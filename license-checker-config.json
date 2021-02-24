@@ -1,0 +1,19 @@
+{
+  "ignore": ["**/.*", "**/*.md", ".github"],
+  "license": "LICENSE.header",
+  "licenseFormats": {
+    "js|ts": {
+      "prepend": "/*",
+      "append": " */",
+      "eachLine": {
+        "prepend": " * "
+      }
+    },
+    "dotfile": {
+      "eachLine": {
+        "prepend": "# "
+      }
+    }
+  },
+  "trailingWhitespace": "TRIM"
+}
