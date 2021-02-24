@@ -29,8 +29,6 @@
 | 📍 Send location!!                                         | ✔   |
 | 🕸🕸 **and much more**                                       | ✔   |
 
-### Debugging
-
 ## Development
 
 Building venom is really simple altough it contains 3 main projects inside
