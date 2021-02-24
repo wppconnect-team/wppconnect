@@ -3,14 +3,14 @@
 > WPPConnect is an open source project developed by the JavaScript community with the aim of exporting functions from WhatsApp Web to the node, which can be used to support the creation of any interaction, such as customer service, media sending, intelligence recognition based on phrases artificial and many other things, use your imagination... 😀🤔💭
 
 <p align="center">
-  <a href="#">Getting Started</a> •
-  <a href="#">Basic Function</a> •
-  <a href="#">Documentation</a>
+  <a href="./docs/getting-started/installation.md">Getting Started</a> •
+  <a href="./docs/getting-started/basic-functions.md">Basic Function</a> •
+  <a href="https://wppconnect-team.github.io/wppconnect/">Documentation</a>
 </p>
 
 ## Our whatsapp group available
 
-<a target="_blank" href="https://chat.whatsapp.com/EGLVbeFGgt40OkbOCX8Sei" target="_blank"><img title="whatzapp" height="75" width="300" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/2000px-WhatsApp_logo.svg.png"></a>
+<a target="_blank" href="https://chat.whatsapp.com/C1ChjyShl5cA7KvmtecF3L" target="_blank"><img title="whatzapp" height="75" width="300" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/2000px-WhatsApp_logo.svg.png"></a>
 
 ## Functions
 
