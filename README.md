@@ -8,7 +8,7 @@
   <a href="#">Documentation</a>
 </p>
 
-**Our whatsapp group available**
+## Our whatsapp group available
 
 <a target="_blank" href="https://chat.whatsapp.com/EGLVbeFGgt40OkbOCX8Sei" target="_blank"><img title="whatzapp" height="75" width="300" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/2000px-WhatsApp_logo.svg.png"></a>
 
@@ -33,20 +33,20 @@
 
 Building venom is really simple altough it contains 3 main projects inside
 
-1. Wapi project
+### 1. Wapi project
 
 ```bash
 > npm run build:wapi
 ```
 
-2. Middleware
+### 2. Middleware
 
 ```bash
 > npm run build:middleware
 > npm run build:jsQR
 ```
 
-3. Wppconnect
+### 3. Wppconnect
 
 ```bash
 > npm run build:venom
