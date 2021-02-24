@@ -10,7 +10,7 @@ labels: 'bug, needs triage'
 
 ## Environment
 
-- **Venom version(s):** [e.g. 2.0.27, 2.2.1]
+- **Wppconnect version(s):** [e.g. 2.0.27, 2.2.1]
 - **Browser:** [e.g. Chrome 87, Chromium 85]
 - **OS:** [e.g. OSX 10.13.4, Windows 10]
 - **Node version:** [e.g. Node 8, Node 14]

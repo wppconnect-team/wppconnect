@@ -46,7 +46,7 @@ Building venom is really simple altough it contains 3 main projects inside
 > npm run build:jsQR
 ```
 
-3. Venom
+3. Wppconnect
 
 ```bash
 > npm run build:venom

@@ -1,7 +1,7 @@
 {
-  "name": "zapi",
-  "version": "0.0.2",
-  "description": "Venom is a high-performance system developed with JavaScript to create a bot for WhatsApp, support for creating any interaction, such as customer service, media sending, sentence recognition based on artificial intelligence and all types of design architecture for WhatsApp. ",
+  "name": "wppconnect",
+  "version": "0.0.1",
+  "description": "WPPConnect is an open source project developed by the JavaScript community with the aim of exporting functions from WhatsApp Web to the node, which can be used to support the creation of any interaction, such as customer service, media sending, intelligence recognition based on phrases artificial and many other things, use your imagination... 😀🤔💭",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -41,7 +41,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/orkestral/venom.git"
+    "url": "git+https://github.com/wppconnect-team/wppconnect.git"
   },
   "keywords": [
     "whatsapp",
@@ -53,15 +53,15 @@
     "automatization",
     "puppeteer"
   ],
-  "author": "Orkestral",
+  "author": "wppconnect-team",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/orkestral/venom/issues"
+    "url": "https://github.com/wppconnect-team/wppconnect/issues"
   },
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/orkestral/venom#readme",
+  "homepage": "https://github.com/wppconnect-team/wppconnect#readme",
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-angular": "^11.0.0",

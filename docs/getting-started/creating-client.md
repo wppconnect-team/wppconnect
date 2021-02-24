@@ -1,6 +1,6 @@
 # Creating a Client
 
-To start using `Venom Bot`, you need to create a file and call the {@link create} method.\
+To start using `Wppconnect Bot`, you need to create a file and call the {@link create} method.\
 That method returns an `Promise` of {@link Whatsapp}.
 
 ```javascript

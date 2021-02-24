@@ -1,6 +1,6 @@
 # Configuring the logger
 
-`Venom Bot` use [winston](https://github.com/winstonjs/winston) package for log management.
+`Wppconnect Bot` use [winston](https://github.com/winstonjs/winston) package for log management.
 
 `venom.defaultLogger` is a instance of `winston.createLogger`.
 
