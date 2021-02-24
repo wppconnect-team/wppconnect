@@ -270,7 +270,7 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
-   * Sends file
+   * Sends ptt audio
    * base64 parameter should have mime type already defined
    * @param to Chat id
    * @param base64 base64 data
@@ -289,6 +289,55 @@ export class SenderLayer extends ListenerLayer {
       },
       { to, base64, filename, caption }
     );
+  }
+
+  /**
+   * Sends ptt audio from path
+   * @param to Chat id
+   * @param filePath File path
+   * @param filename
+   * @param caption
+   */
+  public async sendPtt(
+    to: string,
+    filePath: string,
+    filename?: string,
+    caption?: string
+  ) {
+    return new Promise(async (resolve, reject) => {
+      let base64 = await downloadFileToBase64(filePath, [
+          'audio/3gpp',
+          'audio/3gpp2',
+          'audio/aac',
+          'audio/midi',
+          'audio/mpeg',
+          'audio/ogg',
+          'audio/webm',
+          'audio/x-wav',
+        ]),
+        obj: { erro: boolean; to: string; text: string };
+
+      if (!base64) {
+        base64 = await fileToBase64(filePath);
+      }
+
+      if (!base64) {
+        obj = {
+          erro: true,
+          to: to,
+          text: 'No such file or directory, open "' + filePath + '"',
+        };
+        return reject(obj);
+      }
+
+      if (!filename) {
+        filename = path.basename(filePath);
+      }
+
+      return this.sendPttFromBase64(to, base64, filename, caption)
+        .then(resolve)
+        .catch(reject);
+    });
   }
 
   /**
