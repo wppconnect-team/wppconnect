@@ -19,6 +19,8 @@
     "commit": "cz",
     "fix:doc-theme": "shx cp ./node_modules/typedoc-default-themes/bin/default/partials/type.hbs ./node_modules/typedoc-plugin-pages/dist/theme/v2/partials/type.hbs",
     "generate-api-docs": "npm run fix:doc-theme && typedoc",
+    "license:add": "license-check-and-add add",
+    "license:check": "license-check-and-add check",
     "lint:js": "npx eslint -c .eslintrc.js --ext .js src",
     "lint:ts": "npx eslint -c .eslintrc.js --ext .ts src",
     "lint": "npm run lint:ts && npm run lint:js",
