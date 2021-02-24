@@ -14,8 +14,7 @@ We primarily use GitHub as an issue tracker; for usage and support questions, pl
 
 ---
 
-- Documentation: https://orkestral.github.io/venom/
+- Documentation: https://wppconnect-team.github.io/wppconnect/
 - Discord: https://discord.gg/qCJ95FVbzR
-- WhatsApp Group (Paid): (Request Access)[https://web.whatsapp.com/send?phone=556181590153&text=I%20want%20access%20to%20the%20WhatsApp%20Venom%20support%20group]
+- WhatsApp Group: [https://chat.whatsapp.com/EGLVbeFGgt40OkbOCX8Sei]
 - Also have a look at the readme for more information on how to get support:
-  https://github.com/babel/babel/blob/master/README.md

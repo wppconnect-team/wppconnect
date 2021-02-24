@@ -2,7 +2,7 @@
 
 `Wppconnect Bot` use [winston](https://github.com/winstonjs/winston) package for log management.
 
-`venom.defaultLogger` is a instance of `winston.createLogger`.
+`wppconnect.defaultLogger` is a instance of `winston.createLogger`.
 
 ## Default Log level
 
@@ -10,24 +10,24 @@ The default log level is `info`
 
 ```javascript
 // Supports ES6
-// import * as venom from 'venom-bot';
-const venom = require('venom-bot');
+// import * as wppconnect from 'wppconnect';
+const wppconnect = require('wppconnect');
 
 // Levels: 'error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly'
 // All logs: 'silly'
-venom.defaultLogger.level = 'silly';
+wppconnect.defaultLogger.level = 'silly';
 
 // If you want stop console logging
-venom.defaultLogger.transports.forEach((t) => (t.silent = true));
+wppconnect.defaultLogger.transports.forEach((t) => (t.silent = true));
 ```
 
 ## Using a custon logger
 
 ```javascript
 // Supports ES6
-// import * as venom from 'venom-bot';
+// import * as wppconnect from 'wppconnect';
 // import * as winston from 'winston';
-const venom = require('venom-bot');
+const wppconnect = require('wppconnect');
 const winston = require('winston');
 
 const logger = winston.createLogger({
@@ -44,7 +44,7 @@ const logger = winston.createLogger({
   ],
 });
 
-venom
+wppconnect
   .create(
     'sessionName',
     undefined,
@@ -63,29 +63,29 @@ venom
 
 ## Log to file
 
-By default, venom-bot use the Console transport for logging.
+By default, wppconnect use the Console transport for logging.
 
 If you want to save the log to a file, you can configure
 using the [winston transport](https://github.com/winstonjs/winston#transports)
 
 ```javascript
 // Supports ES6
-// import * as venom from 'venom-bot';
+// import * as wppconnect from 'wppconnect';
 // import * as winston from 'winston';
-const venom = require('venom-bot');
+const wppconnect = require('wppconnect');
 const winston = require('winston');
 
 // Optional: Remove all default transports
-venom.defaultLogger.clear(); // Remove all transports
+wppconnect.defaultLogger.clear(); // Remove all transports
 
 // Create a file transport
 const files = new winston.transports.File({ filename: 'combined.log' });
-venom.defaultLogger.add(files); // Add file transport
+wppconnect.defaultLogger.add(files); // Add file transport
 
 // Optinal: create a custom console with error level
 const console = new winston.transports.Console({ level: 'erro' });
-venom.defaultLogger.add(console); // Add console transport
+wppconnect.defaultLogger.add(console); // Add console transport
 
 // Optinal: Remove the custom transport
-venom.defaultLogger.remove(console); // Remove console transport
+wppconnect.defaultLogger.remove(console); // Remove console transport
 ```

@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
-const venom = require('../../dist');
+const wppconnect = require('../../dist');
 
-venom
+wppconnect
   .create('sessionName')
   .then((client) => start(client))
   .catch((erro) => {

@@ -31,7 +31,7 @@
 
 ## Development
 
-Building venom is really simple altough it contains 3 main projects inside
+Building WPPConnect is really simple altough it contains 3 main projects inside
 
 ### 1. Wapi project
 
@@ -49,7 +49,7 @@ Building venom is really simple altough it contains 3 main projects inside
 ### 3. Wppconnect
 
 ```bash
-> npm run build:venom
+> npm run build:client
 ```
 
 To build the entire project just run
@@ -79,8 +79,8 @@ the Free Software Foundation, either version 3 of the License, or
 
 WPPConnect is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public License
-along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
+along with WPPConnect. If not, see <https://www.gnu.org/licenses/>.

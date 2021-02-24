@@ -5,10 +5,10 @@ That method returns an `Promise` of {@link Whatsapp}.
 
 ```javascript
 // Supports ES6
-// import { create, Whatsapp } from 'venom-bot';
-const venom = require('venom-bot');
+// import { create, Whatsapp } from 'wppconnect';
+const wppconnect = require('wppconnect');
 
-venom
+wppconnect
   .create()
   .then((client) => start(client))
   .catch((error) => console.log(error));
@@ -22,10 +22,10 @@ then you had to specify it in your code like in that example:
 
 ```javascript
 // Init sales whatsapp bot
-venom.create('sales').then((client) => startClient(client));
+wppconnect.create('sales').then((client) => startClient(client));
 
 // Init support whatsapp bot
-venom.create('support').then((client) => startSupport(client));
+wppconnect.create('support').then((client) => startSupport(client));
 ```
 
 ## Passing options on create
@@ -33,7 +33,7 @@ venom.create('support').then((client) => startSupport(client));
 The `create` method third parameter can have the following optional parameters:
 
 ```javascript
-venom.create(
+wppconnect.create(
     //session
     'sessionName', //Pass the name of the client you want to start the bot
     //catchQR
@@ -52,7 +52,7 @@ venom.create(
     // options
     {
       folderNameToken: 'tokens', //folder name when saving tokens
-      mkdirFolderToken: '', //folder directory tokens, just inside the venom folder, example:  { mkdirFolderToken: '/node_modules', } //will save the tokens folder in the node_modules directory
+      mkdirFolderToken: '', //folder directory tokens, just inside the wppconnect folder, example:  { mkdirFolderToken: '/node_modules', } //will save the tokens folder in the node_modules directory
       headless: true, // Headless chrome
       devtools: false, // Open devtools by default
       useChrome: true, // If false will use Chromium instance
@@ -64,7 +64,7 @@ venom.create(
       disableSpins: true, // Will disable Spinnies animation, useful for containers (docker) for a better log
       disableWelcome: true, // Will disable the welcoming message which appears in the beginning
       updatesLog: true, // Logs info updates automatically in terminal
-      autoClose: 60000, // Automatically closes the venom-bot only when scanning the QR code (default 60 seconds, if you want to turn it off, assign 0 or false)
+      autoClose: 60000, // Automatically closes the wppconnect only when scanning the QR code (default 60 seconds, if you want to turn it off, assign 0 or false)
       createPathFileToken: false, //creates a folder when inserting an object in the client's browser, to work it is necessary to pass the parameters in the function create browserSessionToken
     },
     // BrowserSessionToken
@@ -100,8 +100,8 @@ or `deleteToken` or `Create session wss return "serverClose" case server for clo
 | `deleteToken`        | If you pass true within the function `client.getSessionTokenBrowser(true)`                                                                                     |
 
 ```javascript
-const venom = require('venom-bot');
-venom
+const wppconnect = require('wppconnect');
+wppconnect
   .create(
     'sessionName',
     undefined,
@@ -124,9 +124,9 @@ somewhere else heres how:
 
 ```javascript
 const fs = require('fs');
-const venom = require('venom-bot');
+const wppconnect = require('wppconnect');
 
-venom
+wppconnect
   .create(
     'sessionName',
     (base64Qr, asciiQR) => {

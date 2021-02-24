@@ -5,4 +5,4 @@ Fixes # .
 -
 -
 
-To test (it takes a while): `npm install github:<username>/venom#<branch>`
+To test (it takes a while): `npm install github:<username>/wppconnect#<branch>`

@@ -1,6 +1,6 @@
 # Bot to test functions
 
-> Need to do _npm install_ in the main venom folder and _npm start_ here
+> Need to do _npm install_ in the main wppconnect folder and _npm start_ here
 
 | Message                                                 | Return                       |
 | ------------------------------------------------------- | ---------------------------- |

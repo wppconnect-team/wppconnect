@@ -3,11 +3,11 @@
 The first thing that you had to do is install the `npm package`:
 
 ```bash
-npm i --save venom-bot
+npm i --save wppconnect
 ```
 
 or for [Nightly releases](https://github.com/wppconnect-team/wppconnect/releases/tag/nightly):
 
 ```bash
-> npm i --save https://github.com/wppconnect-team/wppconnect/releases/download/nightly/venom-bot-nightly.tgz
+> npm i --save https://github.com/wppconnect-team/wppconnect/releases/download/nightly/wppconnect-nightly.tgz
 ```

@@ -45,16 +45,16 @@ export async function checkUpdates() {
   // Check for updates if needed
   if (!updatesChecked) {
     updatesChecked = true;
-    await checkVenomVersion();
+    await checkWPPConnectVersion();
   }
 }
 
 /**
- * Checs for a new versoin of venom and logs
+ * Checs for a new versoin of wppconnect and logs
  */
-async function checkVenomVersion() {
+async function checkWPPConnectVersion() {
   logger.info('Checking for updates');
-  await latestVersion('venom-bot').then((latest) => {
+  await latestVersion('wppconnect').then((latest) => {
     if (upToDate(version, latest)) {
       logger.info("You're up to date");
     } else {
@@ -74,7 +74,7 @@ function logUpdateAvailable(current: string, latest: string) {
   const newVersionLog =
       `There is a new version of ${chalk.bold(`Wppconnect`)} ${chalk.gray(current)} ➜  ${chalk.bold.green(latest)}\n` +
       `Update your package by running:\n\n` +
-      `${chalk.bold('\>')} ${chalk.blueBright('npm update venom-bot')}`;
+      `${chalk.bold('\>')} ${chalk.blueBright('npm update wppconnect')}`;
 
   logger.info(boxen(newVersionLog, { padding: 1 }));
   logger.info(

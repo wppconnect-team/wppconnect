@@ -44,7 +44,7 @@ jobs:
         run: npm version prerelease --preid=alpha --no-git --no-git-tag-version
 
       - name: Build NPM package
-        run: npm pack && mv venom-bot-*.tgz venom-bot-nightly.tgz
+        run: npm pack && mv wppconnect-*.tgz wppconnect-nightly.tgz
 
       - name: Build API-Docs
         run: npm run generate-api-docs
@@ -78,7 +78,7 @@ jobs:
           draft: false
           prerelease: true
           files: >
-            venom-bot-nightly.tgz
+            wppconnect-nightly.tgz
             api-docs/
           gzip: folders
           allow_override: true

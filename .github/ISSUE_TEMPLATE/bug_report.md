@@ -23,11 +23,6 @@ labels: 'bug, needs triage'
 
 ## Log Output
 
-<!--
-For venom-bot >= 2.2.0, enable all log output first:
-venom.defaultLogger.level = 'silly';
--->
-
 ```
 If relevant, paste all of your Log Output
 ```

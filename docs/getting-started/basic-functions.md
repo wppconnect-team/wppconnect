@@ -70,7 +70,7 @@ Send basic text
 
 ```javascript
 await client
-  .sendText('000000000000@c.us', '👋 Hello from venom!')
+  .sendText('000000000000@c.us', '👋 Hello from wppconnect!')
   .then((result) => {
     console.log('Result: ', result); //return object success
   })
@@ -135,7 +135,7 @@ await client
 
 ### sendFile
 
-Send a file (venom will take care of mime types, just need the path).\
+Send a file (wppconnect will take care of mime types, just need the path).\
 You can also upload an image using a valid HTTP protocol
 
 ```javascript

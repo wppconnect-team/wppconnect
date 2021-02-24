@@ -24,7 +24,7 @@ export interface CreateConfig {
    */
   folderNameToken?: string;
   /**
-   * folder directory tokens, just inside the venom folder, example:  { mkdirFolderToken: '/node_modules', } //will save the tokens folder in the node_modules directory
+   * folder directory tokens, just inside the wppconnect folder, example:  { mkdirFolderToken: '/node_modules', } //will save the tokens folder in the node_modules directory
    */
   mkdirFolderToken?: string;
   /**
@@ -75,7 +75,7 @@ export interface CreateConfig {
    */
   updatesLog?: boolean;
   /**
-   * Automatically closes the venom-bot only when scanning the QR code (default 60000 miliseconds, if you want to turn it off, assign 0 or false)
+   * Automatically closes the wppconnect only when scanning the QR code (default 60000 miliseconds, if you want to turn it off, assign 0 or false)
    * @default 60000
    */
   autoClose?: number;
