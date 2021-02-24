@@ -31,14 +31,11 @@ export function welcomeScreen() {
   }
   welcomeShown = true;
   logger.info(`
-      ▄▄░          ▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄ ██         ▄▄       ▄▄▄▄      ░
-      ░██▄        ██ ███▀▀▀▀▀▀▀▀█▌ ███▌       ██▄  ▄▄█▀▀▀▀▀▀█▄   ▓█▄           ▄█░
-       ░██▄     ░██▀ ███           ██▀██▄     ██▄ ▄█░        ▀█▄ ▓███▄      ░████░
-         ██▌   ▄██░ ▄███▄▄▄▄       ██  ▓██▄   ██▄▐█           ▐█ ▓█▌▀██▄  ▄███░██░
-          ██▌ ▄██░  ▀███▀▀▀▀       ██   ▐██▌  ██▄▐█           ▐█░▓█▌  ▀█████░  ██░
-           ▓████     ███           ██     ▀██▄██▄ █▌          ██ ▓█▌    ▀█░    ██░
-            ▀██      ███        █▌ ██       ▀███▄  ▀█▄     ▄▄█▀  ▓█▌           ██░
-             ▀       ▀███████████▌ ██        ░██▄    ▀▀███▀▀░    ▀█▌           ▓█░`);
+  _       ______  ____  ______                            __ 
+  | |     / / __ \\/ __ \\/ ____/___  ____  ____  ___  _____/ /_
+  | | /| / / /_/ / /_/ / /   / __ \\/ __ \\/ __ \\/ _ \\/ ___/ __/
+  | |/ |/ / ____/ ____/ /___/ /_/ / / / / / / /  __/ /__/ /_  
+  |__/|__/_/   /_/    \\____/\\____/_/ /_/_/ /_/\\___/\\___/\\__/`);
 }
 
 export async function checkUpdates() {
@@ -54,7 +51,7 @@ export async function checkUpdates() {
  */
 async function checkWPPConnectVersion() {
   logger.info('Checking for updates');
-  await latestVersion('wppconnect').then((latest) => {
+  await latestVersion('@wppconnect-team/wppconnect').then((latest) => {
     if (upToDate(version, latest)) {
       logger.info("You're up to date");
     } else {
