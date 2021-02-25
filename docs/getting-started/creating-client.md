@@ -5,8 +5,8 @@ That method returns an `Promise` of {@link Whatsapp}.
 
 ```javascript
 // Supports ES6
-// import { create, Whatsapp } from 'wppconnect';
-const wppconnect = require('wppconnect');
+// import { create, Whatsapp } from '@wppconnect-team/wppconnect';
+const wppconnect = require('@wppconnect-team/wppconnect');
 
 wppconnect
   .create()
@@ -100,7 +100,7 @@ or `deleteToken` or `Create session wss return "serverClose" case server for clo
 | `deleteToken`        | If you pass true within the function `client.getSessionTokenBrowser(true)`                                                                                     |
 
 ```javascript
-const wppconnect = require('wppconnect');
+const wppconnect = require('@wppconnect-team/wppconnect');
 wppconnect
   .create(
     'sessionName',
@@ -124,7 +124,7 @@ somewhere else heres how:
 
 ```javascript
 const fs = require('fs');
-const wppconnect = require('wppconnect');
+const wppconnect = require('@wppconnect-team/wppconnect');
 
 wppconnect
   .create(

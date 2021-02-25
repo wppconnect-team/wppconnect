@@ -10,8 +10,8 @@ The default log level is `info`
 
 ```javascript
 // Supports ES6
-// import * as wppconnect from 'wppconnect';
-const wppconnect = require('wppconnect');
+// import * as wppconnect from '@wppconnect-team/wppconnect';
+const wppconnect = require('@wppconnect-team/wppconnect');
 
 // Levels: 'error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly'
 // All logs: 'silly'
@@ -25,9 +25,9 @@ wppconnect.defaultLogger.transports.forEach((t) => (t.silent = true));
 
 ```javascript
 // Supports ES6
-// import * as wppconnect from 'wppconnect';
+// import * as wppconnect from '@wppconnect-team/wppconnect';
 // import * as winston from 'winston';
-const wppconnect = require('wppconnect');
+const wppconnect = require('@wppconnect-team/wppconnect');
 const winston = require('winston');
 
 const logger = winston.createLogger({
@@ -70,9 +70,9 @@ using the [winston transport](https://github.com/winstonjs/winston#transports)
 
 ```javascript
 // Supports ES6
-// import * as wppconnect from 'wppconnect';
+// import * as wppconnect from '@wppconnect-team/wppconnect';
 // import * as winston from 'winston';
-const wppconnect = require('wppconnect');
+const wppconnect = require('@wppconnect-team/wppconnect');
 const winston = require('winston');
 
 // Optional: Remove all default transports
