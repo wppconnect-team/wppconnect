@@ -143,9 +143,10 @@ import {
   _serializeRawObj,
   _profilePicfunc,
 } from './serializers';
-import { getStore } from './store/get-store';
+import { getStore, getStore2 } from './store/get-store';
 
 window['webpackJsonp'] = window['webpackJsonp'] || [];
+window['webpackChunkbuild'] = window['webpackChunkbuild'] || [];
 
 if (typeof window.Store === 'undefined') {
   window.Store = {};
@@ -159,6 +160,8 @@ if (typeof window.Store === 'undefined') {
         },
         [[parasite]],
       ]);
+      const parasite2 = `999999${Date.now()}`;
+      window['webpackChunkbuild'].push([[parasite2], {}, (z) => getStore2(z)]);
     }
 
     injectParasite();
@@ -167,6 +170,12 @@ if (typeof window.Store === 'undefined') {
       try {
         const last = window['webpackJsonp'].length - 1;
         if (!/^parasite/.test(window['webpackJsonp'][last][0][0])) {
+          injectParasite();
+        }
+      } catch (e) {}
+      try {
+        const last = window['webpackChunkbuild'].length - 1;
+        if (!/^999999/.test(window['webpackChunkbuild'][last][0][0])) {
           injectParasite();
         }
       } catch (e) {}
