@@ -152,6 +152,7 @@ export const storeObjects = [
     id: 'MsgKey',
     conditions: (module) =>
       module.default &&
+      typeof module.default.toString === 'function' &&
       module.default.toString().includes('MsgKey error: obj is null/undefined')
         ? module.default
         : null,
@@ -339,6 +340,7 @@ export const storeObjects = [
     conditions: (module) =>
       module.default &&
       typeof module.default === 'function' &&
+      typeof module.default.toString === 'function' &&
       module.default.toString().match(/crypto/)
         ? module
         : null,

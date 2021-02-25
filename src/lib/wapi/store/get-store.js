@@ -88,7 +88,12 @@ export function getStore2(modules) {
 
     neededObjects.forEach((needObj) => {
       if (!needObj.conditions || needObj.foundedModule) return;
-      let neededModule = needObj.conditions(module);
+      let neededModule = null;
+      try {
+        neededModule = needObj.conditions(module);
+      } catch (error) {
+        console.log(error);
+      }
       if (neededModule !== null) {
         foundCount++;
         needObj.foundedModule = neededModule;
