@@ -23,6 +23,7 @@ import { ScrapQrcode } from '../model/qrcode';
 import { scrapeImg } from '../helpers';
 import {
   asciiQr,
+  getInterfaceStatus,
   isAuthenticated,
   isInsideChat,
   needsToScan,
@@ -74,7 +75,7 @@ export class HostLayer {
       .then(() => {
         this.log('verbose', 'wapi.js injected');
       })
-      .catch(() => {
+      .catch((e) => {
         this.log('verbose', 'wapi.js failed');
       });
   }
@@ -194,6 +195,13 @@ export class HostLayer {
     return inChat;
   }
 
+  public async waitForPageLoad() {
+    await this.page
+      .waitForFunction(`!document.querySelector('#initial_startup')`)
+      .catch(() => {});
+    await getInterfaceStatus(this.page).catch(() => null);
+  }
+
   public async waitForLogin(
     catchQR?: (
       qrCode: string,
@@ -207,9 +215,7 @@ export class HostLayer {
 
     this.log('http', 'Waiting page load');
 
-    await this.page
-      .waitForFunction(`!document.querySelector('#initial_startup')`)
-      .catch(() => {});
+    await this.waitForPageLoad();
 
     this.log('http', 'Checking is logged...');
     let authenticated = await isAuthenticated(this.page).catch(() => null);
