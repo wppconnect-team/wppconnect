@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/wppconnect-team/wppconnect/compare/v1.0.1...v1.0.2) (2021-02-25)
+
+### Bug Fixes
+
+- WhatsApp Web v2.2106.5 compatibility ([fa9d575](https://github.com/wppconnect-team/wppconnect/commit/fa9d575bff21d2a97dda59378e49740b15460a63))
+
 ## [1.0.1](https://github.com/wppconnect-team/wppconnect/compare/v1.0.0...v1.0.1) (2021-02-24)
 
 ### Bug Fixes
