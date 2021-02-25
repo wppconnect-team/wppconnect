@@ -179,10 +179,14 @@ if (typeof window.Store === 'undefined') {
           injectParasite();
         }
       } catch (e) {}
-    }, 100);
+    }, 1000);
   };
 
-  loadParasite();
+  if (document.readyState === 'complete') {
+    loadParasite();
+  } else {
+    window.addEventListener('load', () => loadParasite());
+  }
 }
 
 if (typeof window.WAPI === 'undefined') {
