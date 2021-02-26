@@ -107,6 +107,12 @@ export async function create(
 
   const logger = mergedOptions.logger;
 
+  if (typeof sessionOrOption === 'string') {
+    logger.warn(
+      'You are using deprecated create method, please use create({options})'
+    );
+  }
+
   if (!mergedOptions.disableWelcome) {
     welcomeScreen();
   }
