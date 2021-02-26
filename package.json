@@ -5,13 +5,12 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build:counter": "cd src/lib/counter/ && gulp",
     "build:docs": "typedoc && git add docs/*",
     "build:jsQR": "cd src/lib/jsQR/ && gulp",
     "build:middleware": "cd src/lib/middleware/ && webpack",
     "build:client": "tsc",
     "build:wapi": "cd src/lib/wapi/ && webpack",
-    "build": "npm run build:wapi && npm run build:middleware && npm run build:jsQR && npm run build:counter && npm run build:client",
+    "build": "npm run build:wapi && npm run build:middleware && npm run build:jsQR && npm run build:client",
     "changelog:last": "conventional-changelog -p angular -r 2",
     "changelog:preview": "conventional-changelog -p angular -u",
     "changelog:update": "conventional-changelog -p angular -i CHANGELOG.md -s",
@@ -28,7 +27,7 @@
     "release": "release-it",
     "start": "npm run build:client & tsc app.ts && node app.js",
     "test": "mocha -r ts-node/register src/tests/**/*.test.ts",
-    "watch": "concurrently \"tsc -w\" \"nodemon dist/index.js\""
+    "watch": "concurrently \"npm run build:wapi -- --mode=development -w\" \"npm run build:client -- -w\""
   },
   "husky": {
     "hooks": {
