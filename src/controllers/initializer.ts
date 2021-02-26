@@ -68,6 +68,7 @@ export async function create(createOption: CreateOptions): Promise<Whatsapp>;
  * Start the bot
  * You must pass a string type parameter, this parameter will be the name of the client's session. If the parameter is not passed, the section name will be "session".
  * @returns Whatsapp page, with this parameter you will be able to access the bot functions
+ * @deprecated Deprecated in favor of create with {@link CreateOptions} (e.g., wppconnect.create({session: 'test'})).
  */
 export async function create(
   sessionName: string,
