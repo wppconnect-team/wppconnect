@@ -15,12 +15,12 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export const _serializeContactObj = async (obj) => {
+export const _serializeContactObj = (obj) => {
   if (obj == undefined) {
     return null;
   }
 
-  let profile = await WAPI._profilePicfunc(obj.id._serialized);
+  let profile = WAPI._profilePicfunc(obj.id._serialized);
 
   if (
     !obj.profilePicThumb &&

@@ -15,12 +15,12 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export const _profilePicfunc = async (id) => {
-  return await Store.ProfilePic.find(id)
-    .then((r) => {
-      return WAPI._serializeProfilePicThumb(r);
-    })
-    .catch(() => {
-      return null;
-    });
+export const _profilePicfunc = (id) => {
+  const pic = Store.ProfilePic.get(id);
+
+  if (pic) {
+    return WAPI._serializeProfilePicThumb(pic);
+  }
+
+  return null;
 };
