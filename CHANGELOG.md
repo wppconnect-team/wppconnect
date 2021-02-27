@@ -1,3 +1,13 @@
+# [1.1.0](https://github.com/wppconnect-team/wppconnect/compare/v1.0.3...v1.1.0) (2021-02-27)
+
+### Bug Fixes
+
+- Fixed decryptFile function ([c92597b](https://github.com/wppconnect-team/wppconnect/commit/c92597bb7bda03ee5b4905881894e13e0003e24b))
+
+### Features
+
+- Allow pass browser/page in create method ([#19](https://github.com/wppconnect-team/wppconnect/issues/19)) ([a2902e8](https://github.com/wppconnect-team/wppconnect/commit/a2902e8840046407b56da59ba5d2c1e5c16b5c0b))
+
 ## [1.0.3](https://github.com/wppconnect-team/wppconnect/compare/v1.0.2...v1.0.3) (2021-02-26)
 
 ### Bug Fixes
