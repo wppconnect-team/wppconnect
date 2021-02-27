@@ -32,6 +32,7 @@ export interface Message {
   recvFresh: boolean;
   interactiveAnnotations: any[];
   clientUrl: string;
+  deprecatedMms3Url: string;
   directPath: string;
   mimetype: string;
   filehash: string;

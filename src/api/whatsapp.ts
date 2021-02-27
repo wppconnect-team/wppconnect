@@ -130,8 +130,11 @@ export class Whatsapp extends ControlsLayer {
    * @returns Decrypted file buffer (null otherwise)
    */
   public async decryptFile(message: Message) {
+    const mediaUrl = message.clientUrl || message.deprecatedMms3Url;
+
     const options = makeOptions(useragentOverride);
-    if (!message.clientUrl)
+
+    if (!mediaUrl)
       throw new Error(
         'message is missing critical data needed to download the file.'
       );
@@ -139,7 +142,7 @@ export class Whatsapp extends ControlsLayer {
     let res: any;
     try {
       while (haventGottenImageYet) {
-        res = await axios.get(message.clientUrl.trim(), options);
+        res = await axios.get(mediaUrl.trim(), options);
         if (res.status == 200) {
           haventGottenImageYet = false;
         } else {
