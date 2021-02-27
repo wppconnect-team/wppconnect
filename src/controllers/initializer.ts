@@ -150,8 +150,6 @@ export async function create(
       throw e;
     });
 
-    console.log(browser);
-
     logger.http('checking headless...', {
       session,
       type: 'browser',
