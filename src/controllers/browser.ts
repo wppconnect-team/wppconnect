@@ -39,7 +39,7 @@ export async function initWhatsapp(
 
   await page.setUserAgent(useragentOverride);
 
-  const timeout = 2 * 1000;
+  const timeout = 10 * 1000;
   await Promise.race([
     page.goto(puppeteerConfig.whatsappUrl, { timeout }).catch(() => {}),
     page.waitForSelector('body', { timeout }).catch(() => {}),
