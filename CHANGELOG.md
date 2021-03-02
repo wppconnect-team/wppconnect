@@ -1,3 +1,13 @@
+# [1.2.0](https://github.com/wppconnect-team/wppconnect/compare/v1.1.0...v1.2.0) (2021-03-02)
+
+### Bug Fixes
+
+- Increased timeout WhatsApp page load ([c1f8f03](https://github.com/wppconnect-team/wppconnect/commit/c1f8f03476038bceb9f62fd6648124b774794551))
+
+### Features
+
+- Improved module loader ([#27](https://github.com/wppconnect-team/wppconnect/issues/27)) ([0f44d20](https://github.com/wppconnect-team/wppconnect/commit/0f44d2030b34c0101b3f34d995d824f240aa5548))
+
 # [1.1.0](https://github.com/wppconnect-team/wppconnect/compare/v1.0.3...v1.1.0) (2021-02-27)
 
 ### Bug Fixes
