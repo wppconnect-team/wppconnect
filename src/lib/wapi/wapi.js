@@ -143,50 +143,36 @@ import {
   _serializeRawObj,
   _profilePicfunc,
 } from './serializers';
-import { getStore, getStore2 } from './store/get-store';
+import { storeObjects } from './store/store-objects';
+
+import * as WPPConnectLoader from '@wppconnect-team/loader';
 
 window['webpackJsonp'] = window['webpackJsonp'] || [];
 window['webpackChunkbuild'] = window['webpackChunkbuild'] || [];
 
 if (typeof window.Store === 'undefined') {
   window.Store = {};
-  var loadParasite = function () {
-    function injectParasite() {
-      const parasite = `parasite${Date.now()}`;
-      window['webpackJsonp'].push([
-        [parasite],
-        {
-          [parasite]: (x, y, z) => getStore(z),
-        },
-        [[parasite]],
-      ]);
-      const parasite2 = `999999${Date.now()}`;
-      window['webpackChunkbuild'].push([[parasite2], {}, (z) => getStore2(z)]);
-    }
+  window.Store.promises = {};
+  const loader = new WPPConnectLoader();
 
-    injectParasite();
-
-    setInterval(() => {
-      try {
-        const last = window['webpackJsonp'].length - 1;
-        if (!/^parasite/.test(window['webpackJsonp'][last][0][0])) {
-          injectParasite();
+  for (const store of storeObjects) {
+    window.Store.promises[store.id] = loader
+      .waitForModule(store.conditions)
+      .then((m) => {
+        if (store.id === 'Store') {
+          window.Store = Object.assign({}, window.Store, m);
+        } else {
+          window.Store[store.id] = m;
         }
-      } catch (e) {}
-      try {
-        const last = window['webpackChunkbuild'].length - 1;
-        if (!/^999999/.test(window['webpackChunkbuild'][last][0][0])) {
-          injectParasite();
-        }
-      } catch (e) {}
-    }, 1000);
-  };
-
-  if (document.readyState === 'complete') {
-    loadParasite();
-  } else {
-    window.addEventListener('load', () => loadParasite());
+      });
   }
+
+  window.Store.sendMessage = function (e) {
+    return window.Store.SendTextMsgToChat(this, ...arguments);
+  };
+  window.Store.sendAddMessage = function (e) {
+    return window.Store.addAndSendMsgToChat(this, ...arguments);
+  };
 }
 
 if (typeof window.WAPI === 'undefined') {
@@ -538,17 +524,15 @@ if (typeof window.WAPI === 'undefined') {
     const promises = missing.map((s) => {
       if (!window.WAPI.storePromises[s]) {
         window.WAPI.storePromises[s] = new Promise((resolve) => {
-          let time = null;
           const listen = (e) => {
-            const name = (e && e.detail) || '';
-            if (name === s || !isUndefined(s)) {
-              window.removeEventListener('storeLoaded', listen);
-              clearInterval(time);
+            const storePromise =
+              window.Store.promises[s] || window.Store.promises['Store'];
+
+            storePromise.then(() => {
               resolve(true);
-            }
+            });
           };
           window.addEventListener('storeLoaded', listen);
-          time = setInterval(listen, 1000);
         });
       }
       return window.WAPI.storePromises[s];
