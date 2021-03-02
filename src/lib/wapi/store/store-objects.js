@@ -28,8 +28,7 @@ export const storeObjects = [
     conditions: (module) =>
       module.default &&
       module.default.prototype &&
-      (module.default.prototype.processFiles !== undefined ||
-        module.default.prototype.processAttachments !== undefined)
+      module.default.prototype.processAttachments !== undefined
         ? module.default
         : null,
   },

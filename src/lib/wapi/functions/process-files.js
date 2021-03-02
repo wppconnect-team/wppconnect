@@ -23,7 +23,7 @@ export async function processFiles(chat, blobs) {
     chatParticipantCount: chat.getParticipantCount(),
   });
 
-  await mediaCollection.processFiles(
+  await mediaCollection.processAttachments(
     Debug.VERSION === '0.4.613'
       ? blobs
       : blobs.map((blob) => {

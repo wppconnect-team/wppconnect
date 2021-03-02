@@ -56,7 +56,6 @@ export class HostLayer {
       this.log('error', 'Page Closed', { type: 'page' });
     });
     this.log('info', 'Initializing...');
-    this.initialize();
   }
 
   protected log(level: LogLevel, message: string, meta: object = {}) {
