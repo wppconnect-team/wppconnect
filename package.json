@@ -7,10 +7,9 @@
   "scripts": {
     "build:docs": "typedoc && git add docs/*",
     "build:jsQR": "cd src/lib/jsQR/ && gulp",
-    "build:middleware": "cd src/lib/middleware/ && webpack",
     "build:client": "tsc",
     "build:wapi": "cd src/lib/wapi/ && webpack",
-    "build": "npm run build:wapi && npm run build:middleware && npm run build:jsQR && npm run build:client",
+    "build": "npm run build:wapi && npm run build:jsQR && npm run build:client",
     "changelog:last": "conventional-changelog -p angular -r 2",
     "changelog:preview": "conventional-changelog -p angular -u",
     "changelog:update": "conventional-changelog -p angular -i CHANGELOG.md -s",

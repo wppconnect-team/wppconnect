@@ -42,7 +42,6 @@ Building WPPConnect is really simple altough it contains 3 main projects inside
 ### 2. Middleware
 
 ```bash
-> npm run build:middleware
 > npm run build:jsQR
 ```
 

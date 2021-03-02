@@ -524,15 +524,12 @@ if (typeof window.WAPI === 'undefined') {
     const promises = missing.map((s) => {
       if (!window.WAPI.storePromises[s]) {
         window.WAPI.storePromises[s] = new Promise((resolve) => {
-          const listen = (e) => {
-            const storePromise =
-              window.Store.promises[s] || window.Store.promises['Store'];
+          const storePromise =
+            window.Store.promises[s] || window.Store.promises['Store'];
 
-            storePromise.then(() => {
-              resolve(true);
-            });
-          };
-          window.addEventListener('storeLoaded', listen);
+          storePromise.then(() => {
+            resolve(true);
+          });
         });
       }
       return window.WAPI.storePromises[s];

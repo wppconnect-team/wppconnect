@@ -67,9 +67,7 @@ export const storeObjects = [
   {
     id: 'Conn',
     conditions: (module) =>
-      module.default && module.default.ref && module.default.refTTL
-        ? module.default
-        : null,
+      module.default && module.Conn ? module.default : null,
   },
   {
     id: 'WapQuery',

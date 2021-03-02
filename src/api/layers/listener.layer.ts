@@ -73,6 +73,18 @@ export class ListenerLayer extends ProfileLayer {
 
     await this.page
       .evaluate(() => {
+        if (!window['onMessage'].exposed) {
+          window.WAPI.waitNewMessages(false, (data) => {
+            data.forEach((message) => {
+              window['onMessage'](message);
+            });
+          });
+          window['onMessage'].exposed = true;
+        }
+        if (!window['onAck'].exposed) {
+          window.WAPI.waitNewAcknowledgements(window['onAck']);
+          window['onAck'].exposed = true;
+        }
         if (!window['onAnyMessage'].exposed) {
           window.WAPI.allNewMessagesListener(window['onAnyMessage']);
           window['onAnyMessage'].exposed = true;

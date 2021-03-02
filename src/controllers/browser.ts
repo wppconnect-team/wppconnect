@@ -69,12 +69,6 @@ export async function injectApi(page: Page) {
     ),
   });
 
-  await page.addScriptTag({
-    path: require.resolve(
-      path.join(__dirname, '../../dist/lib/middleware', 'middleware.js')
-    ),
-  });
-
   // Make sure WAPI is initialized
   return await page
     .waitForFunction(() => {
