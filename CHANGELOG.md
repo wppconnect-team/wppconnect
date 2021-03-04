@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/wppconnect-team/wppconnect/compare/v1.2.0...v1.2.1) (2021-03-04)
+
+### Bug Fixes
+
+- Fixed send to status@broadcast ([a0c8d20](https://github.com/wppconnect-team/wppconnect/commit/a0c8d2053d15851dbde34b3a4f3ce03481f8ea09))
+
 # [1.2.0](https://github.com/wppconnect-team/wppconnect/compare/v1.1.0...v1.2.0) (2021-03-02)
 
 ### Bug Fixes
