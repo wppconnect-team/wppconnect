@@ -222,48 +222,35 @@ export async function create(
       });
     }
 
-    let LocalLogin = JSON.parse(
-      await page.evaluate(() => {
-        return JSON.stringify(window.localStorage);
-      })
-    );
-
-    let CheckLogin =
-      LocalLogin.WASecretBundle && LocalLogin.WAToken1 && LocalLogin.WAToken2
-        ? true
-        : false;
-
-    if (!CheckLogin) {
-      if (mergedOptions.waitForLogin) {
-        const isLogged = await client.waitForLogin(catchQR, statusFind);
-        if (!isLogged) {
-          throw 'Not Logged';
-        }
-
-        let waitLoginPromise = null;
-        client.onStateChange(async (state) => {
-          if (
-            state === SocketState.UNPAIRED ||
-            state === SocketState.UNPAIRED_IDLE
-          ) {
-            logger.info('Session Unpaired', { session });
-            if (statusFind) {
-              statusFind('desconnectedMobile', session);
-            }
-            deleteFiles(mergedOptions, session, logger);
-
-            if (!waitLoginPromise) {
-              waitLoginPromise = client
-                .waitForLogin(catchQR, statusFind)
-                .catch(() => {})
-                .finally(() => {
-                  waitLoginPromise = null;
-                });
-            }
-            await waitLoginPromise;
-          }
-        });
+    if (mergedOptions.waitForLogin) {
+      const isLogged = await client.waitForLogin(catchQR, statusFind);
+      if (!isLogged) {
+        throw 'Not Logged';
       }
+
+      let waitLoginPromise = null;
+      client.onStateChange(async (state) => {
+        if (
+          state === SocketState.UNPAIRED ||
+          state === SocketState.UNPAIRED_IDLE
+        ) {
+          logger.info('Session Unpaired', { session });
+          if (statusFind) {
+            statusFind('desconnectedMobile', session);
+          }
+          deleteFiles(mergedOptions, session, logger);
+
+          if (!waitLoginPromise) {
+            waitLoginPromise = client
+              .waitForLogin(catchQR, statusFind)
+              .catch(() => {})
+              .finally(() => {
+                waitLoginPromise = null;
+              });
+          }
+          await waitLoginPromise;
+        }
+      });
     }
 
     if (mergedOptions.debug) {
