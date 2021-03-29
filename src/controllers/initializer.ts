@@ -222,6 +222,19 @@ export async function create(
       });
     }
 
+    client.onStateChange(async (state) => {
+      if (
+        state === SocketState.UNPAIRED ||
+        state === SocketState.UNPAIRED_IDLE
+      ) {
+        logger.info('Session Unpaired', { session });
+        if (statusFind) {
+          statusFind('desconnectedMobile', session);
+        }
+        deleteFiles(mergedOptions, session, logger);
+      }
+    });
+
     if (mergedOptions.waitForLogin) {
       const isLogged = await client.waitForLogin(catchQR, statusFind);
       if (!isLogged) {
@@ -234,12 +247,6 @@ export async function create(
           state === SocketState.UNPAIRED ||
           state === SocketState.UNPAIRED_IDLE
         ) {
-          logger.info('Session Unpaired', { session });
-          if (statusFind) {
-            statusFind('desconnectedMobile', session);
-          }
-          deleteFiles(mergedOptions, session, logger);
-
           if (!waitLoginPromise) {
             waitLoginPromise = client
               .waitForLogin(catchQR, statusFind)
