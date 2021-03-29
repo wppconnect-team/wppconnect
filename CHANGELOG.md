@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/wppconnect-team/wppconnect/compare/v1.2.1...v1.2.2) (2021-03-29)
+
+### Bug Fixes
+
+- Fixed logged token delete on disconnect ([883d0d4](https://github.com/wppconnect-team/wppconnect/commit/883d0d415a6dd7d05625adcefaa0d3d397fc11ed))
+- Fixed statusFind callback (#fix 57) ([cc0d3d6](https://github.com/wppconnect-team/wppconnect/commit/cc0d3d69855ae219699ea65a53e63379f72e3aa6))
+
 ## [1.2.1](https://github.com/wppconnect-team/wppconnect/compare/v1.2.0...v1.2.1) (2021-03-04)
 
 ### Bug Fixes
