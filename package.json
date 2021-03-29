@@ -24,9 +24,9 @@
     "lint": "npm run lint:ts && npm run lint:js",
     "prepare": "npm run clean && npm run build",
     "release": "release-it",
-    "start": "npm run build:client & tsc app.ts && node app.js",
+    "start": "npm run build:client && tsc app.ts && node app.js",
     "test": "mocha -r ts-node/register src/tests/**/*.test.ts",
-    "watch": "concurrently \"npm run build:wapi -- --mode=development -w\" \"npm run build:client -- -w\""
+    "watch": "concurrently \"npm run build:wapi -- --mode=development -w\" \"npm run build:client -- -w --sourceMap\""
   },
   "husky": {
     "hooks": {
