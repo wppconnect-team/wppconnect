@@ -1,3 +1,9 @@
+## [1.2.3](https://github.com/wppconnect-team/wppconnect/compare/v1.2.2...v1.2.3) (2021-03-29)
+
+### Bug Fixes
+
+- Fixed downloadMedia with new WhatsApp version (fix [#76](https://github.com/wppconnect-team/wppconnect/issues/76)) ([f61e118](https://github.com/wppconnect-team/wppconnect/commit/f61e1183937e8dd2989d892b6a8e7b8e117cd22e))
+
 ## [1.2.2](https://github.com/wppconnect-team/wppconnect/compare/v1.2.1...v1.2.2) (2021-03-29)
 
 ### Bug Fixes
