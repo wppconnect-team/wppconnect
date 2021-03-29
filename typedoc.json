@@ -22,6 +22,10 @@
             "source": "./docs/getting-started/creating-client.md"
           },
           {
+            "title": "Receiving Messages",
+            "source": "./docs/getting-started/receiving-messages.md"
+          },
+          {
             "title": "Configuring the logger",
             "source": "./docs/getting-started/configuring-logger.md"
           },
