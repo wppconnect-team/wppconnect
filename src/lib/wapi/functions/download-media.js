@@ -35,7 +35,11 @@ export async function downloadMedia(messageId) {
     };
   }
 
-  await msg.downloadMedia(true, 1);
+  await msg.downloadMedia({
+    downloadEvenIfExpensive: true,
+    rmrReason: 1,
+    isUserInitiated: true,
+  });
 
   let blob = null;
 
