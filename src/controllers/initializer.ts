@@ -260,13 +260,6 @@ export async function create(
       });
     }
 
-    if (mergedOptions.debug) {
-      const debugURL = `http://localhost:${readFileSync(
-        `./${session}/DevToolsActivePort`
-      ).slice(0, -54)}`;
-      logger.info(`\nDebug: \x1b[34m${debugURL}\x1b[0m`);
-    }
-
     return client;
   }
 }
