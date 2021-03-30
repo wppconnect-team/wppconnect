@@ -157,7 +157,8 @@ if (typeof window.Store === 'undefined') {
 
   for (const store of storeObjects) {
     window.Store.promises[store.id] = loader
-      .waitForModule(store.conditions)
+      .waitForModule((m) => !!store.conditions(m))
+      .then(store.conditions)
       .then((m) => {
         if (store.id === 'Store') {
           window.Store = Object.assign({}, window.Store, m);

@@ -23,6 +23,7 @@ import { existsSync, readFileSync } from 'fs';
 import { CreateConfig } from '../config/create-config';
 import { ScrapQrcode } from '../api/model/qrcode';
 import { tokenSession } from '../config/tokenSession.config';
+import { puppeteerConfig } from '../config/puppeteer.config';
 
 export const getInterfaceStatus = async (
   waPage: puppeteer.Page
@@ -183,14 +184,27 @@ export async function auth_InjectToken(
     return false;
   }
 
-  //Auth with token ->start<-
-  return await page.evaluateOnNewDocument((session) => {
+  await page.setRequestInterception(true);
+  const reqHandler = (req: puppeteer.Request) => {
+    req.respond({
+      status: 200,
+      contentType: 'text/plain',
+      body: 'injecting token...',
+    });
+  };
+  page.on('request', reqHandler);
+
+  await page.goto(puppeteerConfig.whatsappUrl);
+  await page.evaluate((session) => {
     localStorage.clear();
     Object.keys(session).forEach((key) => {
       localStorage.setItem(key, session[key]);
     });
   }, token as any);
-  //End Auth with token
+
+  // Disable
+  page.off('request', reqHandler);
+  await page.setRequestInterception(false);
 }
 
 export async function saveToken(
