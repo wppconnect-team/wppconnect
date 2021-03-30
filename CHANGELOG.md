@@ -1,3 +1,9 @@
+## [1.2.4](https://github.com/wppconnect-team/wppconnect/compare/v1.2.3...v1.2.4) (2021-03-30)
+
+### Bug Fixes
+
+- Fixed inject token for authentication ([c36466f](https://github.com/wppconnect-team/wppconnect/commit/c36466faddda75dcbfcc7f1e18d275917e41e707))
+
 ## [1.2.3](https://github.com/wppconnect-team/wppconnect/compare/v1.2.2...v1.2.3) (2021-03-29)
 
 ### Bug Fixes
