@@ -29,6 +29,17 @@
 | 📍 Send location!!                                         | ✔   |
 | 🕸🕸 **and much more**                                       | ✔   |
 
+## Installation
+
+The first thing that you had to do is install the `npm package` :
+
+```bash
+npm i --save @wppconnect-team/wppconnect
+```
+
+See more at <a href="https://wppconnect-team.github.io/wppconnect/pages/Getting%20Started/installation.html">Getting Started</a>
+
+
 ## Development
 
 Building WPPConnect is really simple altough it contains 3 main projects inside
