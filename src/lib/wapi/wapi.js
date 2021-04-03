@@ -116,6 +116,8 @@ import {
   getListMute,
   interfaceMute,
   downloadMedia,
+  startPhoneWatchdog,
+  stopPhoneWatchdog,
 } from './functions';
 import {
   base64ToFile,
@@ -311,6 +313,8 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.restartService = restartService;
   window.WAPI.killServiceWorker = killServiceWorker;
   window.WAPI.sendMute = sendMute;
+  window.WAPI.startPhoneWatchdog = startPhoneWatchdog;
+  window.WAPI.stopPhoneWatchdog = stopPhoneWatchdog;
 
   // Listeners initialization
   window.WAPI._newMessagesQueue = [];

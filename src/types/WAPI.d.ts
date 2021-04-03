@@ -208,7 +208,9 @@ interface WAPI {
   setMyStatus: (to: string) => void;
   setProfilePic: (path: string, to?: string) => Promise<boolean>;
   setTheme: (theme?: string) => boolean;
+  startPhoneWatchdog: (interval: number) => void;
   startTyping: (to: string) => void;
+  stopPhoneWatchdog: () => void;
   stopTyping: (to: string) => void;
   takeOver: () => boolean;
   unblockContact: (messageId: string) => boolean;

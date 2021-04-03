@@ -338,4 +338,23 @@ export class HostLayer {
   public async getBatteryLevel() {
     return await this.page.evaluate(() => WAPI.getBatteryLevel());
   }
+
+  /**
+   * Start phone Watchdog, forcing the phone connection verification.
+   *
+   * @param interval interval number in miliseconds
+   */
+  public async startPhoneWatchdog(interval: number = 15000) {
+    return await this.page.evaluate(
+      (interval) => WAPI.startPhoneWatchdog(interval),
+      interval
+    );
+  }
+
+  /**
+   * Stop phone Watchdog, more details in {@link startPhoneWatchdog}
+   */
+  public async stopPhoneWatchdog(interval: number) {
+    return await this.page.evaluate(() => WAPI.stopPhoneWatchdog());
+  }
 }
