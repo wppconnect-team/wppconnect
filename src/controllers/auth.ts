@@ -24,6 +24,7 @@ import { CreateConfig } from '../config/create-config';
 import { ScrapQrcode } from '../api/model/qrcode';
 import { tokenSession } from '../config/tokenSession.config';
 import { puppeteerConfig } from '../config/puppeteer.config';
+import { sleep } from '../utils/sleep';
 
 export const getInterfaceStatus = async (
   waPage: puppeteer.Page
@@ -185,11 +186,58 @@ export async function auth_InjectToken(
   }
 
   await page.setRequestInterception(true);
+
+  // @todo Move to another file
   const reqHandler = (req: puppeteer.Request) => {
+    if (req.url().endsWith('wppconnect-banner.jpeg')) {
+      req.respond({
+        body: fs.readFileSync(
+          path.resolve(__dirname + '/../../img/wppconnect-banner.jpeg')
+        ),
+        contentType: 'image/jpeg',
+      });
+      return;
+    }
+
+    if (req.resourceType() !== 'document') {
+      req.continue();
+      return;
+    }
+
     req.respond({
       status: 200,
-      contentType: 'text/plain',
-      body: 'injecting token...',
+      contentType: 'text/html',
+      body: `
+<!doctype html>
+<html lang=en>
+  <head>
+    <title>Initializing WhatsApp</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: arial, sans-serif;
+        background-color: #e6e6e6;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        max-height:100%;
+      }
+      h1 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <img src="wppconnect-banner.jpeg" />
+      <h1>Initializing WhatsApp ...</h1>
+    </div>
+  </body>
+</html>`,
     });
   };
   page.on('request', reqHandler);
