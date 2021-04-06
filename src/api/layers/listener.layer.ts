@@ -114,93 +114,76 @@ export class ListenerLayer extends ProfileLayer {
   }
 
   /**
-   * @event Listens to messages received
-   * @returns Observable stream of messages
+   * Register the event and create a disposable object to stop the listening
+   * @param event Name of event
+   * @param listener The function to execute
+   * @returns Disposable object to stop the listening
    */
-  public async onMessage(fn: (message: Message) => void) {
-    this.listenerEmitter.on(ExposedFn.OnMessage, (state: Message) => {
-      fn(state);
-    });
+  protected registerEvent(
+    event: string | symbol,
+    listener: (...args: any[]) => void
+  ) {
+    this.listenerEmitter.on(event, listener);
     return {
       dispose: () => {
-        this.listenerEmitter.off(ExposedFn.OnMessage, fn);
+        this.listenerEmitter.off(event, listener);
       },
     };
   }
 
   /**
-   * @event Listens to all new messages
+   * @event Listens to all new messages received only.
+   * @returns Disposable object to stop the listening
+   */
+  public onMessage(callback: (message: Message) => void) {
+    return this.registerEvent(ExposedFn.OnMessage, callback);
+  }
+
+  /**
+   * @event Listens to all new messages, sent and received.
    * @param to callback
    * @fires Message
+   * @returns Disposable object to stop the listening
    */
-  public async onAnyMessage(fn: (message: Message) => void) {
-    this.listenerEmitter.on(ExposedFn.OnAnyMessage, (state: Message) => {
-      fn(state);
-    });
-    return {
-      dispose: () => {
-        this.listenerEmitter.off(ExposedFn.OnAnyMessage, fn);
-      },
-    };
+  public onAnyMessage(callback: (message: Message) => void) {
+    return this.registerEvent(ExposedFn.OnAnyMessage, callback);
   }
 
   /**
    * @event Listens List of mobile states
-   * @returns Observable status flow
+   * @returns Disposable object to stop the listening
    */
-  public async onStateChange(fn: (state: SocketState) => void) {
-    this.listenerEmitter.on(ExposedFn.onStateChange, (state: SocketState) => {
-      fn(state);
-    });
-    return {
-      dispose: () => {
-        this.listenerEmitter.off(ExposedFn.onStateChange, fn);
-      },
-    };
+  public onStateChange(callback: (state: SocketState) => void) {
+    return this.registerEvent(ExposedFn.onStateChange, callback);
   }
 
   /**
-   * @returns Returns the current state of the connection
+   * @event Returns the current state of the connection
+   * @returns Disposable object to stop the listening
    */
-  public async onStreamChange(fn: (state: SocketStream) => void) {
-    this.listenerEmitter.on(ExposedFn.onStreamChange, (state: SocketStream) => {
-      fn(state);
-    });
-    return {
-      dispose: () => {
-        this.listenerEmitter.off(ExposedFn.onStreamChange, fn);
-      },
-    };
+  public onStreamChange(callback: (state: SocketStream) => void) {
+    return this.registerEvent(ExposedFn.onStreamChange, callback);
   }
 
   /**
    * @event Listens to interface mode change See {@link InterfaceState} and {@link InterfaceMode} for details
-   * @returns A disposable object to cancel the event
+   * @returns Disposable object to stop the listening
    */
   public onInterfaceChange(
-    fn: (state: { displayInfo: InterfaceState; mode: InterfaceMode }) => void
+    callback: (state: {
+      displayInfo: InterfaceState;
+      mode: InterfaceMode;
+    }) => void
   ) {
-    this.listenerEmitter.on(ExposedFn.onInterfaceChange, fn);
-    return {
-      dispose: () => {
-        this.listenerEmitter.off(ExposedFn.onInterfaceChange, fn);
-      },
-    };
+    return this.registerEvent(ExposedFn.onInterfaceChange, callback);
   }
 
   /**
    * @event Listens to messages acknowledgement Changes
-   * @returns Observable stream of messages
+   * @returns Disposable object to stop the listening
    */
-  public async onAck(fn: (ack: Ack) => void) {
-    this.listenerEmitter.on(ExposedFn.onAck, (state: Ack) => {
-      fn(state);
-    });
-    return {
-      dispose: () => {
-        this.listenerEmitter.off(ExposedFn.onAck, fn);
-      },
-    };
+  public onAck(callback: (ack: Ack) => void) {
+    return this.registerEvent(ExposedFn.onAck, callback);
   }
 
   /**
@@ -260,31 +243,17 @@ export class ListenerLayer extends ProfileLayer {
   /**
    * @event Fires callback with Chat object every time the host phone is added to a group.
    * @param to callback
-   * @returns Observable stream of Chats
+   * @returns Disposable object to stop the listening
    */
-  public async onAddedToGroup(fn: (chat: Chat) => any) {
-    this.listenerEmitter.on('onAddedToGroup', (state: Chat) => {
-      fn(state);
-    });
-    return {
-      dispose: () => {
-        this.listenerEmitter.off('onAddedToGroup', fn);
-      },
-    };
+  public onAddedToGroup(callback: (chat: Chat) => any) {
+    return this.registerEvent('onAddedToGroup', callback);
   }
 
   /**
    * @event Listens to messages received
-   * @returns Observable stream of messages
+   * @returns Disposable object to stop the listening
    */
-  public async onIncomingCall(fn: (call: any) => any) {
-    this.listenerEmitter.on('onIncomingCall', (state: any) => {
-      fn(state);
-    });
-    return {
-      dispose: () => {
-        this.listenerEmitter.off('onIncomingCall', fn);
-      },
-    };
+  public onIncomingCall(callback: (call: any) => any) {
+    return this.registerEvent('onIncomingCall', callback);
   }
 }
