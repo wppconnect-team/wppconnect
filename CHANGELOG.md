@@ -1,3 +1,13 @@
+## [1.2.5](https://github.com/wppconnect-team/wppconnect/compare/v1.2.4...v1.2.5) (2021-04-07)
+
+### Bug Fixes
+
+- Fixed event dispose to stop listeners ([#103](https://github.com/wppconnect-team/wppconnect/issues/103)) ([0682c06](https://github.com/wppconnect-team/wppconnect/commit/0682c06122dc534789cea5721a515e4bdd96e4de))
+
+### Features
+
+- Added phoneWatchdog verification ([6616fa2](https://github.com/wppconnect-team/wppconnect/commit/6616fa22567fe0ea1f35fff32ec1f8b070e76695))
+
 ## [1.2.4](https://github.com/wppconnect-team/wppconnect/compare/v1.2.3...v1.2.4) (2021-03-30)
 
 ### Bug Fixes
