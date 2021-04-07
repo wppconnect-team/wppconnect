@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>InterfaceState | @wppconnect-team/wppconnect - v1.2.5</title>
+	<title>StatusFind | @wppconnect-team/wppconnect - v1.2.5</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.2.5">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,16 +55,23 @@
 					<a href="../modules.html">Globals</a>
 				</li>
 				<li>
-					<a href="interfacestate.html">InterfaceState</a>
+					<a href="statusfind.html">StatusFind</a>
 				</li>
 			</ul>
-			<h1>Enumeration InterfaceState</h1>
+			<h1>Enumeration StatusFind</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>SocketState are the possible states of connection between WhatsApp page and phone.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
@@ -72,14 +79,17 @@
 						<section class="tsd-index-section ">
 							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="interfacestate.html#connecting" class="tsd-kind-icon">CONNECTING</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="interfacestate.html#normal" class="tsd-kind-icon">NORMAL</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="interfacestate.html#offline" class="tsd-kind-icon">OFFLINE</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="interfacestate.html#opening" class="tsd-kind-icon">OPENING</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="interfacestate.html#pairing" class="tsd-kind-icon">PAIRING</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="interfacestate.html#resuming" class="tsd-kind-icon">RESUMING</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="interfacestate.html#syncing" class="tsd-kind-icon">SYNCING</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="interfacestate.html#timeout" class="tsd-kind-icon">TIMEOUT</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="statusfind.html#autoclosecalled" class="tsd-kind-icon">autoclose<wbr>Called</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="statusfind.html#browserclose" class="tsd-kind-icon">browser<wbr>Close</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="statusfind.html#desconnectedmobile" class="tsd-kind-icon">desconnected<wbr>Mobile</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="statusfind.html#inchat" class="tsd-kind-icon">in<wbr>Chat</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="statusfind.html#islogged" class="tsd-kind-icon">is<wbr>Logged</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="statusfind.html#notlogged" class="tsd-kind-icon">not<wbr>Logged</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="statusfind.html#phonenotconnected" class="tsd-kind-icon">phone<wbr>Not<wbr>Connected</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="statusfind.html#qrreaderror" class="tsd-kind-icon">qr<wbr>Read<wbr>Error</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="statusfind.html#qrreadfail" class="tsd-kind-icon">qr<wbr>Read<wbr>Fail</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="statusfind.html#qrreadsuccess" class="tsd-kind-icon">qr<wbr>Read<wbr>Success</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="statusfind.html#serverclose" class="tsd-kind-icon">server<wbr>Close</a></li>
 							</ul>
 						</section>
 					</div>
@@ -88,98 +98,134 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Enumeration members</h2>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="connecting" class="tsd-anchor"></a>
-					<h3>CONNECTING</h3>
-					<div class="tsd-signature tsd-kind-icon">CONNECTING<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;CONNECTING&quot;</span></div>
+					<a name="autoclosecalled" class="tsd-anchor"></a>
+					<h3>autoclose<wbr>Called</h3>
+					<div class="tsd-signature tsd-kind-icon">autoclose<wbr>Called<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;autocloseCalled&quot;</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>When the whatsapp web is connecting to whatsapp server.</p>
+							<p>The browser was closed using the autoClose.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="normal" class="tsd-anchor"></a>
-					<h3>NORMAL</h3>
-					<div class="tsd-signature tsd-kind-icon">NORMAL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;NORMAL&quot;</span></div>
+					<a name="browserclose" class="tsd-anchor"></a>
+					<h3>browser<wbr>Close</h3>
+					<div class="tsd-signature tsd-kind-icon">browser<wbr>Close<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;browserClose&quot;</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>When the whatsapp web is ready.</p>
+							<p>If the browser is closed this parameter is returned.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="offline" class="tsd-anchor"></a>
-					<h3>OFFLINE</h3>
-					<div class="tsd-signature tsd-kind-icon">OFFLINE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;OFFLINE&quot;</span></div>
+					<a name="desconnectedmobile" class="tsd-anchor"></a>
+					<h3>desconnected<wbr>Mobile</h3>
+					<div class="tsd-signature tsd-kind-icon">desconnected<wbr>Mobile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;desconnectedMobile&quot;</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>When there are no internet.</p>
+							<p>Client has disconnected in to mobile.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="opening" class="tsd-anchor"></a>
-					<h3>OPENING</h3>
-					<div class="tsd-signature tsd-kind-icon">OPENING<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;OPENING&quot;</span></div>
+					<a name="inchat" class="tsd-anchor"></a>
+					<h3>in<wbr>Chat</h3>
+					<div class="tsd-signature tsd-kind-icon">in<wbr>Chat<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;inChat&quot;</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>When the whatsapp web page is loading.</p>
+							<p>Client is ready to send and receive messages.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="pairing" class="tsd-anchor"></a>
-					<h3>PAIRING</h3>
-					<div class="tsd-signature tsd-kind-icon">PAIRING<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;PAIRING&quot;</span></div>
+					<a name="islogged" class="tsd-anchor"></a>
+					<h3>is<wbr>Logged</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Logged<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;isLogged&quot;</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>When the whatsapp web is connecting to smartphone after QR code scan.</p>
+							<p>When the user is already logged in to the browser.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="resuming" class="tsd-anchor"></a>
-					<h3>RESUMING</h3>
-					<div class="tsd-signature tsd-kind-icon">RESUMING<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;RESUMING&quot;</span></div>
+					<a name="notlogged" class="tsd-anchor"></a>
+					<h3>not<wbr>Logged</h3>
+					<div class="tsd-signature tsd-kind-icon">not<wbr>Logged<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;notLogged&quot;</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>When the whatsapp web is syncing messages with smartphone after a disconnection.</p>
+							<p>When the user is not connected to the browser, it is necessary to scan the QR code through the cell phone in the option WhatsApp Web.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="syncing" class="tsd-anchor"></a>
-					<h3>SYNCING</h3>
-					<div class="tsd-signature tsd-kind-icon">SYNCING<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;SYNCING&quot;</span></div>
+					<a name="phonenotconnected" class="tsd-anchor"></a>
+					<h3>phone<wbr>Not<wbr>Connected</h3>
+					<div class="tsd-signature tsd-kind-icon">phone<wbr>Not<wbr>Connected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;phoneNotConnected&quot;</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>When the whatsapp web is syncing messages with smartphone.</p>
+							<p>Client couldn&#39;t connect to phone.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="timeout" class="tsd-anchor"></a>
-					<h3>TIMEOUT</h3>
-					<div class="tsd-signature tsd-kind-icon">TIMEOUT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;TIMEOUT&quot;</span></div>
+					<a name="qrreaderror" class="tsd-anchor"></a>
+					<h3>qr<wbr>Read<wbr>Error</h3>
+					<div class="tsd-signature tsd-kind-icon">qr<wbr>Read<wbr>Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;qrReadError&quot;</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>When the whatsapp web couldn&#39;t connect to smartphone.</p>
+							<p>Failed to authenticate.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="qrreadfail" class="tsd-anchor"></a>
+					<h3>qr<wbr>Read<wbr>Fail</h3>
+					<div class="tsd-signature tsd-kind-icon">qr<wbr>Read<wbr>Fail<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;qrReadFail&quot;</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the browser stops when the QR code scan is in progress, this parameter is returned.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="qrreadsuccess" class="tsd-anchor"></a>
+					<h3>qr<wbr>Read<wbr>Success</h3>
+					<div class="tsd-signature tsd-kind-icon">qr<wbr>Read<wbr>Success<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;qrReadSuccess&quot;</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the user is not logged in, the QR code is passed on the terminal a callback is returned. After the correct reading by cell phone this parameter is returned.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="serverclose" class="tsd-anchor"></a>
+					<h3>server<wbr>Close</h3>
+					<div class="tsd-signature tsd-kind-icon">server<wbr>Close<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;serverClose&quot;</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p> Client has disconnected in to wss.</p>
 						</div>
 					</div>
 				</section>
@@ -228,48 +274,57 @@
 					<li class=" tsd-kind-enum">
 						<a href="interfacemode.html" class="tsd-kind-icon">Interface<wbr>Mode</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-enum">
+					<li class=" tsd-kind-enum">
 						<a href="interfacestate.html" class="tsd-kind-icon">Interface<wbr>State</a>
-						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="interfacestate.html#connecting" class="tsd-kind-icon">CONNECTING</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="interfacestate.html#normal" class="tsd-kind-icon">NORMAL</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="interfacestate.html#offline" class="tsd-kind-icon">OFFLINE</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="interfacestate.html#opening" class="tsd-kind-icon">OPENING</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="interfacestate.html#pairing" class="tsd-kind-icon">PAIRING</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="interfacestate.html#resuming" class="tsd-kind-icon">RESUMING</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="interfacestate.html#syncing" class="tsd-kind-icon">SYNCING</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="interfacestate.html#timeout" class="tsd-kind-icon">TIMEOUT</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-enum">
 						<a href="messagetype.html" class="tsd-kind-icon">Message<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-enum">
 						<a href="socketstate.html" class="tsd-kind-icon">Socket<wbr>State</a>
 					</li>
-					<li class=" tsd-kind-enum">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-enum">
 						<a href="statusfind.html" class="tsd-kind-icon">Status<wbr>Find</a>
+						<ul>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="statusfind.html#autoclosecalled" class="tsd-kind-icon">autoclose<wbr>Called</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="statusfind.html#browserclose" class="tsd-kind-icon">browser<wbr>Close</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="statusfind.html#desconnectedmobile" class="tsd-kind-icon">desconnected<wbr>Mobile</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="statusfind.html#inchat" class="tsd-kind-icon">in<wbr>Chat</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="statusfind.html#islogged" class="tsd-kind-icon">is<wbr>Logged</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="statusfind.html#notlogged" class="tsd-kind-icon">not<wbr>Logged</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="statusfind.html#phonenotconnected" class="tsd-kind-icon">phone<wbr>Not<wbr>Connected</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="statusfind.html#qrreaderror" class="tsd-kind-icon">qr<wbr>Read<wbr>Error</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="statusfind.html#qrreadfail" class="tsd-kind-icon">qr<wbr>Read<wbr>Fail</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="statusfind.html#qrreadsuccess" class="tsd-kind-icon">qr<wbr>Read<wbr>Success</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="statusfind.html#serverclose" class="tsd-kind-icon">server<wbr>Close</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="../classes/whatsapp.html" class="tsd-kind-icon">Whatsapp</a>
 					</li>
