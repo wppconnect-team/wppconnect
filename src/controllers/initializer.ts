@@ -21,44 +21,15 @@ import { CreateConfig, defaultOptions } from '../config/create-config';
 import { SessionTokenCkeck, saveToken } from './auth';
 import { initWhatsapp, initBrowser, getWhatsappPage } from './browser';
 import { checkUpdates, welcomeScreen } from './welcome';
-import { SocketState } from '../api/model/enum';
+import { SocketState, StatusFind } from '../api/model/enum';
 import { deleteFiles } from '../api/helpers';
 import { tokenSession } from '../config/tokenSession.config';
 import { Browser } from 'puppeteer';
-
-/**
- * A callback will be received, informing the status of the qrcode
- */
-export type CatchQR = (
-  qrCode: string,
-  asciiQR: string,
-  attempt: number,
-  urlCode?: string
-) => void;
-
-/**
- * A callback will be received, informing the customer's status
- */
-export type StatusFind = (statusGet: string, session: string) => void;
-
-export interface CreateOptions extends CreateConfig {
-  /**
-   * You must pass a string type parameter, this parameter will be the name of the client's session. If the parameter is not passed, the section name will be "session".
-   */
-  session: string;
-  /**
-   * A callback will be received, informing the status of the qrcode
-   */
-  catchQR?: CatchQR;
-  /**
-   * A callback will be received, informing the customer's status
-   */
-  statusFind?: StatusFind;
-  /**
-   * Pass the session token information you can receive this token with the await client.getSessionTokenBrowser () function
-   */
-  browserSessionToken?: tokenSession;
-}
+import {
+  CatchQRCallback,
+  CreateOptions,
+  StatusFindCallback,
+} from '../api/model/initializer';
 
 /**
  * Start the bot
@@ -73,16 +44,16 @@ export async function create(createOption: CreateOptions): Promise<Whatsapp>;
  */
 export async function create(
   sessionName: string,
-  catchQR?: CatchQR,
-  statusFind?: StatusFind,
+  catchQR?: CatchQRCallback,
+  statusFind?: StatusFindCallback,
   options?: CreateConfig,
   browserSessionToken?: tokenSession
 ): Promise<Whatsapp>;
 
 export async function create(
   sessionOrOption: string | CreateOptions,
-  catchQR?: CatchQR,
-  statusFind?: StatusFind,
+  catchQR?: CatchQRCallback,
+  statusFind?: StatusFindCallback,
   options?: CreateConfig,
   browserSessionToken?: tokenSession
 ): Promise<Whatsapp> {

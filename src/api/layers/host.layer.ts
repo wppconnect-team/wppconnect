@@ -32,6 +32,7 @@ import {
 import { sleep } from '../../utils/sleep';
 import { defaultLogger, LogLevel } from '../../utils/logger';
 import { Logger } from 'winston';
+import { CatchQRCallback, StatusFindCallback } from '../model';
 
 export class HostLayer {
   readonly session: string;
@@ -39,7 +40,7 @@ export class HostLayer {
   readonly logger: Logger;
 
   protected autoCloseInterval = null;
-  protected statusFind?: (statusGet: string, session: string) => void = null;
+  protected statusFind?: StatusFindCallback = null;
 
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     this.session = session;
@@ -135,14 +136,7 @@ export class HostLayer {
     return qrResult;
   }
 
-  public async waitForQrCodeScan(
-    catchQR?: (
-      qrCode: string,
-      asciiQR: string,
-      attempt: number,
-      urlCode?: string
-    ) => void
-  ) {
+  public async waitForQrCodeScan(catchQR?: CatchQRCallback) {
     let urlCode = null;
     let attempt = 0;
 
@@ -202,13 +196,8 @@ export class HostLayer {
   }
 
   public async waitForLogin(
-    catchQR?: (
-      qrCode: string,
-      asciiQR: string,
-      attempt: number,
-      urlCode?: string
-    ) => void,
-    statusFind?: (statusGet: string, session: string) => void
+    catchQR?: CatchQRCallback,
+    statusFind?: StatusFindCallback
   ) {
     this.statusFind = statusFind;
 

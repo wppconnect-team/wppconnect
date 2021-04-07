@@ -29,3 +29,4 @@ export { ContactStatus } from './contact-status';
 export { GroupCreation } from './group-creation';
 export { WhatsappProfile } from './whatsapp-profile';
 export * from './result';
+export * from './initializer';

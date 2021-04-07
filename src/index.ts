@@ -26,13 +26,9 @@ export {
   SocketState,
   InterfaceMode,
   InterfaceState,
+  StatusFind,
 } from './api/model/enum';
 export { Whatsapp } from './api/whatsapp';
 export { CreateConfig } from './config/create-config';
-export {
-  create,
-  CatchQR,
-  CreateOptions,
-  StatusFind,
-} from './controllers/initializer';
+export { create } from './controllers/initializer';
 export { defaultLogger } from './utils/logger';
