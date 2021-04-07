@@ -109,6 +109,19 @@ wppconnect
   .catch((error) => console.log(error));
 ```
 
+### Phone connection verification
+To enforce the phone connection verification, you can use the code below or check the documentation {@link Whatsapp.startPhoneWatchdog}.:
+```javascript
+// To start with default interval.
+client.startPhoneWatchdog();
+
+// To start with custom interval.
+client.startPhoneWatchdog(30000); // 30s
+
+// To stop.
+client.stopPhoneWatchdog();
+```
+
 ### Exporting QR Code
 
 By default, QR code will appear on the terminal. If you need to pass the QR
