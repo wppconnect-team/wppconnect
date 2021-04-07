@@ -131,7 +131,7 @@ export async function create(
   } else if (!browser && !page) {
     // Initialize new browser
     logger.info('Initializing browser...', { session, type: 'browser' });
-    browser = await initBrowser(session, mergedOptions).catch((e) => {
+    browser = await initBrowser(session, mergedOptions, logger).catch((e) => {
       if (mergedOptions.browserWS && mergedOptions.browserWS != '') {
         logger.error(`Error when try to connect ${mergedOptions.browserWS}`, {
           session,

@@ -27,6 +27,7 @@ import { auth_InjectToken } from './auth';
 import { useragentOverride } from '../config/WAuserAgente';
 import { WebSocketTransport } from './websocket';
 import { tokenSession } from '../config/tokenSession.config';
+import { Logger } from 'winston';
 
 export async function initWhatsapp(
   session: string,
@@ -88,15 +89,20 @@ export async function injectApi(page: Page) {
 export async function initBrowser(
   session: string,
   options: CreateConfig,
-  extras = {}
+  logger: Logger
 ): Promise<Browser> {
   if (options.useChrome) {
     const chromePath = getChrome();
     if (chromePath) {
-      extras = { ...extras, executablePath: chromePath };
+      if (!options.puppeteerOptions) {
+        options.puppeteerOptions = {};
+      }
+      options.puppeteerOptions.executablePath = chromePath;
     } else {
-      console.log('Chrome not found, using chromium');
-      extras = {};
+      logger.warn('Chrome not found, using chromium', {
+        session,
+        type: 'browser',
+      });
     }
   }
 
@@ -115,7 +121,6 @@ export async function initBrowser(
         ? options.browserArgs
         : [...puppeteerConfig.chromiumArgs],
       ...options.puppeteerOptions,
-      ...extras,
     });
   }
 
@@ -139,8 +144,7 @@ export async function getWhatsappPage(
  */
 function getChrome() {
   try {
-    const chromeInstalations = ChromeLauncher.Launcher.getInstallations();
-    return chromeInstalations[0];
+    return ChromeLauncher.Launcher.getFirstInstallation();
   } catch (error) {
     return undefined;
   }
