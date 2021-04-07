@@ -45,14 +45,10 @@ const logger = winston.createLogger({
 });
 
 wppconnect
-  .create(
-    'sessionName',
-    undefined,
-    undefined,
-    {
-      logger: logger
-    }
-  )
+  .create({
+    session: 'sessionName',
+    logger: logger,
+  })
   .then((client) => {
     start(client);
   })

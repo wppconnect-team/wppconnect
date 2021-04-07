@@ -17,7 +17,7 @@
 const wppconnect = require('../../dist');
 
 wppconnect
-  .create('sessionName')
+  .create({ sesion: 'sessionName' })
   .then((client) => start(client))
   .catch((erro) => {
     console.log(erro);
