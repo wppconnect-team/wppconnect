@@ -1,5 +1,5 @@
 {
-  "disableSources": true,
+  "disableSources": false,
   "entryPoints": ["src/index.ts"],
   "excludeExternals": true,
   "excludePrivate": true,
@@ -8,6 +8,7 @@
   "out": "api-docs",
   "theme": "pages-plugin",
   "media": "media",
+  "gaID": "G-LTZL26963K",
   "pages": {
     "groups": [
       {

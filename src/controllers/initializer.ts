@@ -15,21 +15,18 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { readFileSync } from 'fs';
 import { Whatsapp } from '../api/whatsapp';
 import { CreateConfig, defaultOptions } from '../config/create-config';
-import { SessionTokenCkeck, saveToken } from './auth';
-import { initWhatsapp, initBrowser, getWhatsappPage } from './browser';
+import { initBrowser, getOrCreatePage } from './browser';
 import { checkUpdates, welcomeScreen } from './welcome';
 import { SocketState, StatusFind } from '../api/model/enum';
-import { deleteFiles } from '../api/helpers';
-import { tokenSession } from '../config/tokenSession.config';
 import { Browser } from 'puppeteer';
 import {
   CatchQRCallback,
   CreateOptions,
   StatusFindCallback,
 } from '../api/model/initializer';
+import { SessionToken } from '../token-store';
 
 /**
  * Start the bot
@@ -47,7 +44,7 @@ export async function create(
   catchQR?: CatchQRCallback,
   statusFind?: StatusFindCallback,
   options?: CreateConfig,
-  browserSessionToken?: tokenSession
+  browserSessionToken?: SessionToken
 ): Promise<Whatsapp>;
 
 export async function create(
@@ -55,33 +52,42 @@ export async function create(
   catchQR?: CatchQRCallback,
   statusFind?: StatusFindCallback,
   options?: CreateConfig,
-  browserSessionToken?: tokenSession
+  browserSessionToken?: SessionToken
 ): Promise<Whatsapp> {
   let session = 'session';
+  let usingDeprecatedCreate = false;
 
   if (
     typeof sessionOrOption === 'string' &&
     sessionOrOption.replace(/\s/g, '').length
   ) {
     session = sessionOrOption.replace(/\s/g, '');
+
+    usingDeprecatedCreate =
+      typeof sessionOrOption === 'string' ||
+      typeof catchQR !== 'undefined' ||
+      typeof statusFind !== 'undefined' ||
+      typeof options !== 'undefined' ||
+      typeof browserSessionToken !== 'undefined';
   } else if (typeof sessionOrOption === 'object') {
+    options = sessionOrOption;
     session = sessionOrOption.session;
     catchQR = sessionOrOption.catchQR || catchQR;
     statusFind = sessionOrOption.statusFind || statusFind;
-    browserSessionToken =
-      sessionOrOption.browserSessionToken || browserSessionToken;
-    options = sessionOrOption;
-  }
 
-  let browserToken: any;
+    if (!options.sessionToken) {
+      options.sessionToken =
+        sessionOrOption.browserSessionToken || browserSessionToken;
+    }
+  }
 
   const mergedOptions = { ...defaultOptions, ...options };
 
   const logger = mergedOptions.logger;
 
-  if (typeof sessionOrOption === 'string') {
+  if (usingDeprecatedCreate) {
     logger.warn(
-      'You are using deprecated create method, please use create({options})'
+      'You are using deprecated create method, please use create({options}) See: https://wppconnect-team.github.io/wppconnect/pages/Getting%20Started/creating-client.html#passing-options-on-create'
     );
   }
 
@@ -166,45 +172,13 @@ export async function create(
     }
   });
 
-  if (SessionTokenCkeck(browserSessionToken)) {
-    browserToken = browserSessionToken;
-  }
-
   if (!page) {
     // Initialize a page
-    page = await getWhatsappPage(browser);
+    page = await getOrCreatePage(browser);
   }
-
-  // Initialize whatsapp
-  await initWhatsapp(session, mergedOptions, page, browserToken);
 
   if (page) {
     const client = new Whatsapp(page, session, mergedOptions);
-
-    if (mergedOptions.createPathFileToken) {
-      client.onStateChange((state) => {
-        if (state === SocketState.CONNECTED) {
-          setTimeout(() => {
-            saveToken(page, session, mergedOptions).catch((e) => {
-              logger.error(e, { session });
-            });
-          }, 1000);
-        }
-      });
-    }
-
-    client.onStateChange(async (state) => {
-      if (
-        state === SocketState.UNPAIRED ||
-        state === SocketState.UNPAIRED_IDLE
-      ) {
-        logger.info('Session Unpaired', { session });
-        if (statusFind) {
-          statusFind('desconnectedMobile', session);
-        }
-        deleteFiles(mergedOptions, session, logger);
-      }
-    });
 
     if (mergedOptions.waitForLogin) {
       const isLogged = await client.waitForLogin(catchQR, statusFind);

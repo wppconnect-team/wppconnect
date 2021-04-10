@@ -16,18 +16,11 @@
  */
 import { Browser, BrowserContext, LaunchOptions, Page } from 'puppeteer';
 import { Logger } from 'winston';
+import { SessionToken, TokenStore } from '../token-store';
 import { defaultLogger } from '../utils/logger';
 
 // Server config
 export interface CreateConfig {
-  /** folder name when saving tokens
-   * @default 'tokens'
-   */
-  folderNameToken?: string;
-  /**
-   * folder directory tokens, just inside the wppconnect folder, example:  { mkdirFolderToken: '/node_modules', } //will save the tokens folder in the node_modules directory
-   */
-  mkdirFolderToken?: string;
   /**
    * Headless chrome
    * @default true
@@ -89,11 +82,6 @@ export interface CreateConfig {
    */
   autoClose?: number;
   /**
-   * Creates a folder when inserting an object in the client's browser, to work it is necessary to pass the parameters in the function create browserSessionToken
-   * @default true
-   */
-  createPathFileToken?: boolean;
-  /**
    * Wait for in chat to return a instance of {@link Whatsapp}
    * @default false
    */
@@ -103,10 +91,39 @@ export interface CreateConfig {
    * @default false
    */
   logger?: Logger;
+
+  /**
+   * Initial token to log in in WhatsApp.
+   * If not passed, the client will get it from {@link tokenStore}.
+   */
+  sessionToken?: SessionToken;
+
+  /**
+   * Token store used to manage token {@link tokenStore}
+   * @default 'file'
+   */
+  tokenStore?: TokenStore | string;
+
+  /** Folder name when saving tokens if {@link tokenStore} is 'file'.
+   * @default 'tokens'
+   */
+  folderNameToken?: string;
+
+  /**
+   * folder directory tokens, just inside the wppconnect folder, example: { mkdirFolderToken: '/node_modules', } //will save the tokens folder in the node_modules directory
+   * @deprecated See {@link tokenStore}
+   */
+  mkdirFolderToken?: string;
+
+  /**
+   * Creates a folder when inserting an object in the client's browser, to work it is necessary to pass the parameters in the function create browserSessionToken
+   * @deprecated See {@link tokenStore}
+   * @default true
+   */
+  createPathFileToken?: boolean;
 }
 export const defaultOptions: CreateConfig = {
-  folderNameToken: 'tokens',
-  mkdirFolderToken: '',
+  folderNameToken: './tokens',
   headless: true,
   devtools: false,
   useChrome: true,
@@ -121,4 +138,5 @@ export const defaultOptions: CreateConfig = {
   createPathFileToken: true,
   waitForLogin: true,
   logger: defaultLogger,
+  tokenStore: 'file',
 };

@@ -46,8 +46,7 @@ wppconnect.create({
       //Create session wss return "serverClose" case server for close
       console.log('Session name: ', session);
     },
-    folderNameToken: 'tokens', //folder name when saving tokens
-    mkdirFolderToken: '', //folder directory tokens, just inside the wppconnect folder, example:  { mkdirFolderToken: '/node_modules', } //will save the tokens folder in the node_modules directory
+    folderNameToken: './tokens', //folder name when saving tokens
     headless: true, // Headless chrome
     devtools: false, // Open devtools by default
     useChrome: true, // If false will use Chromium instance

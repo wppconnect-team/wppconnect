@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
-import * as boxen from 'boxen';
-import * as chalk from 'chalk';
+import boxen from 'boxen';
+import chalk from 'chalk';
 import latestVersion from 'latest-version';
 import { defaultLogger as logger } from '../utils/logger';
 import { upToDate } from '../utils/semver';
@@ -51,14 +51,18 @@ export async function checkUpdates() {
  */
 async function checkWPPConnectVersion() {
   logger.info('Checking for updates');
-  await latestVersion('@wppconnect-team/wppconnect').then((latest) => {
-    if (upToDate(version, latest)) {
-      logger.info("You're up to date");
-    } else {
-      logger.info('There is a new version available');
-      logUpdateAvailable(version, latest);
-    }
-  });
+  await latestVersion('@wppconnect-team/wppconnect')
+    .then((latest) => {
+      if (upToDate(version, latest)) {
+        logger.info("You're up to date");
+      } else {
+        logger.info('There is a new version available');
+        logUpdateAvailable(version, latest);
+      }
+    })
+    .catch(() => {
+      logger.warn('Failed to check updates');
+    });
 }
 
 /**

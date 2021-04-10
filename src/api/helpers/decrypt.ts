@@ -16,7 +16,7 @@
  */
 
 import * as crypto from 'crypto';
-import * as hkdf from 'futoin-hkdf';
+import hkdf from 'futoin-hkdf';
 import atob = require('atob');
 import { ResponseType } from 'axios';
 

@@ -14,17 +14,39 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
-
-export interface tokenSession {
+export interface SessionToken {
   WABrowserId: string;
   WAToken1: string;
   WAToken2: string;
   WASecretBundle: string;
 }
 
-export const defaultTokenSession: tokenSession = {
-  WABrowserId: '',
-  WASecretBundle: '',
-  WAToken1: '',
-  WAToken2: '',
-};
+/**
+ * Standard interface to manage tokens
+ */
+export interface TokenStore<T extends SessionToken = SessionToken> {
+  /**
+   * Return the session data if exists
+   * @param sessionName Name of session
+   */
+  getToken(sessionName: string): Promise<T | undefined>;
+
+  /**
+   * Store the session token data
+   * @param sessionName Name of session
+   * @param tokenData Session token data
+   */
+  setToken(sessionName: string, tokenData: T | null): Promise<boolean>;
+
+  /**
+   * Remove the session
+   * @param sessionName Name of session
+   * @returns Token was removed
+   */
+  removeToken(sessionName: string): Promise<boolean>;
+
+  /**
+   * A liste of avaliable sessions
+   */
+  listTokens(): Promise<string[]>;
+}
