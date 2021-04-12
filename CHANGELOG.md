@@ -1,3 +1,9 @@
+## [1.2.6](https://github.com/wppconnect-team/wppconnect/compare/v1.2.5...v1.2.6) (2021-04-12)
+
+### Bug Fixes
+
+- Fixed sendFile from URL ([ff63fed](https://github.com/wppconnect-team/wppconnect/commit/ff63fedd51793896169cc09097e13d99290ec031))
+
 ## [1.2.5](https://github.com/wppconnect-team/wppconnect/compare/v1.2.4...v1.2.5) (2021-04-07)
 
 ### Bug Fixes
