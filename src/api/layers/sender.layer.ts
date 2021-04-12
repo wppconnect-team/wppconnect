@@ -22,7 +22,6 @@ import {
   base64MimeType,
   downloadFileToBase64,
   fileToBase64,
-  MINES,
   stickerSelect,
 } from '../helpers';
 import { filenameFromMimeType } from '../helpers/filename-from-mimetype';
@@ -397,7 +396,7 @@ export class SenderLayer extends ListenerLayer {
     caption?: string
   ) {
     return new Promise(async (resolve, reject) => {
-      let base64 = await downloadFileToBase64(filePath, MINES()),
+      let base64 = await downloadFileToBase64(filePath),
         obj: { erro: boolean; to: string; text: string };
 
       if (!base64) {
