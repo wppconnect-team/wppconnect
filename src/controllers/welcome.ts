@@ -71,7 +71,7 @@ function logUpdateAvailable(current: string, latest: string) {
   const newVersionLog =
       `There is a new version of ${chalk.bold(`Wppconnect`)} ${chalk.gray(current)} ➜  ${chalk.bold.green(latest)}\n` +
       `Update your package by running:\n\n` +
-      `${chalk.bold('\>')} ${chalk.blueBright('npm update wppconnect')}`;
+      `${chalk.bold('\>')} ${chalk.blueBright('npm update @wppconnect-team/wppconnect')}`;
 
   logger.info(boxen(newVersionLog, { padding: 1 }));
   logger.info(
