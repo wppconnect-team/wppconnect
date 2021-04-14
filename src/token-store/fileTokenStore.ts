@@ -63,6 +63,29 @@ export const defaultFileTokenStoreOptions: FileTokenStoreOptions = {
 
 /**
  * Token Store using file
+ *
+ * ```typescript
+ * // Example of typescript with FileTokenStore
+ * import * as wppconnect from '@wppconnect-team/wppconnect';
+ *
+ * const myTokenStore = new wppconnect.tokenStore.FileTokenStore({
+ * // decodeFunction: JSON.parse,
+ * // encodeFunction: JSON.stringify,
+ * // encoding: 'utf8',
+ * // fileExtension: '.my.ext',
+ * // path: './a_custom_path',
+ * });
+ *
+ * wppconnect.create({
+ *   session: 'mySession',
+ *   tokenStore: myTokenStore,
+ * });
+ *
+ * wppconnect.create({
+ *   session: 'otherSession',
+ *   tokenStore: myTokenStore,
+ * });
+ * ```
  */
 export class FileTokenStore implements TokenStore {
   protected options: FileTokenStoreOptions;

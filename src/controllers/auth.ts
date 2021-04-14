@@ -21,7 +21,7 @@ import * as puppeteer from 'puppeteer';
 import * as qrcode from 'qrcode-terminal';
 import { ScrapQrcode } from '../api/model/qrcode';
 import { puppeteerConfig } from '../config/puppeteer.config';
-import { isValidSessionToken } from '../token-store/isValidSessionToken';
+import { isValidSessionToken } from '../token-store';
 
 export const getInterfaceStatus = async (
   waPage: puppeteer.Page

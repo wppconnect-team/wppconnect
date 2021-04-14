@@ -39,7 +39,15 @@ export class Whatsapp extends ControlsLayer {
           setTimeout(async () => {
             this.log('verbose', 'Updating session token', { type: 'token' });
             const tokenData = await this.getSessionTokenBrowser();
-            this.tokenStore.setToken(this.session, tokenData);
+            const updated = await Promise.resolve(
+              this.tokenStore.setToken(this.session, tokenData)
+            );
+
+            if (!updated) {
+              this.log('warn', 'Failed to update session token', {
+                type: 'token',
+              });
+            }
           }, 1000);
           break;
 
@@ -47,7 +55,9 @@ export class Whatsapp extends ControlsLayer {
         case SocketState.UNPAIRED_IDLE:
           setTimeout(async () => {
             this.log('info', 'Session Unpaired', { type: 'session' });
-            const removed = await this.tokenStore.removeToken(this.session);
+            const removed = await Promise.resolve(
+              this.tokenStore.removeToken(this.session)
+            );
 
             if (removed) {
               this.log('verbose', 'Token removed', { type: 'token' });

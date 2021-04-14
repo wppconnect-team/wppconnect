@@ -35,11 +35,11 @@ import { Logger } from 'winston';
 import { CatchQRCallback, StatusFindCallback } from '../model';
 import {
   FileTokenStore,
+  isValidSessionToken,
   isValidTokenStore,
   MemoryTokenStore,
   TokenStore,
 } from '../../token-store';
-import { isValidSessionToken } from '../../token-store/isValidSessionToken';
 
 export class HostLayer {
   readonly session: string;
@@ -104,7 +104,9 @@ export class HostLayer {
   protected async initialize() {
     let sessionToken = this.options.sessionToken;
     if (!sessionToken) {
-      sessionToken = await this.tokenStore.getToken(this.session);
+      sessionToken = await Promise.resolve(
+        this.tokenStore.getToken(this.session)
+      );
     }
 
     if (isValidSessionToken(sessionToken)) {

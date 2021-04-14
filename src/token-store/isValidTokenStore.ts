@@ -14,8 +14,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
+import { TokenStore } from './types';
+
 const keys = ['getToken', 'setToken', 'removeToken', 'listTokens'];
 
-export function isValidTokenStore(object: any): boolean {
+/**
+ * Check and validate if the object implements the TokenStore interface
+ * @param object Object to check that implements the TokenStore interface
+ * @returns true if the object is a valid else false
+ */
+export function isValidTokenStore(object: any): object is TokenStore {
   return keys.every((k) => k in object && typeof object[k] === 'function');
 }

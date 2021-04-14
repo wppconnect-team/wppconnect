@@ -15,6 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 export * from './fileTokenStore';
+export * from './isValidSessionToken';
+export * from './isValidTokenStore';
 export * from './memoryTokenStore';
 export * from './types';
-export * from './isValidTokenStore';

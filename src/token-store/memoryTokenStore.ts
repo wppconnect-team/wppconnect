@@ -18,21 +18,36 @@ import { SessionToken, TokenStore } from './types';
 
 /**
  * Token Store using im memory
+ *
+ * ```typescript
+ * // Example of typescript with MemoryTokenStore
+ * import * as wppconnect from '@wppconnect-team/wppconnect';
+ *
+ * const myTokenStore = new wppconnect.tokenStore.MemoryTokenStore();
+ *
+ * wppconnect.create({
+ *   session: 'mySession',
+ *   tokenStore: myTokenStore,
+ * });
+ *
+ * wppconnect.create({
+ *   session: 'otherSession',
+ *   tokenStore: myTokenStore,
+ * });
+ * ```
  */
 export class MemoryTokenStore implements TokenStore {
   protected tokens: {
     [key: string]: any;
   };
 
-  public async getToken(
-    sessionName: string
-  ): Promise<SessionToken | undefined> {
+  public getToken(sessionName: string): SessionToken | undefined {
     return this.tokens[sessionName];
   }
-  public async setToken(
+  public setToken(
     sessionName: string,
     tokenData: SessionToken | void
-  ): Promise<boolean> {
+  ): boolean {
     if (!tokenData) {
       return false;
     }
@@ -40,12 +55,12 @@ export class MemoryTokenStore implements TokenStore {
 
     return true;
   }
-  public async removeToken(sessionName: string): Promise<boolean> {
+  public removeToken(sessionName: string): boolean {
     delete this.tokens[sessionName];
     return true;
   }
 
-  public async listTokens(): Promise<string[]> {
+  public listTokens(): string[] {
     return Object.keys(this.tokens);
   }
 }
