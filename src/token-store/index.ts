@@ -14,21 +14,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
-
-import { Page } from 'puppeteer';
-declare global {
-  interface Window {
-    pathSession: any;
-  }
-}
-export async function scrapeDeleteToken(page: Page): Promise<boolean> {
-  const result = await page.evaluate(() => {
-    const scrape = window.pathSession;
-    if (scrape === true) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-  return result;
-}
+export * from './fileTokenStore';
+export * from './isValidSessionToken';
+export * from './isValidTokenStore';
+export * from './memoryTokenStore';
+export * from './types';

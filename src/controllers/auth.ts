@@ -19,12 +19,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as puppeteer from 'puppeteer';
 import * as qrcode from 'qrcode-terminal';
-import { existsSync, readFileSync } from 'fs';
-import { CreateConfig } from '../config/create-config';
 import { ScrapQrcode } from '../api/model/qrcode';
-import { tokenSession } from '../config/tokenSession.config';
 import { puppeteerConfig } from '../config/puppeteer.config';
-import { sleep } from '../utils/sleep';
+import { isValidSessionToken } from '../token-store';
 
 export const getInterfaceStatus = async (
   waPage: puppeteer.Page
@@ -148,41 +145,9 @@ export async function retrieveQR(
     .catch(() => undefined);
 }
 
-export function SessionTokenCkeck(token: object) {
-  if (
-    token &&
-    token['WABrowserId'] &&
-    token['WASecretBundle'] &&
-    token['WAToken1'] &&
-    token['WAToken2']
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-export async function auth_InjectToken(
-  page: puppeteer.Page,
-  session: string,
-  options: CreateConfig,
-  token?: tokenSession
-) {
-  if (!token) {
-    const pathToken: string = path.join(
-      path.resolve(
-        process.cwd() + options.mkdirFolderToken,
-        options.folderNameToken
-      ),
-      `${session}.data.json`
-    );
-    if (existsSync(pathToken)) {
-      token = JSON.parse(readFileSync(pathToken).toString());
-    }
-  }
-
-  if (!token || !SessionTokenCkeck(token)) {
-    return false;
+export async function injectSessionToken(page: puppeteer.Page, token?: any) {
+  if (!token || !isValidSessionToken(token)) {
+    token = {};
   }
 
   await page.setRequestInterception(true);
@@ -253,52 +218,4 @@ export async function auth_InjectToken(
   // Disable
   page.off('request', reqHandler);
   await page.setRequestInterception(false);
-}
-
-export async function saveToken(
-  page: puppeteer.Page,
-  session: string,
-  options: CreateConfig
-) {
-  const token = (await page
-    .evaluate(() => {
-      if (window.localStorage) {
-        return {
-          WABrowserId: window.localStorage.getItem('WABrowserId'),
-          WASecretBundle: window.localStorage.getItem('WASecretBundle'),
-          WAToken1: window.localStorage.getItem('WAToken1'),
-          WAToken2: window.localStorage.getItem('WAToken2'),
-        };
-      }
-      return undefined;
-    })
-    .catch(() => undefined)) as tokenSession;
-
-  if (!token || !SessionTokenCkeck(token)) {
-    return false;
-  }
-
-  const folder = path.join(
-    path.resolve(
-      process.cwd() + options.mkdirFolderToken,
-      options.folderNameToken
-    )
-  );
-
-  try {
-    fs.mkdirSync(folder, { recursive: true });
-  } catch (error) {
-    throw 'Failed to create folder tokens...';
-  }
-
-  try {
-    fs.writeFileSync(
-      path.join(folder, `${session}.data.json`),
-      JSON.stringify(token)
-    );
-  } catch (error) {
-    throw 'Failed to save token...';
-  }
-
-  return token;
 }

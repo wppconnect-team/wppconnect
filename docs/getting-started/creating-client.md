@@ -30,7 +30,7 @@ wppconnect.create({session: 'support'}).then((client) => startSupport(client));
 
 ## Passing options on create
 
-The `create` method third parameter can have the following optional parameters:
+The {@link create} method third parameter can have the following optional parameters (see all parameters in {@link CreateOptions}):
 
 ```javascript
 wppconnect.create({
@@ -46,8 +46,6 @@ wppconnect.create({
       //Create session wss return "serverClose" case server for close
       console.log('Session name: ', session);
     },
-    folderNameToken: 'tokens', //folder name when saving tokens
-    mkdirFolderToken: '', //folder directory tokens, just inside the wppconnect folder, example:  { mkdirFolderToken: '/node_modules', } //will save the tokens folder in the node_modules directory
     headless: true, // Headless chrome
     devtools: false, // Open devtools by default
     useChrome: true, // If false will use Chromium instance
@@ -56,17 +54,16 @@ wppconnect.create({
     browserWS: '', // If u want to use browserWSEndpoint
     browserArgs: [''], // Parameters to be added into the chrome browser instance
     puppeteerOptions: {}, // Will be passed to puppeteer.launch
-    disableSpins: true, // Will disable Spinnies animation, useful for containers (docker) for a better log
-    disableWelcome: true, // Will disable the welcoming message which appears in the beginning
+    disableWelcome: false, // Option to disable the welcoming message which appears in the beginning
     updatesLog: true, // Logs info updates automatically in terminal
     autoClose: 60000, // Automatically closes the wppconnect only when scanning the QR code (default 60 seconds, if you want to turn it off, assign 0 or false)
-    createPathFileToken: false, //creates a folder when inserting an object in the client's browser, to work it is necessary to pass the parameters in the function create browserSessionToken
+    tokenStore: 'file', // Define how work with tokens, that can be a custom interface
+    folderNameToken: './tokens', //folder name when saving tokens
     // BrowserSessionToken
     // To receive the client's token use the function await clinet.getSessionTokenBrowser()
-    browserSessionToken: {
+    sessionToken: {
       WABrowserId: '"UnXjH....."',
-      WASecretBundle:
-        '{"key":"+i/nRgWJ....","encKey":"kGdMR5t....","macKey":"+i/nRgW...."}',
+      WASecretBundle: '{"key":"+i/nRgWJ....","encKey":"kGdMR5t....","macKey":"+i/nRgW...."}',
       WAToken1: '"0i8...."',
       WAToken2: '"1@lPpzwC...."',
     }
@@ -77,9 +74,7 @@ wppconnect.create({
 
 ### Callback Status Session
 
-Gets the return if the session is `isLogged` or `notLogged` or `browserClose`
-or `qrReadSuccess` or `qrReadFail` or `autocloseCalled` or `desconnectedMobile`
-or `deleteToken` or `Create session wss return "serverClose" case server for close`
+More details in {@link StatusFind}
 
 | Status               | Condition                                                                                                                                                      |
 |----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -125,7 +120,7 @@ client.stopPhoneWatchdog();
 ### Exporting QR Code
 
 By default, QR code will appear on the terminal. If you need to pass the QR
-somewhere else heres how:
+somewhere else heres how (See {@link CatchQRCallback}):
 
 ```javascript
 const fs = require('fs');
@@ -162,3 +157,7 @@ wppconnect
   .then((client) => start(client))
   .catch((error) => console.log(error));
 ```
+
+### Saving Session Token
+
+Read the {@link TokenStore}

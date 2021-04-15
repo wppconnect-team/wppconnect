@@ -29,7 +29,7 @@ import {
   SendStickerResult,
   WhatsappProfile,
 } from '../api/model';
-import { tokenSession } from '../config/tokenSession.config';
+import { SessionToken } from '../token-store';
 
 interface WAPI {
   addParticipant: (groupId: string, contactId: string | string[]) => boolean;
@@ -84,7 +84,7 @@ interface WAPI {
   getListMute: (type?: string) => object;
   getMessageById: (messageId: string) => Promise<Message>;
   getNumberProfile: (contactId: string) => WhatsappProfile;
-  getSessionTokenBrowser: (removePath?: boolean) => tokenSession;
+  getSessionTokenBrowser: (removePath?: boolean) => SessionToken;
   getStatus: (contactId: string) => ContactStatus;
   getTheme: () => string;
   getUnreadMessages: (

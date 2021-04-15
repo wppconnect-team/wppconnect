@@ -22,21 +22,16 @@ import { Browser, BrowserContext, Page } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 import { CreateConfig } from '../config/create-config';
 import { puppeteerConfig } from '../config/puppeteer.config';
-import StealthPlugin = require('puppeteer-extra-plugin-stealth');
-import { auth_InjectToken } from './auth';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+import { injectSessionToken } from './auth';
 import { useragentOverride } from '../config/WAuserAgente';
 import { WebSocketTransport } from './websocket';
-import { tokenSession } from '../config/tokenSession.config';
 import { Logger } from 'winston';
+import { SessionToken } from '../token-store';
 
-export async function initWhatsapp(
-  session: string,
-  options: CreateConfig,
-  page: Page,
-  token?: tokenSession
-) {
+export async function initWhatsapp(page: Page, token?: SessionToken) {
   // Auth with token
-  await auth_InjectToken(page, session, options, token);
+  await injectSessionToken(page, token);
 
   await page.setUserAgent(useragentOverride);
 
@@ -127,7 +122,7 @@ export async function initBrowser(
   return browser;
 }
 
-export async function getWhatsappPage(
+export async function getOrCreatePage(
   browser: Browser | BrowserContext
 ): Promise<Page> {
   const pages = await browser.pages();

@@ -15,7 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { ConnectionTransport } from 'puppeteer';
-import * as WebSocket from 'ws';
+import WebSocket from 'ws';
 
 export class WebSocketTransport implements ConnectionTransport {
   static create(url: string, timeout?: number): Promise<WebSocketTransport> {

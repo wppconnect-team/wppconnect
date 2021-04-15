@@ -18,7 +18,7 @@
 import { Page } from 'puppeteer';
 import { CreateConfig, defaultOptions } from '../../config/create-config';
 import { SocketState } from '../model/enum';
-import { injectApi } from '../../controllers/browser';
+import { initWhatsapp, injectApi } from '../../controllers/browser';
 import { ScrapQrcode } from '../model/qrcode';
 import { scrapeImg } from '../helpers';
 import {
@@ -33,11 +33,19 @@ import { sleep } from '../../utils/sleep';
 import { defaultLogger, LogLevel } from '../../utils/logger';
 import { Logger } from 'winston';
 import { CatchQRCallback, StatusFindCallback } from '../model';
+import {
+  FileTokenStore,
+  isValidSessionToken,
+  isValidTokenStore,
+  MemoryTokenStore,
+  TokenStore,
+} from '../../token-store';
 
 export class HostLayer {
   readonly session: string;
   readonly options: CreateConfig;
   readonly logger: Logger;
+  readonly tokenStore: TokenStore;
 
   protected autoCloseInterval = null;
   protected statusFind?: StatusFindCallback = null;
@@ -48,15 +56,39 @@ export class HostLayer {
 
     this.logger = this.options.logger || defaultLogger;
 
-    this.page.on('load', () => {
-      this.log('verbose', 'Page loaded', { type: 'page' });
-      this.initialize();
-    });
-    this.page.on('close', () => {
-      this.cancelAutoClose();
-      this.log('error', 'Page Closed', { type: 'page' });
-    });
+    if (typeof this.options.tokenStore === 'string') {
+      switch (this.options.tokenStore) {
+        case 'memory':
+          this.tokenStore = new MemoryTokenStore();
+          break;
+
+        case 'file':
+        default:
+          this.tokenStore = new FileTokenStore({
+            path: this.options.folderNameToken,
+          });
+          break;
+      }
+    } else {
+      this.tokenStore = this.options.tokenStore;
+    }
+
+    if (!isValidTokenStore(this.tokenStore)) {
+      this.log('warn', 'Invalid tokenStore, using default tokenStore', {
+        type: 'tokenStore',
+      });
+
+      if (this.options.folderNameToken) {
+        this.tokenStore = new FileTokenStore({
+          path: this.options.folderNameToken,
+        });
+      } else {
+        this.tokenStore = new MemoryTokenStore();
+      }
+    }
+
     this.log('info', 'Initializing...');
+    this.initialize();
   }
 
   protected log(level: LogLevel, message: string, meta: object = {}) {
@@ -70,6 +102,30 @@ export class HostLayer {
   }
 
   protected async initialize() {
+    let sessionToken = this.options.sessionToken;
+    if (!sessionToken) {
+      sessionToken = await Promise.resolve(
+        this.tokenStore.getToken(this.session)
+      );
+    }
+
+    if (isValidSessionToken(sessionToken)) {
+      this.log('verbose', 'Injecting session token', { type: 'token' });
+    }
+
+    await initWhatsapp(this.page, sessionToken);
+
+    this.page.on('load', () => {
+      this.log('verbose', 'Page loaded', { type: 'page' });
+      this.afterPageLoad();
+    });
+    this.page.on('close', () => {
+      this.cancelAutoClose();
+      this.log('error', 'Page Closed', { type: 'page' });
+    });
+  }
+
+  protected async afterPageLoad() {
     this.log('verbose', 'Injecting wapi.js');
     await injectApi(this.page)
       .then(() => {

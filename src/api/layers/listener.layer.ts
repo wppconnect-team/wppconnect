@@ -47,8 +47,8 @@ export class ListenerLayer extends ProfileLayer {
     });
   }
 
-  protected async initialize() {
-    await super.initialize();
+  protected async afterPageLoad() {
+    await super.afterPageLoad();
 
     const functions = [
       ...Object.values(ExposedFn),

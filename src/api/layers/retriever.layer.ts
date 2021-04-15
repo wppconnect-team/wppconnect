@@ -17,7 +17,7 @@
 
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
-import { tokenSession } from '../../config/tokenSession.config';
+import { SessionToken } from '../../token-store';
 import { WhatsappProfile } from '../model';
 import { SenderLayer } from './sender.layer';
 
@@ -44,13 +44,26 @@ export class RetrieverLayer extends SenderLayer {
    */
   public async getSessionTokenBrowser(
     removePath?: boolean
-  ): Promise<tokenSession> {
+  ): Promise<SessionToken> {
     if (removePath === true) {
       await this.page.evaluate(() => {
         window['pathSession'] = true;
       });
     }
-    return await this.page.evaluate(() => WAPI.getSessionTokenBrowser());
+
+    return await this.page
+      .evaluate(() => {
+        if (window.localStorage) {
+          return {
+            WABrowserId: window.localStorage.getItem('WABrowserId'),
+            WASecretBundle: window.localStorage.getItem('WASecretBundle'),
+            WAToken1: window.localStorage.getItem('WAToken1'),
+            WAToken2: window.localStorage.getItem('WAToken2'),
+          };
+        }
+        return null;
+      })
+      .catch(() => null);
   }
 
   /**

@@ -23,10 +23,55 @@ import { useragentOverride } from '../config/WAuserAgente';
 import { CreateConfig } from '../config/create-config';
 import axios from 'axios';
 import treekill = require('tree-kill');
+import { SocketState } from './model/enum';
 
 export class Whatsapp extends ControlsLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
+
+    let connected = false;
+
+    this.onStateChange(async (state) => {
+      switch (state) {
+        case SocketState.CONNECTED:
+          connected = true;
+          // wait for localStore populate
+          setTimeout(async () => {
+            this.log('verbose', 'Updating session token', { type: 'token' });
+            const tokenData = await this.getSessionTokenBrowser();
+            const updated = await Promise.resolve(
+              this.tokenStore.setToken(this.session, tokenData)
+            );
+
+            if (!updated) {
+              this.log('warn', 'Failed to update session token', {
+                type: 'token',
+              });
+            }
+          }, 1000);
+          break;
+
+        case SocketState.UNPAIRED:
+        case SocketState.UNPAIRED_IDLE:
+          setTimeout(async () => {
+            this.log('info', 'Session Unpaired', { type: 'session' });
+            const removed = await Promise.resolve(
+              this.tokenStore.removeToken(this.session)
+            );
+
+            if (removed) {
+              this.log('verbose', 'Token removed', { type: 'token' });
+            }
+
+            // Fire only after a success connection and disconnection
+            if (connected && this.statusFind) {
+              connected = false;
+              this.statusFind('desconnectedMobile', session);
+            }
+          }, 1000);
+          break;
+      }
+    });
   }
 
   /**

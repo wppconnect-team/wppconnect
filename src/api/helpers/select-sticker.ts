@@ -15,7 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as sharp from 'sharp';
+import sharp from 'sharp';
 
 interface selectOutput {
   webpBase64: string;
