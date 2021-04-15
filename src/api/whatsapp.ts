@@ -43,7 +43,11 @@ export class Whatsapp extends ControlsLayer {
               this.tokenStore.setToken(this.session, tokenData)
             );
 
-            if (!updated) {
+            if (updated) {
+              this.log('verbose', 'Session token updated', {
+                type: 'token',
+              });
+            } else {
               this.log('warn', 'Failed to update session token', {
                 type: 'token',
               });
