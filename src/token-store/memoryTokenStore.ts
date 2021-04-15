@@ -39,7 +39,7 @@ import { SessionToken, TokenStore } from './types';
 export class MemoryTokenStore implements TokenStore {
   protected tokens: {
     [key: string]: any;
-  };
+  } = {};
 
   public getToken(sessionName: string): SessionToken | undefined {
     return this.tokens[sessionName];
