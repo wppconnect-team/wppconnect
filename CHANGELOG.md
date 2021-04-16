@@ -1,3 +1,13 @@
+# [1.3.0](https://github.com/wppconnect-team/wppconnect/compare/v1.2.6...v1.3.0) (2021-04-16)
+
+### Bug Fixes
+
+- corrects update instructions ([#124](https://github.com/wppconnect-team/wppconnect/issues/124)) ([8cbfb9b](https://github.com/wppconnect-team/wppconnect/commit/8cbfb9b2c48879d5c6709a40eb7e53188a1347f2))
+
+### Features
+
+- Created tokenStore interface for session data management ([a3a76c3](https://github.com/wppconnect-team/wppconnect/commit/a3a76c3e2e01581ff2ae4e40199eab5957bac0a3))
+
 ## [1.2.6](https://github.com/wppconnect-team/wppconnect/compare/v1.2.5...v1.2.6) (2021-04-12)
 
 ### Bug Fixes
