@@ -15,28 +15,9 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Contact } from './contact';
-import { GroupMetadata } from './group-metadata';
-import { MessageId } from './message-id';
-import { Presence } from './presence';
 import { Wid } from './wid';
 
-export interface Chat {
+export interface Presence {
   id: Wid;
-  pendingMsgs: boolean;
-  lastReceivedKey: MessageId;
-  t: number;
-  unreadCount: number;
-  archive: boolean;
-  isReadOnly: boolean;
-  muteExpiration: number;
-  name: string;
-  notSpam: boolean;
-  pin: number;
-  msgs: null;
-  kind: string;
-  isGroup: boolean;
-  contact: Contact;
-  groupMetadata: GroupMetadata;
-  presence: Presence;
+  chatstates: any[];
 }

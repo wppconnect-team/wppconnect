@@ -15,7 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export { Chat, LastReceivedKey } from './chat';
+export { Chat } from './chat';
 export { Contact } from './contact';
 export { GroupMetadata } from './group-metadata';
 export { Id } from './id';
@@ -30,3 +30,6 @@ export { GroupCreation } from './group-creation';
 export { WhatsappProfile } from './whatsapp-profile';
 export * from './result';
 export * from './initializer';
+export * from './message-id';
+export * from './profile-pic-thumb';
+export * from './wid';

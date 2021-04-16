@@ -15,11 +15,15 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Id } from './id';
+import { Wid } from './wid';
+import { ProfilePicThumbObj } from './profile-pic-thumb';
 
+/**
+ * Data info of contact
+ */
 export interface Contact {
   formattedName: string;
-  id: Id;
+  id: Wid;
   isBusiness: boolean;
   isEnterprise: boolean;
   isHighLevelVerified: any;
@@ -31,29 +35,26 @@ export interface Contact {
   isWAContact: boolean;
   labels: any[];
   msgs: any;
-  name: string;
+
+  /**
+   * Name of concat in your agenda
+   */
+  name?: string;
   plaintextDisabled: boolean;
-  profilePicThumbObj: {
-    eurl: string;
-    id: Id;
-    img: string;
-    imgFull: string;
-    raw: any;
-    tag: string;
-  };
-  pushname: string;
+  profilePicThumbObj: ProfilePicThumbObj;
+
+  /**
+   * Name defined by common contact
+   */
+  pushname?: string;
   sectionHeader: any;
   shortName: string;
   statusMute: boolean;
   type: string;
   verifiedLevel: any;
-  verifiedName: any;
+
   /**
-   * @deprecated This is unreliable. Use the method {@link Whatsapp.getChatIsOnline} instead.
+   * Name defined by business contact
    */
-  isOnline: null | boolean;
-  /**
-   * @deprecated This is unreliable. Use the method {@link Whatsapp.getLastSeen} instead.
-   */
-  lastSeen: null | number | boolean;
+  verifiedName?: any;
 }

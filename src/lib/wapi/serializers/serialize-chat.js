@@ -40,12 +40,5 @@ export const _serializeChatObj = (obj) => {
       ? window.WAPI._serializeRawObj(obj['presence'])
       : null,
     msgs: null,
-    isOnline: obj.__x_presence.attributes.isOnline || null,
-    lastSeen:
-      obj &&
-      obj.previewMessage &&
-      obj.previewMessage.__x_ephemeralStartTimestamp
-        ? obj.previewMessage.__x_ephemeralStartTimestamp * 1000
-        : null,
   });
 };

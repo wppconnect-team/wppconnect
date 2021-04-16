@@ -15,16 +15,12 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Id } from '.';
+import { Wid } from './wid';
 
 export interface GroupMetadata {
-  id: Id;
+  id: Wid;
   creation: number;
-  owner: {
-    server: string;
-    user: string;
-    _serialized: string;
-  };
+  owner: Wid;
   participants: any[];
   pendingParticipants: any[];
 }

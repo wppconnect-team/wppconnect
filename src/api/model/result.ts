@@ -15,18 +15,17 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { LastReceivedKey } from './chat';
 import { HostDevice } from './host-device';
+import { MessageId } from './message-id';
 
 export interface ScopeResult {
   me: HostDevice;
-  to: LastReceivedKey & {
+  to: MessageId & {
     formattedName: string;
     isBusiness: boolean;
     isMyContact: boolean;
     verifiedName: string;
     pushname?: string;
-    isOnline?: boolean;
   };
   erro?: boolean;
   text?: string | null;

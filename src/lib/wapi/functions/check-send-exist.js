@@ -34,7 +34,6 @@ export async function getchatId(chatId) {
       isMyContact: to.contact.isMyContact,
       verifiedName: to.contact.verifiedName,
       pushname: to.contact.pushname,
-      isOnline: to.isOnline,
     };
   Object.assign(objTo, extend);
   return objTo;

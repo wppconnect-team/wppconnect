@@ -15,12 +15,10 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { Wid } from './wid';
+
 export interface GroupCreation {
   status: number;
-  gid: {
-    server: string;
-    user: string;
-    _serialized: string;
-  };
+  gid: Wid;
   participants: { [key: string]: any[] }[];
 }

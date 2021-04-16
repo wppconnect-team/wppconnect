@@ -15,13 +15,15 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { Wid } from './wid';
+
 export interface HostDevice {
   id: string;
   ref: string;
   refTTL: number;
-  wid: Me;
+  wid: Wid;
   connected: boolean;
-  me: Me;
+  me: Wid;
   protoVersion: number[];
   clientToken: string;
   serverToken: string;
@@ -38,12 +40,6 @@ export interface HostDevice {
   smbTos: number;
   pushname: string;
   blockStoreAdds: boolean;
-}
-
-export interface Me {
-  server: string;
-  user: string;
-  _serialized: string;
 }
 
 export interface Phone {

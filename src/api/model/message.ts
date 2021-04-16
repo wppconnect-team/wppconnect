@@ -15,6 +15,9 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { Chat } from './chat';
+import { Contact } from './contact';
+
 export interface Message {
   id: string;
   body: string;
@@ -46,7 +49,7 @@ export interface Message {
   mentionedJidList: any[];
   isForwarded: boolean;
   labels: any[];
-  sender: Sender;
+  sender: Contact;
   timestamp: number;
   content: string;
   isGroupMsg: boolean;
@@ -54,85 +57,11 @@ export interface Message {
   isMedia: boolean;
   isNotification: boolean;
   isPSA: boolean;
-  chat: {
-    id: string;
-    pendingMsgs: boolean;
-    lastReceivedKey: LastReceivedKey;
-    t: number;
-    unreadCount: number;
-    archive: boolean;
-    isReadOnly: boolean;
-    muteExpiration: number;
-    name: string;
-    notSpam: boolean;
-    pin: number;
-    msgs: null;
-    kind: string;
-    isGroup: boolean;
-    contact: Sender;
-    groupMetadata: null;
-    presence: Presence;
-    /**
-     * @deprecated This is unreliable. Use the method {@link Whatsapp.getChatIsOnline} instead.
-     */
-    isOnline: null | boolean;
-    /**
-     * @deprecated This is unreliable. Use the method {@link Whatsapp.getLastSeen} instead.
-     */
-    lastSeen: null | number | boolean;
-  };
-  /**
-   * @deprecated This is unreliable. Use the method {@link Whatsapp.getChatIsOnline} instead.
-   */
-  isOnline: null | boolean;
-  /**
-   * @deprecated This is unreliable. Use the method {@link Whatsapp.getLastSeen} instead.
-   */
+  chat: Chat;
   lastSeen: null | number | boolean;
   chatId: string;
   quotedMsgObj: null;
   mediaData: MediaData;
-}
-
-export interface Sender {
-  id: string;
-  name: string;
-  shortName: string;
-  pushname: string;
-  type: string;
-  isBusiness: boolean;
-  isEnterprise: boolean;
-  statusMute: boolean;
-  labels: any[];
-  formattedName: string;
-  isMe: boolean;
-  isMyContact: boolean;
-  isPSA: boolean;
-  isUser: boolean;
-  isWAContact: boolean;
-  profilePicThumbObj: ProfilePicThumbObj;
-  msgs: null;
-}
-
-export interface ProfilePicThumbObj {
-  eurl: string;
-  id: string;
-  img: string;
-  imgFull: string;
-  raw: null;
-  tag: string;
-}
-
-export interface LastReceivedKey {
-  fromMe: boolean;
-  remote: string;
-  id: string;
-  _serialized: string;
-}
-
-export interface Presence {
-  id: string;
-  chatstates: any[];
 }
 
 export interface MediaData {
