@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LastReceivedKey | @wppconnect-team/wppconnect - v1.2.6</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.2.6">
+	<title>ProfilePicThumbObj | @wppconnect-team/wppconnect - v1.3.0</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.3.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.2.6</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.3.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -55,21 +55,28 @@
 					<a href="../modules.html">Globals</a>
 				</li>
 				<li>
-					<a href="lastreceivedkey.html">LastReceivedKey</a>
+					<a href="profilepicthumbobj.html">ProfilePicThumbObj</a>
 				</li>
 			</ul>
-			<h1>Interface LastReceivedKey</h1>
+			<h1>Interface ProfilePicThumbObj</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Profile picture data</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">LastReceivedKey</span>
+						<span class="target">ProfilePicThumbObj</span>
 					</li>
 				</ul>
 			</section>
@@ -80,10 +87,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lastreceivedkey.html#_serialized" class="tsd-kind-icon">_serialized</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lastreceivedkey.html#fromme" class="tsd-kind-icon">from<wbr>Me</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lastreceivedkey.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lastreceivedkey.html#remote" class="tsd-kind-icon">remote</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="profilepicthumbobj.html#eurl" class="tsd-kind-icon">eurl</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="profilepicthumbobj.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="profilepicthumbobj.html#img" class="tsd-kind-icon">img</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="profilepicthumbobj.html#imgfull" class="tsd-kind-icon">img<wbr>Full</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="profilepicthumbobj.html#raw" class="tsd-kind-icon">raw</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="profilepicthumbobj.html#tag" class="tsd-kind-icon">tag</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,31 +101,63 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="_serialized" class="tsd-anchor"></a>
-					<h3>_serialized</h3>
-					<div class="tsd-signature tsd-kind-icon">_serialized<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="eurl" class="tsd-anchor"></a>
+					<h3>eurl</h3>
+					<div class="tsd-signature tsd-kind-icon">eurl<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="fromme" class="tsd-anchor"></a>
-					<h3>from<wbr>Me</h3>
-					<div class="tsd-signature tsd-kind-icon">from<wbr>Me<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/profile-pic-thumb.ts#L7">api/model/profile-pic-thumb.ts:7</a></li>
+						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="id" class="tsd-anchor"></a>
 					<h3>id</h3>
-					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <a href="wid.html" class="tsd-signature-type" data-tsd-kind="Interface">Wid</a></div>
 					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/profile-pic-thumb.ts#L8">api/model/profile-pic-thumb.ts:8</a></li>
+						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="remote" class="tsd-anchor"></a>
-					<h3>remote</h3>
-					<div class="tsd-signature tsd-kind-icon">remote<span class="tsd-signature-symbol">:</span> <a href="id.html" class="tsd-signature-type" data-tsd-kind="Interface">Id</a></div>
+					<a name="img" class="tsd-anchor"></a>
+					<h3>img</h3>
+					<div class="tsd-signature tsd-kind-icon">img<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/profile-pic-thumb.ts#L9">api/model/profile-pic-thumb.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="imgfull" class="tsd-anchor"></a>
+					<h3>img<wbr>Full</h3>
+					<div class="tsd-signature tsd-kind-icon">img<wbr>Full<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/profile-pic-thumb.ts#L10">api/model/profile-pic-thumb.ts:10</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="raw" class="tsd-anchor"></a>
+					<h3>raw</h3>
+					<div class="tsd-signature tsd-kind-icon">raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/profile-pic-thumb.ts#L11">api/model/profile-pic-thumb.ts:11</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="tag" class="tsd-anchor"></a>
+					<h3>tag</h3>
+					<div class="tsd-signature tsd-kind-icon">tag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/profile-pic-thumb.ts#L12">api/model/profile-pic-thumb.ts:12</a></li>
+						</ul>
 					</aside>
 				</section>
 			</section>
@@ -209,27 +250,6 @@
 					<li class=" tsd-kind-interface">
 						<a href="id.html" class="tsd-kind-icon">Id</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="lastreceivedkey.html" class="tsd-kind-icon">Last<wbr>Received<wbr>Key</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="lastreceivedkey.html#_serialized" class="tsd-kind-icon">_serialized</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="lastreceivedkey.html#fromme" class="tsd-kind-icon">from<wbr>Me</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="lastreceivedkey.html#id" class="tsd-kind-icon">id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="lastreceivedkey.html#remote" class="tsd-kind-icon">remote</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="livelocation.html" class="tsd-kind-icon">Live<wbr>Location</a>
 					</li>
@@ -237,11 +257,41 @@
 						<a href="message.html" class="tsd-kind-icon">Message</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="messageid.html" class="tsd-kind-icon">Message<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="partialmessage.html" class="tsd-kind-icon">Partial<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="participantevent.html" class="tsd-kind-icon">Participant<wbr>Event</a>
 					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="profilepicthumbobj.html" class="tsd-kind-icon">Profile<wbr>Pic<wbr>Thumb<wbr>Obj</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="profilepicthumbobj.html#eurl" class="tsd-kind-icon">eurl</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="profilepicthumbobj.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="profilepicthumbobj.html#img" class="tsd-kind-icon">img</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="profilepicthumbobj.html#imgfull" class="tsd-kind-icon">img<wbr>Full</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="profilepicthumbobj.html#raw" class="tsd-kind-icon">raw</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="profilepicthumbobj.html#tag" class="tsd-kind-icon">tag</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="scoperesult.html" class="tsd-kind-icon">Scope<wbr>Result</a>
 					</li>
@@ -256,6 +306,9 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="whatsappprofile.html" class="tsd-kind-icon">Whatsapp<wbr>Profile</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="wid.html" class="tsd-kind-icon">Wid</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#catchqrcallback" class="tsd-kind-icon">CatchQRCallback</a>
@@ -298,5 +351,14 @@
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
 <script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.json"><' + '/script>');</script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'G-LTZL26963K', 'auto');
+        ga('send', 'pageview');
+    </script>
 </body>
 </html>

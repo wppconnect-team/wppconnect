@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GroupCreation | @wppconnect-team/wppconnect - v1.3.0</title>
+	<title>MessageId | @wppconnect-team/wppconnect - v1.3.0</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.3.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">Globals</a>
 				</li>
 				<li>
-					<a href="groupcreation.html">GroupCreation</a>
+					<a href="messageid.html">MessageId</a>
 				</li>
 			</ul>
-			<h1>Interface GroupCreation</h1>
+			<h1>Interface MessageId</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GroupCreation</span>
+						<span class="target">MessageId</span>
 					</li>
 				</ul>
 			</section>
@@ -80,9 +80,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="groupcreation.html#gid" class="tsd-kind-icon">gid</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="groupcreation.html#participants" class="tsd-kind-icon">participants</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="groupcreation.html#status" class="tsd-kind-icon">status</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="messageid.html#_serialized" class="tsd-kind-icon">_serialized</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="messageid.html#fromme" class="tsd-kind-icon">from<wbr>Me</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="messageid.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="messageid.html#remote" class="tsd-kind-icon">remote</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,32 +92,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="gid" class="tsd-anchor"></a>
-					<h3>gid</h3>
-					<div class="tsd-signature tsd-kind-icon">gid<span class="tsd-signature-symbol">:</span> <a href="wid.html" class="tsd-signature-type" data-tsd-kind="Interface">Wid</a></div>
+					<a name="_serialized" class="tsd-anchor"></a>
+					<h3>_serialized</h3>
+					<div class="tsd-signature tsd-kind-icon">_serialized<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/group-creation.ts#L22">api/model/group-creation.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/message-id.ts#L24">api/model/message-id.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="participants" class="tsd-anchor"></a>
-					<h3>participants</h3>
-					<div class="tsd-signature tsd-kind-icon">participants<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="fromme" class="tsd-anchor"></a>
+					<h3>from<wbr>Me</h3>
+					<div class="tsd-signature tsd-kind-icon">from<wbr>Me<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/group-creation.ts#L23">api/model/group-creation.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/message-id.ts#L21">api/model/message-id.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="status" class="tsd-anchor"></a>
-					<h3>status</h3>
-					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="id" class="tsd-anchor"></a>
+					<h3>id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/group-creation.ts#L21">api/model/group-creation.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/message-id.ts#L22">api/model/message-id.ts:22</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="remote" class="tsd-anchor"></a>
+					<h3>remote</h3>
+					<div class="tsd-signature tsd-kind-icon">remote<span class="tsd-signature-symbol">:</span> <a href="wid.html" class="tsd-signature-type" data-tsd-kind="Interface">Wid</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/message-id.ts#L23">api/model/message-id.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -198,24 +209,9 @@
 					<li class=" tsd-kind-interface">
 						<a href="createoptions.html" class="tsd-kind-icon">Create<wbr>Options</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="groupcreation.html" class="tsd-kind-icon">Group<wbr>Creation</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="groupcreation.html#gid" class="tsd-kind-icon">gid</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="groupcreation.html#participants" class="tsd-kind-icon">participants</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="groupcreation.html#status" class="tsd-kind-icon">status</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="groupmetadata.html" class="tsd-kind-icon">Group<wbr>Metadata</a>
 					</li>
@@ -231,9 +227,27 @@
 					<li class=" tsd-kind-interface">
 						<a href="message.html" class="tsd-kind-icon">Message</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="messageid.html" class="tsd-kind-icon">Message<wbr>Id</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="messageid.html#_serialized" class="tsd-kind-icon">_serialized</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="messageid.html#fromme" class="tsd-kind-icon">from<wbr>Me</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="messageid.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="messageid.html#remote" class="tsd-kind-icon">remote</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="partialmessage.html" class="tsd-kind-icon">Partial<wbr>Message</a>
 					</li>

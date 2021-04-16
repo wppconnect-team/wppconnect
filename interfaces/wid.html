@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GroupCreation | @wppconnect-team/wppconnect - v1.3.0</title>
+	<title>Wid | @wppconnect-team/wppconnect - v1.3.0</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.3.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,21 +55,30 @@
 					<a href="../modules.html">Globals</a>
 				</li>
 				<li>
-					<a href="groupcreation.html">GroupCreation</a>
+					<a href="wid.html">Wid</a>
 				</li>
 			</ul>
-			<h1>Interface GroupCreation</h1>
+			<h1>Interface Wid</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>ID of user or group
+							&quot;<a href="mailto:xxxxxxxxxx@c.us">xxxxxxxxxx@c.us</a>&quot; for contacts
+						&quot;<a href="mailto:xxxxxxxxxx@g.us">xxxxxxxxxx@g.us</a>&quot; for groups</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GroupCreation</span>
+						<span class="target">Wid</span>
 					</li>
 				</ul>
 			</section>
@@ -80,9 +89,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="groupcreation.html#gid" class="tsd-kind-icon">gid</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="groupcreation.html#participants" class="tsd-kind-icon">participants</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="groupcreation.html#status" class="tsd-kind-icon">status</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="wid.html#_serialized" class="tsd-kind-icon">_serialized</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="wid.html#server" class="tsd-kind-icon">server</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="wid.html#user" class="tsd-kind-icon">user</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,34 +100,50 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="gid" class="tsd-anchor"></a>
-					<h3>gid</h3>
-					<div class="tsd-signature tsd-kind-icon">gid<span class="tsd-signature-symbol">:</span> <a href="wid.html" class="tsd-signature-type" data-tsd-kind="Interface">Wid</a></div>
+					<a name="_serialized" class="tsd-anchor"></a>
+					<h3>_serialized</h3>
+					<div class="tsd-signature tsd-kind-icon">_serialized<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/group-creation.ts#L22">api/model/group-creation.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/wid.ts#L38">api/model/wid.ts:38</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>user@server</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="participants" class="tsd-anchor"></a>
-					<h3>participants</h3>
-					<div class="tsd-signature tsd-kind-icon">participants<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="server" class="tsd-anchor"></a>
+					<h3>server</h3>
+					<div class="tsd-signature tsd-kind-icon">server<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/group-creation.ts#L23">api/model/group-creation.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/wid.ts#L28">api/model/wid.ts:28</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>&quot;c.us&quot; for contacts
+							&quot;g.us&quot; for groups</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="status" class="tsd-anchor"></a>
-					<h3>status</h3>
-					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="user" class="tsd-anchor"></a>
+					<h3>user</h3>
+					<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/group-creation.ts#L21">api/model/group-creation.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/42e58df/src/api/model/wid.ts#L33">api/model/wid.ts:33</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>number of contact or group</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -198,24 +223,9 @@
 					<li class=" tsd-kind-interface">
 						<a href="createoptions.html" class="tsd-kind-icon">Create<wbr>Options</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="groupcreation.html" class="tsd-kind-icon">Group<wbr>Creation</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="groupcreation.html#gid" class="tsd-kind-icon">gid</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="groupcreation.html#participants" class="tsd-kind-icon">participants</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="groupcreation.html#status" class="tsd-kind-icon">status</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="groupmetadata.html" class="tsd-kind-icon">Group<wbr>Metadata</a>
 					</li>
@@ -258,9 +268,24 @@
 					<li class=" tsd-kind-interface">
 						<a href="whatsappprofile.html" class="tsd-kind-icon">Whatsapp<wbr>Profile</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="wid.html" class="tsd-kind-icon">Wid</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="wid.html#_serialized" class="tsd-kind-icon">_serialized</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="wid.html#server" class="tsd-kind-icon">server</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="wid.html#user" class="tsd-kind-icon">user</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#catchqrcallback" class="tsd-kind-icon">CatchQRCallback</a>
 					</li>
