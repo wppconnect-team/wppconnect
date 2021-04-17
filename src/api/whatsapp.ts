@@ -105,7 +105,7 @@ export class Whatsapp extends ControlsLayer {
       messageId
     );
 
-    if (typeof result === 'object' && result.__error) {
+    if (typeof result == 'object' && '__error' in result) {
       throw result.__error;
     }
     return result as string;

@@ -203,10 +203,21 @@ interface WAPI {
     filename: string,
     caption: string
   ) => void;
+  setGroupDescription: (
+    groupId: string,
+    description: string
+  ) => Promise<object>;
+  setGroupProperty: (
+    groupId: string,
+    property: string,
+    value: boolean
+  ) => Promise<object>;
+  setGroupSubject: (groupId: string, title: string) => Promise<object>;
   setMessagesAdminsOnly: (chatId: string, option: boolean) => boolean;
   setMyName: (name: string) => void;
   setMyStatus: (to: string) => void;
   setProfilePic: (path: string, to?: string) => Promise<boolean>;
+  setTemporaryMessages: (chatId: string, value: string) => Promise<boolean>;
   setTheme: (theme?: string) => boolean;
   startPhoneWatchdog: (interval: number) => void;
   startTyping: (to: string) => void;

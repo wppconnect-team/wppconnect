@@ -17,7 +17,9 @@
 
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
+import { evaluateAndReturn } from '../helpers';
 import { Id } from '../model';
+import { GroupProperty } from '../model/enum';
 import { RetrieverLayer } from './retriever.layer';
 
 export class GroupLayer extends RetrieverLayer {
@@ -181,6 +183,55 @@ export class GroupLayer extends RetrieverLayer {
     return await this.page.evaluate(
       (inviteCode) => WAPI.joinGroup(inviteCode),
       inviteCode
+    );
+  }
+
+  /**
+   * Set group description (if allowed)
+   * @param groupId Group ID ('000000-000000@g.us')
+   * @param description New group description
+   * @returns empty object
+   */
+  public async setGroupDescription(groupId: string, description: string) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ groupId, description }) =>
+        WAPI.setGroupDescription(groupId, description),
+      { groupId, description }
+    );
+  }
+
+  /**
+   * Set group subject (if allowed)
+   * @param groupId Group ID ('000000-000000@g.us')
+   * @param title New group subject
+   * @returns empty object
+   */
+  public async setGroupSubject(groupId: string, title: string) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ groupId, title }) => WAPI.setGroupSubject(groupId, title),
+      { groupId, title }
+    );
+  }
+
+  /**
+   * Enable or disable group properties, see {@link GroupProperty for details}
+   * @param groupId Group ID ('000000-000000@g.us')
+   * @param property
+   * @param value true or false
+   * @returns empty object
+   */
+  public async setGroupProperty(
+    groupId: string,
+    property: GroupProperty,
+    value: boolean
+  ) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ groupId, property, value }) =>
+        WAPI.setGroupProperty(groupId, property, value),
+      { groupId, property, value }
     );
   }
 }
