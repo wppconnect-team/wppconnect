@@ -15,6 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import * as WPPConnectLoader from '@wppconnect-team/loader';
 import {
   _getGroupParticipants,
   addParticipant,
@@ -118,6 +119,10 @@ import {
   downloadMedia,
   startPhoneWatchdog,
   stopPhoneWatchdog,
+  setGroupSubject,
+  setGroupDescription,
+  setGroupProperty,
+  setTemporaryMessages,
 } from './functions';
 import {
   base64ToFile,
@@ -147,8 +152,6 @@ import {
 } from './serializers';
 import { storeObjects } from './store/store-objects';
 
-import * as WPPConnectLoader from '@wppconnect-team/loader';
-
 window['webpackJsonp'] = window['webpackJsonp'] || [];
 window['webpackChunkbuild'] = window['webpackChunkbuild'] || [];
 
@@ -156,6 +159,7 @@ if (typeof window.Store === 'undefined') {
   window.Store = {};
   window.Store.promises = {};
   const loader = new WPPConnectLoader();
+  window.Store.loader = loader;
 
   for (const store of storeObjects) {
     window.Store.promises[store.id] = loader
@@ -193,6 +197,7 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.getchatId = getchatId;
   window.WAPI.sendExist = sendExist;
   window.WAPI.pinChat = pinChat;
+  window.WAPI.setTemporaryMessages = setTemporaryMessages;
 
   // Layout Functions
   window.WAPI.setTheme = setTheme;
@@ -219,6 +224,9 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.promoteParticipant = promoteParticipant;
   window.WAPI.demoteParticipant = demoteParticipant;
   window.WAPI.joinGroup = joinGroup;
+  window.WAPI.setGroupDescription = setGroupDescription;
+  window.WAPI.setGroupProperty = setGroupProperty;
+  window.WAPI.setGroupSubject = setGroupSubject;
 
   // Chatting functions
   window.WAPI.sendChatstate = sendChatstate;

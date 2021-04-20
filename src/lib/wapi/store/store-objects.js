@@ -383,4 +383,30 @@ export const storeObjects = [
         ? module.default
         : null,
   },
+  {
+    id: 'randomMessageId',
+    conditions: (module) =>
+      module.randomId && module.default ? module.default : null,
+  },
+  {
+    id: 'randomId',
+    conditions: (module) =>
+      module.randomId && module.default ? module.randomId : null,
+  },
+  {
+    id: 'sendSetGroupSubject',
+    conditions: (module) => module.sendSetGroupSubject,
+  },
+  {
+    id: 'sendSetGroupProperty',
+    conditions: (module) => module.sendSetGroupProperty,
+  },
+  {
+    id: 'sendSetGroupDescription',
+    conditions: (module) => module.sendSetGroupDescription,
+  },
+  {
+    id: 'changeEphemeralDuration',
+    conditions: (module) => module.changeEphemeralDuration,
+  },
 ];

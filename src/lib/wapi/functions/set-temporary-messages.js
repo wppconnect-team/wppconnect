@@ -15,11 +15,29 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export { fileToBase64 } from './file-to-base64';
-export { base64MimeType } from './base64-mimetype';
-export { downloadFileToBase64 } from './download-file';
-export { stickerSelect, resizeImg } from './select-sticker';
-export { scrapeImg } from './scrape-img-qr';
-export { scrapeLogin } from './scrape-login';
-export { scrapeDesconnected } from './scrape-desconnect';
-export { evaluateAndReturn } from './evaluate-and-return';
+export async function setTemporaryMessages(chatId, value) {
+  const chat = Store.Chat.get(chatId);
+
+  if (!chat) {
+    throw {
+      error: true,
+      code: 'chat_not_found',
+      message: 'Chat not found',
+    };
+  }
+  if (chat.isGroup) {
+    return await WAPI.setGroupProperty(chat.id, 'ephemeral', value);
+  }
+
+  value = value ? 604800 : 0;
+
+  await Store.changeEphemeralDuration(chat, value).catch((e) => {
+    throw {
+      error: true,
+      code: e.code || e.status || e.statusCode || 'unknown',
+      message: e.message || e.reason || 'Unknown Error',
+    };
+  });
+
+  return true;
+}
