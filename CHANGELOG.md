@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/wppconnect-team/wppconnect/compare/v1.3.0...v1.3.1) (2021-04-20)
+
+### Features
+
+- Added function to enable and disable temporary messages ([5a9a289](https://github.com/wppconnect-team/wppconnect/commit/5a9a2891785e6b34e3bcb6a6cee3502101e36d7f))
+- Added options to edit group description, subject and properties ([07d155f](https://github.com/wppconnect-team/wppconnect/commit/07d155fb5ca891223881100b28931c4fbbf37740))
+
 # [1.3.0](https://github.com/wppconnect-team/wppconnect/compare/v1.2.6...v1.3.0) (2021-04-16)
 
 ### Bug Fixes
