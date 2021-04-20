@@ -17,6 +17,7 @@
 
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
+import { evaluateAndReturn } from '../helpers';
 import { UILayer } from './ui.layer';
 
 export class ControlsLayer extends UILayer {
@@ -136,7 +137,7 @@ export class ControlsLayer extends UILayer {
   }
 
   /**
-   * Archive and unarchive chat messages with true or false
+   * Allow only admin to send messages with true or false
    * @param chatId {string} id '000000000000@c.us'
    * @param option {boolean} true or false
    * @returns boolean
@@ -145,6 +146,21 @@ export class ControlsLayer extends UILayer {
     return this.page.evaluate(
       ({ chatId, option }) => WAPI.setMessagesAdminsOnly(chatId, option),
       { chatId, option }
+    );
+  }
+
+  /**
+   * Enable or disable temporary messages with true or false
+   * @param chatOrGroupId id '000000000000@c.us' or '000000-000000@g.us'
+   * @param value true or false
+   * @returns boolean
+   */
+  public async setTemporaryMessages(chatOrGroupId: string, value: boolean) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ chatOrGroupId, value }) =>
+        WAPI.setTemporaryMessages(chatOrGroupId, value),
+      { chatOrGroupId, value }
     );
   }
 }
