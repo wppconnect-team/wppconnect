@@ -28,8 +28,8 @@
 | Forward Messages                                           | ✔   |
 | Receive message                                            | ✔   |
 | insert user section                                        | ✔   |
-| 📍 Send location!!                                         | ✔   |
-| 🕸🕸 **and much more**                                       | ✔   |
+| Send *location*                                            | ✔   |
+| **and much more**                                          | ✔   |
 
 ## Installation
 
