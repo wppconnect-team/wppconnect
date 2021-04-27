@@ -68,7 +68,7 @@
     "@types/atob": "^2.1.2",
     "@types/mime-types": "^2.1.0",
     "@types/mocha": "^8.2.1",
-    "@types/node": "^14.14.22",
+    "@types/node": "^15.0.0",
     "@types/puppeteer": "^5.4.3",
     "@types/sharp": "^0.28.0",
     "@types/ws": "^7.4.0",
