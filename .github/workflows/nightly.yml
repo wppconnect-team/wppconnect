@@ -47,7 +47,7 @@ jobs:
         run: npm pack && mv wppconnect-*.tgz wppconnect-nightly.tgz
 
       - name: Build API-Docs
-        run: npm run generate-api-docs
+        run: npm run docs:build
 
       - name: Generate Changelog
         id: generate_changelog

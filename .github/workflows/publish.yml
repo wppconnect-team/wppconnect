@@ -70,7 +70,7 @@ jobs:
           prerelease: false
 
       - name: Build API-Docs
-        run: npm run generate-api-docs
+        run: npm run docs:build
         continue-on-error: true
 
       - name: Deploy API-Docs
