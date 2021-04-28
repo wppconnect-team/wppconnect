@@ -15,33 +15,37 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export async function sendContactVcard(chatId, contact, name) {
+export async function sendContactVcard(chatId, contactId, name) {
   var chat = await WAPI.sendExist(chatId);
-  var cont = await WAPI.sendExist(contact);
-  if (chat.id && cont.id) {
+  var contChat = await WAPI.sendExist(contactId);
+  if (chat.id && contChat.id) {
     var newId = window.WAPI.getNewMessageId(chat.id);
-    var tempMsg = Object.create(
-      Store.Msg.models.filter((msg) => msg.__x_isSentByMe && !msg.quotedMsg)[0]
-    );
-    var bod = await window.Store.Vcard.vcardFromContactModel(cont.__x_contact);
-    name = !name ? cont.__x_formattedTitle : name;
-    var extend = {
+    // Create a copy of contact
+    var contact = new Store.Contact.modelClass(contChat.contact);
+
+    // Use defined name if exists
+    if (name) {
+      contact.name = name;
+    }
+
+    var bod = await window.Store.Vcard.vcardFromContactModel(contact);
+    var message = {
       ack: 0,
       body: bod.vcard,
-      from: cont.__x_contact,
+      from: Store.UserPrefs.getMaybeMeUser(),
       local: !0,
       self: 'out',
       id: newId,
-      vcardFormattedName: name,
+      vcardFormattedName: contact.formattedName,
       t: parseInt(new Date().getTime() / 1000),
-      to: chatId,
+      to: chat.id,
       type: 'vcard',
       isNewMsg: !0,
     };
-    Object.assign(tempMsg, extend);
+
     var result =
-      (await Promise.all(Store.addAndSendMsgToChat(chat, tempMsg)))[1] || '';
-    var m = { from: contact, type: 'vcard' },
+      (await Promise.all(Store.addAndSendMsgToChat(chat, message)))[1] || '';
+    var m = { from: contactId, type: 'vcard' },
       To = await WAPI.getchatId(chat.id);
     if (result === 'success' || result === 'OK') {
       var obj = WAPI.scope(To, false, result, null);
