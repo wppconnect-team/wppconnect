@@ -1,3 +1,14 @@
+## [1.3.2](https://github.com/wppconnect-team/wppconnect/compare/v1.3.1...v1.3.2) (2021-04-28)
+
+### Bug Fixes
+
+- Fixed message ID generator ([0da9a62](https://github.com/wppconnect-team/wppconnect/commit/0da9a62490073642aa00dc4f7052465de271f7f3))
+- Fixed sendContact with custom name ([#152](https://github.com/wppconnect-team/wppconnect/issues/152)) ([47a51f0](https://github.com/wppconnect-team/wppconnect/commit/47a51f060814ab79704b160227c350092e2abe3f))
+
+### Features
+
+- Allow to define contact name in sendContactVcardList ([#152](https://github.com/wppconnect-team/wppconnect/issues/152)) ([474e5a0](https://github.com/wppconnect-team/wppconnect/commit/474e5a061496cd96ca4864b0d033813bc47c573a))
+
 ## [1.3.1](https://github.com/wppconnect-team/wppconnect/compare/v1.3.0...v1.3.1) (2021-04-20)
 
 ### Features
