@@ -33,39 +33,44 @@ export async function sendContactVcardList(chatId, contacts) {
   }
   var chat = await WAPI.sendExist(chatId);
   if (!chat.erro) {
-    var tempMsg = Object.create(
-        Store.Msg.models.filter(
-          (msg) => msg.__x_isSentByMe && !msg.quotedMsg
-        )[0]
-      ),
-      conta = contacts.map(async (e) => {
-        return await WAPI.sendExist(e);
-      });
-    var ar = await Promise.all(conta);
-    var cont = new Array();
-    for (var key in ar) {
-      cont.push(ar[key].__x_contact);
-    }
-    var vcard = cont.map(async (e) => {
-      return await window.Store.Vcard.vcardFromContactModel(e);
+    var vcardPromises = contacts.map(async (e) => {
+      var id = e;
+      var name = null;
+      if (typeof e === 'object') {
+        id = e.id;
+        name = e.name;
+      }
+
+      var contChat = await WAPI.sendExist(id);
+
+      // Create a copy of contact
+      var contact = new Store.Contact.modelClass(contChat.contact);
+
+      // Use defined name if exists
+      if (name) {
+        contact.name = name;
+      }
+
+      return await window.Store.Vcard.vcardFromContactModel(contact);
     });
-    var newId = window.WAPI.getNewMessageId(chatId);
-    var Vcards = await Promise.all(vcard);
-    var extend = {
+    var newId = window.WAPI.getNewMessageId(chat.id);
+    var Vcards = await Promise.all(vcardPromises);
+
+    var message = {
       ack: 0,
-      from: chatId,
+      from: Store.UserPrefs.getMaybeMeUser(),
       local: !0,
       self: 'out',
       id: newId,
       t: parseInt(new Date().getTime() / 1000),
-      to: chatId,
+      to: chat.id,
       type: 'multi_vcard',
       vcardList: Vcards,
       isNewMsg: !0,
     };
-    Object.assign(tempMsg, extend);
+
     var result =
-      (await Promise.all(Store.addAndSendMsgToChat(chat, tempMsg)))[1] || '';
+      (await Promise.all(Store.addAndSendMsgToChat(chat, message)))[1] || '';
     var m = { from: contacts, type: 'multi_vcard' },
       To = await WAPI.getchatId(chat.id);
     if (result === 'success' || result === 'OK') {

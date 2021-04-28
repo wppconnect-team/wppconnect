@@ -490,9 +490,12 @@ export class SenderLayer extends ListenerLayer {
   /**
    * Send a list of contact cards
    * @param to Chat id
-   * @param contacts Example: | [000@c.us, 1111@c.us]
+   * @param contacts Example: | ['000@c.us', '1111@c.us', {id: '2222@c.us', name: 'Test'}]
    */
-  public async sendContactVcardList(to: string, contacts: string[]) {
+  public async sendContactVcardList(
+    to: string,
+    contacts: (string | { id: string; name: string })[]
+  ) {
     return new Promise(async (resolve, reject) => {
       const result = await this.page.evaluate(
         ({ to, contacts }) => {
