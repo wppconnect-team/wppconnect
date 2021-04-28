@@ -15,7 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as WPPConnectLoader from '@wppconnect-team/loader';
+import WPPConnectLoader from '@wppconnect-team/loader';
 import {
   _getGroupParticipants,
   addParticipant,
