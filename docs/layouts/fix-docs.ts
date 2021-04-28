@@ -27,8 +27,7 @@ const defaultTheme = path.resolve(nodeModulesDir, 'typedoc-default-themes/bin/de
 // Fix Theme
 // shell.cp(path.resolve(defaultTheme, './partials/type.hbs'), path.resolve(pagesThemeDir, './partials/'));
 shell.cp(path.resolve(defaultTheme, './partials/*'), path.resolve(pagesThemeDir, './partials/'));
-shell.cp(path.resolve(defaultTheme, './assets/js/main.js'), path.resolve(pagesThemeDir, './assets/js/'));
-shell.cp(path.resolve(defaultTheme, './assets/css/main.css'), path.resolve(pagesThemeDir, './assets/css/'));
+shell.cp('-R', path.resolve(defaultTheme, './assets/*'), path.resolve(pagesThemeDir, './assets/'));
 
 // Google Analytics
 shell.cp(path.resolve(__dirname, './analytics.hbs'), path.resolve(pagesThemeDir, './partials/'));

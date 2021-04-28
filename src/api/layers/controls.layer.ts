@@ -27,6 +27,7 @@ export class ControlsLayer extends UILayer {
 
   /**
    * Unblock contact
+   * @category Blocklist
    * @param contactId {string} id '000000000000@c.us'
    * @returns boolean
    */
@@ -39,6 +40,7 @@ export class ControlsLayer extends UILayer {
 
   /**
    * Block contact
+   * @category Blocklist
    * @param contactId {string} id '000000000000@c.us'
    * @returns boolean
    */
@@ -51,6 +53,7 @@ export class ControlsLayer extends UILayer {
 
   /**
    * puts the chat as unread
+   * @category Chat
    * @param contactId {string} id '000000000000@c.us'
    * @returns boolean
    */
@@ -63,6 +66,7 @@ export class ControlsLayer extends UILayer {
 
   /**
    * Deletes the given chat
+   * @category Chat
    * @param chatId {string} id '000000000000@c.us'
    * @returns boolean
    */
@@ -75,6 +79,7 @@ export class ControlsLayer extends UILayer {
 
   /**
    * Archive and unarchive chat messages with true or false
+   * @category Chat
    * @param chatId {string} id '000000000000@c.us'
    * @param option {boolean} true or false
    * @returns boolean
@@ -88,6 +93,7 @@ export class ControlsLayer extends UILayer {
 
   /**
    * Pin and Unpin chat messages with true or false
+   * @category Chat
    * @param chatId {string} id '000000000000@c.us'
    * @param option {boolean} true or false
    * @param nonExistent {boolean} Pin chat, non-existent (optional)
@@ -111,6 +117,7 @@ export class ControlsLayer extends UILayer {
 
   /**
    * Deletes all messages of given chat
+   * @category Chat
    * @param chatId
    * @returns boolean
    */
@@ -120,6 +127,7 @@ export class ControlsLayer extends UILayer {
 
   /**
    * Deletes message of given message id
+   * @category Chat
    * @param chatId The chat id from which to delete the message.
    * @param messageId The specific message id of the message to be deleted
    * @param onlyLocal If it should only delete locally (message remains on the other recipienct's phone). Defaults to false.
@@ -138,6 +146,7 @@ export class ControlsLayer extends UILayer {
 
   /**
    * Allow only admin to send messages with true or false
+   * @category Group
    * @param chatId {string} id '000000000000@c.us'
    * @param option {boolean} true or false
    * @returns boolean
@@ -151,6 +160,7 @@ export class ControlsLayer extends UILayer {
 
   /**
    * Enable or disable temporary messages with true or false
+   * @category Chat
    * @param chatOrGroupId id '000000000000@c.us' or '000000-000000@g.us'
    * @param value true or false
    * @returns boolean

@@ -15,17 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 export * from './api/model';
-export {
-  AckType,
-  ChatState,
-  GroupChangeEvent,
-  GroupNotificationType,
-  MessageType,
-  SocketState,
-  InterfaceMode,
-  InterfaceState,
-  StatusFind,
-} from './api/model/enum';
+export * from './api/model/enum';
 export { Whatsapp } from './api/whatsapp';
 export { CreateConfig } from './config/create-config';
 export { create } from './controllers/initializer';

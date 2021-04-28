@@ -327,6 +327,7 @@ export class HostLayer {
 
   /**
    * Delete the Service Workers
+   * @category Host
    */
   public async killServiceWorker() {
     return await this.page.evaluate(() => WAPI.killServiceWorker());
@@ -334,12 +335,14 @@ export class HostLayer {
 
   /**
    * Load the service again
+   * @category Host
    */
   public async restartService() {
     return await this.page.evaluate(() => WAPI.restartService());
   }
 
   /**
+   * @category Host
    * @returns Current host device details
    */
   public async getHostDevice() {
@@ -348,6 +351,7 @@ export class HostLayer {
 
   /**
    * Retrieves WA version
+   * @category Host
    */
   public async getWAVersion() {
     return await this.page.evaluate(() => WAPI.getWAVersion());
@@ -355,6 +359,7 @@ export class HostLayer {
 
   /**
    * Retrieves the connecction state
+   * @category Host
    */
   public async getConnectionState(): Promise<SocketState> {
     return await this.page.evaluate(() => {
@@ -365,6 +370,7 @@ export class HostLayer {
 
   /**
    * Retrieves if the phone is online. Please note that this may not be real time.
+   * @category Host
    */
   public async isConnected() {
     return await this.page.evaluate(() => WAPI.isConnected());
@@ -372,6 +378,7 @@ export class HostLayer {
 
   /**
    * Retrieves if the phone is online. Please note that this may not be real time.
+   * @category Host
    */
   public async isLoggedIn() {
     return await this.page.evaluate(() => WAPI.isLoggedIn());
@@ -379,6 +386,7 @@ export class HostLayer {
 
   /**
    * Retrieves Battery Level
+   * @category Host
    */
   public async getBatteryLevel() {
     return await this.page.evaluate(() => WAPI.getBatteryLevel());
@@ -387,6 +395,7 @@ export class HostLayer {
   /**
    * Start phone Watchdog, forcing the phone connection verification.
    *
+   * @category Host
    * @param interval interval number in miliseconds
    */
   public async startPhoneWatchdog(interval: number = 15000) {
@@ -398,6 +407,7 @@ export class HostLayer {
 
   /**
    * Stop phone Watchdog, more details in {@link startPhoneWatchdog}
+   * @category Host
    */
   public async stopPhoneWatchdog(interval: number) {
     return await this.page.evaluate(() => WAPI.stopPhoneWatchdog());

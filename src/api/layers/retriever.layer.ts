@@ -28,6 +28,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Returns a list of mute and non-mute users
+   * @category Chat
    * @param type return type: all, toMute and noMute.
    * @returns obj
    */
@@ -40,6 +41,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Returns browser session token
+   * @category Host
    * @returns obj [token]
    */
   public async getSessionTokenBrowser(
@@ -68,6 +70,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Receive the current theme
+   * @category Host
    * @returns string light or dark
    */
   public async getTheme() {
@@ -76,6 +79,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Receive all blocked contacts
+   * @category Blocklist
    * @returns array of [0,1,2,3....]
    */
   public async getBlockList() {
@@ -84,6 +88,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves all chats
+   * @category Chat
    * @returns array of [Chat]
    */
   public async getAllChats(withNewMessageOnly = false) {
@@ -96,6 +101,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Checks if a number is a valid WA number
+   * @category Contact
    * @param contactId, you need to include the @c.us at the end.
    * @returns contact detial as promise
    */
@@ -108,6 +114,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves all chats with messages
+   * @category Chat
    * @returns array of [Chat]
    */
   public async getAllChatsWithMessages(withNewMessageOnly = false) {
@@ -120,6 +127,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieve all groups
+   * @category Group
    * @returns array of groups
    */
   public async getAllGroups(withNewMessagesOnly = false) {
@@ -135,6 +143,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves contact detail object of given contact id
+   * @category Contact
    * @param contactId
    * @returns contact detial as promise
    */
@@ -147,6 +156,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves all contacts
+   * @category Contact
    * @returns array of [Contact]
    */
   public async getAllContacts() {
@@ -155,6 +165,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves chat object of given contact id
+   * @category Chat
    * @param contactId
    * @returns contact detial as promise
    */
@@ -167,6 +178,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves chat object of given contact id
+   * @category Chat
    * @param contactId
    * @returns contact detial as promise
    * @deprecated
@@ -177,6 +189,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves chat picture
+   * @category Contact
    * @param chatId Chat id
    * @returns url of the chat picture or undefined if there is no picture for the chat.
    */
@@ -186,6 +199,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Load more messages in chat object from server. Use this in a while loop
+   * @category Chat
    * @param contactId
    * @returns contact detial as promise
    * @deprecated
@@ -199,6 +213,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves status of given contact
+   * @category Contact
    * @param contactId
    */
   public async getStatus(contactId: string) {
@@ -210,6 +225,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Checks if a number is a valid whatsapp number
+   * @category Contact
    * @param contactId, you need to include the @c.us at the end.
    * @returns contact detial as promise
    */
@@ -222,6 +238,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves all undread Messages
+   * @category Chat
    * @param includeMe
    * @param includeNotifications
    * @param useUnreadCount
@@ -242,6 +259,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves all unread messages (where ack is -1)
+   * @category Chat
    * @returns list of messages
    */
   public async getAllUnreadMessages() {
@@ -250,6 +268,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves all new messages (where isNewMsg is true)
+   * @category Chat
    * @returns List of messages
    * @deprecated Use getAllUnreadMessages
    */
@@ -260,6 +279,7 @@ export class RetrieverLayer extends SenderLayer {
   /**
    * Retrieves all messages already loaded in a chat
    * For loading every message use loadAndGetAllMessagesInChat
+   * @category Chat
    * @param chatId, the chat to get the messages from
    * @param includeMe, include my own messages? boolean
    * @param includeNotifications
@@ -279,6 +299,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Loads and Retrieves all Messages in a chat
+   * @category Chat
    * @param chatId, the chat to get the messages from
    * @param includeMe, include my own messages? boolean
    * @param includeNotifications
@@ -302,6 +323,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Checks if a CHAT contact is online.
+   * @category Chat
    * @param chatId chat id: xxxxx@c.us
    */
   public async getChatIsOnline(chatId: string): Promise<boolean> {
@@ -313,6 +335,7 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves the last seen of a CHAT.
+   * @category Chat
    * @param chatId chat id: xxxxx@c.us
    */
   public async getLastSeen(chatId: string): Promise<number | boolean> {

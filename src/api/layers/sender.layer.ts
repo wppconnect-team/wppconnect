@@ -41,6 +41,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Automatically sends a link with the auto generated link preview. You can also add a custom message to be added.
+   * @category Chat
    * @param chatId
    * @param url string A link, for example for youtube. e.g https://www.youtube.com/watch?v=Zi_XLOBDo_Y&list=RDEMe12_MlgO8mGFdeeftZ2nOQ&start_radio=1
    * @param title custom text as the message body, this includes the link or will be attached after the link
@@ -67,6 +68,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends a text message to given chat
+   * @category Chat
    * @param to chat id: xxxxx@us.c
    * @param content text message
    */
@@ -90,6 +92,14 @@ export class SenderLayer extends ListenerLayer {
     });
   }
 
+  /**
+   *
+   * @category Chat
+   * @param chat
+   * @param content
+   * @param options
+   * @returns
+   */
   public async sendMessageOptions(
     chat: any,
     content: any,
@@ -116,6 +126,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends image message
+   * @category Chat
    * @param to Chat id
    * @param filePath File path or http link
    * @param filename
@@ -161,6 +172,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends image message
+   * @category Chat
    * @param to Chat id
    * @param base64 File path, http link or base64Encoded
    * @param filename
@@ -211,6 +223,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends message with thumbnail
+   * @category Chat
    * @param thumb
    * @param url
    * @param title
@@ -240,6 +253,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Replies to given mesage id of given chat id
+   * @category Chat
    * @param to Chat id
    * @param content Message body
    * @param quotedMsg Message id to reply to.
@@ -271,6 +285,7 @@ export class SenderLayer extends ListenerLayer {
   /**
    * Sends ptt audio
    * base64 parameter should have mime type already defined
+   * @category Chat
    * @param to Chat id
    * @param base64 base64 data
    * @param filename
@@ -292,6 +307,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends ptt audio from path
+   * @category Chat
    * @param to Chat id
    * @param filePath File path
    * @param filename
@@ -342,6 +358,7 @@ export class SenderLayer extends ListenerLayer {
   /**
    * Sends file
    * base64 parameter should have mime type already defined
+   * @category Chat
    * @param to Chat id
    * @param base64 base64 data
    * @param filename
@@ -384,6 +401,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends file from path
+   * @category Chat
    * @param to Chat id
    * @param filePath File path
    * @param filename
@@ -424,6 +442,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends a video to given chat as a gif, with caption or not, using base64
+   * @category Chat
    * @param to chat id xxxxx@us.c
    * @param base64 base64 data:video/xxx;base64,xxx
    * @param filename string xxxxx
@@ -443,6 +462,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends a video to given chat as a gif, with caption or not, using base64
+   * @category Chat
    * @param to chat id xxxxx@us.c
    * @param base64 base64 data:video/xxx;base64,xxx
    * @param filename string xxxxx
@@ -464,6 +484,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends contact card to iven chat id
+   * @category Chat
    * @param to Chat id
    * @param contactsId Example: 0000@c.us | [000@c.us, 1111@c.us]
    */
@@ -489,6 +510,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Send a list of contact cards
+   * @category Chat
    * @param to Chat id
    * @param contacts Example: | ['000@c.us', '1111@c.us', {id: '2222@c.us', name: 'Test'}]
    */
@@ -513,6 +535,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Forwards array of messages (could be ids or message objects)
+   * @category Chat
    * @param to Chat id
    * @param messages Array of messages ids to be forwarded
    * @param skipMyMessages
@@ -531,6 +554,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Generates sticker from the provided animated gif image and sends it (Send image as animated sticker)
+   * @category Chat
    *  @param path image path imageBase64 A valid gif image is required. You can also send via http/https (http://www.website.com/img.gif)
    *  @param to chatId '000000000000@c.us'
    */
@@ -582,6 +606,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Generates sticker from given image and sends it (Send Image As Sticker)
+   * @category Chat
    * @param path image path imageBase64 A valid png, jpg and webp image is required. You can also send via http/https (http://www.website.com/img.gif)
    * @param to chatId '000000000000@c.us'
    */
@@ -640,6 +665,7 @@ export class SenderLayer extends ListenerLayer {
   /**
    * TODO: Fix message not being delivered
    * Sends location to given chat id
+   * @category Chat
    * @param to Chat id
    * @param latitude Latitude
    * @param longitude Longitude
@@ -668,6 +694,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sets a chat status to seen. Marks all messages as ack: 3
+   * @category Chat
    * @param chatId chat id: xxxxx@us.c
    */
   public async sendSeen(chatId: string) {
@@ -676,6 +703,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Starts typing ('Typing...' state)
+   * @category Chat
    * @param chatId
    */
   public async startTyping(to: string) {
@@ -684,6 +712,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Stops typing
+   * @category Chat
    * @param to Chat id
    */
   public async stopTyping(to: string) {
@@ -692,7 +721,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends text with tags
-   *
+   * @category Chat
    */
   public async sendMentioned(to: string, message: string, mentioned: string[]) {
     return await this.page.evaluate(
@@ -705,6 +734,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sets the chat state
+   * @category Chat
    * @param chatState
    * @param chatId
    */

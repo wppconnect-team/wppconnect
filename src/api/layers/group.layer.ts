@@ -29,6 +29,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Removes the host device from the group
+   * @category Group
    * @param groupId group id
    */
   public async leaveGroup(groupId: string) {
@@ -37,6 +38,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Retrieves group members as [Id] objects
+   * @category Group
    * @param groupId group id
    */
   public async getGroupMembersIds(groupId: string): Promise<Id[]> {
@@ -48,6 +50,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Returns group members [Contact] objects
+   * @category Group
    * @param groupId
    */
   public async getGroupMembers(groupId: string) {
@@ -60,6 +63,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Generates group-invite link
+   * @category Group
    * @param chatId
    * @returns Invitation link
    */
@@ -71,6 +75,7 @@ export class GroupLayer extends RetrieverLayer {
   }
   /**
    * Generates group-invite link
+   * @category Group
    * @param inviteCode
    * @returns Invite code from group link. Example: CMJYfPFqRyE2GxrnkldYED
    */
@@ -87,6 +92,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Creates a new chat group
+   * @category Group
    * @param groupName Group name
    * @param contacts Contacts that should be added.
    */
@@ -99,6 +105,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Removes participant from group
+   * @category Group
    * @param groupId Chat id ('0000000000-00000000@g.us')
    * @param participantId Participant id'000000000000@c.us'
    */
@@ -115,6 +122,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Adds participant to Group
+   * @category Group
    * @param groupId Chat id ('0000000000-00000000@g.us')
    * @param participantId Participant id'000000000000@c.us'
    */
@@ -131,6 +139,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Promotes participant as Admin in given group
+   * @category Group
    * @param groupId Chat id ('0000000000-00000000@g.us')
    * @param participantId Participant id'000000000000@c.us'
    */
@@ -147,6 +156,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Demotes admin privileges of participant
+   * @category Group
    * @param groupId Chat id ('0000000000-00000000@g.us')
    * @param participantId Participant id'000000000000@c.us'
    */
@@ -163,6 +173,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Retrieves group admins
+   * @category Group
    * @param chatId Group/Chat id ('0000000000-00000000@g.us')
    */
   public async getGroupAdmins(chatId: string) {
@@ -173,6 +184,7 @@ export class GroupLayer extends RetrieverLayer {
   }
   /**
    * Join a group with invite code
+   * @category Group
    * @param inviteCode
    */
   public async joinGroup(inviteCode: string) {
@@ -188,6 +200,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Set group description (if allowed)
+   * @category Group
    * @param groupId Group ID ('000000-000000@g.us')
    * @param description New group description
    * @returns empty object
@@ -203,6 +216,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Set group subject (if allowed)
+   * @category Group
    * @param groupId Group ID ('000000-000000@g.us')
    * @param title New group subject
    * @returns empty object
@@ -217,6 +231,7 @@ export class GroupLayer extends RetrieverLayer {
 
   /**
    * Enable or disable group properties, see {@link GroupProperty for details}
+   * @category Group
    * @param groupId Group ID ('000000-000000@g.us')
    * @param property
    * @param value true or false

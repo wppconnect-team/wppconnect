@@ -31,6 +31,7 @@ export class ProfileLayer extends HostLayer {
   }
 
   /**
+   * @category Chat
    * @param contactsId Example: 0000@c.us | [000@c.us, 1111@c.us]
    * @param time duration of silence
    * @param type kind of silence "hours" "minutes" "year"
@@ -54,6 +55,7 @@ export class ProfileLayer extends HostLayer {
 
   /**
    * Change the theme
+   * @category Host
    * @param string types "dark" or "light"
    */
   public setTheme(type: string) {
@@ -62,6 +64,7 @@ export class ProfileLayer extends HostLayer {
 
   /**
    * Sets current user profile status
+   * @category Profile
    * @param status
    */
   public async setProfileStatus(status: string) {
@@ -75,6 +78,7 @@ export class ProfileLayer extends HostLayer {
 
   /**
    * Sets the user's current profile photo
+   * @category Profile
    * @param name
    */
   public async setProfilePic(path: string, to?: string) {
@@ -116,6 +120,7 @@ export class ProfileLayer extends HostLayer {
 
   /**
    * Sets current user profile name
+   * @category Profile
    * @param name
    */
   public async setProfileName(name: string) {
