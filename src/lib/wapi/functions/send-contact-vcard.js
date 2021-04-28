@@ -26,6 +26,7 @@ export async function sendContactVcard(chatId, contactId, name) {
     // Use defined name if exists
     if (name) {
       contact.name = name;
+      Object.defineProperty(contact, 'formattedName', { value: name });
     }
 
     var bod = await window.Store.Vcard.vcardFromContactModel(contact);
