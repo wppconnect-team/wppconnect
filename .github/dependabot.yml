@@ -1,6 +1,42 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "daily"
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: husky
+    versions:
+    - ">= 5.a, < 6"
+  - dependency-name: puppeteer
+    versions:
+    - ">= 8.a, < 9"
+  - dependency-name: "@types/node"
+    versions:
+    - ">= 15.a, < 16"
+  - dependency-name: ts-loader
+    versions:
+    - 9.0.0
+  - dependency-name: webpack
+    versions:
+    - 5.25.0
+    - 5.34.0
+  - dependency-name: "@typescript-eslint/parser"
+    versions:
+    - 4.16.1
+  - dependency-name: "@typescript-eslint/eslint-plugin"
+    versions:
+    - 4.16.1
+  - dependency-name: eslint
+    versions:
+    - 7.21.0
+  - dependency-name: eslint-config-prettier
+    versions:
+    - 8.1.0
+  - dependency-name: rxjs
+    versions:
+    - 6.6.6
+  - dependency-name: puppeteer
+    versions:
+    - 7.1.0
