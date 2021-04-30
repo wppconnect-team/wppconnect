@@ -16,8 +16,11 @@
  */
 
 import * as ChromeLauncher from 'chrome-launcher';
+import * as os from 'os';
 import * as path from 'path';
+import * as rimraf from 'rimraf';
 import axios from 'axios';
+import { addExitCallback } from 'catch-exit';
 import { Browser, BrowserContext, Page } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 import { CreateConfig } from '../config/create-config';
@@ -117,6 +120,31 @@ export async function initBrowser(
         : [...puppeteerConfig.chromiumArgs],
       ...options.puppeteerOptions,
     });
+
+    // Register an exit callback to remove user-data-dir
+    try {
+      const arg = browser
+        .process()
+        .spawnargs.find((s: string) => s.startsWith('--user-data-dir='));
+
+      if (arg) {
+        const tmpUserDataDir = arg.split('=')[1];
+
+        // Only if path is in TMP directory
+        if (
+          path.relative(os.tmpdir(), tmpUserDataDir).startsWith('puppeteer')
+        ) {
+          addExitCallback((signal) => {
+            // Remove only on exit signal
+            if (signal === 'exit') {
+              try {
+                rimraf.sync(tmpUserDataDir);
+              } catch (error) {}
+            }
+          });
+        }
+      }
+    } catch (error) {}
   }
 
   return browser;
