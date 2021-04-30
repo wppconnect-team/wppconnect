@@ -1,3 +1,9 @@
+## [1.3.4](https://github.com/wppconnect-team/wppconnect/compare/v1.3.3...v1.3.4) (2021-04-30)
+
+### Bug Fixes
+
+- Fixed deletion of tmp chrome user data dir on exit ([ce767b5](https://github.com/wppconnect-team/wppconnect/commit/ce767b54caae473db14e6be05c95133c4fb73c00))
+
 ## [1.3.3](https://github.com/wppconnect-team/wppconnect/compare/v1.3.2...v1.3.3) (2021-04-28)
 
 ## [1.3.2](https://github.com/wppconnect-team/wppconnect/compare/v1.3.1...v1.3.2) (2021-04-28)
