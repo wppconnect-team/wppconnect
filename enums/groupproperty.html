@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MessageId | @wppconnect-team/wppconnect - v1.3.4</title>
+	<title>GroupProperty | @wppconnect-team/wppconnect - v1.3.4</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.3.4">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -63,81 +63,106 @@
 					<a href="../modules.html">@wppconnect-team/wppconnect - v1.3.4</a>
 				</li>
 				<li>
-					<a href="messageid.html">MessageId</a>
+					<a href="groupproperty.html">GroupProperty</a>
 				</li>
 			</ul>
-			<h1>Interface MessageId</h1>
+			<h1>Enumeration GroupProperty</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">MessageId</span>
-					</li>
-				</ul>
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Group properties</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="messageid.html#_serialized" class="tsd-kind-icon">_serialized</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="messageid.html#fromme" class="tsd-kind-icon">from<wbr>Me</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="messageid.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="messageid.html#remote" class="tsd-kind-icon">remote</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="groupproperty.html#announcement" class="tsd-kind-icon">ANNOUNCEMENT</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="groupproperty.html#ephemeral" class="tsd-kind-icon">EPHEMERAL</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="groupproperty.html#no_frequently_forwarded" class="tsd-kind-icon">NO_<wbr>FREQUENTLY_<wbr>FORWARDED</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="groupproperty.html#restrict" class="tsd-kind-icon">RESTRICT</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="_serialized" class="tsd-anchor"></a>
-					<h3>_serialized</h3>
-					<div class="tsd-signature tsd-kind-icon">_serialized<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="announcement" class="tsd-anchor"></a>
+					<h3>ANNOUNCEMENT</h3>
+					<div class="tsd-signature tsd-kind-icon">ANNOUNCEMENT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;announcement&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/6aa6b4b/src/api/model/message-id.ts#L24">api/model/message-id.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/6aa6b4b/src/api/model/enum/group-property.ts#L27">api/model/enum/group-property.ts:27</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Define how can send message in the group
+								<code>true</code> only admins
+							<code>false</code> everyone</p>
+						</div>
+					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="fromme" class="tsd-anchor"></a>
-					<h3>from<wbr>Me</h3>
-					<div class="tsd-signature tsd-kind-icon">from<wbr>Me<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="ephemeral" class="tsd-anchor"></a>
+					<h3>EPHEMERAL</h3>
+					<div class="tsd-signature tsd-kind-icon">EPHEMERAL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;ephemeral&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/6aa6b4b/src/api/model/message-id.ts#L21">api/model/message-id.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/6aa6b4b/src/api/model/enum/group-property.ts#L46">api/model/enum/group-property.ts:46</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enable or disable temporary messages
+								<code>true</code> to enable
+							<code>false</code> to disable</p>
+						</div>
+					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="id" class="tsd-anchor"></a>
-					<h3>id</h3>
-					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="no_frequently_forwarded" class="tsd-anchor"></a>
+					<h3>NO_<wbr>FREQUENTLY_<wbr>FORWARDED</h3>
+					<div class="tsd-signature tsd-kind-icon">NO_<wbr>FREQUENTLY_<wbr>FORWARDED<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;no_frequently_forwarded&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/6aa6b4b/src/api/model/message-id.ts#L22">api/model/message-id.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/6aa6b4b/src/api/model/enum/group-property.ts#L39">api/model/enum/group-property.ts:39</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Non-Documented</p>
+						</div>
+					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="remote" class="tsd-anchor"></a>
-					<h3>remote</h3>
-					<div class="tsd-signature tsd-kind-icon">remote<span class="tsd-signature-symbol">:</span> <a href="wid.html" class="tsd-signature-type" data-tsd-kind="Interface">Wid</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="restrict" class="tsd-anchor"></a>
+					<h3>RESTRICT</h3>
+					<div class="tsd-signature tsd-kind-icon">RESTRICT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;restrict&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/6aa6b4b/src/api/model/message-id.ts#L23">api/model/message-id.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/6aa6b4b/src/api/model/enum/group-property.ts#L34">api/model/enum/group-property.ts:34</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Define how can edit the group data
+								<code>true</code> only admins
+							<code>false</code> everyone</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -170,127 +195,127 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
-						<a href="../enums/acktype.html" class="tsd-kind-icon">Ack<wbr>Type</a>
+						<a href="acktype.html" class="tsd-kind-icon">Ack<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-enum">
-						<a href="../enums/chatstate.html" class="tsd-kind-icon">Chat<wbr>State</a>
+						<a href="chatstate.html" class="tsd-kind-icon">Chat<wbr>State</a>
 					</li>
 					<li class=" tsd-kind-enum">
-						<a href="../enums/groupchangeevent.html" class="tsd-kind-icon">Group<wbr>Change<wbr>Event</a>
+						<a href="groupchangeevent.html" class="tsd-kind-icon">Group<wbr>Change<wbr>Event</a>
 					</li>
 					<li class=" tsd-kind-enum">
-						<a href="../enums/groupnotificationtype.html" class="tsd-kind-icon">Group<wbr>Notification<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="../enums/groupproperty.html" class="tsd-kind-icon">Group<wbr>Property</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="../enums/interfacemode.html" class="tsd-kind-icon">Interface<wbr>Mode</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="../enums/interfacestate.html" class="tsd-kind-icon">Interface<wbr>State</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="../enums/mediatype.html" class="tsd-kind-icon">Media<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="../enums/messagetype.html" class="tsd-kind-icon">Message<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="../enums/socketstate.html" class="tsd-kind-icon">Socket<wbr>State</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="../enums/socketstream.html" class="tsd-kind-icon">Socket<wbr>Stream</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="../enums/statusfind.html" class="tsd-kind-icon">Status<wbr>Find</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/whatsapp.html" class="tsd-kind-icon">Whatsapp</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="ack.html" class="tsd-kind-icon">Ack</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="chat.html" class="tsd-kind-icon">Chat</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="contact.html" class="tsd-kind-icon">Contact</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="contactstatus.html" class="tsd-kind-icon">Contact<wbr>Status</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="createconfig.html" class="tsd-kind-icon">Create<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="createoptions.html" class="tsd-kind-icon">Create<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="groupcreation.html" class="tsd-kind-icon">Group<wbr>Creation</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="groupmetadata.html" class="tsd-kind-icon">Group<wbr>Metadata</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="hostdevice.html" class="tsd-kind-icon">Host<wbr>Device</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="id.html" class="tsd-kind-icon">Id</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="livelocation.html" class="tsd-kind-icon">Live<wbr>Location</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="message.html" class="tsd-kind-icon">Message</a>
+						<a href="groupnotificationtype.html" class="tsd-kind-icon">Group<wbr>Notification<wbr>Type</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="messageid.html" class="tsd-kind-icon">Message<wbr>Id</a>
+					<li class="current tsd-kind-enum">
+						<a href="groupproperty.html" class="tsd-kind-icon">Group<wbr>Property</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="messageid.html#_serialized" class="tsd-kind-icon">_serialized</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="groupproperty.html#announcement" class="tsd-kind-icon">ANNOUNCEMENT</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="messageid.html#fromme" class="tsd-kind-icon">from<wbr>Me</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="groupproperty.html#ephemeral" class="tsd-kind-icon">EPHEMERAL</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="messageid.html#id" class="tsd-kind-icon">id</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="groupproperty.html#no_frequently_forwarded" class="tsd-kind-icon">NO_<wbr>FREQUENTLY_<wbr>FORWARDED</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="messageid.html#remote" class="tsd-kind-icon">remote</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="groupproperty.html#restrict" class="tsd-kind-icon">RESTRICT</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="partialmessage.html" class="tsd-kind-icon">Partial<wbr>Message</a>
+					<li class=" tsd-kind-enum">
+						<a href="interfacemode.html" class="tsd-kind-icon">Interface<wbr>Mode</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="interfacestate.html" class="tsd-kind-icon">Interface<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="mediatype.html" class="tsd-kind-icon">Media<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="messagetype.html" class="tsd-kind-icon">Message<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="socketstate.html" class="tsd-kind-icon">Socket<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="socketstream.html" class="tsd-kind-icon">Socket<wbr>Stream</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="statusfind.html" class="tsd-kind-icon">Status<wbr>Find</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/whatsapp.html" class="tsd-kind-icon">Whatsapp</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="participantevent.html" class="tsd-kind-icon">Participant<wbr>Event</a>
+						<a href="../interfaces/ack.html" class="tsd-kind-icon">Ack</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="profilepicthumbobj.html" class="tsd-kind-icon">Profile<wbr>Pic<wbr>Thumb<wbr>Obj</a>
+						<a href="../interfaces/chat.html" class="tsd-kind-icon">Chat</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="scoperesult.html" class="tsd-kind-icon">Scope<wbr>Result</a>
+						<a href="../interfaces/contact.html" class="tsd-kind-icon">Contact</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="sendfileresult.html" class="tsd-kind-icon">Send<wbr>File<wbr>Result</a>
+						<a href="../interfaces/contactstatus.html" class="tsd-kind-icon">Contact<wbr>Status</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="sendlinkresult.html" class="tsd-kind-icon">Send<wbr>Link<wbr>Result</a>
+						<a href="../interfaces/createconfig.html" class="tsd-kind-icon">Create<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="sendstickerresult.html" class="tsd-kind-icon">Send<wbr>Sticker<wbr>Result</a>
+						<a href="../interfaces/createoptions.html" class="tsd-kind-icon">Create<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="whatsappprofile.html" class="tsd-kind-icon">Whatsapp<wbr>Profile</a>
+						<a href="../interfaces/groupcreation.html" class="tsd-kind-icon">Group<wbr>Creation</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="wid.html" class="tsd-kind-icon">Wid</a>
+						<a href="../interfaces/groupmetadata.html" class="tsd-kind-icon">Group<wbr>Metadata</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/hostdevice.html" class="tsd-kind-icon">Host<wbr>Device</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/id.html" class="tsd-kind-icon">Id</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/livelocation.html" class="tsd-kind-icon">Live<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/message.html" class="tsd-kind-icon">Message</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/messageid.html" class="tsd-kind-icon">Message<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/partialmessage.html" class="tsd-kind-icon">Partial<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/participantevent.html" class="tsd-kind-icon">Participant<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/profilepicthumbobj.html" class="tsd-kind-icon">Profile<wbr>Pic<wbr>Thumb<wbr>Obj</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/scoperesult.html" class="tsd-kind-icon">Scope<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/sendfileresult.html" class="tsd-kind-icon">Send<wbr>File<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/sendlinkresult.html" class="tsd-kind-icon">Send<wbr>Link<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/sendstickerresult.html" class="tsd-kind-icon">Send<wbr>Sticker<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/whatsappprofile.html" class="tsd-kind-icon">Whatsapp<wbr>Profile</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/wid.html" class="tsd-kind-icon">Wid</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#catchqrcallback" class="tsd-kind-icon">CatchQRCallback</a>
