@@ -442,23 +442,44 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
-   * Sends a video to given chat as a gif, with caption or not, using base64
+   * Sends a video to given chat as a gif, with caption or not
    * @category Chat
-   * @param to chat id xxxxx@us.c
-   * @param base64 base64 data:video/xxx;base64,xxx
-   * @param filename string xxxxx
-   * @param caption string xxxxx
+   * @param to Chat id
+   * @param filePath File path
+   * @param filename
+   * @param caption
    */
   public async sendVideoAsGif(
     to: string,
-    path: string,
-    filename: string,
-    caption: string
+    filePath: string,
+    filename?: string,
+    caption?: string
   ) {
-    const base64 = await fileToBase64(path);
-    if (base64) {
-      return this.sendVideoAsGifFromBase64(to, base64, filename, caption);
-    }
+    return new Promise(async (resolve, reject) => {
+      let base64 = await downloadFileToBase64(filePath),
+        obj: { erro: boolean; to: string; text: string };
+
+      if (!base64) {
+        base64 = await fileToBase64(filePath);
+      }
+
+      if (!base64) {
+        obj = {
+          erro: true,
+          to: to,
+          text: 'No such file or directory, open "' + filePath + '"',
+        };
+        return reject(obj);
+      }
+
+      if (!filename) {
+        filename = path.basename(filePath);
+      }
+
+      this.sendVideoAsGifFromBase64(to, base64, filename, caption)
+        .then(resolve)
+        .catch(reject);
+    });
   }
 
   /**
