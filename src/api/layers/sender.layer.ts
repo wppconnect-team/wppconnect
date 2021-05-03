@@ -18,6 +18,7 @@
 import * as path from 'path';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
+import { convertToMP4GIF } from '../../utils/ffmpeg';
 import {
   base64MimeType,
   downloadFileToBase64,
@@ -472,16 +473,74 @@ export class SenderLayer extends ListenerLayer {
     to: string,
     base64: string,
     filename: string,
-    caption: string
+    caption?: string
   ) {
     return await this.page.evaluate(
-      ({ to, base64, filename, caption }) => {
-        WAPI.sendVideoAsGif(base64, to, filename, caption);
-      },
+      ({ to, base64, filename, caption }) =>
+        WAPI.sendVideoAsGif(base64, to, filename, caption),
       { to, base64, filename, caption }
     );
   }
 
+  /**
+   * Sends a video to given chat as a gif, with caption or not, using base64
+   * @category Chat
+   * @param to Chat id
+   * @param filePath File path
+   * @param filename
+   * @param caption
+   */
+  public async sendGif(
+    to: string,
+    filePath: string,
+    filename?: string,
+    caption?: string
+  ) {
+    return new Promise(async (resolve, reject) => {
+      let base64 = await downloadFileToBase64(filePath),
+        obj: { erro: boolean; to: string; text: string };
+
+      if (!base64) {
+        base64 = await fileToBase64(filePath);
+      }
+
+      if (!base64) {
+        obj = {
+          erro: true,
+          to: to,
+          text: 'No such file or directory, open "' + filePath + '"',
+        };
+        return reject(obj);
+      }
+
+      if (!filename) {
+        filename = path.basename(filePath);
+      }
+
+      this.sendGifFromBase64(to, base64, filename, caption)
+        .then(resolve)
+        .catch(reject);
+    });
+  }
+
+  /**
+   * Sends a video to given chat as a gif, with caption or not, using base64
+   * @category Chat
+   * @param to chat id xxxxx@us.c
+   * @param base64 base64 data:video/xxx;base64,xxx
+   * @param filename string xxxxx
+   * @param caption string xxxxx
+   */
+  public async sendGifFromBase64(
+    to: string,
+    base64: string,
+    filename: string,
+    caption?: string
+  ) {
+    base64 = await convertToMP4GIF(base64);
+
+    return await this.sendVideoAsGifFromBase64(to, base64, filename, caption);
+  }
   /**
    * Sends contact card to iven chat id
    * @category Chat
