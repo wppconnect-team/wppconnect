@@ -40,7 +40,6 @@ export async function sendVideoAsGif(
     var media = mediaCollection.models[0];
     media.mediaPrep._mediaData.isGif = true;
     media.mediaPrep._mediaData.gifAttribution = 1;
-    media.mediaPrep.sendToChat(chat, { caption: caption });
 
     var result = (await media.sendToChat(chat, { caption: caption })) || '';
     var m = { filename: filename, text: caption },

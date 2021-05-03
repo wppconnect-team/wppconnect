@@ -20,7 +20,6 @@ let pong = true;
 
 async function sendPing() {
   return window.WAPI.waitForStore(['State', 'Stream'], () => {
-    console.log(window.Store.Stream.mode, window.Store.State.default.state);
     // Check only if the interface is in CHAT and not disconnected
     if (
       window.Store.Stream.mode !== 'MAIN' ||
