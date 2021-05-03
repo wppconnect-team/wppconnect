@@ -1,3 +1,14 @@
+## [1.3.5](https://github.com/wppconnect-team/wppconnect/compare/v1.3.3...v1.3.5) (2021-05-03)
+
+### Bug Fixes
+
+- Fixed deletion of tmp chrome user data dir on exit ([8586505](https://github.com/wppconnect-team/wppconnect/commit/85865059810ba9388f172c2ff3b681bae6a3b420))
+- Fixed sendVideoAsGif from URL ([0422a5b](https://github.com/wppconnect-team/wppconnect/commit/0422a5bf7ba94c8d5255592fbc6b5a959ca8ba7d))
+
+### Features
+
+- Added sendGif method to send GIF in the chat ([#112](https://github.com/wppconnect-team/wppconnect/issues/112)) ([4ee590c](https://github.com/wppconnect-team/wppconnect/commit/4ee590c1d0c07bec7d5789deb60f693e0a524192))
+
 ## [1.3.4](https://github.com/wppconnect-team/wppconnect/compare/v1.3.3...v1.3.4) (2021-04-30)
 
 ### Bug Fixes
