@@ -117,7 +117,7 @@
     "latest-version": "^5.1.0",
     "lookpath": "^1.2.0",
     "mime-types": "^2.1.28",
-    "puppeteer": "^5.5.0",
+    "puppeteer": "^9.0.0",
     "puppeteer-extra": "^3.1.16",
     "puppeteer-extra-plugin-stealth": "^2.6.6",
     "qrcode-terminal": "^0.12.0",
