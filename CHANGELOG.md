@@ -1,3 +1,9 @@
+## [1.3.6](https://github.com/wppconnect-team/wppconnect/compare/v1.3.5...v1.3.6) (2021-05-04)
+
+### Bug Fixes
+
+- Fixed getAllUnreadMessages and getAllNewMessages (fix [#170](https://github.com/wppconnect-team/wppconnect/issues/170)) ([c45314f](https://github.com/wppconnect-team/wppconnect/commit/c45314f25112a93b242ebd5985e5c69aa8008166))
+
 ## [1.3.5](https://github.com/wppconnect-team/wppconnect/compare/v1.3.3...v1.3.5) (2021-05-03)
 
 ### Bug Fixes
