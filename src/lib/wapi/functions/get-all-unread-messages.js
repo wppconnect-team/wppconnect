@@ -23,13 +23,14 @@ import { getAllChatsWithNewMessages } from './get-chats-with-new-messages';
  * TODO: Test this fn, seems incorrect, should not be async
  */
 export const getAllUnreadMessages = async function () {
-  const _partials = JSON.stringify(
-    getAllChatsWithNewMessages()
-      .map((c) => WAPI.getChat(c.id._serialized))
-      .map((c) => c.msgs._models.filter((x) => x.ack === -1))
-      .flatMap((x) => x) || []
+  const queries = getAllChatsWithNewMessages().map((c) =>
+    Store.Msg.findQuery({
+      remote: c.id,
+      count: c.unreadCount - 1,
+    })
   );
 
-  const partials = JSON.parse(_partials);
-  return partials;
+  const chatMessages = await Promise.all(queries);
+
+  return chatMessages.flat().map(WAPI._serializeMessageObj);
 };
