@@ -135,6 +135,7 @@ import {
   addOnAddedToGroup,
   addOnLiveLocation,
   addOnNewAcks,
+  addOnNotificationMessage,
   addOnParticipantsChange,
   addOnStateChange,
   addOnStreamChange,
@@ -566,4 +567,5 @@ if (typeof window.WAPI === 'undefined') {
   addOnAddedToGroup();
   addOnLiveLocation();
   addOnParticipantsChange();
+  addOnNotificationMessage();
 }

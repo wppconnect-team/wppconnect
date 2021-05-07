@@ -17,11 +17,16 @@
 
 import { Chat } from './chat';
 import { Contact } from './contact';
+import { MessageType } from './enum';
 
 export interface Message {
   id: string;
   body: string;
-  type: string;
+  type: MessageType;
+  /**
+   * When type is GP2: {@link GroupNotificationType}
+   */
+  subtype: string;
   t: number;
   notifyName: string;
   from: string;

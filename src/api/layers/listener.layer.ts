@@ -109,6 +109,10 @@ export class ListenerLayer extends ProfileLayer {
           window.WAPI.onInterfaceChange(window['onInterfaceChange']);
           window['onInterfaceChange'].exposed = true;
         }
+        if (!window['onNotificationMessage'].exposed) {
+          window.WAPI.onNotificationMessage(window['onNotificationMessage']);
+          window['onNotificationMessage'].exposed = true;
+        }
       })
       .catch(() => {});
   }
@@ -147,6 +151,16 @@ export class ListenerLayer extends ProfileLayer {
    */
   public onAnyMessage(callback: (message: Message) => void) {
     return this.registerEvent(ExposedFn.OnAnyMessage, callback);
+  }
+
+  /**
+   * @event Listens to all notification messages, like group changes, join, leave
+   * @param to callback
+   * @fires Message
+   * @returns Disposable object to stop the listening
+   */
+  public onNotificationMessage(callback: (message: Message) => void) {
+    return this.registerEvent(ExposedFn.onNotificationMessage, callback);
   }
 
   /**

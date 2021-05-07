@@ -110,6 +110,7 @@ interface WAPI {
   onIncomingCall: (callback: Function) => any;
   onInterfaceChange: (callback: Function) => void;
   onLiveLocation: (chatId: string, callback: Function) => any;
+  onNotificationMessage: (callback: (message: Message) => void) => any;
   onParticipantsChanged: (groupId: string, callback: Function) => any;
   onStateChange: (callback: Function) => void;
   onStreamChange: (callback: Function) => void;
