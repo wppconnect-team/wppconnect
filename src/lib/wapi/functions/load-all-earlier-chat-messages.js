@@ -16,12 +16,26 @@
  */
 
 export async function loadAllEarlierMessages(id, done) {
-  const found = WAPI.getChat(id);
-  while (!found.msgs.msgLoadState.noEarlierMsgs) {
-    console.log('Loading...');
-    await found.loadEarlierMsgs();
+  const chat = WAPI.getChat(id);
+
+  if (!chat) {
+    done && done(false);
+    return false;
   }
-  console.log('done');
+
+  // improve load speed
+  try {
+    await Store.Msg.findQuery({
+      remote: chat.id,
+      count: -1,
+    });
+  } catch (error) {}
+
+  while (!chat.msgs.msgLoadState.noEarlierMsgs) {
+    await chat.loadEarlierMsgs();
+  }
+
+  done && done(true);
   return true;
 }
 
