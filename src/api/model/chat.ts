@@ -28,14 +28,16 @@ export interface Chat {
   t: number;
   unreadCount: number;
   archive: boolean;
-  isReadOnly: boolean;
   muteExpiration: number;
   name: string;
   notSpam: boolean;
   pin: number;
   msgs: null;
   kind: string;
+  isBroadcast: boolean;
   isGroup: boolean;
+  isReadOnly: boolean;
+  isUser: boolean;
   contact: Contact;
   groupMetadata: GroupMetadata;
   presence: Presence;

@@ -29,7 +29,9 @@ export const _serializeChatObj = (obj) => {
   }
   return Object.assign(window.WAPI._serializeRawObj(obj), {
     kind: obj.kind,
+    isBroadcast: obj.isBroadcast,
     isGroup: obj.isGroup,
+    isUser: obj.isUser,
     contact: obj['contact']
       ? window.WAPI._serializeContactObj(obj['contact'])
       : null,

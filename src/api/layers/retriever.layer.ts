@@ -142,6 +142,18 @@ export class RetrieverLayer extends SenderLayer {
   }
 
   /**
+   * Retrieve all broadcast list
+   * @category Group
+   * @returns array of broadcast list
+   */
+  public async getAllBroadcastList() {
+    const chats = await this.page.evaluate(() => WAPI.getAllChats());
+    return chats.filter(
+      (chat) => chat.isBroadcast && chat.id._serialized !== 'status@broadcast'
+    );
+  }
+
+  /**
    * Retrieves contact detail object of given contact id
    * @category Contact
    * @param contactId
