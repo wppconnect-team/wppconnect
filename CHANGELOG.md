@@ -1,3 +1,16 @@
+# [1.4.0](https://github.com/wppconnect-team/wppconnect/compare/v1.3.6...v1.4.0) (2021-05-08)
+
+### Bug Fixes
+
+- Fixed getAllMessagesInChat function when chat not found ([2760f68](https://github.com/wppconnect-team/wppconnect/commit/2760f68e2347f4ec9b664315c4a1a89371760aab))
+- Fixed onParticipantsChanged function (fix [#171](https://github.com/wppconnect-team/wppconnect/issues/171)) ([08975a0](https://github.com/wppconnect-team/wppconnect/commit/08975a0657eaed1e4dfc1673003ffac9c657c87f))
+- Improved speed of loadAndGetAllMessagesInChat function (fix [#166](https://github.com/wppconnect-team/wppconnect/issues/166)) ([7f1348a](https://github.com/wppconnect-team/wppconnect/commit/7f1348ac75756822c9356ecc2fc8d793a84f0e30))
+
+### Features
+
+- Added getAllBroadcastList function (close [#184](https://github.com/wppconnect-team/wppconnect/issues/184)) ([351be03](https://github.com/wppconnect-team/wppconnect/commit/351be03ba4801566753e8856ee3940fb362e202e))
+- Added onNotificationMessage function for notif. msg. ([#171](https://github.com/wppconnect-team/wppconnect/issues/171)) ([32c395b](https://github.com/wppconnect-team/wppconnect/commit/32c395b2f936b9b9d259ca43acaa44c02d455bb6))
+
 ## [1.3.6](https://github.com/wppconnect-team/wppconnect/compare/v1.3.5...v1.3.6) (2021-05-04)
 
 ### Bug Fixes
