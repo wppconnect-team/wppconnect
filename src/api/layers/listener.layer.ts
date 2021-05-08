@@ -20,7 +20,7 @@ import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { ExposedFn } from '../helpers/exposed.enum';
 import { Ack, Chat, LiveLocation, Message, ParticipantEvent } from '../model';
-import { SocketState, SocketStream } from '../model/enum';
+import { MessageType, SocketState, SocketStream } from '../model/enum';
 import { InterfaceMode } from '../model/enum/interface-mode';
 import { InterfaceState } from '../model/enum/interface-state';
 import { ProfileLayer } from './profile.layer';
@@ -229,29 +229,54 @@ export class ListenerLayer extends ProfileLayer {
 
   /**
    * @event Listens to participants changed
+   * @param to callback
+   * @returns Stream of ParticipantEvent
+   */
+  public onParticipantsChanged(
+    callback: (participantChangedEvent: ParticipantEvent) => void
+  ): { dispose: () => void };
+  /**
+   * @event Listens to participants changed
    * @param to group id: xxxxx-yyyy@us.c
    * @param to callback
    * @returns Stream of ParticipantEvent
    */
-  public async onParticipantsChanged(
+  public onParticipantsChanged(
     groupId: string,
-    fn: (participantChangedEvent: ParticipantEvent) => void
-  ) {
-    const method =
-      'onParticipantsChanged_' + groupId.replace('_', '').replace('_', '');
-    return this.page
-      .exposeFunction(method, (participantChangedEvent: ParticipantEvent) =>
-        fn(participantChangedEvent)
-      )
-      .then((_) =>
-        this.page.evaluate(
-          ({ groupId, method }) => {
-            //@ts-ignore
-            WAPI.onParticipantsChanged(groupId, window[method]);
-          },
-          { groupId, method }
-        )
-      );
+    callback: (participantChangedEvent: ParticipantEvent) => void
+  ): { dispose: () => void };
+  public onParticipantsChanged(
+    groupId: any,
+    callback?: (participantChangedEvent: ParticipantEvent) => void
+  ): { dispose: () => void } {
+    if (typeof groupId === 'function') {
+      callback = groupId;
+      groupId = null;
+    }
+
+    const subtypeEvents = ['invite', 'add', 'remove', 'leave'];
+
+    return this.registerEvent(
+      ExposedFn.onNotificationMessage,
+      (message: Message) => {
+        // Only group events
+        if (
+          message.type !== MessageType.GP2 ||
+          !subtypeEvents.includes(message.subtype)
+        ) {
+          return;
+        }
+        if (groupId && groupId !== message.id) {
+          return;
+        }
+        callback({
+          by: message.from,
+          groupId: message.chatId,
+          action: message.subtype as any,
+          who: message.recipients,
+        });
+      }
+    );
   }
 
   /**

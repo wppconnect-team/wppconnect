@@ -16,6 +16,8 @@
  */
 
 export enum GroupChangeEvent {
-  Remove = 'remove',
   Add = 'add',
+  Inivite = 'invite',
+  Leave = 'leave',
+  Remove = 'remove',
 }

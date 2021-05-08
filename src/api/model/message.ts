@@ -67,6 +67,7 @@ export interface Message {
   chatId: string;
   quotedMsgObj: null;
   mediaData: MediaData;
+  recipients?: string[];
 }
 
 export interface MediaData {
