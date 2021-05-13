@@ -92,7 +92,7 @@
     "husky": "^6.0.0",
     "license-check-and-add": "^4.0.2",
     "mocha": "^8.3.0",
-    "prettier": "^2.2.1",
+    "prettier": "^2.3.0",
     "pretty-quick": "^3.1.0",
     "release-it": "^14.4.1",
     "shx": "^0.3.3",
