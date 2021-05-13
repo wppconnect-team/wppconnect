@@ -15,7 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export async function clearChat(id, keepStarred = true) {
+export async function clearChat(id, keepStarred) {
   if (typeof keepStarred === 'undefined') {
     keepStarred = true;
   }

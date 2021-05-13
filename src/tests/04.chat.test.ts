@@ -31,6 +31,8 @@ describeAuthenticatedTest('Chat functions', function (getClient) {
 
     assert.ok(msgs2.length > msgs1.length);
 
+    await sleep(2000);
+
     await client.clearChat(testUserId, true);
 
     await sleep(2000);
