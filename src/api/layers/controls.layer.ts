@@ -124,9 +124,8 @@ export class ControlsLayer extends UILayer {
    */
   public async clearChat(chatId: string, keepStarred = true) {
     return this.page.evaluate(
-      (chatId, keepStarred) => WAPI.clearChat(chatId, keepStarred),
-      chatId,
-      keepStarred
+      ({ chatId, keepStarred }) => WAPI.clearChat(chatId, keepStarred),
+      { chatId, keepStarred }
     );
   }
 

@@ -16,7 +16,6 @@
  */
 import * as assert from 'assert';
 import { describeAuthenticatedTest, testUserId } from './common';
-import * as wppconnect from '../';
 
 describeAuthenticatedTest('Basic functions', function (getClient) {
   it('getAllChats', function (done) {

@@ -47,7 +47,7 @@ export function describeAuthenticatedTest(
       });
       const authenticated = await client.waitForLogin().catch(() => false);
 
-      if (authenticated) {
+      if (!authenticated) {
         console.warn(
           'Please, set create a authenticated session for "test-authenticated".'
         );
