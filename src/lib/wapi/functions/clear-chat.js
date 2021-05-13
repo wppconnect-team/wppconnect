@@ -15,6 +15,9 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export async function clearChat(id) {
-  return await Store.ChatUtil.sendClear(Store.Chat.get(id), true);
+export async function clearChat(id, keepStarred = true) {
+  if (typeof keepStarred === 'undefined') {
+    keepStarred = true;
+  }
+  return await Store.ChatUtil.sendClear(Store.Chat.get(id), keepStarred);
 }

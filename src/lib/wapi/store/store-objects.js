@@ -38,7 +38,8 @@ export const storeObjects = [
   },
   {
     id: 'ChatUtil',
-    conditions: (module) => (module.sendClear ? module : null),
+    conditions: (module) =>
+      module.sendClear && module.clearChat ? module : null,
   },
   {
     id: 'GroupInvite',

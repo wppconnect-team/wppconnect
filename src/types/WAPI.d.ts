@@ -38,7 +38,7 @@ interface WAPI {
   arrayBufferToBase64: (buffer: ArrayBuffer) => string;
   blockContact: (messageId: string) => boolean;
   checkNumberStatus: (contactId: string) => Promise<WhatsappProfile>;
-  clearChat: (chatId: string) => void;
+  clearChat: (chatId: string, keepStarred: boolean) => void;
   createGroup: (
     groupName: string,
     contactId: string | string[]

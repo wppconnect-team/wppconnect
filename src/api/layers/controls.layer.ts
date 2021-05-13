@@ -119,10 +119,15 @@ export class ControlsLayer extends UILayer {
    * Deletes all messages of given chat
    * @category Chat
    * @param chatId
+   * @param keepStarred Keep starred messages
    * @returns boolean
    */
-  public async clearChat(chatId: string) {
-    return this.page.evaluate((chatId) => WAPI.clearChat(chatId), chatId);
+  public async clearChat(chatId: string, keepStarred = true) {
+    return this.page.evaluate(
+      (chatId, keepStarred) => WAPI.clearChat(chatId, keepStarred),
+      chatId,
+      keepStarred
+    );
   }
 
   /**
