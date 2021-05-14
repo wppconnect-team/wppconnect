@@ -35,5 +35,9 @@ export async function forwardMessages(to, messages, skipMyMessages) {
 
   // const userId = new window.Store.UserConstructor(to);
   const conversation = window.Store.Chat.get(to);
-  return conversation.forwardMessages(toForward);
+  await conversation.forwardMessages(toForward);
+
+  const msgs = conversation.msgs.models.slice(messages.length * -1);
+
+  return msgs.map((m) => m.id._serialized);
 }

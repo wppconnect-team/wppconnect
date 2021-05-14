@@ -40,4 +40,56 @@ describeAuthenticatedTest('Chat functions', function (getClient) {
     const msgs3 = await client.getAllMessagesInChat(testUserId, true, false);
     assert.strictEqual(msgs3.length, 0);
   });
+
+  it('forward a single message', async function () {
+    const client = getClient();
+
+    const host = await client.getHostDevice();
+
+    assert.ok(host);
+
+    const msg = await client.sendText(
+      host.wid._serialized,
+      'Message to forward'
+    );
+
+    const r = await client.forwardMessages(testUserId, msg.id, false);
+
+    assert.strictEqual(r.length, 1);
+
+    const fmsg = await client.getMessageById(r[0]);
+
+    assert.strictEqual(fmsg.body, 'Message to forward');
+  });
+
+  it('forward multiple messages', async function () {
+    const client = getClient();
+
+    const host = await client.getHostDevice();
+
+    assert.ok(host);
+
+    const msg1 = await client.sendText(
+      host.wid._serialized,
+      'Message 1 to forward'
+    );
+    const msg2 = await client.sendText(
+      host.wid._serialized,
+      'Message 2 to forward'
+    );
+
+    const r = await client.forwardMessages(
+      testUserId,
+      [msg1.id, msg2.id],
+      false
+    );
+
+    assert.strictEqual(r.length, 2);
+
+    const fmsg1 = await client.getMessageById(r[0]);
+    const fmsg2 = await client.getMessageById(r[1]);
+
+    assert.strictEqual(fmsg1.body, 'Message 1 to forward');
+    assert.strictEqual(fmsg2.body, 'Message 2 to forward');
+  });
 });

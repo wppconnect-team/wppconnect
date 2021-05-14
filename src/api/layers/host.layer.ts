@@ -32,7 +32,7 @@ import {
 import { sleep } from '../../utils/sleep';
 import { defaultLogger, LogLevel } from '../../utils/logger';
 import { Logger } from 'winston';
-import { CatchQRCallback, StatusFindCallback } from '../model';
+import { CatchQRCallback, HostDevice, StatusFindCallback } from '../model';
 import {
   FileTokenStore,
   isValidSessionToken,
@@ -345,7 +345,7 @@ export class HostLayer {
    * @category Host
    * @returns Current host device details
    */
-  public async getHostDevice() {
+  public async getHostDevice(): Promise<HostDevice> {
     return await this.page.evaluate(() => WAPI.getHost());
   }
 

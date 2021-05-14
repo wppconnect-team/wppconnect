@@ -56,7 +56,7 @@ interface WAPI {
     to: string,
     messages: string | string[],
     skipMyMessages: boolean
-  ) => any;
+  ) => string[];
   getAllChats: () => Chat[];
   getAllChatsWithMessages: (withNewMessageOnly?: boolean) => Chat[];
   getAllChatsWithNewMsg: () => Chat[];

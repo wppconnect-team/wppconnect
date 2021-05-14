@@ -619,12 +619,13 @@ export class SenderLayer extends ListenerLayer {
    * @param to Chat id
    * @param messages Array of messages ids to be forwarded
    * @param skipMyMessages
+   * @returns array of messages ID
    */
   public async forwardMessages(
     to: string,
     messages: string | string[],
     skipMyMessages: boolean
-  ) {
+  ): Promise<string[]> {
     return this.page.evaluate(
       ({ to, messages, skipMyMessages }) =>
         WAPI.forwardMessages(to, messages, skipMyMessages),
