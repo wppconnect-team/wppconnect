@@ -1,3 +1,11 @@
+## [1.4.1](https://github.com/wppconnect-team/wppconnect/compare/v1.4.0...v1.4.1) (2021-05-14)
+
+### Bug Fixes
+
+- Fixed archiveChat function ([#194](https://github.com/wppconnect-team/wppconnect/issues/194)) ([1ee2bce](https://github.com/wppconnect-team/wppconnect/commit/1ee2bce38841fc4d123c08fc8395639bfada1c41))
+- Fixed clearChat function ([#194](https://github.com/wppconnect-team/wppconnect/issues/194)) ([4ee7a2e](https://github.com/wppconnect-team/wppconnect/commit/4ee7a2ec0c3bb58aab9ae4df4dc0a0c4f682617a))
+- Fixed return of forwardMessages function ([#194](https://github.com/wppconnect-team/wppconnect/issues/194)) ([d81f94b](https://github.com/wppconnect-team/wppconnect/commit/d81f94bc195a559222a07340ab1c1209c6251558))
+
 # [1.4.0](https://github.com/wppconnect-team/wppconnect/compare/v1.3.6...v1.4.0) (2021-05-08)
 
 ### Bug Fixes
