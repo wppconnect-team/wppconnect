@@ -18,7 +18,7 @@
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { SessionToken } from '../../token-store';
-import { WhatsappProfile } from '../model';
+import { Chat, WhatsappProfile } from '../model';
 import { SenderLayer } from './sender.layer';
 
 export class RetrieverLayer extends SenderLayer {
@@ -181,7 +181,7 @@ export class RetrieverLayer extends SenderLayer {
    * @param contactId
    * @returns contact detial as promise
    */
-  public async getChatById(contactId: string) {
+  public async getChatById(contactId: string): Promise<Chat> {
     return this.page.evaluate(
       (contactId) => WAPI.getChatById(contactId),
       contactId

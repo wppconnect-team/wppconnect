@@ -469,9 +469,11 @@ if (typeof window.WAPI === 'undefined') {
    * @return boolean true: worked, false: didnt work (probably already in desired state)
    */
   window.WAPI.archiveChat = async function (id, archive) {
-    return await Store.Archive.setArchive(Store.Chat.get(id), archive)
+    const promise = Store.Archive.setArchive(Store.Chat.get(id), archive)
       .then((_) => true)
       .catch((_) => false);
+
+    return await Promise.resolve(promise);
   };
 
   window.WAPI.takeOver = async function () {

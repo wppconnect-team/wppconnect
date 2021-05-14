@@ -84,7 +84,7 @@ export class ControlsLayer extends UILayer {
    * @param option {boolean} true or false
    * @returns boolean
    */
-  public async archiveChat(chatId: string, option: boolean) {
+  public async archiveChat(chatId: string, option: boolean = true) {
     return this.page.evaluate(
       ({ chatId, option }) => WAPI.archiveChat(chatId, option),
       { chatId, option }

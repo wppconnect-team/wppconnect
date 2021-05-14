@@ -92,4 +92,47 @@ describeAuthenticatedTest('Chat functions', function (getClient) {
     assert.strictEqual(fmsg1.body, 'Message 1 to forward');
     assert.strictEqual(fmsg2.body, 'Message 2 to forward');
   });
+
+  it('archive chat', async function () {
+    const client = getClient();
+
+    // Ensure chat is not archived
+    await client.sendText(testUserId, 'unarchive chat');
+
+    await sleep(1000);
+    let chat = await client.getChatById(testUserId);
+
+    assert.strictEqual(chat.archive, false);
+
+    // ensure the first archive is OK
+    let result = await client.archiveChat(testUserId, true);
+
+    assert.strictEqual(result, true);
+
+    await sleep(1000);
+    // ensure the second archive is not OK
+    result = await client.archiveChat(testUserId, true);
+
+    assert.strictEqual(result, false);
+
+    await sleep(1000);
+    chat = await client.getChatById(testUserId);
+
+    assert.strictEqual(chat.archive, true);
+
+    // ensure the first unarchive is OK
+    result = await client.archiveChat(testUserId, false);
+
+    assert.strictEqual(result, true);
+
+    await sleep(1000);
+    chat = await client.getChatById(testUserId);
+
+    assert.strictEqual(chat.archive, false);
+
+    // ensure the second unarchive is not OK
+    result = await client.archiveChat(testUserId, false);
+
+    assert.strictEqual(result, false);
+  });
 });
