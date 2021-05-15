@@ -123,7 +123,8 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async clearChat(chatId: string, keepStarred = true) {
-    return this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ chatId, keepStarred }) => WAPI.clearChat(chatId, keepStarred),
       { chatId, keepStarred }
     );
@@ -145,6 +146,23 @@ export class ControlsLayer extends UILayer {
       ({ contactId, messageId, onlyLocal }) =>
         WAPI.deleteMessages(contactId, messageId, onlyLocal),
       { contactId: chatId, messageId, onlyLocal }
+    );
+  }
+
+  /**
+   * Stars message of given message id
+   * @category Chat
+   * @param messagesId The specific message id of the message to be starred
+   * @param star Add or remove star of the message. Defaults to true.
+   */
+  public async starMessage(
+    messagesId: string[] | string,
+    star = true
+  ): Promise<number> {
+    return await evaluateAndReturn(
+      this.page,
+      ({ messagesId, star }) => WAPI.starMessages(messagesId, star),
+      { messagesId, star }
     );
   }
 

@@ -116,3 +116,4 @@ export * from './set-group-description';
 export * from './set-group-property';
 export * from './set-group-subject';
 export * from './set-temporary-messages';
+export * from './star-messages';

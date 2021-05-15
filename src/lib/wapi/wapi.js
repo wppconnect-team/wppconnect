@@ -123,6 +123,7 @@ import {
   setGroupDescription,
   setGroupProperty,
   setTemporaryMessages,
+  starMessages,
 } from './functions';
 import {
   base64ToFile,
@@ -264,6 +265,7 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.markUnseenMessage = markUnseenMessage;
   window.WAPI.sendLinkPreview = sendLinkPreview;
   window.WAPI.sendMessageOptions = sendMessageOptions;
+  window.WAPI.starMessages = starMessages;
 
   //////block functions
   window.WAPI.blockContact = blockContact;

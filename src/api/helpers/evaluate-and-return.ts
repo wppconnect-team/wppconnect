@@ -53,10 +53,6 @@ export async function evaluateAndReturn<T extends EvaluateFn>(
     }
   }
 
-  console.log(functionText);
-
-  // functionText = 'function() {return arguments;}';
-
   const func = new Function(`
       return Promise.resolve(
         (${functionText}).apply(this, arguments)

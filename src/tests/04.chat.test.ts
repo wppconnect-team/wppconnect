@@ -19,26 +19,75 @@ import { sleep } from '../utils/sleep';
 import { describeAuthenticatedTest, testUserId } from './common';
 
 describeAuthenticatedTest('Chat functions', function (getClient) {
-  it('clearChat', async function () {
+  it('star message', async function () {
     const client = getClient();
-    const msgs1 = await client.getAllMessagesInChat(testUserId, true, false);
 
     await client.sendText(testUserId, 'Message 1');
-    await client.sendText(testUserId, 'Message 2');
+    const msg2 = await client.sendText(testUserId, 'Message 2');
     await client.sendText(testUserId, 'Message 3');
 
-    const msgs2 = await client.getAllMessagesInChat(testUserId, true, false);
+    let msg = await client.getMessageById(msg2.id);
+    assert.strictEqual(msg.star, false);
+
+    let result = await client.starMessage(msg2.id, true);
+    assert.strictEqual(result, 1);
+
+    // Star a starred message
+    result = await client.starMessage(msg2.id, true);
+    assert.strictEqual(result, 0);
+
+    msg = await client.getMessageById(msg2.id);
+    assert.strictEqual(msg.star, true);
+
+    result = await client.starMessage(msg2.id, false);
+    assert.strictEqual(result, 1);
+
+    // Unstar a unstarred message
+    result = await client.starMessage(msg2.id, false);
+    assert.strictEqual(result, 0);
+
+    msg = await client.getMessageById(msg2.id);
+    assert.strictEqual(msg.star, false);
+  });
+
+  it('clear chat', async function () {
+    const client = getClient();
+
+    const host = await client.getHostDevice();
+
+    const chatId = host.wid._serialized;
+
+    const msgs1 = await client.getAllMessagesInChat(chatId, true, false);
+
+    await client.sendText(chatId, 'Message 1');
+    const msg2 = await client.sendText(chatId, 'Message 2');
+    await client.sendText(chatId, 'Message 3');
+
+    await sleep(2000);
+
+    await client.starMessage(msg2.id, true);
+
+    await sleep(2000);
+
+    const msgs2 = await client.getAllMessagesInChat(chatId, true, false);
 
     assert.ok(msgs2.length > msgs1.length);
 
     await sleep(2000);
 
-    await client.clearChat(testUserId, true);
+    await client.clearChat(chatId, true);
 
     await sleep(2000);
 
-    const msgs3 = await client.getAllMessagesInChat(testUserId, true, false);
-    assert.strictEqual(msgs3.length, 0);
+    const msgs3 = await client.getAllMessagesInChat(chatId, true, false);
+    assert.strictEqual(msgs3.length, 1);
+
+    await client.clearChat(chatId, false);
+
+    await sleep(2000);
+
+    const msgs4 = await client.getAllMessagesInChat(chatId, true, false);
+    assert.strictEqual(msgs4.length, 0);
   });
 
   it('forward a single message', async function () {

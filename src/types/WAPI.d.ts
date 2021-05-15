@@ -223,6 +223,10 @@ interface WAPI {
   setProfilePic: (path: string, to?: string) => Promise<boolean>;
   setTemporaryMessages: (chatId: string, value: string) => Promise<boolean>;
   setTheme: (theme?: string) => boolean;
+  starMessages: (
+    messagesId: string[] | string,
+    star: boolean
+  ) => Promise<number>;
   startPhoneWatchdog: (interval: number) => void;
   startTyping: (to: string) => void;
   stopPhoneWatchdog: () => void;
