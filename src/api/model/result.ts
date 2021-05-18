@@ -48,3 +48,9 @@ export interface SendLinkResult extends ScopeResult {
   url: string;
   text: string;
 }
+
+export interface SendPttResult extends ScopeResult {
+  type: string;
+  filename: string;
+  text?: string;
+}

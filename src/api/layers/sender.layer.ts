@@ -298,11 +298,11 @@ export class SenderLayer extends ListenerLayer {
     base64: string,
     filename: string,
     caption?: string
-  ) {
-    return this.page.evaluate(
-      ({ to, base64, filename, caption }) => {
-        WAPI.sendPtt(base64, to, filename, caption);
-      },
+  ): Promise<SendFileResult> {
+    return evaluateAndReturn(
+      this.page,
+      ({ to, base64, filename, caption }) =>
+        WAPI.sendPtt(base64, to, filename, caption),
       { to, base64, filename, caption }
     );
   }
@@ -321,7 +321,7 @@ export class SenderLayer extends ListenerLayer {
     filename?: string,
     caption?: string
   ) {
-    return new Promise(async (resolve, reject) => {
+    return new Promise<SendFileResult>(async (resolve, reject) => {
       let base64 = await downloadFileToBase64(filePath, [
           'audio/3gpp',
           'audio/3gpp2',

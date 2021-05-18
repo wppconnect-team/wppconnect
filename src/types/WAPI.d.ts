@@ -26,6 +26,7 @@ import {
   PartialMessage,
   SendFileResult,
   SendLinkResult,
+  SendPttResult,
   SendStickerResult,
   WhatsappProfile,
 } from '../api/model';
@@ -200,7 +201,7 @@ interface WAPI {
     to: string,
     filename: string,
     caption: string
-  ) => any;
+  ) => Promise<SendPttResult>;
   sendVideoAsGif: (
     base64: string,
     to: string,

@@ -26,15 +26,35 @@ import { base64ToFile } from '../helper';
  * @param {string} caption
  * @param {Function} done Optional callback
  */
-export function sendPtt(imgBase64, chatid, filename, caption, done) {
-  const idUser = new Store.WidFactory.createWid(chatid);
-  return Store.Chat.find(idUser).then((chat) => {
+export async function sendPtt(imgBase64, chatid, filename, caption, done) {
+  var chat = await WAPI.sendExist(chatid);
+
+  if (!chat.erro) {
     var mediaBlob = base64ToFile(imgBase64, filename);
-    processFiles(chat, mediaBlob).then((mediaCollection) => {
-      var media = mediaCollection.models[0];
-      media.mediaPrep._mediaData.type = 'ptt';
-      media.mediaPrep.sendToChat(chat, { caption: caption });
-      if (done !== undefined) done(true);
-    });
-  });
+    var mediaCollection = await processFiles(chat, mediaBlob);
+    var media = mediaCollection.models[0];
+    media.mediaPrep._mediaData.type = 'ptt';
+
+    var result = (await media.sendToChat(chat, { caption: caption })) || '';
+
+    if (done !== undefined) done(true);
+
+    var m = {
+        type: 'ptt',
+        filename: filename,
+        text: caption,
+      },
+      To = await WAPI.getchatId(chat.id);
+    if (result === 'success' || result === 'OK') {
+      var obj = WAPI.scope(To, false, result, null);
+      Object.assign(obj, m);
+      return obj;
+    } else {
+      var obj = WAPI.scope(To, true, result, null);
+      Object.assign(obj, m);
+      return obj;
+    }
+  } else {
+    return chat;
+  }
 }
