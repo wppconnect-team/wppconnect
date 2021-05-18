@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SendStickerResult | @wppconnect-team/wppconnect - v1.5.0</title>
+	<title>SendPttResult | @wppconnect-team/wppconnect - v1.5.0</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.5.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -63,10 +63,10 @@
 					<a href="../modules.html">@wppconnect-team/wppconnect - v1.5.0</a>
 				</li>
 				<li>
-					<a href="sendstickerresult.html">SendStickerResult</a>
+					<a href="sendpttresult.html">SendPttResult</a>
 				</li>
 			</ul>
-			<h1>Interface SendStickerResult</h1>
+			<h1>Interface SendPttResult</h1>
 		</div>
 	</div>
 </header>
@@ -80,7 +80,7 @@
 						<a href="scoperesult.html" class="tsd-signature-type" data-tsd-kind="Interface">ScopeResult</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">SendStickerResult</span>
+								<span class="target">SendPttResult</span>
 							</li>
 						</ul>
 					</li>
@@ -93,12 +93,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="sendstickerresult.html#erro" class="tsd-kind-icon">erro</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="sendstickerresult.html#me" class="tsd-kind-icon">me</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="sendstickerresult.html#status" class="tsd-kind-icon">status</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="sendstickerresult.html#text" class="tsd-kind-icon">text</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="sendstickerresult.html#to" class="tsd-kind-icon">to</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="sendstickerresult.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="sendpttresult.html#erro" class="tsd-kind-icon">erro</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="sendpttresult.html#filename" class="tsd-kind-icon">filename</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="sendpttresult.html#me" class="tsd-kind-icon">me</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="sendpttresult.html#status" class="tsd-kind-icon">status</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite"><a href="sendpttresult.html#text" class="tsd-kind-icon">text</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="sendpttresult.html#to" class="tsd-kind-icon">to</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="sendpttresult.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -114,6 +115,16 @@
 						<p>Inherited from <a href="scoperesult.html">ScopeResult</a>.<a href="scoperesult.html#erro">erro</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/result.ts#L30">api/model/result.ts:30</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="filename" class="tsd-anchor"></a>
+					<h3>filename</h3>
+					<div class="tsd-signature tsd-kind-icon">filename<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/result.ts#L54">api/model/result.ts:54</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -139,14 +150,14 @@
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
 					<a name="text" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> text</h3>
 					<div class="tsd-signature tsd-kind-icon">text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="scoperesult.html">ScopeResult</a>.<a href="scoperesult.html#text">text</a></p>
+						<p>Overrides <a href="scoperesult.html">ScopeResult</a>.<a href="scoperesult.html#text">text</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/result.ts#L31">api/model/result.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/result.ts#L55">api/model/result.ts:55</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -167,7 +178,7 @@
 					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/result.ts#L43">api/model/result.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/result.ts#L53">api/model/result.ts:53</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -204,25 +215,28 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="sendstickerresult.html" class="tsd-kind-icon">Send<wbr>Sticker<wbr>Result</a>
+						<a href="sendpttresult.html" class="tsd-kind-icon">Send<wbr>Ptt<wbr>Result</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="sendstickerresult.html#erro" class="tsd-kind-icon">erro</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="sendstickerresult.html#me" class="tsd-kind-icon">me</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="sendstickerresult.html#status" class="tsd-kind-icon">status</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="sendstickerresult.html#text" class="tsd-kind-icon">text</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="sendstickerresult.html#to" class="tsd-kind-icon">to</a>
+								<a href="sendpttresult.html#erro" class="tsd-kind-icon">erro</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="sendstickerresult.html#type" class="tsd-kind-icon">type</a>
+								<a href="sendpttresult.html#filename" class="tsd-kind-icon">filename</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="sendpttresult.html#me" class="tsd-kind-icon">me</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="sendpttresult.html#status" class="tsd-kind-icon">status</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
+								<a href="sendpttresult.html#text" class="tsd-kind-icon">text</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="sendpttresult.html#to" class="tsd-kind-icon">to</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="sendpttresult.html#type" class="tsd-kind-icon">type</a>
 							</li>
 						</ul>
 					</li>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LiveLocation | @wppconnect-team/wppconnect - v1.5.0</title>
+	<title>PresenceEvent | @wppconnect-team/wppconnect - v1.5.0</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.5.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -63,10 +63,10 @@
 					<a href="../modules.html">@wppconnect-team/wppconnect - v1.5.0</a>
 				</li>
 				<li>
-					<a href="livelocation.html">LiveLocation</a>
+					<a href="presenceevent.html">PresenceEvent</a>
 				</li>
 			</ul>
-			<h1>Interface LiveLocation</h1>
+			<h1>Interface PresenceEvent</h1>
 		</div>
 	</div>
 </header>
@@ -77,7 +77,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">LiveLocation</span>
+						<span class="target">PresenceEvent</span>
 					</li>
 				</ul>
 			</section>
@@ -88,13 +88,14 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="livelocation.html#accuracy" class="tsd-kind-icon">accuracy</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="livelocation.html#degrees" class="tsd-kind-icon">degrees</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="livelocation.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="livelocation.html#lastupdated" class="tsd-kind-icon">last<wbr>Updated</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="livelocation.html#lat" class="tsd-kind-icon">lat</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="livelocation.html#lng" class="tsd-kind-icon">lng</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="livelocation.html#speed" class="tsd-kind-icon">speed</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="presenceevent.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="presenceevent.html#iscontact" class="tsd-kind-icon">is<wbr>Contact</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="presenceevent.html#isgroup" class="tsd-kind-icon">is<wbr>Group</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="presenceevent.html#isonline" class="tsd-kind-icon">is<wbr>Online</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="presenceevent.html#isuser" class="tsd-kind-icon">is<wbr>User</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="presenceevent.html#participants" class="tsd-kind-icon">participants</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="presenceevent.html#state" class="tsd-kind-icon">state</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="presenceevent.html#t" class="tsd-kind-icon">t</a></li>
 							</ul>
 						</section>
 					</div>
@@ -103,74 +104,99 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="accuracy" class="tsd-anchor"></a>
-					<h3>accuracy</h3>
-					<div class="tsd-signature tsd-kind-icon">accuracy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/live-location.ts#L24">api/model/live-location.ts:24</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="degrees" class="tsd-anchor"></a>
-					<h3>degrees</h3>
-					<div class="tsd-signature tsd-kind-icon">degrees<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/live-location.ts#L25">api/model/live-location.ts:25</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="id" class="tsd-anchor"></a>
 					<h3>id</h3>
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/live-location.ts#L19">api/model/live-location.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/presence-event.ts#L22">api/model/presence-event.ts:22</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>ID of contact or group</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="iscontact" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> is<wbr>Contact</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Contact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/presence-event.ts#L34">api/model/presence-event.ts:34</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If is an user, check is a contact</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="isgroup" class="tsd-anchor"></a>
+					<h3>is<wbr>Group</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Group<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/presence-event.ts#L24">api/model/presence-event.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="lastupdated" class="tsd-anchor"></a>
-					<h3>last<wbr>Updated</h3>
-					<div class="tsd-signature tsd-kind-icon">last<wbr>Updated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="isonline" class="tsd-anchor"></a>
+					<h3>is<wbr>Online</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Online<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/live-location.ts#L23">api/model/live-location.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/presence-event.ts#L23">api/model/presence-event.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="lat" class="tsd-anchor"></a>
-					<h3>lat</h3>
-					<div class="tsd-signature tsd-kind-icon">lat<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="isuser" class="tsd-anchor"></a>
+					<h3>is<wbr>User</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>User<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/live-location.ts#L20">api/model/live-location.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/presence-event.ts#L25">api/model/presence-event.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="lng" class="tsd-anchor"></a>
-					<h3>lng</h3>
-					<div class="tsd-signature tsd-kind-icon">lng<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="participants" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> participants</h3>
+					<div class="tsd-signature tsd-kind-icon">participants<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>shortName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;available&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;composing&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;recording&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;unavailable&quot;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/live-location.ts#L21">api/model/live-location.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/presence-event.ts#L35">api/model/presence-event.ts:35</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="speed" class="tsd-anchor"></a>
-					<h3>speed</h3>
-					<div class="tsd-signature tsd-kind-icon">speed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="state" class="tsd-anchor"></a>
+					<h3>state</h3>
+					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;available&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;composing&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;recording&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;unavailable&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/live-location.ts#L22">api/model/live-location.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/presence-event.ts#L26">api/model/presence-event.ts:26</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="t" class="tsd-anchor"></a>
+					<h3>t</h3>
+					<div class="tsd-signature tsd-kind-icon">t<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/wppconnect-team/wppconnect/blob/e7b0b16/src/api/model/presence-event.ts#L30">api/model/presence-event.ts:30</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Timestramp of event <code>Date.now()</code></p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -205,28 +231,31 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="livelocation.html" class="tsd-kind-icon">Live<wbr>Location</a>
+						<a href="presenceevent.html" class="tsd-kind-icon">Presence<wbr>Event</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="livelocation.html#accuracy" class="tsd-kind-icon">accuracy</a>
+								<a href="presenceevent.html#id" class="tsd-kind-icon">id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="livelocation.html#degrees" class="tsd-kind-icon">degrees</a>
+								<a href="presenceevent.html#iscontact" class="tsd-kind-icon">is<wbr>Contact</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="livelocation.html#id" class="tsd-kind-icon">id</a>
+								<a href="presenceevent.html#isgroup" class="tsd-kind-icon">is<wbr>Group</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="livelocation.html#lastupdated" class="tsd-kind-icon">last<wbr>Updated</a>
+								<a href="presenceevent.html#isonline" class="tsd-kind-icon">is<wbr>Online</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="livelocation.html#lat" class="tsd-kind-icon">lat</a>
+								<a href="presenceevent.html#isuser" class="tsd-kind-icon">is<wbr>User</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="livelocation.html#lng" class="tsd-kind-icon">lng</a>
+								<a href="presenceevent.html#participants" class="tsd-kind-icon">participants</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="livelocation.html#speed" class="tsd-kind-icon">speed</a>
+								<a href="presenceevent.html#state" class="tsd-kind-icon">state</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="presenceevent.html#t" class="tsd-kind-icon">t</a>
 							</li>
 						</ul>
 					</li>
