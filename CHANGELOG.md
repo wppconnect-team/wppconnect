@@ -1,3 +1,16 @@
+# [1.5.0](https://github.com/wppconnect-team/wppconnect/compare/v1.4.1...v1.5.0) (2021-05-18)
+
+### Bug Fixes
+
+- Fixed sendFile return type ([#208](https://github.com/wppconnect-team/wppconnect/issues/208)) ([67dfad5](https://github.com/wppconnect-team/wppconnect/commit/67dfad5c54c598791dc0ac3a0947d5c339fffe2c))
+- Fixed sendPtt return type (fix [#208](https://github.com/wppconnect-team/wppconnect/issues/208)) ([5b701f7](https://github.com/wppconnect-team/wppconnect/commit/5b701f7834134e51d92cff9a86665bf1bce3abf6))
+- Fixed setChatState function (fix [#188](https://github.com/wppconnect-team/wppconnect/issues/188)) ([3351bf7](https://github.com/wppconnect-team/wppconnect/commit/3351bf797b49732efccc4306aca04f4899e3a32c))
+
+### Features
+
+- Added onPresenceChanged to listen presence change ([4629699](https://github.com/wppconnect-team/wppconnect/commit/46296992602ea12631821d1345e5c6c32a5efd3d))
+- Added starMessage function to star/unstar messages ([b83fcbb](https://github.com/wppconnect-team/wppconnect/commit/b83fcbb6ec67578dcddb936ecb2bee079f5cdd46))
+
 ## [1.4.1](https://github.com/wppconnect-team/wppconnect/compare/v1.4.0...v1.4.1) (2021-05-14)
 
 ### Bug Fixes
