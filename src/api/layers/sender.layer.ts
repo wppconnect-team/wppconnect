@@ -415,7 +415,7 @@ export class SenderLayer extends ListenerLayer {
     filename?: string,
     caption?: string
   ) {
-    return new Promise(async (resolve, reject) => {
+    return new Promise<SendFileResult>(async (resolve, reject) => {
       let base64 = await downloadFileToBase64(filePath),
         obj: { erro: boolean; to: string; text: string };
 
