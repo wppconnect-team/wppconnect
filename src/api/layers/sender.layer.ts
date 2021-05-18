@@ -22,6 +22,7 @@ import { convertToMP4GIF } from '../../utils/ffmpeg';
 import {
   base64MimeType,
   downloadFileToBase64,
+  evaluateAndReturn,
   fileToBase64,
   stickerSelect,
 } from '../helpers';
@@ -820,7 +821,8 @@ export class SenderLayer extends ListenerLayer {
    * @param chatId
    */
   public async setChatState(chatId: string, chatState: ChatState) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ chatState, chatId }) => {
         WAPI.sendChatstate(chatState, chatId);
       },

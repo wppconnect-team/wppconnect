@@ -16,18 +16,31 @@
  */
 
 export async function sendChatstate(state, chatId) {
+  state = parseInt(state, 10);
+
+  const chat = window.Store.Chat.get(chatId);
+
+  if (!chat) {
+    throw {
+      error: true,
+      code: 'chat_not_found',
+      message: 'Chat not found',
+    };
+  }
+
   switch (state) {
-    case '0':
-      await window.Store.ChatStates.sendChatStateComposing(chatId);
+    case 0:
+      window.Store.ChatStates.sendChatStateComposing(chat.id);
       break;
-    case '1':
-      await window.Store.ChatStates.sendChatStateRecording(chatId);
+    case 1:
+      window.Store.ChatStates.sendChatStateRecording(chat.id);
       break;
-    case '2':
-      await window.Store.ChatStates.sendChatStatePaused(chatId);
+    case 2:
+      window.Store.ChatStates.sendChatStatePaused(chat.id);
       break;
     default:
       return false;
   }
+
   return true;
 }
