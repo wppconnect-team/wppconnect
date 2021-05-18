@@ -24,6 +24,7 @@ import {
   Id,
   Message,
   PartialMessage,
+  PresenceEvent,
   SendFileResult,
   SendLinkResult,
   SendPttResult,
@@ -115,6 +116,7 @@ interface WAPI {
   onParticipantsChanged: (groupId: string, callback: Function) => any;
   onStateChange: (callback: Function) => void;
   onStreamChange: (callback: Function) => void;
+  onPresenceChanged: (callback: (presence: PresenceEvent) => void) => void;
   openChat: (chatId: string) => boolean;
   openChatAt: (
     chatId: string,
@@ -232,7 +234,9 @@ interface WAPI {
   startTyping: (to: string) => void;
   stopPhoneWatchdog: () => void;
   stopTyping: (to: string) => void;
+  subscribePresence: (id: string | string[]) => Promise<number>;
   takeOver: () => boolean;
+  unsubscribePresence: (id: string | string[]) => Promise<number>;
   unblockContact: (messageId: string) => boolean;
   waitForStore: (store: string | string[], callback?: Function) => Promise<any>;
   waitNewAcknowledgements: (callback: Function) => void;

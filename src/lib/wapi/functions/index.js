@@ -112,6 +112,7 @@ export { sendMute } from './send-mute';
 export { getListMute, interfaceMute } from './get-list-mute';
 export { downloadMedia } from './download-media';
 export * from './phoneWatchdog';
+export * from './presence';
 export * from './set-group-description';
 export * from './set-group-property';
 export * from './set-group-subject';

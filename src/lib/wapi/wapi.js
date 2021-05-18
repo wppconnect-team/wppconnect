@@ -124,6 +124,8 @@ import {
   setGroupProperty,
   setTemporaryMessages,
   starMessages,
+  subscribePresence,
+  unsubscribePresence,
 } from './functions';
 import {
   base64ToFile,
@@ -138,6 +140,7 @@ import {
   addOnNewAcks,
   addOnNotificationMessage,
   addOnParticipantsChange,
+  addOnPresenceChanged,
   addOnStateChange,
   addOnStreamChange,
   allNewMessagesListener,
@@ -326,6 +329,8 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.sendMute = sendMute;
   window.WAPI.startPhoneWatchdog = startPhoneWatchdog;
   window.WAPI.stopPhoneWatchdog = stopPhoneWatchdog;
+  window.WAPI.subscribePresence = subscribePresence;
+  window.WAPI.unsubscribePresence = unsubscribePresence;
 
   // Listeners initialization
   window.WAPI._newMessagesQueue = [];
@@ -572,4 +577,5 @@ if (typeof window.WAPI === 'undefined') {
   addOnLiveLocation();
   addOnParticipantsChange();
   addOnNotificationMessage();
+  addOnPresenceChanged();
 }

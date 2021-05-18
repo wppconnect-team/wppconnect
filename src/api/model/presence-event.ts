@@ -15,15 +15,26 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export enum ExposedFn {
-  OnMessage = 'onMessage',
-  OnAnyMessage = 'onAnyMessage',
-  onAck = 'onAck',
-  onNotificationMessage = 'onNotificationMessage',
-  onParticipantsChanged = 'onParticipantsChanged',
-  onStateChange = 'onStateChange',
-  onStreamChange = 'onStreamChange',
-  onIncomingCall = 'onIncomingCall',
-  onInterfaceChange = 'onInterfaceChange',
-  onPresenceChanged = 'onPresenceChanged',
+export interface PresenceEvent {
+  /**
+   * ID of contact or group
+   */
+  id: string;
+  isOnline: boolean;
+  isGroup: boolean;
+  isUser: boolean;
+  state: 'available' | 'composing' | 'recording' | 'unavailable';
+  /**
+   * Timestramp of event `Date.now()`
+   */
+  t: number;
+  /**
+   * If is an user, check is a contact
+   */
+  isContact?: boolean;
+  participants?: {
+    id: string;
+    state: 'available' | 'composing' | 'recording' | 'unavailable';
+    shortName: string;
+  }[];
 }

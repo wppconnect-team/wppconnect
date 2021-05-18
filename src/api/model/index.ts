@@ -31,5 +31,6 @@ export { WhatsappProfile } from './whatsapp-profile';
 export * from './result';
 export * from './initializer';
 export * from './message-id';
+export * from './presence-event';
 export * from './profile-pic-thumb';
 export * from './wid';

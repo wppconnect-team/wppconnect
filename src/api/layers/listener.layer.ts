@@ -18,8 +18,16 @@
 import { EventEmitter } from 'events';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
+import { evaluateAndReturn } from '../helpers';
 import { ExposedFn } from '../helpers/exposed.enum';
-import { Ack, Chat, LiveLocation, Message, ParticipantEvent } from '../model';
+import {
+  Ack,
+  Chat,
+  LiveLocation,
+  Message,
+  ParticipantEvent,
+  PresenceEvent,
+} from '../model';
 import { MessageType, SocketState, SocketStream } from '../model/enum';
 import { InterfaceMode } from '../model/enum/interface-mode';
 import { InterfaceState } from '../model/enum/interface-state';
@@ -112,6 +120,10 @@ export class ListenerLayer extends ProfileLayer {
         if (!window['onNotificationMessage'].exposed) {
           window.WAPI.onNotificationMessage(window['onNotificationMessage']);
           window['onNotificationMessage'].exposed = true;
+        }
+        if (!window['onPresenceChanged'].exposed) {
+          window.WAPI.onPresenceChanged(window['onPresenceChanged']);
+          window['onPresenceChanged'].exposed = true;
         }
       })
       .catch(() => {});
@@ -294,5 +306,93 @@ export class ListenerLayer extends ProfileLayer {
    */
   public onIncomingCall(callback: (call: any) => any) {
     return this.registerEvent('onIncomingCall', callback);
+  }
+
+  /**
+   * Listens to presence changed, by default, it will triggered for active chats only or contacts subscribed (see {@link subscribePresence})
+   * @event Listens to presence changed
+   * @param callback Callback of on presence changed
+   * @returns Disposable object to stop the listening
+   */
+  public onPresenceChanged(
+    callback: (presenceChangedEvent: PresenceEvent) => void
+  ): { dispose: () => void };
+  /**
+   * Listens to presence changed, the callback will triggered only for passed IDs
+   * @event Listens to presence changed
+   * @param id contact id (xxxxx@c.us) or group id: xxxxx-yyyy@g.us
+   * @param callback Callback of on presence changed
+   * @returns Disposable object to stop the listening
+   */
+  public onPresenceChanged(
+    id: string | string[],
+    callback: (presenceChangedEvent: PresenceEvent) => void
+  ): { dispose: () => void };
+  public onPresenceChanged(
+    id: any,
+    callback?: (presenceChangedEvent: PresenceEvent) => void
+  ): { dispose: () => void } {
+    let ids = [];
+
+    if (typeof id === 'function') {
+      callback = id;
+      ids = [];
+    } else if (!Array.isArray(id)) {
+      ids = [id];
+    }
+
+    if (ids.length) {
+      this.subscribePresence(ids);
+    }
+
+    return this.registerEvent(
+      ExposedFn.onPresenceChanged,
+      (presence: PresenceEvent) => {
+        // Only group events
+        if (ids.length && !ids.includes(presence.id)) {
+          return;
+        }
+        callback(presence);
+      }
+    );
+  }
+
+  /**
+   * Subscribe presence of a contact or group to use in onPresenceChanged (see {@link onPresenceChanged})
+   *
+   * ```typescript
+   * // subcribe all contacts
+   * const contacts = await client.getAllContacts();
+   * await client.subscribePresence(contacts.map((c) => c.id._serialized));
+   *
+   * // subcribe all groups participants
+   * const chats = await client.getAllGroups(false);
+   * for (const c of chats) {
+   *   const ids = c.groupMetadata.participants.map((p) => p.id._serialized);
+   *   await client.subscribePresence(ids);
+   * }
+   * ```
+   *
+   * @param id contact id (xxxxx@c.us) or group id: xxxxx-yyyy@g.us
+   * @returns number of subscribed
+   */
+  public async subscribePresence(id: string | string[]): Promise<number> {
+    return await evaluateAndReturn(
+      this.page,
+      (id) => WAPI.subscribePresence(id),
+      id
+    );
+  }
+  /**
+   * Unsubscribe presence of a contact or group to use in onPresenceChanged (see {@link onPresenceChanged})
+   * @param id contact id (xxxxx@c.us) or group id: xxxxx-yyyy@g.us
+   * @returns number of unsubscribed
+   */
+  public async unsubscribePresence(id: string | string[]): Promise<number> {
+    return await evaluateAndReturn(
+      this.page,
+      (id) => WAPI.unsubscribePresence(id),
+      id
+    );
   }
 }

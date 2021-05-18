@@ -14,16 +14,36 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
+export async function subscribePresence(ids) {
+  if (!Array.isArray(ids)) {
+    ids = [ids];
+  }
 
-export enum ExposedFn {
-  OnMessage = 'onMessage',
-  OnAnyMessage = 'onAnyMessage',
-  onAck = 'onAck',
-  onNotificationMessage = 'onNotificationMessage',
-  onParticipantsChanged = 'onParticipantsChanged',
-  onStateChange = 'onStateChange',
-  onStreamChange = 'onStreamChange',
-  onIncomingCall = 'onIncomingCall',
-  onInterfaceChange = 'onInterfaceChange',
-  onPresenceChanged = 'onPresenceChanged',
+  let count = 0;
+  for (const id of ids) {
+    const wid = new Store.WidFactory.createWid(id);
+    if (Store.Presence.get(wid)) {
+      continue;
+    }
+    await Store.Presence.find(wid);
+    count++;
+  }
+  return count;
+}
+
+export async function unsubscribePresence(ids) {
+  if (!Array.isArray(ids)) {
+    ids = [ids];
+  }
+  let count = 0;
+  for (const id of ids) {
+    const wid = new Store.WidFactory.createWid(id);
+    const presence = Store.Presence.get(wid);
+    if (!presence) {
+      continue;
+    }
+    presence.delete();
+    count++;
+  }
+  return count;
 }

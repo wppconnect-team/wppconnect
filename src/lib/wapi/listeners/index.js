@@ -22,5 +22,6 @@ export { addOnStateChange, addOnStreamChange } from './add-on-state-change';
 export { addOnNewAcks } from './add-on-new-ack';
 export { addOnLiveLocation } from './add-on-live-location';
 export { addOnParticipantsChange } from './add-on-participants-change';
+export { addOnPresenceChanged } from './add-on-presence-changed';
 export { addOnAddedToGroup } from './add-on-added-to-group';
 export { addOnNotificationMessage } from './add-on-notification-message';
