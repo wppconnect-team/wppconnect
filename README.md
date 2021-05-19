@@ -6,7 +6,6 @@
 [![Downloads](https://img.shields.io/npm/dm/@wppconnect-team/wppconnect.svg)](https://www.npmjs.com/package/@wppconnect-team/wppconnect)
 [![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/wppconnect-team/wppconnect.svg)](https://isitmaintained.com/project/wppconnect-team/wppconnect 'Average time to resolve an issue')
 [![Percentage of issues still open](https://isitmaintained.com/badge/open/wppconnect-team/wppconnect.svg)](https://isitmaintained.com/project/wppconnect-team/wppconnect 'Percentage of issues still open')
-
 [![Build Status](https://img.shields.io/github/workflow/status/wppconnect-team/wppconnect/build.svg)](https://github.com/wppconnect-team/wppconnect/actions)
 [![Lint Status](https://img.shields.io/github/workflow/status/wppconnect-team/wppconnect/lint.svg?label=lint)](https://github.com/wppconnect-team/wppconnect/actions)
 [![release-it](https://img.shields.io/badge/%F0%9F%93%A6%F0%9F%9A%80-release--it-e10079.svg)](https://github.com/release-it/release-it)
@@ -19,9 +18,13 @@
   <a href="https://wppconnect-team.github.io/wppconnect/">Documentation</a>
 </p>
 
-## Our whatsapp group available
+## Our online channels
 
-<a target="_blank" href="https://chat.whatsapp.com/C1ChjyShl5cA7KvmtecF3L" target="_blank"><img title="whatzapp" height="75" width="300" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/2000px-WhatsApp_logo.svg.png"></a>
+[![WhatsApp Group](https://img.shields.io/badge/WhatsApp-Group-25D366)](https://chat.whatsapp.com/C1ChjyShl5cA7KvmtecF3L)
+[![Discord](https://img.shields.io/discord/844351092758413353?color=blueviolet&label=discord&style=flat)](https://discord.gg/zufsDRjxUQ)
+
+<a target="_blank" href="https://chat.whatsapp.com/C1ChjyShl5cA7KvmtecF3L" target="_blank"><img title="whatzapp" height="75" width="300" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/320px-WhatsApp_logo.svg.png"></a>
+<a target="_blank" href="https://discord.gg/zufsDRjxUQ" target="_blank"><img title="Discord" height="75" width="300" src="https://upload.wikimedia.org/wikipedia/pt/thumb/b/b7/Discord_logo_svg.svg/320px-Discord_logo_svg.svg.png"></a>
 
 ## Functions
 
@@ -40,6 +43,8 @@
 | Send _location_                                            | ✔   |
 | **and much more**                                          | ✔   |
 
+See more at <a href="https://wppconnect-team.github.io/wppconnect/classes/whatsapp.html">WhatsApp methods</a>
+
 ## Installation
 
 The first thing that you had to do is install the `npm package` :
@@ -52,27 +57,7 @@ See more at <a href="https://wppconnect-team.github.io/wppconnect/pages/Getting%
 
 ## Development
 
-Building WPPConnect is really simple altough it contains 3 main projects inside
-
-### 1. Wapi project
-
-```bash
-> npm run build:wapi
-```
-
-### 2. Middleware
-
-```bash
-> npm run build:jsQR
-```
-
-### 3. Wppconnect
-
-```bash
-> npm run build:client
-```
-
-To build the entire project just run
+Building WPPConnect is really simple, to build the entire project just run
 
 ```bash
 > npm run build
