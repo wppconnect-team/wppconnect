@@ -18,5 +18,7 @@
 export async function revokeGroupInviteLink(chatId) {
   var chat = Store.Chat.get(chatId);
   if (!chat.isGroup) return false;
-  return await Store.GroupInvite.sendRevokeGroupInviteCode(chat.id);
+  const inviteCode = await Store.GroupInvite.sendRevokeGroupInviteCode(chat.id);
+
+  return `https://chat.whatsapp.com/${inviteCode}`;
 }

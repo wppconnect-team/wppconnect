@@ -73,6 +73,20 @@ export class GroupLayer extends RetrieverLayer {
       chatId
     );
   }
+
+  /**
+   * Revokes group-invite link and generate new one.
+   * @category Group
+   * @param chatId
+   * @returns Invitation link
+   */
+  public async revokeGroupInviteLink(chatId: string) {
+    return await this.page.evaluate(
+      (chatId) => WAPI.revokeGroupInviteLink(chatId),
+      chatId
+    );
+  }
+
   /**
    * Generates group-invite link
    * @category Group
