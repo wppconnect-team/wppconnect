@@ -1,3 +1,13 @@
+## [1.5.1](https://github.com/wppconnect-team/wppconnect/compare/v1.5.0...v1.5.1) (2021-05-21)
+
+### Bug Fixes
+
+- Fixed getGroupInviteLink function (fix [#214](https://github.com/wppconnect-team/wppconnect/issues/214)) ([597715b](https://github.com/wppconnect-team/wppconnect/commit/597715bc2984c2e4e56942830f893e52d61f9091))
+
+### Features
+
+- Added revokeGroupInviteLink function; ([50feb3c](https://github.com/wppconnect-team/wppconnect/commit/50feb3ceeaa1ed5a0648158f85a11853931725cb))
+
 # [1.5.0](https://github.com/wppconnect-team/wppconnect/compare/v1.4.1...v1.5.0) (2021-05-18)
 
 ### Bug Fixes
