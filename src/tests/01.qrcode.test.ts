@@ -57,4 +57,18 @@ describe('QRCode test', function () {
     assert.ok(second.urlCode !== first.urlCode);
     assert.ok(second.base64Image !== first.base64Image);
   });
+
+  it('Await QRCode reload button', async function () {
+    this.timeout(8 * 20000 + 20000);
+
+    const result = await new Promise((resolve) => {
+      client.waitForQrCodeScan((q, a, attempt) => {
+        if (attempt > 6) {
+          resolve(true);
+        }
+      });
+    });
+
+    assert.ok(result);
+  });
 });
