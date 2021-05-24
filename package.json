@@ -97,7 +97,7 @@
     "release-it": "^14.4.1",
     "shx": "^0.3.3",
     "ts-loader": "^9.0.0",
-    "ts-node": "^9.1.1",
+    "ts-node": "^10.0.0",
     "typedoc": "^0.20.28",
     "typedoc-plugin-pages": "^1.1.0",
     "typescript": "^4.2.2",
