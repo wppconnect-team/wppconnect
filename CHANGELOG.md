@@ -1,8 +1,14 @@
+# [1.6.0](https://github.com/wppconnect-team/wppconnect/compare/v1.5.2...v1.6.0) (2021-06-02)
+
+### Bug Fixes
+
+- Fixed send message to non contact ([c66b597](https://github.com/wppconnect-team/wppconnect/commit/c66b597f80ed8d08c0c07ba0ca9252f6f328372e))
+
 ## [1.5.2](https://github.com/wppconnect-team/wppconnect/compare/v1.5.1...v1.5.2) (2021-05-24)
 
 ### Bug Fixes
 
-* Fixed click to reload qr code, Update scrape-img-qr.ts ([a2104e4](https://github.com/wppconnect-team/wppconnect/commit/a2104e4b5bb50a606c90a2d7d42801289f33f2c1)) Thanks to @AlanMartines
+- Fixed click to reload qr code, Update scrape-img-qr.ts ([a2104e4](https://github.com/wppconnect-team/wppconnect/commit/a2104e4b5bb50a606c90a2d7d42801289f33f2c1)) Thanks to @AlanMartines
 
 ## [1.5.1](https://github.com/wppconnect-team/wppconnect/compare/v1.5.0...v1.5.1) (2021-05-21)
 
