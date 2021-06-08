@@ -1,6 +1,14 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: npm
+    directory: '/'
     schedule:
-      interval: "daily"
+      interval: daily
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: puppeteer
+        versions:
+          - '>= 6.a'
+      - dependency-name: '@types/node'
+        versions:
+          - '>= 15.a, < 16'
