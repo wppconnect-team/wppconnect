@@ -17,7 +17,8 @@
 
 export async function getBusinessProfilesProducts(id) {
   try {
-    if (!window.Store.Catalog.get(id)) await window.Store.Catalog.findCarouselCatalog(id);
+    if (!window.Store.Catalog.get(id))
+      await window.Store.Catalog.findCarouselCatalog(id);
     const catalog = window.Store.Catalog.get(id);
     if (catalog.productCollection && catalog.productCollection._models.length)
       return JSON.parse(JSON.stringify(catalog.productCollection._models));

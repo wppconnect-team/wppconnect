@@ -155,10 +155,7 @@ import {
   _serializeRawObj,
   _profilePicfunc,
 } from './serializers';
-import {
-  getBusinessProfilesProducts,
-  getOrderbyMsg
-} from './business';
+import { getBusinessProfilesProducts, getOrderbyMsg } from './business';
 import { storeObjects } from './store/store-objects';
 
 window['webpackJsonp'] = window['webpackJsonp'] || [];
