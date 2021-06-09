@@ -14,26 +14,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
-const wppconnect = require('../../dist');
 
-wppconnect
-  .create()
-  .then((client) => start(client))
-  .catch((erro) => {
-    console.log(erro);
-  });
+import { getMessageById } from '../functions/get-message-by-id';
 
-function start(client) {
-  client.onMessage((message) => {
-    if (message.body === 'Hi' && message.isGroupMsg === false) {
-      client
-        .sendText(message.from, 'Welcome Wppconnect')
-        .then((result) => {
-          console.log('Result: ', result); //return object success
-        })
-        .catch((erro) => {
-          console.error('Error when sending: ', erro); //return object error
-        });
-    }
-  });
+export async function getOrderbyMsg(msgId) {
+  try {
+    let msg = await getMessageById(msgId, null, false);
+    let oc = window.Store.loader.searchModule((m) => m.OrderCollection);
+    let order = await oc.default.findOrder(
+      msg.orderId,
+      msg.sellerJid,
+      msg.token
+    );
+    return order.products;
+  } catch (error) {
+    return error;
+  }
 }

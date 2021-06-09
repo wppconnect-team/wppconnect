@@ -16,7 +16,7 @@
  */
 
 import { Page } from 'puppeteer';
-import { ControlsLayer } from './layers/controls.layer';
+import { BusinessLayer } from './layers/business.layer';
 import { Message } from './model';
 import { magix, timeout, makeOptions } from './helpers/decrypt';
 import { useragentOverride } from '../config/WAuserAgente';
@@ -25,7 +25,7 @@ import axios from 'axios';
 import treekill = require('tree-kill');
 import { SocketState } from './model/enum';
 
-export class Whatsapp extends ControlsLayer {
+export class Whatsapp extends BusinessLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
 

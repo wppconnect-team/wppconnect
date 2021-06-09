@@ -15,15 +15,14 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-window.WAPI.getBusinessProfilesProducts = function (id, done) {
-  return Store.Catalog.find(id)
-    .then((resp) => {
-      if (resp.msgProductCollection && resp.msgProductCollection._models.length)
-        done();
-      return resp.productCollection._models;
-    })
-    .catch((error) => {
-      done();
-      return error.model._products;
-    });
-};
+export async function getBusinessProfilesProducts(id) {
+  try {
+    if (!window.Store.Catalog.get(id)) await window.Store.Catalog.findCarouselCatalog(id);
+    const catalog = window.Store.Catalog.get(id);
+    if (catalog.productCollection && catalog.productCollection._models.length)
+      return JSON.parse(JSON.stringify(catalog.productCollection._models));
+    else return [];
+  } catch (error) {
+    return false;
+  }
+}

@@ -16,3 +16,4 @@ session
 session-*
 src/app.ts
 tokens
+yarn.lock

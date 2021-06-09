@@ -155,6 +155,10 @@ import {
   _serializeRawObj,
   _profilePicfunc,
 } from './serializers';
+import {
+  getBusinessProfilesProducts,
+  getOrderbyMsg
+} from './business';
 import { storeObjects } from './store/store-objects';
 
 window['webpackJsonp'] = window['webpackJsonp'] || [];
@@ -331,6 +335,10 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.stopPhoneWatchdog = stopPhoneWatchdog;
   window.WAPI.subscribePresence = subscribePresence;
   window.WAPI.unsubscribePresence = unsubscribePresence;
+
+  // business functions
+  window.WAPI.getBusinessProfilesProducts = getBusinessProfilesProducts;
+  window.WAPI.getOrderbyMsg = getOrderbyMsg;
 
   // Listeners initialization
   window.WAPI._newMessagesQueue = [];

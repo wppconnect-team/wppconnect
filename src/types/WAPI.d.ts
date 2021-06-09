@@ -73,6 +73,7 @@ interface WAPI {
   getBatteryLevel: () => number;
   getBlockList: () => Contact[];
   getBusinessProfilesProducts: (to: string) => any;
+  getOrderbyMsg: (messageId: string) => any;
   getChat: (contactId: string) => Chat;
   getChatById: (contactId: string) => Chat;
   getChatIsOnline: (chatId: string) => Promise<boolean>;
