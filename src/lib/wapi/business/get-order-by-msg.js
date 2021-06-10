@@ -15,23 +15,40 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export async function getBusinessProfilesProducts(id) {
-  let catalog = window.Store.Catalog.get(id);
-  if (!catalog) {
-    catalog = await window.Store.Catalog.find(Store.WidFactory.createWid(id));
-  }
+import { getMessageById } from '../functions/get-message-by-id';
 
-  if (!catalog) {
+export async function getOrderbyMsg(msgId) {
+  let msg = await getMessageById(msgId, null, false);
+  if (!msg) {
     throw {
       error: true,
-      code: 'catalog_not_found',
-      message: 'Catalog not found',
+      code: 'message_not_found',
+      message: 'Message not found',
+    };
+  }
+  if (msg.type !== 'order') {
+    throw {
+      error: true,
+      code: 'message_is_not_an_order',
+      message: 'Message is not an order',
+    };
+  }
+  let order = window.Store.Order.get(msg.orderId);
+  if (!order) {
+    order = await window.Store.Order.findOrder(
+      msg.orderId,
+      msg.sellerJid,
+      msg.token
+    );
+  }
+
+  if (!order) {
+    throw {
+      error: true,
+      code: 'order_not_found',
+      message: 'Order not found',
     };
   }
 
-  if (catalog.productCollection) {
-    return catalog.productCollection.serialize();
-  }
-
-  return [];
+  return order.products;
 }

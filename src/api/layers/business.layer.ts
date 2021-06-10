@@ -17,10 +17,12 @@
 
 import { Page } from 'puppeteer';
 import { ControlsLayer } from './controls.layer';
+import { CreateConfig } from '../../config/create-config';
+import { evaluateAndReturn } from '../helpers';
 
 export class BusinessLayer extends ControlsLayer {
-  constructor(page: Page) {
-    super(page);
+  constructor(public page: Page, session?: string, options?: CreateConfig) {
+    super(page, session, options);
   }
 
   /**
@@ -28,11 +30,23 @@ export class BusinessLayer extends ControlsLayer {
    * @param id Buisness profile id ('00000@c.us')
    */
   public async getBusinessProfilesProducts(id: string) {
-    return this.page.evaluate(
-      ({ id }) => {
-        WAPI.getBusinessProfilesProducts(id);
-      },
+    return evaluateAndReturn(
+      this.page,
+      ({ id }) => WAPI.getBusinessProfilesProducts(id),
       { id }
+    );
+  }
+
+  /**
+   * Querys order catalog
+   * @param messageId string
+   * @returns Message object
+   */
+  public async getOrderbyMsg(messageId: string) {
+    return evaluateAndReturn(
+      this.page,
+      ({ messageId }) => WAPI.getOrderbyMsg(messageId),
+      { messageId }
     );
   }
 

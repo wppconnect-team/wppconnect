@@ -27,7 +27,7 @@ function start(client) {
   client.onMessage((message) => {
     if (message.body === 'Hi' && message.isGroupMsg === false) {
       client
-        .sendText(message.from, 'Welcome Wppconnect 🕷')
+        .sendText(message.from, 'Welcome Wppconnect')
         .then((result) => {
           console.log('Result: ', result); //return object success
         })
