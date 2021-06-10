@@ -18,6 +18,7 @@
 import { Page } from 'puppeteer';
 import { ControlsLayer } from './controls.layer';
 import { CreateConfig } from '../../config/create-config';
+import { evaluateAndReturn } from '../helpers';
 
 export class BusinessLayer extends ControlsLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -29,10 +30,9 @@ export class BusinessLayer extends ControlsLayer {
    * @param id Buisness profile id ('00000@c.us')
    */
   public async getBusinessProfilesProducts(id: string) {
-    return this.page.evaluate(
-      ({ id }) => {
-        WAPI.getBusinessProfilesProducts(id);
-      },
+    return evaluateAndReturn(
+      this.page,
+      ({ id }) => WAPI.getBusinessProfilesProducts(id),
       { id }
     );
   }
@@ -43,10 +43,9 @@ export class BusinessLayer extends ControlsLayer {
    * @returns Message object
    */
   public async getOrderbyMsg(messageId: string) {
-    return this.page.evaluate(
-      ({ messageId }) => {
-        WAPI.getOrderbyMsg(messageId);
-      },
+    return evaluateAndReturn(
+      this.page,
+      ({ messageId }) => WAPI.getOrderbyMsg(messageId),
       { messageId }
     );
   }

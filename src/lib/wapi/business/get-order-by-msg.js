@@ -18,16 +18,37 @@
 import { getMessageById } from '../functions/get-message-by-id';
 
 export async function getOrderbyMsg(msgId) {
-  try {
-    let msg = await getMessageById(msgId, null, false);
-    let oc = window.Store.loader.searchModule((m) => m.OrderCollection);
-    let order = await oc.default.findOrder(
+  let msg = await getMessageById(msgId, null, false);
+  if (!msg) {
+    throw {
+      error: true,
+      code: 'message_not_found',
+      message: 'Message not found',
+    };
+  }
+  if (msg.type !== 'order') {
+    throw {
+      error: true,
+      code: 'message_is_not_an_order',
+      message: 'Message is not an order',
+    };
+  }
+  let order = window.Store.Order.get(msg.orderId);
+  if (!order) {
+    order = await window.Store.Order.findOrder(
       msg.orderId,
       msg.sellerJid,
       msg.token
     );
-    return order.products;
-  } catch (error) {
-    return error;
   }
+
+  if (!order) {
+    throw {
+      error: true,
+      code: 'order_not_found',
+      message: 'Order not found',
+    };
+  }
+
+  return order.products;
 }

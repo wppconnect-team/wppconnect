@@ -16,14 +16,22 @@
  */
 
 export async function getBusinessProfilesProducts(id) {
-  try {
-    if (!window.Store.Catalog.get(id))
-      await window.Store.Catalog.findCarouselCatalog(id);
-    const catalog = window.Store.Catalog.get(id);
-    if (catalog.productCollection && catalog.productCollection._models.length)
-      return JSON.parse(JSON.stringify(catalog.productCollection._models));
-    else return [];
-  } catch (error) {
-    return false;
+  let catalog = window.Store.Catalog.get(id);
+  if (!catalog) {
+    catalog = await window.Store.Catalog.find(Store.WidFactory.createWid(id));
   }
+
+  if (!catalog) {
+    throw {
+      error: true,
+      code: 'catalog_not_found',
+      message: 'Catalog not found',
+    };
+  }
+
+  if (catalog.productCollection) {
+    return catalog.productCollection.serialize();
+  }
+
+  return [];
 }
