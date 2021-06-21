@@ -16,32 +16,83 @@
  */
 
 export function addOnLiveLocation() {
-  window.WAPI.onLiveLocation = async function (chatId, callback) {
-    return await window.WAPI.waitForStore(['LiveLocation'], () => {
-      var lLChat = Store.LiveLocation.get(chatId);
-      if (lLChat) {
-        var validLocs = lLChat.participants.validLocations();
-        validLocs.map((x) =>
-          x.on('change:lastUpdated', (x, y, z) => {
-            console.log(x, y, z);
-            const { id, lat, lng, accuracy, degrees, speed, lastUpdated } = x;
-            const l = {
-              id: id.toString(),
-              lat,
-              lng,
-              accuracy,
-              degrees,
-              speed,
-              lastUpdated,
-            };
-            // console.log('newloc',l)
-            callback(l);
-          })
-        );
-        return true;
-      } else {
-        return false;
+  const callbacks = [];
+
+  /**
+   * Dispara o evento com dados formatados
+   */
+  function fireCallback(data) {
+    const location = Object.assign({}, data);
+    if (location.jid) {
+      location.id = location.jid.toString();
+    }
+    delete location.jid;
+    delete location.body;
+    delete location.isLive;
+    delete location.sequence;
+
+    for (const callback of callbacks) {
+      try {
+        callback(location);
+      } catch (error) {}
+    }
+  }
+
+  window.WAPI.waitForStore(['LiveLocation'], async () => {
+    /**
+     * Substitui o manipulador original para capturar todos eventos,
+     * pois o Store.LiveLocation só inicializa a partir de uma mensagem,
+     * caso a mensagem fique muito para atrás (após troca de 50 mensagens),
+     * ele não é inicializado até carregar a mensage.
+     */
+    const originalHandle = Store.LiveLocation.handle;
+    Store.LiveLocation.handle = function (list) {
+      originalHandle.apply(this, arguments);
+
+      for (const p of list) {
+        fireCallback(p);
       }
+    };
+
+    // Para cada novo LiveLocation inicializado, força a vizualização de mapa de todos
+    Store.LiveLocation.on('add', () => {
+      setTimeout(() => {
+        Store.LiveLocation.forEach((l) => {
+          l.startViewingMap();
+          setTimeout(() => {
+            try {
+              l._startKeepAlive();
+            } catch (error) {}
+          }, 1000);
+        });
+      }, 100);
     });
+
+    // Força a inicialização de localização para todos chats ativos
+    Store.Chat.map((c) => Store.LiveLocation.find(c.id));
+  });
+
+  // Caso receba nova mensagem de localização, inicializa o LiveLocation e dispara o primeiro evento
+  WAPI.waitNewMessages(false, (messages) => {
+    for (const message of messages) {
+      if (message.isLive) {
+        fireCallback({
+          type: 'enable',
+          isLive: message.isLive,
+          id: message.sender.id,
+          lat: message.lat,
+          lng: message.lng,
+          accuracy: message.accuracy,
+          speed: message.speed,
+          degrees: message.degrees,
+          sequence: message.sequence,
+          shareDuration: message.shareDuration,
+        });
+      }
+    }
+  });
+
+  window.WAPI.onLiveLocation = async function (callback) {
+    callbacks.push(callback);
   };
 }

@@ -26,4 +26,5 @@ export enum ExposedFn {
   onIncomingCall = 'onIncomingCall',
   onInterfaceChange = 'onInterfaceChange',
   onPresenceChanged = 'onPresenceChanged',
+  onLiveLocation = 'onLiveLocation',
 }

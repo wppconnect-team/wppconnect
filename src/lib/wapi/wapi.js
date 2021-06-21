@@ -188,6 +188,25 @@ if (typeof window.Store === 'undefined') {
   };
 }
 
+// setTimeout(() => {
+//   window.WAPI.waitForStore(['LiveLocation'], async () => {
+//     console.log('handle');
+//     // Store.LiveLocation.handle = (e) => console.log(e[0]);
+//     Store.LiveLocation.handle = (e) =>
+//       console.log(e[0].jid.user, (e[0].speed * 3.6).toFixed(2) + ' km/h');
+
+//     const livePromises = Store.Chat.map((c) => Store.LiveLocation.find(c.id));
+
+//     await Promise.all(livePromises);
+//     console.log('find');
+
+//     setTimeout(() => {
+//       Store.LiveLocation.forEach((l) => l.startViewingMap());
+//       console.log('start');
+//     }, 1000);
+//   });
+// }, 100);
+
 if (typeof window.WAPI === 'undefined') {
   window.WAPI = {
     lastRead: {},

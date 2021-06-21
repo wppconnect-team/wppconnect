@@ -125,6 +125,10 @@ export class ListenerLayer extends ProfileLayer {
           window.WAPI.onPresenceChanged(window['onPresenceChanged']);
           window['onPresenceChanged'].exposed = true;
         }
+        if (!window['onLiveLocation'].exposed) {
+          window.WAPI.onLiveLocation(window['onLiveLocation']);
+          window['onLiveLocation'].exposed = true;
+        }
       })
       .catch(() => {});
   }
@@ -213,30 +217,49 @@ export class ListenerLayer extends ProfileLayer {
   }
 
   /**
-   * @event Listens to live locations from a chat that already has valid live locations
-   * @param chatId the chat from which you want to subscribes to live location updates
-   * @param fn callback that takes in a LiveLocation
-   * @returns boolean, if returns false then there were no valid live locations in the chat of chatId
-   * @emits <LiveLocation> LiveLocation
+   * Escuta os eventos de Localização em tempo real de todos os chats
+   * @event Eventos de Localização em tempo real
+   * @param callback Função para ser executada quando houver alterações
+   * @returns Objeto descartável para parar de ouvir
    */
-  public async onLiveLocation(
-    chatId: string,
-    fn: (liveLocationChangedEvent: LiveLocation) => void
+  public onLiveLocation(callback: (liveLocationEvent: LiveLocation) => void): {
+    dispose: () => void;
+  };
+  /**
+   * Escuta os eventos de Localização em tempo real
+   * @event Eventos de Localização em tempo real
+   * @param id Único ID ou lista de IDs de contatos para acompanhar a localização
+   * @param callback Função para ser executada quando houver alterações
+   * @returns Objeto descartável para parar de ouvir
+   */
+  public onLiveLocation(
+    id: string | string[],
+    callback: (liveLocationEvent: LiveLocation) => void
+  ): { dispose: () => void };
+  public onLiveLocation(
+    id: any,
+    callback?: (liveLocationEvent: LiveLocation) => void
   ) {
-    const method = 'onLiveLocation_' + chatId.replace('_', '').replace('_', '');
-    return this.page
-      .exposeFunction(method, (liveLocationChangedEvent: LiveLocation) =>
-        fn(liveLocationChangedEvent)
-      )
-      .then((_) =>
-        this.page.evaluate(
-          ({ chatId, method }) => {
-            //@ts-ignore
-            return WAPI.onLiveLocation(chatId, window[method]);
-          },
-          { chatId, method }
-        )
-      );
+    const ids: string[] = [];
+
+    if (typeof id === 'function') {
+      callback = id;
+    } else if (Array.isArray(id)) {
+      ids.push(...id);
+    } else {
+      ids.push(id);
+    }
+
+    return this.registerEvent(
+      ExposedFn.onLiveLocation,
+      (event: LiveLocation) => {
+        // Only group events
+        if (ids.length && !ids.includes(event.id)) {
+          return;
+        }
+        callback(event);
+      }
+    );
   }
 
   /**
@@ -332,13 +355,14 @@ export class ListenerLayer extends ProfileLayer {
     id: any,
     callback?: (presenceChangedEvent: PresenceEvent) => void
   ): { dispose: () => void } {
-    let ids = [];
+    const ids = [];
 
     if (typeof id === 'function') {
       callback = id;
-      ids = [];
-    } else if (!Array.isArray(id)) {
-      ids = [id];
+    } else if (Array.isArray(id)) {
+      ids.push(...id);
+    } else {
+      ids.push(id);
     }
 
     if (ids.length) {
