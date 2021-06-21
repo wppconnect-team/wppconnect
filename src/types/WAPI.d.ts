@@ -25,6 +25,7 @@ import {
   Message,
   PartialMessage,
   PresenceEvent,
+  ProfilePicThumbObj,
   SendFileResult,
   SendLinkResult,
   SendPttResult,
@@ -244,7 +245,7 @@ interface WAPI {
   waitNewAcknowledgements: (callback: Function) => void;
   waitNewMessages: (rmCallback: boolean, callback: Function) => void;
   sendSeen: (to: string) => void;
-  _profilePicfunc: (contactId: string) => Promise<object>;
+  _profilePicfunc: (contactId: string) => Promise<ProfilePicThumbObj>;
 }
 
 declare global {

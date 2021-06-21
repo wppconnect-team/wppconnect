@@ -18,7 +18,8 @@
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { SessionToken } from '../../token-store';
-import { Chat, WhatsappProfile } from '../model';
+import { evaluateAndReturn } from '../helpers';
+import { Chat, ProfilePicThumbObj, WhatsappProfile } from '../model';
 import { SenderLayer } from './sender.layer';
 
 export class RetrieverLayer extends SenderLayer {
@@ -200,13 +201,19 @@ export class RetrieverLayer extends SenderLayer {
   }
 
   /**
-   * Retrieves chat picture
+   * Retorna dados da imagem do contato
    * @category Contact
    * @param chatId Chat id
    * @returns url of the chat picture or undefined if there is no picture for the chat.
    */
-  public async getProfilePicFromServer(chatId: string) {
-    return this.page.evaluate((chatId) => WAPI._profilePicfunc(chatId), chatId);
+  public async getProfilePicFromServer(
+    chatId: string
+  ): Promise<ProfilePicThumbObj> {
+    return evaluateAndReturn(
+      this.page,
+      (chatId) => WAPI._profilePicfunc(chatId),
+      chatId
+    );
   }
 
   /**

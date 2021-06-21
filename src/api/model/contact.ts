@@ -41,6 +41,10 @@ export interface Contact {
    */
   name?: string;
   plaintextDisabled: boolean;
+
+  /**
+   * @deprecated Depreciado em favor da função {@link getProfilePicFromServer}
+   */
   profilePicThumbObj: ProfilePicThumbObj;
 
   /**

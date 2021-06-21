@@ -20,16 +20,11 @@ export const _serializeContactObj = (obj) => {
     return null;
   }
 
-  let profile = WAPI._profilePicfunc(obj.id._serialized);
+  let profile = null;
 
-  if (
-    !obj.profilePicThumb &&
-    obj.id &&
-    window.Store.ProfilePicThumb &&
-    profile === null
-  ) {
-    let PicThumb = window.Store.ProfilePicThumb.get(obj.id);
-    profile = PicThumb ? WAPI._serializeProfilePicThumb(PicThumb) : {};
+  if (!obj.profilePicThumb && obj.id && window.Store.ProfilePicThumb) {
+    let thumb = window.Store.ProfilePicThumb.get(obj.id);
+    profile = thumb ? WAPI._serializeProfilePicThumb(thumb) : {};
   }
 
   return Object.assign(window.WAPI._serializeRawObj(obj), {
