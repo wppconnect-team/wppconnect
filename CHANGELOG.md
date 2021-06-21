@@ -1,3 +1,14 @@
+# [1.7.0](https://github.com/wppconnect-team/wppconnect/compare/v1.6.0...v1.7.0) (2021-06-21)
+
+### Bug Fixes
+
+- Corrigido a função getProfilePicFromServer ([#240](https://github.com/wppconnect-team/wppconnect/issues/240)) ([b7061e5](https://github.com/wppconnect-team/wppconnect/commit/b7061e5da570ba146dd18695a9de7e62858d70bc))
+- Corrigido e melhorado a função de onLiveLocation (fix [#258](https://github.com/wppconnect-team/wppconnect/issues/258)) ([6bc6d7e](https://github.com/wppconnect-team/wppconnect/commit/6bc6d7e706eb2a6a30e8f24a81e466f35a2c2c10))
+
+### Features
+
+- new functions catalog business ([#255](https://github.com/wppconnect-team/wppconnect/issues/255)) ([96d391e](https://github.com/wppconnect-team/wppconnect/commit/96d391e90dfea9e5dee8cd72d6d04e6d842c5ea2))
+
 # [1.6.0](https://github.com/wppconnect-team/wppconnect/compare/v1.5.2...v1.6.0) (2021-06-02)
 
 ### Bug Fixes
