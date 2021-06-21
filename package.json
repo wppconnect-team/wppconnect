@@ -30,15 +30,9 @@
     "test": "mocha -r ts-node/register src/tests/**/*.test.ts",
     "watch": "concurrently \"npm run build:wapi -- --mode=development -w\" \"npm run build:client -- -w --sourceMap\""
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "@commitlint/cz-commitlint"
     }
   },
   "repository": {
@@ -66,7 +60,8 @@
   "homepage": "https://github.com/wppconnect-team/wppconnect#readme",
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
-    "@commitlint/config-angular": "^12.0.1",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@commitlint/cz-commitlint": "^12.1.4",
     "@types/atob": "^2.1.2",
     "@types/mime-types": "^2.1.0",
     "@types/mocha": "^8.2.1",
@@ -84,7 +79,6 @@
     "concurrently": "^6.0.0",
     "conventional-changelog-cli": "^2.1.1",
     "copy-webpack-plugin": "^9.0.0",
-    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
