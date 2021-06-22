@@ -1,3 +1,9 @@
+## [1.7.1](https://github.com/wppconnect-team/wppconnect/compare/v1.7.0...v1.7.1) (2021-06-22)
+
+### Bug Fixes
+
+- Corrigido a função sendLocation (fix [#273](https://github.com/wppconnect-team/wppconnect/issues/273)) ([e3dd987](https://github.com/wppconnect-team/wppconnect/commit/e3dd987c4a5dd4412d50f7b86d67577384878e06))
+
 # [1.7.0](https://github.com/wppconnect-team/wppconnect/compare/v1.6.0...v1.7.0) (2021-06-21)
 
 ### Bug Fixes
