@@ -24,42 +24,25 @@ export async function sendLocation(
   var chat = await WAPI.sendExist(chatId);
 
   if (!chat.erro) {
-    var tempMsg = await Object.create(
-      Store.Msg.models.filter((msg) => msg.__x_isSentByMe && !msg.quotedMsg)[0]
-    );
-    var newId = await window.WAPI.getNewMessageId(chatId);
+    var newId = await window.WAPI.getNewMessageId(chat.id);
 
-    var extend = {
+    var message = {
       ack: 0,
       id: newId,
-      local: !0,
+      local: true,
       self: 'out',
       t: parseInt(new Date().getTime() / 1000),
-      to: chatId,
-      isNewMsg: !0,
+      from: Store.UserPrefs.getMaybeMeUser(),
+      to: chat.id,
+      isNewMsg: true,
       type: 'location',
       lat: latitude,
       lng: longitude,
       loc: location,
-      clientUrl: undefined,
-      directPath: undefined,
-      filehash: undefined,
-      uploadhash: undefined,
-      mediaKey: undefined,
-      isQuotedMsgAvailable: false,
-      invis: false,
-      mediaKeyTimestamp: undefined,
-      mimetype: undefined,
-      height: undefined,
-      width: undefined,
-      ephemeralStartTimestamp: undefined,
-      body: undefined,
-      mediaData: undefined,
     };
 
-    Object.assign(tempMsg, extend);
     var result =
-      (await Promise.all(Store.addAndSendMsgToChat(chat, tempMsg)))[1] || '';
+      (await Promise.all(Store.addAndSendMsgToChat(chat, message)))[1] || '';
     var m = {
         latitude: latitude,
         longitude: longitude,
