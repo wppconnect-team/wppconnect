@@ -1,3 +1,9 @@
+## [1.7.2](https://github.com/wppconnect-team/wppconnect/compare/v1.7.1...v1.7.2) (2021-07-01)
+
+### Features
+
+- Adicionado nova função getMessages (fix [#282](https://github.com/wppconnect-team/wppconnect/issues/282)) ([ee783e4](https://github.com/wppconnect-team/wppconnect/commit/ee783e423292665c355f5232ccec8b363a872dd3))
+
 ## [1.7.1](https://github.com/wppconnect-team/wppconnect/compare/v1.7.0...v1.7.1) (2021-06-22)
 
 ### Bug Fixes
