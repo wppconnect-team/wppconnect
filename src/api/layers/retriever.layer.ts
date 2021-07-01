@@ -218,10 +218,12 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Load more messages in chat object from server. Use this in a while loop
+   * Depreciado em favor de {@link getMessages}
+   *
+   * @deprecated Depreciado em favor de getMessages
    * @category Chat
    * @param contactId
    * @returns contact detial as promise
-   * @deprecated
    */
   public async loadEarlierMessages(contactId: string) {
     return this.page.evaluate(
@@ -298,6 +300,10 @@ export class RetrieverLayer extends SenderLayer {
   /**
    * Retrieves all messages already loaded in a chat
    * For loading every message use loadAndGetAllMessagesInChat
+   * Depreciado em favor de {@link getMessages}
+   *
+   * @deprecated Depreciado em favor de getMessages
+   *
    * @category Chat
    * @param chatId, the chat to get the messages from
    * @param includeMe, include my own messages? boolean
@@ -318,6 +324,9 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Loads and Retrieves all Messages in a chat
+   * Depreciado em favor de {@link getMessages}
+   *
+   * @deprecated Depreciado em favor de getMessages
    * @category Chat
    * @param chatId, the chat to get the messages from
    * @param includeMe, include my own messages? boolean

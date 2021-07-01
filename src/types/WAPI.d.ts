@@ -19,6 +19,7 @@ import {
   Chat,
   Contact,
   ContactStatus,
+  GetMessagesParam,
   GroupCreation,
   HostDevice,
   Id,
@@ -87,6 +88,7 @@ interface WAPI {
   getHost: () => HostDevice;
   getListMute: (type?: string) => object;
   getMessageById: (messageId: string) => Promise<Message>;
+  getMessages: (chatId: string, params: GetMessagesParam) => Promise<Message[]>;
   getNumberProfile: (contactId: string) => WhatsappProfile;
   getSessionTokenBrowser: (removePath?: boolean) => SessionToken;
   getStatus: (contactId: string) => ContactStatus;

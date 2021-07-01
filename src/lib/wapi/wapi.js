@@ -126,6 +126,7 @@ import {
   starMessages,
   subscribePresence,
   unsubscribePresence,
+  getMessages,
 } from './functions';
 import {
   base64ToFile,
@@ -330,6 +331,7 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.downloadMedia = downloadMedia;
   window.WAPI.getNumberProfile = getNumberProfile;
   window.WAPI.getMessageById = getMessageById;
+  window.WAPI.getMessages = getMessages;
   window.WAPI.getNewMessageId = getNewMessageId;
   window.WAPI.getFileHash = getFileHash;
   window.WAPI.generateMediaKey = generateMediaKey;

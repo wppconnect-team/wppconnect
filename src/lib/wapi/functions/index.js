@@ -89,6 +89,7 @@ export { getNewMessageId } from './get-new-message-id';
 export { reply } from './reply';
 export { startTyping, stopTyping } from './simulate-typing';
 export { getMessageById } from './get-message-by-id';
+export { getMessages } from './get-messages';
 export { blockContact } from './block-contact';
 export { unblockContact } from './unblock-contact';
 export { removeParticipant } from './remove-participant';

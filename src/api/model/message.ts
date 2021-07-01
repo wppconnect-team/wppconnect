@@ -62,6 +62,9 @@ export interface Message {
   isMedia: boolean;
   isNotification: boolean;
   isPSA: boolean;
+  /**
+   * @deprecated Use o getChat para obter detalhes do chat
+   */
   chat: Chat;
   lastSeen: null | number | boolean;
   chatId: string;

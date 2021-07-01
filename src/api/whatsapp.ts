@@ -17,13 +17,14 @@
 
 import { Page } from 'puppeteer';
 import { BusinessLayer } from './layers/business.layer';
-import { Message } from './model';
+import { GetMessagesParam, Message } from './model';
 import { magix, timeout, makeOptions } from './helpers/decrypt';
 import { useragentOverride } from '../config/WAuserAgente';
 import { CreateConfig } from '../config/create-config';
 import axios from 'axios';
 import treekill = require('tree-kill');
 import { SocketState } from './model/enum';
+import { evaluateAndReturn } from './helpers';
 
 export class Whatsapp extends BusinessLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -171,6 +172,20 @@ export class Whatsapp extends BusinessLayer {
       (messageId: any) => WAPI.getMessageById(messageId),
       messageId
     )) as Message;
+  }
+
+  /**
+   * Retorna uma lista de mensagens de um chat
+   * @param chatId string ID da conversa ou do grupo
+   * @param params GetMessagesParam Opções de filtragem de resultados (count, id, direction) veja {@link GetMessagesParam}.
+   * @returns Message object
+   */
+  public async getMessages(chatId: string, params: GetMessagesParam = {}) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ chatId, params }) => WAPI.getMessages(chatId, params),
+      { chatId, params: params as any }
+    );
   }
 
   /**

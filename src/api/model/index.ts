@@ -29,6 +29,7 @@ export { ContactStatus } from './contact-status';
 export { GroupCreation } from './group-creation';
 export { WhatsappProfile } from './whatsapp-profile';
 export * from './result';
+export * from './get-messages-param';
 export * from './initializer';
 export * from './message-id';
 export * from './presence-event';
