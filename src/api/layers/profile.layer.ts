@@ -22,6 +22,7 @@ import {
   fileToBase64,
   downloadFileToBase64,
   resizeImg,
+  evaluateAndReturn,
 } from '../helpers';
 import { CreateConfig } from '../../config/create-config';
 
@@ -39,7 +40,8 @@ export class ProfileLayer extends HostLayer {
    */
   public sendMute(id: string, time: number, type: string): Promise<object> {
     return new Promise(async (resolve, reject) => {
-      const result = await this.page.evaluate(
+      const result = await evaluateAndReturn(
+        this.page,
         (id, time, type) => WAPI.sendMute(id, time, type),
         id,
         time,
@@ -59,7 +61,7 @@ export class ProfileLayer extends HostLayer {
    * @param string types "dark" or "light"
    */
   public setTheme(type: string) {
-    return this.page.evaluate((type) => WAPI.setTheme(type), type);
+    return evaluateAndReturn(this.page, (type) => WAPI.setTheme(type), type);
   }
 
   /**
@@ -68,7 +70,8 @@ export class ProfileLayer extends HostLayer {
    * @param status
    */
   public async setProfileStatus(status: string) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ status }) => {
         WAPI.setMyStatus(status);
       },
@@ -104,7 +107,8 @@ export class ProfileLayer extends HostLayer {
           _webb64_640 = await resizeImg(buff, { width: 640, height: 640 });
         let obj = { a: _webb64_640, b: _webb64_96 };
 
-        return await this.page.evaluate(
+        return await evaluateAndReturn(
+          this.page,
           ({ obj, to }) => WAPI.setProfilePic(obj, to),
           {
             obj,
@@ -124,7 +128,8 @@ export class ProfileLayer extends HostLayer {
    * @param name
    */
   public async setProfileName(name: string) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       ({ name }) => {
         WAPI.setMyName(name);
       },

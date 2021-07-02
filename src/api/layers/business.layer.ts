@@ -65,7 +65,8 @@ export class BusinessLayer extends ControlsLayer {
     businessId: string,
     productId: string
   ) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       ({ to, base64, businessId, caption, productId }) => {
         WAPI.sendImageWithProduct(base64, to, caption, businessId, productId);
       },

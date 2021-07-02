@@ -34,7 +34,8 @@ export class RetrieverLayer extends SenderLayer {
    * @returns obj
    */
   public async getListMutes(type?: string): Promise<object> {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       (type: string) => WAPI.getListMute(type),
       type
     );
@@ -49,7 +50,7 @@ export class RetrieverLayer extends SenderLayer {
     removePath?: boolean
   ): Promise<SessionToken> {
     if (removePath === true) {
-      await this.page.evaluate(() => {
+      await evaluateAndReturn(this.page, () => {
         window['pathSession'] = true;
       });
     }
@@ -75,7 +76,7 @@ export class RetrieverLayer extends SenderLayer {
    * @returns string light or dark
    */
   public async getTheme() {
-    return await this.page.evaluate(() => WAPI.getTheme());
+    return await evaluateAndReturn(this.page, () => WAPI.getTheme());
   }
 
   /**
@@ -84,7 +85,7 @@ export class RetrieverLayer extends SenderLayer {
    * @returns array of [0,1,2,3....]
    */
   public async getBlockList() {
-    return await this.page.evaluate(() => WAPI.getBlockList());
+    return await evaluateAndReturn(this.page, () => WAPI.getBlockList());
   }
 
   /**
@@ -94,9 +95,9 @@ export class RetrieverLayer extends SenderLayer {
    */
   public async getAllChats(withNewMessageOnly = false) {
     if (withNewMessageOnly) {
-      return this.page.evaluate(() => WAPI.getAllChatsWithNewMsg());
+      return evaluateAndReturn(this.page, () => WAPI.getAllChatsWithNewMsg());
     } else {
-      return this.page.evaluate(() => WAPI.getAllChats());
+      return evaluateAndReturn(this.page, () => WAPI.getAllChats());
     }
   }
 
@@ -107,7 +108,8 @@ export class RetrieverLayer extends SenderLayer {
    * @returns contact detial as promise
    */
   public async checkNumberStatus(contactId: string): Promise<WhatsappProfile> {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       (contactId) => WAPI.checkNumberStatus(contactId),
       contactId
     );
@@ -119,7 +121,8 @@ export class RetrieverLayer extends SenderLayer {
    * @returns array of [Chat]
    */
   public async getAllChatsWithMessages(withNewMessageOnly = false) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       (withNewMessageOnly: boolean) =>
         WAPI.getAllChatsWithMessages(withNewMessageOnly),
       withNewMessageOnly
@@ -134,10 +137,12 @@ export class RetrieverLayer extends SenderLayer {
   public async getAllGroups(withNewMessagesOnly = false) {
     if (withNewMessagesOnly) {
       // prettier-ignore
-      const chats = await this.page.evaluate(() => WAPI.getAllChatsWithNewMsg());
+      const chats = await evaluateAndReturn(this.page,() => WAPI.getAllChatsWithNewMsg());
       return chats.filter((chat) => chat.isGroup);
     } else {
-      const chats = await this.page.evaluate(() => WAPI.getAllChats());
+      const chats = await evaluateAndReturn(this.page, () =>
+        WAPI.getAllChats()
+      );
       return chats.filter((chat) => chat.isGroup);
     }
   }
@@ -148,7 +153,7 @@ export class RetrieverLayer extends SenderLayer {
    * @returns array of broadcast list
    */
   public async getAllBroadcastList() {
-    const chats = await this.page.evaluate(() => WAPI.getAllChats());
+    const chats = await evaluateAndReturn(this.page, () => WAPI.getAllChats());
     return chats.filter(
       (chat) => chat.isBroadcast && chat.id._serialized !== 'status@broadcast'
     );
@@ -161,7 +166,8 @@ export class RetrieverLayer extends SenderLayer {
    * @returns contact detial as promise
    */
   public async getContact(contactId: string) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       (contactId) => WAPI.getContact(contactId),
       contactId
     );
@@ -173,7 +179,7 @@ export class RetrieverLayer extends SenderLayer {
    * @returns array of [Contact]
    */
   public async getAllContacts() {
-    return await this.page.evaluate(() => WAPI.getAllContacts());
+    return await evaluateAndReturn(this.page, () => WAPI.getAllContacts());
   }
 
   /**
@@ -183,7 +189,8 @@ export class RetrieverLayer extends SenderLayer {
    * @returns contact detial as promise
    */
   public async getChatById(contactId: string): Promise<Chat> {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       (contactId) => WAPI.getChatById(contactId),
       contactId
     );
@@ -226,7 +233,8 @@ export class RetrieverLayer extends SenderLayer {
    * @returns contact detial as promise
    */
   public async loadEarlierMessages(contactId: string) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       (contactId) => WAPI.loadEarlierMessages(contactId),
       contactId
     );
@@ -238,7 +246,8 @@ export class RetrieverLayer extends SenderLayer {
    * @param contactId
    */
   public async getStatus(contactId: string) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       (contactId) => WAPI.getStatus(contactId),
       contactId
     );
@@ -251,7 +260,8 @@ export class RetrieverLayer extends SenderLayer {
    * @returns contact detial as promise
    */
   public async getNumberProfile(contactId: string) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       (contactId) => WAPI.getNumberProfile(contactId),
       contactId
     );
@@ -271,7 +281,8 @@ export class RetrieverLayer extends SenderLayer {
     includeNotifications: boolean,
     useUnreadCount: boolean
   ) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ includeMe, includeNotifications, useUnreadCount }) =>
         WAPI.getUnreadMessages(includeMe, includeNotifications, useUnreadCount),
       { includeMe, includeNotifications, useUnreadCount }
@@ -284,7 +295,7 @@ export class RetrieverLayer extends SenderLayer {
    * @returns list of messages
    */
   public async getAllUnreadMessages() {
-    return this.page.evaluate(() => WAPI.getAllUnreadMessages());
+    return evaluateAndReturn(this.page, () => WAPI.getAllUnreadMessages());
   }
 
   /**
@@ -294,7 +305,7 @@ export class RetrieverLayer extends SenderLayer {
    * @deprecated Use getAllUnreadMessages
    */
   public async getAllNewMessages() {
-    return await this.page.evaluate(() => WAPI.getAllNewMessages());
+    return await evaluateAndReturn(this.page, () => WAPI.getAllNewMessages());
   }
 
   /**
@@ -315,7 +326,8 @@ export class RetrieverLayer extends SenderLayer {
     includeMe: boolean,
     includeNotifications: boolean
   ) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ chatId, includeMe, includeNotifications }) =>
         WAPI.getAllMessagesInChat(chatId, includeMe, includeNotifications),
       { chatId, includeMe, includeNotifications }
@@ -338,7 +350,8 @@ export class RetrieverLayer extends SenderLayer {
     includeMe = false,
     includeNotifications = false
   ) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ chatId, includeMe, includeNotifications }) =>
         WAPI.loadAndGetAllMessagesInChat(
           chatId,
@@ -355,7 +368,8 @@ export class RetrieverLayer extends SenderLayer {
    * @param chatId chat id: xxxxx@c.us
    */
   public async getChatIsOnline(chatId: string): Promise<boolean> {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       (chatId: string) => WAPI.getChatIsOnline(chatId),
       chatId
     );
@@ -367,7 +381,8 @@ export class RetrieverLayer extends SenderLayer {
    * @param chatId chat id: xxxxx@c.us
    */
   public async getLastSeen(chatId: string): Promise<number | boolean> {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       (chatId: string) => WAPI.getLastSeen(chatId),
       chatId
     );

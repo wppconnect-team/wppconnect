@@ -23,6 +23,15 @@ export async function loadAndGetAllMessagesInChat(
 ) {
   return WAPI.loadAllEarlierMessages(id).then((_) => {
     const chat = WAPI.getChat(id);
+
+    if (!chat) {
+      throw {
+        error: true,
+        code: 'chat_not_found',
+        message: 'Chat not found',
+      };
+    }
+
     let output = [];
     const messages = chat.msgs._models;
 

@@ -85,7 +85,11 @@ export class Whatsapp extends BusinessLayer {
    * @returns Decrypted file buffer (null otherwise)
    */
   public async downloadFile(data: string) {
-    return await this.page.evaluate((data) => WAPI.downloadFile(data), data);
+    return await evaluateAndReturn(
+      this.page,
+      (data) => WAPI.downloadFile(data),
+      data
+    );
   }
 
   /**
@@ -98,7 +102,8 @@ export class Whatsapp extends BusinessLayer {
       messageId = messageId.id;
     }
 
-    const result = await this.page.evaluate(
+    const result = await evaluateAndReturn(
+      this.page,
       (messageId) =>
         WAPI.downloadMedia(messageId).catch((e) => ({
           __error: e,
@@ -127,7 +132,7 @@ export class Whatsapp extends BusinessLayer {
    * Dont rely on this method
    */
   public async useHere() {
-    return await this.page.evaluate(() => WAPI.takeOver());
+    return await evaluateAndReturn(this.page, () => WAPI.takeOver());
   }
 
   /**
@@ -135,7 +140,7 @@ export class Whatsapp extends BusinessLayer {
    * @returns boolean
    */
   public async logout() {
-    return await this.page.evaluate(() => WAPI.logout());
+    return await evaluateAndReturn(this.page, () => WAPI.logout());
   }
 
   /**
@@ -168,7 +173,8 @@ export class Whatsapp extends BusinessLayer {
    * @returns Message object
    */
   public async getMessageById(messageId: string) {
-    return (await this.page.evaluate(
+    return (await evaluateAndReturn(
+      this.page,
       (messageId: any) => WAPI.getMessageById(messageId),
       messageId
     )) as Message;

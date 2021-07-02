@@ -54,7 +54,8 @@ export class SenderLayer extends ListenerLayer {
     title: string
   ): Promise<SendLinkResult> {
     return new Promise(async (resolve, reject) => {
-      const result = await this.page.evaluate(
+      const result = await evaluateAndReturn(
+        this.page,
         ({ chatId, url, title }) => {
           return WAPI.sendLinkPreview(chatId, url, title);
         },
@@ -76,13 +77,15 @@ export class SenderLayer extends ListenerLayer {
    */
   public async sendText(to: string, content: string): Promise<Message> {
     return new Promise(async (resolve, reject) => {
-      const messageId: string = await this.page.evaluate(
+      const messageId: string = await evaluateAndReturn(
+        this.page,
         ({ to, content }) => {
           return WAPI.sendMessage(to, content);
         },
         { to, content }
       );
-      const result = (await this.page.evaluate(
+      const result = (await evaluateAndReturn(
+        this.page,
         (messageId: any) => WAPI.getMessageById(messageId),
         messageId
       )) as Message;
@@ -109,13 +112,15 @@ export class SenderLayer extends ListenerLayer {
   ): Promise<Message> {
     return new Promise(async (resolve, reject) => {
       try {
-        const messageId = await this.page.evaluate(
+        const messageId = await evaluateAndReturn(
+          this.page,
           ({ chat, content, options }) => {
             return WAPI.sendMessageOptions(chat, content, options);
           },
           { chat, content, options }
         );
-        const result = (await this.page.evaluate(
+        const result = (await evaluateAndReturn(
+          this.page,
           (messageId: any) => WAPI.getMessageById(messageId),
           messageId
         )) as Message;
@@ -209,7 +214,8 @@ export class SenderLayer extends ListenerLayer {
 
       filename = filenameFromMimeType(filename, mimeType);
 
-      const result = await this.page.evaluate(
+      const result = await evaluateAndReturn(
+        this.page,
         ({ to, base64, filename, caption }) => {
           return WAPI.sendImage(base64, to, filename, caption);
         },
@@ -239,7 +245,8 @@ export class SenderLayer extends ListenerLayer {
     description: string,
     chatId: string
   ) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       ({ thumb, url, title, description, chatId }) => {
         WAPI.sendMessageWithThumb(thumb, url, title, description, chatId);
       },
@@ -266,13 +273,15 @@ export class SenderLayer extends ListenerLayer {
     quotedMsg: string
   ): Promise<Message> {
     return new Promise(async (resolve, reject) => {
-      const messageId: string = await this.page.evaluate(
+      const messageId: string = await evaluateAndReturn(
+        this.page,
         ({ to, content, quotedMsg }) => {
           return WAPI.reply(to, content, quotedMsg);
         },
         { to, content, quotedMsg }
       );
-      const result = (await this.page.evaluate(
+      const result = (await evaluateAndReturn(
+        this.page,
         (messageId: any) => WAPI.getMessageById(messageId),
         messageId
       )) as Message;
@@ -387,7 +396,8 @@ export class SenderLayer extends ListenerLayer {
       filename = filenameFromMimeType(filename, mimeType);
 
       const type = 'FileFromBase64';
-      const result = await this.page.evaluate(
+      const result = await evaluateAndReturn(
+        this.page,
         ({ to, base64, filename, caption, type }) => {
           return WAPI.sendFile(base64, to, filename, caption, type);
         },
@@ -497,7 +507,8 @@ export class SenderLayer extends ListenerLayer {
     filename: string,
     caption?: string
   ) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ to, base64, filename, caption }) =>
         WAPI.sendVideoAsGif(base64, to, filename, caption),
       { to, base64, filename, caption }
@@ -575,7 +586,8 @@ export class SenderLayer extends ListenerLayer {
     name?: string
   ) {
     return new Promise(async (resolve, reject) => {
-      const result = await this.page.evaluate(
+      const result = await evaluateAndReturn(
+        this.page,
         ({ to, contactsId, name }) => {
           return WAPI.sendContactVcard(to, contactsId, name);
         },
@@ -600,7 +612,8 @@ export class SenderLayer extends ListenerLayer {
     contacts: (string | { id: string; name: string })[]
   ) {
     return new Promise(async (resolve, reject) => {
-      const result = await this.page.evaluate(
+      const result = await evaluateAndReturn(
+        this.page,
         ({ to, contacts }) => {
           return WAPI.sendContactVcardList(to, contacts);
         },
@@ -627,7 +640,8 @@ export class SenderLayer extends ListenerLayer {
     messages: string | string[],
     skipMyMessages: boolean
   ): Promise<string[]> {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       ({ to, messages, skipMyMessages }) =>
         WAPI.forwardMessages(to, messages, skipMyMessages),
       { to, messages, skipMyMessages }
@@ -661,7 +675,8 @@ export class SenderLayer extends ListenerLayer {
           let _met = obj['metadata'];
 
           return new Promise(async (resolve, reject) => {
-            const result = await this.page.evaluate(
+            const result = await evaluateAndReturn(
+              this.page,
               ({ _webb64, to, _met }) => {
                 return WAPI.sendImageAsSticker(_webb64, to, _met, 'StickerGif');
               },
@@ -719,7 +734,8 @@ export class SenderLayer extends ListenerLayer {
           let _webb64 = obj['webpBase64'];
           let _met = obj['metadata'];
           return new Promise(async (resolve, reject) => {
-            const result = await this.page.evaluate(
+            const result = await evaluateAndReturn(
+              this.page,
               ({ _webb64, to, _met }) => {
                 return WAPI.sendImageAsSticker(_webb64, to, _met, 'Sticker');
               },
@@ -760,7 +776,8 @@ export class SenderLayer extends ListenerLayer {
     title: string
   ) {
     return new Promise(async (resolve, reject) => {
-      const result = await this.page.evaluate(
+      const result = await evaluateAndReturn(
+        this.page,
         ({ to, latitude, longitude, title }) => {
           return WAPI.sendLocation(to, latitude, longitude, title);
         },
@@ -780,7 +797,11 @@ export class SenderLayer extends ListenerLayer {
    * @param chatId chat id: xxxxx@us.c
    */
   public async sendSeen(chatId: string) {
-    return this.page.evaluate((chatId) => WAPI.sendSeen(chatId), chatId);
+    return evaluateAndReturn(
+      this.page,
+      (chatId) => WAPI.sendSeen(chatId),
+      chatId
+    );
   }
 
   /**
@@ -789,7 +810,9 @@ export class SenderLayer extends ListenerLayer {
    * @param chatId
    */
   public async startTyping(to: string) {
-    return this.page.evaluate(({ to }) => WAPI.startTyping(to), { to });
+    return evaluateAndReturn(this.page, ({ to }) => WAPI.startTyping(to), {
+      to,
+    });
   }
 
   /**
@@ -798,7 +821,9 @@ export class SenderLayer extends ListenerLayer {
    * @param to Chat id
    */
   public async stopTyping(to: string) {
-    return this.page.evaluate(({ to }) => WAPI.stopTyping(to), { to });
+    return evaluateAndReturn(this.page, ({ to }) => WAPI.stopTyping(to), {
+      to,
+    });
   }
 
   /**
@@ -806,7 +831,8 @@ export class SenderLayer extends ListenerLayer {
    * @category Chat
    */
   public async sendMentioned(to: string, message: string, mentioned: string[]) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ to, message, mentioned }) => {
         WAPI.sendMessageMentioned(to, message, mentioned);
       },

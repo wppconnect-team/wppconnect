@@ -33,7 +33,11 @@ export class GroupLayer extends RetrieverLayer {
    * @param groupId group id
    */
   public async leaveGroup(groupId: string) {
-    return this.page.evaluate((groupId) => WAPI.leaveGroup(groupId), groupId);
+    return evaluateAndReturn(
+      this.page,
+      (groupId) => WAPI.leaveGroup(groupId),
+      groupId
+    );
   }
 
   /**
@@ -42,7 +46,8 @@ export class GroupLayer extends RetrieverLayer {
    * @param groupId group id
    */
   public async getGroupMembersIds(groupId: string): Promise<Id[]> {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       (groupId: string) => WAPI.getGroupParticipantIDs(groupId),
       groupId
     );
@@ -68,7 +73,8 @@ export class GroupLayer extends RetrieverLayer {
    * @returns Invitation link
    */
   public async getGroupInviteLink(chatId: string) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       (chatId) => WAPI.getGroupInviteLink(chatId),
       chatId
     );
@@ -81,7 +87,8 @@ export class GroupLayer extends RetrieverLayer {
    * @returns Invitation link
    */
   public async revokeGroupInviteLink(chatId: string) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       (chatId) => WAPI.revokeGroupInviteLink(chatId),
       chatId
     );
@@ -98,7 +105,8 @@ export class GroupLayer extends RetrieverLayer {
     inviteCode = inviteCode.replace('invite/', '');
     inviteCode = inviteCode.replace('https://', '');
     inviteCode = inviteCode.replace('http://', '');
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       (inviteCode) => WAPI.getGroupInfoFromInviteLink(inviteCode),
       inviteCode
     );
@@ -111,7 +119,8 @@ export class GroupLayer extends RetrieverLayer {
    * @param contacts Contacts that should be added.
    */
   public async createGroup(groupName: string, contacts: string | string[]) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ groupName, contacts }) => WAPI.createGroup(groupName, contacts),
       { groupName, contacts }
     );
@@ -127,7 +136,8 @@ export class GroupLayer extends RetrieverLayer {
     groupId: string,
     participantId: string | string[]
   ) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ groupId, participantId }) =>
         WAPI.removeParticipant(groupId, participantId),
       { groupId, participantId }
@@ -144,7 +154,8 @@ export class GroupLayer extends RetrieverLayer {
     groupId: string,
     participantId: string | string[]
   ) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ groupId, participantId }) =>
         WAPI.addParticipant(groupId, participantId),
       { groupId, participantId }
@@ -161,7 +172,8 @@ export class GroupLayer extends RetrieverLayer {
     groupId: string,
     participantId: string | string[]
   ) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ groupId, participantId }) =>
         WAPI.promoteParticipant(groupId, participantId),
       { groupId, participantId }
@@ -178,7 +190,8 @@ export class GroupLayer extends RetrieverLayer {
     groupId: string,
     participantId: string | string[]
   ) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ groupId, participantId }) =>
         WAPI.demoteParticipant(groupId, participantId),
       { groupId, participantId }
@@ -191,7 +204,8 @@ export class GroupLayer extends RetrieverLayer {
    * @param chatId Group/Chat id ('0000000000-00000000@g.us')
    */
   public async getGroupAdmins(chatId: string) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       (chatId) => WAPI.getGroupAdmins(chatId),
       chatId
     );
@@ -206,7 +220,8 @@ export class GroupLayer extends RetrieverLayer {
     inviteCode = inviteCode.replace('invite/', '');
     inviteCode = inviteCode.replace('https://', '');
     inviteCode = inviteCode.replace('http://', '');
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       (inviteCode) => WAPI.joinGroup(inviteCode),
       inviteCode
     );

@@ -32,7 +32,8 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async unblockContact(contactId: string) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       (contactId) => WAPI.unblockContact(contactId),
       contactId
     );
@@ -45,7 +46,8 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async blockContact(contactId: string) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       (contactId) => WAPI.blockContact(contactId),
       contactId
     );
@@ -58,7 +60,8 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async markUnseenMessage(contactId: string) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       (contactId) => WAPI.markUnseenMessage(contactId),
       contactId
     );
@@ -71,7 +74,8 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async deleteChat(chatId: string) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       (chatId) => WAPI.deleteConversation(chatId),
       chatId
     );
@@ -85,7 +89,8 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async archiveChat(chatId: string, option: boolean = true) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       ({ chatId, option }) => WAPI.archiveChat(chatId, option),
       { chatId, option }
     );
@@ -101,7 +106,8 @@ export class ControlsLayer extends UILayer {
    */
   public async pinChat(chatId: string, option: boolean, nonExistent?: boolean) {
     return new Promise(async (resolve, reject) => {
-      const result = await this.page.evaluate(
+      const result = await evaluateAndReturn(
+        this.page,
         ({ chatId, option, nonExistent }) => {
           return WAPI.pinChat(chatId, option, nonExistent);
         },
@@ -142,7 +148,8 @@ export class ControlsLayer extends UILayer {
     messageId: string[] | string,
     onlyLocal = false
   ) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       ({ contactId, messageId, onlyLocal }) =>
         WAPI.deleteMessages(contactId, messageId, onlyLocal),
       { contactId: chatId, messageId, onlyLocal }
@@ -174,7 +181,8 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async setMessagesAdminsOnly(chatId: string, option: boolean) {
-    return this.page.evaluate(
+    return evaluateAndReturn(
+      this.page,
       ({ chatId, option }) => WAPI.setMessagesAdminsOnly(chatId, option),
       { chatId, option }
     );

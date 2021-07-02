@@ -20,7 +20,7 @@ import { CreateConfig, defaultOptions } from '../../config/create-config';
 import { SocketState } from '../model/enum';
 import { initWhatsapp, injectApi } from '../../controllers/browser';
 import { ScrapQrcode } from '../model/qrcode';
-import { scrapeImg } from '../helpers';
+import { evaluateAndReturn, scrapeImg } from '../helpers';
 import {
   asciiQr,
   getInterfaceStatus,
@@ -330,7 +330,7 @@ export class HostLayer {
    * @category Host
    */
   public async killServiceWorker() {
-    return await this.page.evaluate(() => WAPI.killServiceWorker());
+    return await evaluateAndReturn(this.page, () => WAPI.killServiceWorker());
   }
 
   /**
@@ -338,7 +338,7 @@ export class HostLayer {
    * @category Host
    */
   public async restartService() {
-    return await this.page.evaluate(() => WAPI.restartService());
+    return await evaluateAndReturn(this.page, () => WAPI.restartService());
   }
 
   /**
@@ -346,7 +346,7 @@ export class HostLayer {
    * @returns Current host device details
    */
   public async getHostDevice(): Promise<HostDevice> {
-    return await this.page.evaluate(() => WAPI.getHost());
+    return await evaluateAndReturn(this.page, () => WAPI.getHost());
   }
 
   /**
@@ -354,7 +354,7 @@ export class HostLayer {
    * @category Host
    */
   public async getWAVersion() {
-    return await this.page.evaluate(() => WAPI.getWAVersion());
+    return await evaluateAndReturn(this.page, () => WAPI.getWAVersion());
   }
 
   /**
@@ -362,7 +362,7 @@ export class HostLayer {
    * @category Host
    */
   public async getConnectionState(): Promise<SocketState> {
-    return await this.page.evaluate(() => {
+    return await evaluateAndReturn(this.page, () => {
       //@ts-ignore
       return Store.State.default.state;
     });
@@ -373,7 +373,7 @@ export class HostLayer {
    * @category Host
    */
   public async isConnected() {
-    return await this.page.evaluate(() => WAPI.isConnected());
+    return await evaluateAndReturn(this.page, () => WAPI.isConnected());
   }
 
   /**
@@ -381,7 +381,7 @@ export class HostLayer {
    * @category Host
    */
   public async isLoggedIn() {
-    return await this.page.evaluate(() => WAPI.isLoggedIn());
+    return await evaluateAndReturn(this.page, () => WAPI.isLoggedIn());
   }
 
   /**
@@ -389,7 +389,7 @@ export class HostLayer {
    * @category Host
    */
   public async getBatteryLevel() {
-    return await this.page.evaluate(() => WAPI.getBatteryLevel());
+    return await evaluateAndReturn(this.page, () => WAPI.getBatteryLevel());
   }
 
   /**
@@ -399,7 +399,8 @@ export class HostLayer {
    * @param interval interval number in miliseconds
    */
   public async startPhoneWatchdog(interval: number = 15000) {
-    return await this.page.evaluate(
+    return await evaluateAndReturn(
+      this.page,
       (interval) => WAPI.startPhoneWatchdog(interval),
       interval
     );
@@ -410,6 +411,6 @@ export class HostLayer {
    * @category Host
    */
   public async stopPhoneWatchdog(interval: number) {
-    return await this.page.evaluate(() => WAPI.stopPhoneWatchdog());
+    return await evaluateAndReturn(this.page, () => WAPI.stopPhoneWatchdog());
   }
 }
