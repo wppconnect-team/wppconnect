@@ -1,3 +1,15 @@
+## [1.7.3](https://github.com/wppconnect-team/wppconnect/compare/v1.7.2...v1.7.3) (2021-07-02)
+
+### Bug Fixes
+
+- Corrigido função onAddedToGroup (fix [#276](https://github.com/wppconnect-team/wppconnect/issues/276)) ([f034d1a](https://github.com/wppconnect-team/wppconnect/commit/f034d1ad69f43634da8d9924f7c968cd5fdcbe18))
+- Envolvido todos erros para separar erro da LIB do puppeteer ([68b933d](https://github.com/wppconnect-team/wppconnect/commit/68b933d8816ba3a2d0a0a34acdbbed2155d7dcf9))
+
+### Performance Improvements
+
+- Removido chat da serialização de mensagem para maior desempenho ([#289](https://github.com/wppconnect-team/wppconnect/issues/289)) ([69df15c](https://github.com/wppconnect-team/wppconnect/commit/69df15cc39406ee4e9e3d5e1e35b8764d4247d73))
+- Removido o quotedMsgObj da serialização de mensagem e adicionado quotedMsgId ([#289](https://github.com/wppconnect-team/wppconnect/issues/289)) ([3f6daaf](https://github.com/wppconnect-team/wppconnect/commit/3f6daaf6235e6f3e4de8d417aafdfc5091fa170c))
+
 ## [1.7.2](https://github.com/wppconnect-team/wppconnect/compare/v1.7.1...v1.7.2) (2021-07-01)
 
 ### Features
