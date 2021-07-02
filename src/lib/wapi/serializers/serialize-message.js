@@ -59,7 +59,11 @@ export const _serializeMessageObj = (obj) => {
     isPSA: obj.isPSA,
     type: obj.type,
     chat: _chat,
-    quotedMsgObj: WAPI._serializeMessageObj(obj['_quotedMsgObj']),
+    quotedMsgId: obj._quotedMsgObj
+      ? obj._quotedMsgObj.id
+        ? obj._quotedMsgObj.id._serialized
+        : obj._quotedMsgObj.id._serialized
+      : undefined,
     mediaData: window.WAPI._serializeRawObj(obj['mediaData']),
     reply: (body) => window.WAPI.reply(_chat.id._serialized, body, obj),
   });

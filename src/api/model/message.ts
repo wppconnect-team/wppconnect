@@ -68,7 +68,11 @@ export interface Message {
   chat: Chat;
   lastSeen: null | number | boolean;
   chatId: string;
+  /**
+   * @deprecated Use o atributo quotedMsgId em getMessageById para obter detalhes da mensagem
+   */
   quotedMsgObj: null;
+  quotedMsgId: null;
   mediaData: MediaData;
   recipients?: string[];
 }
