@@ -19,7 +19,6 @@ export const _serializeMessageObj = (obj) => {
   if (obj == undefined) {
     return null;
   }
-  const _chat = obj['chat'] ? WAPI._serializeChatObj(obj['chat']) : {};
   if (obj.quotedMsg) obj.quotedMsgObj();
   return Object.assign(window.WAPI._serializeRawObj(obj), {
     id: obj.id._serialized,
@@ -58,13 +57,11 @@ export const _serializeMessageObj = (obj) => {
     isNotification: obj.isNotification,
     isPSA: obj.isPSA,
     type: obj.type,
-    chat: _chat,
     quotedMsgId: obj._quotedMsgObj
       ? obj._quotedMsgObj.id
         ? obj._quotedMsgObj.id._serialized
         : obj._quotedMsgObj.id._serialized
       : undefined,
     mediaData: window.WAPI._serializeRawObj(obj['mediaData']),
-    reply: (body) => window.WAPI.reply(_chat.id._serialized, body, obj),
   });
 };
