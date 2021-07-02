@@ -20,11 +20,10 @@
 
 ## Our online channels
 
-[![WhatsApp Group](https://img.shields.io/badge/WhatsApp-Group-25D366)](https://chat.whatsapp.com/C1ChjyShl5cA7KvmtecF3L)
-[![Discord](https://img.shields.io/discord/844351092758413353?color=blueviolet&label=discord&style=flat)](https://discord.gg/zufsDRjxUQ)
-
-<a target="_blank" href="https://chat.whatsapp.com/C1ChjyShl5cA7KvmtecF3L" target="_blank"><img title="whatzapp" height="75" width="300" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/320px-WhatsApp_logo.svg.png"></a>
-<a target="_blank" href="https://discord.gg/zufsDRjxUQ" target="_blank"><img title="Discord" height="75" width="300" src="https://upload.wikimedia.org/wikipedia/pt/thumb/b/b7/Discord_logo_svg.svg/320px-Discord_logo_svg.svg.png"></a>
+[![Discord](https://img.shields.io/discord/844351092758413353?color=blueviolet&label=Discord&logo=discord&style=flat)](https://discord.gg/zufsDRjxUQ)
+[![Telegram Group](https://img.shields.io/badge/Telegram-Group-32AFED?logo=telegram)](https://t.me/wppconnect)
+[![WhatsApp Group](https://img.shields.io/badge/WhatsApp-Group-25D366?logo=whatsapp)](https://chat.whatsapp.com/C1ChjyShl5cA7KvmtecF3L)
+[![YouTube](https://img.shields.io/youtube/channel/subscribers/UCD7J9LG08PmGQrF5IS7Yv9A?label=YouTube)](https://www.youtube.com/c/wppconnect)
 
 ## Functions
 
