@@ -32,9 +32,9 @@ export function addOnAddedToGroup() {
          * - Evento de adicionado no grupo
          */
         if (
-          message.isNewMsg ||
-          message.isNotification ||
-          message.type === 'gp2' ||
+          message.isNewMsg &&
+          message.isNotification &&
+          message.type === 'gp2' &&
           message.subtype === 'add'
         ) {
           try {
