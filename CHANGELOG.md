@@ -1,3 +1,9 @@
+## [1.7.4](https://github.com/wppconnect-team/wppconnect/compare/v1.7.3...v1.7.4) (2021-07-08)
+
+### Bug Fixes
+
+- Corrigido o disparo do evento onAddedToGroup ([9e0fcbe](https://github.com/wppconnect-team/wppconnect/commit/9e0fcbe6f022e4acbb047cfbd814c9012a293722))
+
 ## [1.7.3](https://github.com/wppconnect-team/wppconnect/compare/v1.7.2...v1.7.3) (2021-07-02)
 
 ### Bug Fixes
