@@ -1,3 +1,9 @@
+## [1.7.5](https://github.com/wppconnect-team/wppconnect/compare/v1.7.4...v1.7.5) (2021-07-09)
+
+### Bug Fixes
+
+- Corrigido injeção de script para nova versão do WhatsApp Web ([efd6fe7](https://github.com/wppconnect-team/wppconnect/commit/efd6fe76ffdd4b2ae3e287736a4bf3dd8315e23e))
+
 ## [1.7.4](https://github.com/wppconnect-team/wppconnect/compare/v1.7.3...v1.7.4) (2021-07-08)
 
 ### Bug Fixes
