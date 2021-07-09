@@ -74,7 +74,7 @@
     "@types/ws": "^7.4.0",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
-    "@wppconnect-team/loader": "^1.0.0",
+    "@wppconnect-team/loader": "^1.0.5",
     "commitizen": "^4.2.3",
     "concurrently": "^6.0.0",
     "conventional-changelog-cli": "^2.1.1",
