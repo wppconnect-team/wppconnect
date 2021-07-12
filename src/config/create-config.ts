@@ -121,6 +121,15 @@ export interface CreateConfig {
    * @default true
    */
   createPathFileToken?: boolean;
+
+  /**
+   * Quando definido, essa opção força o carregamento de uma versão específica do WhatsApp WEB
+   * Normalmente, versões mais antigas continuam funcionando por mais um tempo,
+   * assim, com essa opção, é possível ter uma janela de tempo maior para se preparar para atualizações.
+   * Caso seja definido vazio ou null, será usado a versão atual, ou seja, sem forçar versão específica.
+   * @default 2.2126.x
+   */
+  whatsappVersion?: string;
 }
 export const defaultOptions: CreateConfig = {
   folderNameToken: './tokens',
@@ -139,4 +148,5 @@ export const defaultOptions: CreateConfig = {
   waitForLogin: true,
   logger: defaultLogger,
   tokenStore: 'file',
+  whatsappVersion: '2.2126.10',
 };

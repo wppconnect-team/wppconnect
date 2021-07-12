@@ -113,7 +113,7 @@ export class HostLayer {
       this.log('verbose', 'Injecting session token', { type: 'token' });
     }
 
-    await initWhatsapp(this.page, sessionToken);
+    await initWhatsapp(this.page, sessionToken, this.options.whatsappVersion);
 
     this.page.on('load', () => {
       this.log('verbose', 'Page loaded', { type: 'page' });
@@ -130,6 +130,9 @@ export class HostLayer {
     await injectApi(this.page)
       .then(() => {
         this.log('verbose', 'wapi.js injected');
+        this.getWAVersion().then((version) => {
+          this.log('info', `WhatsApp WEB version: ${version}`);
+        });
       })
       .catch((e) => {
         this.log('verbose', 'wapi.js failed');

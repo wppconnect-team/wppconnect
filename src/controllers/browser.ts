@@ -19,9 +19,10 @@ import * as ChromeLauncher from 'chrome-launcher';
 import * as os from 'os';
 import * as path from 'path';
 import * as rimraf from 'rimraf';
+import * as waVersion from '@wppconnect/wa-version';
 import axios from 'axios';
 import { addExitCallback } from 'catch-exit';
-import { Browser, BrowserContext, Page } from 'puppeteer';
+import { Browser, BrowserContext, Page, Request } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 import { CreateConfig } from '../config/create-config';
 import { puppeteerConfig } from '../config/puppeteer.config';
@@ -32,11 +33,47 @@ import { WebSocketTransport } from './websocket';
 import { Logger } from 'winston';
 import { SessionToken } from '../token-store';
 
-export async function initWhatsapp(page: Page, token?: SessionToken) {
+/**
+ * Força o carregamento de uma versão específica do WhatsApp WEB
+ * @param page Página a ser injetada
+ * @param version Versão ou expressão semver
+ */
+export async function setWhatsappVersion(page: Page, version: string) {
+  const body = waVersion.getPageContent(version);
+
+  await page.setRequestInterception(true);
+
+  page.on('request', (req) => {
+    if (req.url().startsWith('https://web.whatsapp.com/check-update')) {
+      req.abort();
+      return;
+    }
+    if (req.url() !== 'https://web.whatsapp.com/') {
+      req.continue();
+      return;
+    }
+
+    req.respond({
+      status: 200,
+      contentType: 'text/html',
+      body: body,
+    });
+  });
+}
+
+export async function initWhatsapp(
+  page: Page,
+  token?: SessionToken,
+  version?: string
+) {
+  await page.setUserAgent(useragentOverride);
+
   // Auth with token
   await injectSessionToken(page, token);
 
-  await page.setUserAgent(useragentOverride);
+  if (version) {
+    await setWhatsappVersion(page, version);
+  }
 
   const timeout = 10 * 1000;
   await Promise.race([
