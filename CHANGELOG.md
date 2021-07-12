@@ -1,3 +1,9 @@
+## [1.8.1](https://github.com/wppconnect-team/wppconnect/compare/v1.8.0...v1.8.1) (2021-07-12)
+
+### Bug Fixes
+
+- Atualizado a versão estável do WhatsApp ([08dabb2](https://github.com/wppconnect-team/wppconnect/commit/08dabb21f3b4d00175efc7d260a257a805fe4716))
+
 # [1.8.0](https://github.com/wppconnect-team/wppconnect/compare/v1.7.5...v1.8.0) (2021-07-12)
 
 ### Features
