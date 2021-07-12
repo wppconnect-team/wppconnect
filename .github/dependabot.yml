@@ -10,8 +10,4 @@ updates:
         versions:
           - '>= 15.a'
       - dependency-name: '@types/puppeteer'
-        versions:
-          - '>= 6.a'
       - dependency-name: 'puppeteer'
-        versions:
-          - '>= 6.a'
