@@ -1,3 +1,9 @@
+# [1.8.0](https://github.com/wppconnect-team/wppconnect/compare/v1.7.5...v1.8.0) (2021-07-12)
+
+### Features
+
+- Estabilidade para evitar problemas na atualização do WhatsApp ([97d26ab](https://github.com/wppconnect-team/wppconnect/commit/97d26ab7b3c18ba699f4888d0b109a5b8bd9d3d7))
+
 ## [1.7.5](https://github.com/wppconnect-team/wppconnect/compare/v1.7.4...v1.7.5) (2021-07-09)
 
 ### Bug Fixes
