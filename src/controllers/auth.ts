@@ -56,7 +56,7 @@ export const getInterfaceStatus = async (
       }
     )
     .then(async (element) => {
-      return await element.evaluate((a) => a);
+      return (await element.evaluate((a) => a)) as string;
     })
     .catch(() => null);
 };
