@@ -324,8 +324,11 @@ export class ListenerLayer extends ProfileLayer {
   }
 
   /**
-   * @event Listens to messages received
-   * @returns Disposable object to stop the listening
+   * @event Escuta por ligações recebidas, seja de áudio ou vídeo.
+   *
+   * Para recusar a ligação, basta chamar o `rejectCall` {@link rejectCall}
+   *
+   * @returns Objeto descartável para parar de ouvir
    */
   public onIncomingCall(callback: (call: any) => any) {
     return this.registerEvent('onIncomingCall', callback);

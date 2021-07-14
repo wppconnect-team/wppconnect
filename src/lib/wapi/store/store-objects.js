@@ -407,4 +407,8 @@ export const storeObjects = [
     id: 'changeEphemeralDuration',
     conditions: (module) => module.changeEphemeralDuration,
   },
+  {
+    id: 'sendCallSignalingMsg',
+    conditions: (module) => module.sendCallSignalingMsg,
+  },
 ];

@@ -134,6 +134,7 @@ interface WAPI {
   promoteParticipant: (groupId: string, contactId: string | string[]) => void;
   removeParticipant: (groupId: string, contactId: string | string[]) => void;
   reply: (to: string, content: string, quotedMsg: string) => Promise<string>;
+  rejectCall: (callId?: string) => Promise<number>;
   revokeGroupInviteLink: (chatId: string) => Promise<string>;
   restartService: () => boolean;
   sendChatstate: (chatState: string, chatId: string) => void;

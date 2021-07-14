@@ -225,4 +225,19 @@ export class Whatsapp extends BusinessLayer {
     const buff = Buffer.from(res.data, 'binary');
     return magix(buff, message.mediaKey, message.type, message.size);
   }
+
+  /**
+   * Rejeita uma ligação recebida pelo WhatsApp
+   * @param callId string ID da ligação, caso não passado, todas ligações serão rejeitadas
+   * @returns Número de ligações rejeitadas
+   */
+  public async rejectCall(callId?: string) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ callId }) => WAPI.rejectCall(callId),
+      {
+        callId,
+      }
+    );
+  }
 }
