@@ -101,7 +101,7 @@ export async function evaluateAndReturn<T extends EvaluateFn>(
           return resolve(await (${functionText}).apply(this, arguments));
         } catch (error) {
           return resolve({
-            __error: JSON.parse(JSON.stringify(err, Object.getOwnPropertyNames(err))),
+            __error: JSON.parse(JSON.stringify(error, Object.getOwnPropertyNames(error))),
           });
         }
       });`);
@@ -109,7 +109,14 @@ export async function evaluateAndReturn<T extends EvaluateFn>(
   const result = (await page.evaluate(func as any, ...args)) as any;
 
   if (typeof result === 'object' && '__error' in result) {
-    throw result.__error;
+    const errorMessage =
+      result.__error.message || JSON.stringify(result.__error);
+
+    const error = new Error(errorMessage);
+
+    Object.assign(error, result.__error);
+
+    throw error;
   }
 
   return result;
