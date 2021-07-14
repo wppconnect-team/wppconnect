@@ -1,3 +1,12 @@
+## 1.8.3 (2021-07-14)
+
+
+### Bug Fixes
+
+* Corrigido disparos de onNotificationMessage e onParticipantsChanged ao iniciar ([d421f7b](https://github.com/wppconnect-team/wppconnect/commit/d421f7bc860ec4cee503340c14e676692094ac1d))
+
+
+
 ## 1.8.2 (2021-07-14)
 
 
