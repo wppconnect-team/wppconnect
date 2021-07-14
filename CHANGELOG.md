@@ -1,3 +1,12 @@
+## 1.8.2 (2021-07-14)
+
+
+### Features
+
+* Adicionado recurso de recusar ligação do WhatsApp (close [#299](https://github.com/wppconnect-team/wppconnect/issues/299)) ([e7ef0b6](https://github.com/wppconnect-team/wppconnect/commit/e7ef0b6db0aecf57bd058c681127a0bdd756636b))
+
+
+
 ## [1.8.1](https://github.com/wppconnect-team/wppconnect/compare/v1.8.0...v1.8.1) (2021-07-12)
 
 ### Bug Fixes
