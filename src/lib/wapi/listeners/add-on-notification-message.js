@@ -19,7 +19,7 @@ export function addOnNotificationMessage() {
   window.WAPI.onNotificationMessage = function (callback) {
     window.WAPI.waitForStore('Msg', () => {
       window.Store.Msg.on('add', (message) => {
-        if (!message.isNotification) {
+        if (!message.isNotification || !message.isNewMsg) {
           return;
         }
         const data = WAPI._serializeMessageObj(message);
