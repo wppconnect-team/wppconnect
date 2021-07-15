@@ -42,7 +42,7 @@
 | Send _location_                                            | ✔   |
 | **and much more**                                          | ✔   |
 
-See more at <a href="https://wppconnect-team.github.io/wppconnect/classes/whatsapp.html">WhatsApp methods</a>
+See more at <a href="https://wppconnect-team.github.io/wppconnect/classes/Whatsapp.html">WhatsApp methods</a>
 
 ## Installation
 
