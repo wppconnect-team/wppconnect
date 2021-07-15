@@ -45,7 +45,7 @@ export async function sendLinkPreview(chatId, url, text) {
   if (!chat.erro) {
     const linkPreview = await Store.WapQuery.queryLinkPreview(url);
     var result =
-      (await chat.sendMessage(text.includes(url) ? text : `${url}\n${text}`, {
+      (await chat.sendMessage(text.includes(url) ? text : `*${text}*\n${url}`, {
         linkPreview,
       })) || '';
     var m = { type: 'LinkPreview', url: url, text: text },
