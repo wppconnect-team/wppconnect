@@ -22,8 +22,6 @@
 		}'		
 
 
-
-
 # Example to consume Lib via REST
 
 2 shapes were created in this example
