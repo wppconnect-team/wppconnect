@@ -130,9 +130,11 @@ export class HostLayer {
     await injectApi(this.page)
       .then(() => {
         this.log('verbose', 'wapi.js injected');
-        this.getWAVersion().then((version) => {
-          this.log('info', `WhatsApp WEB version: ${version}`);
-        });
+        this.getWAVersion()
+          .then((version) => {
+            this.log('info', `WhatsApp WEB version: ${version}`);
+          })
+          .catch(() => null);
       })
       .catch((e) => {
         this.log('verbose', 'wapi.js failed');
