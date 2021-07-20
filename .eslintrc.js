@@ -32,7 +32,7 @@ module.exports = {
     {
       files: ['src/lib/**/*.js'],
       parser: '@babel/eslint-parser',
-      plugins: '@babel',
+      plugins: ['@babel'],
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',

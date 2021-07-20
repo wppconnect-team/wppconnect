@@ -110,41 +110,6 @@ export async function asciiQr(code: string): Promise<string> {
   });
 }
 
-export async function retrieveQR(
-  page: puppeteer.Page
-): Promise<ScrapQrcode | undefined> {
-  const hasCanvas = await page.evaluate(
-    () => document.querySelector('canvas') !== null
-  );
-
-  if (!hasCanvas) {
-    return undefined;
-  }
-
-  await page.addScriptTag({
-    path: require.resolve(path.join(__dirname, '../lib/jsQR', 'jsQR.js')),
-  });
-
-  return await page
-    .evaluate(() => {
-      const canvas = document.querySelector('canvas') || null;
-      if (canvas !== null) {
-        const context = canvas.getContext('2d') || null;
-        if (context !== null) {
-          // @ts-ignore
-          const code = jsQR(
-            context.getImageData(0, 0, canvas.width, canvas.height).data,
-            canvas.width,
-            canvas.height
-          );
-          return { urlCode: code.data, base64Image: canvas.toDataURL() };
-        }
-      }
-      return undefined;
-    })
-    .catch(() => undefined);
-}
-
 export async function injectSessionToken(page: puppeteer.Page, token?: any) {
   if (!token || !isValidSessionToken(token)) {
     token = {};

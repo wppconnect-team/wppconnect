@@ -27,7 +27,6 @@ import {
   isAuthenticated,
   isInsideChat,
   needsToScan,
-  retrieveQR,
 } from '../../controllers/auth';
 import { sleep } from '../../utils/sleep';
 import { defaultLogger, LogLevel } from '../../utils/logger';
@@ -190,9 +189,6 @@ export class HostLayer {
     let qrResult: ScrapQrcode | undefined;
 
     qrResult = await scrapeImg(this.page).catch(() => undefined);
-    if (!qrResult || !qrResult.urlCode) {
-      qrResult = await retrieveQR(this.page).catch(() => undefined);
-    }
 
     return qrResult;
   }
