@@ -18,9 +18,20 @@
 const path = require('path');
 
 module.exports = {
-  entry: './wapi.js',
-  // mode: 'development',
+  entry: ['regenerator-runtime/runtime.js', './wapi.js'],
+  mode: 'production',
   // devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+    ],
+  },
   output: {
     path: path.resolve(__dirname, '../../../dist/lib/wapi'),
     filename: 'wapi.js',

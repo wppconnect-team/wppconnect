@@ -31,6 +31,8 @@ module.exports = {
   overrides: [
     {
       files: ['src/lib/**/*.js'],
+      parser: '@babel/eslint-parser',
+      plugins: '@babel',
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
