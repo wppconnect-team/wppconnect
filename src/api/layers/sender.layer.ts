@@ -331,16 +331,7 @@ export class SenderLayer extends ListenerLayer {
     caption?: string
   ) {
     return new Promise<SendFileResult>(async (resolve, reject) => {
-      let base64 = await downloadFileToBase64(filePath, [
-          'audio/3gpp',
-          'audio/3gpp2',
-          'audio/aac',
-          'audio/midi',
-          'audio/mpeg',
-          'audio/ogg',
-          'audio/webm',
-          'audio/x-wav',
-        ]),
+      let base64 = await downloadFileToBase64(filePath, [/^audio/]),
         obj: { erro: boolean; to: string; text: string };
 
       if (!base64) {
