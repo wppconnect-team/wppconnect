@@ -1,3 +1,12 @@
+## 1.8.4 (2021-07-20)
+
+
+### Bug Fixes
+
+* Corrigido o envio de arquivos de tipos de áudio via URL (fix [#329](https://github.com/wppconnect-team/wppconnect/issues/329)) ([6e8b836](https://github.com/wppconnect-team/wppconnect/commit/6e8b836f40ecda9df4870b09d6fc11410a15e1f6))
+
+
+
 ## 1.8.3 (2021-07-14)
 
 
