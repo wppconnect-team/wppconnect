@@ -53,20 +53,17 @@ export class SenderLayer extends ListenerLayer {
     url: string,
     title: string
   ): Promise<SendLinkResult> {
-    return new Promise(async (resolve, reject) => {
-      const result = await evaluateAndReturn(
-        this.page,
-        ({ chatId, url, title }) => {
-          return WAPI.sendLinkPreview(chatId, url, title);
-        },
-        { chatId, url, title }
-      );
-      if (result['erro'] == true) {
-        reject(result);
-      } else {
-        resolve(result);
-      }
-    });
+    const result = await evaluateAndReturn(
+      this.page,
+      ({ chatId, url, title }) => {
+        return WAPI.sendLinkPreview(chatId, url, title);
+      },
+      { chatId, url, title }
+    );
+    if (result['erro'] == true) {
+      throw result;
+    }
+    return result;
   }
 
   /**
@@ -76,25 +73,22 @@ export class SenderLayer extends ListenerLayer {
    * @param content text message
    */
   public async sendText(to: string, content: string): Promise<Message> {
-    return new Promise(async (resolve, reject) => {
-      const messageId: string = await evaluateAndReturn(
-        this.page,
-        ({ to, content }) => {
-          return WAPI.sendMessage(to, content);
-        },
-        { to, content }
-      );
-      const result = (await evaluateAndReturn(
-        this.page,
-        (messageId: any) => WAPI.getMessageById(messageId),
-        messageId
-      )) as Message;
-      if (result['erro'] == true) {
-        reject(result);
-      } else {
-        resolve(result);
-      }
-    });
+    const messageId: string = await evaluateAndReturn(
+      this.page,
+      ({ to, content }) => {
+        return WAPI.sendMessage(to, content);
+      },
+      { to, content }
+    );
+    const result = (await evaluateAndReturn(
+      this.page,
+      (messageId: any) => WAPI.getMessageById(messageId),
+      messageId
+    )) as Message;
+    if (result['erro'] == true) {
+      throw result;
+    }
+    return result;
   }
 
   /**
@@ -110,25 +104,19 @@ export class SenderLayer extends ListenerLayer {
     content: any,
     options?: any
   ): Promise<Message> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const messageId = await evaluateAndReturn(
-          this.page,
-          ({ chat, content, options }) => {
-            return WAPI.sendMessageOptions(chat, content, options);
-          },
-          { chat, content, options }
-        );
-        const result = (await evaluateAndReturn(
-          this.page,
-          (messageId: any) => WAPI.getMessageById(messageId),
-          messageId
-        )) as Message;
-        resolve(result);
-      } catch (error) {
-        reject(error);
-      }
-    });
+    const messageId = await evaluateAndReturn(
+      this.page,
+      ({ chat, content, options }) => {
+        return WAPI.sendMessageOptions(chat, content, options);
+      },
+      { chat, content, options }
+    );
+    const result = (await evaluateAndReturn(
+      this.page,
+      (messageId: any) => WAPI.getMessageById(messageId),
+      messageId
+    )) as Message;
+    return result;
   }
 
   /**
@@ -145,36 +133,32 @@ export class SenderLayer extends ListenerLayer {
     filename?: string,
     caption?: string
   ): Promise<SendFileResult> {
-    return new Promise(async (resolve, reject) => {
-      let base64 = await downloadFileToBase64(filePath, [
-        'image/gif',
-        'image/png',
-        'image/jpg',
-        'image/jpeg',
-        'image/webp',
-      ]);
+    let base64 = await downloadFileToBase64(filePath, [
+      'image/gif',
+      'image/png',
+      'image/jpg',
+      'image/jpeg',
+      'image/webp',
+    ]);
 
-      if (!base64) {
-        base64 = await fileToBase64(filePath);
-      }
+    if (!base64) {
+      base64 = await fileToBase64(filePath);
+    }
 
-      if (!base64) {
-        const obj = {
-          erro: true,
-          to: to,
-          text: 'No such file or directory, open "' + filePath + '"',
-        };
-        return reject(obj);
-      }
+    if (!base64) {
+      const obj = {
+        erro: true,
+        to: to,
+        text: 'No such file or directory, open "' + filePath + '"',
+      };
+      throw obj;
+    }
 
-      if (!filename) {
-        filename = path.basename(filePath);
-      }
+    if (!filename) {
+      filename = path.basename(filePath);
+    }
 
-      this.sendImageFromBase64(to, base64, filename, caption)
-        .then(resolve)
-        .catch(reject);
-    });
+    return await this.sendImageFromBase64(to, base64, filename, caption);
   }
 
   /**
@@ -191,42 +175,39 @@ export class SenderLayer extends ListenerLayer {
     filename: string,
     caption?: string
   ): Promise<SendFileResult> {
-    return new Promise(async (resolve, reject) => {
-      let mimeType = base64MimeType(base64);
+    let mimeType = base64MimeType(base64);
 
-      if (!mimeType) {
-        const obj = {
-          erro: true,
-          to: to,
-          text: 'Invalid base64!',
-        };
-        return reject(obj);
-      }
+    if (!mimeType) {
+      const obj = {
+        erro: true,
+        to: to,
+        text: 'Invalid base64!',
+      };
+      throw obj;
+    }
 
-      if (!mimeType.includes('image')) {
-        const obj = {
-          erro: true,
-          to: to,
-          text: 'Not an image, allowed formats png, jpeg and webp',
-        };
-        return reject(obj);
-      }
+    if (!mimeType.includes('image')) {
+      const obj = {
+        erro: true,
+        to: to,
+        text: 'Not an image, allowed formats png, jpeg and webp',
+      };
+      throw obj;
+    }
 
-      filename = filenameFromMimeType(filename, mimeType);
+    filename = filenameFromMimeType(filename, mimeType);
 
-      const result = await evaluateAndReturn(
-        this.page,
-        ({ to, base64, filename, caption }) => {
-          return WAPI.sendImage(base64, to, filename, caption);
-        },
-        { to, base64, filename, caption }
-      );
-      if (result['erro'] == true) {
-        reject(result);
-      } else {
-        resolve(result);
-      }
-    });
+    const result = await evaluateAndReturn(
+      this.page,
+      ({ to, base64, filename, caption }) => {
+        return WAPI.sendImage(base64, to, filename, caption);
+      },
+      { to, base64, filename, caption }
+    );
+    if (result['erro'] == true) {
+      throw result;
+    }
+    return result;
   }
 
   /**
@@ -272,25 +253,22 @@ export class SenderLayer extends ListenerLayer {
     content: string,
     quotedMsg: string
   ): Promise<Message> {
-    return new Promise(async (resolve, reject) => {
-      const messageId: string = await evaluateAndReturn(
-        this.page,
-        ({ to, content, quotedMsg }) => {
-          return WAPI.reply(to, content, quotedMsg);
-        },
-        { to, content, quotedMsg }
-      );
-      const result = (await evaluateAndReturn(
-        this.page,
-        (messageId: any) => WAPI.getMessageById(messageId),
-        messageId
-      )) as Message;
-      if (result['erro'] == true) {
-        reject(result);
-      } else {
-        resolve(result);
-      }
-    });
+    const messageId: string = await evaluateAndReturn(
+      this.page,
+      ({ to, content, quotedMsg }) => {
+        return WAPI.reply(to, content, quotedMsg);
+      },
+      { to, content, quotedMsg }
+    );
+    const result = (await evaluateAndReturn(
+      this.page,
+      (messageId: any) => WAPI.getMessageById(messageId),
+      messageId
+    )) as Message;
+    if (result['erro'] == true) {
+      throw result;
+    }
+    return result;
   }
 
   /**
@@ -372,34 +350,31 @@ export class SenderLayer extends ListenerLayer {
     filename: string,
     caption?: string
   ): Promise<SendFileResult> {
-    return new Promise(async (resolve, reject) => {
-      let mimeType = base64MimeType(base64);
+    let mimeType = base64MimeType(base64);
 
-      if (!mimeType) {
-        const obj = {
-          erro: true,
-          to: to,
-          text: 'Invalid base64!',
-        };
-        return reject(obj);
-      }
+    if (!mimeType) {
+      const obj = {
+        erro: true,
+        to: to,
+        text: 'Invalid base64!',
+      };
+      throw obj;
+    }
 
-      filename = filenameFromMimeType(filename, mimeType);
+    filename = filenameFromMimeType(filename, mimeType);
 
-      const type = 'FileFromBase64';
-      const result = await evaluateAndReturn(
-        this.page,
-        ({ to, base64, filename, caption, type }) => {
-          return WAPI.sendFile(base64, to, filename, caption, type);
-        },
-        { to, base64, filename, caption, type }
-      );
-      if (result['erro'] == true) {
-        reject(result);
-      } else {
-        resolve(result);
-      }
-    });
+    const type = 'FileFromBase64';
+    const result = await evaluateAndReturn(
+      this.page,
+      ({ to, base64, filename, caption, type }) => {
+        return WAPI.sendFile(base64, to, filename, caption, type);
+      },
+      { to, base64, filename, caption, type }
+    );
+    if (result['erro'] == true) {
+      throw result;
+    }
+    return result;
   }
 
   /**
@@ -457,31 +432,27 @@ export class SenderLayer extends ListenerLayer {
     filename?: string,
     caption?: string
   ) {
-    return new Promise(async (resolve, reject) => {
-      let base64 = await downloadFileToBase64(filePath),
-        obj: { erro: boolean; to: string; text: string };
+    let base64 = await downloadFileToBase64(filePath),
+      obj: { erro: boolean; to: string; text: string };
 
-      if (!base64) {
-        base64 = await fileToBase64(filePath);
-      }
+    if (!base64) {
+      base64 = await fileToBase64(filePath);
+    }
 
-      if (!base64) {
-        obj = {
-          erro: true,
-          to: to,
-          text: 'No such file or directory, open "' + filePath + '"',
-        };
-        return reject(obj);
-      }
+    if (!base64) {
+      obj = {
+        erro: true,
+        to: to,
+        text: 'No such file or directory, open "' + filePath + '"',
+      };
+      throw obj;
+    }
 
-      if (!filename) {
-        filename = path.basename(filePath);
-      }
+    if (!filename) {
+      filename = path.basename(filePath);
+    }
 
-      this.sendVideoAsGifFromBase64(to, base64, filename, caption)
-        .then(resolve)
-        .catch(reject);
-    });
+    return this.sendVideoAsGifFromBase64(to, base64, filename, caption);
   }
 
   /**
@@ -520,31 +491,27 @@ export class SenderLayer extends ListenerLayer {
     filename?: string,
     caption?: string
   ) {
-    return new Promise(async (resolve, reject) => {
-      let base64 = await downloadFileToBase64(filePath),
-        obj: { erro: boolean; to: string; text: string };
+    let base64 = await downloadFileToBase64(filePath),
+      obj: { erro: boolean; to: string; text: string };
 
-      if (!base64) {
-        base64 = await fileToBase64(filePath);
-      }
+    if (!base64) {
+      base64 = await fileToBase64(filePath);
+    }
 
-      if (!base64) {
-        obj = {
-          erro: true,
-          to: to,
-          text: 'No such file or directory, open "' + filePath + '"',
-        };
-        return reject(obj);
-      }
+    if (!base64) {
+      obj = {
+        erro: true,
+        to: to,
+        text: 'No such file or directory, open "' + filePath + '"',
+      };
+      throw obj;
+    }
 
-      if (!filename) {
-        filename = path.basename(filePath);
-      }
+    if (!filename) {
+      filename = path.basename(filePath);
+    }
 
-      this.sendGifFromBase64(to, base64, filename, caption)
-        .then(resolve)
-        .catch(reject);
-    });
+    return this.sendGifFromBase64(to, base64, filename, caption);
   }
 
   /**
@@ -576,20 +543,17 @@ export class SenderLayer extends ListenerLayer {
     contactsId: string | string[],
     name?: string
   ) {
-    return new Promise(async (resolve, reject) => {
-      const result = await evaluateAndReturn(
-        this.page,
-        ({ to, contactsId, name }) => {
-          return WAPI.sendContactVcard(to, contactsId, name);
-        },
-        { to, contactsId, name }
-      );
-      if (result['erro'] == true) {
-        reject(result);
-      } else {
-        resolve(result);
-      }
-    });
+    const result = await evaluateAndReturn(
+      this.page,
+      ({ to, contactsId, name }) => {
+        return WAPI.sendContactVcard(to, contactsId, name);
+      },
+      { to, contactsId, name }
+    );
+    if (result['erro'] == true) {
+      throw result;
+    }
+    return result;
   }
 
   /**
@@ -602,20 +566,17 @@ export class SenderLayer extends ListenerLayer {
     to: string,
     contacts: (string | { id: string; name: string })[]
   ) {
-    return new Promise(async (resolve, reject) => {
-      const result = await evaluateAndReturn(
-        this.page,
-        ({ to, contacts }) => {
-          return WAPI.sendContactVcardList(to, contacts);
-        },
-        { to, contacts }
-      );
-      if (result['erro'] == true) {
-        reject(result);
-      } else {
-        resolve(result);
-      }
-    });
+    const result = await evaluateAndReturn(
+      this.page,
+      ({ to, contacts }) => {
+        return WAPI.sendContactVcardList(to, contacts);
+      },
+      { to, contacts }
+    );
+    if (result['erro'] == true) {
+      throw result;
+    }
+    return result;
   }
 
   /**
@@ -665,20 +626,17 @@ export class SenderLayer extends ListenerLayer {
           let _webb64 = obj['webpBase64'];
           let _met = obj['metadata'];
 
-          return new Promise(async (resolve, reject) => {
-            const result = await evaluateAndReturn(
-              this.page,
-              ({ _webb64, to, _met }) => {
-                return WAPI.sendImageAsSticker(_webb64, to, _met, 'StickerGif');
-              },
-              { _webb64, to, _met }
-            );
-            if (result['erro'] == true) {
-              reject(result);
-            } else {
-              resolve(result);
-            }
-          });
+          const result = await evaluateAndReturn(
+            this.page,
+            ({ _webb64, to, _met }) => {
+              return WAPI.sendImageAsSticker(_webb64, to, _met, 'StickerGif');
+            },
+            { _webb64, to, _met }
+          );
+          if (result['erro'] == true) {
+            throw result;
+          }
+          return result;
         } else {
           throw {
             error: true,
@@ -724,20 +682,17 @@ export class SenderLayer extends ListenerLayer {
         if (typeof obj == 'object') {
           let _webb64 = obj['webpBase64'];
           let _met = obj['metadata'];
-          return new Promise(async (resolve, reject) => {
-            const result = await evaluateAndReturn(
-              this.page,
-              ({ _webb64, to, _met }) => {
-                return WAPI.sendImageAsSticker(_webb64, to, _met, 'Sticker');
-              },
-              { _webb64, to, _met }
-            );
-            if (result['erro'] == true) {
-              reject(result);
-            } else {
-              resolve(result);
-            }
-          });
+          const result = await evaluateAndReturn(
+            this.page,
+            ({ _webb64, to, _met }) => {
+              return WAPI.sendImageAsSticker(_webb64, to, _met, 'Sticker');
+            },
+            { _webb64, to, _met }
+          );
+          if (result['erro'] == true) {
+            throw result;
+          }
+          return result;
         } else {
           throw {
             error: true,
@@ -766,20 +721,18 @@ export class SenderLayer extends ListenerLayer {
     longitude: string,
     title: string
   ) {
-    return new Promise(async (resolve, reject) => {
-      const result = await evaluateAndReturn(
-        this.page,
-        ({ to, latitude, longitude, title }) => {
-          return WAPI.sendLocation(to, latitude, longitude, title);
-        },
-        { to, latitude, longitude, title }
-      );
-      if (result['erro'] == true) {
-        reject(result);
-      } else {
-        resolve(result);
-      }
-    });
+    const result = await evaluateAndReturn(
+      this.page,
+      ({ to, latitude, longitude, title }) => {
+        return WAPI.sendLocation(to, latitude, longitude, title);
+      },
+      { to, latitude, longitude, title }
+    );
+    if (result['erro'] == true) {
+      throw result;
+    } else {
+      return result;
+    }
   }
 
   /**

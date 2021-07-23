@@ -17,43 +17,41 @@
 
 import { getMessageById } from './get-message-by-id';
 
-export function starMessages(messagesId, star) {
-  return new Promise(async (resolve) => {
-    if (typeof star === 'undefined') {
-      star = true;
-    }
+export async function starMessages(messagesId, star) {
+  if (typeof star === 'undefined') {
+    star = true;
+  }
 
-    if (!Array.isArray(messagesId)) {
-      messagesId = [messagesId];
-    }
+  if (!Array.isArray(messagesId)) {
+    messagesId = [messagesId];
+  }
 
-    let messagesToStar = await Promise.all(
-      messagesId.map(async (msgId) => await getMessageById(msgId, null, false))
-    );
+  let messagesToStar = await Promise.all(
+    messagesId.map(async (msgId) => await getMessageById(msgId, null, false))
+  );
 
-    // Ignore unchanged messages
-    messagesToStar = messagesToStar.filter((msg) => msg && msg.star !== star);
+  // Ignore unchanged messages
+  messagesToStar = messagesToStar.filter((msg) => msg && msg.star !== star);
 
-    // group by chat
-    const messagesPerChat = messagesToStar.reduce(function (r, msg) {
-      const id = msg.id.remote._serialized;
-      r[id] = r[id] || [];
-      r[id].push(msg);
-      return r;
-    }, Object.create(null));
+  // group by chat
+  const messagesPerChat = messagesToStar.reduce(function (r, msg) {
+    const id = msg.id.remote._serialized;
+    r[id] = r[id] || [];
+    r[id].push(msg);
+    return r;
+  }, Object.create(null));
 
-    let count = 0;
-    // Star Messages
-    for (const chatId in messagesPerChat) {
-      const chat = Store.Chat.get(chatId);
-      const messages = messagesPerChat[chatId];
+  let count = 0;
+  // Star Messages
+  for (const chatId in messagesPerChat) {
+    const chat = Store.Chat.get(chatId);
+    const messages = messagesPerChat[chatId];
 
-      count += await chat
-        .sendStarMsgs(messages, star)
-        .then(() => messages.length)
-        .catch(() => 0);
-    }
+    count += await chat
+      .sendStarMsgs(messages, star)
+      .then(() => messages.length)
+      .catch(() => 0);
+  }
 
-    return resolve(count);
-  });
+  return count;
 }

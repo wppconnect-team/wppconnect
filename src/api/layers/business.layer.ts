@@ -73,4 +73,13 @@ export class BusinessLayer extends ControlsLayer {
       { to, base64, businessId, caption, productId }
     );
   }
+
+  /**
+   * Querys order catalog
+   * @param messageId string
+   * @returns Message object
+   */
+  public async getAllLabels() {
+    return evaluateAndReturn(this.page, () => WAPI.getAllLabels());
+  }
 }

@@ -38,21 +38,22 @@ export class ProfileLayer extends HostLayer {
    * @param type kind of silence "hours" "minutes" "year"
    * To remove the silence, just enter the contact parameter
    */
-  public sendMute(id: string, time: number, type: string): Promise<object> {
-    return new Promise(async (resolve, reject) => {
-      const result = await evaluateAndReturn(
-        this.page,
-        (id, time, type) => WAPI.sendMute(id, time, type),
-        id,
-        time,
-        type
-      );
-      if (result['erro'] == true) {
-        reject(result);
-      } else {
-        resolve(result);
-      }
-    });
+  public async sendMute(
+    id: string,
+    time: number,
+    type: string
+  ): Promise<object> {
+    const result = await evaluateAndReturn(
+      this.page,
+      (id, time, type) => WAPI.sendMute(id, time, type),
+      id,
+      time,
+      type
+    );
+    if (result['erro'] == true) {
+      throw result;
+    }
+    return result;
   }
 
   /**
