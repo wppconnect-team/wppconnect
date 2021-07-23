@@ -40,6 +40,10 @@ export async function getchatId(chatId) {
 }
 
 export async function sendExist(chatId, returnChat = true, Send = true) {
+  if (!chatId) {
+    return scope(chatId, true, 500, 'Chat ID is empty');
+  }
+
   // Check chat exists (group is always a chat)
   let chat = await window.WAPI.getChat(chatId);
 
