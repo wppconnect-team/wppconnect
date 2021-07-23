@@ -67,7 +67,7 @@
     "@commitlint/cz-commitlint": "^12.1.4",
     "@types/atob": "^2.1.2",
     "@types/mime-types": "^2.1.0",
-    "@types/mocha": "^8.2.1",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^14.14.22",
     "@types/puppeteer": "5.4.3",
     "@types/rimraf": "^3.0.0",
