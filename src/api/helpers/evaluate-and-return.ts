@@ -106,18 +106,19 @@ export async function evaluateAndReturn<T extends EvaluateFn>(
         }
       });`);
 
-  const result = (await page.evaluate(func as any, ...args)) as any;
-
-  if (typeof result === 'object' && '__error' in result) {
-    const errorMessage =
-      result.__error.message || JSON.stringify(result.__error);
-
-    const error = new Error(errorMessage);
-
-    Object.assign(error, result.__error);
-
-    throw error;
-  }
-
-  return result;
+  // Prevents exception from rising up the stack when evaluate fails.
+  let result = null;
+  try {
+      result = (await page.evaluate(func as any, ...args)) as any;
+      if (typeof result === 'object' && '__error' in result) {
+         const errorMessage = result.__error.message || JSON.stringify(result.__error);
+         const error = new Error(errorMessage);
+         Object.assign(error, result.__error);
+         //throw error;
+      }
+   }
+   catch(ex) {
+     console.log("Error on evaluateAndReturn:", ex.message); 
+   }
+   return result;
 }
