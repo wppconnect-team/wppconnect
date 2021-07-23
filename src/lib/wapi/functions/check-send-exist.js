@@ -40,6 +40,11 @@ export async function getchatId(chatId) {
 }
 
 export async function sendExist(chatId, returnChat = true, Send = true) {
+  
+  // Prevent error: cannot read property includes of undefined 
+  // ... when chatId is undefined 
+  if (!chatId) return scope(chatId, true, 404, 'Invalid chat id'); 
+  
   // Check chat exists (group is always a chat)
   let chat = await window.WAPI.getChat(chatId);
 
