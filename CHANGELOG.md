@@ -1,3 +1,7 @@
+## 1.8.6 (2021-07-23)
+
+
+
 ## [1.8.5](https://github.com/wppconnect-team/wppconnect/compare/v1.8.4...v1.8.5) (2021-07-20)
 
 
