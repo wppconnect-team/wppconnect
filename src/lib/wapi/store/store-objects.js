@@ -411,4 +411,11 @@ export const storeObjects = [
     id: 'sendCallSignalingMsg',
     conditions: (module) => module.sendCallSignalingMsg,
   },
+  {
+    id: 'checkNumberInfo',
+    conditions: (module) =>
+      module.default.toString().includes('Should not reach queryExists MD')
+        ? module.default
+        : null,
+  },
 ];

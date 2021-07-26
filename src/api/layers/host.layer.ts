@@ -112,7 +112,12 @@ export class HostLayer {
       this.log('verbose', 'Injecting session token', { type: 'token' });
     }
 
-    await initWhatsapp(this.page, sessionToken, this.options.whatsappVersion);
+    await initWhatsapp(
+      this.page,
+      sessionToken,
+      !this.options?.puppeteerOptions?.userDataDir,
+      this.options.whatsappVersion
+    );
 
     this.page.on('load', () => {
       this.log('verbose', 'Page loaded', { type: 'page' });

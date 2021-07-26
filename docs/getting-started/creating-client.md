@@ -161,3 +161,25 @@ wppconnect
 ### Saving Session Token
 
 Read the {@link TokenStore}
+
+### Multidevice (BETA)
+
+To use multidevice account, you have to setup a fixed user data dir for browser to keep it logged,
+because WhatsApp changed the way of autentication.
+
+To setup this, you can use the example bellow:
+
+```javascript
+wppconnect
+  .create({
+    // ...
+    session: 'mySessionName',
+    puppeteerOptions: {
+      userDataDir: './tokens/mySessionName', // or your custom directory
+    },
+    // ...
+  })
+  .then((client) => start(client))
+  .catch((error) => console.log(error));
+```
+

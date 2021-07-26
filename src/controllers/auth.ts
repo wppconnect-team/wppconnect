@@ -110,7 +110,11 @@ export async function asciiQr(code: string): Promise<string> {
   });
 }
 
-export async function injectSessionToken(page: puppeteer.Page, token?: any) {
+export async function injectSessionToken(
+  page: puppeteer.Page,
+  token?: any,
+  clear = true
+) {
   if (!token || !isValidSessionToken(token)) {
     token = {};
   }
@@ -173,8 +177,13 @@ export async function injectSessionToken(page: puppeteer.Page, token?: any) {
   page.on('request', reqHandler);
 
   await page.goto(puppeteerConfig.whatsappUrl);
+
+  if (clear) {
+    await page.evaluate((session) => {
+      localStorage.clear();
+    });
+  }
   await page.evaluate((session) => {
-    localStorage.clear();
     Object.keys(session).forEach((key) => {
       localStorage.setItem(key, session[key]);
     });

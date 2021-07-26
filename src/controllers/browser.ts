@@ -64,12 +64,13 @@ export async function setWhatsappVersion(page: Page, version: string) {
 export async function initWhatsapp(
   page: Page,
   token?: SessionToken,
+  clear = true,
   version?: string
 ) {
   await page.setUserAgent(useragentOverride);
 
   // Auth with token
-  await injectSessionToken(page, token);
+  await injectSessionToken(page, token, clear);
 
   if (version) {
     await setWhatsappVersion(page, version);
