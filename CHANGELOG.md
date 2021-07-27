@@ -1,3 +1,12 @@
+## 1.8.9 (2021-07-27)
+
+
+### Bug Fixes
+
+* Corrigido a função de fixar conversas (pinChat) (fix [#338](https://github.com/wppconnect-team/wppconnect/issues/338)) ([f6bf1f3](https://github.com/wppconnect-team/wppconnect/commit/f6bf1f3f1598719d38eeb9d84bf3a9c0d87de18d))
+
+
+
 ## 1.8.8 (2021-07-27)
 
 
