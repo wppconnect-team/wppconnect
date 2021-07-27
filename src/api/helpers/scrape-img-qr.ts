@@ -34,7 +34,11 @@ export async function scrapeImg(page: Page): Promise<ScrapQrcode | undefined> {
     .catch(() => false);
 
   if (click) {
-    await page.waitForNavigation();
+    await page.waitForFunction(() => {
+      const selectorImg = document.querySelector('canvas');
+      const selectorUrl = selectorImg.closest('[data-ref]');
+      return selectorUrl.getAttribute('data-ref');
+    });
   }
 
   const result = await page
