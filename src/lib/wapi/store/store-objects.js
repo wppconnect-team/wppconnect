@@ -117,7 +117,8 @@ export const storeObjects = [
   },
   {
     id: 'pinChat',
-    conditions: (module) => (module.setPin ? module : null),
+    conditions: (module) =>
+      module.setPin.toString().includes('.unproxy') ? module : null,
   },
   {
     id: 'sendDelete',
