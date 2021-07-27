@@ -15,4 +15,7 @@ updates:
         versions:
           - '>= 15.a'
       - dependency-name: '@types/puppeteer'
+      - dependency-name: 'latest-version'
+        versions:
+          - '>= 6.a'
       - dependency-name: 'puppeteer'
