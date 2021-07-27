@@ -209,10 +209,7 @@ export class HostLayer {
       }
 
       const result = await this.getQrCode();
-      if (!result?.urlCode) {
-        break;
-      }
-      if (urlCode !== result.urlCode) {
+      if (result?.urlCode && urlCode !== result.urlCode) {
         urlCode = result.urlCode;
         attempt++;
 
