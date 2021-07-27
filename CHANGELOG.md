@@ -1,3 +1,12 @@
+## 1.8.8 (2021-07-27)
+
+
+### Bug Fixes
+
+* Corrigido problema de ES Module (fix [#362](https://github.com/wppconnect-team/wppconnect/issues/362)) ([dcdefc4](https://github.com/wppconnect-team/wppconnect/commit/dcdefc4e7e0dbeb5cd3678ee0b7e7f92e8210dba))
+
+
+
 ## 1.8.7 (2021-07-26)
 
 
