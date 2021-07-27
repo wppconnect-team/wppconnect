@@ -19,11 +19,29 @@ export async function sendMessage(to, content) {
   const chat = await WAPI.sendExist(to);
 
   if (!chat.erro) {
-    const message = content;
+    var newId = await window.WAPI.getNewMessageId(chat.id);
 
-    const result = await chat.sendMessage(message);
+    var message = {
+      id: newId,
+      body: content,
+      type: 'chat',
+      subtype: null,
+      t: parseInt(new Date().getTime() / 1000),
+      from: Store.UserPrefs.getMaybeMeUser(),
+      to: chat.id,
+      self: 'out',
+      isNewMsg: true,
+      local: true,
+      ack: 0,
+      urlText: null,
+      urlNumber: null,
+    };
+
+    var result =
+      (await Promise.all(Store.addAndSendMsgToChat(chat, message)))[1] || '';
+
     if (result === 'success' || result === 'OK') {
-      return chat?.lastReceivedKey?._serialized;
+      return newId?._serialized;
     } else {
       const m = { type: 'sendtext', text: message };
       const To = await WAPI.getchatId(chat.id);
