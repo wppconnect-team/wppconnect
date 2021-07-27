@@ -32,6 +32,25 @@ export class Whatsapp extends BusinessLayer {
 
     let connected = false;
 
+    const removeToken = async () => {
+      this.log('info', 'Session Unpaired', { type: 'session' });
+      const removed = await Promise.resolve(
+        this.tokenStore.removeToken(this.session)
+      );
+
+      if (removed) {
+        this.log('verbose', 'Token removed', { type: 'token' });
+      }
+    };
+
+    if (this.page) {
+      this.page.on('close', async () => {
+        if (!connected) {
+          await removeToken();
+        }
+      });
+    }
+
     this.onStateChange(async (state) => {
       switch (state) {
         case SocketState.CONNECTED:
@@ -59,20 +78,15 @@ export class Whatsapp extends BusinessLayer {
         case SocketState.UNPAIRED:
         case SocketState.UNPAIRED_IDLE:
           setTimeout(async () => {
-            this.log('info', 'Session Unpaired', { type: 'session' });
-            const removed = await Promise.resolve(
-              this.tokenStore.removeToken(this.session)
-            );
-
-            if (removed) {
-              this.log('verbose', 'Token removed', { type: 'token' });
-            }
+            await removeToken();
 
             // Fire only after a success connection and disconnection
             if (connected && this.statusFind) {
-              connected = false;
-              this.statusFind('desconnectedMobile', session);
+              try {
+                this.statusFind('desconnectedMobile', session);
+              } catch (error) {}
             }
+            connected = false;
           }, 1000);
           break;
       }
