@@ -468,6 +468,16 @@ if (typeof window.WAPI === 'undefined') {
 
     const result = await Store.checkNumberInfo(wid);
 
+    if (!result) {
+      return {
+        id: id,
+        isBusiness: false,
+        canReceiveMessage: false,
+        numberExists: false,
+        status: 404,
+      };
+    }
+
     return {
       id: result.wid,
       isBusiness: result.biz,
