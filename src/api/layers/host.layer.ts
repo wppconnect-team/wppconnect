@@ -47,6 +47,7 @@ export class HostLayer {
   readonly tokenStore: TokenStore;
 
   protected autoCloseInterval = null;
+  protected autoCloseCalled = false;
   protected statusFind?: StatusFindCallback = null;
 
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -125,7 +126,7 @@ export class HostLayer {
     });
     this.page.on('close', () => {
       this.cancelAutoClose();
-      this.log('error', 'Page Closed', { type: 'page' });
+      this.log('verbose', 'Page Closed', { type: 'page' });
     });
   }
 
@@ -156,6 +157,7 @@ export class HostLayer {
       !this.page.isClosed()
     ) {
       this.log('info', 'Closing the page');
+      this.autoCloseCalled = true;
       this.statusFind && this.statusFind('autocloseCalled', this.session);
       try {
         this.page.close();
@@ -324,6 +326,17 @@ export class HostLayer {
     }
 
     this.tryAutoClose();
+
+    if (this.autoCloseCalled) {
+      this.log('error', 'Auto Close Called');
+      throw 'Auto Close Called';
+    }
+
+    if (this.page.isClosed()) {
+      this.log('error', 'Page Closed');
+      throw 'Page Closed';
+    }
+
     this.log('error', 'Unknow error');
     throw 'Unknow error';
   }
