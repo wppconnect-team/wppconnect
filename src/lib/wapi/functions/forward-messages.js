@@ -17,27 +17,47 @@
 
 import { getMessageById } from './get-message-by-id';
 
-export async function forwardMessages(to, messages, skipMyMessages) {
-  if (!Array.isArray(messages)) {
-    messages = [messages];
+export async function forwardMessages(chatId, messagesId, skipMyMessages) {
+  if (!Array.isArray(messagesId)) {
+    messagesId = [messagesId];
   }
-  const toForward = (
-    await Promise.all(
-      messages.map(async (msg) => {
-        if (typeof msg === 'string') {
-          return await getMessageById(msg, null, false);
-        } else {
-          return await getMessageById(msg.id, null, false);
-        }
-      })
-    )
-  ).filter((msg) => (skipMyMessages ? !msg.__x_isSentByMe : true));
+
+  const chat = window.Store.Chat.get(chatId);
+  if (!chat) {
+    throw {
+      error: true,
+      code: 'chat_not_found',
+      message: 'Chat not found',
+      chatId: chatId,
+    };
+  }
+
+  const messages = [];
+
+  for (const msg of messagesId) {
+    const msgId = typeof msg === 'string' ? msg : msg.id;
+    const messageData = await getMessageById(msgId, null, false);
+
+    if (!messageData) {
+      throw {
+        error: true,
+        code: 'message_not_found',
+        message: 'Message not Found',
+        messageId: msgId,
+      };
+    }
+
+    messages.push(messageData);
+  }
+
+  const toForward = messages.filter((msg) =>
+    skipMyMessages ? !msg.isSentByMe : true
+  );
 
   // const userId = new window.Store.UserConstructor(to);
-  const conversation = window.Store.Chat.get(to);
-  await conversation.forwardMessages(toForward);
+  await chat.forwardMessages(toForward);
 
-  const msgs = conversation.msgs.models.slice(messages.length * -1);
+  const msgs = chat.msgs.models.slice(messagesId.length * -1);
 
   return msgs.map((m) => m.id._serialized);
 }
