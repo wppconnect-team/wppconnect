@@ -419,4 +419,8 @@ export const storeObjects = [
         ? module.default
         : null,
   },
+  {
+    id: 'sendCreateGroup',
+    conditions: (module) => module.sendCreateGroup,
+  },
 ];
