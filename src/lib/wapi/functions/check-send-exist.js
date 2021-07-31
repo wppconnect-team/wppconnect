@@ -27,7 +27,7 @@ export function scope(id, erro, status, text = null) {
 }
 export async function getchatId(chatId) {
   var to = await WAPI.getChatById(chatId),
-    objTo = to.lastReceivedKey,
+    objTo = to.lastReceivedKey || {},
     extend = {
       formattedName: to.contact.formattedName,
       isBusiness: to.contact.isBusiness,
