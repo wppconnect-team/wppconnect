@@ -1,3 +1,12 @@
+## 1.8.10 (2021-07-31)
+
+
+### Bug Fixes
+
+* Corrigido erro "null to object" ao enviar mensagem (fix [#378](https://github.com/wppconnect-team/wppconnect/issues/378)) ([ec103b9](https://github.com/wppconnect-team/wppconnect/commit/ec103b9cae33b993f95cacdb2a1d35fd3e4ecacc))
+
+
+
 ## 1.8.9 (2021-07-27)
 
 
