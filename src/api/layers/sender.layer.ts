@@ -760,14 +760,18 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
-   * Stops typing
+   * Update your online presence
    * @category Chat
-   * @param to Chat id
+   * @param online true for available presence and false for unavailable
    */
-  public async stopTyping(to: string) {
-    return evaluateAndReturn(this.page, ({ to }) => WAPI.stopTyping(to), {
-      to,
-    });
+  public async setOnlinePresence(online: boolean = true) {
+    return evaluateAndReturn(
+      this.page,
+      ({ online }) => WAPI.setOnlinePresence(online),
+      {
+        online,
+      }
+    );
   }
 
   /**

@@ -128,6 +128,7 @@ import {
   unsubscribePresence,
   getMessages,
   rejectCall,
+  setOnlinePresence,
 } from './functions';
 import {
   base64ToFile,
@@ -284,6 +285,7 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.sendImageAsStickerGif = sendImageAsSticker;
   window.WAPI.startTyping = startTyping;
   window.WAPI.stopTyping = stopTyping;
+  window.WAPI.setOnlinePresence = setOnlinePresence;
   window.WAPI.sendLocation = sendLocation;
   window.WAPI.openChat = openChat;
   window.WAPI.openChatAt = openChatAt;

@@ -229,6 +229,7 @@ interface WAPI {
   setMessagesAdminsOnly: (chatId: string, option: boolean) => boolean;
   setMyName: (name: string) => void;
   setMyStatus: (to: string) => void;
+  setOnlinePresence: (online: boolean) => void;
   setProfilePic: (path: string, to?: string) => Promise<boolean>;
   setTemporaryMessages: (chatId: string, value: string) => Promise<boolean>;
   setTheme: (theme?: string) => boolean;

@@ -118,5 +118,6 @@ export * from './reject-call';
 export * from './set-group-description';
 export * from './set-group-property';
 export * from './set-group-subject';
+export * from './set-online-presence';
 export * from './set-temporary-messages';
 export * from './star-messages';
