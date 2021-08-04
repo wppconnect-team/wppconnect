@@ -100,7 +100,12 @@ export async function initWhatsapp(
   }
 
   const timeout = 10 * 1000;
-  await page.goto(puppeteerConfig.whatsappUrl, { timeout }).catch(() => {});
+  await page
+    .goto(puppeteerConfig.whatsappUrl, {
+      timeout,
+      waitUntil: 'domcontentloaded',
+    })
+    .catch(() => {});
 
   return page;
 }
