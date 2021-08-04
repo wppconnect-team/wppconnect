@@ -16,8 +16,14 @@
  */
 export async function setProfilePic(obj, id) {
   if (!id) {
-    id = Store.Me.attributes.wid._serialized;
+    id = Store.UserPrefs.getMaybeMeUser();
   }
+  const wid = Store.WidFactory.createWid(id);
+
   let base64 = 'data:image/jpeg;base64,';
-  return await Store.Profile.sendSetPicture(id, base64 + obj.b, base64 + obj.a);
+  return await Store.Profile.sendSetPicture(
+    wid,
+    base64 + obj.b,
+    base64 + obj.a
+  );
 }
