@@ -17,6 +17,13 @@
 
 export async function getGroupInviteLink(chatId) {
   var chat = Store.Chat.get(chatId);
+  if (!chat) {
+    throw {
+      error: true,
+      code: 'group_not_found',
+      message: 'Group not found',
+    };
+  }
   if (!chat.isGroup) {
     return '';
   }
