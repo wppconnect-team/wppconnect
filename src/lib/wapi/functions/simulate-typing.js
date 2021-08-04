@@ -16,7 +16,16 @@
  */
 
 export async function startTyping(chatId) {
-  await Store.ChatStates.sendChatStateComposing(chatId);
+  const chat = window.Store.Chat.get(chatId);
+  if (!chat) {
+    throw {
+      error: true,
+      code: 'chat_not_found',
+      message: 'Chat not found',
+      chatId: chatId,
+    };
+  }
+  await Store.ChatPresence.markComposing(chat);
 }
 
 /**
@@ -24,5 +33,14 @@ export async function startTyping(chatId) {
  * @param {string} chatId
  */
 export async function stopTyping(chatId) {
-  await Store.ChatStates.sendChatStatePaused(chatId);
+  const chat = window.Store.Chat.get(chatId);
+  if (!chat) {
+    throw {
+      error: true,
+      code: 'chat_not_found',
+      message: 'Chat not found',
+      chatId: chatId,
+    };
+  }
+  await Store.ChatPresence.markPaused(chat);
 }

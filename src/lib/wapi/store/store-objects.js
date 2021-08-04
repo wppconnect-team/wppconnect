@@ -196,6 +196,13 @@ export const storeObjects = [
         : null,
   },
   {
+    id: 'ChatPresence',
+    conditions: (module) =>
+      module.markComposing && module.markPaused && module.markRecording
+        ? module
+        : null,
+  },
+  {
     id: 'GroupActions',
     conditions: (module) =>
       module.sendExitGroup && module.localExitGroup ? module : null,
