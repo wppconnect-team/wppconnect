@@ -33,12 +33,35 @@ import { WebSocketTransport } from './websocket';
 import { Logger } from 'winston';
 import { SessionToken } from '../token-store';
 
+export async function unregisterServiceWorker(page: Page) {
+  await page.evaluateOnNewDocument(() => {
+    // Remove existent service worker
+    navigator.serviceWorker
+      .getRegistrations()
+      .then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      })
+      .catch((err) => null);
+
+    // Disable service worker registration
+    // @ts-ignore
+    navigator.serviceWorker.register = undefined;
+    // Disable service worker detection
+    // @ts-ignore
+    delete navigator.serviceWorker;
+  });
+}
+
 /**
  * Força o carregamento de uma versão específica do WhatsApp WEB
  * @param page Página a ser injetada
  * @param version Versão ou expressão semver
  */
 export async function setWhatsappVersion(page: Page, version: string) {
+  await unregisterServiceWorker(page);
+
   const body = waVersion.getPageContent(version);
 
   await page.setRequestInterception(true);
@@ -77,10 +100,7 @@ export async function initWhatsapp(
   }
 
   const timeout = 10 * 1000;
-  await Promise.race([
-    page.goto(puppeteerConfig.whatsappUrl, { timeout }).catch(() => {}),
-    page.waitForSelector('body', { timeout }).catch(() => {}),
-  ]);
+  await page.goto(puppeteerConfig.whatsappUrl, { timeout }).catch(() => {});
 
   return page;
 }
