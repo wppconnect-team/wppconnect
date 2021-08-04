@@ -1,3 +1,12 @@
+## 1.8.11 (2021-08-04)
+
+
+### Features
+
+* Added setOnlinePresence function to define your presence ([627d1a5](https://github.com/wppconnect-team/wppconnect/commit/627d1a5f3a76ea4813420a4fc25784362497da39))
+
+
+
 ## 1.8.10 (2021-07-31)
 
 
