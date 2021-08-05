@@ -47,10 +47,7 @@ export async function unregisterServiceWorker(page: Page) {
 
     // Disable service worker registration
     // @ts-ignore
-    navigator.serviceWorker.register = undefined;
-    // Disable service worker detection
-    // @ts-ignore
-    delete navigator.serviceWorker;
+    navigator.serviceWorker.register = new Promise(() => {});
   });
 }
 
