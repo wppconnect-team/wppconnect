@@ -760,6 +760,17 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
+   * Stops typing ('Typing...' state)
+   * @category Chat
+   * @param chatId
+   */
+  public async stopTyping(to: string) {
+    return evaluateAndReturn(this.page, ({ to }) => WAPI.stopTyping(to), {
+      to,
+    });
+  }
+
+  /**
    * Update your online presence
    * @category Chat
    * @param online true for available presence and false for unavailable
