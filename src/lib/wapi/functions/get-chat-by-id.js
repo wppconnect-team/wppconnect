@@ -15,8 +15,8 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export function getChatById(id, done) {
-  let found = WAPI.getChat(id);
+export async function getChatById(id, done) {
+  let found = await WAPI.getChat(id);
   if (found) {
     found = WAPI._serializeChatObj(found);
   } else {
