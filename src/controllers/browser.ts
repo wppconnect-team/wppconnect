@@ -111,6 +111,9 @@ export async function injectApi(page: Page) {
   const injected = await page
     .evaluate(() => {
       // @ts-ignore
+
+      localStorage.setItem('md-opted-in', 'false');
+      
       return (
         typeof window.WAPI !== 'undefined' &&
         typeof window.Store !== 'undefined'
