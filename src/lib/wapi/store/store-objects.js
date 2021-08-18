@@ -430,4 +430,9 @@ export const storeObjects = [
     id: 'sendCreateGroup',
     conditions: (module) => module.sendCreateGroup,
   },
+  {
+    id: 'msgFindQuery',
+    conditions: (module) =>
+      module.msgFindQuery && module.msgFindByIds ? module.msgFindQuery : null,
+  },
 ];

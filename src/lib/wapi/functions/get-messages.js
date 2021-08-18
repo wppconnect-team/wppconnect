@@ -53,6 +53,7 @@ export async function getMessages(chatId, params = {}, serialize = true) {
     remote: chatWid,
     count: params.count,
     owner: params.fromMe,
+    direction: direction,
   };
 
   // Caso tenha informado o ID da mensagem, a consulta se realizará a partir dela
@@ -61,7 +62,8 @@ export async function getMessages(chatId, params = {}, serialize = true) {
       const msgKey = window.Store.MsgKey.fromString(params.id);
       if (msgKey) {
         queryData.id = msgKey.id;
-        queryData.owner = msgKey.fromMe;
+        queryData.fromMe = msgKey.fromMe;
+        queryData._serialized = msgKey._serialized;
       }
     } catch (error) {
       queryData.id = params.id;
@@ -71,7 +73,16 @@ export async function getMessages(chatId, params = {}, serialize = true) {
     queryData.count--;
   }
 
-  const msgs = await Store.WapQuery.msgFindQuery(direction, queryData);
+  const msgs = await Store.msgFindQuery(direction, queryData);
+  console.log(msgs);
+
+  if (!Array.isArray(msgs)) {
+    const error = new Error(`Failed to fetch messages for ${chat.id}`);
+
+    Object.assign(error, msgs);
+
+    throw error;
+  }
 
   const result = msgs
     .map((m) => new Store.Msg.modelClass(m))
