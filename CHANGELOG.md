@@ -1,3 +1,12 @@
+## 1.8.13 (2021-08-19)
+
+
+### Bug Fixes
+
+* Fixed file mime-type detection (fix [#409](https://github.com/wppconnect-team/wppconnect/issues/409)) ([1609e34](https://github.com/wppconnect-team/wppconnect/commit/1609e34e89b02eaba57cd2c0ef17e94393e89916))
+
+
+
 ## 1.8.12 (2021-08-05)
 
 
