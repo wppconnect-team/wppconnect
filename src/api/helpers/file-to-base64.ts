@@ -15,7 +15,8 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const mimeTypes = require('mime-types');
+import * as mimeTypes from 'mime-types';
+import * as fileType from 'file-type';
 import * as fs from 'fs';
 
 /**
@@ -23,11 +24,18 @@ import * as fs from 'fs';
  * @param path file path
  * @param mime Optional, will retrieve file mime automatically if not defined (Example: 'image/png')
  */
-export async function fileToBase64(path: string, mime?: string) {
+export async function fileToBase64(path: string, mime?: string | false) {
   if (fs.existsSync(path)) {
     const base64 = fs.readFileSync(path, { encoding: 'base64' });
     if (mime === undefined) {
-      mime = await mimeTypes.lookup(path);
+      mime = mimeTypes.lookup(path);
+    }
+    if (!mime) {
+      const result = await fileType.fromFile(path);
+      mime = result?.mime;
+    }
+    if (!mime) {
+      mime = 'application/octet-stream';
     }
     const data = `data:${mime};base64,${base64}`;
     return data;
