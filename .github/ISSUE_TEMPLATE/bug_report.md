@@ -15,6 +15,7 @@ labels: 'bug, needs triage'
 - **OS:** [e.g. OSX 10.13.4, Windows 10]
 - **Node version:** [e.g. Node 8, Node 14]
 - **WhatsApp version:** [e.g. 2.2126.14]
+- **MultiDevice (BETA):** yes/no
 
 ## Steps to Reproduce
 
