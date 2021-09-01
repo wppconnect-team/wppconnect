@@ -14,6 +14,7 @@ labels: 'bug, needs triage'
 - **Browser:** [e.g. Chrome 87, Chromium 85]
 - **OS:** [e.g. OSX 10.13.4, Windows 10]
 - **Node version:** [e.g. Node 8, Node 14]
+- **WhatsApp version:** [e.g. 2.2126.14]
 
 ## Steps to Reproduce
 
