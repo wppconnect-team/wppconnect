@@ -16,10 +16,12 @@
  */
 
 export const _profilePicfunc = async (id) => {
-  let pic = Store.ProfilePicThumb.get(id);
+
+  const wid = Store.WidFactory.createDeviceWid(id);
+  let pic = Store.ProfilePicThumb.get(wid);
 
   if (!pic) {
-    pic = await Store.ProfilePicThumb.find(id);
+    pic = await Store.ProfilePicThumb.find(wid);
   }
 
   if (pic) {
