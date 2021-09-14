@@ -86,6 +86,7 @@ interface WAPI {
   getGroupInviteLink: (chatId: string) => Promise<string>;
   getGroupParticipantIDs: (groupId: string) => Id[];
   getHost: () => HostDevice;
+  getWid: () => string;
   getListMute: (type?: string) => object;
   getMessageById: (messageId: string) => Promise<Message>;
   getMessages: (chatId: string, params: GetMessagesParam) => Promise<Message[]>;

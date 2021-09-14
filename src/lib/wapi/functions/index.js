@@ -45,6 +45,7 @@ export { getGroupMetadata } from './get-group-metadata';
 export { getGroupParticipantIDs } from './get-group-participant-ids';
 export { _getGroupParticipants } from './get-group-participants';
 export { getHost } from './get-host';
+export { getWid } from './get-wid';
 export { getMe } from './get-me';
 export { getMyContacts } from './get-my-contacts';
 export { getNewId } from './get-new-id';

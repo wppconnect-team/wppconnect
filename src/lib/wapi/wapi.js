@@ -53,6 +53,7 @@ import {
   getGroupMetadata,
   getGroupParticipantIDs,
   getHost,
+  getWid,
   getMe,
   getMessageById,
   getMyContacts,
@@ -343,6 +344,7 @@ if (typeof window.WAPI === 'undefined') {
 
   // Device functions
   window.WAPI.getHost = getHost;
+  window.WAPI.getWid = getWid;
   window.WAPI.getMe = getMe;
   window.WAPI.isConnected = isConnected;
   window.WAPI.isLoggedIn = isLoggedIn;
