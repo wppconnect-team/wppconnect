@@ -126,12 +126,16 @@ export class SenderLayer extends ListenerLayer {
    * @param filePath File path or http link
    * @param filename
    * @param caption
+   * @param quotedMessageId Quoted message id
+   * @param isViewOnce Enable single view
    */
   public async sendImage(
     to: string,
     filePath: string,
     filename?: string,
-    caption?: string
+    caption?: string,
+    quotedMessageId?: string,
+    isViewOnce?: boolean
   ): Promise<SendFileResult> {
     let base64 = await downloadFileToBase64(filePath, [
       'image/gif',
@@ -158,7 +162,14 @@ export class SenderLayer extends ListenerLayer {
       filename = path.basename(filePath);
     }
 
-    return await this.sendImageFromBase64(to, base64, filename, caption);
+    return await this.sendImageFromBase64(
+      to,
+      base64,
+      filename,
+      caption,
+      quotedMessageId,
+      isViewOnce
+    );
   }
 
   /**
@@ -168,12 +179,16 @@ export class SenderLayer extends ListenerLayer {
    * @param base64 File path, http link or base64Encoded
    * @param filename
    * @param caption
+   * @param quotedMessageId Quoted message id
+   * @param isViewOnce Enable single view
    */
   public async sendImageFromBase64(
     to: string,
     base64: string,
     filename: string,
-    caption?: string
+    caption?: string,
+    quotedMessageId?: string,
+    isViewOnce?: boolean
   ): Promise<SendFileResult> {
     let mimeType = base64MimeType(base64);
 
@@ -199,10 +214,17 @@ export class SenderLayer extends ListenerLayer {
 
     const result = await evaluateAndReturn(
       this.page,
-      ({ to, base64, filename, caption }) => {
-        return WAPI.sendImage(base64, to, filename, caption);
+      ({ to, base64, filename, caption, quotedMessageId, isViewOnce }) => {
+        return WAPI.sendImage(
+          base64,
+          to,
+          filename,
+          caption,
+          quotedMessageId,
+          isViewOnce
+        );
       },
-      { to, base64, filename, caption }
+      { to, base64, filename, caption, quotedMessageId, isViewOnce }
     );
     if (result['erro'] == true) {
       throw result;
@@ -279,18 +301,20 @@ export class SenderLayer extends ListenerLayer {
    * @param base64 base64 data
    * @param filename
    * @param caption
+   * @param quotedMessageId Quoted message id
    */
   public async sendPttFromBase64(
     to: string,
     base64: string,
     filename: string,
-    caption?: string
+    caption?: string,
+    quotedMessageId?: string
   ): Promise<SendFileResult> {
     return evaluateAndReturn(
       this.page,
-      ({ to, base64, filename, caption }) =>
-        WAPI.sendPtt(base64, to, filename, caption),
-      { to, base64, filename, caption }
+      ({ to, base64, filename, caption, quotedMessageId }) =>
+        WAPI.sendPtt(base64, to, filename, caption, () => {}, quotedMessageId),
+      { to, base64, filename, caption, quotedMessageId }
     );
   }
 
@@ -301,12 +325,14 @@ export class SenderLayer extends ListenerLayer {
    * @param filePath File path
    * @param filename
    * @param caption
+   * @param quotedMessageId Quoted message id
    */
   public async sendPtt(
     to: string,
     filePath: string,
     filename?: string,
-    caption?: string
+    caption?: string,
+    quotedMessageId?: string
   ) {
     return new Promise<SendFileResult>(async (resolve, reject) => {
       let base64 = await downloadFileToBase64(filePath, [/^audio/]),
@@ -329,7 +355,13 @@ export class SenderLayer extends ListenerLayer {
         filename = path.basename(filePath);
       }
 
-      return this.sendPttFromBase64(to, base64, filename, caption)
+      return this.sendPttFromBase64(
+        to,
+        base64,
+        filename,
+        caption,
+        quotedMessageId
+      )
         .then(resolve)
         .catch(reject);
     });

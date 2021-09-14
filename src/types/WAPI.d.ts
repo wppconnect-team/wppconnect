@@ -152,13 +152,17 @@ interface WAPI {
     to: string,
     filename: string,
     caption: string,
-    type?: string
+    type?: string,
+    quotedMessageId?: string,
+    isViewOnce?: boolean
   ) => Promise<SendFileResult>;
   sendImage: (
     imgBase64: string,
     to: string,
     filename: string,
-    caption?: string
+    caption?: string,
+    quotedMessageId?: string,
+    isViewOnce?: boolean
   ) => Promise<SendFileResult>;
   sendImageAsSticker: (
     webpBase64: string,
@@ -208,7 +212,9 @@ interface WAPI {
     base64: string,
     to: string,
     filename: string,
-    caption: string
+    caption: string,
+    done: () => void,
+    quotedMessageId?: string
   ) => Promise<SendPttResult>;
   sendVideoAsGif: (
     base64: string,

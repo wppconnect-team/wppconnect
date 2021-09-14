@@ -17,8 +17,17 @@
 
 import { processFiles } from './process-files';
 import { base64ToFile } from '../helper';
+import { getMessageById } from './get-message-by-id';
 
-export async function sendFile(imgBase64, chatid, filename, caption, type) {
+export async function sendFile(
+  imgBase64,
+  chatid,
+  filename,
+  caption,
+  type,
+  quotedMessageId = null,
+  isViewOnce = false
+) {
   type = type ? type : 'sendFile';
 
   if (
@@ -34,18 +43,29 @@ export async function sendFile(imgBase64, chatid, filename, caption, type) {
   }
   var chat = await WAPI.sendExist(chatid);
   if (!chat.erro) {
-    var mediaBlob = base64ToFile(imgBase64, filename),
-      mediaCollection = await processFiles(chat, mediaBlob),
-      media = mediaCollection.models[0];
-    var result = (await media.sendToChat(chat, { caption: caption })) || '';
-    var m = { type: type, filename: filename, text: caption, mimeType: mime },
-      To = await WAPI.getchatId(chat.id);
+    let quotedMsg = null;
+
+    if (typeof quotedMessageId === 'string' && quotedMessageId) {
+      const message = await getMessageById(quotedMessageId, null, false);
+
+      if (message && message.canReply()) {
+        quotedMsg = message;
+      }
+    }
+
+    var mediaBlob = base64ToFile(imgBase64, filename);
+    var mediaCollection = await processFiles(chat, mediaBlob);
+    var media = mediaCollection.models[0];
+    var result =
+      (await media.sendToChat(chat, { caption, quotedMsg, isViewOnce })) || '';
+    var m = { type: type, filename: filename, text: caption, mimeType: mime };
+    var to = await WAPI.getchatId(chat.id);
     if (result === 'success' || result === 'OK') {
-      var obj = WAPI.scope(To, false, result, null);
+      var obj = WAPI.scope(to, false, result, null);
       Object.assign(obj, m);
       return obj;
     } else {
-      var obj = WAPI.scope(To, true, result, null);
+      var obj = WAPI.scope(to, true, result, null);
       Object.assign(obj, m);
       return obj;
     }
