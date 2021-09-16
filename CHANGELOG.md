@@ -1,90 +1,64 @@
-## 1.8.13 (2021-08-19)
+## 1.8.14 (2021-09-15)
 
+### Features
+
+- Added change of sendMessageOptions to allow different types.
+
+## 1.8.13 (2021-08-19)
 
 ### Bug Fixes
 
-* Fixed file mime-type detection (fix [#409](https://github.com/wppconnect-team/wppconnect/issues/409)) ([1609e34](https://github.com/wppconnect-team/wppconnect/commit/1609e34e89b02eaba57cd2c0ef17e94393e89916))
-
-
+- Fixed file mime-type detection (fix [#409](https://github.com/wppconnect-team/wppconnect/issues/409)) ([1609e34](https://github.com/wppconnect-team/wppconnect/commit/1609e34e89b02eaba57cd2c0ef17e94393e89916))
 
 ## 1.8.12 (2021-08-05)
 
-
-
 ## 1.8.11 (2021-08-04)
-
 
 ### Features
 
-* Added setOnlinePresence function to define your presence ([627d1a5](https://github.com/wppconnect-team/wppconnect/commit/627d1a5f3a76ea4813420a4fc25784362497da39))
-
-
+- Added setOnlinePresence function to define your presence ([627d1a5](https://github.com/wppconnect-team/wppconnect/commit/627d1a5f3a76ea4813420a4fc25784362497da39))
 
 ## 1.8.10 (2021-07-31)
 
-
 ### Bug Fixes
 
-* Corrigido erro "null to object" ao enviar mensagem (fix [#378](https://github.com/wppconnect-team/wppconnect/issues/378)) ([ec103b9](https://github.com/wppconnect-team/wppconnect/commit/ec103b9cae33b993f95cacdb2a1d35fd3e4ecacc))
-
-
+- Corrigido erro "null to object" ao enviar mensagem (fix [#378](https://github.com/wppconnect-team/wppconnect/issues/378)) ([ec103b9](https://github.com/wppconnect-team/wppconnect/commit/ec103b9cae33b993f95cacdb2a1d35fd3e4ecacc))
 
 ## 1.8.9 (2021-07-27)
 
-
 ### Bug Fixes
 
-* Corrigido a função de fixar conversas (pinChat) (fix [#338](https://github.com/wppconnect-team/wppconnect/issues/338)) ([f6bf1f3](https://github.com/wppconnect-team/wppconnect/commit/f6bf1f3f1598719d38eeb9d84bf3a9c0d87de18d))
-
-
+- Corrigido a função de fixar conversas (pinChat) (fix [#338](https://github.com/wppconnect-team/wppconnect/issues/338)) ([f6bf1f3](https://github.com/wppconnect-team/wppconnect/commit/f6bf1f3f1598719d38eeb9d84bf3a9c0d87de18d))
 
 ## 1.8.8 (2021-07-27)
 
-
 ### Bug Fixes
 
-* Corrigido problema de ES Module (fix [#362](https://github.com/wppconnect-team/wppconnect/issues/362)) ([dcdefc4](https://github.com/wppconnect-team/wppconnect/commit/dcdefc4e7e0dbeb5cd3678ee0b7e7f92e8210dba))
-
-
+- Corrigido problema de ES Module (fix [#362](https://github.com/wppconnect-team/wppconnect/issues/362)) ([dcdefc4](https://github.com/wppconnect-team/wppconnect/commit/dcdefc4e7e0dbeb5cd3678ee0b7e7f92e8210dba))
 
 ## 1.8.7 (2021-07-26)
 
-
-
 ## 1.8.6 (2021-07-23)
-
-
 
 ## [1.8.5](https://github.com/wppconnect-team/wppconnect/compare/v1.8.4...v1.8.5) (2021-07-20)
 
-
-
 ## 1.8.4 (2021-07-20)
-
 
 ### Bug Fixes
 
-* Corrigido o envio de arquivos de tipos de áudio via URL (fix [#329](https://github.com/wppconnect-team/wppconnect/issues/329)) ([6e8b836](https://github.com/wppconnect-team/wppconnect/commit/6e8b836f40ecda9df4870b09d6fc11410a15e1f6))
-
-
+- Corrigido o envio de arquivos de tipos de áudio via URL (fix [#329](https://github.com/wppconnect-team/wppconnect/issues/329)) ([6e8b836](https://github.com/wppconnect-team/wppconnect/commit/6e8b836f40ecda9df4870b09d6fc11410a15e1f6))
 
 ## 1.8.3 (2021-07-14)
 
-
 ### Bug Fixes
 
-* Corrigido disparos de onNotificationMessage e onParticipantsChanged ao iniciar ([d421f7b](https://github.com/wppconnect-team/wppconnect/commit/d421f7bc860ec4cee503340c14e676692094ac1d))
-
-
+- Corrigido disparos de onNotificationMessage e onParticipantsChanged ao iniciar ([d421f7b](https://github.com/wppconnect-team/wppconnect/commit/d421f7bc860ec4cee503340c14e676692094ac1d))
 
 ## 1.8.2 (2021-07-14)
 
-
 ### Features
 
-* Adicionado recurso de recusar ligação do WhatsApp (close [#299](https://github.com/wppconnect-team/wppconnect/issues/299)) ([e7ef0b6](https://github.com/wppconnect-team/wppconnect/commit/e7ef0b6db0aecf57bd058c681127a0bdd756636b))
-
-
+- Adicionado recurso de recusar ligação do WhatsApp (close [#299](https://github.com/wppconnect-team/wppconnect/issues/299)) ([e7ef0b6](https://github.com/wppconnect-team/wppconnect/commit/e7ef0b6db0aecf57bd058c681127a0bdd756636b))
 
 ## [1.8.1](https://github.com/wppconnect-team/wppconnect/compare/v1.8.0...v1.8.1) (2021-07-12)
 

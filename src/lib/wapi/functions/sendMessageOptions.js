@@ -133,7 +133,7 @@ export async function sendMessageOptions(chatId, content, options = {}) {
     self: 'out',
     t: parseInt(new Date().getTime() / 1000),
     isNewMsg: !0,
-    type: 'chat',
+    type: options.type || 'chat',
     ...locationOptions,
     ...attOptions,
     ...quotedMsgOptions,
