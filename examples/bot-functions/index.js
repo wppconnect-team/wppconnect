@@ -17,13 +17,14 @@
 const wppconnect = require('../../dist');
 
 wppconnect
-  .create({ sesion: 'sessionName' })
+  .create()
   .then((client) => start(client))
   .catch((erro) => {
     console.log(erro);
   });
 
 function start(client) {
+  console.log('Starting bot...');
   client.onMessage(async (msg) => {
     try {
       if (msg.body == '!ping') {
@@ -77,6 +78,28 @@ function start(client) {
         } else {
           await client.setChatState(msg.from, '2');
         }
+      } else if (msg.body.startsWith('!btn')) {
+        await client.sendMessageOptions(msg.from, 'teste', {
+          title: 'CALÇA JEN FEMININA',
+          footer: 'Escolha uma opção abaixo',
+          isDynamicReplyButtonsMsg: true,
+          dynamicReplyButtons: [
+            {
+              buttonId: 'idSim',
+              buttonText: {
+                displayText: 'SIM',
+              },
+              type: 1,
+            },
+            {
+              buttonId: 'idNao',
+              buttonText: {
+                displayText: 'NÃO',
+              },
+              type: 1,
+            },
+          ],
+        });
       }
     } catch (e) {
       console.log(e);
