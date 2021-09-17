@@ -16,7 +16,6 @@
  */
 
 export const _profilePicfunc = async (id) => {
-
   const wid = Store.WidFactory.createDeviceWid(id);
   let pic = Store.ProfilePicThumb.get(wid);
 

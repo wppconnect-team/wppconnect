@@ -16,7 +16,7 @@
  */
 
 function getWidMd() {
-  return localStorage.getItem("last-wid-md")?.replace(/"/g,'');
+  return localStorage.getItem('last-wid-md')?.replace(/"/g, '');
 }
 
 function parseWid(rawWid) {
@@ -25,8 +25,8 @@ function parseWid(rawWid) {
 
 export function getWid() {
   const attrs = Store.Me.attributes;
-  
-  if(attrs?.wid?._serialized) {
+
+  if (attrs?.wid?._serialized) {
     return attrs.wid._serialized;
   }
 

@@ -365,13 +365,13 @@ export class HostLayer {
     return await evaluateAndReturn(this.page, () => WAPI.getHost());
   }
 
-   /**
+  /**
    * @category Host
    * @returns Current wid connected
    */
-    public async getWid(): Promise<string> {
-      return await evaluateAndReturn(this.page, () => WAPI.getWid());
-    }
+  public async getWid(): Promise<string> {
+    return await evaluateAndReturn(this.page, () => WAPI.getWid());
+  }
 
   /**
    * Retrieves WA version
