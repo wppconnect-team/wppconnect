@@ -15,20 +15,6 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-function getWidMd() {
-  return localStorage.getItem('last-wid-md')?.replace(/"/g, '');
-}
-
-function parseWid(rawWid) {
-  return rawWid.replace(/(:.*@)/g, '@');
-}
-
 export function getWid() {
-  const attrs = Store.Me.attributes;
-
-  if (attrs?.wid?._serialized) {
-    return attrs.wid._serialized;
-  }
-
-  return parseWid(getWidMd());
+  return Store.UserPrefs.getMaybeMeUser()?._serialized;
 }
