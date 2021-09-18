@@ -15,17 +15,6 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export const _profilePicfunc = async (id) => {
-  const wid = Store.WidFactory.createDeviceWid(id);
-  let pic = Store.ProfilePicThumb.get(wid);
-
-  if (!pic) {
-    pic = await Store.ProfilePicThumb.find(wid);
-  }
-
-  if (pic) {
-    return WAPI._serializeProfilePicThumb(pic);
-  }
-
-  return null;
-};
+export function getWid() {
+  return Store.UserPrefs.getMaybeMeUser()?._serialized;
+}
