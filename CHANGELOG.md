@@ -1,3 +1,12 @@
+## 1.8.14 (2021-09-19)
+
+
+### Bug Fixes
+
+* Allow to define chat type in sendMessageOptions (close [#504](https://github.com/wppconnect-team/wppconnect/issues/504)) ([bf76179](https://github.com/wppconnect-team/wppconnect/commit/bf761794559c02a5f7a2d842e68fd6562b68b0cb))
+
+
+
 ## 1.8.13 (2021-08-19)
 
 
