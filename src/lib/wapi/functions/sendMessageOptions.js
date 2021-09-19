@@ -123,7 +123,6 @@ export async function sendMessageOptions(chatId, content, options = {}) {
   const newMsgId = await window.WAPI.getNewMessageId(chat.id);
   const fromwWid = await Store.UserPrefs.getMaybeMeUser();
   const message = {
-    ...options,
     id: newMsgId,
     ack: 0,
     body: content,
@@ -134,6 +133,7 @@ export async function sendMessageOptions(chatId, content, options = {}) {
     t: parseInt(new Date().getTime() / 1000),
     isNewMsg: !0,
     type: 'chat',
+    ...options,
     ...locationOptions,
     ...attOptions,
     ...quotedMsgOptions,
