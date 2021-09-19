@@ -86,6 +86,7 @@ interface WAPI {
   getGroupInviteLink: (chatId: string) => Promise<string>;
   getGroupParticipantIDs: (groupId: string) => Id[];
   getHost: () => HostDevice;
+  getWid: () => string;
   getListMute: (type?: string) => object;
   getMessageById: (messageId: string) => Promise<Message>;
   getMessages: (chatId: string, params: GetMessagesParam) => Promise<Message[]>;
@@ -152,13 +153,17 @@ interface WAPI {
     to: string,
     filename: string,
     caption: string,
-    type?: string
+    type?: string,
+    quotedMessageId?: string,
+    isViewOnce?: boolean
   ) => Promise<SendFileResult>;
   sendImage: (
     imgBase64: string,
     to: string,
     filename: string,
-    caption?: string
+    caption?: string,
+    quotedMessageId?: string,
+    isViewOnce?: boolean
   ) => Promise<SendFileResult>;
   sendImageAsSticker: (
     webpBase64: string,
@@ -208,7 +213,9 @@ interface WAPI {
     base64: string,
     to: string,
     filename: string,
-    caption: string
+    caption: string,
+    done: () => void,
+    quotedMessageId?: string
   ) => Promise<SendPttResult>;
   sendVideoAsGif: (
     base64: string,

@@ -23,8 +23,25 @@ import { sendFile } from './send-file';
  * @param {string} chatid Chat id
  * @param {string} filename
  * @param {string} caption
+ * @param {string} quotedMessageId Quoted message id
+ * @param {boolean} isViewOnce Enable single view
  * @param {Function} done Optional callback
  */
-export function sendImage(imgBase64, chatid, filename, caption) {
-  return sendFile(imgBase64, chatid, filename, caption, 'sendImage');
+export function sendImage(
+  imgBase64,
+  chatid,
+  filename,
+  caption,
+  quotedMessageId,
+  isViewOnce
+) {
+  return sendFile(
+    imgBase64,
+    chatid,
+    filename,
+    caption,
+    'sendImage',
+    quotedMessageId,
+    isViewOnce
+  );
 }
