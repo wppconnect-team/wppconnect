@@ -375,12 +375,14 @@ export class SenderLayer extends ListenerLayer {
    * @param base64 base64 data
    * @param filename
    * @param caption
+   * @param quotedMessageId Quoted message id
    */
   public async sendFileFromBase64(
     to: string,
     base64: string,
     filename: string,
-    caption?: string
+    caption?: string,
+    quotedMessageId?: string
   ): Promise<SendFileResult> {
     let mimeType = base64MimeType(base64);
 
@@ -398,10 +400,17 @@ export class SenderLayer extends ListenerLayer {
     const type = 'FileFromBase64';
     const result = await evaluateAndReturn(
       this.page,
-      ({ to, base64, filename, caption, type }) => {
-        return WAPI.sendFile(base64, to, filename, caption, type);
+      ({ to, base64, filename, caption, type, quotedMessageId }) => {
+        return WAPI.sendFile(
+          base64,
+          to,
+          filename,
+          caption,
+          type,
+          quotedMessageId
+        );
       },
-      { to, base64, filename, caption, type }
+      { to, base64, filename, caption, type, quotedMessageId }
     );
     if (result['erro'] == true) {
       throw result;
@@ -416,12 +425,14 @@ export class SenderLayer extends ListenerLayer {
    * @param filePath File path
    * @param filename
    * @param caption
+   * @param quotedMessageId Quoted message id
    */
   public async sendFile(
     to: string,
     filePath: string,
     filename?: string,
-    caption?: string
+    caption?: string,
+    quotedMessageId?: string
   ) {
     return new Promise<SendFileResult>(async (resolve, reject) => {
       let base64 = await downloadFileToBase64(filePath),
@@ -444,7 +455,7 @@ export class SenderLayer extends ListenerLayer {
         filename = path.basename(filePath);
       }
 
-      this.sendFileFromBase64(to, base64, filename, caption)
+      this.sendFileFromBase64(to, base64, filename, caption, quotedMessageId)
         .then(resolve)
         .catch(reject);
     });
