@@ -19,7 +19,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as puppeteer from 'puppeteer';
 import * as qrcode from 'qrcode-terminal';
-import { ScrapQrcode } from '../api/model/qrcode';
 import { puppeteerConfig } from '../config/puppeteer.config';
 import { isValidSessionToken } from '../token-store';
 
@@ -122,7 +121,7 @@ export async function injectSessionToken(
   await page.setRequestInterception(true);
 
   // @todo Move to another file
-  const reqHandler = (req: puppeteer.Request) => {
+  const reqHandler = function (req: puppeteer.PageEventObject['request']) {
     if (req.url().endsWith('wppconnect-banner.jpeg')) {
       req.respond({
         body: fs.readFileSync(
@@ -190,6 +189,7 @@ export async function injectSessionToken(
   }, token as any);
 
   // Disable
-  page.off('request', reqHandler);
+  page.removeAllListeners('request');
+
   await page.setRequestInterception(false);
 }

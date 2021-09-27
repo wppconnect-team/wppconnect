@@ -22,7 +22,7 @@ import * as rimraf from 'rimraf';
 import * as waVersion from '@wppconnect/wa-version';
 import axios from 'axios';
 import { addExitCallback } from 'catch-exit';
-import { Browser, BrowserContext, Page, Request } from 'puppeteer';
+import { Browser, BrowserContext, Page } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 import { CreateConfig } from '../config/create-config';
 import { puppeteerConfig } from '../config/puppeteer.config';

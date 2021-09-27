@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { Browser, BrowserContext, LaunchOptions, Page } from 'puppeteer';
+import { Browser, BrowserContext, Page, launch } from 'puppeteer';
 import { Logger } from 'winston';
 import { SessionToken, TokenStore } from '../token-store';
 import { defaultLogger } from '../utils/logger';
@@ -52,7 +52,7 @@ export interface CreateConfig {
   /**
    * Will be passed to puppeteer.launch
    */
-  puppeteerOptions?: LaunchOptions;
+  puppeteerOptions?: Parameters<typeof launch>[0];
   /**
    * Pass a external browser instance, can be used with electron
    */

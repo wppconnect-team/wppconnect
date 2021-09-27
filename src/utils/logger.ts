@@ -15,7 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { config, createLogger, format, transports } from 'winston';
-import { TransformableInfo } from 'logform';
+import { FormatWrap, TransformableInfo } from 'logform';
 
 export type LogLevel =
   | 'error'
@@ -33,23 +33,25 @@ export interface MetaInfo {
 
 export interface SessionInfo extends TransformableInfo, MetaInfo {}
 
-export const formatLabelSession = format((info: SessionInfo, opts?: any) => {
-  const parts = [];
-  if (info.session) {
-    parts.push(info.session);
-    delete info.session;
-  }
-  if (info.type) {
-    parts.push(info.type);
-    delete info.type;
-  }
+export const formatLabelSession: FormatWrap = format(
+  (info: SessionInfo, opts?: any) => {
+    const parts = [];
+    if (info.session) {
+      parts.push(info.session);
+      delete info.session;
+    }
+    if (info.type) {
+      parts.push(info.type);
+      delete info.type;
+    }
 
-  if (parts.length) {
-    let prefix = parts.join(':');
-    info.message = `[${prefix}] ${info.message}`;
+    if (parts.length) {
+      let prefix = parts.join(':');
+      info.message = `[${prefix}] ${info.message}`;
+    }
+    return info;
   }
-  return info;
-});
+);
 
 export const defaultLogger = createLogger({
   level: 'info',

@@ -10,12 +10,11 @@ updates:
     schedule:
       interval: daily
     open-pull-requests-limit: 20
+    versioning-strategy: increase
     ignore:
       - dependency-name: '@types/node'
         versions:
           - '>= 15.a'
-      - dependency-name: '@types/puppeteer'
       - dependency-name: 'latest-version'
         versions:
           - '>= 6.a'
-      - dependency-name: 'puppeteer'
