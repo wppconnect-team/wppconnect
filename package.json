@@ -79,7 +79,7 @@
     "@wppconnect-team/loader": "^1.0.5",
     "babel-loader": "^8.2.2",
     "commitizen": "^4.2.3",
-    "concurrently": "^6.0.0",
+    "concurrently": "^6.2.2",
     "conventional-changelog-cli": "^2.1.1",
     "copy-webpack-plugin": "^9.0.0",
     "eslint": "^7.21.0",
