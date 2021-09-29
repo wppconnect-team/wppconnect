@@ -33,7 +33,7 @@ export async function loadAndGetAllMessagesInChat(
     }
 
     let output = [];
-    const messages = chat.msgs._models;
+    const messages = chat.msgs.models;
 
     for (const i in messages) {
       if (i === 'remove') {

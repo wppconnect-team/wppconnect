@@ -24,6 +24,10 @@ describe('QRCode test', function () {
   this.timeout(20000);
 
   before(async function () {
+    if (process.env.SKIP_QR_CODE) {
+      this.skip();
+    }
+
     wppconnect.defaultLogger.level = 'none';
 
     client = await wppconnect.create({
@@ -36,7 +40,9 @@ describe('QRCode test', function () {
   });
 
   after(async function () {
-    await client.close();
+    if (client) {
+      await client.close();
+    }
   });
 
   it('Get QRCode', async function () {
