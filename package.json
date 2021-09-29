@@ -119,7 +119,7 @@
     "lookpath": "^1.2.0",
     "mime-types": "^2.1.28",
     "puppeteer": "*",
-    "puppeteer-extra": "^3.2.2",
+    "puppeteer-extra": "^3.2.3",
     "puppeteer-extra-plugin-stealth": "^2.8.1",
     "puppeteer-extra-plugin-user-data-dir": "^2.3.1",
     "puppeteer-extra-plugin-user-preferences": "^2.3.1",
