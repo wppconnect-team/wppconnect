@@ -22,6 +22,7 @@ export async function forwardMessages(chatId, messagesId, skipMyMessages) {
     messagesId = [messagesId];
   }
 
+  await WAPI.sendExist(chatId);
   const chat = window.Store.Chat.get(chatId);
   if (!chat) {
     throw {
@@ -56,6 +57,7 @@ export async function forwardMessages(chatId, messagesId, skipMyMessages) {
 
   // const userId = new window.Store.UserConstructor(to);
   await chat.forwardMessages(toForward);
+  await new Promise((resolve) => setTimeout(resolve, 100)); // Wait collection update
 
   const msgs = chat.msgs.models.slice(messagesId.length * -1);
 
