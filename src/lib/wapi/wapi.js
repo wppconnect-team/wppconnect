@@ -505,7 +505,10 @@ if (typeof window.WAPI === 'undefined') {
     if (!chat) {
       return false;
     }
-    await chat.presence.subscribe();
+    if (!chat.presence.hasData) {
+      await chat.presence.subscribe();
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
     return chat.presence.chatstate.t || false;
   };
 
