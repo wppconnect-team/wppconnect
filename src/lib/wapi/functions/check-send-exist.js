@@ -64,7 +64,7 @@ export async function sendExist(chatId, returnChat = true, Send = true) {
     }
 
     // Load chat ID for non contact
-    await window.Store.Chat.find(ck.id);
+    await WPP.chat.find(ck.id);
 
     chatId = ck.id._serialized;
     chat = await window.WAPI.getChat(chatId);
