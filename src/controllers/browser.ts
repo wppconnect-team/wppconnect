@@ -124,6 +124,17 @@ export async function injectApi(page: Page) {
   }
 
   await page.addScriptTag({
+    path: require.resolve('@wppconnect/wa-js'),
+  });
+
+  await page
+    .waitForFunction(() => {
+      // @ts-ignore
+      return typeof window.WPP !== 'undefined' && window.WPP.isReady;
+    })
+    .catch(() => false);
+
+  await page.addScriptTag({
     path: require.resolve(
       path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
     ),

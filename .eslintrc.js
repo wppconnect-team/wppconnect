@@ -49,6 +49,7 @@ module.exports = {
         Debug: true,
         Store: true,
         WAPI: true,
+        WPP: true,
         webpackJsonp: true,
         WWebJS: true,
       },
