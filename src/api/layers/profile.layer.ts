@@ -85,42 +85,63 @@ export class ProfileLayer extends HostLayer {
    * @category Profile
    * @param name
    */
-  public async setProfilePic(path: string, to?: string) {
-    let b64 = await downloadFileToBase64(path, [
-      'image/gif',
-      'image/png',
-      'image/jpg',
-      'image/jpeg',
-      'image/webp',
-    ]);
-    if (!b64) {
-      b64 = await fileToBase64(path);
-    }
-    if (b64) {
-      const buff = Buffer.from(
-        b64.replace(/^data:image\/(png|jpe?g|webp);base64,/, ''),
-        'base64'
-      );
-      const mimeInfo = base64MimeType(b64);
+  public async setProfilePic(pathOrBase64: string, to?: string) {
+    let base64: string = '';
 
-      if (!mimeInfo || mimeInfo.includes('image')) {
-        let _webb64_96 = await resizeImg(buff, { width: 96, height: 96 }),
-          _webb64_640 = await resizeImg(buff, { width: 640, height: 640 });
-        let obj = { a: _webb64_640, b: _webb64_96 };
-
-        return await evaluateAndReturn(
-          this.page,
-          ({ obj, to }) => WAPI.setProfilePic(obj, to),
-          {
-            obj,
-            to,
-          }
-        );
-      } else {
-        console.log('Not an image, allowed formats png, jpeg and webp');
-        return false;
+    if (pathOrBase64.startsWith('data:')) {
+      base64 = pathOrBase64;
+    } else {
+      let fileContent = await downloadFileToBase64(pathOrBase64, [
+        'image/gif',
+        'image/png',
+        'image/jpg',
+        'image/jpeg',
+        'image/webp',
+      ]);
+      if (!fileContent) {
+        fileContent = await fileToBase64(pathOrBase64);
+      }
+      if (fileContent) {
+        base64 = fileContent;
       }
     }
+
+    if (!base64) {
+      const error = new Error('Empty or invalid file or base64');
+      Object.assign(error, {
+        code: 'empty_file',
+      });
+      throw error;
+    }
+
+    const mimeInfo = base64MimeType(base64);
+
+    if (!mimeInfo || !mimeInfo.includes('image')) {
+      const error = new Error(
+        'Not an image, allowed formats png, jpeg and webp'
+      );
+      Object.assign(error, {
+        code: 'invalid_image',
+      });
+      throw error;
+    }
+
+    const buff = Buffer.from(
+      base64.replace(/^data:image\/(png|jpe?g|webp);base64,/, ''),
+      'base64'
+    );
+    let _webb64_96 = await resizeImg(buff, { width: 96, height: 96 }),
+      _webb64_640 = await resizeImg(buff, { width: 640, height: 640 });
+    let obj = { a: _webb64_640, b: _webb64_96 };
+
+    return await evaluateAndReturn(
+      this.page,
+      ({ obj, to }) => WAPI.setProfilePic(obj, to),
+      {
+        obj,
+        to,
+      }
+    );
   }
 
   /**
