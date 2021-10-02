@@ -15,6 +15,9 @@ updates:
       - dependency-name: '@types/node'
         versions:
           - '>= 15.a'
+      - dependency-name: 'boxen'
+        versions:
+          - '>= 6.a'
       - dependency-name: 'latest-version'
         versions:
           - '>= 6.a'
