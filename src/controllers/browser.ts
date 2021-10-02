@@ -257,7 +257,7 @@ async function getTransport(browserWS: string) {
   try {
     const endpointURL =
       browserWS.replace(/ws(s)?:/, 'http$1:') + '/json/version';
-    const data = await axios.get(endpointURL).then((r) => r.data);
+    const data = await axios.get<any>(endpointURL).then((r) => r.data);
 
     return await WebSocketTransport.create(data.webSocketDebuggerUrl, 10000);
   } catch (e) {}

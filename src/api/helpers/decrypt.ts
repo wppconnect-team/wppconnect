@@ -24,8 +24,8 @@ export const makeOptions = (useragentOverride: string) => ({
   responseType: 'arraybuffer' as ResponseType,
   headers: {
     'User-Agent': processUA(useragentOverride),
-    DNT: 1,
-    'Upgrade-Insecure-Requests': 1,
+    DNT: '1',
+    'Upgrade-Insecure-Requests': '1',
     origin: 'https://web.whatsapp.com/',
     referer: 'https://web.whatsapp.com/',
   },

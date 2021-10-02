@@ -226,7 +226,7 @@ export class Whatsapp extends BusinessLayer {
     let res: any;
     try {
       while (haventGottenImageYet) {
-        res = await axios.get(mediaUrl.trim(), options);
+        res = await axios.get<any>(mediaUrl.trim(), options);
         if (res.status == 200) {
           haventGottenImageYet = false;
         } else {
