@@ -136,12 +136,14 @@ export class GroupLayer extends RetrieverLayer {
     groupId: string,
     participantId: string | string[]
   ) {
-    return await evaluateAndReturn(
+    await evaluateAndReturn(
       this.page,
       ({ groupId, participantId }) =>
-        WAPI.removeParticipant(groupId, participantId),
+        WPP.group.removeParticipants(groupId, participantId),
       { groupId, participantId }
     );
+
+    return true;
   }
 
   /**
@@ -154,12 +156,14 @@ export class GroupLayer extends RetrieverLayer {
     groupId: string,
     participantId: string | string[]
   ) {
-    return await evaluateAndReturn(
+    await evaluateAndReturn(
       this.page,
       ({ groupId, participantId }) =>
-        WAPI.addParticipant(groupId, participantId),
+        WPP.group.addParticipants(groupId, participantId),
       { groupId, participantId }
     );
+
+    return true;
   }
 
   /**
@@ -172,12 +176,14 @@ export class GroupLayer extends RetrieverLayer {
     groupId: string,
     participantId: string | string[]
   ) {
-    return await evaluateAndReturn(
+    await evaluateAndReturn(
       this.page,
       ({ groupId, participantId }) =>
-        WAPI.promoteParticipant(groupId, participantId),
+        WPP.group.promoteParticipants(groupId, participantId),
       { groupId, participantId }
     );
+
+    return true;
   }
 
   /**
@@ -193,9 +199,11 @@ export class GroupLayer extends RetrieverLayer {
     return await evaluateAndReturn(
       this.page,
       ({ groupId, participantId }) =>
-        WAPI.demoteParticipant(groupId, participantId),
+        WPP.group.demoteParticipants(groupId, participantId),
       { groupId, participantId }
     );
+
+    return true;
   }
 
   /**
