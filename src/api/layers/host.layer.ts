@@ -132,6 +132,19 @@ export class HostLayer {
 
   protected async afterPageLoad() {
     this.log('verbose', 'Injecting wapi.js');
+
+    const options = {
+      deviceName: this.options.deviceName,
+    };
+
+    await evaluateAndReturn(
+      this.page,
+      (options) => {
+        (window as any).WPPConfig = options;
+      },
+      options
+    );
+
     await injectApi(this.page)
       .then(() => {
         this.log('verbose', 'wapi.js injected');

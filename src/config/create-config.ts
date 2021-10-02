@@ -130,6 +130,12 @@ export interface CreateConfig {
    * @default 2.2134.x
    */
   whatsappVersion?: string;
+
+  /**
+   * Define the connected device name in WhatsApp app
+   * @default 'WPPConnect'
+   */
+  deviceName?: string;
 }
 export const defaultOptions: CreateConfig = {
   folderNameToken: './tokens',
@@ -149,4 +155,5 @@ export const defaultOptions: CreateConfig = {
   logger: defaultLogger,
   tokenStore: 'file',
   whatsappVersion: '2.2134.x',
+  deviceName: 'WPPConnect',
 };
