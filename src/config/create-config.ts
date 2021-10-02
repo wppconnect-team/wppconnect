@@ -154,6 +154,6 @@ export const defaultOptions: CreateConfig = {
   waitForLogin: true,
   logger: defaultLogger,
   tokenStore: 'file',
-  whatsappVersion: '2.2134.x',
+  whatsappVersion: '2.2138.x',
   deviceName: 'WPPConnect',
 };
