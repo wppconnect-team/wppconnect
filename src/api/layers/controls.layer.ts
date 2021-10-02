@@ -32,11 +32,13 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async unblockContact(contactId: string) {
-    return evaluateAndReturn(
+    await evaluateAndReturn(
       this.page,
-      (contactId) => WAPI.unblockContact(contactId),
+      (contactId) => WPP.blocklist.unblockContact(contactId),
       contactId
     );
+
+    return true;
   }
 
   /**
@@ -46,11 +48,13 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async blockContact(contactId: string) {
-    return evaluateAndReturn(
+    await evaluateAndReturn(
       this.page,
-      (contactId) => WAPI.blockContact(contactId),
+      (contactId) => WPP.blocklist.blockContact(contactId),
       contactId
     );
+
+    return true;
   }
 
   /**
