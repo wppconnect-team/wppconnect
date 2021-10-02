@@ -1,3 +1,12 @@
+## 1.9.1 (2021-10-02)
+
+
+### Features
+
+* Added option to use setProfilePic using base64 (close [#505](https://github.com/wppconnect-team/wppconnect/issues/505)) ([87f1841](https://github.com/wppconnect-team/wppconnect/commit/87f184128c2b458f128ff26ac9ea081537b4c2a4))
+
+
+
 # 1.9.0 (2021-10-02)
 
 
