@@ -74,7 +74,7 @@
     "@types/shelljs": "^0.8.8",
     "@types/tmp": "^0.2.0",
     "@types/ws": "^8.2.0",
-    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.32.0",
     "@wppconnect-team/loader": "^1.0.5",
     "babel-loader": "^8.2.2",
