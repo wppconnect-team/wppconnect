@@ -1,3 +1,12 @@
+## 1.9.2 (2021-10-12)
+
+
+### Features
+
+* Added onRevokedMessage (close [#434](https://github.com/wppconnect-team/wppconnect/issues/434)) ([b5df5bb](https://github.com/wppconnect-team/wppconnect/commit/b5df5bbcc3418204744057cf45089c3bb2228c57))
+
+
+
 ## 1.9.1 (2021-10-02)
 
 
