@@ -454,4 +454,12 @@ export class HostLayer {
   public async stopPhoneWatchdog(interval: number) {
     return await evaluateAndReturn(this.page, () => WAPI.stopPhoneWatchdog());
   }
+
+  /**
+   * Check the current session is an MultiDevice session
+   * @category Host
+   */
+  public async isMultiDevice() {
+    return await evaluateAndReturn(this.page, () => WPP.auth.isMultiDevice());
+  }
 }
