@@ -62,6 +62,7 @@ export class ListenerLayer extends ProfileLayer {
       ...Object.values(ExposedFn),
       'onAddedToGroup',
       'onIncomingCall',
+      'onRevokedMessage',
     ];
 
     for (const func of functions) {
@@ -128,6 +129,20 @@ export class ListenerLayer extends ProfileLayer {
         if (!window['onLiveLocation'].exposed) {
           window.WAPI.onLiveLocation(window['onLiveLocation']);
           window['onLiveLocation'].exposed = true;
+        }
+        if (!window['onRevokedMessage'].exposed) {
+          // @ts-ignore
+          WPP.chat.on('msg_revoke', (data: any) => {
+            const eventData = {
+              author: data.author,
+              from: data.from,
+              to: data.to,
+              id: data.id._serialized,
+              refId: data.refId._serialized,
+            };
+            window['onRevokedMessage'](eventData);
+          });
+          window['onRevokedMessage'].exposed = true;
         }
       })
       .catch(() => {});
@@ -421,5 +436,21 @@ export class ListenerLayer extends ProfileLayer {
       (id) => WAPI.unsubscribePresence(id),
       id
     );
+  }
+
+  /**
+   * @event Listens to revoked messages
+   * @returns Disposable object to stop the listening
+   */
+  public onRevokedMessage(
+    callback: (data: {
+      author?: string;
+      from: string;
+      to: string;
+      id: string;
+      refId: String;
+    }) => any
+  ) {
+    return this.registerEvent('onRevokedMessage', callback);
   }
 }
