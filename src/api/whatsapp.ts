@@ -154,7 +154,7 @@ export class Whatsapp extends BusinessLayer {
    * @returns boolean
    */
   public async logout() {
-    return await evaluateAndReturn(this.page, () => WAPI.logout());
+    return await evaluateAndReturn(this.page, () => WPP.auth.logout());
   }
 
   /**

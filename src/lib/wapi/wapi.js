@@ -575,10 +575,7 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   window.WAPI.logout = async function () {
-    return await window.WAPI.waitForStore(['ws2'], () => {
-      window.Store.ws2.logout();
-      return true;
-    });
+    return await WPP.auth.logout();
   };
 
   window.WAPI.storePromises = {};
