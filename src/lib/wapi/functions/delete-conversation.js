@@ -15,30 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export function deleteConversation(chatId, done) {
-  let userId = new window.Store.UserConstructor(chatId, {
-    intentionallyUsePrivateConstructor: true,
-  });
-  let conversation = WAPI.getChat(userId);
-
-  if (!conversation) {
-    if (done !== undefined) {
-      done(false);
-    }
-    return false;
-  }
-
-  window.Store.sendDelete(conversation, false)
-    .then(() => {
-      if (done !== undefined) {
-        done(true);
-      }
-    })
-    .catch(() => {
-      if (done !== undefined) {
-        done(false);
-      }
-    });
-
+export function deleteConversation(chatId) {
+  WPP.chat.delete(chatId);
   return true;
 }

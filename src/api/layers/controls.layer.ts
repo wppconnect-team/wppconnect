@@ -78,11 +78,12 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async deleteChat(chatId: string) {
-    return evaluateAndReturn(
+    const result = await evaluateAndReturn(
       this.page,
-      (chatId) => WAPI.deleteConversation(chatId),
+      (chatId) => WPP.chat.delete(chatId),
       chatId
     );
+    return result.status === 200;
   }
 
   /**
