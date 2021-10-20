@@ -131,11 +131,13 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async clearChat(chatId: string, keepStarred = true) {
-    return await evaluateAndReturn(
+    const result = await evaluateAndReturn(
       this.page,
-      ({ chatId, keepStarred }) => WAPI.clearChat(chatId, keepStarred),
+      ({ chatId, keepStarred }) => WPP.chat.clear(chatId, keepStarred),
       { chatId, keepStarred }
     );
+
+    return result.status === 200;
   }
 
   /**

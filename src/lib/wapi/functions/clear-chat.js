@@ -19,5 +19,7 @@ export async function clearChat(id, keepStarred) {
   if (typeof keepStarred === 'undefined') {
     keepStarred = true;
   }
-  return await Store.ChatUtil.sendClear(Store.Chat.get(id), keepStarred);
+  const result = await WPP.chat.clear(id, keepStarred);
+
+  return result.status === 200;
 }
