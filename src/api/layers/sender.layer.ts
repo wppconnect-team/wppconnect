@@ -15,8 +15,9 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { ListMessageOptions } from '@wppconnect/wa-js/dist/chat';
 import * as path from 'path';
-import { Page } from 'puppeteer';
+import { JSONObject, Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { convertToMP4GIF } from '../../utils/ffmpeg';
 import {
@@ -828,6 +829,46 @@ export class SenderLayer extends ListenerLayer {
         WAPI.sendMessageMentioned(to, message, mentioned);
       },
       { to, message, mentioned }
+    );
+  }
+
+  /**
+   * Sends a list message
+   *
+   * ```typescript
+   *   // Example
+   *   client.sendListMessage('<number>@c.us', {
+   *     buttonText: 'Click here',
+   *     description: 'Choose one option',
+   *     sections: [
+   *       {
+   *         title: 'Section 1',
+   *         rows: [
+   *           {
+   *             rowId: 'my_custom_id',
+   *             title: 'Test 1',
+   *             description: 'Description 1',
+   *           },
+   *           {
+   *             rowId: '2',
+   *             title: 'Test 2',
+   *             description: 'Description 2',
+   *           },
+   *         ],
+   *       },
+   *     ],
+   *   });
+   * ```
+   *
+   * @category Chat
+   */
+  public async sendListMessage(to: string, options: ListMessageOptions) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ to, options }) => {
+        WPP.chat.sendListMessage(to, options);
+      },
+      { to, options: options as unknown as JSONObject }
     );
   }
 
