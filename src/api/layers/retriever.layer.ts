@@ -54,7 +54,6 @@ export class RetrieverLayer extends SenderLayer {
         window['pathSession'] = true;
       });
     }
-
     if (await this.isMultiDevice()) {
       return {
         WABrowserId: 'MultiDevice',
@@ -63,7 +62,6 @@ export class RetrieverLayer extends SenderLayer {
         WAToken2: 'MultiDevice',
       };
     }
-
     return await this.page
       .evaluate(() => {
         if (window.localStorage) {
