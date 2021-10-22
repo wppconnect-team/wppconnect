@@ -1,3 +1,16 @@
+## 1.9.4 (2021-10-21)
+
+
+
+## 1.9.3 (2021-10-21)
+
+
+### Bug Fixes
+
+* Fixed close method ([#579](https://github.com/wppconnect-team/wppconnect/issues/579)) ([ef42485](https://github.com/wppconnect-team/wppconnect/commit/ef42485505e9920b5b7826674949ed9d5e36d4e1))
+
+
+
 ## 1.9.2 (2021-10-12)
 
 

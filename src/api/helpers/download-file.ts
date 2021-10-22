@@ -33,7 +33,7 @@ export async function downloadFileToBase64(
   }
 
   try {
-    const response = await axios.get(_path, {
+    const response = await axios.get<any>(_path, {
       responseType: 'arraybuffer',
     });
 

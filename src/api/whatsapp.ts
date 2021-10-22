@@ -154,7 +154,7 @@ export class Whatsapp extends BusinessLayer {
    * @returns boolean
    */
   public async logout() {
-    return await evaluateAndReturn(this.page, () => WAPI.logout());
+    return await evaluateAndReturn(this.page, () => WPP.auth.logout());
   }
 
   /**
@@ -162,22 +162,21 @@ export class Whatsapp extends BusinessLayer {
    * @internal
    */
   public async close() {
-    const closing = async (waPage: {
-      browser: () => any;
-      isClosed: () => any;
-      close: () => any;
-    }) => {
-      if (waPage) {
-        const browser = await waPage.browser();
-        const pid = browser.process() ? browser?.process().pid : null;
-        if (!waPage.isClosed()) await waPage.close();
-        if (browser) await browser.close();
-        if (pid) treekill(pid, 'SIGKILL');
-      }
-    };
+    const browser = this.page.browser();
+
+    if (!this.page.isClosed()) {
+      await this.page.close().catch(() => null);
+    }
+
+    await browser.close().catch(() => null);
+
     try {
-      await closing(this.page);
+      const process = browser.process();
+      if (process) {
+        treekill(process.pid, 'SIGKILL');
+      }
     } catch (error) {}
+
     return true;
   }
 
