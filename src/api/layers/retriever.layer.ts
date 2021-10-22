@@ -54,7 +54,14 @@ export class RetrieverLayer extends SenderLayer {
         window['pathSession'] = true;
       });
     }
-
+    if (await this.isMultiDevice()) {
+      return {
+        WABrowserId: 'MultiDevice',
+        WASecretBundle: 'MultiDevice',
+        WAToken1: 'MultiDevice',
+        WAToken2: 'MultiDevice',
+      };
+    }
     return await this.page
       .evaluate(() => {
         if (window.localStorage) {
