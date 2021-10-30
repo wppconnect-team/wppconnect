@@ -150,14 +150,22 @@ export class ControlsLayer extends UILayer {
   public async deleteMessage(
     chatId: string,
     messageId: string[] | string,
-    onlyLocal = false
+    onlyLocal = false,
+    deleteMediaInDevice = true
   ) {
-    return await evaluateAndReturn(
+    await evaluateAndReturn(
       this.page,
-      ({ contactId, messageId, onlyLocal }) =>
-        WAPI.deleteMessages(contactId, messageId, onlyLocal),
-      { contactId: chatId, messageId, onlyLocal }
+      ({ chatId, messageId, onlyLocal, deleteMediaInDevice }) =>
+        WPP.chat.deleteMessage(
+          chatId,
+          messageId,
+          deleteMediaInDevice,
+          !onlyLocal
+        ),
+      { chatId, messageId, onlyLocal, deleteMediaInDevice }
     );
+
+    return true;
   }
 
   /**
