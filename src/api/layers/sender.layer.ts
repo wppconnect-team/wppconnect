@@ -517,14 +517,31 @@ export class SenderLayer extends ListenerLayer {
     to: string,
     base64: string,
     filename: string,
-    caption?: string
+    caption?: string,
+    quotedMessageId?: string
   ) {
-    return await evaluateAndReturn(
+    const result = await evaluateAndReturn(
       this.page,
-      ({ to, base64, filename, caption }) =>
-        WAPI.sendVideoAsGif(base64, to, filename, caption),
-      { to, base64, filename, caption }
+      async ({ to, base64, filename, caption, quotedMessageId }) => {
+        const result = await WPP.chat.sendFileMessage(to, base64, {
+          type: 'video',
+          isGif: true,
+          filename,
+          caption,
+          quotedMsg: quotedMessageId,
+          waitForAck: true,
+        });
+
+        return {
+          ack: result.ack,
+          id: result.id,
+          sendMsgResult: await result.sendMsgResult,
+        };
+      },
+      { to, base64, filename, caption, quotedMessageId }
     );
+
+    return result;
   }
 
   /**
