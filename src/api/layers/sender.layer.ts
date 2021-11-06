@@ -311,13 +311,29 @@ export class SenderLayer extends ListenerLayer {
     filename: string,
     caption?: string,
     quotedMessageId?: string
-  ): Promise<SendFileResult> {
-    return evaluateAndReturn(
+  ) {
+    const result = await evaluateAndReturn(
       this.page,
-      ({ to, base64, filename, caption, quotedMessageId }) =>
-        WAPI.sendPtt(base64, to, filename, caption, () => {}, quotedMessageId),
+      async ({ to, base64, filename, caption, quotedMessageId }) => {
+        const result = await WPP.chat.sendFileMessage(to, base64, {
+          type: 'audio',
+          isPtt: true,
+          filename,
+          caption,
+          quotedMsg: quotedMessageId,
+          waitForAck: true,
+        });
+
+        return {
+          ack: result.ack,
+          id: result.id,
+          sendMsgResult: await result.sendMsgResult,
+        };
+      },
       { to, base64, filename, caption, quotedMessageId }
     );
+
+    return result;
   }
 
   /**
@@ -336,7 +352,7 @@ export class SenderLayer extends ListenerLayer {
     caption?: string,
     quotedMessageId?: string
   ) {
-    return new Promise<SendFileResult>(async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       let base64 = await downloadFileToBase64(filePath, [/^audio/]),
         obj: { erro: boolean; to: string; text: string };
 
