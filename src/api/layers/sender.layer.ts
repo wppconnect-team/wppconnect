@@ -137,7 +137,7 @@ export class SenderLayer extends ListenerLayer {
     caption?: string,
     quotedMessageId?: string,
     isViewOnce?: boolean
-  ): Promise<SendFileResult> {
+  ) {
     let base64 = await downloadFileToBase64(filePath, [
       'image/gif',
       'image/png',
