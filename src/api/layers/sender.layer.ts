@@ -190,7 +190,7 @@ export class SenderLayer extends ListenerLayer {
     caption?: string,
     quotedMessageId?: string,
     isViewOnce?: boolean
-  ): Promise<SendFileResult> {
+  ) {
     let mimeType = base64MimeType(base64);
 
     if (!mimeType) {
@@ -215,21 +215,32 @@ export class SenderLayer extends ListenerLayer {
 
     const result = await evaluateAndReturn(
       this.page,
-      ({ to, base64, filename, caption, quotedMessageId, isViewOnce }) => {
-        return WAPI.sendImage(
-          base64,
-          to,
+      async ({
+        to,
+        base64,
+        filename,
+        caption,
+        quotedMessageId,
+        isViewOnce,
+      }) => {
+        const result = await WPP.chat.sendFileMessage(to, base64, {
+          type: 'image',
+          isViewOnce,
           filename,
           caption,
-          quotedMessageId,
-          isViewOnce
-        );
+          quotedMsg: quotedMessageId,
+          waitForAck: true,
+        });
+
+        return {
+          ack: result.ack,
+          id: result.id,
+          sendMsgResult: await result.sendMsgResult,
+        };
       },
       { to, base64, filename, caption, quotedMessageId, isViewOnce }
     );
-    if (result['erro'] == true) {
-      throw result;
-    }
+
     return result;
   }
 
