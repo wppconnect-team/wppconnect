@@ -15,36 +15,10 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { getMessageById } from './get-message-by-id';
-
 export async function reply(chatId, content, quotedMessageId) {
-  const chat = Store.Chat.get(chatId);
+  const result = await WPP.chat.sendTextMessage(chatId, content, {
+    quotedMsg: quotedMessageId,
+  });
 
-  let quotedMsgOptions = {};
-  if (quotedMessageId) {
-    let quotedMessage = await getMessageById(quotedMessageId, null, false);
-    if (quotedMessage && quotedMessage.canReply()) {
-      quotedMsgOptions = quotedMessage.msgContextInfo(chat);
-    }
-  }
-
-  const newMsgId = await window.WAPI.getNewMessageId(chat.id);
-  const fromwWid = await Store.UserPrefs.getMaybeMeUser();
-  const message = {
-    id: newMsgId,
-    ack: 0,
-    body: content,
-    from: fromwWid,
-    to: chat.id,
-    local: !0,
-    self: 'out',
-    t: parseInt(new Date().getTime() / 1000),
-    isNewMsg: !0,
-    type: 'chat',
-    ...quotedMsgOptions,
-  };
-
-  await window.Store.addAndSendMsgToChat(chat, message);
-
-  return newMsgId._serialized;
+  return result.id.toString();
 }

@@ -276,22 +276,23 @@ export class SenderLayer extends ListenerLayer {
     content: string,
     quotedMsg: string
   ): Promise<Message> {
-    const messageId: string = await evaluateAndReturn(
+    const result = await evaluateAndReturn(
       this.page,
       ({ to, content, quotedMsg }) => {
-        return WAPI.reply(to, content, quotedMsg);
+        return WPP.chat.sendTextMessage(to, content, { quotedMsg });
       },
       { to, content, quotedMsg }
     );
-    const result = (await evaluateAndReturn(
+
+    const message = (await evaluateAndReturn(
       this.page,
       (messageId: any) => WAPI.getMessageById(messageId),
-      messageId
+      result.id
     )) as Message;
-    if (result['erro'] == true) {
-      throw result;
+    if (message['erro'] == true) {
+      throw message;
     }
-    return result;
+    return message;
   }
 
   /**
