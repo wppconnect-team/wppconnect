@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MessageButtonsOptions | @wppconnect-team/wppconnect - v1.9.4</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.9.4">
+	<title>MessageButtonsOptions | @wppconnect-team/wppconnect - v1.10.0</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.10.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.9.4</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.10.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.9.4</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.10.0</a>
 				</li>
 				<li>
 					<a href="../modules/WAJS.html">WAJS</a>
@@ -89,6 +89,17 @@
 				<ul class="tsd-hierarchy">
 					<li>
 						<span class="target">MessageButtonsOptions</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<a href="WAJS.internal.chat.DocumentMessageOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">DocumentMessageOptions</a>
+							</li>
+							<li>
+								<a href="WAJS.internal.chat.ImageMessageOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageMessageOptions</a>
+							</li>
+							<li>
+								<a href="WAJS.internal.chat.VideoMessageOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">VideoMessageOptions</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -115,9 +126,14 @@
 					<div class="tsd-signature tsd-kind-icon">buttons<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/types.d.ts:47</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/types.d.ts:107</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>List of buttons, with at least 1 option and a maximum of 3</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="footer" class="tsd-anchor"></a>
@@ -125,9 +141,14 @@
 					<div class="tsd-signature tsd-kind-icon">footer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/types.d.ts:52</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/types.d.ts:118</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Footer text for buttons</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="title" class="tsd-anchor"></a>
@@ -135,9 +156,14 @@
 					<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/types.d.ts:51</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/types.d.ts:114</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Title for buttons, only for text message</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -219,10 +245,25 @@
 						<a href="../classes/WAJS.internal.chat.Chat.html" class="tsd-kind-icon">Chat</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.AudioMessageOptions.html" class="tsd-kind-icon">Audio<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.internal.chat.ChatEventTypes.html" class="tsd-kind-icon">Chat<wbr>Event<wbr>Types</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.DeleteMessageReturn.html" class="tsd-kind-icon">Delete<wbr>Message<wbr>Return</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.DocumentMessageOptions.html" class="tsd-kind-icon">Document<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.FileMessageOptions.html" class="tsd-kind-icon">File<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.internal.chat.GetMessagesOptions.html" class="tsd-kind-icon">Get<wbr>Messages<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.ImageMessageOptions.html" class="tsd-kind-icon">Image<wbr>Message<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.internal.chat.ListMessageOptions.html" class="tsd-kind-icon">List<wbr>Message<wbr>Options</a>
@@ -247,6 +288,12 @@
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.internal.chat.SendMessageOptions.html" class="tsd-kind-icon">Send<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.SendMessageReturn.html" class="tsd-kind-icon">Send<wbr>Message<wbr>Return</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.VideoMessageOptions.html" class="tsd-kind-icon">Video<wbr>Message<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace tsd-is-external">
 						<a href="../modules/WAJS.internal.chat.html#AllMessageOptions" class="tsd-kind-icon">All<wbr>Message<wbr>Options</a>
