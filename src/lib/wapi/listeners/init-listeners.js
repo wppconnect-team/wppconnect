@@ -21,43 +21,59 @@ export function initNewMessagesListener() {
       'add',
       (newMessage) => {
         if (newMessage && newMessage.isNewMsg && !newMessage.isSentByMe) {
-          let message = window.WAPI.processMessageObj(newMessage, false, false);
-          if (message) {
-            window.WAPI._newMessagesQueue.push(message);
-            window.WAPI._newMessagesBuffer.push(message);
-          }
+          let startTime = Date.now();
+          let processNewMessagesListener = () => {
+            setTimeout(() => {
+              if (!newMessage.body && Date.now() - startTime < 3000) {
+                processNewMessagesListener();
+                return false;
+              }
+              let message = window.WAPI.processMessageObj(
+                newMessage,
+                false,
+                false
+              );
+              if (message) {
+                window.WAPI._newMessagesQueue.push(message);
+                window.WAPI._newMessagesBuffer.push(message);
+              }
 
-          // Starts debouncer time to don't call a callback for each message if more than one message arrives
-          // in the same second
-          if (
-            !window.WAPI._newMessagesDebouncer &&
-            window.WAPI._newMessagesQueue.length > 0
-          ) {
-            window.WAPI._newMessagesDebouncer = setTimeout(() => {
-              let queuedMessages = window.WAPI._newMessagesQueue;
+              // Starts debouncer time to don't call a callback for each message if more than one message arrives
+              // in the same second
+              if (
+                !window.WAPI._newMessagesDebouncer &&
+                window.WAPI._newMessagesQueue.length > 0
+              ) {
+                window.WAPI._newMessagesDebouncer = setTimeout(() => {
+                  let queuedMessages = window.WAPI._newMessagesQueue;
 
-              window.WAPI._newMessagesDebouncer = null;
-              window.WAPI._newMessagesQueue = [];
+                  window.WAPI._newMessagesDebouncer = null;
+                  window.WAPI._newMessagesQueue = [];
 
-              let removeCallbacks = [];
+                  let removeCallbacks = [];
 
-              window.WAPI._newMessagesCallbacks.forEach(function (callbackObj) {
-                if (callbackObj.callback !== undefined) {
-                  callbackObj.callback(queuedMessages);
-                }
-                if (callbackObj.rmAfterUse === true) {
-                  removeCallbacks.push(callbackObj);
-                }
-              });
+                  window.WAPI._newMessagesCallbacks.forEach(function (
+                    callbackObj
+                  ) {
+                    if (callbackObj.callback !== undefined) {
+                      callbackObj.callback(queuedMessages);
+                    }
+                    if (callbackObj.rmAfterUse === true) {
+                      removeCallbacks.push(callbackObj);
+                    }
+                  });
 
-              // Remove removable callbacks.
-              removeCallbacks.forEach(function (rmCallbackObj) {
-                let callbackIndex =
-                  window.WAPI._newMessagesCallbacks.indexOf(rmCallbackObj);
-                window.WAPI._newMessagesCallbacks.splice(callbackIndex, 1);
-              });
-            }, 1000);
-          }
+                  // Remove removable callbacks.
+                  removeCallbacks.forEach(function (rmCallbackObj) {
+                    let callbackIndex =
+                      window.WAPI._newMessagesCallbacks.indexOf(rmCallbackObj);
+                    window.WAPI._newMessagesCallbacks.splice(callbackIndex, 1);
+                  });
+                }, 1000);
+              }
+            }, 100);
+          };
+          processNewMessagesListener();
         }
       }
     );
