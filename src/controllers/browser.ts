@@ -134,6 +134,11 @@ export async function injectApi(page: Page) {
     })
     .catch(() => false);
 
+  await page
+    .evaluate(() => {
+      WPP.chat.defaultSendMessageOptions.createChat = true;
+    })
+    .catch(() => false);
   await page.addScriptTag({
     path: require.resolve(
       path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
