@@ -24,9 +24,8 @@ import { getAllChatsWithNewMessages } from './get-chats-with-new-messages';
  */
 export const getAllUnreadMessages = async function () {
   const queries = getAllChatsWithNewMessages().map((c) =>
-    Store.Msg.findQuery({
-      remote: c.id,
-      count: c.unreadCount - 1,
+    WPP.chat.getMessages(c.id, {
+      count: c.unreadCount,
     })
   );
 
