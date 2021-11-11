@@ -109,7 +109,7 @@
     "boxen": "^5.1.2",
     "catch-exit": "^1.1.0",
     "chalk": "^4.0.0",
-    "chrome-launcher": "^0.14.2",
+    "chrome-launcher": "^0.15.0",
     "execa": "^5.0.0",
     "file-type": "^16.5.3",
     "fsevents": "^2.3.1",
