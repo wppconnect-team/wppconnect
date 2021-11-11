@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BlocklistResult | @wppconnect-team/wppconnect - v1.10.1</title>
+	<title>Contact | @wppconnect-team/wppconnect - v1.10.1</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.10.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -71,13 +71,13 @@
 					<a href="../modules/WAJS.internal.html">internal</a>
 				</li>
 				<li>
-					<a href="../modules/WAJS.internal.blocklist.html">blocklist</a>
+					<a href="../modules/WAJS.internal.contact.html">contact</a>
 				</li>
 				<li>
-					<a href="WAJS.internal.blocklist.BlocklistResult.html">BlocklistResult</a>
+					<a href="WAJS.internal.contact.Contact.html">Contact</a>
 				</li>
 			</ul>
-			<h1>Interface BlocklistResult</h1>
+			<h1>Class Contact</h1>
 		</div>
 	</div>
 </header>
@@ -88,7 +88,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BlocklistResult</span>
+						<span class="tsd-signature-type">Emittery</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/WAJS.internal.contact.ContactEventTypes.html" class="tsd-signature-type" data-tsd-kind="Interface">ContactEventTypes</a><span class="tsd-signature-symbol">&gt;</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">Contact</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -97,36 +102,83 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-external">
-							<h3>Properties</h3>
+							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.internal.blocklist.BlocklistResult.html#isBlocked" class="tsd-kind-icon">is<wbr>Blocked</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.internal.blocklist.BlocklistResult.html#wid" class="tsd-kind-icon">wid</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="WAJS.internal.contact.Contact.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.internal.contact.Contact.html#initialize" class="tsd-kind-icon">initialize</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.internal.contact.Contact.html#queryExists" class="tsd-kind-icon">query<wbr>Exists</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="isBlocked" class="tsd-anchor"></a>
-					<h3>is<wbr>Blocked</h3>
-					<div class="tsd-signature tsd-kind-icon">is<wbr>Blocked<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/blocklist/types.d.ts:22</li>
-						</ul>
-					</aside>
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Contact<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="WAJS.internal.contact.Contact.html" class="tsd-signature-type" data-tsd-kind="Class">Contact</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Emittery&lt;ContactEventTypes&gt;.constructor</p>
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/contact/Contact.d.ts:20</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="WAJS.internal.contact.Contact.html" class="tsd-signature-type" data-tsd-kind="Class">Contact</a></h4>
+						</li>
+					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="wid" class="tsd-anchor"></a>
-					<h3>wid</h3>
-					<div class="tsd-signature tsd-kind-icon">wid<span class="tsd-signature-symbol">:</span> <a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/blocklist/types.d.ts:21</li>
-						</ul>
-					</aside>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="initialize" class="tsd-anchor"></a>
+					<h3>initialize</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">initialize<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/contact/Contact.d.ts:21</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="queryExists" class="tsd-anchor"></a>
+					<h3>query<wbr>Exists</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">query<wbr>Exists<span class="tsd-signature-symbol">(</span>contactId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>biz<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>wid<span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/contact/Contact.d.ts:22</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>contactId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>biz<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>wid<span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -178,13 +230,13 @@
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 										<a href="../modules/WAJS.internal.auth.html">auth</a>
 									</li>
-									<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 										<a href="../modules/WAJS.internal.blocklist.html">blocklist</a>
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 										<a href="../modules/WAJS.internal.chat.html">chat</a>
 									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+									<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 										<a href="../modules/WAJS.internal.contact.html">contact</a>
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
@@ -207,29 +259,29 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-namespace tsd-is-external">
-						<a href="../classes/WAJS.internal.blocklist.Blocklist.html" class="tsd-kind-icon">Blocklist</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.internal.blocklist.BlocklistEventTypes.html" class="tsd-kind-icon">Blocklist<wbr>Event<wbr>Types</a>
-					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.internal.blocklist.BlocklistResult.html" class="tsd-kind-icon">Blocklist<wbr>Result</a>
+					<li class="current tsd-kind-class tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.contact.Contact.html" class="tsd-kind-icon">Contact</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.internal.blocklist.BlocklistResult.html#isBlocked" class="tsd-kind-icon">is<wbr>Blocked</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+								<a href="WAJS.internal.contact.Contact.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.internal.blocklist.BlocklistResult.html#wid" class="tsd-kind-icon">wid</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="WAJS.internal.contact.Contact.html#initialize" class="tsd-kind-icon">initialize</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="WAJS.internal.contact.Contact.html#queryExists" class="tsd-kind-icon">query<wbr>Exists</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="../interfaces/WAJS.internal.contact.ContactEventTypes.html" class="tsd-kind-icon">Contact<wbr>Event<wbr>Types</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.internal.blocklist.html#default" class="tsd-kind-icon">default</a>
+						<a href="../modules/WAJS.internal.contact.html#default" class="tsd-kind-icon">default</a>
 					</li>
 				</ul>
 			</nav>

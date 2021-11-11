@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Group | @wppconnect-team/wppconnect - v1.10.0</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.10.0">
+	<title>Group | @wppconnect-team/wppconnect - v1.10.1</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.10.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.10.0</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.10.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.10.0</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.10.1</a>
 				</li>
 				<li>
 					<a href="../modules/WAJS.html">WAJS</a>
@@ -115,6 +115,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.internal.group.Group.html#canDemote" class="tsd-kind-icon">can<wbr>Demote</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.internal.group.Group.html#canPromote" class="tsd-kind-icon">can<wbr>Promote</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.internal.group.Group.html#canRemove" class="tsd-kind-icon">can<wbr>Remove</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.internal.group.Group.html#create" class="tsd-kind-icon">create</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.internal.group.Group.html#demoteParticipants" class="tsd-kind-icon">demote<wbr>Participants</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.internal.group.Group.html#iAmAdmin" class="tsd-kind-icon">i<wbr>AmAdmin</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.internal.group.Group.html#iAmMember" class="tsd-kind-icon">i<wbr>AmMember</a></li>
@@ -275,6 +276,32 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="create" class="tsd-anchor"></a>
+					<h3>create</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>groupName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, participantsIds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>gid<span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">; </span>participants<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>status<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/group/Group.d.ts:36</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>groupName: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>participantsIds: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>gid<span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">; </span>participants<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>status<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -521,6 +548,9 @@
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 										<a href="../modules/WAJS.internal.chat.html">chat</a>
 									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+										<a href="../modules/WAJS.internal.contact.html">contact</a>
+									</li>
 									<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 										<a href="../modules/WAJS.internal.group.html">group</a>
 									</li>
@@ -563,6 +593,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="WAJS.internal.group.Group.html#canRemove" class="tsd-kind-icon">can<wbr>Remove</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="WAJS.internal.group.Group.html#create" class="tsd-kind-icon">create</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="WAJS.internal.group.Group.html#demoteParticipants" class="tsd-kind-icon">demote<wbr>Participants</a>
