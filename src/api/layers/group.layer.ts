@@ -121,7 +121,7 @@ export class GroupLayer extends RetrieverLayer {
   public async createGroup(groupName: string, contacts: string | string[]) {
     return await evaluateAndReturn(
       this.page,
-      ({ groupName, contacts }) => WAPI.createGroup(groupName, contacts),
+      ({ groupName, contacts }) => WPP.group.create(groupName, contacts),
       { groupName, contacts }
     );
   }
