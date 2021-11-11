@@ -1,3 +1,12 @@
+## 1.10.1 (2021-11-11)
+
+
+### Features
+
+* Updated to latest version of WhatsApp ([f6d01a3](https://github.com/wppconnect-team/wppconnect/commit/f6d01a390db9577f46fee0072637ece981e54780))
+
+
+
 # 1.10.0 (2021-11-06)
 
 
