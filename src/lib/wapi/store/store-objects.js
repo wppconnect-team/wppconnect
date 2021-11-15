@@ -46,10 +46,6 @@ export const storeObjects = [
     conditions: (module) => (module.sendQueryGroupInviteCode ? module : null),
   },
   {
-    id: 'Wap',
-    conditions: (module) => (module.createGroup ? module : null),
-  },
-  {
     id: 'ServiceWorker',
     conditions: (module) =>
       module.default && module.default.killServiceWorker ? module : null,
@@ -229,16 +225,6 @@ export const storeObjects = [
     conditions: (module) =>
       module.createMessageKey && module.createDeviceSentMessage
         ? module.createMessageKey
-        : null,
-  },
-  {
-    id: 'Participants',
-    conditions: (module) =>
-      module.addParticipants &&
-      module.removeParticipants &&
-      module.promoteParticipants &&
-      module.demoteParticipants
-        ? module
         : null,
   },
   {

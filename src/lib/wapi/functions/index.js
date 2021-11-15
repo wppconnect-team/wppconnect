@@ -17,7 +17,6 @@
 
 export { areAllMessagesLoaded } from './are-all-messages-loaded';
 export { clearChat } from './clear-chat';
-export { createGroup } from './create-group';
 export { deleteConversation } from './delete-conversation';
 export { deleteMessages } from './delete-messages';
 export { downloadFile } from './download-file-with-credentials';
@@ -93,10 +92,6 @@ export { getMessageById } from './get-message-by-id';
 export { getMessages } from './get-messages';
 export { blockContact } from './block-contact';
 export { unblockContact } from './unblock-contact';
-export { removeParticipant } from './remove-participant';
-export { addParticipant } from './add-participant';
-export { promoteParticipant } from './promote-participant';
-export { demoteParticipant } from './demote-participant';
 export { openChat, openChatAt } from './open-chat';
 export { joinGroup } from './join-group';
 export { markUnseenMessage } from './mark-unseen-message.js';

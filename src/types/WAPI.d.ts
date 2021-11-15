@@ -36,24 +36,18 @@ import {
 import { SessionToken } from '../token-store';
 
 interface WAPI {
-  addParticipant: (groupId: string, contactId: string | string[]) => boolean;
   allNewMessagesListener: (callback: Function) => void;
   archiveChat: (chatId: string, option: boolean) => boolean;
   arrayBufferToBase64: (buffer: ArrayBuffer) => string;
   blockContact: (messageId: string) => boolean;
   checkNumberStatus: (contactId: string) => Promise<WhatsappProfile>;
   clearChat: (chatId: string, keepStarred: boolean) => void;
-  createGroup: (
-    groupName: string,
-    contactId: string | string[]
-  ) => GroupCreation;
   deleteConversation: (chatId: string) => boolean;
   deleteMessages: (
     contactId: string,
     messageId: string[] | string,
     onlyLocal: boolean
   ) => Promise<boolean>;
-  demoteParticipant: (groupId: string, contactId: string | string[]) => void;
   downloadFile: (data: string) => Promise<string | boolean>;
   downloadMedia: (messageId: string) => Promise<string>;
   forwardMessages: (
@@ -132,8 +126,6 @@ interface WAPI {
     option: boolean,
     nonExistent?: boolean
   ) => Promise<object>;
-  promoteParticipant: (groupId: string, contactId: string | string[]) => void;
-  removeParticipant: (groupId: string, contactId: string | string[]) => void;
   reply: (to: string, content: string, quotedMsg: string) => Promise<string>;
   rejectCall: (callId?: string) => Promise<number>;
   revokeGroupInviteLink: (chatId: string) => Promise<string>;
