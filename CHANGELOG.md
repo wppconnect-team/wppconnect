@@ -1,3 +1,12 @@
+## 1.10.2 (2021-11-15)
+
+
+### Bug Fixes
+
+* Fixed call of createWid function (fix [#647](https://github.com/wppconnect-team/wppconnect/issues/647)) ([c381000](https://github.com/wppconnect-team/wppconnect/commit/c3810003a4f145f9c3ec54f49cde97ddbe01a164))
+
+
+
 ## 1.10.1 (2021-11-11)
 
 
