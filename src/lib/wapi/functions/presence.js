@@ -21,7 +21,7 @@ export async function subscribePresence(ids) {
 
   let count = 0;
   for (const id of ids) {
-    const wid = new Store.WidFactory.createWid(id);
+    const wid = new WPP.whatsapp.WidFactory.createWid(id);
     if (Store.Presence.get(wid)) {
       continue;
     }
@@ -37,7 +37,7 @@ export async function unsubscribePresence(ids) {
   }
   let count = 0;
   for (const id of ids) {
-    const wid = new Store.WidFactory.createWid(id);
+    const wid = new WPP.whatsapp.WidFactory.createWid(id);
     const presence = Store.Presence.get(wid);
     if (!presence) {
       continue;

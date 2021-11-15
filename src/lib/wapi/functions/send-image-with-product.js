@@ -55,7 +55,7 @@ export function sendImageWithProduct(
         caption,
       };
 
-      var idUser = new Store.WidFactory.createWid(chatid);
+      var idUser = new WPP.whatsapp.WidFactory.createWid(chatid);
 
       return WPP.chat.find(idUser).then((chat) => {
         var mediaBlob = base64ToFile(imgBase64, product.name);

@@ -18,7 +18,7 @@
 export function getNewMessageId(chatId) {
   return new Store.MsgKey({
     from: Store.UserPrefs.getMaybeMeUser(),
-    to: new Store.WidFactory.createWid(chatId),
+    to: new WPP.whatsapp.WidFactory.createWid(chatId),
     id: Store.randomMessageId(),
     participant: undefined,
     selfDir: 'out',

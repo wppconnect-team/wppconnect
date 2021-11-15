@@ -28,8 +28,9 @@ export async function sendMessageWithTags(to, body) {
   var mentionedJidList =
     body
       .match(/@(\d*)/g)
-      .map((x) => new Store.WidFactory.createUserWid(x.replace('@', ''))) ||
-    undefined;
+      .map(
+        (x) => new WPP.whatsapp.WidFactory.createUserWid(x.replace('@', ''))
+      ) || undefined;
 
   var extend = {
     ack: 0,
@@ -37,7 +38,7 @@ export async function sendMessageWithTags(to, body) {
     local: !0,
     self: 'out',
     t: parseInt(new Date().getTime() / 1000),
-    to: new Store.WidFactory.createWid(chatId),
+    to: new WPP.whatsapp.WidFactory.createWid(chatId),
     isNewMsg: !0,
     type: 'chat',
     body,

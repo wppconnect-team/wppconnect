@@ -228,13 +228,6 @@ export const storeObjects = [
         : null,
   },
   {
-    id: 'WidFactory',
-    conditions: (module) =>
-      module.isWidlike && module.createWid && module.createWidFromWidLike
-        ? module
-        : null,
-  },
-  {
     id: 'Base',
     conditions: (module) =>
       module.setSubProtocol && module.binSend && module.actionNode

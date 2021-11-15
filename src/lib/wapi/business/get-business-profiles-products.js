@@ -18,7 +18,9 @@
 export async function getBusinessProfilesProducts(id) {
   let catalog = window.Store.Catalog.get(id);
   if (!catalog) {
-    catalog = await window.Store.Catalog.find(Store.WidFactory.createWid(id));
+    catalog = await window.Store.Catalog.find(
+      WPP.whatsapp.WidFactory.createWid(id)
+    );
   }
 
   if (!catalog) {

@@ -18,7 +18,7 @@ export async function setProfilePic(obj, id) {
   if (!id) {
     id = Store.UserPrefs.getMaybeMeUser();
   }
-  const wid = Store.WidFactory.createWid(id);
+  const wid = WPP.whatsapp.WidFactory.createWid(id);
 
   let base64 = 'data:image/jpeg;base64,';
   return await Store.Profile.sendSetPicture(

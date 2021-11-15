@@ -124,7 +124,7 @@ window.WAPI.sendButtons = async function (chatId) {
       const s = Store.Base2;
       if (!s.BinaryProtocol)
         window.Store.Base2.BinaryProtocol = new window.Store.bp(11);
-      var idUser = new Store.WidFactory.createWid(chatId);
+      var idUser = new WPP.whatsapp.WidFactory.createWid(chatId);
       var k = Store.createMessageKey({
         ...e,
         to: idUser,
@@ -218,7 +218,7 @@ window.WAPI.sendButtons2 = async function (chatId) {
     local: !0,
     self: 'out',
     t: parseInt(new Date().getTime() / 1000),
-    to: Store.WidFactory.createWid(chatId),
+    to: WPP.whatsapp.WidFactory.createWid(chatId),
     isNewMsg: !0,
     type: 'template',
     subtype: 'text',
@@ -296,7 +296,7 @@ window.WAPI.sendButtons2 = async function (chatId) {
       const s = Store.Base2;
       if (!s.BinaryProtocol)
         window.Store.Base2.BinaryProtocol = new window.Store.bp(11);
-      var idUser = new Store.WidFactory.createWid(chatId);
+      var idUser = new WPP.whatsapp.WidFactory.createWid(chatId);
       var k = Store.createMessageKey({
         ...e,
         to: idUser,

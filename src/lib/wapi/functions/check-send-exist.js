@@ -49,7 +49,7 @@ export async function sendExist(chatId, returnChat = true, Send = true) {
 
   if (!chat && chatId === 'status@broadcast') {
     chat = new Store.Chat.modelClass({
-      id: Store.WidFactory.createWid('status@broadcast'),
+      id: WPP.whatsapp.WidFactory.createWid('status@broadcast'),
     });
     Store.Chat.add(chat);
     chat = await window.WAPI.getChat(chatId); // Fix some methods

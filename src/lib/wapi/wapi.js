@@ -458,9 +458,7 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   window.WAPI.checkNumberStatus = async function (id) {
-    const wid = Store.WidFactory.createWid(id);
-
-    const result = await Store.checkNumberInfo(wid);
+    const result = await WPP.contact.queryExists(id);
 
     if (!result) {
       return {
