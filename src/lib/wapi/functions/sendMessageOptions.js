@@ -24,7 +24,8 @@ import { getMessageById } from './get-message-by-id';
  * @param {string} options object aditionais
  */
 export async function sendMessageOptions(chatId, content, options = {}) {
-  const chat = Store.Chat.get(chatId);
+  const chat = WPP.chat.get(chatId) || (await WPP.chat.find(chatId));
+
   let attOptions = {};
   if (options.attachment) {
     attOptions = await WWebJS.processMediaData(
