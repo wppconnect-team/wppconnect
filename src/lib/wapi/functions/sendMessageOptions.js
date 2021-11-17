@@ -122,7 +122,7 @@ export async function sendMessageOptions(chatId, content, options = {}) {
     }
   }
   const newMsgId = WPP.chat.generateMessageID(chat.id);
-  const fromwWid = await Store.UserPrefs.getMaybeMeUser();
+  const fromwWid = WPP.whatsapp.UserPrefs.getMaybeMeUser();
   const message = {
     id: newMsgId,
     ack: 0,

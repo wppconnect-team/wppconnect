@@ -32,7 +32,7 @@ export async function sendLocation(
       local: true,
       self: 'out',
       t: parseInt(new Date().getTime() / 1000),
-      from: Store.UserPrefs.getMaybeMeUser(),
+      from: WPP.whatsapp.UserPrefs.getMaybeMeUser(),
       to: chat.id,
       isNewMsg: true,
       type: 'location',

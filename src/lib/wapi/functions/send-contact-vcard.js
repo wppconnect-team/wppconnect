@@ -33,7 +33,7 @@ export async function sendContactVcard(chatId, contactId, name) {
     var message = {
       ack: 0,
       body: bod.vcard,
-      from: Store.UserPrefs.getMaybeMeUser(),
+      from: WPP.whatsapp.UserPrefs.getMaybeMeUser(),
       local: !0,
       self: 'out',
       id: newId,

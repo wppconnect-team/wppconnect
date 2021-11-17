@@ -16,5 +16,5 @@
  */
 
 export function getWid() {
-  return Store.UserPrefs.getMaybeMeUser()?._serialized;
+  return WPP.whatsapp.UserPrefs.getMaybeMeUser()?._serialized;
 }

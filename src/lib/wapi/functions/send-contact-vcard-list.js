@@ -59,7 +59,7 @@ export async function sendContactVcardList(chatId, contacts) {
 
     var message = {
       ack: 0,
-      from: Store.UserPrefs.getMaybeMeUser(),
+      from: WPP.whatsapp.UserPrefs.getMaybeMeUser(),
       local: !0,
       self: 'out',
       id: newId,

@@ -356,10 +356,6 @@ export const storeObjects = [
       module.default && module.default.getOrCreateURL ? module.default : null,
   },
   {
-    id: 'UserPrefs',
-    conditions: (module) => (module.getMaybeMeUser ? module : null),
-  },
-  {
     id: 'randomMessageId',
     conditions: (module) =>
       module.randomId && module.default ? module.default : null,

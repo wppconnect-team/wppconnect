@@ -27,7 +27,7 @@ export async function sendMessage(to, content) {
       type: 'chat',
       subtype: null,
       t: parseInt(new Date().getTime() / 1000),
-      from: Store.UserPrefs.getMaybeMeUser(),
+      from: WPP.whatsapp.UserPrefs.getMaybeMeUser(),
       to: chat.id,
       self: 'out',
       isNewMsg: true,
