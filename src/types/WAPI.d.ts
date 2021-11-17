@@ -131,15 +131,6 @@ interface WAPI {
   revokeGroupInviteLink: (chatId: string) => Promise<string>;
   restartService: () => boolean;
   sendChatstate: (chatState: string, chatId: string) => void;
-  sendContactVcard: (
-    to: string,
-    contact: string,
-    name?: string
-  ) => Promise<object>;
-  sendContactVcardList: (
-    to: string,
-    contacts: (string | { id: string; name: string })[]
-  ) => Promise<object>;
   sendFile: (
     base64: string,
     to: string,

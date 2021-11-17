@@ -73,7 +73,6 @@ import {
   revokeGroupInviteLink,
   sendMessageOptions,
   sendChatstate,
-  sendContactVcard,
   sendFile,
   sendPtt,
   sendImage,
@@ -104,7 +103,6 @@ import {
   scope,
   getchatId,
   sendExist,
-  sendContactVcardList,
   setProfilePic,
   pinChat,
   getSessionTokenBrowser,
@@ -265,8 +263,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.sendVideoAsGif = sendVideoAsGif;
   window.WAPI.processFiles = processFiles;
   window.WAPI.sendImageWithProduct = sendImageWithProduct;
-  window.WAPI.sendContactVcard = sendContactVcard;
-  window.WAPI.sendContactVcardList = sendContactVcardList;
   window.WAPI.forwardMessages = forwardMessages;
   window.WAPI.reply = reply;
   window.WAPI._sendSticker = sendSticker;

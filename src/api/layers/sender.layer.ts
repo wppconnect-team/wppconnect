@@ -616,21 +616,14 @@ export class SenderLayer extends ListenerLayer {
    * @param to Chat id
    * @param contactsId Example: 0000@c.us | [000@c.us, 1111@c.us]
    */
-  public async sendContactVcard(
-    to: string,
-    contactsId: string | string[],
-    name?: string
-  ) {
+  public async sendContactVcard(to: string, contactsId: string, name?: string) {
     const result = await evaluateAndReturn(
       this.page,
       ({ to, contactsId, name }) => {
-        return WAPI.sendContactVcard(to, contactsId, name);
+        WPP.chat.sendVCardContactMessage(to, { id: contactsId, name: name });
       },
       { to, contactsId, name }
     );
-    if (result['erro'] == true) {
-      throw result;
-    }
     return result;
   }
 
@@ -647,13 +640,10 @@ export class SenderLayer extends ListenerLayer {
     const result = await evaluateAndReturn(
       this.page,
       ({ to, contacts }) => {
-        return WAPI.sendContactVcardList(to, contacts);
+        return WPP.chat.sendVCardContactMessage(to, contacts);
       },
       { to, contacts }
     );
-    if (result['erro'] == true) {
-      throw result;
-    }
     return result;
   }
 
