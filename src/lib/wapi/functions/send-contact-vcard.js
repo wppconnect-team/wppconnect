@@ -19,7 +19,7 @@ export async function sendContactVcard(chatId, contactId, name) {
   var chat = await WAPI.sendExist(chatId);
   var contChat = await WAPI.sendExist(contactId);
   if (chat.id && contChat.id) {
-    var newId = window.WAPI.getNewMessageId(chat.id);
+    var newId = WPP.chat.generateMessageID(chat.id);
     // Create a copy of contact
     var contact = new Store.Contact.modelClass(contChat.contact);
 

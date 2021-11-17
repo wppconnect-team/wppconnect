@@ -144,15 +144,6 @@ export const storeObjects = [
         : null,
   },
   {
-    id: 'MsgKey',
-    conditions: (module) =>
-      module.default &&
-      typeof module.default.toString === 'function' &&
-      module.default.toString().includes('MsgKey error: obj is null/undefined')
-        ? module.default
-        : null,
-  },
-  {
     id: 'Parser',
     conditions: (module) =>
       module.convertToTextWithoutSpecialEmojis ? module.default : null,

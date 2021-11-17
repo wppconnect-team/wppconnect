@@ -55,7 +55,6 @@ import {
   getMessageById,
   getMyContacts,
   getNewId,
-  getNewMessageId,
   getNumberProfile,
   getStatus,
   getUnreadMessages,
@@ -326,7 +325,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.getNumberProfile = getNumberProfile;
   window.WAPI.getMessageById = getMessageById;
   window.WAPI.getMessages = getMessages;
-  window.WAPI.getNewMessageId = getNewMessageId;
   window.WAPI.getFileHash = getFileHash;
   window.WAPI.generateMediaKey = generateMediaKey;
   window.WAPI.arrayBufferToBase64 = arrayBufferToBase64;

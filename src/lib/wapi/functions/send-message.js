@@ -19,7 +19,7 @@ export async function sendMessage(to, content) {
   const chat = await WAPI.sendExist(to);
 
   if (!chat.erro) {
-    var newId = await window.WAPI.getNewMessageId(chat.id);
+    var newId = WPP.chat.generateMessageID(chat.id);
 
     var message = {
       id: newId,

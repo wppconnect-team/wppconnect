@@ -22,7 +22,7 @@ window.WAPI.sendButtons = async function (chatId) {
   var t2 = Object.create(
     Store.Msg.filter((x) => (x.type == 'template') & !x.id.fromMe)[0]
   );
-  var newId = window.WAPI.getNewMessageId(chatId);
+  var newId = WPP.chat.generateMessageID(chatId);
   delete tempMsg.hasTemplateButtons;
   var extend = {
     ack: 0,
@@ -210,7 +210,7 @@ window.WAPI.sendButtons2 = async function (chatId) {
         !msg.quotedStanzaID
     )[0]
   );
-  var newId = window.WAPI.getNewMessageId(chatId);
+  var newId = WPP.chat.generateMessageID(chatId);
   delete tempMsg.hasTemplateButtons;
   var extend = {
     ack: 0,

@@ -23,7 +23,7 @@ window.WAPI.sendPaymentRequest = async function (
 ) {
   var chat = Store.Chat.get(chatId);
   var tempMsg = Object.create(chat.msgs.filter((msg) => msg.__x_isSentByMe)[0]);
-  var newId = window.WAPI.getNewMessageId(chatId);
+  var newId = WPP.chat.generateMessageID(chatId);
   var extend = {
     ack: 0,
     id: newId,

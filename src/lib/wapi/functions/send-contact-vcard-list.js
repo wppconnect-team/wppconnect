@@ -54,7 +54,7 @@ export async function sendContactVcardList(chatId, contacts) {
 
       return await window.Store.Vcard.vcardFromContactModel(contact);
     });
-    var newId = window.WAPI.getNewMessageId(chat.id);
+    var newId = WPP.chat.generateMessageID(chat.id);
     var Vcards = await Promise.all(vcardPromises);
 
     var message = {

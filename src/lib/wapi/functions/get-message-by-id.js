@@ -26,39 +26,13 @@ export async function getMessageById(id, done, serialize = true) {
     return false;
   }
 
-  const key = window.Store.MsgKey.fromString(id);
+  const key = WPP.whatsapp.MsgKey.fromString(id);
 
   if (!key) {
     return false;
   }
 
-  // Check message is loaded in store
-  let msg = window.Store.Msg.get(key);
-
-  if (!msg) {
-    // Get chat of message
-    const chat = window.Store.Chat.get(key.remote);
-    if (!chat) {
-      return false;
-    }
-
-    //If not message not found, load latest messages of chat
-    await chat.loadEarlierMsgs();
-    msg = window.Store.Msg.get(key);
-
-    if (!msg) {
-      // If not found, load messages around the message ID
-      const context = chat.getSearchContext(key);
-      if (
-        context &&
-        context.collection &&
-        context.collection.loadAroundPromise
-      ) {
-        await context.collection.loadAroundPromise;
-      }
-      msg = window.Store.Msg.get(key);
-    }
-  }
+  const msg = await WPP.chat.getMessageById(key.remote, key.toString());
 
   if (!msg) {
     return false;

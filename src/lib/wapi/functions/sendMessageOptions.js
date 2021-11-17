@@ -120,7 +120,7 @@ export async function sendMessageOptions(chatId, content, options = {}) {
       options = { ...options, ...preview };
     }
   }
-  const newMsgId = await window.WAPI.getNewMessageId(chat.id);
+  const newMsgId = WPP.chat.generateMessageID(chat.id);
   const fromwWid = await Store.UserPrefs.getMaybeMeUser();
   const message = {
     id: newMsgId,

@@ -24,7 +24,7 @@ export async function sendLocation(
   var chat = await WAPI.sendExist(chatId);
 
   if (!chat.erro) {
-    var newId = await window.WAPI.getNewMessageId(chat.id);
+    var newId = WPP.chat.generateMessageID(chat.id);
 
     var message = {
       ack: 0,

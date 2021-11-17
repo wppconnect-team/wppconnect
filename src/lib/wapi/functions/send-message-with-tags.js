@@ -24,7 +24,7 @@ export async function sendMessageWithTags(to, body) {
   }
 
   var tempMsg = Object.create(msgIveSent);
-  var newId = window.WAPI.getNewMessageId(chatId);
+  var newId = WPP.chat.generateMessageID(chatId);
   var mentionedJidList =
     body
       .match(/@(\d*)/g)
