@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ModelOptions | @wppconnect-team/wppconnect - v1.10.3</title>
+	<title>VCardContact | @wppconnect-team/wppconnect - v1.10.3</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.10.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -68,13 +68,16 @@
 					<a href="../modules/WAJS.html">WAJS</a>
 				</li>
 				<li>
-					<a href="../modules/WAJS.whatsapp.html">whatsapp</a>
+					<a href="../modules/WAJS.internal.html">internal</a>
 				</li>
 				<li>
-					<a href="WAJS.whatsapp.ModelOptions.html">ModelOptions</a>
+					<a href="../modules/WAJS.internal.chat.html">chat</a>
+				</li>
+				<li>
+					<a href="WAJS.internal.chat.VCardContact.html">VCardContact</a>
 				</li>
 			</ul>
-			<h1>Interface ModelOptions</h1>
+			<h1>Interface VCardContact</h1>
 		</div>
 	</div>
 </header>
@@ -85,7 +88,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ModelOptions</span>
+						<span class="target">VCardContact</span>
 					</li>
 				</ul>
 			</section>
@@ -96,11 +99,8 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.ModelOptions.html#_internalInitializationDoNotUse" class="tsd-kind-icon">_internal<wbr>Initialization<wbr>DoNot<wbr>Use</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.ModelOptions.html#collection" class="tsd-kind-icon">collection</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.ModelOptions.html#merge" class="tsd-kind-icon">merge</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.ModelOptions.html#parent" class="tsd-kind-icon">parent</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.ModelOptions.html#silent" class="tsd-kind-icon">silent</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.internal.chat.VCardContact.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.internal.chat.VCardContact.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -109,52 +109,22 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="_internalInitializationDoNotUse" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> _internal<wbr>Initialization<wbr>DoNot<wbr>Use</h3>
-					<div class="tsd-signature tsd-kind-icon">_internal<wbr>Initialization<wbr>DoNot<wbr>Use<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="id" class="tsd-anchor"></a>
+					<h3>id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/models/Model.d.ts:30</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/types.d.ts:173</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="collection" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> collection</h3>
-					<div class="tsd-signature tsd-kind-icon">collection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/models/Model.d.ts:31</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="merge" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> merge</h3>
-					<div class="tsd-signature tsd-kind-icon">merge<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/models/Model.d.ts:32</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="parent" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> parent</h3>
-					<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/models/Model.d.ts:33</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="silent" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> silent</h3>
-					<div class="tsd-signature tsd-kind-icon">silent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/models/Model.d.ts:34</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/types.d.ts:174</li>
 						</ul>
 					</aside>
 				</section>
@@ -181,8 +151,20 @@
 					<li class=" pp-nav pp-page">
 						<a href="../pages/Getting Started/basic-functions.html">Basic <wbr>Functions</a>
 					</li>
+					<li class="label pp-nav pp-group">
+						<span>API</span>
+					</li>
 					<li class=" ">
 						<a href="../modules.html">Exports</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Internals</span>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/tokenStore.html">token<wbr>Store</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
 					</li>
 					<li class="current tsd-kind-namespace tsd-is-external">
 						<a href="../modules/WAJS.html">WAJS</a>
@@ -190,55 +172,34 @@
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="../modules/WAJS.config.html">config</a>
 							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+							<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="../modules/WAJS.internal.html">internal</a>
+								<ul>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+										<a href="../modules/WAJS.internal.auth.html">auth</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+										<a href="../modules/WAJS.internal.blocklist.html">blocklist</a>
+									</li>
+									<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+										<a href="../modules/WAJS.internal.chat.html">chat</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+										<a href="../modules/WAJS.internal.contact.html">contact</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+										<a href="../modules/WAJS.internal.group.html">group</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+										<a href="../modules/WAJS.internal.status.html">status</a>
+									</li>
+								</ul>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="../modules/WAJS.webpack.html">webpack</a>
 							</li>
-							<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="../modules/WAJS.whatsapp.html">whatsapp</a>
-								<ul>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.Base64.html">Base64</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.Browser.html">Browser</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.ClockSkew.html">Clock<wbr>Skew</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.ImageUtils.html">Image<wbr>Utils</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.MediaObjectUtil.html">Media<wbr>Object<wbr>Util</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.MediaPrep.html">Media<wbr>Prep</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.MediaUtils.html">Media<wbr>Utils</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.UserPrefs.html">User<wbr>Prefs</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.VCard.html">VCard</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.WidFactory.html">Wid<wbr>Factory</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.enums.html">enums</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.functions.html">functions</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-										<a href="../modules/WAJS.whatsapp.multidevice.html">multidevice</a>
-									</li>
-								</ul>
 							</li>
 						</ul>
 					</li>
@@ -246,30 +207,75 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-namespace tsd-is-external">
+						<a href="../classes/WAJS.internal.chat.Chat.html" class="tsd-kind-icon">Chat</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.AudioMessageOptions.html" class="tsd-kind-icon">Audio<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.AutoDetectMessageOptions.html" class="tsd-kind-icon">Auto<wbr>Detect<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.ChatEventTypes.html" class="tsd-kind-icon">Chat<wbr>Event<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.DeleteMessageReturn.html" class="tsd-kind-icon">Delete<wbr>Message<wbr>Return</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.DocumentMessageOptions.html" class="tsd-kind-icon">Document<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.FileMessageOptions.html" class="tsd-kind-icon">File<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.GetMessagesOptions.html" class="tsd-kind-icon">Get<wbr>Messages<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.ImageMessageOptions.html" class="tsd-kind-icon">Image<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.ListMessageOptions.html" class="tsd-kind-icon">List<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.MessageButtonsOptions.html" class="tsd-kind-icon">Message<wbr>Buttons<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.SendMessageOptions.html" class="tsd-kind-icon">Send<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.SendMessageReturn.html" class="tsd-kind-icon">Send<wbr>Message<wbr>Return</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.whatsapp.ModelOptions.html" class="tsd-kind-icon">Model<wbr>Options</a>
+						<a href="WAJS.internal.chat.VCardContact.html" class="tsd-kind-icon">VCard<wbr>Contact</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.whatsapp.ModelOptions.html#_internalInitializationDoNotUse" class="tsd-kind-icon">_internal<wbr>Initialization<wbr>DoNot<wbr>Use</a>
+								<a href="WAJS.internal.chat.VCardContact.html#id" class="tsd-kind-icon">id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.whatsapp.ModelOptions.html#collection" class="tsd-kind-icon">collection</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.whatsapp.ModelOptions.html#merge" class="tsd-kind-icon">merge</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.whatsapp.ModelOptions.html#parent" class="tsd-kind-icon">parent</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.whatsapp.ModelOptions.html#silent" class="tsd-kind-icon">silent</a>
+								<a href="WAJS.internal.chat.VCardContact.html#name" class="tsd-kind-icon">name</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.internal.chat.VideoMessageOptions.html" class="tsd-kind-icon">Video<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace tsd-is-external">
+						<a href="../modules/WAJS.internal.chat.html#AllMessageOptions" class="tsd-kind-icon">All<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace tsd-is-external">
+						<a href="../modules/WAJS.internal.chat.html#RawMessage" class="tsd-kind-icon">Raw<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace tsd-is-external">
+						<a href="../modules/WAJS.internal.chat.html#TextMessageOptions" class="tsd-kind-icon">Text<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace tsd-is-external">
+						<a href="../modules/WAJS.internal.chat.html#default" class="tsd-kind-icon">default</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

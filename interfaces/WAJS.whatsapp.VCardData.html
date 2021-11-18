@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ModelOptions | @wppconnect-team/wppconnect - v1.10.3</title>
+	<title>VCardData | @wppconnect-team/wppconnect - v1.10.3</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.10.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -71,10 +71,10 @@
 					<a href="../modules/WAJS.whatsapp.html">whatsapp</a>
 				</li>
 				<li>
-					<a href="WAJS.whatsapp.ModelOptions.html">ModelOptions</a>
+					<a href="WAJS.whatsapp.VCardData.html">VCardData</a>
 				</li>
 			</ul>
-			<h1>Interface ModelOptions</h1>
+			<h1>Interface VCardData</h1>
 		</div>
 	</div>
 </header>
@@ -85,7 +85,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ModelOptions</span>
+						<span class="target">VCardData</span>
 					</li>
 				</ul>
 			</section>
@@ -96,11 +96,9 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.ModelOptions.html#_internalInitializationDoNotUse" class="tsd-kind-icon">_internal<wbr>Initialization<wbr>DoNot<wbr>Use</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.ModelOptions.html#collection" class="tsd-kind-icon">collection</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.ModelOptions.html#merge" class="tsd-kind-icon">merge</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.ModelOptions.html#parent" class="tsd-kind-icon">parent</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.ModelOptions.html#silent" class="tsd-kind-icon">silent</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.VCardData.html#displayName" class="tsd-kind-icon">display<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.VCardData.html#isMultiVcard" class="tsd-kind-icon">is<wbr>Multi<wbr>Vcard</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.whatsapp.VCardData.html#vcard" class="tsd-kind-icon">vcard</a></li>
 							</ul>
 						</section>
 					</div>
@@ -109,52 +107,32 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="_internalInitializationDoNotUse" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> _internal<wbr>Initialization<wbr>DoNot<wbr>Use</h3>
-					<div class="tsd-signature tsd-kind-icon">_internal<wbr>Initialization<wbr>DoNot<wbr>Use<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="displayName" class="tsd-anchor"></a>
+					<h3>display<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/models/Model.d.ts:30</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/VCard.d.ts:18</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="collection" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> collection</h3>
-					<div class="tsd-signature tsd-kind-icon">collection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="isMultiVcard" class="tsd-anchor"></a>
+					<h3>is<wbr>Multi<wbr>Vcard</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Multi<wbr>Vcard<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/models/Model.d.ts:31</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/VCard.d.ts:20</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="merge" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> merge</h3>
-					<div class="tsd-signature tsd-kind-icon">merge<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="vcard" class="tsd-anchor"></a>
+					<h3>vcard</h3>
+					<div class="tsd-signature tsd-kind-icon">vcard<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/models/Model.d.ts:32</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="parent" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> parent</h3>
-					<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/models/Model.d.ts:33</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="silent" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> silent</h3>
-					<div class="tsd-signature tsd-kind-icon">silent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/models/Model.d.ts:34</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/VCard.d.ts:19</li>
 						</ul>
 					</aside>
 				</section>
@@ -249,22 +227,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.whatsapp.ModelOptions.html" class="tsd-kind-icon">Model<wbr>Options</a>
+						<a href="WAJS.whatsapp.VCardData.html" class="tsd-kind-icon">VCard<wbr>Data</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.whatsapp.ModelOptions.html#_internalInitializationDoNotUse" class="tsd-kind-icon">_internal<wbr>Initialization<wbr>DoNot<wbr>Use</a>
+								<a href="WAJS.whatsapp.VCardData.html#displayName" class="tsd-kind-icon">display<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.whatsapp.ModelOptions.html#collection" class="tsd-kind-icon">collection</a>
+								<a href="WAJS.whatsapp.VCardData.html#isMultiVcard" class="tsd-kind-icon">is<wbr>Multi<wbr>Vcard</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.whatsapp.ModelOptions.html#merge" class="tsd-kind-icon">merge</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.whatsapp.ModelOptions.html#parent" class="tsd-kind-icon">parent</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.whatsapp.ModelOptions.html#silent" class="tsd-kind-icon">silent</a>
+								<a href="WAJS.whatsapp.VCardData.html#vcard" class="tsd-kind-icon">vcard</a>
 							</li>
 						</ul>
 					</li>
