@@ -15,7 +15,6 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import WPPConnectLoader from '@wppconnect-team/loader';
 import {
   _getGroupParticipants,
   areAllMessagesLoaded,
@@ -160,12 +159,11 @@ window['webpackChunkbuild'] = window['webpackChunkbuild'] || [];
 if (typeof window.Store === 'undefined') {
   window.Store = {};
   window.Store.promises = {};
-  const loader = new WPPConnectLoader();
-  window.Store.loader = loader;
 
   for (const store of storeObjects) {
-    window.Store.promises[store.id] = loader
-      .waitForModule((m) => !!store.conditions(m))
+    window.Store.promises[store.id] = Promise.resolve(
+      WPP.webpack.search(store.conditions)
+    )
       .then(store.conditions)
       .then((m) => {
         if (store.id === 'Store') {

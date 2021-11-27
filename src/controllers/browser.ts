@@ -128,10 +128,15 @@ export async function injectApi(page: Page) {
   });
 
   await page
-    .waitForFunction(() => {
-      // @ts-ignore
-      return typeof window.WPP !== 'undefined' && window.WPP.isReady;
-    })
+    .waitForFunction(
+      () => {
+        // @ts-ignore
+        return typeof window.WPP !== 'undefined' && window.WPP.isReady;
+      },
+      {
+        timeout: 60000,
+      }
+    )
     .catch(() => false);
 
   await page
