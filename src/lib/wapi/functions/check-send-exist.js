@@ -48,10 +48,10 @@ export async function sendExist(chatId, returnChat = true, Send = true) {
   let chat = await window.WAPI.getChat(chatId);
 
   if (!chat && chatId === 'status@broadcast') {
-    chat = new Store.Chat.modelClass({
+    chat = new WPP.whatsapp.ChatStore.modelClass({
       id: WPP.whatsapp.WidFactory.createWid('status@broadcast'),
     });
-    Store.Chat.add(chat);
+    WPP.whatsapp.ChatStore.add(chat);
     chat = await window.WAPI.getChat(chatId); // Fix some methods
   }
 

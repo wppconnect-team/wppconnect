@@ -16,7 +16,7 @@
  */
 
 export async function sendMessageWithTags(to, body) {
-  var chat = to.id ? to : Store.Chat.get(to);
+  var chat = to.id ? to : WPP.whatsapp.ChatStore.get(to);
   var chatId = chat.id._serialized;
   var msgIveSent = chat.msgs.filter((msg) => msg.__x_isSentByMe)[0];
   if (!msgIveSent) {

@@ -44,7 +44,7 @@ export async function starMessages(messagesId, star) {
   let count = 0;
   // Star Messages
   for (const chatId in messagesPerChat) {
-    const chat = Store.Chat.get(chatId);
+    const chat = WPP.whatsapp.ChatStore.get(chatId);
     const messages = messagesPerChat[chatId];
 
     count += await chat

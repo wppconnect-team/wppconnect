@@ -19,54 +19,52 @@ import { subscribePresence } from '../functions';
 
 export function addOnPresenceChanged() {
   window.WAPI.onPresenceChanged = function (callback) {
-    window.WAPI.waitForStore('Presence', () => {
-      window.Store.Presence.on('change:chatstate.type', (chatstate) => {
-        try {
-          // Search precense model from chatstate
-          const presence = window.Store.Presence.models.find(
-            (m) => m.chatstate === chatstate
-          );
+    WPP.whatsapp.PresenceStore.on('change:chatstate.type', (chatstate) => {
+      try {
+        // Search precense model from chatstate
+        const presence = WPP.whatsapp.PresenceStore.models.find(
+          (m) => m.chatstate === chatstate
+        );
 
-          // Ignore not initialized presences
-          if (!presence || !presence.hasData || !presence.chatstate.type) {
-            return;
-          }
-
-          const contact = window.Store.Contact.get(presence.id);
-
-          const data = {
-            id: presence.id,
-            isOnline: presence.isOnline,
-            isGroup: presence.isGroup,
-            isUser: presence.isUser,
-            shortName: contact ? contact.formattedShortName : '',
-            state: presence.chatstate.type,
-            t: Date.now(),
-          };
-
-          if (presence.isUser) {
-            data.isContact = !presence.chatstate.deny;
-          }
-
-          if (presence.isGroup) {
-            data.participants = presence.chatstates.models
-              .filter((c) => !!c.type)
-              .map((c) => {
-                const contact = window.Store.Contact.get(c.id);
-
-                return {
-                  id: c.id.toString(),
-                  state: c.type,
-                  shortName: contact ? contact.formattedShortName : '',
-                };
-              });
-          }
-
-          callback(data);
-        } catch (error) {
-          console.log(error);
+        // Ignore not initialized presences
+        if (!presence || !presence.hasData || !presence.chatstate.type) {
+          return;
         }
-      });
+
+        const contact = WPP.whatsapp.ContactStore.get(presence.id);
+
+        const data = {
+          id: presence.id,
+          isOnline: presence.isOnline,
+          isGroup: presence.isGroup,
+          isUser: presence.isUser,
+          shortName: contact ? contact.formattedShortName : '',
+          state: presence.chatstate.type,
+          t: Date.now(),
+        };
+
+        if (presence.isUser) {
+          data.isContact = !presence.chatstate.deny;
+        }
+
+        if (presence.isGroup) {
+          data.participants = presence.chatstates.models
+            .filter((c) => !!c.type)
+            .map((c) => {
+              const contact = WPP.whatsapp.ContactStore.get(c.id);
+
+              return {
+                id: c.id.toString(),
+                state: c.type,
+                shortName: contact ? contact.formattedShortName : '',
+              };
+            });
+        }
+
+        callback(data);
+      } catch (error) {
+        console.log(error);
+      }
     });
     return true;
   };

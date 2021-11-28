@@ -23,7 +23,7 @@ export async function forwardMessages(chatId, messagesId, skipMyMessages) {
   }
 
   await WAPI.sendExist(chatId);
-  const chat = window.Store.Chat.get(chatId);
+  const chat = WPP.whatsapp.ChatStore.get(chatId);
   if (!chat) {
     throw {
       error: true,

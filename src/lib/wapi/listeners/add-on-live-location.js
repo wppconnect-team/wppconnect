@@ -38,39 +38,37 @@ export function addOnLiveLocation() {
     }
   }
 
-  window.WAPI.waitForStore(['LiveLocation'], async () => {
-    /**
-     * Substitui o manipulador original para capturar todos eventos,
-     * pois o Store.LiveLocation só inicializa a partir de uma mensagem,
-     * caso a mensagem fique muito para atrás (após troca de 50 mensagens),
-     * ele não é inicializado até carregar a mensage.
-     */
-    const originalHandle = Store.LiveLocation.handle;
-    Store.LiveLocation.handle = function (list) {
-      originalHandle.apply(this, arguments);
+  /**
+   * Substitui o manipulador original para capturar todos eventos,
+   * pois o Store.LiveLocation só inicializa a partir de uma mensagem,
+   * caso a mensagem fique muito para atrás (após troca de 50 mensagens),
+   * ele não é inicializado até carregar a mensage.
+   */
+  const originalHandle = WPP.whatsapp.LiveLocationStore.handle;
+  WPP.whatsapp.LiveLocationStore.handle = function (list) {
+    originalHandle.apply(this, arguments);
 
-      for (const p of list) {
-        fireCallback(p);
-      }
-    };
+    for (const p of list) {
+      fireCallback(p);
+    }
+  };
 
-    // Para cada novo LiveLocation inicializado, força a vizualização de mapa de todos
-    Store.LiveLocation.on('add', () => {
-      setTimeout(() => {
-        Store.LiveLocation.forEach((l) => {
-          l.startViewingMap();
-          setTimeout(() => {
-            try {
-              l._startKeepAlive();
-            } catch (error) {}
-          }, 1000);
-        });
-      }, 100);
-    });
-
-    // Força a inicialização de localização para todos chats ativos
-    Store.Chat.map((c) => Store.LiveLocation.find(c.id));
+  // Para cada novo LiveLocation inicializado, força a vizualização de mapa de todos
+  WPP.whatsapp.LiveLocationStore.on('add', () => {
+    setTimeout(() => {
+      WPP.whatsapp.LiveLocationStore.forEach((l) => {
+        l.startViewingMap();
+        setTimeout(() => {
+          try {
+            l._startKeepAlive();
+          } catch (error) {}
+        }, 1000);
+      });
+    }, 100);
   });
+
+  // Força a inicialização de localização para todos chats ativos
+  WPP.whatsapp.ChatStore.map((c) => WPP.whatsapp.LiveLocationStore.find(c.id));
 
   // Caso receba nova mensagem de localização, inicializa o LiveLocation e dispara o primeiro evento
   WAPI.waitNewMessages(false, (messages) => {

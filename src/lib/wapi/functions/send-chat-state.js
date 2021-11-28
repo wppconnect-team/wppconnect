@@ -18,7 +18,7 @@
 export async function sendChatstate(state, chatId) {
   state = parseInt(state, 10);
 
-  const chat = window.Store.Chat.get(chatId);
+  const chat = WPP.whatsapp.ChatStore.get(chatId);
 
   if (!chat) {
     throw {

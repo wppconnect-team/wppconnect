@@ -16,7 +16,7 @@
  */
 
 export async function setTemporaryMessages(chatId, value) {
-  const chat = Store.Chat.get(chatId);
+  const chat = WPP.whatsapp.ChatStore.get(chatId);
 
   if (!chat) {
     throw {

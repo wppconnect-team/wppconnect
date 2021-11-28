@@ -18,7 +18,7 @@
 import { hasUndreadMessages } from './has-unread-messages';
 
 export const getAllChatsWithNewMessages = function (done) {
-  const chats = window.Store.Chat.filter(hasUndreadMessages).map((chat) =>
+  const chats = WPP.whatsapp.ChatStore.filter(hasUndreadMessages).map((chat) =>
     WAPI._serializeChatObj(chat)
   );
 

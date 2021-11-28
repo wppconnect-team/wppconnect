@@ -168,25 +168,6 @@ if (typeof window.Store === 'undefined') {
   }
 }
 
-// setTimeout(() => {
-//   window.WAPI.waitForStore(['LiveLocation'], async () => {
-//     console.log('handle');
-//     // Store.LiveLocation.handle = (e) => console.log(e[0]);
-//     Store.LiveLocation.handle = (e) =>
-//       console.log(e[0].jid.user, (e[0].speed * 3.6).toFixed(2) + ' km/h');
-
-//     const livePromises = Store.Chat.map((c) => Store.LiveLocation.find(c.id));
-
-//     await Promise.all(livePromises);
-//     console.log('find');
-
-//     setTimeout(() => {
-//       Store.LiveLocation.forEach((l) => l.startViewingMap());
-//       console.log('start');
-//     }, 1000);
-//   });
-// }, 100);
-
 if (typeof window.WAPI === 'undefined') {
   window.WAPI = {
     lastRead: {},
@@ -449,7 +430,7 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   window.WAPI.getChatIsOnline = async function (chatId) {
-    const chat = Store.Chat.get(chatId);
+    const chat = WPP.whatsapp.ChatStore.get(chatId);
     if (!chat) {
       return false;
     }
@@ -458,7 +439,7 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   window.WAPI.getLastSeen = async function (chatId) {
-    const chat = Store.Chat.get(chatId);
+    const chat = WPP.whatsapp.ChatStore.get(chatId);
     if (!chat) {
       return false;
     }
@@ -479,7 +460,10 @@ if (typeof window.WAPI === 'undefined') {
    * @return boolean true: worked, false: didnt work (probably already in desired state)
    */
   window.WAPI.archiveChat = async function (id, archive) {
-    const promise = Store.Archive.setArchive(Store.Chat.get(id), archive)
+    const promise = Store.Archive.setArchive(
+      WPP.whatsapp.ChatStore.get(id),
+      archive
+    )
       .then((_) => true)
       .catch((_) => false);
 

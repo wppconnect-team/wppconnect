@@ -16,7 +16,7 @@
  */
 
 export async function setGroupSubject(groupId, title) {
-  const chat = Store.Chat.get(groupId);
+  const chat = WPP.whatsapp.ChatStore.get(groupId);
 
   if (!chat) {
     throw {

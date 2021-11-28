@@ -17,7 +17,7 @@
 
 export function initNewMessagesListener() {
   window.WAPI.waitForStore(['Chat', 'Msg'], () => {
-    window.WAPI._newMessagesListener = window.Store.Msg.on(
+    window.WAPI._newMessagesListener = WPP.whatsapp.MsgStore.on(
       'add',
       (newMessage) => {
         if (newMessage && newMessage.isNewMsg && !newMessage.isSentByMe) {

@@ -25,7 +25,7 @@ export async function loadAllEarlierMessages(id, done) {
 
   // improve load speed
   try {
-    await Store.Msg.findQuery({
+    await WPP.whatsapp.MsgStore.findQuery({
       remote: chat.id,
       count: -1,
     });

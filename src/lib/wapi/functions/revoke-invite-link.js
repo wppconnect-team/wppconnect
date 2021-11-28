@@ -16,7 +16,7 @@
  */
 
 export async function revokeGroupInviteLink(chatId) {
-  var chat = Store.Chat.get(chatId);
+  var chat = WPP.whatsapp.ChatStore.get(chatId);
   if (!chat) {
     throw {
       error: true,

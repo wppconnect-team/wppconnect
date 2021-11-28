@@ -16,11 +16,13 @@
  */
 
 window.WAPI.sendButtons = async function (chatId) {
-  var chat = Store.Chat.get(chatId);
+  var chat = WPP.whatsapp.ChatStore.get(chatId);
   var tempMsg = Object.create(chat.msgs.filter((msg) => msg.__x_isSentByMe)[0]);
-  // var tempMsg = Object.create(Store.Msg.models.filter(msg => msg.to._serialized===chatId&&msg.__x_isSentByMe&& msg.type=='chat' && !msg.quotedStanzaID)[0])
+  // var tempMsg = Object.create(WPP.whatsapp.MsgStore.models.filter(msg => msg.to._serialized===chatId&&msg.__x_isSentByMe&& msg.type=='chat' && !msg.quotedStanzaID)[0])
   var t2 = Object.create(
-    Store.Msg.filter((x) => (x.type == 'template') & !x.id.fromMe)[0]
+    WPP.whatsapp.MsgStore.filter(
+      (x) => (x.type == 'template') & !x.id.fromMe
+    )[0]
   );
   var newId = WPP.chat.generateMessageID(chatId);
   delete tempMsg.hasTemplateButtons;
@@ -107,7 +109,7 @@ window.WAPI.sendButtons = async function (chatId) {
       chat.addQueue
         .enqueue(
           Store.MessageUtils.appendMessage(chat, tempMsg).then(() => {
-            var e = Store.Msg.add(tempMsg)[0];
+            var e = WPP.whatsapp.MsgStore.add(tempMsg)[0];
             console.log('e ', e);
             if (e) {
               return e.waitForPrep().then(() => {
@@ -171,7 +173,7 @@ window.WAPI.sendButtons = async function (chatId) {
             }),
             retryOn5xx: !0,
             resendGuard: function (_) {
-              var t = Store.Msg.get(e.id);
+              var t = WPP.whatsapp.MsgStore.get(e.id);
               console.log('in resend', _);
               return 'protocol' === e.type || (t && t.id.equals(e.id));
             },
@@ -191,9 +193,9 @@ window.WAPI.sendButtons = async function (chatId) {
 };
 
 window.WAPI.sendButtons2 = async function (chatId) {
-  var chat = Store.Chat.get(chatId);
+  var chat = WPP.whatsapp.ChatStore.get(chatId);
   var tempMsg = Object.create(
-    Store.Msg.models.filter(
+    WPP.whatsapp.MsgStore.models.filter(
       (msg) =>
         msg.to._serialized === chatId &&
         msg.__x_isSentByMe &&
@@ -202,7 +204,7 @@ window.WAPI.sendButtons2 = async function (chatId) {
     )[0]
   );
   var t2 = Object.create(
-    Store.Msg.models.filter(
+    WPP.whatsapp.MsgStore.models.filter(
       (msg) =>
         msg.to._serialized === chatId &&
         msg.__x_isSentByMe &&
@@ -278,7 +280,7 @@ window.WAPI.sendButtons2 = async function (chatId) {
       chat.addQueue
         .enqueue(
           Store.MessageUtils.appendMessage(chat, tempMsg).then(() => {
-            var e = Store.Msg.add(tempMsg)[0];
+            var e = WPP.whatsapp.MsgStore.add(tempMsg)[0];
             console.log('e ', e);
             if (e) {
               return e.waitForPrep().then(() => {
@@ -334,7 +336,7 @@ window.WAPI.sendButtons2 = async function (chatId) {
             onDrop: s.wrap(reject),
             retryOn5xx: !0,
             resendGuard: function (_) {
-              var t = Store.Msg.get(e.id);
+              var t = WPP.whatsapp.MsgStore.get(e.id);
               return 'protocol' === e.type || (t && t.id.equals(e.id));
             },
           },

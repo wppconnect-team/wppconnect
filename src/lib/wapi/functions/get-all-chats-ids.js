@@ -16,7 +16,7 @@
  */
 
 export const getAllChatIds = function (done) {
-  const chatIds = window.Store.Chat.map(
+  const chatIds = WPP.whatsapp.ChatStore.map(
     (chat) => chat.id._serialized || chat.id
   );
 

@@ -16,7 +16,7 @@
  */
 
 export async function startTyping(chatId) {
-  const chat = window.Store.Chat.get(chatId);
+  const chat = WPP.whatsapp.ChatStore.get(chatId);
   if (!chat) {
     throw {
       error: true,
@@ -33,7 +33,7 @@ export async function startTyping(chatId) {
  * @param {string} chatId
  */
 export async function stopTyping(chatId) {
-  const chat = window.Store.Chat.get(chatId);
+  const chat = WPP.whatsapp.ChatStore.get(chatId);
   if (!chat) {
     throw {
       error: true,

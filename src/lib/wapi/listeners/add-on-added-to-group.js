@@ -22,29 +22,27 @@ export function addOnAddedToGroup() {
    * @returns {boolean}
    */
   window.WAPI.onAddedToGroup = function (callback) {
-    window.WAPI.waitForStore('Msg', () => {
-      window.Store.Msg.on('add', (message) => {
-        /**
-         * Mensagem precisa ser:
-         * - Nova
-         * - É uma notificação
-         * - Do tipo de eventos de grupo
-         * - Evento de adicionado no grupo
-         */
-        if (
-          message.isNewMsg &&
-          message.isNotification &&
-          message.type === 'gp2' &&
-          message.subtype === 'add'
-        ) {
-          try {
-            const data = WAPI._serializeChatObj(message.chat);
-            callback(data);
-          } catch (error) {
-            console.error(error);
-          }
+    WPP.whatsapp.MsgStore.on('add', (message) => {
+      /**
+       * Mensagem precisa ser:
+       * - Nova
+       * - É uma notificação
+       * - Do tipo de eventos de grupo
+       * - Evento de adicionado no grupo
+       */
+      if (
+        message.isNewMsg &&
+        message.isNotification &&
+        message.type === 'gp2' &&
+        message.subtype === 'add'
+      ) {
+        try {
+          const data = WAPI._serializeChatObj(message.chat);
+          callback(data);
+        } catch (error) {
+          console.error(error);
         }
-      });
+      }
     });
     return true;
   };

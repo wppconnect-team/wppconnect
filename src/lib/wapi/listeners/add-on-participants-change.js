@@ -37,9 +37,9 @@ export function addOnParticipantsChange() {
         'promote',
         'demote',
       ];
-      const chat = window.Store.Chat.get(groupId);
+      const chat = WPP.whatsapp.ChatStore.get(groupId);
       //attach all group Participants to the events object as 'add'
-      const metadata = window.Store.GroupMetadata.default.get(groupId);
+      const metadata = WPP.whatsapp.GroupMetadataStore.get(groupId);
       if (!groupParticpiantsEvents[groupId]) {
         groupParticpiantsEvents[groupId] = {};
         metadata.participants.forEach((participant) => {
