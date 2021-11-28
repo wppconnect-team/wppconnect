@@ -21,7 +21,6 @@ import {
   asyncLoadAllEarlierMessages,
   clearChat,
   deleteConversation,
-  deleteMessages,
   downloadFile,
   encryptAndUploadFile,
   forwardMessages,
@@ -247,7 +246,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.sendMessage2 = sendMessage2;
   window.WAPI.sendSeen = sendSeen;
   window.WAPI.deleteConversation = deleteConversation;
-  window.WAPI.deleteMessages = deleteMessages;
   window.WAPI.clearChat = clearChat;
   window.WAPI.sendImage = sendImage;
   window.WAPI.sendPtt = sendPtt;

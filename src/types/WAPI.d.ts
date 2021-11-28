@@ -42,11 +42,6 @@ interface WAPI {
   checkNumberStatus: (contactId: string) => Promise<WhatsappProfile>;
   clearChat: (chatId: string, keepStarred: boolean) => void;
   deleteConversation: (chatId: string) => boolean;
-  deleteMessages: (
-    contactId: string,
-    messageId: string[] | string,
-    onlyLocal: boolean
-  ) => Promise<boolean>;
   downloadFile: (data: string) => Promise<string | boolean>;
   downloadMedia: (messageId: string) => Promise<string>;
   forwardMessages: (
