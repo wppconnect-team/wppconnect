@@ -19,9 +19,6 @@ import {
   _getGroupParticipants,
   areAllMessagesLoaded,
   asyncLoadAllEarlierMessages,
-  blockContact,
-  unblockContact,
-  getBlockList,
   clearChat,
   deleteConversation,
   deleteMessages,
@@ -277,11 +274,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.sendLinkPreview = sendLinkPreview;
   window.WAPI.sendMessageOptions = sendMessageOptions;
   window.WAPI.starMessages = starMessages;
-
-  //////block functions
-  window.WAPI.blockContact = blockContact;
-  window.WAPI.unblockContact = unblockContact;
-  window.WAPI.getBlockList = getBlockList;
 
   // Retrieving functions
   window.WAPI.getAllContacts = getAllContacts;

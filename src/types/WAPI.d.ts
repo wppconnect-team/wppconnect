@@ -39,7 +39,6 @@ interface WAPI {
   allNewMessagesListener: (callback: Function) => void;
   archiveChat: (chatId: string, option: boolean) => boolean;
   arrayBufferToBase64: (buffer: ArrayBuffer) => string;
-  blockContact: (messageId: string) => boolean;
   checkNumberStatus: (contactId: string) => Promise<WhatsappProfile>;
   clearChat: (chatId: string, keepStarred: boolean) => void;
   deleteConversation: (chatId: string) => boolean;
@@ -67,7 +66,6 @@ interface WAPI {
   getAllNewMessages: () => Message[];
   getAllUnreadMessages: () => PartialMessage[];
   getBatteryLevel: () => number;
-  getBlockList: () => Contact[];
   getBusinessProfilesProducts: (to: string) => any;
   getOrderbyMsg: (messageId: string) => any;
   getChat: (contactId: string) => Chat;
@@ -234,7 +232,6 @@ interface WAPI {
   subscribePresence: (id: string | string[]) => Promise<number>;
   takeOver: () => boolean;
   unsubscribePresence: (id: string | string[]) => Promise<number>;
-  unblockContact: (messageId: string) => boolean;
   waitForStore: (store: string | string[], callback?: Function) => Promise<any>;
   waitNewAcknowledgements: (callback: Function) => void;
   waitNewMessages: (rmCallback: boolean, callback: Function) => void;

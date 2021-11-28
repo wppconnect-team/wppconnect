@@ -92,7 +92,9 @@ export class RetrieverLayer extends SenderLayer {
    * @returns array of [0,1,2,3....]
    */
   public async getBlockList() {
-    return await evaluateAndReturn(this.page, () => WAPI.getBlockList());
+    return await evaluateAndReturn(this.page, () =>
+      WPP.blocklist.all().map((b) => b.toString())
+    );
   }
 
   /**

@@ -277,11 +277,6 @@ export const storeObjects = [
     conditions: (module) => (module.sendSeen ? module : null),
   },
   {
-    id: 'Block',
-    conditions: (module) =>
-      module.blockContact && module.unblockContact ? module : null,
-  },
-  {
     id: 'BlockList',
     conditions: (module) => (module.BlocklistCollection ? module : null),
   },
