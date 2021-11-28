@@ -40,8 +40,6 @@ interface WAPI {
   archiveChat: (chatId: string, option: boolean) => boolean;
   arrayBufferToBase64: (buffer: ArrayBuffer) => string;
   checkNumberStatus: (contactId: string) => Promise<WhatsappProfile>;
-  clearChat: (chatId: string, keepStarred: boolean) => void;
-  deleteConversation: (chatId: string) => boolean;
   downloadFile: (data: string) => Promise<string | boolean>;
   downloadMedia: (messageId: string) => Promise<string>;
   forwardMessages: (

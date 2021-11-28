@@ -16,8 +16,6 @@
  */
 
 export { areAllMessagesLoaded } from './are-all-messages-loaded';
-export { clearChat } from './clear-chat';
-export { deleteConversation } from './delete-conversation';
 export { downloadFile } from './download-file-with-credentials';
 export { encryptAndUploadFile } from './encrypt-and-upload-file';
 export { getAllChats } from './get-all-chats';

@@ -37,11 +37,6 @@ export const storeObjects = [
     conditions: (module) => (module.BLOB ? module : null),
   },
   {
-    id: 'ChatUtil',
-    conditions: (module) =>
-      module.sendClear && module.clearChat ? module : null,
-  },
-  {
     id: 'GroupInvite',
     conditions: (module) => (module.sendQueryGroupInviteCode ? module : null),
   },

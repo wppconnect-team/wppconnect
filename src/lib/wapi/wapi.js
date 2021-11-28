@@ -19,8 +19,6 @@ import {
   _getGroupParticipants,
   areAllMessagesLoaded,
   asyncLoadAllEarlierMessages,
-  clearChat,
-  deleteConversation,
   downloadFile,
   encryptAndUploadFile,
   forwardMessages,
@@ -245,8 +243,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.sendMessage = sendMessage;
   window.WAPI.sendMessage2 = sendMessage2;
   window.WAPI.sendSeen = sendSeen;
-  window.WAPI.deleteConversation = deleteConversation;
-  window.WAPI.clearChat = clearChat;
   window.WAPI.sendImage = sendImage;
   window.WAPI.sendPtt = sendPtt;
   window.WAPI.sendFile = sendFile;
