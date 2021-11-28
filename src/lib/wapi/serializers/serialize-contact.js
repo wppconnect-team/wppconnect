@@ -22,8 +22,8 @@ export const _serializeContactObj = (obj) => {
 
   let profile = null;
 
-  if (!obj.profilePicThumb && obj.id && window.Store.ProfilePicThumb) {
-    let thumb = window.Store.ProfilePicThumb.get(obj.id);
+  if (!obj.profilePicThumb && obj.id && WPP.whatsapp.ProfilePicThumbStore) {
+    let thumb = WPP.whatsapp.ProfilePicThumbStore.get(obj.id);
     profile = thumb ? WAPI._serializeProfilePicThumb(thumb) : {};
   }
 

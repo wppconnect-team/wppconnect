@@ -366,7 +366,7 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   window.WAPI.getProfilePicSmallFromId = async function (id) {
-    return await window.Store.ProfilePicThumb.find(id).then(
+    return await WPP.whatsapp.ProfilePicThumbStore.find(id).then(
       async function (d) {
         if (d.img !== undefined) {
           return await window.WAPI.downloadFileWithCredentials(d.img);
@@ -381,7 +381,7 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   window.WAPI.getProfilePicFromId = async function (id) {
-    return await window.Store.ProfilePicThumb.find(id).then(
+    return await WPP.whatsapp.ProfilePicThumbStore.find(id).then(
       async function (d) {
         if (d.imgFull !== undefined) {
           return await window.WAPI.downloadFileWithCredentials(d.imgFull);
