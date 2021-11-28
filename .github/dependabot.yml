@@ -18,6 +18,9 @@ updates:
       - dependency-name: 'boxen'
         versions:
           - '>= 6.a'
+      - dependency-name: 'chalk'
+        versions:
+          - '>= 5.a'
       - dependency-name: 'file-type'
         versions:
           - '>= 17.a'
