@@ -124,7 +124,6 @@ interface WAPI {
     option: boolean,
     nonExistent?: boolean
   ) => Promise<object>;
-  reply: (to: string, content: string, quotedMsg: string) => Promise<string>;
   rejectCall: (callId?: string) => Promise<number>;
   revokeGroupInviteLink: (chatId: string) => Promise<string>;
   restartService: () => boolean;

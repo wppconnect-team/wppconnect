@@ -84,7 +84,6 @@ export { sendVideoAsGif } from './send-video-as-gif';
 export { setMyName } from './set-my-name';
 export { setMyStatus } from './set-my-status';
 export { forwardMessages } from './forward-messages';
-export { reply } from './reply';
 export { startTyping, stopTyping } from './simulate-typing';
 export { getMessageById } from './get-message-by-id';
 export { getMessages } from './get-messages';

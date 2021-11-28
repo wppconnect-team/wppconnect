@@ -65,7 +65,6 @@ import {
   loadEarlierMessagesTillDate,
   processFiles,
   processMessageObj,
-  reply,
   revokeGroupInviteLink,
   sendMessageOptions,
   sendChatstate,
@@ -259,7 +258,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.processFiles = processFiles;
   window.WAPI.sendImageWithProduct = sendImageWithProduct;
   window.WAPI.forwardMessages = forwardMessages;
-  window.WAPI.reply = reply;
   window.WAPI._sendSticker = sendSticker;
   window.WAPI.encryptAndUploadFile = encryptAndUploadFile;
   window.WAPI.sendImageAsSticker = sendImageAsSticker;
