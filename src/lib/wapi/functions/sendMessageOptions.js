@@ -141,7 +141,7 @@ export async function sendMessageOptions(chatId, content, options = {}) {
     ...vcardOptions,
   };
 
-  await window.Store.addAndSendMsgToChat(chat, message);
+  await WPP.whatsapp.functions.addAndSendMsgToChat(chat, message);
 
   return newMsgId._serialized;
 }

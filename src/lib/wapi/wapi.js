@@ -166,13 +166,6 @@ if (typeof window.Store === 'undefined') {
         }
       });
   }
-
-  window.Store.sendMessage = function (e) {
-    return window.Store.SendTextMsgToChat(this, ...arguments);
-  };
-  window.Store.sendAddMessage = function (e) {
-    return window.Store.addAndSendMsgToChat(this, ...arguments);
-  };
 }
 
 // setTimeout(() => {

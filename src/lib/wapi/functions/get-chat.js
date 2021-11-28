@@ -25,7 +25,7 @@ export function getChat(id) {
     found.sendMessage = found.sendMessage
       ? found.sendMessage
       : function () {
-          return window.Store.sendMessage.apply(this, arguments);
+          return WPP.whatsapp.functions.sendTextMsgToChat(this, ...arguments);
         };
   }
   return found;

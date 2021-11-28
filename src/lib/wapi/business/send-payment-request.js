@@ -43,5 +43,5 @@ window.WAPI.sendPaymentRequest = async function (
     ),
   };
   Object.assign(tempMsg, extend);
-  await Store.addAndSendMsgToChat(chat, tempMsg);
+  await WPP.whatsapp.functions.addAndSendMsgToChat(chat, tempMsg);
 };

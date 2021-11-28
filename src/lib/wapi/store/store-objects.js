@@ -90,11 +90,6 @@ export const storeObjects = [
         : null,
   },
   {
-    id: 'SendTextMsgToChat',
-    conditions: (module) =>
-      module.sendTextMsgToChat ? module.sendTextMsgToChat : null,
-  },
-  {
     id: 'SendSeen',
     conditions: (module) => (module.sendSeen ? module.sendSeen : null),
   },
@@ -110,11 +105,6 @@ export const storeObjects = [
   {
     id: 'sendDelete',
     conditions: (module) => (module.sendDelete ? module.sendDelete : null),
-  },
-  {
-    id: 'addAndSendMsgToChat',
-    conditions: (module) =>
-      module.addAndSendMsgToChat ? module.addAndSendMsgToChat : null,
   },
   {
     id: 'sendMsgToChat',

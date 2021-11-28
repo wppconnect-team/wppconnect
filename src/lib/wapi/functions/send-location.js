@@ -42,7 +42,11 @@ export async function sendLocation(
     };
 
     var result =
-      (await Promise.all(Store.addAndSendMsgToChat(chat, message)))[1] || '';
+      (
+        await Promise.all(
+          Store.WPP.whatsapp.functions.addAndSendMsgToChat(chat, message)
+        )
+      )[1] || '';
     var m = {
         latitude: latitude,
         longitude: longitude,

@@ -38,7 +38,11 @@ export async function sendMessage(to, content) {
     };
 
     var result =
-      (await Promise.all(Store.addAndSendMsgToChat(chat, message)))[1] || '';
+      (
+        await Promise.all(
+          WPP.whatsapp.functions.addAndSendMsgToChat(chat, message)
+        )
+      )[1] || '';
 
     if (result === 'success' || result === 'OK') {
       return newId?._serialized;
