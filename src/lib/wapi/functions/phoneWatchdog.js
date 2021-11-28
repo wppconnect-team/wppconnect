@@ -23,15 +23,15 @@ async function sendPing() {
     // Check only if the interface is in CHAT and not disconnected
     if (
       window.Store.Stream.mode !== 'MAIN' ||
-      window.Store.State.default.state === 'TIMEOUT'
+      WPP.whatsapp.State.state === 'TIMEOUT'
     ) {
       return;
     }
 
     // Start phoneWatchdog if ping fails
     if (!pong) {
-      window.Store.State.default.phoneWatchdog.activate();
-      window.Store.State.default.phoneWatchdog.poke(250);
+      WPP.whatsapp.State.phoneWatchdog.activate();
+      WPP.whatsapp.State.phoneWatchdog.poke(250);
       return;
     }
 
@@ -39,14 +39,12 @@ async function sendPing() {
     pong = false;
 
     // Send a ping request
-    return window.Store.State.default
-      .sendBasic({
-        tag: window.Store.State.default.tag('ping'),
-        data: ['admin', 'test'],
-      })
-      .then(() => {
-        pong = true;
-      });
+    return WPP.whatsapp.State.sendBasic({
+      tag: WPP.whatsapp.State.tag('ping'),
+      data: ['admin', 'test'],
+    }).then(() => {
+      pong = true;
+    });
   });
 }
 

@@ -405,7 +405,7 @@ export class HostLayer {
   public async getConnectionState(): Promise<SocketState> {
     return await evaluateAndReturn(this.page, () => {
       //@ts-ignore
-      return Store.State.default.state;
+      return WPP.whatsapp.State.state as SocketState;
     });
   }
 

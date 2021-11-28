@@ -494,7 +494,7 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   window.WAPI.takeOver = async function () {
-    await Store.State.default.takeover();
+    await WPP.whatsapp.State.takeover();
     return true;
   };
 

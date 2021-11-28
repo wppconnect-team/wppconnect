@@ -23,3 +23,9 @@ declare global {
   }
   const WPP: typeof wajs;
 }
+
+declare global {
+  interface Window {
+    Store: any;
+  }
+}

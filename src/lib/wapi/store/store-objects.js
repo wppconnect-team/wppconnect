@@ -46,10 +46,6 @@ export const storeObjects = [
       module.default && module.default.killServiceWorker ? module : null,
   },
   {
-    id: 'State',
-    conditions: (module) => (module.STATE && module.STREAM ? module : null),
-  },
-  {
     id: 'WapDelete',
     conditions: (module) =>
       module.sendConversationDelete && module.sendConversationDelete.length == 2
