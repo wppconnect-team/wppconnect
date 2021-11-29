@@ -44,7 +44,7 @@ export async function sendLocation(
     var result =
       (
         await Promise.all(
-          Store.WPP.whatsapp.functions.addAndSendMsgToChat(chat, message)
+          WPP.whatsapp.functions.addAndSendMsgToChat(chat, message)
         )
       )[1] || '';
     var m = {

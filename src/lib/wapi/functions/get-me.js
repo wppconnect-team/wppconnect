@@ -16,7 +16,7 @@
  */
 
 export function getMe(done) {
-  const rawMe = window.Store.Contact.get(window.Store.Conn.me);
+  const rawMe = WPP.whatsapp.ContactStore.get(window.Store.Conn.me);
 
   if (done !== undefined) done(rawMe.all);
   return rawMe.all;

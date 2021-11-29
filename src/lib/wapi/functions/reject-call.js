@@ -16,7 +16,7 @@
  */
 
 async function rejectCallByCallId(callId) {
-  const call = await Store.Call.get(callId);
+  const call = WPP.whatsapp.CallStore.get(callId);
 
   if (!call) {
     throw {
@@ -56,7 +56,7 @@ export async function rejectCall(callId) {
     return 1;
   }
 
-  const calls = Store.Call.models.filter(
+  const calls = WPP.whatsapp.CallStore.models.filter(
     (c) => c.getState() === 'INCOMING_RING'
   );
 

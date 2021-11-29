@@ -334,7 +334,7 @@ if (typeof window.WAPI === 'undefined') {
     }
 
     const chat = WAPI.getChat(chatId);
-    const users = await Store.Contact.serialize().filter((x) =>
+    const users = await WPP.whatsapp.ContactStore.serialize().filter((x) =>
       mentioned.includes(x.id.user)
     );
 

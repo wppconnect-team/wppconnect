@@ -35,7 +35,7 @@ export function sendImageWithProduct(
   productId,
   done
 ) {
-  Store.Catalog.findCarouselCatalog(bizNumber).then((cat) => {
+  WPP.whatsapp.CatalogStore.findCarouselCatalog(bizNumber).then((cat) => {
     if (cat && cat[0]) {
       const product = cat[0].productCollection.get(productId);
       const temp = {

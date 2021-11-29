@@ -17,7 +17,7 @@
 
 export async function openChat(chatId) {
   const chat = WPP.whatsapp.ChatStore.get(chatId);
-  const result = Store.Cmd.default.openChatBottom(chat);
+  const result = WPP.whatsapp.Cmd.openChatBottom(chat);
   return result;
 }
 
@@ -36,6 +36,6 @@ export async function openChatAt(chatId, messageId) {
     msg: atMessage,
     isUnreadDivider: false,
   };
-  const result = await Store.Cmd.default._openChat(chat, args);
+  const result = await WPP.whatsapp.Cmd._openChat(chat, args);
   return result;
 }
