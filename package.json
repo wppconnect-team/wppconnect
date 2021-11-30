@@ -74,7 +74,7 @@
     "@types/shelljs": "^0.8.8",
     "@types/tmp": "^0.2.2",
     "@types/ws": "^8.2.0",
-    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.4.0",
     "babel-loader": "^8.2.3",
     "commitizen": "^4.2.3",
