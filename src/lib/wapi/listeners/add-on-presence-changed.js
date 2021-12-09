@@ -15,10 +15,12 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { subscribePresence } from '../functions';
-
 export function addOnPresenceChanged() {
   window.WAPI.onPresenceChanged = function (callback) {
+    setTimeout(() => {
+      WPP.whatsapp.ChatStore.map((c) => c.presence.subscribe());
+    }, 1000);
+
     WPP.whatsapp.PresenceStore.on('change:chatstate.type', (chatstate) => {
       try {
         // Search precense model from chatstate
