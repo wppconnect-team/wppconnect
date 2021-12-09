@@ -1,3 +1,12 @@
+## 1.11.1 (2021-12-09)
+
+
+### Bug Fixes
+
+* Fixed getNumberProfile function (fix [#717](https://github.com/wppconnect-team/wppconnect/issues/717)) ([89a0720](https://github.com/wppconnect-team/wppconnect/commit/89a072066991213d301739b0788d19f05a9b0912))
+
+
+
 # 1.11.0 (2021-12-09)
 
 
