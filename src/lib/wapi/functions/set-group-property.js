@@ -50,6 +50,8 @@ export async function setGroupProperty(groupId, property, value) {
 
   if (property === 'ephemeral') {
     value = value ? 604800 : 0;
+  } else {
+    value = value ? 1 : 0; // MD uses number
   }
 
   const result = await Store.sendSetGroupProperty(
