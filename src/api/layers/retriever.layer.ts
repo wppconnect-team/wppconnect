@@ -264,6 +264,9 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Checks if a number is a valid whatsapp number
+   *
+   * Deprecated in favor of checkNumberStatus
+   * @deprecated Deprecated in favor of checkNumberStatus
    * @category Contact
    * @param contactId, you need to include the @c.us at the end.
    * @returns contact detial as promise
