@@ -167,7 +167,6 @@ interface WAPI {
     title: string
   ) => Promise<object>;
   sendMessage: (to: string, content: string) => Promise<string>;
-  sendMessageMentioned: (...args: any) => any;
   sendMessageOptions: (
     chat: any,
     content: any,

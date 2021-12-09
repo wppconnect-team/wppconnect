@@ -943,9 +943,11 @@ export class SenderLayer extends ListenerLayer {
   public async sendMentioned(to: string, message: string, mentioned: string[]) {
     return await evaluateAndReturn(
       this.page,
-      ({ to, message, mentioned }) => {
-        WAPI.sendMessageMentioned(to, message, mentioned);
-      },
+      ({ to, message, mentioned }) =>
+        WPP.chat.sendTextMessage(to, message, {
+          detectMentioned: true,
+          mentionedList: mentioned,
+        }),
       { to, message, mentioned }
     );
   }

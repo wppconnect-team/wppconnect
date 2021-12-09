@@ -313,31 +313,6 @@ if (typeof window.WAPI === 'undefined') {
   window.addEventListener('pageunload', window.WAPI._unloadInform, false);
   // On-work below:
 
-  /**
-   * New version of @tag message
-   */
-  window.WAPI.sendMessageMentioned = async function (
-    chatId,
-    message,
-    mentioned
-  ) {
-    if (!Array.isArray(mentioned)) {
-      mentioned = [mentioned];
-    }
-
-    const chat = WAPI.getChat(chatId);
-    const users = await WPP.whatsapp.ContactStore.serialize().filter((x) =>
-      mentioned.includes(x.id.user)
-    );
-
-    chat.sendMessage(message, {
-      linkPreview: null,
-      mentionedJidList: users.map((u) => u.id),
-      quotedMsg: null,
-      quotedMsgAdminGroupJid: null,
-    });
-  };
-
   window.WAPI.getProfilePicSmallFromId = async function (id) {
     return await WPP.whatsapp.ProfilePicThumbStore.find(id).then(
       async function (d) {
