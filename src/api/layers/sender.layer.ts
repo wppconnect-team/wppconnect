@@ -844,6 +844,33 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
+   * Starts recording ('Recording...' state)
+   * @category Chat
+   * @param chatId
+   */
+  public async startRecording(to: string, duration?: number) {
+    return evaluateAndReturn(
+      this.page,
+      ({ to, duration }) => WPP.chat.markIsRecording(to, duration),
+      {
+        to,
+        duration,
+      }
+    );
+  }
+
+  /**
+   * Stops recording ('Recording...' state)
+   * @category Chat
+   * @param chatId
+   */
+  public async stopRecoring(to: string) {
+    return evaluateAndReturn(this.page, ({ to }) => WPP.chat.markIsPaused(to), {
+      to,
+    });
+  }
+
+  /**
    * Update your online presence
    * @category Chat
    * @param online true for available presence and false for unavailable
@@ -914,9 +941,11 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sets the chat state
+   * Deprecated in favor of Use startTyping or startRecording functions
    * @category Chat
    * @param chatState
    * @param chatId
+   * @deprecated Deprecated in favor of Use startTyping or startRecording functions
    */
   public async setChatState(chatId: string, chatState: ChatState) {
     return await evaluateAndReturn(
