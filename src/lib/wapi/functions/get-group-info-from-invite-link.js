@@ -16,8 +16,10 @@
  */
 
 export async function getGroupInfoFromInviteLink(inviteCode) {
-  // await Store.GroupInvite.queryGroupInviteCode(inviteCode);
-  var groupInfo = await Store.WapQuery.groupInviteInfo(inviteCode);
+  inviteCode = inviteCode.replace('chat.whatsapp.com/', '');
+  inviteCode = inviteCode.replace('invite/', '');
+  inviteCode = inviteCode.replace('https://', '');
+  inviteCode = inviteCode.replace('http://', '');
 
-  return groupInfo;
+  return await Store.sendQueryGroupInvite(inviteCode);
 }

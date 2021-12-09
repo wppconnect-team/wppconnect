@@ -369,4 +369,9 @@ export const storeObjects = [
     conditions: (module) =>
       module.msgFindQuery && module.msgFindByIds ? module.msgFindQuery : null,
   },
+  {
+    id: 'sendQueryGroupInvite',
+    conditions: (module) =>
+      module.sendQueryGroupInvite ? module.sendQueryGroupInvite : null,
+  },
 ];
