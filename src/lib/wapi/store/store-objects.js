@@ -90,10 +90,6 @@ export const storeObjects = [
         : null,
   },
   {
-    id: 'SendSeen',
-    conditions: (module) => (module.sendSeen ? module.sendSeen : null),
-  },
-  {
     id: 'Archive',
     conditions: (module) => (module.setArchive ? module : null),
   },
@@ -252,10 +248,6 @@ export const storeObjects = [
     id: 'Cmd',
     conditions: (module) =>
       module.default && module.default.openChatFromUnread ? module : null,
-  },
-  {
-    id: 'ReadSeen',
-    conditions: (module) => (module.sendSeen ? module : null),
   },
   {
     id: 'BlockList',

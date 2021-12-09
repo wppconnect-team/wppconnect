@@ -811,7 +811,7 @@ export class SenderLayer extends ListenerLayer {
   public async sendSeen(chatId: string) {
     return evaluateAndReturn(
       this.page,
-      (chatId) => WAPI.sendSeen(chatId),
+      (chatId) => WPP.chat.markIsRead(chatId),
       chatId
     );
   }

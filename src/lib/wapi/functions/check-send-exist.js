@@ -74,7 +74,7 @@ export async function sendExist(chatId, returnChat = true, Send = true) {
     return scope(chatId, true, 404);
   }
   if (Send) {
-    await window.Store.SendSeen(chat, false);
+    await WPP.chat.markIsRead(chat);
   }
   if (returnChat) {
     return chat;

@@ -75,7 +75,6 @@ import {
   sendMessage2,
   sendMessageWithTags,
   sendMessageWithThumb,
-  sendSeen,
   sendSticker,
   sendVideoAsGif,
   setMyName,
@@ -86,7 +85,6 @@ import {
   openChatAt,
   getGroupInfoFromInviteLink,
   joinGroup,
-  markUnseenMessage,
   getTheme,
   setTheme,
   restartService,
@@ -216,7 +214,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.sendMessageWithTags = sendMessageWithTags;
   window.WAPI.sendMessage = sendMessage;
   window.WAPI.sendMessage2 = sendMessage2;
-  window.WAPI.sendSeen = sendSeen;
   window.WAPI.sendImage = sendImage;
   window.WAPI.sendPtt = sendPtt;
   window.WAPI.sendFile = sendFile;
@@ -236,7 +233,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.sendLocation = sendLocation;
   window.WAPI.openChat = openChat;
   window.WAPI.openChatAt = openChatAt;
-  window.WAPI.markUnseenMessage = markUnseenMessage;
   window.WAPI.sendLinkPreview = sendLinkPreview;
   window.WAPI.sendMessageOptions = sendMessageOptions;
   window.WAPI.starMessages = starMessages;

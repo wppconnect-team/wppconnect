@@ -64,11 +64,12 @@ export class ControlsLayer extends UILayer {
    * @returns boolean
    */
   public async markUnseenMessage(contactId: string) {
-    return evaluateAndReturn(
+    await evaluateAndReturn(
       this.page,
-      (contactId) => WAPI.markUnseenMessage(contactId),
+      (contactId) => WPP.chat.markIsUnread(contactId),
       contactId
     );
+    return true;
   }
 
   /**

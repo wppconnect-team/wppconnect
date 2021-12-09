@@ -97,7 +97,6 @@ interface WAPI {
   ) => Message[];
   loadEarlierMessages: (contactId: string) => Message[];
   logout: () => Promise<boolean>;
-  markUnseenMessage: (messageId: string) => boolean;
   onAddedToGroup: (callback: Function) => any;
   onIncomingCall: (callback: Function) => any;
   onInterfaceChange: (callback: Function) => void;
@@ -227,7 +226,6 @@ interface WAPI {
   waitForStore: (store: string | string[], callback?: Function) => Promise<any>;
   waitNewAcknowledgements: (callback: Function) => void;
   waitNewMessages: (rmCallback: boolean, callback: Function) => void;
-  sendSeen: (to: string) => void;
   _profilePicfunc: (contactId: string) => Promise<ProfilePicThumbObj>;
 }
 
