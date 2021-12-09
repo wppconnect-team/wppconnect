@@ -1,3 +1,12 @@
+# 1.11.0 (2021-12-09)
+
+
+### Bug Fixes
+
+* Fixed initialization of onPresenceChanged (fix [#704](https://github.com/wppconnect-team/wppconnect/issues/704)) ([0470ea8](https://github.com/wppconnect-team/wppconnect/commit/0470ea8a0fd15727f91e18c913b96f3c1e1f79a9))
+
+
+
 ## 1.10.3 (2021-11-18)
 
 
