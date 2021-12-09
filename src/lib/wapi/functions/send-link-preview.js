@@ -43,7 +43,10 @@ export async function sendLinkPreview(chatId, url, text) {
   }
   var chat = await WAPI.sendExist(chatId);
   if (!chat.erro) {
-    const linkPreview = await Store.WapQuery.queryLinkPreview(url);
+    // There are no support for link preview with MD
+    const linkPreview = WPP.auth.isMultiDevice()
+      ? undefined
+      : await Store.WapQuery.queryLinkPreview(url);
     var result =
       (await chat.sendMessage(text.includes(url) ? text : `${url}\n${text}`, {
         linkPreview,

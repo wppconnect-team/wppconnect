@@ -112,7 +112,7 @@ export async function sendMessageOptions(chatId, content, options = {}) {
   if (options.linkPreview) {
     delete options.linkPreview;
     const link = await window.Store.Validators.findLink(content);
-    if (link) {
+    if (link && !WPP.auth.isMultiDevice()) {
       const preview = await window.Store.Wap2.default.queryLinkPreview(
         link.url
       );
