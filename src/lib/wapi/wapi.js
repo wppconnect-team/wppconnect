@@ -79,8 +79,6 @@ import {
   sendVideoAsGif,
   setMyName,
   setMyStatus,
-  startTyping,
-  stopTyping,
   openChat,
   openChatAt,
   getGroupInfoFromInviteLink,
@@ -227,8 +225,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.encryptAndUploadFile = encryptAndUploadFile;
   window.WAPI.sendImageAsSticker = sendImageAsSticker;
   window.WAPI.sendImageAsStickerGif = sendImageAsSticker;
-  window.WAPI.startTyping = startTyping;
-  window.WAPI.stopTyping = stopTyping;
   window.WAPI.setOnlinePresence = setOnlinePresence;
   window.WAPI.sendLocation = sendLocation;
   window.WAPI.openChat = openChat;

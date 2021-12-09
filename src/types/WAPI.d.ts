@@ -217,9 +217,7 @@ interface WAPI {
     star: boolean
   ) => Promise<number>;
   startPhoneWatchdog: (interval: number) => void;
-  startTyping: (to: string) => void;
   stopPhoneWatchdog: () => void;
-  stopTyping: (to: string) => void;
   subscribePresence: (id: string | string[]) => Promise<number>;
   takeOver: () => boolean;
   unsubscribePresence: (id: string | string[]) => Promise<number>;

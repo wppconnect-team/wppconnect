@@ -821,10 +821,15 @@ export class SenderLayer extends ListenerLayer {
    * @category Chat
    * @param chatId
    */
-  public async startTyping(to: string) {
-    return evaluateAndReturn(this.page, ({ to }) => WAPI.startTyping(to), {
-      to,
-    });
+  public async startTyping(to: string, duration?: number) {
+    return evaluateAndReturn(
+      this.page,
+      ({ to, duration }) => WPP.chat.markIsComposing(to, duration),
+      {
+        to,
+        duration,
+      }
+    );
   }
 
   /**
@@ -833,7 +838,7 @@ export class SenderLayer extends ListenerLayer {
    * @param chatId
    */
   public async stopTyping(to: string) {
-    return evaluateAndReturn(this.page, ({ to }) => WAPI.stopTyping(to), {
+    return evaluateAndReturn(this.page, ({ to }) => WPP.chat.markIsPaused(to), {
       to,
     });
   }
