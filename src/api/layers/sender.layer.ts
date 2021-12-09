@@ -15,11 +15,15 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { ListMessageOptions } from '@wppconnect/wa-js/dist/chat';
+import type {
+  ListMessageOptions,
+  TextMessageOptions,
+} from '@wppconnect/wa-js/dist/chat';
 import * as path from 'path';
 import { JSONObject, Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { convertToMP4GIF } from '../../utils/ffmpeg';
+import { sleep } from '../../utils/sleep';
 import {
   base64MimeType,
   downloadFileToBase64,
@@ -72,23 +76,58 @@ export class SenderLayer extends ListenerLayer {
    * @category Chat
    * @param to chat id: xxxxx@us.c
    * @param content text message
+   *
+   * @example
+   * ```javascript
+   * // Simple message
+   * client.sendText('<number>@c.us', 'A simple message');
+   *
+   * // With buttons
+   * client.sendText('<number>@c.us', 'A simple message with buttons', {
+   *    buttons: [
+   *      {
+   *        id: 'your custom id 1',
+   *        text: 'Some text'
+   *      },
+   *      {
+   *        id: 'another id 2',
+   *        text: 'Another text'
+   *      }
+   *    ],
+   *    title: 'Title text' // Optional
+   *    footer: 'Footer text' // Optional
+   * });
+   * ```
    */
-  public async sendText(to: string, content: string): Promise<Message> {
-    const messageId: string = await evaluateAndReturn(
+  public async sendText(
+    to: string,
+    content: string,
+    options?: TextMessageOptions
+  ): Promise<Message> {
+    const sendResult = await evaluateAndReturn(
       this.page,
-      ({ to, content }) => {
-        return WAPI.sendMessage(to, content);
-      },
-      { to, content }
+      ({ to, content, options }) =>
+        WPP.chat.sendTextMessage(to, content, {
+          ...options,
+          waitForAck: true,
+        }),
+      { to, content, options: options as any }
     );
+
+    // I don't know why the evaluate is returning undefined for direct call
+    // To solve that, I added `JSON.parse(JSON.stringify(<message>))` to solve that
     const result = (await evaluateAndReturn(
       this.page,
-      (messageId: any) => WAPI.getMessageById(messageId),
-      messageId
+      async ({ messageId }) => {
+        return JSON.parse(JSON.stringify(await WAPI.getMessageById(messageId)));
+      },
+      { messageId: sendResult.id }
     )) as Message;
+
     if (result['erro'] == true) {
       throw result;
     }
+
     return result;
   }
 
