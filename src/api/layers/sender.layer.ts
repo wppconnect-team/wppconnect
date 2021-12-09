@@ -299,13 +299,25 @@ export class SenderLayer extends ListenerLayer {
     description: string,
     chatId: string
   ) {
+    let base64 = await downloadFileToBase64(thumb, [
+      'image/gif',
+      'image/png',
+      'image/jpg',
+      'image/jpeg',
+      'image/webp',
+    ]);
+
+    if (!base64) {
+      base64 = await fileToBase64(thumb);
+    }
+
     return evaluateAndReturn(
       this.page,
       ({ thumb, url, title, description, chatId }) => {
         WAPI.sendMessageWithThumb(thumb, url, title, description, chatId);
       },
       {
-        thumb,
+        base64,
         url,
         title,
         description,
