@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Browser | @wppconnect-team/wppconnect - v1.11.0</title>
+	<title>ChatPresence | @wppconnect-team/wppconnect - v1.11.0</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.11.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -71,10 +71,10 @@
 					<a href="WAJS.whatsapp.html">whatsapp</a>
 				</li>
 				<li>
-					<a href="WAJS.whatsapp.Browser.html">Browser</a>
+					<a href="WAJS.whatsapp.ChatPresence.html">ChatPresence</a>
 				</li>
 			</ul>
-			<h1>Namespace Browser</h1>
+			<h1>Namespace ChatPresence</h1>
 		</div>
 	</div>
 </header>
@@ -85,7 +85,7 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>whatsapp</dt>
-						<dd><p>2.2147.14:94666</p>
+						<dd><p>2.2147.14:83271</p>
 						</dd>
 					</dl>
 				</div>
@@ -95,157 +95,38 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-external">
-							<h3>Variables</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.Browser.html#promptUnloadGuards" class="tsd-kind-icon">prompt<wbr>Unload<wbr>Guards</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-external">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.Browser.html#clearDownloading" class="tsd-kind-icon">clear<wbr>Downloading</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.Browser.html#hardRefresh" class="tsd-kind-icon">hard<wbr>Refresh</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.Browser.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.Browser.html#info" class="tsd-kind-icon">info</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.Browser.html#isDownloading" class="tsd-kind-icon">is<wbr>Downloading</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.Browser.html#open" class="tsd-kind-icon">open</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.Browser.html#startDownloading" class="tsd-kind-icon">start<wbr>Downloading</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.ChatPresence.html#clearPresence" class="tsd-kind-icon">clear<wbr>Presence</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.ChatPresence.html#markComposing" class="tsd-kind-icon">mark<wbr>Composing</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.ChatPresence.html#markPaused" class="tsd-kind-icon">mark<wbr>Paused</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.ChatPresence.html#markRecording" class="tsd-kind-icon">mark<wbr>Recording</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.ChatPresence.html#sendPresenceAvailable" class="tsd-kind-icon">send<wbr>Presence<wbr>Available</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.ChatPresence.html#sendPresenceUnavailable" class="tsd-kind-icon">send<wbr>Presence<wbr>Unavailable</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace tsd-is-external">
-					<a name="promptUnloadGuards" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagLet">Let</span> prompt<wbr>Unload<wbr>Guards</h3>
-					<div class="tsd-signature tsd-kind-icon">prompt<wbr>Unload<wbr>Guards<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/Browser.d.ts:18</li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-					<a name="clearDownloading" class="tsd-anchor"></a>
-					<h3>clear<wbr>Downloading</h3>
+					<a name="clearPresence" class="tsd-anchor"></a>
+					<h3>clear<wbr>Presence</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">clear<wbr>Downloading<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">clear<wbr>Presence<span class="tsd-signature-symbol">(</span>chat<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/Browser.d.ts:28</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-					<a name="hardRefresh" class="tsd-anchor"></a>
-					<h3>hard<wbr>Refresh</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">hard<wbr>Refresh<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">never</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/Browser.d.ts:26</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">never</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-					<a name="id" class="tsd-anchor"></a>
-					<h3>id</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/Browser.d.ts:19</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-					<a name="info" class="tsd-anchor"></a>
-					<h3>info</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">info<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>os<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>ua<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/Browser.d.ts:20</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>os<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>ua<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h4>
-							<ul class="tsd-parameters">
-								<li class="tsd-parameter">
-									<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li class="tsd-parameter">
-									<h5>os<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li class="tsd-parameter">
-									<h5>ua<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li class="tsd-parameter">
-									<h5>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-					<a name="isDownloading" class="tsd-anchor"></a>
-					<h3>is<wbr>Downloading</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Downloading<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/Browser.d.ts:29</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-					<a name="open" class="tsd-anchor"></a>
-					<h3>open</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">open<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/Browser.d.ts:30</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/ChatPresence.d.ts:24</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>e: <span class="tsd-signature-type">any</span></h5>
+									<h5>chat: <a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -253,16 +134,102 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-					<a name="startDownloading" class="tsd-anchor"></a>
-					<h3>start<wbr>Downloading</h3>
+					<a name="markComposing" class="tsd-anchor"></a>
+					<h3>mark<wbr>Composing</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">start<wbr>Downloading<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">mark<wbr>Composing<span class="tsd-signature-symbol">(</span>chat<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/Browser.d.ts:27</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/ChatPresence.d.ts:19</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>chat: <a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="markPaused" class="tsd-anchor"></a>
+					<h3>mark<wbr>Paused</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">mark<wbr>Paused<span class="tsd-signature-symbol">(</span>chat<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/ChatPresence.d.ts:20</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>chat: <a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="markRecording" class="tsd-anchor"></a>
+					<h3>mark<wbr>Recording</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">mark<wbr>Recording<span class="tsd-signature-symbol">(</span>chat<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/ChatPresence.d.ts:21</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>chat: <a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="sendPresenceAvailable" class="tsd-anchor"></a>
+					<h3>send<wbr>Presence<wbr>Available</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Presence<wbr>Available<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/ChatPresence.d.ts:22</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="sendPresenceUnavailable" class="tsd-anchor"></a>
+					<h3>send<wbr>Presence<wbr>Unavailable</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Presence<wbr>Unavailable<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/ChatPresence.d.ts:23</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -313,10 +280,10 @@
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 										<a href="WAJS.whatsapp.Base64.html">Base64</a>
 									</li>
-									<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 										<a href="WAJS.whatsapp.Browser.html">Browser</a>
 									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+									<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 										<a href="WAJS.whatsapp.ChatPresence.html">Chat<wbr>Presence</a>
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
@@ -357,29 +324,23 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.whatsapp.Browser.html#promptUnloadGuards" class="tsd-kind-icon">prompt<wbr>Unload<wbr>Guards</a>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.whatsapp.ChatPresence.html#clearPresence" class="tsd-kind-icon">clear<wbr>Presence</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.whatsapp.Browser.html#clearDownloading" class="tsd-kind-icon">clear<wbr>Downloading</a>
+						<a href="WAJS.whatsapp.ChatPresence.html#markComposing" class="tsd-kind-icon">mark<wbr>Composing</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.whatsapp.Browser.html#hardRefresh" class="tsd-kind-icon">hard<wbr>Refresh</a>
+						<a href="WAJS.whatsapp.ChatPresence.html#markPaused" class="tsd-kind-icon">mark<wbr>Paused</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.whatsapp.Browser.html#id" class="tsd-kind-icon">id</a>
+						<a href="WAJS.whatsapp.ChatPresence.html#markRecording" class="tsd-kind-icon">mark<wbr>Recording</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.whatsapp.Browser.html#info" class="tsd-kind-icon">info</a>
+						<a href="WAJS.whatsapp.ChatPresence.html#sendPresenceAvailable" class="tsd-kind-icon">send<wbr>Presence<wbr>Available</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.whatsapp.Browser.html#isDownloading" class="tsd-kind-icon">is<wbr>Downloading</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.whatsapp.Browser.html#open" class="tsd-kind-icon">open</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.whatsapp.Browser.html#startDownloading" class="tsd-kind-icon">start<wbr>Downloading</a>
+						<a href="WAJS.whatsapp.ChatPresence.html#sendPresenceUnavailable" class="tsd-kind-icon">send<wbr>Presence<wbr>Unavailable</a>
 					</li>
 				</ul>
 			</nav>
