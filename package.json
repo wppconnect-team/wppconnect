@@ -72,7 +72,7 @@
     "@types/rimraf": "^3.0.0",
     "@types/sharp": "^0.29.4",
     "@types/shelljs": "^0.8.8",
-    "@types/tmp": "^0.2.2",
+    "@types/tmp": "^0.2.3",
     "@types/ws": "^8.2.2",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
