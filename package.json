@@ -112,7 +112,7 @@
     "execa": "^5.0.0",
     "file-type": "~16.5.3",
     "fsevents": "^2.3.1",
-    "futoin-hkdf": "^1.3.2",
+    "futoin-hkdf": "^1.4.3",
     "latest-version": "^5.1.0",
     "logform": "^2.3.0",
     "lookpath": "^1.2.0",
