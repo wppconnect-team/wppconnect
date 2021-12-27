@@ -79,7 +79,7 @@
     "babel-loader": "^8.2.3",
     "commitizen": "^4.2.3",
     "concurrently": "^6.5.1",
-    "conventional-changelog-cli": "^2.1.1",
+    "conventional-changelog-cli": "^2.2.2",
     "copy-webpack-plugin": "^10.2.0",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.1.0",
