@@ -41,7 +41,6 @@ interface WAPI {
   arrayBufferToBase64: (buffer: ArrayBuffer) => string;
   checkNumberStatus: (contactId: string) => Promise<WhatsappProfile>;
   downloadFile: (data: string) => Promise<string | boolean>;
-  downloadMedia: (messageId: string) => Promise<string>;
   forwardMessages: (
     to: string,
     messages: string | string[],

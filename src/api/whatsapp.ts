@@ -116,19 +116,12 @@ export class Whatsapp extends BusinessLayer {
       messageId = messageId.id;
     }
 
-    const result = await evaluateAndReturn(
+    return await evaluateAndReturn(
       this.page,
-      (messageId) =>
-        WAPI.downloadMedia(messageId).catch((e) => ({
-          __error: e,
-        })),
+      async (messageId) =>
+        WPP.util.blobToBase64(await WPP.chat.downloadMedia(messageId)),
       messageId
     );
-
-    if (typeof result == 'object' && '__error' in result) {
-      throw result.__error;
-    }
-    return result as string;
   }
 
   /**

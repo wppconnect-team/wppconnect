@@ -97,7 +97,6 @@ import {
   sendMute,
   getListMute,
   interfaceMute,
-  downloadMedia,
   startPhoneWatchdog,
   stopPhoneWatchdog,
   setGroupSubject,
@@ -265,7 +264,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.getUnreadMessages = getUnreadMessages;
   window.WAPI.getCommonGroups = getCommonGroups;
   window.WAPI.downloadFile = downloadFile;
-  window.WAPI.downloadMedia = downloadMedia;
   window.WAPI.getNumberProfile = getNumberProfile;
   window.WAPI.getMessageById = getMessageById;
   window.WAPI.getMessages = getMessages;
