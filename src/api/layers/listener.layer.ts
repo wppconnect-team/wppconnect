@@ -131,8 +131,7 @@ export class ListenerLayer extends ProfileLayer {
           window['onLiveLocation'].exposed = true;
         }
         if (!window['onRevokedMessage'].exposed) {
-          // @ts-ignore
-          WPP.chat.on('msg_revoke', (data: any) => {
+          WPP.chat.on('msg_revoke', (data) => {
             const eventData = {
               author: data.author,
               from: data.from,

@@ -130,7 +130,6 @@ export async function injectApi(page: Page) {
   await page
     .waitForFunction(
       () => {
-        // @ts-ignore
         return typeof window.WPP !== 'undefined' && window.WPP.isReady;
       },
       {
@@ -153,7 +152,6 @@ export async function injectApi(page: Page) {
   // Make sure WAPI is initialized
   return await page
     .waitForFunction(() => {
-      // @ts-ignore
       return (
         typeof window.WAPI !== 'undefined' &&
         typeof window.Store !== 'undefined'
