@@ -671,7 +671,10 @@ export class SenderLayer extends ListenerLayer {
     const result = await evaluateAndReturn(
       this.page,
       ({ to, contactsId, name }) => {
-        WPP.chat.sendVCardContactMessage(to, { id: contactsId, name: name });
+        return WPP.chat.sendVCardContactMessage(to, {
+          id: contactsId,
+          name: name,
+        });
       },
       { to, contactsId, name }
     );
