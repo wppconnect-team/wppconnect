@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>webpack | @wppconnect-team/wppconnect - v1.11.1</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.11.1">
+	<title>webpack | @wppconnect-team/wppconnect - v1.12.0</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.12.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.11.1</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.12.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.11.1</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.12.0</a>
 				</li>
 				<li>
 					<a href="WAJS.html">WAJS</a>
@@ -101,6 +101,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.webpack.html#injectLoader" class="tsd-kind-icon">inject<wbr>Loader</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.webpack.html#isReactComponent" class="tsd-kind-icon">is<wbr>React<wbr>Component</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.webpack.html#moduleSource" class="tsd-kind-icon">module<wbr>Source</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.webpack.html#modules" class="tsd-kind-icon">modules</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.webpack.html#onInjected" class="tsd-kind-icon">on<wbr>Injected</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.webpack.html#onReady" class="tsd-kind-icon">on<wbr>Ready</a></li>
@@ -116,7 +117,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace tsd-is-external">
 					<a name="SearchModuleCondition" class="tsd-anchor"></a>
 					<h3>Search<wbr>Module<wbr>Condition</h3>
-					<div class="tsd-signature tsd-kind-icon">Search<wbr>Module<wbr>Condition<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>module<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, moduleId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
+					<div class="tsd-signature tsd-kind-icon">Search<wbr>Module<wbr>Condition<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>module<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, moduleId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack.d.ts:26</li>
@@ -127,7 +128,7 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-signature">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-external">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>module<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, moduleId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>module<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, moduleId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
@@ -137,7 +138,7 @@
 												<h5>module: <span class="tsd-signature-type">any</span></h5>
 											</li>
 											<li>
-												<h5><span class="tsd-flag ts-flagOptional">Optional</span> moduleId: <span class="tsd-signature-type">string</span></h5>
+												<h5>moduleId: <span class="tsd-signature-type">string</span></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -220,7 +221,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack.d.ts:44</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack.d.ts:45</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -234,6 +235,29 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="moduleSource" class="tsd-anchor"></a>
+					<h3>module<wbr>Source</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">module<wbr>Source<span class="tsd-signature-symbol">(</span>moduleId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack.d.ts:44</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>moduleId: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 					<a name="modules" class="tsd-anchor"></a>
 					<h3>modules</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
@@ -243,7 +267,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack.d.ts:62</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack.d.ts:63</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -355,7 +379,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack.d.ts:56</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack.d.ts:57</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -398,7 +422,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack.d.ts:50</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack.d.ts:51</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -467,10 +491,31 @@
 						<a href="WAJS.html">WAJS</a>
 						<ul>
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+								<a href="WAJS.auth.html">auth</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+								<a href="WAJS.blocklist.html">blocklist</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+								<a href="WAJS.chat.html">chat</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="WAJS.config.html">config</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.internal.html">internal</a>
+								<a href="WAJS.contact.html">contact</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+								<a href="WAJS.group.html">group</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+								<a href="WAJS.labels.html">labels</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+								<a href="WAJS.status.html">status</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+								<a href="WAJS.util.html">util</a>
 							</li>
 							<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="WAJS.webpack.html">webpack</a>
@@ -501,6 +546,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.webpack.html#isReactComponent" class="tsd-kind-icon">is<wbr>React<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.webpack.html#moduleSource" class="tsd-kind-icon">module<wbr>Source</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.webpack.html#modules" class="tsd-kind-icon">modules</a>
