@@ -114,7 +114,7 @@
     "fsevents": "^2.3.1",
     "futoin-hkdf": "^1.4.3",
     "latest-version": "^5.1.0",
-    "logform": "^2.3.0",
+    "logform": "^2.3.2",
     "lookpath": "^1.2.0",
     "mime-types": "^2.1.34",
     "puppeteer": "*",
