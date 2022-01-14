@@ -131,11 +131,6 @@ export const storeObjects = [
       module.TemplateMessage && module.HydratedFourRowTemplate ? module : null,
   },
   {
-    id: 'Me',
-    conditions: (module) =>
-      module.PLATFORMS && module.Conn ? module.default : null,
-  },
-  {
     id: 'CallUtils',
     conditions: (module) =>
       module.sendCallEnd && module.parseCall ? module : null,

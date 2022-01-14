@@ -16,5 +16,5 @@
  */
 
 export function getHost() {
-  return Store.Me.attributes;
+  return WPP.whatsapp.Conn.attributes;
 }

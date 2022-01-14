@@ -16,5 +16,5 @@
  */
 
 export function getBatteryLevel() {
-  return Store.Me.attributes.battery;
+  return WPP.whatsapp.Conn.attributes.battery;
 }

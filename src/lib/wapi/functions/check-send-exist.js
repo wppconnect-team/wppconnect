@@ -17,7 +17,7 @@
 
 export function scope(id, erro, status, text = null) {
   let e = {
-    me: Store.Me.attributes,
+    me: WPP.whatsapp.Conn.attributes,
     to: id,
     erro: erro,
     text: text,
