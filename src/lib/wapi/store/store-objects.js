@@ -258,11 +258,6 @@ export const storeObjects = [
     conditions: (module) => (module.vcardFromContactModel ? module : null),
   },
   {
-    id: 'Profile',
-    conditions: (module) =>
-      module.sendSetPicture && module.requestDeletePicture ? module : null,
-  },
-  {
     id: 'SendMute',
     conditions: (module) => (module.sendConversationMute ? module : null),
   },
@@ -349,20 +344,8 @@ export const storeObjects = [
     conditions: (module) => module.sendCallSignalingMsg,
   },
   {
-    id: 'checkNumberInfo',
-    conditions: (module) =>
-      module.default.toString().includes('Should not reach queryExists MD')
-        ? module.default
-        : null,
-  },
-  {
     id: 'sendCreateGroup',
     conditions: (module) => module.sendCreateGroup,
-  },
-  {
-    id: 'msgFindQuery',
-    conditions: (module) =>
-      module.msgFindQuery && module.msgFindByIds ? module.msgFindQuery : null,
   },
   {
     id: 'sendQueryGroupInvite',

@@ -21,8 +21,8 @@ export async function setOnlinePresence(online) {
   }
 
   if (online) {
-    await Store.ChatPresence.sendPresenceAvailable();
+    await WPP.whatsapp.ChatPresence.sendPresenceAvailable();
   } else {
-    await Store.ChatPresence.sendPresenceUnavailable();
+    await WPP.whatsapp.ChatPresence.sendPresenceUnavailable();
   }
 }
