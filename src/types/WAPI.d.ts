@@ -219,7 +219,6 @@ interface WAPI {
   subscribePresence: (id: string | string[]) => Promise<number>;
   takeOver: () => boolean;
   unsubscribePresence: (id: string | string[]) => Promise<number>;
-  waitForStore: (store: string | string[], callback?: Function) => Promise<any>;
   waitNewAcknowledgements: (callback: Function) => void;
   waitNewMessages: (rmCallback: boolean, callback: Function) => void;
   _profilePicfunc: (contactId: string) => Promise<ProfilePicThumbObj>;

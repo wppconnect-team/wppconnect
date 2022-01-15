@@ -19,32 +19,30 @@ let timer = null;
 let pong = true;
 
 async function sendPing() {
-  return window.WAPI.waitForStore(['State', 'Stream'], () => {
-    // Check only if the interface is in CHAT and not disconnected
-    if (
-      window.Store.Stream.mode !== 'MAIN' ||
-      WPP.whatsapp.State.state === 'TIMEOUT'
-    ) {
-      return;
-    }
+  // Check only if the interface is in CHAT and not disconnected
+  if (
+    window.Store.Stream.mode !== 'MAIN' ||
+    WPP.whatsapp.State.state === 'TIMEOUT'
+  ) {
+    return;
+  }
 
-    // Start phoneWatchdog if ping fails
-    if (!pong) {
-      WPP.whatsapp.State.phoneWatchdog.activate();
-      WPP.whatsapp.State.phoneWatchdog.poke(250);
-      return;
-    }
+  // Start phoneWatchdog if ping fails
+  if (!pong) {
+    WPP.whatsapp.State.phoneWatchdog.activate();
+    WPP.whatsapp.State.phoneWatchdog.poke(250);
+    return;
+  }
 
-    // Reset ping state
-    pong = false;
+  // Reset ping state
+  pong = false;
 
-    // Send a ping request
-    return WPP.whatsapp.State.sendBasic({
-      tag: WPP.whatsapp.State.tag('ping'),
-      data: ['admin', 'test'],
-    }).then(() => {
-      pong = true;
-    });
+  // Send a ping request
+  return WPP.whatsapp.State.sendBasic({
+    tag: WPP.whatsapp.State.tag('ping'),
+    data: ['admin', 'test'],
+  }).then(() => {
+    pong = true;
   });
 }
 

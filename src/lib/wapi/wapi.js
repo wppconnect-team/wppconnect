@@ -446,9 +446,7 @@ if (typeof window.WAPI === 'undefined') {
    * @returns {boolean}
    */
   window.WAPI.onIncomingCall = function (callback) {
-    window.WAPI.waitForStore(['Call'], () => {
-      window.Store.Call.on('add', callback);
-    });
+    WPP.whatsapp.CallStore.on('add', callback);
     return true;
   };
 
@@ -458,19 +456,14 @@ if (typeof window.WAPI === 'undefined') {
    * @returns {boolean}
    */
   window.WAPI.onInterfaceChange = function (callback) {
-    window.WAPI.waitForStore('Stream', () => {
-      const getData = () => ({
-        displayInfo: window.Store.Stream.displayInfo,
-        mode: window.Store.Stream.mode,
-        info: window.Store.Stream.info,
-      });
+    const getData = () => ({
+      displayInfo: window.Store.Stream.displayInfo,
+      mode: window.Store.Stream.mode,
+      info: window.Store.Stream.info,
+    });
+    callback(getData());
+    window.Store.Stream.on('change:info change:displayInfo change:mode', () => {
       callback(getData());
-      window.Store.Stream.on(
-        'change:info change:displayInfo change:mode',
-        () => {
-          callback(getData());
-        }
-      );
     });
     return true;
   };
@@ -482,38 +475,6 @@ if (typeof window.WAPI === 'undefined') {
 
   window.WAPI.logout = async function () {
     return await WPP.auth.logout();
-  };
-
-  window.WAPI.storePromises = {};
-  window.WAPI.waitForStore = async function (stores, callback) {
-    if (!Array.isArray(stores)) {
-      stores = [stores];
-    }
-
-    const isUndefined = (p) => typeof window.Store[p] === 'undefined';
-    const missing = stores.filter(isUndefined);
-
-    const promises = missing.map((s) => {
-      if (!window.WAPI.storePromises[s]) {
-        window.WAPI.storePromises[s] = new Promise((resolve) => {
-          const storePromise =
-            window.Store.promises[s] || window.Store.promises['Store'];
-
-          storePromise.then(() => {
-            resolve(true);
-          });
-        });
-      }
-      return window.WAPI.storePromises[s];
-    });
-
-    const all = Promise.all(promises);
-
-    if (typeof callback === 'function') {
-      all.then(callback);
-    }
-
-    return await all;
   };
 
   addOnStreamChange();

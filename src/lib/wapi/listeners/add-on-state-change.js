@@ -22,13 +22,11 @@ export function addOnStateChange() {
   };
 
   window.WAPI.onStateChange = function (callback) {
-    window.WAPI.waitForStore('State', () => {
-      WPP.whatsapp.State.on('change:state', () => callback(getData()));
-      if (!initialized) {
-        initialized = true;
-        callback(getData());
-      }
-    });
+    WPP.whatsapp.State.on('change:state', () => callback(getData()));
+    if (!initialized) {
+      initialized = true;
+      callback(getData());
+    }
     return true;
   };
 }
@@ -39,13 +37,11 @@ export function addOnStreamChange() {
     return WPP.whatsapp.State.stream;
   };
   window.WAPI.onStreamChange = function (callback) {
-    window.WAPI.waitForStore('State', () => {
-      WPP.whatsapp.State.on('change:stream', () => callback(getData()));
-      if (!initialized) {
-        initialized = true;
-        callback(getData());
-      }
-    });
+    WPP.whatsapp.State.on('change:stream', () => callback(getData()));
+    if (!initialized) {
+      initialized = true;
+      callback(getData());
+    }
     return true;
   };
 }
