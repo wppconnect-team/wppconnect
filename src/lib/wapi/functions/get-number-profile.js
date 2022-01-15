@@ -16,30 +16,19 @@
  */
 
 export async function getNumberProfile(id, done) {
-  try {
-    const result = await WPP.contact.queryExists(id).catch(() => null);
-    if (!result || result.wid === undefined) throw 404;
+  const result = await WPP.contact.queryExists(id);
 
-    const data = window.WAPI._serializeNumberStatusObj({
-      jid: result.wid,
-      status: 200,
-      isBusiness: result.biz,
-    });
-    if (data.status == 200) data.numberExists = true;
-    if (done !== undefined) {
-      done(window.WAPI._serializeNumberStatusObj(result));
-      done(data);
-    }
-    return data;
-  } catch (e) {
-    if (done !== undefined) {
-      done(
-        window.WAPI._serializeNumberStatusObj({
-          status: e,
-          jid: id,
-        })
-      );
-    }
-    return e;
+  if (!result || result.wid === undefined) throw 404;
+
+  const data = window.WAPI._serializeNumberStatusObj({
+    jid: result.wid,
+    status: 200,
+    isBusiness: result.biz,
+  });
+  if (data.status == 200) data.numberExists = true;
+  if (done !== undefined) {
+    done(window.WAPI._serializeNumberStatusObj(result));
+    done(data);
   }
+  return data;
 }

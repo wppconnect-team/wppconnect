@@ -280,6 +280,10 @@ export class RetrieverLayer extends SenderLayer {
    * @returns contact detial as promise
    */
   public async getNumberProfile(contactId: string) {
+    this.log(
+      'warn',
+      'The getNumberProfile function is deprecated, please use checkNumberStatus'
+    );
     return evaluateAndReturn(
       this.page,
       (contactId) => WAPI.getNumberProfile(contactId),
