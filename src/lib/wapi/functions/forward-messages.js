@@ -55,7 +55,6 @@ export async function forwardMessages(chatId, messagesId, skipMyMessages) {
     skipMyMessages ? !msg.isSentByMe : true
   );
 
-  // const userId = new window.Store.UserConstructor(to);
   await chat.forwardMessages(toForward);
   await new Promise((resolve) => setTimeout(resolve, 100)); // Wait collection update
 

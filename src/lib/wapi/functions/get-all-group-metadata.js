@@ -16,7 +16,7 @@
  */
 
 export function getAllGroupMetadata(done) {
-  const groupData = window.Store.GroupMetadata.default.map(
+  const groupData = WPP.whatsapp.GroupMetadataStore.map(
     (groupData) => groupData.attributes
   );
 

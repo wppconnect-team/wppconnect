@@ -33,10 +33,6 @@ export const storeObjects = [
         : null,
   },
   {
-    id: 'MediaProcess',
-    conditions: (module) => (module.BLOB ? module : null),
-  },
-  {
     id: 'GroupInvite',
     conditions: (module) => (module.sendQueryGroupInviteCode ? module : null),
   },
@@ -44,18 +40,6 @@ export const storeObjects = [
     id: 'ServiceWorker',
     conditions: (module) =>
       module.default && module.default.killServiceWorker ? module : null,
-  },
-  {
-    id: 'WapDelete',
-    conditions: (module) =>
-      module.sendConversationDelete && module.sendConversationDelete.length == 2
-        ? module
-        : null,
-  },
-  {
-    id: 'Conn',
-    conditions: (module) =>
-      module.default && module.Conn ? module.default : null,
   },
   {
     id: 'WapQuery',
@@ -80,16 +64,6 @@ export const storeObjects = [
         : null,
   },
   {
-    id: 'UserConstructor',
-    conditions: (module) =>
-      module.default &&
-      module.default.prototype &&
-      module.default.prototype.isServer &&
-      module.default.prototype.isUser
-        ? module.default
-        : null,
-  },
-  {
     id: 'Archive',
     conditions: (module) => (module.setArchive ? module : null),
   },
@@ -97,19 +71,6 @@ export const storeObjects = [
     id: 'pinChat',
     conditions: (module) =>
       module.setPin.toString().includes('.unproxy') ? module : null,
-  },
-  {
-    id: 'sendDelete',
-    conditions: (module) => (module.sendDelete ? module.sendDelete : null),
-  },
-  {
-    id: 'sendMsgToChat',
-    conditions: (module) =>
-      module.sendMsgToChat ? module.sendMsgToChat : null,
-  },
-  {
-    id: 'Catalog',
-    conditions: (module) => (module.Catalog ? module.Catalog : null),
   },
   {
     id: 'Perfil',
@@ -155,21 +116,9 @@ export const storeObjects = [
         : null,
   },
   {
-    id: 'ChatPresence',
-    conditions: (module) =>
-      module.markComposing && module.markPaused && module.markRecording
-        ? module
-        : null,
-  },
-  {
     id: 'GroupActions',
     conditions: (module) =>
       module.sendExitGroup && module.localExitGroup ? module : null,
-  },
-  {
-    id: 'Features',
-    conditions: (module) =>
-      module.FEATURE_CHANGE_EVENT && module.features ? module : null,
   },
   {
     id: 'MessageUtils',
@@ -240,22 +189,9 @@ export const storeObjects = [
       module.default && module.default.encryptAndUpload ? module.default : null,
   },
   {
-    id: 'Cmd',
-    conditions: (module) =>
-      module.default && module.default.openChatFromUnread ? module : null,
-  },
-  {
-    id: 'BlockList',
-    conditions: (module) => (module.BlocklistCollection ? module : null),
-  },
-  {
     id: 'Theme',
     conditions: (module) =>
       module.getTheme && module.setTheme ? module : null,
-  },
-  {
-    id: 'Vcard',
-    conditions: (module) => (module.vcardFromContactModel ? module : null),
   },
   {
     id: 'SendMute',
@@ -270,35 +206,6 @@ export const storeObjects = [
     conditions: (module) => (module.Wap ? module : null),
   },
   {
-    id: 'genId',
-    conditions: (module) =>
-      module.default &&
-      typeof module.default === 'function' &&
-      typeof module.default.toString === 'function' &&
-      module.default.toString().match(/crypto/)
-        ? module
-        : null,
-  },
-  {
-    id: 'GroupMetadata',
-    conditions: (module) =>
-      module.default && module.default.handlePendingInvite ? module : null,
-  },
-  {
-    id: 'i10n',
-    conditions: (module) =>
-      module.default && module.default.downloadAppLocale
-        ? module.default
-        : null,
-  },
-  {
-    id: 'NetworkStatus',
-    conditions: (module) =>
-      module.default && module.default._logOnlineOffline
-        ? module.default
-        : null,
-  },
-  {
     id: 'Stream',
     conditions: (module) =>
       module.default && module.default.unobscure ? module.default : null,
@@ -307,21 +214,6 @@ export const storeObjects = [
     id: 'ws2',
     conditions: (module) =>
       module.default && module.default.destroyStorage ? module.default : null,
-  },
-  {
-    id: 'BlobCache',
-    conditions: (module) =>
-      module.default && module.default.getOrCreateURL ? module.default : null,
-  },
-  {
-    id: 'randomMessageId',
-    conditions: (module) =>
-      module.randomId && module.default ? module.default : null,
-  },
-  {
-    id: 'randomId',
-    conditions: (module) =>
-      module.randomId && module.default ? module.randomId : null,
   },
   {
     id: 'sendSetGroupSubject',

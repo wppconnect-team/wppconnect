@@ -41,7 +41,7 @@ export async function setGroupDescription(groupId, description) {
     };
   }
 
-  const idDesc = Store.randomMessageId();
+  const idDesc = WPP.whatsapp.functions.randomMessageId();
   const prevDesc = chat.groupMetadata.descId;
 
   const result = await Store.sendSetGroupDescription(
