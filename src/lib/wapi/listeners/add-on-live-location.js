@@ -19,17 +19,13 @@ export function addOnLiveLocation() {
   const callbacks = [];
 
   /**
-   * Dispara o evento com dados formatados
+   * Trigger the event
    */
   function fireCallback(data) {
     const location = Object.assign({}, data);
     if (location.jid) {
       location.id = location.jid.toString();
     }
-    delete location.jid;
-    delete location.body;
-    delete location.isLive;
-    delete location.sequence;
 
     for (const callback of callbacks) {
       try {
@@ -38,56 +34,39 @@ export function addOnLiveLocation() {
     }
   }
 
-  /**
-   * Substitui o manipulador original para capturar todos eventos,
-   * pois o Store.LiveLocation só inicializa a partir de uma mensagem,
-   * caso a mensagem fique muito para atrás (após troca de 50 mensagens),
-   * ele não é inicializado até carregar a mensage.
-   */
-  const originalHandle = WPP.whatsapp.LiveLocationStore.handle;
-  WPP.whatsapp.LiveLocationStore.handle = function (list) {
-    originalHandle.apply(this, arguments);
-
-    for (const p of list) {
-      fireCallback(p);
-    }
-  };
-
-  // Para cada novo LiveLocation inicializado, força a vizualização de mapa de todos
-  WPP.whatsapp.LiveLocationStore.on('add', () => {
-    setTimeout(() => {
-      WPP.whatsapp.LiveLocationStore.forEach((l) => {
-        l.startViewingMap();
-        setTimeout(() => {
-          try {
-            l._startKeepAlive();
-          } catch (error) {}
-        }, 1000);
-      });
-    }, 100);
+  WPP.chat.on('live_location_start', (e) => {
+    fireCallback({
+      type: 'enable',
+      id: e.id.toString(),
+      lat: e.lat,
+      lng: e.lng,
+      accuracy: e.accuracy,
+      speed: e.speed,
+      degrees: e.degrees,
+      shareDuration: e.shareDuration,
+    });
   });
 
-  // Força a inicialização de localização para todos chats ativos
-  WPP.whatsapp.ChatStore.map((c) => WPP.whatsapp.LiveLocationStore.find(c.id));
+  WPP.chat.on('live_location_update', (e) => {
+    fireCallback({
+      type: 'update',
+      id: e.id.toString(),
+      lat: e.lat,
+      lng: e.lng,
+      accuracy: e.accuracy,
+      speed: e.speed,
+      degrees: e.degrees,
+      elapsed: e.elapsed,
+      lastUpdated: e.lastUpdated,
+    });
+  });
 
-  // Caso receba nova mensagem de localização, inicializa o LiveLocation e dispara o primeiro evento
-  WAPI.waitNewMessages(false, (messages) => {
-    for (const message of messages) {
-      if (message.isLive) {
-        fireCallback({
-          type: 'enable',
-          isLive: message.isLive,
-          id: message.sender.id,
-          lat: message.lat,
-          lng: message.lng,
-          accuracy: message.accuracy,
-          speed: message.speed,
-          degrees: message.degrees,
-          sequence: message.sequence,
-          shareDuration: message.shareDuration,
-        });
-      }
-    }
+  WPP.chat.on('live_location_end', (e) => {
+    fireCallback({
+      type: 'disablle',
+      id: e.id.toString(),
+      chat: e.chat.toString(),
+    });
   });
 
   window.WAPI.onLiveLocation = async function (callback) {
