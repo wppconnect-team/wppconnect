@@ -120,7 +120,7 @@ export async function evaluateAndReturn<T extends EvaluateFn>(
 
   const result = (await page.evaluate(func as any, ...args)) as any;
 
-  if (typeof result === 'object' && '__error' in result) {
+  if (result !== null && typeof result === 'object' && '__error' in result) {
     const errorMessage =
       result.__error.message || JSON.stringify(result.__error);
 
