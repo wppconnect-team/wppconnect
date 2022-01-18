@@ -68,7 +68,7 @@
     "@types/atob": "^2.1.2",
     "@types/mime-types": "^2.1.0",
     "@types/mocha": "^9.0.0",
-    "@types/node": "^14.18.5",
+    "@types/node": "^14.18.7",
     "@types/rimraf": "^3.0.0",
     "@types/sharp": "^0.29.5",
     "@types/shelljs": "^0.8.11",
