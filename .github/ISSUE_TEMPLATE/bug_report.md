@@ -10,11 +10,12 @@ labels: 'bug, needs triage'
 
 ## Environment
 
-- **Wppconnect version(s):** [e.g. 2.0.27, 2.2.1]
-- **Browser:** [e.g. Chrome 87, Chromium 85]
-- **OS:** [e.g. OSX 10.13.4, Windows 10]
-- **Node version:** [e.g. Node 8, Node 14]
-- **WhatsApp version:** [e.g. 2.2126.14]
+- **WPPConnect version(s):** X.Y.Z
+- **WA-JS version(s):** X.Y.Z
+- **Browser:** Chrome XX / Chromium XX
+- **OS:** Windows X / OSX X.Y.Z
+- **Node version:** Node XY
+- **WhatsApp version:** X.YYYY.ZZ
 - **MultiDevice (BETA):** yes/no
 
 ## Steps to Reproduce

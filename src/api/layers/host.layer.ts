@@ -153,6 +153,11 @@ export class HostLayer {
             this.log('info', `WhatsApp WEB version: ${version}`);
           })
           .catch(() => null);
+        this.getWAJSVersion()
+          .then((version) => {
+            this.log('info', `WA-JS version: ${version}`);
+          })
+          .catch(() => null);
       })
       .catch((e) => {
         this.log('verbose', 'wapi.js failed');
@@ -396,6 +401,16 @@ export class HostLayer {
       .catch(() => null);
 
     return await evaluateAndReturn(this.page, () => WAPI.getWAVersion());
+  }
+
+  /**
+   * Retrieves WA-JS version
+   * @category Host
+   */
+  public async getWAJSVersion() {
+    await this.page.waitForFunction(() => WPP.version).catch(() => null);
+
+    return await evaluateAndReturn(this.page, () => WPP.version);
   }
 
   /**
