@@ -76,7 +76,6 @@ interface WAPI {
   getMessages: (chatId: string, params: GetMessagesParam) => Promise<Message[]>;
   getNumberProfile: (contactId: string) => WhatsappProfile;
   getSessionTokenBrowser: (removePath?: boolean) => SessionToken;
-  getStatus: (contactId: string) => ContactStatus;
   getTheme: () => string;
   getUnreadMessages: (
     includeMe: boolean,
@@ -205,7 +204,6 @@ interface WAPI {
   setGroupSubject: (groupId: string, title: string) => Promise<object>;
   setMessagesAdminsOnly: (chatId: string, option: boolean) => boolean;
   setMyName: (name: string) => void;
-  setMyStatus: (to: string) => void;
   setOnlinePresence: (online: boolean) => void;
   setProfilePic: (path: string, to?: string) => Promise<boolean>;
   setTemporaryMessages: (chatId: string, value: string) => Promise<boolean>;

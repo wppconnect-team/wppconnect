@@ -49,7 +49,6 @@ import {
   getMyContacts,
   getNewId,
   getNumberProfile,
-  getStatus,
   getUnreadMessages,
   getUnreadMessagesInChat,
   hasUndreadMessages,
@@ -78,7 +77,6 @@ import {
   sendSticker,
   sendVideoAsGif,
   setMyName,
-  setMyStatus,
   openChat,
   openChatAt,
   getGroupInfoFromInviteLink,
@@ -215,7 +213,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.sendPtt = sendPtt;
   window.WAPI.sendFile = sendFile;
   window.WAPI.setMyName = setMyName;
-  window.WAPI.setMyStatus = setMyStatus;
   window.WAPI.sendVideoAsGif = sendVideoAsGif;
   window.WAPI.processFiles = processFiles;
   window.WAPI.sendImageWithProduct = sendImageWithProduct;
@@ -245,7 +242,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.getAllChatsWithMessages = getAllChatsWithMessages;
   window.WAPI.getAllGroups = getAllGroups;
   window.WAPI.getChat = getChat;
-  window.WAPI.getStatus = getStatus;
   window.WAPI.getChatByName = getChatByName;
   window.WAPI.getNewId = getNewId;
   window.WAPI.getChatById = getChatById;

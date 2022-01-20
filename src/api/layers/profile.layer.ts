@@ -74,7 +74,7 @@ export class ProfileLayer extends HostLayer {
     return await evaluateAndReturn(
       this.page,
       ({ status }) => {
-        WAPI.setMyStatus(status);
+        WPP.profile.setMyStatus(status);
       },
       { status }
     );

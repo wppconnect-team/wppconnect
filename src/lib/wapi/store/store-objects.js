@@ -102,11 +102,6 @@ export const storeObjects = [
       module.queryIdentity && module.updateIdentity ? module : null,
   },
   {
-    id: 'MyStatus',
-    conditions: (module) =>
-      module.getStatus && module.setMyStatus ? module : null,
-  },
-  {
     id: 'ChatStates',
     conditions: (module) =>
       module.sendChatStatePaused &&

@@ -265,7 +265,7 @@ export class RetrieverLayer extends SenderLayer {
   public async getStatus(contactId: string) {
     return evaluateAndReturn(
       this.page,
-      (contactId) => WAPI.getStatus(contactId),
+      (contactId) => WPP.contact.getStatus(contactId),
       contactId
     );
   }
