@@ -1,3 +1,12 @@
+## 1.12.3 (2022-01-21)
+
+
+### Bug Fixes
+
+* Updated @wppconnect/wa-js to v1.1.9 ([5074de1](https://github.com/wppconnect-team/wppconnect/commit/5074de182f401b8f8e6b382aa513ca2cc65ef488))
+
+
+
 ## 1.12.2 (2022-01-15)
 
 
