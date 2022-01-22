@@ -26,13 +26,7 @@ export async function getMessageById(id, done, serialize = true) {
     return false;
   }
 
-  const key = WPP.whatsapp.MsgKey.fromString(id);
-
-  if (!key) {
-    return false;
-  }
-
-  const msg = await WPP.chat.getMessageById(key.remote, key.toString());
+  const msg = await WPP.chat.getMessageById(id);
 
   if (!msg) {
     return false;
