@@ -19,7 +19,12 @@ import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { SessionToken } from '../../token-store';
 import { evaluateAndReturn } from '../helpers';
-import { Chat, ProfilePicThumbObj, WhatsappProfile } from '../model';
+import {
+  Chat,
+  ContactStatus,
+  ProfilePicThumbObj,
+  WhatsappProfile,
+} from '../model';
 import { SenderLayer } from './sender.layer';
 
 export class RetrieverLayer extends SenderLayer {
@@ -262,10 +267,17 @@ export class RetrieverLayer extends SenderLayer {
    * @category Contact
    * @param contactId
    */
-  public async getStatus(contactId: string) {
-    return evaluateAndReturn(
+  public async getStatus(contactId: string): Promise<ContactStatus> {
+    return await evaluateAndReturn(
       this.page,
-      (contactId) => WPP.contact.getStatus(contactId),
+      async (contactId) => {
+        const status = await WPP.contact.getStatus(contactId);
+
+        return {
+          id: status.id.toString(),
+          status: status.status,
+        };
+      },
       contactId
     );
   }
