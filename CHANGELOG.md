@@ -1,3 +1,12 @@
+## 1.12.4 (2022-01-22)
+
+
+### Bug Fixes
+
+* Fixed getMessageById where the message is from status (fix [#823](https://github.com/wppconnect-team/wppconnect/issues/823)) ([ed57b97](https://github.com/wppconnect-team/wppconnect/commit/ed57b9700efd72f3de7c0c8d658d24b41f4da5d9))
+
+
+
 ## 1.12.3 (2022-01-21)
 
 
