@@ -111,11 +111,6 @@ export const storeObjects = [
         : null,
   },
   {
-    id: 'GroupActions',
-    conditions: (module) =>
-      module.sendExitGroup && module.localExitGroup ? module : null,
-  },
-  {
     id: 'MessageUtils',
     conditions: (module) =>
       module.storeMessages && module.appendMessage ? module : null,
@@ -225,10 +220,6 @@ export const storeObjects = [
   {
     id: 'changeEphemeralDuration',
     conditions: (module) => module.changeEphemeralDuration,
-  },
-  {
-    id: 'sendCallSignalingMsg',
-    conditions: (module) => module.sendCallSignalingMsg,
   },
   {
     id: 'sendCreateGroup',

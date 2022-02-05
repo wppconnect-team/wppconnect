@@ -38,8 +38,6 @@ import {
   getChatByName,
   getCommonGroups,
   getContact,
-  getGroupAdmins,
-  getGroupInviteLink,
   getGroupMetadata,
   getGroupParticipantIDs,
   getHost,
@@ -54,14 +52,12 @@ import {
   hasUndreadMessages,
   isConnected,
   isLoggedIn,
-  leaveGroup,
   loadAllEarlierMessages,
   loadAndGetAllMessagesInChat,
   loadChatEarlierMessages,
   loadEarlierMessagesTillDate,
   processFiles,
   processMessageObj,
-  revokeGroupInviteLink,
   sendMessageOptions,
   sendChatstate,
   sendFile,
@@ -77,10 +73,6 @@ import {
   sendSticker,
   sendVideoAsGif,
   setMyName,
-  openChat,
-  openChatAt,
-  getGroupInfoFromInviteLink,
-  joinGroup,
   getTheme,
   setTheme,
   restartService,
@@ -97,9 +89,6 @@ import {
   interfaceMute,
   startPhoneWatchdog,
   stopPhoneWatchdog,
-  setGroupSubject,
-  setGroupDescription,
-  setGroupProperty,
   setTemporaryMessages,
   starMessages,
   subscribePresence,
@@ -191,17 +180,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI._serializeProfilePicThumb = _serializeProfilePicThumb;
   window.WAPI._profilePicfunc = _profilePicfunc;
 
-  // Group Functions
-  window.WAPI.leaveGroup = leaveGroup;
-  window.WAPI.revokeGroupInviteLink = revokeGroupInviteLink;
-  window.WAPI.getGroupInviteLink = getGroupInviteLink;
-  window.WAPI.getGroupInfoFromInviteLink = getGroupInfoFromInviteLink;
-  window.WAPI.getGroupAdmins = getGroupAdmins;
-  window.WAPI.joinGroup = joinGroup;
-  window.WAPI.setGroupDescription = setGroupDescription;
-  window.WAPI.setGroupProperty = setGroupProperty;
-  window.WAPI.setGroupSubject = setGroupSubject;
-
   // Chatting functions
   window.WAPI.sendChatstate = sendChatstate;
   window.WAPI.sendMessageWithThumb = sendMessageWithThumb;
@@ -223,8 +201,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.sendImageAsStickerGif = sendImageAsSticker;
   window.WAPI.setOnlinePresence = setOnlinePresence;
   window.WAPI.sendLocation = sendLocation;
-  window.WAPI.openChat = openChat;
-  window.WAPI.openChatAt = openChatAt;
   window.WAPI.sendLinkPreview = sendLinkPreview;
   window.WAPI.sendMessageOptions = sendMessageOptions;
   window.WAPI.starMessages = starMessages;
@@ -465,7 +441,7 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   window.WAPI.setMessagesAdminsOnly = async function (chatId, option) {
-    await Store.WapQuery.setGroupProperty(chatId, 'announcement', option);
+    await WPP.group.setProperty(chatId, 'announcement', option);
     return true;
   };
 

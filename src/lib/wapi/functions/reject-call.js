@@ -34,7 +34,7 @@ async function rejectCallByCallId(callId) {
     };
   }
 
-  return await Store.sendCallSignalingMsg({
+  return await WPP.whatsapp.functions.sendCallSignalingMsg({
     common: {
       peer_jid: call.peerJid,
     },

@@ -65,9 +65,6 @@ interface WAPI {
   getChatIsOnline: (chatId: string) => Promise<boolean>;
   getLastSeen: (chatId: string) => Promise<number | boolean>;
   getContact: (contactId: string) => Contact;
-  getGroupAdmins: (groupId: string) => Contact[];
-  getGroupInfoFromInviteLink: (inviteCode: string) => Promise<string | boolean>;
-  getGroupInviteLink: (chatId: string) => Promise<string>;
   getGroupParticipantIDs: (groupId: string) => Id[];
   getHost: () => HostDevice;
   getWid: () => string;
@@ -104,18 +101,12 @@ interface WAPI {
   onStateChange: (callback: Function) => void;
   onStreamChange: (callback: Function) => void;
   onPresenceChanged: (callback: (presence: PresenceEvent) => void) => void;
-  openChat: (chatId: string) => boolean;
-  openChatAt: (
-    chatId: string,
-    messageId: string
-  ) => { wasVisible: boolean; alignAt: string };
   pinChat: (
     chatId: string,
     option: boolean,
     nonExistent?: boolean
   ) => Promise<object>;
   rejectCall: (callId?: string) => Promise<number>;
-  revokeGroupInviteLink: (chatId: string) => Promise<string>;
   restartService: () => boolean;
   sendChatstate: (chatState: string, chatId: string) => void;
   sendFile: (
@@ -192,16 +183,6 @@ interface WAPI {
     filename: string,
     caption: string
   ) => void;
-  setGroupDescription: (
-    groupId: string,
-    description: string
-  ) => Promise<object>;
-  setGroupProperty: (
-    groupId: string,
-    property: string,
-    value: boolean
-  ) => Promise<object>;
-  setGroupSubject: (groupId: string, title: string) => Promise<object>;
   setMessagesAdminsOnly: (chatId: string, option: boolean) => boolean;
   setMyName: (name: string) => void;
   setOnlinePresence: (online: boolean) => void;

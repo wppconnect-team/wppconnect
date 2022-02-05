@@ -35,7 +35,7 @@ export class GroupLayer extends RetrieverLayer {
   public async leaveGroup(groupId: string) {
     return evaluateAndReturn(
       this.page,
-      (groupId) => WAPI.leaveGroup(groupId),
+      (groupId) => WPP.group.leave(groupId),
       groupId
     );
   }
@@ -73,11 +73,13 @@ export class GroupLayer extends RetrieverLayer {
    * @returns Invitation link
    */
   public async getGroupInviteLink(chatId: string) {
-    return await evaluateAndReturn(
+    const code = await evaluateAndReturn(
       this.page,
-      (chatId) => WAPI.getGroupInviteLink(chatId),
+      (chatId) => WPP.group.getInviteCode(chatId),
       chatId
     );
+
+    return `https://chat.whatsapp.com/${code}`;
   }
 
   /**
@@ -87,11 +89,13 @@ export class GroupLayer extends RetrieverLayer {
    * @returns Invitation link
    */
   public async revokeGroupInviteLink(chatId: string) {
-    return await evaluateAndReturn(
+    const code = await evaluateAndReturn(
       this.page,
-      (chatId) => WAPI.revokeGroupInviteLink(chatId),
+      (chatId) => WPP.group.revokeInviteCode(chatId),
       chatId
     );
+
+    return `https://chat.whatsapp.com/${code}`;
   }
 
   /**
@@ -107,7 +111,7 @@ export class GroupLayer extends RetrieverLayer {
     inviteCode = inviteCode.replace('http://', '');
     return await evaluateAndReturn(
       this.page,
-      (inviteCode) => WAPI.getGroupInfoFromInviteLink(inviteCode),
+      (inviteCode) => WPP.group.getGroupInfoFromInviteCode(inviteCode),
       inviteCode
     );
   }
@@ -212,11 +216,13 @@ export class GroupLayer extends RetrieverLayer {
    * @param chatId Group/Chat id ('0000000000-00000000@g.us')
    */
   public async getGroupAdmins(chatId: string) {
-    return await evaluateAndReturn(
+    const participants = await evaluateAndReturn(
       this.page,
-      (chatId) => WAPI.getGroupAdmins(chatId),
+      (chatId) => WPP.group.getParticipants(chatId).map((p) => p.toJSON()),
       chatId
     );
+
+    return participants.filter((p) => p.isAdmin).map((p) => p.id);
   }
   /**
    * Join a group with invite code
@@ -230,7 +236,7 @@ export class GroupLayer extends RetrieverLayer {
     inviteCode = inviteCode.replace('http://', '');
     return await evaluateAndReturn(
       this.page,
-      (inviteCode) => WAPI.joinGroup(inviteCode),
+      (inviteCode) => WPP.group.join(inviteCode),
       inviteCode
     );
   }
@@ -246,7 +252,7 @@ export class GroupLayer extends RetrieverLayer {
     return await evaluateAndReturn(
       this.page,
       ({ groupId, description }) =>
-        WAPI.setGroupDescription(groupId, description),
+        WPP.group.setDescription(groupId, description),
       { groupId, description }
     );
   }
@@ -261,7 +267,7 @@ export class GroupLayer extends RetrieverLayer {
   public async setGroupSubject(groupId: string, title: string) {
     return await evaluateAndReturn(
       this.page,
-      ({ groupId, title }) => WAPI.setGroupSubject(groupId, title),
+      ({ groupId, title }) => WPP.group.setSubject(groupId, title),
       { groupId, title }
     );
   }
@@ -282,7 +288,7 @@ export class GroupLayer extends RetrieverLayer {
     return await evaluateAndReturn(
       this.page,
       ({ groupId, property, value }) =>
-        WAPI.setGroupProperty(groupId, property, value),
+        WPP.group.setProperty(groupId, property, value),
       { groupId, property, value }
     );
   }

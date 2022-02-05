@@ -26,7 +26,7 @@ export async function setTemporaryMessages(chatId, value) {
     };
   }
   if (chat.isGroup) {
-    return await WAPI.setGroupProperty(chat.id, 'ephemeral', value);
+    return await WPP.group.setProperty(chat.id, 'ephemeral', value);
   }
 
   value = value ? 604800 : 0;
