@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>chat | @wppconnect-team/wppconnect - v1.12.4</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.12.4">
+	<title>chat | @wppconnect-team/wppconnect - v1.12.5</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.12.5">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.12.4</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.12.5</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.12.4</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.12.5</a>
 				</li>
 				<li>
 					<a href="WAJS.html">WAJS</a>
@@ -98,6 +98,7 @@
 								<li class="tsd-kind-interface tsd-parent-kind-namespace tsd-is-external"><a href="../interfaces/WAJS.chat.MessageButtonsOptions.html" class="tsd-kind-icon">Message<wbr>Buttons<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-namespace tsd-is-external"><a href="../interfaces/WAJS.chat.SendMessageOptions.html" class="tsd-kind-icon">Send<wbr>Message<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-namespace tsd-is-external"><a href="../interfaces/WAJS.chat.SendMessageReturn.html" class="tsd-kind-icon">Send<wbr>Message<wbr>Return</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-namespace tsd-is-external"><a href="../interfaces/WAJS.chat.StarMessageReturn.html" class="tsd-kind-icon">Star<wbr>Message<wbr>Return</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-namespace tsd-is-external"><a href="../interfaces/WAJS.chat.StickerMessageOptions.html" class="tsd-kind-icon">Sticker<wbr>Message<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-namespace tsd-is-external"><a href="../interfaces/WAJS.chat.VCardContact.html" class="tsd-kind-icon">VCard<wbr>Contact</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-namespace tsd-is-external"><a href="../interfaces/WAJS.chat.VideoMessageOptions.html" class="tsd-kind-icon">Video<wbr>Message<wbr>Options</a></li>
@@ -142,6 +143,9 @@
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.chat.html#markIsRecording" class="tsd-kind-icon">mark<wbr>IsRecording</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.chat.html#markIsUnread" class="tsd-kind-icon">mark<wbr>IsUnread</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.chat.html#mute" class="tsd-kind-icon">mute</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.chat.html#openChatAt" class="tsd-kind-icon">open<wbr>Chat<wbr>At</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.chat.html#openChatBottom" class="tsd-kind-icon">open<wbr>Chat<wbr>Bottom</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.chat.html#openChatFromUnread" class="tsd-kind-icon">open<wbr>Chat<wbr>From<wbr>Unread</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.chat.html#unmute" class="tsd-kind-icon">unmute</a></li>
 							</ul>
 							<h3>Message Functions</h3>
@@ -159,6 +163,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.chat.html#sendRawMessage" class="tsd-kind-icon">send<wbr>Raw<wbr>Message</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.chat.html#sendTextMessage" class="tsd-kind-icon">send<wbr>Text<wbr>Message</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.chat.html#sendVCardContactMessage" class="tsd-kind-icon">sendVCard<wbr>Contact<wbr>Message</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.chat.html#starMessage" class="tsd-kind-icon">star<wbr>Message</a></li>
 							</ul>
 						</section>
 					</div>
@@ -832,6 +837,111 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>expiration<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>isMuted<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>wid<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="openChatAt" class="tsd-anchor"></a>
+					<h3>open<wbr>Chat<wbr>At</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">open<wbr>Chat<wbr>At<span class="tsd-signature-symbol">(</span>chatId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a>, messageId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/openChatAt.d.ts:27</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Open the chat in the WhatsApp interface in a specific message</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">openChatAt</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;number&gt;@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #800000">&lt;</span><span style="color: #267F99">message_id</span><span style="color: #800000">&gt;</span><span style="color: #000000">);</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>chatId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a></h5>
+								</li>
+								<li>
+									<h5>messageId: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="openChatBottom" class="tsd-anchor"></a>
+					<h3>open<wbr>Chat<wbr>Bottom</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">open<wbr>Chat<wbr>Bottom<span class="tsd-signature-symbol">(</span>chatId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/openChatBottom.d.ts:27</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Open the chat in the WhatsApp interface in bottom position</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">openChatBottom</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;number&gt;@c.us&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>chatId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="openChatFromUnread" class="tsd-anchor"></a>
+					<h3>open<wbr>Chat<wbr>From<wbr>Unread</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">open<wbr>Chat<wbr>From<wbr>Unread<span class="tsd-signature-symbol">(</span>chatId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/openChatFromUnread.d.ts:27</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Open the chat in the WhatsApp interface from first unread message</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">openChatFromUnread</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;number&gt;@c.us&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>chatId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -1519,6 +1629,80 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="starMessage" class="tsd-anchor"></a>
+					<h3>star<wbr>Message</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">star<wbr>Message<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, star<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/WAJS.chat.StarMessageReturn.html" class="tsd-signature-type" data-tsd-kind="Interface">StarMessageReturn</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">star<wbr>Message<span class="tsd-signature-symbol">(</span>ids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, star<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/WAJS.chat.StarMessageReturn.html" class="tsd-signature-type" data-tsd-kind="Interface">StarMessageReturn</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/starMessage.d.ts:33</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Star/Unstar a message</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-javascript"><span style="color: #008000">// star a message</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">starMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;message id&gt;&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// unstar a message</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">starMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;message id&gt;&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">false</span><span style="color: #000000">);</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>star: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/WAJS.chat.StarMessageReturn.html" class="tsd-signature-type" data-tsd-kind="Interface">StarMessageReturn</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/starMessage.d.ts:47</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Star/Unstar messages</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-javascript"><span style="color: #008000">// star messages</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">starMessage</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;&lt;message id&gt;&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;&lt;message id&gt;&#039;</span><span style="color: #000000">]);</span>
+
+<span style="color: #008000">// unstar messages</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">starMessage</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;&lt;message id&gt;&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;&lt;message id&gt;&#039;</span><span style="color: #000000">], </span><span style="color: #0000FF">false</span><span style="color: #000000">);</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ids: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>star: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/WAJS.chat.StarMessageReturn.html" class="tsd-signature-type" data-tsd-kind="Interface">StarMessageReturn</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -1642,6 +1826,9 @@
 						<a href="../interfaces/WAJS.chat.SendMessageReturn.html" class="tsd-kind-icon">Send<wbr>Message<wbr>Return</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+						<a href="../interfaces/WAJS.chat.StarMessageReturn.html" class="tsd-kind-icon">Star<wbr>Message<wbr>Return</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
 						<a href="../interfaces/WAJS.chat.StickerMessageOptions.html" class="tsd-kind-icon">Sticker<wbr>Message<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
@@ -1728,6 +1915,15 @@
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.chat.html#mute" class="tsd-kind-icon">mute</a>
 					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.chat.html#openChatAt" class="tsd-kind-icon">open<wbr>Chat<wbr>At</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.chat.html#openChatBottom" class="tsd-kind-icon">open<wbr>Chat<wbr>Bottom</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.chat.html#openChatFromUnread" class="tsd-kind-icon">open<wbr>Chat<wbr>From<wbr>Unread</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
 						<a href="WAJS.chat.html#prepareLinkPreview" class="tsd-kind-icon">prepare<wbr>Link<wbr>Preview</a>
 					</li>
@@ -1751,6 +1947,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.chat.html#sendVCardContactMessage" class="tsd-kind-icon">sendVCard<wbr>Contact<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.chat.html#starMessage" class="tsd-kind-icon">star<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.chat.html#unmute" class="tsd-kind-icon">unmute</a>
