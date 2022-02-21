@@ -82,7 +82,7 @@
     "conventional-changelog-cli": "^2.2.2",
     "copy-webpack-plugin": "^10.2.4",
     "eslint": "^8.9.0",
-    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
     "gulp": "^4.0.2",
     "husky": "^7.0.4",
