@@ -48,7 +48,10 @@ export class GroupLayer extends RetrieverLayer {
   public async getGroupMembersIds(groupId: string): Promise<Id[]> {
     return evaluateAndReturn(
       this.page,
-      (groupId: string) => WAPI.getGroupParticipantIDs(groupId),
+      (groupId: string) =>
+        Promise.resolve(WPP.group.getParticipants(groupId)).then(
+          (participants) => participants.map((p) => p.id as any)
+        ),
       groupId
     );
   }
