@@ -1,3 +1,12 @@
+## 1.12.6 (2022-02-22)
+
+
+### Bug Fixes
+
+* Fixed getGroupMembersIds and getGroupMembers for large chats (fix [#892](https://github.com/wppconnect-team/wppconnect/issues/892)) ([9cc34a5](https://github.com/wppconnect-team/wppconnect/commit/9cc34a5fddef52b01feba6194fff31aa19b388f0))
+
+
+
 ## 1.12.5 (2022-02-06)
 
 
