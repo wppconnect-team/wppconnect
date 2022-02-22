@@ -360,22 +360,6 @@ export class HostLayer {
   }
 
   /**
-   * Delete the Service Workers
-   * @category Host
-   */
-  public async killServiceWorker() {
-    return await evaluateAndReturn(this.page, () => WAPI.killServiceWorker());
-  }
-
-  /**
-   * Load the service again
-   * @category Host
-   */
-  public async restartService() {
-    return await evaluateAndReturn(this.page, () => WAPI.restartService());
-  }
-
-  /**
    * @category Host
    * @returns Current host device details
    */
