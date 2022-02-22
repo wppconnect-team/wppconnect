@@ -186,6 +186,7 @@ export async function injectSessionToken(
     Object.keys(session).forEach((key) => {
       localStorage.setItem(key, session[key]);
     });
+    localStorage.setItem('remember-me', 'true');
   }, token as any);
 
   // Disable
