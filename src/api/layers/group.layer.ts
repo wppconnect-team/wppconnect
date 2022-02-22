@@ -218,7 +218,10 @@ export class GroupLayer extends RetrieverLayer {
   public async getGroupAdmins(chatId: string) {
     const participants = await evaluateAndReturn(
       this.page,
-      (chatId) => WPP.group.getParticipants(chatId).map((p) => p.toJSON()),
+      (chatId) =>
+        Promise.resolve(WPP.group.getParticipants(chatId)).then(
+          (participants) => participants.map((p) => p.toJSON())
+        ),
       chatId
     );
 
