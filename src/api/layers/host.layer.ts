@@ -403,7 +403,7 @@ export class HostLayer {
    */
   public async getConnectionState(): Promise<SocketState> {
     return await evaluateAndReturn(this.page, () => {
-      return WPP.whatsapp.State.state as SocketState;
+      return WPP.whatsapp.Socket.state as SocketState;
     });
   }
 
@@ -458,6 +458,6 @@ export class HostLayer {
    * @category Host
    */
   public async isMultiDevice() {
-    return await evaluateAndReturn(this.page, () => WPP.auth.isMultiDevice());
+    return await evaluateAndReturn(this.page, () => WPP.conn.isMultiDevice());
   }
 }

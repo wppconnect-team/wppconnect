@@ -408,7 +408,7 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   window.WAPI.takeOver = async function () {
-    await WPP.whatsapp.State.takeover();
+    await WPP.whatsapp.Socket.takeover();
     return true;
   };
 
@@ -429,12 +429,12 @@ if (typeof window.WAPI === 'undefined') {
    */
   window.WAPI.onInterfaceChange = function (callback) {
     const getData = () => ({
-      displayInfo: window.Store.Stream.displayInfo,
-      mode: window.Store.Stream.mode,
-      info: window.Store.Stream.info,
+      displayInfo: WPP.whatsapp.Stream.displayInfo,
+      mode: WPP.whatsapp.Stream.mode,
+      info: WPP.whatsapp.Stream.info,
     });
     callback(getData());
-    window.Store.Stream.on('change:info change:displayInfo change:mode', () => {
+    WPP.whatsapp.Stream.on('change:info change:displayInfo change:mode', () => {
       callback(getData());
     });
     return true;
@@ -446,7 +446,7 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   window.WAPI.logout = async function () {
-    return await WPP.auth.logout();
+    return await WPP.conn.logout();
   };
 
   addOnStreamChange();

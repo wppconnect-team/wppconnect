@@ -22,15 +22,15 @@ async function sendPing() {
   // Check only if the interface is in CHAT and not disconnected
   if (
     window.Store.Stream.mode !== 'MAIN' ||
-    WPP.whatsapp.State.state === 'TIMEOUT'
+    WPP.whatsapp.Socket.state === 'TIMEOUT'
   ) {
     return;
   }
 
   // Start phoneWatchdog if ping fails
   if (!pong) {
-    WPP.whatsapp.State.phoneWatchdog.activate();
-    WPP.whatsapp.State.phoneWatchdog.poke(250);
+    WPP.whatsapp.Socket.phoneWatchdog.activate();
+    WPP.whatsapp.Socket.phoneWatchdog.poke(250);
     return;
   }
 
@@ -38,8 +38,8 @@ async function sendPing() {
   pong = false;
 
   // Send a ping request
-  return WPP.whatsapp.State.sendBasic({
-    tag: WPP.whatsapp.State.tag('ping'),
+  return WPP.whatsapp.Socket.sendBasic({
+    tag: WPP.whatsapp.Socket.tag('ping'),
     data: ['admin', 'test'],
   }).then(() => {
     pong = true;

@@ -18,11 +18,11 @@
 export function addOnStateChange() {
   let initialized = false;
   let getData = () => {
-    return WPP.whatsapp.State.state;
+    return WPP.whatsapp.Socket.state;
   };
 
   window.WAPI.onStateChange = function (callback) {
-    WPP.whatsapp.State.on('change:state', () => callback(getData()));
+    WPP.whatsapp.Socket.on('change:state', () => callback(getData()));
     if (!initialized) {
       initialized = true;
       callback(getData());
@@ -34,10 +34,10 @@ export function addOnStateChange() {
 export function addOnStreamChange() {
   let initialized = false;
   let getData = () => {
-    return WPP.whatsapp.State.stream;
+    return WPP.whatsapp.Socket.stream;
   };
   window.WAPI.onStreamChange = function (callback) {
-    WPP.whatsapp.State.on('change:stream', () => callback(getData()));
+    WPP.whatsapp.Socket.on('change:stream', () => callback(getData()));
     if (!initialized) {
       initialized = true;
       callback(getData());
