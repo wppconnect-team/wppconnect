@@ -1,3 +1,12 @@
+## 1.12.7 (2022-03-03)
+
+
+### Bug Fixes
+
+* Fixed onParticipantsChanged and onPresenceChanged function (fix [#864](https://github.com/wppconnect-team/wppconnect/issues/864), fix [#911](https://github.com/wppconnect-team/wppconnect/issues/911)) ([aff7f6c](https://github.com/wppconnect-team/wppconnect/commit/aff7f6cd34c22c086789ca4871c3113d8d8b2bb8))
+
+
+
 ## 1.12.6 (2022-02-22)
 
 
