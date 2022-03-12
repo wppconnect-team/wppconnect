@@ -27,6 +27,25 @@ import {
   StatusFindCallback,
 } from '../api/model/initializer';
 import { SessionToken } from '../token-store';
+import { defaultLogger } from '../utils/logger';
+
+process.on(
+  'unhandledRejection',
+  (reason: Error | any, promise: Promise<any>) => {
+    let message = 'Unhandled Rejection: ';
+    if (reason instanceof Error) {
+      if (reason.stack) {
+        message += reason.stack;
+      } else {
+        message += reason.toString();
+      }
+    } else {
+      message += JSON.stringify(reason);
+    }
+
+    defaultLogger.error(message);
+  }
+);
 
 /**
  * Start the bot

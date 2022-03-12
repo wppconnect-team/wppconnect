@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { addExitCallback } from 'catch-exit';
 import execa from 'execa';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -26,7 +25,7 @@ const tmpDir = tmp.dirSync({});
 
 let i = 0;
 
-addExitCallback((signal) => {
+process.on('exit', () => {
   // Remove only on exit signal
   try {
     // Use rimraf because it is synchronous

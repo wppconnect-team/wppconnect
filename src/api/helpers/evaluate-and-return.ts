@@ -128,6 +128,12 @@ export async function evaluateAndReturn<T extends EvaluateFn>(
 
     Object.assign(error, result.__error);
 
+    let jsStack = error.stack;
+    Error.captureStackTrace(error);
+    if (jsStack) {
+      error.stack = (error.stack || '') + '\nJS Stack: ' + jsStack;
+    }
+
     throw error;
   }
 

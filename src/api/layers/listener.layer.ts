@@ -15,7 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { EventEmitter } from 'events';
+import { EventEmitter, captureRejectionSymbol } from 'events';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
@@ -45,7 +45,9 @@ declare global {
 }
 
 export class ListenerLayer extends ProfileLayer {
-  private listenerEmitter = new EventEmitter();
+  private listenerEmitter = new EventEmitter({
+    captureRejections: true,
+  });
 
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
@@ -53,6 +55,12 @@ export class ListenerLayer extends ProfileLayer {
     this.listenerEmitter.on(ExposedFn.onInterfaceChange, (state) => {
       this.log('http', `Current state: ${state.mode} (${state.displayInfo})`);
     });
+    this.listenerEmitter.on('error', (error) => {
+      this.log('error', error.toString());
+    });
+    this.listenerEmitter[captureRejectionSymbol] = (error) => {
+      this.log('error', error.toString());
+    };
   }
 
   protected async afterPageLoad() {
@@ -356,7 +364,6 @@ export class ListenerLayer extends ProfileLayer {
     return this.registerEvent(
       ExposedFn.onNotificationMessage,
       (message: Message) => {
-        console.log('notification', message);
         // Only group events
         if (
           message.type !== MessageType.GP2 ||
