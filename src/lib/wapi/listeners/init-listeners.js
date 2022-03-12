@@ -19,7 +19,12 @@ export function initNewMessagesListener() {
   window.WAPI._newMessagesListener = WPP.whatsapp.MsgStore.on(
     'add',
     (newMessage) => {
-      if (newMessage && newMessage.isNewMsg && !newMessage.isSentByMe) {
+      if (
+        newMessage &&
+        newMessage.isNewMsg &&
+        !newMessage.isSentByMe &&
+        !newMessage.isStatusV3
+      ) {
         setTimeout(
           () => {
             let message = window.WAPI.processMessageObj(
