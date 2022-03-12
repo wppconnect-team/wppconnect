@@ -55,11 +55,21 @@ export class ListenerLayer extends ProfileLayer {
     this.listenerEmitter.on(ExposedFn.onInterfaceChange, (state) => {
       this.log('http', `Current state: ${state.mode} (${state.displayInfo})`);
     });
-    this.listenerEmitter.on('error', (error) => {
-      this.log('error', error.toString());
-    });
-    this.listenerEmitter[captureRejectionSymbol] = (error) => {
-      this.log('error', error.toString());
+    this.listenerEmitter[captureRejectionSymbol] = (
+      reason: any,
+      event: string
+    ) => {
+      let message = `Unhandled Rejection in a ${event} event: `;
+      if (reason instanceof Error) {
+        if (reason.stack) {
+          message += reason.stack;
+        } else {
+          message += reason.toString();
+        }
+      } else {
+        message += JSON.stringify(reason);
+      }
+      this.log('error', reason);
     };
   }
 
