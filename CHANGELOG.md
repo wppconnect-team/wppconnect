@@ -1,3 +1,12 @@
+## 1.12.8 (2022-03-13)
+
+
+### Bug Fixes
+
+* Fixed stuck state after logout ([bb9695a](https://github.com/wppconnect-team/wppconnect/commit/bb9695a61404a062daf1d0995ad2bb10af7c5006))
+
+
+
 ## 1.12.7 (2022-03-03)
 
 
