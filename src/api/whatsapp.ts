@@ -86,6 +86,12 @@ export class Whatsapp extends BusinessLayer {
                 this.statusFind('desconnectedMobile', session);
               } catch (error) {}
             }
+
+            if (connected) {
+              await page.evaluate(() => localStorage.clear());
+              await page.reload();
+            }
+
             connected = false;
           }, 1000);
           break;

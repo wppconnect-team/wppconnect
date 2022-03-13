@@ -109,14 +109,19 @@ export class HostLayer {
       );
     }
 
-    if (isValidSessionToken(sessionToken)) {
+    const isValidToken = isValidSessionToken(sessionToken);
+    if (isValidToken) {
       this.log('verbose', 'Injecting session token', { type: 'token' });
     }
+
+    const hasUserDataDir = !!this.options?.puppeteerOptions?.userDataDir;
+
+    let clear = !hasUserDataDir || (hasUserDataDir && !isValidToken);
 
     await initWhatsapp(
       this.page,
       sessionToken,
-      !this.options?.puppeteerOptions?.userDataDir,
+      clear,
       this.options.whatsappVersion
     );
 
