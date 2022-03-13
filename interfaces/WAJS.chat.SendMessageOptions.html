@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SendMessageOptions | @wppconnect-team/wppconnect - v1.12.7</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.12.7">
+	<title>SendMessageOptions | @wppconnect-team/wppconnect - v1.12.8</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.12.8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.12.7</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.12.8</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.12.7</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.12.8</a>
 				</li>
 				<li>
 					<a href="../modules/WAJS.html">WAJS</a>
@@ -136,7 +136,7 @@
 							<dd><p>false</p>
 							</dd>
 							<dt>example</dt>
-							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;number&gt;@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Hello new contact&#039;</span><span style="color: #000000">, {</span>
+							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Hello new contact&#039;</span><span style="color: #000000">, {</span>
 <span style="color: #000000">  </span><span style="color: #001080">createChat:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span>
 <span style="color: #000000">});</span>
 </code></pre>
@@ -155,14 +155,14 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Automatic detect and add the mentioned contacts with @<number></p>
+							<p>Automatic detect and add the mentioned contacts with @[number]</p>
 						</div>
 						<dl class="tsd-comment-tags">
 							<dt>default</dt>
 							<dd><p>true</p>
 							</dd>
 							<dt>example</dt>
-							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;number&gt;@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Hello @123 and @456&#039;</span><span style="color: #000000">, {</span>
+							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Hello @123 and @456&#039;</span><span style="color: #000000">, {</span>
 <span style="color: #000000">  </span><span style="color: #001080">detectMentioned:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span>
 <span style="color: #000000">});</span>
 </code></pre>
@@ -188,7 +188,7 @@
 							<dd><p>true</p>
 							</dd>
 							<dt>example</dt>
-							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;number&gt;@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Replying your message&#039;</span><span style="color: #000000">, {</span>
+							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Replying your message&#039;</span><span style="color: #000000">, {</span>
 <span style="color: #000000">  </span><span style="color: #001080">markIsRead:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span>
 <span style="color: #000000">});</span>
 </code></pre>
@@ -212,7 +212,7 @@
 						</div>
 						<dl class="tsd-comment-tags">
 							<dt>example</dt>
-							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;number&gt;@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Hello @123 and @456&#039;</span><span style="color: #000000">, {</span>
+							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Hello @123 and @456&#039;</span><span style="color: #000000">, {</span>
 <span style="color: #000000">  </span><span style="color: #001080">mentionedList:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;123@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;456@c.us&#039;</span><span style="color: #000000">]</span>
 <span style="color: #000000">})</span>
 </code></pre>
@@ -245,8 +245,8 @@
 						</div>
 						<dl class="tsd-comment-tags">
 							<dt>example</dt>
-							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;number&gt;@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;This is a reply&#039;</span><span style="color: #000000">, {</span>
-<span style="color: #000000">  </span><span style="color: #001080">quotedMsg:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;true_&lt;number&gt;@c.us_3EB0F435D95D32C4C638&#039;</span>
+							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;This is a reply&#039;</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #001080">quotedMsg:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;true_[number]@c.us_3EB0F435D95D32C4C638&#039;</span>
 <span style="color: #000000">})</span>
 </code></pre>
 							</dd>
@@ -271,7 +271,7 @@
 							<dd><p>true</p>
 							</dd>
 							<dt>example</dt>
-							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;number&gt;@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Wait for sent&#039;</span><span style="color: #000000">, {</span>
+							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">sendTextMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@c.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Wait for sent&#039;</span><span style="color: #000000">, {</span>
 <span style="color: #000000">  </span><span style="color: #001080">waitForAck:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span>
 <span style="color: #000000">})</span>
 </code></pre>

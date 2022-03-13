@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>group | @wppconnect-team/wppconnect - v1.12.7</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.12.7">
+	<title>group | @wppconnect-team/wppconnect - v1.12.8</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.12.8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.12.7</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.12.8</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.12.7</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.12.8</a>
 				</li>
 				<li>
 					<a href="WAJS.html">WAJS</a>
@@ -474,7 +474,7 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">leave</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;number&gt;@g.us&#039;</span><span style="color: #000000">);</span>
+									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">leave</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@g.us&#039;</span><span style="color: #000000">);</span>
 </code></pre>
 									</dd>
 								</dl>
@@ -508,7 +508,7 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">code</span><span style="color: #000000"> = </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">revokeInviteCode</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">);</span>
+									<dd><pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">code</span><span style="color: #000000"> = </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">revokeInviteCode</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">);</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">link</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;https://chat.whatsapp.com/&#039;</span><span style="color: #000000"> + </span><span style="color: #001080">code</span><span style="color: #000000">;</span>
 </code></pre>
 									</dd>
@@ -543,7 +543,7 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setDescription</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;new group description&#039;</span><span style="color: #000000">);</span>
+									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setDescription</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;new group description&#039;</span><span style="color: #000000">);</span>
 </code></pre>
 									</dd>
 								</dl>
@@ -581,28 +581,28 @@
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
 									<dd><pre><code class="language-javascript"><span style="color: #008000">// Only admins can send message</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;announcement&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;announcement&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// All can send message</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;announcement&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">false</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;announcement&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">false</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// Disatble temporary messages</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;ephemeral&#039;</span><span style="color: #000000">, </span><span style="color: #098658">0</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;ephemeral&#039;</span><span style="color: #000000">, </span><span style="color: #098658">0</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// Enable temporary messages for 24 hours</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;ephemeral&#039;</span><span style="color: #000000">, </span><span style="color: #098658">86400</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;ephemeral&#039;</span><span style="color: #000000">, </span><span style="color: #098658">86400</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// Enable temporary messages for 7 days</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;ephemeral&#039;</span><span style="color: #000000">, </span><span style="color: #098658">604800</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;ephemeral&#039;</span><span style="color: #000000">, </span><span style="color: #098658">604800</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// Enable temporary messages for 90 days</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;ephemeral&#039;</span><span style="color: #000000">, </span><span style="color: #098658">7776000</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;ephemeral&#039;</span><span style="color: #000000">, </span><span style="color: #098658">7776000</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// Only admins can edit group properties</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;restrict&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;restrict&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// All can edit group properties</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;restrict&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">false</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setProperty</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;restrict&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">false</span><span style="color: #000000">);</span>
 </code></pre>
 									</dd>
 								</dl>
@@ -642,7 +642,7 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setSubject</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;new group subject&#039;</span><span style="color: #000000">);</span>
+									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">setSubject</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;new group subject&#039;</span><span style="color: #000000">);</span>
 </code></pre>
 									</dd>
 								</dl>
@@ -916,7 +916,7 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">code</span><span style="color: #000000"> = </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">getInviteCode</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">);</span>
+									<dd><pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">code</span><span style="color: #000000"> = </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">getInviteCode</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">);</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">link</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;https://chat.whatsapp.com/&#039;</span><span style="color: #000000"> + </span><span style="color: #001080">code</span><span style="color: #000000">;</span>
 </code></pre>
 									</dd>
@@ -951,7 +951,7 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">getParticipants</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&lt;group-id&gt;@g.us&#039;</span><span style="color: #000000">);</span>
+									<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">getParticipants</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[group-id]@g.us&#039;</span><span style="color: #000000">);</span>
 </code></pre>
 									</dd>
 								</dl>
