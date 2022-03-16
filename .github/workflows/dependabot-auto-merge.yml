@@ -11,6 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
+      - name: Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v1.1.1
+        with:
+          ref: ${{ github.ref }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          running-workflow-name: dependabot
+          wait-interval: 15
+
       - name: Dependabot metadata
         id: metadata
         uses: dependabot/fetch-metadata@v1.3.0
