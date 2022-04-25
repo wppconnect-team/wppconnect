@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>util | @wppconnect-team/wppconnect - v1.12.8</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.12.8">
+	<title>util | @wppconnect-team/wppconnect - v1.13.0</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.13.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.12.8</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.13.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.12.8</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.13.0</a>
 				</li>
 				<li>
 					<a href="WAJS.html">WAJS</a>
@@ -94,6 +94,8 @@
 								<li class="tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="WAJS.util.html#FunctionProperties" class="tsd-kind-icon">Function<wbr>Properties</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="WAJS.util.html#FunctionPropertyNames" class="tsd-kind-icon">Function<wbr>Property<wbr>Names</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="WAJS.util.html#IfEquals" class="tsd-kind-icon">If<wbr>Equals</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="WAJS.util.html#InferArgs" class="tsd-kind-icon">Infer<wbr>Args</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="WAJS.util.html#InferReturn" class="tsd-kind-icon">Infer<wbr>Return</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="WAJS.util.html#NonFunctionProperties" class="tsd-kind-icon">Non<wbr>Function<wbr>Properties</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="WAJS.util.html#NonFunctionPropertyNames" class="tsd-kind-icon">Non<wbr>Function<wbr>Property<wbr>Names</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="WAJS.util.html#ReadonlyProperties" class="tsd-kind-icon">Readonly<wbr>Properties</a></li>
@@ -109,6 +111,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.util.html#convertToFile" class="tsd-kind-icon">convert<wbr>ToFile</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.util.html#createWid" class="tsd-kind-icon">create<wbr>Wid</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.util.html#isBase64" class="tsd-kind-icon">is<wbr>Base64</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="WAJS.util.html#wrapFunction" class="tsd-kind-icon">wrap<wbr>Function</a></li>
 							</ul>
 						</section>
 					</div>
@@ -122,7 +125,7 @@
 					<div class="tsd-signature tsd-kind-icon">Function<wbr>Properties&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><a href="WAJS.util.html#FunctionPropertyNames" class="tsd-signature-type" data-tsd-kind="Type alias">FunctionPropertyNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:19</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:21</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -138,7 +141,7 @@
 					<div class="tsd-signature tsd-kind-icon">Function<wbr>Property<wbr>Names&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:16</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:18</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -154,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">If<wbr>Equals&lt;X, Y, A, B&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>&lt;T&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">X</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">1</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">2</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> extends </span>&lt;T&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">Y</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">1</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">2</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">B</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:24</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:26</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -174,12 +177,44 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+					<a name="InferArgs" class="tsd-anchor"></a>
+					<h3>Infer<wbr>Args</h3>
+					<div class="tsd-signature tsd-kind-icon">Infer<wbr>Args&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">...</span><span class="tsd-signature-symbol">infer </span> Arg<span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">Arg</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:16</li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>T</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+					<a name="InferReturn" class="tsd-anchor"></a>
+					<h3>Infer<wbr>Return</h3>
+					<div class="tsd-signature tsd-kind-icon">Infer<wbr>Return&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">...</span><span class="tsd-signature-symbol">infer </span> Arg<span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-symbol">infer </span> Res<span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">Res</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:17</li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>T</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
 					<a name="NonFunctionProperties" class="tsd-anchor"></a>
 					<h3>Non<wbr>Function<wbr>Properties</h3>
 					<div class="tsd-signature tsd-kind-icon">Non<wbr>Function<wbr>Properties&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><a href="WAJS.util.html#NonFunctionPropertyNames" class="tsd-signature-type" data-tsd-kind="Type alias">NonFunctionPropertyNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:23</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:25</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -195,7 +230,7 @@
 					<div class="tsd-signature tsd-kind-icon">Non<wbr>Function<wbr>Property<wbr>Names&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:20</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:22</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -211,7 +246,7 @@
 					<div class="tsd-signature tsd-kind-icon">Readonly<wbr>Properties&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><a href="WAJS.util.html#ReadonlyPropertiesNames" class="tsd-signature-type" data-tsd-kind="Type alias">ReadonlyPropertiesNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:40</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:42</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -227,7 +262,7 @@
 					<div class="tsd-signature tsd-kind-icon">Readonly<wbr>Properties<wbr>Names&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><a href="WAJS.util.html#IfEquals" class="tsd-signature-type" data-tsd-kind="Type alias">IfEquals</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">Q</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">-readonly </span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">Q</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">-?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:33</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:35</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -243,7 +278,7 @@
 					<div class="tsd-signature tsd-kind-icon">Writable<wbr>Properties&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><a href="WAJS.util.html#WritablePropertiesNames" class="tsd-signature-type" data-tsd-kind="Type alias">WritablePropertiesNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:32</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:34</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -259,7 +294,7 @@
 					<div class="tsd-signature tsd-kind-icon">Writable<wbr>Properties<wbr>Names&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><a href="WAJS.util.html#IfEquals" class="tsd-signature-type" data-tsd-kind="Type alias">IfEquals</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">Q</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">-readonly </span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">Q</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">-?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:25</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/util/types.d.ts:27</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -370,6 +405,87 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+					<a name="wrapFunction" class="tsd-anchor"></a>
+					<h3>wrap<wbr>Function</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">wrap<wbr>Function&lt;TFunc&gt;<span class="tsd-signature-symbol">(</span>func<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TFunc</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>func<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TFunc</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><a href="WAJS.util.html#InferArgs" class="tsd-signature-type" data-tsd-kind="Type alias">InferArgs</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="WAJS.util.html#InferReturn" class="tsd-signature-type" data-tsd-kind="Type alias">InferReturn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><a href="WAJS.util.html#InferArgs" class="tsd-signature-type" data-tsd-kind="Type alias">InferArgs</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="WAJS.util.html#InferReturn" class="tsd-signature-type" data-tsd-kind="Type alias">InferReturn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/util/wrapFunction.d.ts:20</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Wrap a function with the callback</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TFunc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>func: <span class="tsd-signature-type">TFunc</span></h5>
+								</li>
+								<li>
+									<h5>callback: <span class="tsd-signature-symbol">(</span>func<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TFunc</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><a href="WAJS.util.html#InferArgs" class="tsd-signature-type" data-tsd-kind="Type alias">InferArgs</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="WAJS.util.html#InferReturn" class="tsd-signature-type" data-tsd-kind="Type alias">InferReturn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>func<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TFunc</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><a href="WAJS.util.html#InferArgs" class="tsd-signature-type" data-tsd-kind="Type alias">InferArgs</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="WAJS.util.html#InferReturn" class="tsd-signature-type" data-tsd-kind="Type alias">InferReturn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>func: <span class="tsd-signature-type">TFunc</span></h5>
+														</li>
+														<li>
+															<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <a href="WAJS.util.html#InferArgs" class="tsd-signature-type" data-tsd-kind="Type alias">InferArgs</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <a href="WAJS.util.html#InferReturn" class="tsd-signature-type" data-tsd-kind="Type alias">InferReturn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><a href="WAJS.util.html#InferArgs" class="tsd-signature-type" data-tsd-kind="Type alias">InferArgs</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="WAJS.util.html#InferReturn" class="tsd-signature-type" data-tsd-kind="Type alias">InferReturn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-signature">
+									<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><a href="WAJS.util.html#InferArgs" class="tsd-signature-type" data-tsd-kind="Type alias">InferArgs</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="WAJS.util.html#InferReturn" class="tsd-signature-type" data-tsd-kind="Type alias">InferReturn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<div class="tsd-comment tsd-typography">
+												<div class="lead">
+													<p>Wrap a function with the callback</p>
+												</div>
+											</div>
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <a href="WAJS.util.html#InferArgs" class="tsd-signature-type" data-tsd-kind="Type alias">InferArgs</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <a href="WAJS.util.html#InferReturn" class="tsd-signature-type" data-tsd-kind="Type alias">InferReturn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TFunc</span><span class="tsd-signature-symbol">&gt;</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -427,6 +543,9 @@
 								<a href="WAJS.contact.html">contact</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+								<a href="WAJS.ev.html">ev</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="WAJS.group.html">group</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
@@ -466,6 +585,12 @@
 						<a href="WAJS.util.html#IfEquals" class="tsd-kind-icon">If<wbr>Equals</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+						<a href="WAJS.util.html#InferArgs" class="tsd-kind-icon">Infer<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+						<a href="WAJS.util.html#InferReturn" class="tsd-kind-icon">Infer<wbr>Return</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
 						<a href="WAJS.util.html#NonFunctionProperties" class="tsd-kind-icon">Non<wbr>Function<wbr>Properties</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
@@ -494,6 +619,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.util.html#isBase64" class="tsd-kind-icon">is<wbr>Base64</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+						<a href="WAJS.util.html#wrapFunction" class="tsd-kind-icon">wrap<wbr>Function</a>
 					</li>
 				</ul>
 			</nav>
