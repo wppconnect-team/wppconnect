@@ -34,7 +34,7 @@ export function addOnLiveLocation() {
     }
   }
 
-  WPP.chat.on('live_location_start', (e) => {
+  WPP.on('chat.live_location_start', (e) => {
     fireCallback({
       type: 'enable',
       id: e.id.toString(),
@@ -47,7 +47,7 @@ export function addOnLiveLocation() {
     });
   });
 
-  WPP.chat.on('live_location_update', (e) => {
+  WPP.on('chat.live_location_update', (e) => {
     fireCallback({
       type: 'update',
       id: e.id.toString(),
@@ -61,7 +61,7 @@ export function addOnLiveLocation() {
     });
   });
 
-  WPP.chat.on('live_location_end', (e) => {
+  WPP.on('chat.live_location_end', (e) => {
     fireCallback({
       type: 'disablle',
       id: e.id.toString(),

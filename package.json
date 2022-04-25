@@ -101,8 +101,8 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "@wppconnect/wa-js": "^1.2.5",
-    "@wppconnect/wa-version": "^1.1.65",
+    "@wppconnect/wa-js": "^2.0.0",
+    "@wppconnect/wa-version": "^1.1.66",
     "atob": "^2.1.2",
     "axios": "^0.26.1",
     "boxen": "^5.1.2",
@@ -111,7 +111,6 @@
     "chrome-launcher": "^0.15.0",
     "execa": "^5.0.0",
     "file-type": "~16.5.3",
-    "fsevents": "^2.3.1",
     "futoin-hkdf": "^1.5.0",
     "latest-version": "^5.1.0",
     "logform": "^2.4.0",
