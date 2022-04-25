@@ -1,3 +1,12 @@
+# 1.13.0 (2022-04-25)
+
+
+### Features
+
+* Improved chat state to keep alive and online ([ba82005](https://github.com/wppconnect-team/wppconnect/commit/ba82005f11b8ecc8dacee08304b7d3a66bbea6b0))
+
+
+
 ## 1.12.8 (2022-03-13)
 
 
