@@ -85,7 +85,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "gulp": "^4.0.2",
-    "husky": "^7.0.4",
+    "husky": "^8.0.1",
     "license-check-and-add": "^4.0.5",
     "mocha": "^10.0.0",
     "prettier": "^2.6.2",
