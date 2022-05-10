@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LabelCollection | @wppconnect-team/wppconnect - v1.13.0</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.13.0">
+	<title>LabelCollection | @wppconnect-team/wppconnect - v1.13.1</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.13.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.13.0</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.13.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.13.0</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.13.1</a>
 				</li>
 				<li>
 					<a href="../modules/WAJS.html">WAJS</a>
@@ -94,7 +94,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="WAJS.whatsapp.Collection.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a><span class="tsd-signature-symbol">&lt;</span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">&gt;</span>
+						<a href="WAJS.whatsapp.BaseCollection.html" class="tsd-signature-type" data-tsd-kind="Class">BaseCollection</a><span class="tsd-signature-symbol">&lt;</span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">&gt;</span>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">LabelCollection</span>
@@ -119,6 +119,8 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#checksum" class="tsd-kind-icon">checksum</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#findFirst" class="tsd-kind-icon">find<wbr>First</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#modelClass" class="tsd-kind-icon">model<wbr>Class</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#onResume" class="tsd-kind-icon">on<wbr>Resume</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#cachePolicy" class="tsd-kind-icon">cache<wbr>Policy</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#comparator" class="tsd-kind-icon">comparator</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#model" class="tsd-kind-icon">model</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#resumeOnAvailable" class="tsd-kind-icon">resume<wbr>OnAvailable</a></li>
@@ -144,23 +146,31 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#assertGet" class="tsd-kind-icon">assert<wbr>Get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#at" class="tsd-kind-icon">at</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#bind" class="tsd-kind-icon">bind</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#delete" class="tsd-kind-icon">delete</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#deleteLabel" class="tsd-kind-icon">delete<wbr>Label</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#emit" class="tsd-kind-icon">emit</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#every" class="tsd-kind-icon">every</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#filter" class="tsd-kind-icon">filter</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#find" class="tsd-kind-icon">find</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#findQuery" class="tsd-kind-icon">find<wbr>Query</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#forEach" class="tsd-kind-icon">for<wbr>Each</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#gadd" class="tsd-kind-icon">gadd</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#gaddUp" class="tsd-kind-icon">gadd<wbr>Up</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#get" class="tsd-kind-icon">get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#getLabelColorPalette" class="tsd-kind-icon">get<wbr>Label<wbr>Color<wbr>Palette</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#getLabelsForModel" class="tsd-kind-icon">get<wbr>Labels<wbr>For<wbr>Model</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#getModelsArray" class="tsd-kind-icon">get<wbr>Models<wbr>Array</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#getNewLabelColor" class="tsd-kind-icon">get<wbr>New<wbr>Label<wbr>Color</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#handle" class="tsd-kind-icon">handle</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#handleRemove" class="tsd-kind-icon">handle<wbr>Remove</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#head" class="tsd-kind-icon">head</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#includes" class="tsd-kind-icon">includes</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#indexOf" class="tsd-kind-icon">index<wbr>Of</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#initializeAssociationsFromCache" class="tsd-kind-icon">initialize<wbr>Associations<wbr>From<wbr>Cache</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#initializeFromCache" class="tsd-kind-icon">initialize<wbr>From<wbr>Cache</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#isListening" class="tsd-kind-icon">is<wbr>Listening</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#isModel" class="tsd-kind-icon">is<wbr>Model</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#isStateStale" class="tsd-kind-icon">is<wbr>State<wbr>Stale</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#last" class="tsd-kind-icon">last</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#lastIndexOf" class="tsd-kind-icon">last<wbr>Index<wbr>Of</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#listenTo" class="tsd-kind-icon">listen<wbr>To</a></li>
@@ -169,7 +179,6 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#map" class="tsd-kind-icon">map</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#off" class="tsd-kind-icon">off</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#on" class="tsd-kind-icon">on</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#onResume" class="tsd-kind-icon">on<wbr>Resume</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#once" class="tsd-kind-icon">once</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#reduce" class="tsd-kind-icon">reduce</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#remove" class="tsd-kind-icon">remove</a></li>
@@ -180,17 +189,18 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#reorderMutate" class="tsd-kind-icon">reorder<wbr>Mutate</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#replaceId" class="tsd-kind-icon">replace<wbr>Id</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#reset" class="tsd-kind-icon">reset</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#saveToCache" class="tsd-kind-icon">save<wbr>ToCache</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#serialize" class="tsd-kind-icon">serialize</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#set" class="tsd-kind-icon">set</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#slice" class="tsd-kind-icon">slice</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#some" class="tsd-kind-icon">some</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#sort" class="tsd-kind-icon">sort</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#stopListening" class="tsd-kind-icon">stop<wbr>Listening</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#sync" class="tsd-kind-icon">sync</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#toArray" class="tsd-kind-icon">to<wbr>Array</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#toJSON" class="tsd-kind-icon">toJSON</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#trigger" class="tsd-kind-icon">trigger</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#trigger-1" class="tsd-kind-icon">trigger</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#unbind" class="tsd-kind-icon">unbind</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#update" class="tsd-kind-icon">update</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#updateChecksum" class="tsd-kind-icon">update<wbr>Checksum</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#updateLabel" class="tsd-kind-icon">update<wbr>Label</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="WAJS.whatsapp.LabelCollection.html#where" class="tsd-kind-icon">where</a></li>
@@ -210,7 +220,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#constructor">constructor</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#constructor">constructor</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:32</li>
 								</ul>
@@ -251,7 +261,7 @@
 					<h3>find<wbr>First</h3>
 					<div class="tsd-signature tsd-kind-icon">find<wbr>First<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>&lt;S&gt;<span class="tsd-signature-symbol">(</span>predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, obj<span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">S</span>, thisArg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">; </span><span class="tsd-signature-symbol">(</span>predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, obj<span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">unknown</span>, thisArg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#findFirst">findFirst</a></p>
+						<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#findFirst">findFirst</a></p>
 						<ul>
 							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:57</li>
 						</ul>
@@ -368,18 +378,75 @@
 					<h3>model<wbr>Class</h3>
 					<div class="tsd-signature tsd-kind-icon">model<wbr>Class<span class="tsd-signature-symbol">:</span> <a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#modelClass">modelClass</a></p>
+						<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#modelClass">modelClass</a></p>
 						<ul>
 							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:31</li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="onResume" class="tsd-anchor"></a>
+					<h3>on<wbr>Resume</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Resume<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#onResume">onResume</a></p>
+						<ul>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:25</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class tsd-is-external">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+					<a name="cachePolicy" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> cache<wbr>Policy</h3>
+					<div class="tsd-signature tsd-kind-icon">cache<wbr>Policy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>policy<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>trigger<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#cachePolicy">cachePolicy</a></p>
+						<ul>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:20</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>policy<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>trigger<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
 					<a name="comparator" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> comparator</h3>
 					<div class="tsd-signature tsd-kind-icon">comparator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#comparator">comparator</a></p>
+						<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#comparator">comparator</a></p>
 						<ul>
 							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:30</li>
 						</ul>
@@ -414,7 +481,7 @@
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> model</h3>
 					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a></div>
 					<aside class="tsd-sources">
-						<p>Overrides <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#model">model</a></p>
+						<p>Overrides <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#model">model</a></p>
 						<ul>
 							<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/LabelCollection.d.ts:20</li>
 						</ul>
@@ -507,7 +574,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/LabelCollection.d.ts:38</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/LabelCollection.d.ts:36</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -523,7 +590,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#add">add</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#add">add</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:35</li>
 								</ul>
@@ -628,7 +695,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#assertGet">assertGet</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#assertGet">assertGet</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:48</li>
 								</ul>
@@ -652,7 +719,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#at">at</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#at">at</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:49</li>
 								</ul>
@@ -676,7 +743,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#bind">bind</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#bind">bind</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:84</li>
 								</ul>
@@ -704,6 +771,24 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="WAJS.whatsapp.LabelCollection.html" class="tsd-signature-type" data-tsd-kind="Class">LabelCollection</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="delete" class="tsd-anchor"></a>
+					<h3>delete</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">delete<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#delete">delete</a></p>
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:43</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -739,7 +824,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#emit">emit</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#emit">emit</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:104</li>
 								</ul>
@@ -777,7 +862,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#every">every</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#every">every</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1380</li>
 								</ul>
@@ -839,7 +924,7 @@
 						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#every">every</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#every">every</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1389</li>
 								</ul>
@@ -905,7 +990,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#filter">filter</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#filter">filter</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1416</li>
 								</ul>
@@ -964,7 +1049,7 @@
 						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#filter">filter</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#filter">filter</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1422</li>
 								</ul>
@@ -1018,6 +1103,76 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="find" class="tsd-anchor"></a>
+					<h3>find</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">find<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Stringable</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>logOnSend<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>set<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#find">find</a></p>
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:32</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">Stringable</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-symbol">{ </span>logOnSend<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>set<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> log<wbr>OnSend<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> set<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="findQuery" class="tsd-anchor"></a>
+					<h3>find<wbr>Query</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">find<wbr>Query<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Stringable</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>logOnSend<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>set<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#findQuery">findQuery</a></p>
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:28</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">Stringable</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-symbol">{ </span>logOnSend<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>set<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> log<wbr>OnSend<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> set<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="forEach" class="tsd-anchor"></a>
 					<h3>for<wbr>Each</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
@@ -1026,7 +1181,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#forEach">forEach</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#forEach">forEach</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1404</li>
 								</ul>
@@ -1080,6 +1235,54 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="gadd" class="tsd-anchor"></a>
+					<h3>gadd</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">gadd<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Stringable</span><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#gadd">gadd</a></p>
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:41</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">Stringable</span><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="gaddUp" class="tsd-anchor"></a>
+					<h3>gadd<wbr>Up</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">gadd<wbr>Up<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Stringable</span><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#gaddUp">gaddUp</a></p>
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:42</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">Stringable</span><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="get" class="tsd-anchor"></a>
 					<h3>get</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
@@ -1088,7 +1291,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#get">get</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#get">get</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:47</li>
 								</ul>
@@ -1130,7 +1333,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/LabelCollection.d.ts:37</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/LabelCollection.d.ts:35</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1155,7 +1358,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#getModelsArray">getModelsArray</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#getModelsArray">getModelsArray</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:62</li>
 								</ul>
@@ -1178,6 +1381,30 @@
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="handle" class="tsd-anchor"></a>
+					<h3>handle</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">handle<span class="tsd-signature-symbol">(</span>values<span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#handle">handle</a></p>
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:40</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>values: <a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -1213,7 +1440,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#head">head</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#head">head</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:59</li>
 								</ul>
@@ -1231,7 +1458,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#includes">includes</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#includes">includes</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:56</li>
 								</ul>
@@ -1258,7 +1485,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#indexOf">indexOf</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#indexOf">indexOf</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1365</li>
 								</ul>
@@ -1311,6 +1538,30 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="initializeFromCache" class="tsd-anchor"></a>
+					<h3>initialize<wbr>From<wbr>Cache</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">initialize<wbr>From<wbr>Cache<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#initializeFromCache">initializeFromCache</a></p>
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:26</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol"> | </span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="isListening" class="tsd-anchor"></a>
 					<h3>is<wbr>Listening</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
@@ -1319,7 +1570,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#isListening">isListening</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#isListening">isListening</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:79</li>
 								</ul>
@@ -1343,7 +1594,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#isModel">isModel</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#isModel">isModel</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:55</li>
 								</ul>
@@ -1359,6 +1610,30 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="isStateStale" class="tsd-anchor"></a>
+					<h3>is<wbr>State<wbr>Stale</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>State<wbr>Stale<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Stringable</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#isStateStale">isStateStale</a></p>
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:44</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">Stringable</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="last" class="tsd-anchor"></a>
 					<h3>last</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
@@ -1367,7 +1642,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#last">last</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#last">last</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:60</li>
 								</ul>
@@ -1385,7 +1660,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#lastIndexOf">lastIndexOf</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#lastIndexOf">lastIndexOf</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1371</li>
 								</ul>
@@ -1423,7 +1698,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#listenTo">listenTo</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#listenTo">listenTo</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:66</li>
 								</ul>
@@ -1462,7 +1737,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#listenToAndRun">listenToAndRun</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#listenToAndRun">listenToAndRun</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:78</li>
 								</ul>
@@ -1501,7 +1776,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#listenToOnce">listenToOnce</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#listenToOnce">listenToOnce</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:72</li>
 								</ul>
@@ -1540,7 +1815,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#map">map</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#map">map</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1410</li>
 								</ul>
@@ -1608,7 +1883,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#off">off</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#off">off</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:54</li>
 								</ul>
@@ -1653,7 +1928,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#on">on</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#on">on</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:36</li>
 								</ul>
@@ -1689,23 +1964,6 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
-					<a name="onResume" class="tsd-anchor"></a>
-					<h3>on<wbr>Resume</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Resume<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/LabelCollection.d.ts:34</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="once" class="tsd-anchor"></a>
 					<h3>once</h3>
@@ -1715,7 +1973,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#once">once</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#once">once</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:45</li>
 								</ul>
@@ -1762,7 +2020,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#reduce">reduce</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#reduce">reduce</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1428</li>
 								</ul>
@@ -1812,7 +2070,7 @@
 						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#reduce">reduce</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#reduce">reduce</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1429</li>
 								</ul>
@@ -1857,7 +2115,7 @@
 						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#reduce">reduce</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#reduce">reduce</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1435</li>
 								</ul>
@@ -1928,7 +2186,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#remove">remove</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#remove">remove</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:37</li>
 								</ul>
@@ -1986,7 +2244,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#removeAllListeners">removeAllListeners</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#removeAllListeners">removeAllListeners</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:99</li>
 								</ul>
@@ -2010,7 +2268,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#removeListener">removeListener</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#removeListener">removeListener</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:94</li>
 								</ul>
@@ -2050,7 +2308,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#reorder">reorder</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#reorder">reorder</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:63</li>
 								</ul>
@@ -2077,7 +2335,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#reorderMutate">reorderMutate</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#reorderMutate">reorderMutate</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:46</li>
 								</ul>
@@ -2104,7 +2362,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#replaceId">replaceId</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#replaceId">replaceId</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:45</li>
 								</ul>
@@ -2131,9 +2389,27 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#reset">reset</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#reset">reset</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:41</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="saveToCache" class="tsd-anchor"></a>
+					<h3>save<wbr>ToCache</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">save<wbr>ToCache<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#saveToCache">saveToCache</a></p>
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:27</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -2149,7 +2425,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#serialize">serialize</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#serialize">serialize</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:53</li>
 								</ul>
@@ -2167,7 +2443,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#set">set</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#set">set</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:36</li>
 								</ul>
@@ -2194,7 +2470,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#slice">slice</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#slice">slice</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1328</li>
 								</ul>
@@ -2236,7 +2512,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#some">some</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#some">some</a></p>
 								<ul>
 									<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:1398</li>
 								</ul>
@@ -2301,7 +2577,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#sort">sort</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#sort">sort</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:42</li>
 								</ul>
@@ -2330,7 +2606,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#stopListening">stopListening</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#stopListening">stopListening</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:60</li>
 								</ul>
@@ -2351,29 +2627,6 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
-					<a name="sync" class="tsd-anchor"></a>
-					<h3>sync</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">sync<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/LabelCollection.d.ts:35</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> e: <span class="tsd-signature-type">any</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="toArray" class="tsd-anchor"></a>
 					<h3>to<wbr>Array</h3>
@@ -2383,7 +2636,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#toArray">toArray</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#toArray">toArray</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:61</li>
 								</ul>
@@ -2401,7 +2654,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#toJSON">toJSON</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#toJSON">toJSON</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:54</li>
 								</ul>
@@ -2411,7 +2664,7 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-					<a name="trigger" class="tsd-anchor"></a>
+					<a name="trigger-1" class="tsd-anchor"></a>
 					<h3>trigger</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 						<li class="tsd-signature tsd-kind-icon">trigger<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="WAJS.whatsapp.LabelCollection.html" class="tsd-signature-type" data-tsd-kind="Class">LabelCollection</a></li>
@@ -2419,7 +2672,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#trigger">trigger</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#trigger-1">trigger</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:59</li>
 								</ul>
@@ -2452,7 +2705,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#unbind">unbind</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#unbind">unbind</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/misc/EventEmitter.d.ts:89</li>
 								</ul>
@@ -2483,6 +2736,41 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="update" class="tsd-anchor"></a>
+					<h3>update</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Stringable</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>logOnSend<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>set<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#update">update</a></p>
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/BaseCollection.d.ts:36</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">Stringable</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-symbol">{ </span>logOnSend<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>set<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> log<wbr>OnSend<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> set<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="WAJS.whatsapp.LabelModel.html" class="tsd-signature-type" data-tsd-kind="Class">LabelModel</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
 					<a name="updateChecksum" class="tsd-anchor"></a>
 					<h3>update<wbr>Checksum</h3>
@@ -2493,7 +2781,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/LabelCollection.d.ts:36</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/LabelCollection.d.ts:34</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2541,7 +2829,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="WAJS.whatsapp.Collection.html">Collection</a>.<a href="WAJS.whatsapp.Collection.html#where">where</a></p>
+								<p>Inherited from <a href="WAJS.whatsapp.BaseCollection.html">BaseCollection</a>.<a href="WAJS.whatsapp.BaseCollection.html#where">where</a></p>
 								<ul>
 									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/collections/Collection.d.ts:58</li>
 								</ul>
@@ -2688,6 +2976,12 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#modelClass" class="tsd-kind-icon">model<wbr>Class</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#onResume" class="tsd-kind-icon">on<wbr>Resume</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#cachePolicy" class="tsd-kind-icon">cache<wbr>Policy</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#comparator" class="tsd-kind-icon">comparator</a>
 							</li>
@@ -2733,6 +3027,9 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#bind" class="tsd-kind-icon">bind</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#delete" class="tsd-kind-icon">delete</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#deleteLabel" class="tsd-kind-icon">delete<wbr>Label</a>
 							</li>
@@ -2746,7 +3043,19 @@
 								<a href="WAJS.whatsapp.LabelCollection.html#filter" class="tsd-kind-icon">filter</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#find" class="tsd-kind-icon">find</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#findQuery" class="tsd-kind-icon">find<wbr>Query</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#forEach" class="tsd-kind-icon">for<wbr>Each</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#gadd" class="tsd-kind-icon">gadd</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#gaddUp" class="tsd-kind-icon">gadd<wbr>Up</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#get" class="tsd-kind-icon">get</a>
@@ -2762,6 +3071,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#getNewLabelColor" class="tsd-kind-icon">get<wbr>New<wbr>Label<wbr>Color</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#handle" class="tsd-kind-icon">handle</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#handleRemove" class="tsd-kind-icon">handle<wbr>Remove</a>
@@ -2779,10 +3091,16 @@
 								<a href="WAJS.whatsapp.LabelCollection.html#initializeAssociationsFromCache" class="tsd-kind-icon">initialize<wbr>Associations<wbr>From<wbr>Cache</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#initializeFromCache" class="tsd-kind-icon">initialize<wbr>From<wbr>Cache</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#isListening" class="tsd-kind-icon">is<wbr>Listening</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#isModel" class="tsd-kind-icon">is<wbr>Model</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#isStateStale" class="tsd-kind-icon">is<wbr>State<wbr>Stale</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#last" class="tsd-kind-icon">last</a>
@@ -2807,9 +3125,6 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#on" class="tsd-kind-icon">on</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="WAJS.whatsapp.LabelCollection.html#onResume" class="tsd-kind-icon">on<wbr>Resume</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#once" class="tsd-kind-icon">once</a>
@@ -2842,6 +3157,9 @@
 								<a href="WAJS.whatsapp.LabelCollection.html#reset" class="tsd-kind-icon">reset</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#saveToCache" class="tsd-kind-icon">save<wbr>ToCache</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#serialize" class="tsd-kind-icon">serialize</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
@@ -2859,9 +3177,6 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#stopListening" class="tsd-kind-icon">stop<wbr>Listening</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="WAJS.whatsapp.LabelCollection.html#sync" class="tsd-kind-icon">sync</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#toArray" class="tsd-kind-icon">to<wbr>Array</a>
 							</li>
@@ -2869,10 +3184,13 @@
 								<a href="WAJS.whatsapp.LabelCollection.html#toJSON" class="tsd-kind-icon">toJSON</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-								<a href="WAJS.whatsapp.LabelCollection.html#trigger" class="tsd-kind-icon">trigger</a>
+								<a href="WAJS.whatsapp.LabelCollection.html#trigger-1" class="tsd-kind-icon">trigger</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#unbind" class="tsd-kind-icon">unbind</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="WAJS.whatsapp.LabelCollection.html#update" class="tsd-kind-icon">update</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="WAJS.whatsapp.LabelCollection.html#updateChecksum" class="tsd-kind-icon">update<wbr>Checksum</a>
