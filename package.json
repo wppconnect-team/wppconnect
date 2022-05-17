@@ -63,7 +63,7 @@
     "@babel/eslint-plugin": "^7.17.7",
     "@babel/preset-env": "^7.17.10",
     "@commitlint/cli": "^16.3.0",
-    "@commitlint/config-conventional": "^16.2.4",
+    "@commitlint/config-conventional": "^17.0.0",
     "@commitlint/cz-commitlint": "^16.3.0",
     "@types/atob": "^2.1.2",
     "@types/mime-types": "^2.1.0",
