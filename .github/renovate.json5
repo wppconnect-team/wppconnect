@@ -1,0 +1,78 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:base",
+        ":semanticCommits"
+    ],
+    "lockFileMaintenance": {
+        "enabled": true,
+        "automerge": true
+    },
+    "packageRules": [
+        {
+            "description": "Use bump strategy",
+            "matchPackagePatterns": [
+                "*"
+            ],
+            "rangeStrategy": "bump"
+        },
+        {
+            "matchManagers": [
+                "github-actions"
+            ],
+            "semanticCommitType": "ci"
+        },
+        {
+            "matchDepTypes": [
+                "devDependencies"
+            ],
+            "semanticCommitScope": "deps-dev"
+        },
+        {
+            "description": "Show in changelog package updates",
+            "matchPackagePatterns": [
+                "^@wppconnect/"
+            ],
+            "semanticCommitType": "fix"
+        },
+        {
+            "description": "Automatically merge minor and patch-level updates",
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "automerge": true,
+            "automergeType": "branch"
+        },
+        {
+            "description": "Ignore major version",
+            "matchPackageNames": [
+                "boxen"
+            ],
+            "allowedVersions": "<6"
+        },
+        {
+            "description": "Ignore major version",
+            "matchPackageNames": [
+                "chalk"
+            ],
+            "allowedVersions": "<5"
+        },
+        {
+            "description": "Ignore major version",
+            "matchPackageNames": [
+                "file-type"
+            ],
+            "allowedVersions": "<17"
+        },
+        {
+            "description": "Ignore major version",
+            "matchPackageNames": [
+                "latest-version"
+            ],
+            "allowedVersions": "<6"
+        }
+    ]
+}
