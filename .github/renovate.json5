@@ -45,7 +45,8 @@
                 "digest"
             ],
             "automerge": true,
-            "automergeType": "branch"
+            "automergeStrategy": "squash",
+            "automergeType": "pr"
         },
         {
             "description": "Ignore major version",
