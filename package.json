@@ -132,7 +132,7 @@
     "ws": "^8.6.0"
   },
   "optionalDependencies": {
-    "fsevents": "^2.3.1"
+    "fsevents": "^2.3.2"
   },
   "directories": {
     "doc": "docs",
