@@ -14,7 +14,8 @@
             "matchPackagePatterns": [
                 "*"
             ],
-            "rangeStrategy": "bump"
+            "rangeStrategy": "bump",
+            "semanticCommitType": "build"
         },
         {
             "matchManagers": [
