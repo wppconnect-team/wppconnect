@@ -4,6 +4,8 @@
         "config:base",
         ":semanticCommits"
     ],
+    "prHourlyLimit": 15,
+    "prConcurrentLimit": 5,
     "lockFileMaintenance": {
         "enabled": true,
         "automerge": true
