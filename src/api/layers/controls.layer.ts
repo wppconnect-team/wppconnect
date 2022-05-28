@@ -97,7 +97,7 @@ export class ControlsLayer extends UILayer {
   public async archiveChat(chatId: string, option: boolean = true) {
     return evaluateAndReturn(
       this.page,
-      ({ chatId, option }) => WAPI.archiveChat(chatId, option),
+      ({ chatId, option }) => WPP.chat.archive(chatId, option),
       { chatId, option }
     );
   }
@@ -111,17 +111,19 @@ export class ControlsLayer extends UILayer {
    * @returns object
    */
   public async pinChat(chatId: string, option: boolean, nonExistent?: boolean) {
-    const result = await evaluateAndReturn(
-      this.page,
-      ({ chatId, option, nonExistent }) => {
-        return WAPI.pinChat(chatId, option, nonExistent);
-      },
-      { chatId, option, nonExistent }
-    );
-    if (result['erro'] == true) {
-      throw result;
+    if (nonExistent) {
+      await evaluateAndReturn(
+        this.page,
+        ({ chatId }) => WPP.chat.find(chatId),
+        { chatId }
+      );
     }
-    return result;
+
+    return await evaluateAndReturn(
+      this.page,
+      ({ chatId, option }) => WPP.chat.pin(chatId, option),
+      { chatId, option }
+    );
   }
 
   /**
