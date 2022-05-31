@@ -108,7 +108,7 @@
     "boxen": "^5.1.2",
     "catch-exit": "^1.2.2",
     "chalk": "~4.1.2",
-    "chrome-launcher": "^0.15.0",
+    "chrome-launcher": "^0.15.1",
     "execa": "^5.1.1",
     "file-type": "~16.5.3",
     "futoin-hkdf": "^1.5.1",
