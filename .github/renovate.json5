@@ -1,8 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", ":semanticCommits"],
-  "prHourlyLimit": 15,
-  "prConcurrentLimit": 5,
+  "extends": [
+    "config:base",
+    ":prConcurrentLimitNone",
+    ":prHourlyLimitNone",
+    ":semanticCommits"
+  ],
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true
