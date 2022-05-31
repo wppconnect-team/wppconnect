@@ -873,8 +873,18 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Starts typing ('Typing...' state)
+   *
+   * @example
+   * ```javascript
+   * // Keep sending typing state, use stopTyping to finish
+   * await client.startTyping('[number]@c.us');
+   *
+   * // Keep sending typing state for 5 seconds
+   * await client.startTyping('[number]@c.us', 5000);
+   * ```
    * @category Chat
-   * @param chatId
+   * @param to Chat Id
+   * @param duration Duration um miliseconds
    */
   public async startTyping(to: string, duration?: number) {
     return evaluateAndReturn(
@@ -890,7 +900,7 @@ export class SenderLayer extends ListenerLayer {
   /**
    * Stops typing ('Typing...' state)
    * @category Chat
-   * @param chatId
+   * @param to Chat Id
    */
   public async stopTyping(to: string) {
     return evaluateAndReturn(this.page, ({ to }) => WPP.chat.markIsPaused(to), {
@@ -900,8 +910,17 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Starts recording ('Recording...' state)
+   * @example
+   * ```javascript
+   * // Keep sending recording state, use stopRecoring to finish
+   * await client.startRecording('[number]@c.us');
+   *
+   * // Keep sending typing state for 5 seconds
+   * await client.startRecording('[number]@c.us', 5000);
+   * ```
    * @category Chat
-   * @param chatId
+   * @param to Chat Id
+   * @param duration Duration um miliseconds
    */
   public async startRecording(to: string, duration?: number) {
     return evaluateAndReturn(
@@ -917,7 +936,7 @@ export class SenderLayer extends ListenerLayer {
   /**
    * Stops recording ('Recording...' state)
    * @category Chat
-   * @param chatId
+   * @param to Chat Id
    */
   public async stopRecoring(to: string) {
     return evaluateAndReturn(this.page, ({ to }) => WPP.chat.markIsPaused(to), {
