@@ -1,3 +1,12 @@
+## 1.13.2 (2022-05-28)
+
+
+### Bug Fixes
+
+* Migrate archiveChat and pinChat methods to WA-JS ([cee7e1c](https://github.com/wppconnect-team/wppconnect/commit/cee7e1ced23409d66365e42a35602265e0c09536))
+
+
+
 ## 1.13.1 (2022-05-10)
 
 
