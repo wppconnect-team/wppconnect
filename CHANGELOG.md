@@ -1,3 +1,12 @@
+## 1.13.3 (2022-06-01)
+
+
+### Bug Fixes
+
+* Clear all token data when disconnected (fix [#1147](https://github.com/wppconnect-team/wppconnect/issues/1147)) ([4abcfed](https://github.com/wppconnect-team/wppconnect/commit/4abcfed97778ddb619df65fec0b1c3d0dc4debac))
+
+
+
 ## 1.13.2 (2022-05-28)
 
 
