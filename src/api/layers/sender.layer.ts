@@ -721,107 +721,148 @@ export class SenderLayer extends ListenerLayer {
   /**
    * Generates sticker from the provided animated gif image and sends it (Send image as animated sticker)
    * @category Chat
-   *  @param path image path imageBase64 A valid gif image is required. You can also send via http/https (http://www.website.com/img.gif)
-   *  @param to chatId '000000000000@c.us'
+   * @param pathOrBase64 image path imageBase64 A valid gif image is required. You can also send via http/https (http://www.website.com/img.gif)
+   * @param to chatId '000000000000@c.us'
    */
-  public async sendImageAsStickerGif(
-    to: string,
-    path: string
-  ): Promise<SendStickerResult | false> {
-    let b64 = await downloadFileToBase64(path, ['image/gif', 'image/webp']);
-    if (!b64) {
-      b64 = await fileToBase64(path);
-    }
-    if (b64) {
-      const buff = Buffer.from(
-        b64.replace(/^data:image\/(gif|webp);base64,/, ''),
-        'base64'
-      );
-      const mimeInfo = base64MimeType(b64);
-      if (!mimeInfo || mimeInfo.includes('image')) {
-        let obj = await stickerSelect(buff, 1);
-        if (typeof obj == 'object') {
-          let _webb64 = obj['webpBase64'];
-          let _met = obj['metadata'];
+  public async sendImageAsStickerGif(to: string, pathOrBase64: string) {
+    let base64: string = '';
 
-          const result = await evaluateAndReturn(
-            this.page,
-            ({ _webb64, to, _met }) => {
-              return WAPI.sendImageAsSticker(_webb64, to, _met, 'StickerGif');
-            },
-            { _webb64, to, _met }
-          );
-          if (result['erro'] == true) {
-            throw result;
-          }
-          return result;
-        } else {
-          throw {
-            error: true,
-            message: 'Error with sharp library, check the console log',
-          };
-        }
-      } else {
-        console.log('Not an image, allowed format gif');
-        return false;
+    if (pathOrBase64.startsWith('data:')) {
+      base64 = pathOrBase64;
+    } else {
+      let fileContent = await downloadFileToBase64(pathOrBase64, [
+        'image/gif',
+        'image/webp',
+      ]);
+      if (!fileContent) {
+        fileContent = await fileToBase64(pathOrBase64);
+      }
+      if (fileContent) {
+        base64 = fileContent;
       }
     }
+
+    if (!base64) {
+      const error = new Error('Empty or invalid file or base64');
+      Object.assign(error, {
+        code: 'empty_file',
+      });
+      throw error;
+    }
+
+    const mimeInfo = base64MimeType(base64);
+
+    if (!mimeInfo || !mimeInfo.includes('image')) {
+      const error = new Error('Not an image, allowed formats gig and webp');
+      Object.assign(error, {
+        code: 'invalid_image',
+      });
+      throw error;
+    }
+
+    const buff = Buffer.from(
+      base64.replace(/^data:image\/(gif|webp);base64,/, ''),
+      'base64'
+    );
+
+    let obj = await stickerSelect(buff, 1);
+
+    if (!obj) {
+      const error = new Error(
+        'Error with sharp library, check the console log'
+      );
+      Object.assign(error, {
+        code: 'sharp_error',
+      });
+      throw error;
+    }
+
+    const { webpBase64 } = obj;
+
+    return await evaluateAndReturn(
+      this.page,
+      ({ to, webpBase64 }) => {
+        return WPP.chat.sendFileMessage(to, webpBase64, {
+          type: 'sticker',
+        });
+      },
+      { to, webpBase64 }
+    );
   }
 
   /**
    * Generates sticker from given image and sends it (Send Image As Sticker)
    * @category Chat
-   * @param path image path imageBase64 A valid png, jpg and webp image is required. You can also send via http/https (http://www.website.com/img.gif)
+   * @param pathOrBase64 image path imageBase64 A valid png, jpg and webp image is required. You can also send via http/https (http://www.website.com/img.gif)
    * @param to chatId '000000000000@c.us'
    */
-  public async sendImageAsSticker(
-    to: string,
-    path: string
-  ): Promise<SendStickerResult | false> {
-    let b64 = await downloadFileToBase64(path, [
-      'image/gif',
-      'image/png',
-      'image/jpg',
-      'image/jpeg',
-      'image/webp',
-    ]);
-    if (!b64) {
-      b64 = await fileToBase64(path);
-    }
-    if (b64) {
-      const buff = Buffer.from(
-        b64.replace(/^data:image\/(png|jpe?g|webp|gif);base64,/, ''),
-        'base64'
-      );
-      const mimeInfo = base64MimeType(b64);
+  public async sendImageAsSticker(to: string, pathOrBase64: string) {
+    let base64: string = '';
 
-      if (!mimeInfo || mimeInfo.includes('image')) {
-        let obj = await stickerSelect(buff, 0);
-        if (typeof obj == 'object') {
-          let _webb64 = obj['webpBase64'];
-          let _met = obj['metadata'];
-          const result = await evaluateAndReturn(
-            this.page,
-            ({ _webb64, to, _met }) => {
-              return WAPI.sendImageAsSticker(_webb64, to, _met, 'Sticker');
-            },
-            { _webb64, to, _met }
-          );
-          if (result['erro'] == true) {
-            throw result;
-          }
-          return result;
-        } else {
-          throw {
-            error: true,
-            message: 'Error with sharp library, check the console log',
-          };
-        }
-      } else {
-        console.log('Not an image, allowed formats png, jpeg and webp');
-        return false;
+    if (pathOrBase64.startsWith('data:')) {
+      base64 = pathOrBase64;
+    } else {
+      let fileContent = await downloadFileToBase64(pathOrBase64, [
+        'image/gif',
+        'image/png',
+        'image/jpg',
+        'image/jpeg',
+        'image/webp',
+      ]);
+      if (!fileContent) {
+        fileContent = await fileToBase64(pathOrBase64);
+      }
+      if (fileContent) {
+        base64 = fileContent;
       }
     }
+
+    if (!base64) {
+      const error = new Error('Empty or invalid file or base64');
+      Object.assign(error, {
+        code: 'empty_file',
+      });
+      throw error;
+    }
+
+    const mimeInfo = base64MimeType(base64);
+
+    if (!mimeInfo || !mimeInfo.includes('image')) {
+      const error = new Error('Not an image, allowed formats gig and webp');
+      Object.assign(error, {
+        code: 'invalid_image',
+      });
+      throw error;
+    }
+
+    const buff = Buffer.from(
+      base64.replace(/^data:image\/(png|jpe?g|webp|gif);base64,/, ''),
+      'base64'
+    );
+
+    let obj = await stickerSelect(buff, 0);
+
+    if (!obj) {
+      const error = new Error(
+        'Error with sharp library, check the console log'
+      );
+      Object.assign(error, {
+        code: 'sharp_error',
+      });
+      throw error;
+    }
+
+    const { webpBase64 } = obj;
+
+    return await evaluateAndReturn(
+      this.page,
+      ({ to, webpBase64 }) => {
+        return WPP.chat.sendFileMessage(to, webpBase64, {
+          type: 'sticker',
+        });
+      },
+      { to, webpBase64 }
+    );
   }
 
   /**
