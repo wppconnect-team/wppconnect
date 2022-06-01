@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>chat | @wppconnect-team/wppconnect - v1.13.2</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.13.2">
+	<title>chat | @wppconnect-team/wppconnect - v1.13.3</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.13.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.13.2</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.13.3</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.13.2</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.13.3</a>
 				</li>
 				<li>
 					<a href="WAJS.html">WAJS</a>
@@ -974,13 +974,26 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/deleteMessage.d.ts:29</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/deleteMessage.d.ts:42</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Delete a message</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-javascript"><span style="color: #008000">// Delete a message</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">deleteMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@callback.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;msgid&#039;</span><span style="color: #000000">);</span>
+<span style="color: #008000">// Delete a list of messages</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">deleteMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@callback.us&#039;</span><span style="color: #000000">, [</span><span style="color: #A31515">&#039;msgid1&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;msgid2])</span><span style="color: #CD3131">;</span>
+<span style="color: #008000">// Delete a message and delete media</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">deleteMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@callback.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;msgid&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000">);</span>
+<span style="color: #008000">// Revoke a message</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">deleteMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@callback.us&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;msgid&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000">);</span>
+</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -1002,7 +1015,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/deleteMessage.d.ts:35</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/deleteMessage.d.ts:48</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
