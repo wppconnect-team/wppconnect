@@ -281,39 +281,85 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends message with thumbnail
+   *
+   * @deprecated: please use {@link sendText} with options
+   *
+   * @deprecated
    * @category Chat
-   * @param thumb
+   * @param pathOrBase64
    * @param url
    * @param title
    * @param description
    * @param chatId
    */
   public async sendMessageWithThumb(
-    thumb: string,
+    pathOrBase64: string,
     url: string,
     title: string,
     description: string,
     chatId: string
   ) {
-    let base64 = await downloadFileToBase64(thumb, [
-      'image/gif',
-      'image/png',
-      'image/jpg',
-      'image/jpeg',
-      'image/webp',
-    ]);
+    let base64: string = '';
+
+    if (pathOrBase64.startsWith('data:')) {
+      base64 = pathOrBase64;
+    } else {
+      let fileContent = await downloadFileToBase64(pathOrBase64, [
+        'image/gif',
+        'image/png',
+        'image/jpg',
+        'image/jpeg',
+        'image/webp',
+      ]);
+      if (!fileContent) {
+        fileContent = await fileToBase64(pathOrBase64);
+      }
+      if (fileContent) {
+        base64 = fileContent;
+      }
+    }
 
     if (!base64) {
-      base64 = await fileToBase64(thumb);
+      const error = new Error('Empty or invalid file or base64');
+      Object.assign(error, {
+        code: 'empty_file',
+      });
+      throw error;
     }
+
+    const mimeInfo = base64MimeType(base64);
+
+    if (!mimeInfo || !mimeInfo.includes('image')) {
+      const error = new Error(
+        'Not an image, allowed formats png, jpeg, webp and gif'
+      );
+      Object.assign(error, {
+        code: 'invalid_image',
+      });
+      throw error;
+    }
+
+    const thumbnail = base64.replace(
+      /^data:image\/(png|jpe?g|webp|gif);base64,/,
+      ''
+    );
 
     return evaluateAndReturn(
       this.page,
-      ({ thumb, url, title, description, chatId }) => {
-        WAPI.sendMessageWithThumb(thumb, url, title, description, chatId);
-      },
+      ({ thumbnail, url, title, description, chatId }) =>
+        WPP.chat.sendTextMessage(chatId, url, {
+          linkPreview: {
+            thumbnail: thumbnail,
+            canonicalUrl: url,
+            description: description,
+            matchedText: url,
+            title: title,
+            richPreviewType: 0,
+            doNotPlayInline: true,
+          },
+        }),
       {
-        base64,
+        thumbnail,
         url,
         title,
         description,
@@ -828,7 +874,9 @@ export class SenderLayer extends ListenerLayer {
     const mimeInfo = base64MimeType(base64);
 
     if (!mimeInfo || !mimeInfo.includes('image')) {
-      const error = new Error('Not an image, allowed formats gig and webp');
+      const error = new Error(
+        'Not an image, allowed formats png, jpeg, webp and gif'
+      );
       Object.assign(error, {
         code: 'invalid_image',
       });
