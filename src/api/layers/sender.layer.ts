@@ -32,12 +32,7 @@ import {
   stickerSelect,
 } from '../helpers';
 import { filenameFromMimeType } from '../helpers/filename-from-mimetype';
-import {
-  Message,
-  SendFileResult,
-  SendLinkResult,
-  SendStickerResult,
-} from '../model';
+import { Message, SendFileResult, SendStickerResult } from '../model';
 import { ChatState } from '../model/enum';
 import { ListenerLayer } from './listener.layer';
 
@@ -48,26 +43,26 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Automatically sends a link with the auto generated link preview. You can also add a custom message to be added.
+   *
+   * Deprecated: please use {@link sendText}
+   *
    * @category Chat
+   * @deprecated
    * @param chatId
    * @param url string A link, for example for youtube. e.g https://www.youtube.com/watch?v=Zi_XLOBDo_Y&list=RDEMe12_MlgO8mGFdeeftZ2nOQ&start_radio=1
-   * @param title custom text as the message body, this includes the link or will be attached after the link
+   * @param text custom text as the message body, this includes the link or will be attached after the link
    */
-  public async sendLinkPreview(
-    chatId: string,
-    url: string,
-    title: string
-  ): Promise<SendLinkResult> {
+  public async sendLinkPreview(chatId: string, url: string, text: string = '') {
+    const message = text.includes(url) ? text : `${url}\n${text}`;
+
     const result = await evaluateAndReturn(
       this.page,
-      ({ chatId, url, title }) => {
-        return WAPI.sendLinkPreview(chatId, url, title);
+      ({ chatId, message }) => {
+        return WPP.chat.sendTextMessage(chatId, message, { linkPreview: true });
       },
-      { chatId, url, title }
+      { chatId, message }
     );
-    if (result['erro'] == true) {
-      throw result;
-    }
+
     return result;
   }
 

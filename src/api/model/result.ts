@@ -43,12 +43,6 @@ export interface SendStickerResult extends ScopeResult {
   type: string;
 }
 
-export interface SendLinkResult extends ScopeResult {
-  type: string;
-  url: string;
-  text: string;
-}
-
 export interface SendPttResult extends ScopeResult {
   type: string;
   filename: string;
