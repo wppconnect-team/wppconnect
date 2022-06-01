@@ -4,6 +4,7 @@
     "config:base",
     ":prConcurrentLimitNone",
     ":prHourlyLimitNone",
+    ":prNotPending",
     ":semanticCommits"
   ],
   "lockFileMaintenance": {
