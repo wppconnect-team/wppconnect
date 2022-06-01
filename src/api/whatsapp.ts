@@ -89,6 +89,31 @@ export class Whatsapp extends BusinessLayer {
 
             if (connected) {
               await page.evaluate(() => localStorage.clear());
+              await page.evaluate(() => {
+                const promises = [];
+                window.indexedDB
+                  .databases()
+                  .then((dbs) => {
+                    dbs.forEach((db) => {
+                      promises.push(
+                        new Promise<void>((resolve) => {
+                          const r = window.indexedDB.deleteDatabase(db.name);
+                          r.onerror = r.onblocked = function () {
+                            this.result.close();
+                            window.indexedDB.deleteDatabase(db.name);
+                            resolve();
+                          };
+                          r.onsuccess = function () {
+                            resolve();
+                          };
+                        })
+                      );
+                    });
+                  })
+                  .catch(() => null);
+
+                return Promise.all(promises);
+              });
               await page.reload();
             }
 

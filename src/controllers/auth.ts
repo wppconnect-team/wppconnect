@@ -180,6 +180,15 @@ export async function injectSessionToken(
   if (clear) {
     await page.evaluate((session) => {
       localStorage.clear();
+
+      window.indexedDB
+        .databases()
+        .then((dbs) => {
+          dbs.forEach((db) => {
+            window.indexedDB.deleteDatabase(db.name);
+          });
+        })
+        .catch(() => null);
     });
   }
   await page.evaluate((session) => {
