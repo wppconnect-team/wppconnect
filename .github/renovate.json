@@ -2,11 +2,11 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
-    ":prConcurrentLimitNone",
     ":prHourlyLimitNone",
     ":prNotPending",
     ":semanticCommits"
   ],
+  "prConcurrentLimit": 3,
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true
@@ -20,7 +20,12 @@
     },
     {
       "matchManagers": ["github-actions"],
-      "semanticCommitType": "ci"
+      "semanticCommitType": "ci",
+      "addLabels": ["github_actions"]
+    },
+    {
+      "matchManagers": ["npm"],
+      "addLabels": ["javascript"]
     },
     {
       "matchDepTypes": ["devDependencies"],
