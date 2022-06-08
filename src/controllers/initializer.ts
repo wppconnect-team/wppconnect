@@ -145,7 +145,7 @@ export async function create(
     }
 
     if (!mergedOptions.browserWS) {
-      logger.error(
+      logger.info(
         `Using browser folder '${mergedOptions.puppeteerOptions.userDataDir}'`,
         {
           session,
