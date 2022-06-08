@@ -589,8 +589,14 @@ export class SenderLayer extends ListenerLayer {
 
     return evaluateAndReturn(
       this.page,
-      ({ to, base64, options }) =>
-        WPP.chat.sendFileMessage(to, base64, options),
+      async ({ to, base64, options }) => {
+        const result = await WPP.chat.sendFileMessage(to, base64, options);
+        return {
+          ack: result.ack,
+          id: result.id,
+          sendMsgResult: await result.sendMsgResult,
+        };
+      },
       { to, base64, options: options as any }
     );
   }
