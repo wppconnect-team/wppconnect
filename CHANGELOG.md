@@ -1,3 +1,12 @@
+# 1.14.0 (2022-06-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @wppconnect/wa-js to ^2.6.0 ([27d5a52](https://github.com/wppconnect-team/wppconnect/commit/27d5a523c1dfa1a22c8be08cd7ff6d03af1fc0b1))
+
+
+
 ## 1.13.3 (2022-06-01)
 
 
