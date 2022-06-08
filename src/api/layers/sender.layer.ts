@@ -81,9 +81,17 @@ export class SenderLayer extends ListenerLayer {
    * client.sendText('<number>@c.us', 'A simple message');
    *
    * // With buttons
-   * client.sendText('<number>@c.us', 'A simple message with buttons', {
+   * client.sendText('<number>@c.us', 'WPPConnect message with buttons', {
    *    useTemplateButtons: true, // False for legacy
    *    buttons: [
+   *      {
+   *        url: 'https://wppconnect-team.github.io/',
+   *        text: 'WPPConnect Site'
+   *      },
+   *      {
+   *        phoneNumber: '+55 11 22334455',
+   *        text: 'Call me'
+   *      },
    *      {
    *        id: 'your custom id 1',
    *        text: 'Some text'
@@ -522,6 +530,38 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Sends file from path or base64
+   *
+   * @example
+   * ```javascript
+   * // Simple message
+   * client.sendFile('<number>@c.us', 'data:text/plain;base64,V1BQQ29ubmVjdA==');
+   *
+   * // With buttons
+   * client.sendFile('<number>@c.us', 'data:text/plain;base64,V1BQQ29ubmVjdA==', {
+   *    useTemplateButtons: true, // False for legacy
+   *    buttons: [
+   *      {
+   *        url: 'https://wppconnect-team.github.io/',
+   *        text: 'WPPConnect Site'
+   *      },
+   *      {
+   *        phoneNumber: '+55 11 22334455',
+   *        text: 'Call me'
+   *      },
+   *      {
+   *        id: 'your custom id 1',
+   *        text: 'Some text'
+   *      },
+   *      {
+   *        id: 'another id 2',
+   *        text: 'Another text'
+   *      }
+   *    ],
+   *    title: 'Title text' // Optional
+   *    footer: 'Footer text' // Optional
+   * });
+   * ```
+   *
    * @category Chat
    * @param to Chat id
    * @param pathOrBase64 File path
