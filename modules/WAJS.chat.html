@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>chat | @wppconnect-team/wppconnect - v1.13.3</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.13.3">
+	<title>chat | @wppconnect-team/wppconnect - v1.14.0</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.14.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.13.3</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.14.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.13.3</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.14.0</a>
 				</li>
 				<li>
 					<a href="WAJS.html">WAJS</a>
@@ -423,13 +423,13 @@
 					<a name="list" class="tsd-anchor"></a>
 					<h3>list</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">list<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/WAJS.chat.ChatListOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ChatListOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">list<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/WAJS.chat.ChatListOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ChatListOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/list.d.ts:39</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/list.d.ts:49</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -439,13 +439,22 @@
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
 									<dd><pre><code class="language-javascript"><span style="color: #008000">// All chats</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">chat</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">list</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">chats</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">list</span><span style="color: #000000">();</span>
 
 <span style="color: #008000">// Only users chats</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">chat</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">list</span><span style="color: #000000">({</span><span style="color: #001080">onlyUsers:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">});</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">chats</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">list</span><span style="color: #000000">({</span><span style="color: #001080">onlyUsers:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">});</span>
 
 <span style="color: #008000">// Only groups chats</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">chat</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">list</span><span style="color: #000000">({</span><span style="color: #001080">onlyGroups:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">});</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">chats</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">list</span><span style="color: #000000">({</span><span style="color: #001080">onlyGroups:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">});</span>
+
+<span style="color: #008000">// Only with label Text</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">chats</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">list</span><span style="color: #000000">({</span><span style="color: #001080">withLabels:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;Test&#039;</span><span style="color: #000000">]});</span>
+
+<span style="color: #008000">// Only with label id</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">chats</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">list</span><span style="color: #000000">({</span><span style="color: #001080">withLabels:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;1&#039;</span><span style="color: #000000">]});</span>
+
+<span style="color: #008000">// Only with label with one of text or id</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">chats</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">list</span><span style="color: #000000">({</span><span style="color: #001080">withLabels:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;Alfa&#039;</span><span style="color: #000000">,</span><span style="color: #A31515">&#039;5&#039;</span><span style="color: #000000">]});</span>
 </code></pre>
 									</dd>
 								</dl>
@@ -453,7 +462,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <a href="../interfaces/WAJS.chat.ChatListOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ChatListOptions</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/WAJS.chat.ChatListOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ChatListOptions</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1162,7 +1171,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/getMessages.d.ts:48</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/functions/getMessages.d.ts:61</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1179,6 +1188,18 @@
 <span style="color: #008000">// All messages</span>
 <span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">getMessages</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@c.us&#039;</span><span style="color: #000000">, {</span>
 <span style="color: #000000">  </span><span style="color: #001080">count:</span><span style="color: #000000"> -</span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #008000">// Last 20 unread messages</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">getMessages</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@c.us&#039;</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #001080">count:</span><span style="color: #000000"> </span><span style="color: #098658">20</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">onlyUnread:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #008000">// All unread messages</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">chat</span><span style="color: #000000">.</span><span style="color: #795E26">getMessages</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;[number]@c.us&#039;</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #001080">count:</span><span style="color: #000000"> -</span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">onlyUnread:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
 <span style="color: #000000">});</span>
 
 <span style="color: #008000">// 20 messages before specific message</span>

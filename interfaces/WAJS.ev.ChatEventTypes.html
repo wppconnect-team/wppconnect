@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ChatEventTypes | @wppconnect-team/wppconnect - v1.13.3</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.13.3">
+	<title>ChatEventTypes | @wppconnect-team/wppconnect - v1.14.0</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.14.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.13.3</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.14.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.13.3</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.14.0</a>
 				</li>
 				<li>
 					<a href="../modules/WAJS.html">WAJS</a>
@@ -102,6 +102,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.ev.ChatEventTypes.html#chat_msg_ack_change" class="tsd-kind-icon">chat.msg_<wbr>ack_<wbr>change</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.ev.ChatEventTypes.html#chat_msg_revoke" class="tsd-kind-icon">chat.msg_<wbr>revoke</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.ev.ChatEventTypes.html#chat_new_message" class="tsd-kind-icon">chat.new_<wbr>message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.ev.ChatEventTypes.html#chat_new_reaction" class="tsd-kind-icon">chat.new_<wbr>reaction</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.ev.ChatEventTypes.html#chat_presence_change" class="tsd-kind-icon">chat.presence_<wbr>change</a></li>
 							</ul>
 						</section>
@@ -337,12 +338,79 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="chat_new_reaction" class="tsd-anchor"></a>
+					<h3>chat.new_<wbr>reaction</h3>
+					<div class="tsd-signature tsd-kind-icon">chat.new_<wbr>reaction<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.MsgKey.html" class="tsd-signature-type" data-tsd-kind="Class">MsgKey</a><span class="tsd-signature-symbol">; </span>msgId<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.MsgKey.html" class="tsd-signature-type" data-tsd-kind="Class">MsgKey</a><span class="tsd-signature-symbol">; </span>orphan<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>orphanReason<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>reactionText<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>read<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>sender<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">; </span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/events/eventTypes.d.ts:101</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Triggered when a new reaction is received</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>example</dt>
+							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;chat.new_reaction&#039;</span><span style="color: #000000">, (</span><span style="color: #001080">msg</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// Your code</span>
+<span style="color: #000000">});</span>
+</code></pre>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>id<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.MsgKey.html" class="tsd-signature-type" data-tsd-kind="Class">MsgKey</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Reaction ID</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>msg<wbr>Id<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.MsgKey.html" class="tsd-signature-type" data-tsd-kind="Class">MsgKey</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Message ID that received the reaction</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>orphan<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>orphan<wbr>Reason<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>reaction<wbr>Text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>The reaction emoji or empty if removed</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>read<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>sender<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="chat_presence_change" class="tsd-anchor"></a>
 					<h3>chat.presence_<wbr>change</h3>
 					<div class="tsd-signature tsd-kind-icon">chat.presence_<wbr>change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">; </span>isContact<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>isGroup<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>isOnline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>isUser<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>participants<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>shortName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>shortName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/events/eventTypes.d.ts:94</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/chat/events/eventTypes.d.ts:123</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -494,6 +562,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 								<a href="WAJS.ev.ChatEventTypes.html#chat_new_message" class="tsd-kind-icon">chat.new_<wbr>message</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="WAJS.ev.ChatEventTypes.html#chat_new_reaction" class="tsd-kind-icon">chat.new_<wbr>reaction</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 								<a href="WAJS.ev.ChatEventTypes.html#chat_presence_change" class="tsd-kind-icon">chat.presence_<wbr>change</a>

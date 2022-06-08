@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BlocklistEventTypes | @wppconnect-team/wppconnect - v1.14.0</title>
+	<title>ContactListOptions | @wppconnect-team/wppconnect - v1.14.0</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.14.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -68,13 +68,13 @@
 					<a href="../modules/WAJS.html">WAJS</a>
 				</li>
 				<li>
-					<a href="../modules/WAJS.ev.html">ev</a>
+					<a href="../modules/WAJS.contact.html">contact</a>
 				</li>
 				<li>
-					<a href="WAJS.ev.BlocklistEventTypes.html">BlocklistEventTypes</a>
+					<a href="WAJS.contact.ContactListOptions.html">ContactListOptions</a>
 				</li>
 			</ul>
-			<h1>Interface BlocklistEventTypes</h1>
+			<h1>Interface ContactListOptions</h1>
 		</div>
 	</div>
 </header>
@@ -85,7 +85,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BlocklistEventTypes</span>
+						<span class="target">ContactListOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -96,7 +96,8 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.ev.BlocklistEventTypes.html#blocklist_sync" class="tsd-kind-icon">blocklist.sync</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.contact.ContactListOptions.html#onlyMyContacts" class="tsd-kind-icon">only<wbr>MyContacts</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.contact.ContactListOptions.html#withLabels" class="tsd-kind-icon">with<wbr>Labels</a></li>
 							</ul>
 						</section>
 					</div>
@@ -105,12 +106,22 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="blocklist_sync" class="tsd-anchor"></a>
-					<h3>blocklist.sync</h3>
-					<div class="tsd-signature tsd-kind-icon">blocklist.sync<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span></div>
+					<a name="onlyMyContacts" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> only<wbr>MyContacts</h3>
+					<div class="tsd-signature tsd-kind-icon">only<wbr>MyContacts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/blocklist/events/eventTypes.d.ts:17</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/contact/functions/list.d.ts:18</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="withLabels" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> with<wbr>Labels</h3>
+					<div class="tsd-signature tsd-kind-icon">with<wbr>Labels<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/contact/functions/list.d.ts:19</li>
 						</ul>
 					</aside>
 				</section>
@@ -164,10 +175,10 @@
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="../modules/WAJS.conn.html">conn</a>
 							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+							<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="../modules/WAJS.contact.html">contact</a>
 							</li>
-							<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="../modules/WAJS.ev.html">ev</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
@@ -197,116 +208,32 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../classes/WAJS.ev.EventEmitter.html" class="tsd-kind-icon">Event<wbr>Emitter</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.ev.BlocklistEventTypes.html" class="tsd-kind-icon">Blocklist<wbr>Event<wbr>Types</a>
+						<a href="WAJS.contact.ContactListOptions.html" class="tsd-kind-icon">Contact<wbr>List<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.ev.BlocklistEventTypes.html#blocklist_sync" class="tsd-kind-icon">blocklist.sync</a>
+								<a href="WAJS.contact.ContactListOptions.html#onlyMyContacts" class="tsd-kind-icon">only<wbr>MyContacts</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="WAJS.contact.ContactListOptions.html#withLabels" class="tsd-kind-icon">with<wbr>Labels</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.ev.ChatEventTypes.html" class="tsd-kind-icon">Chat<wbr>Event<wbr>Types</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.ev.ConnEventTypes.html" class="tsd-kind-icon">Conn<wbr>Event<wbr>Types</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.ev.StatusEventTypes.html" class="tsd-kind-icon">Status<wbr>Event<wbr>Types</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.ev.WebpackEvents.html" class="tsd-kind-icon">Webpack<wbr>Events</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.ev.html#EventTypes" class="tsd-kind-icon">Event<wbr>Types</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.ev.html#ev" class="tsd-kind-icon">ev</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.ev.html#internalEv" class="tsd-kind-icon">internal<wbr>Ev</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#addListener" class="tsd-kind-icon">add<wbr>Listener</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#emit" class="tsd-kind-icon">emit</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#emitAsync" class="tsd-kind-icon">emit<wbr>Async</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#eventNames" class="tsd-kind-icon">event<wbr>Names</a>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="../modules/WAJS.contact.html#getProfilePictureUrl" class="tsd-kind-icon">get<wbr>Profile<wbr>Picture<wbr>Url</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.ev.html#getMaxListeners" class="tsd-kind-icon">get<wbr>Max<wbr>Listeners</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#hasListeners" class="tsd-kind-icon">has<wbr>Listeners</a>
+						<a href="../modules/WAJS.contact.html#getStatus" class="tsd-kind-icon">get<wbr>Status</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.ev.html#listenTo" class="tsd-kind-icon">listen<wbr>To</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#listenerCount" class="tsd-kind-icon">listener<wbr>Count</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#listeners" class="tsd-kind-icon">listeners</a>
+						<a href="../modules/WAJS.contact.html#list" class="tsd-kind-icon">list</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.ev.html#listenersAny" class="tsd-kind-icon">listeners<wbr>Any</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#many" class="tsd-kind-icon">many</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#off" class="tsd-kind-icon">off</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.ev.html#offAny" class="tsd-kind-icon">off<wbr>Any</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#on" class="tsd-kind-icon">on</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.ev.html#onAny" class="tsd-kind-icon">on<wbr>Any</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#once" class="tsd-kind-icon">once</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.ev.html#prependAny" class="tsd-kind-icon">prepend<wbr>Any</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#prependListener" class="tsd-kind-icon">prepend<wbr>Listener</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#prependMany" class="tsd-kind-icon">prepend<wbr>Many</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#prependOnceListener" class="tsd-kind-icon">prepend<wbr>Once<wbr>Listener</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#removeAllListeners" class="tsd-kind-icon">remove<wbr>All<wbr>Listeners</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#removeListener" class="tsd-kind-icon">remove<wbr>Listener</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.ev.html#setMaxListeners" class="tsd-kind-icon">set<wbr>Max<wbr>Listeners</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="../modules/WAJS.ev.html#stopListeningTo" class="tsd-kind-icon">stop<wbr>Listening<wbr>To</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
-						<a href="../modules/WAJS.ev.html#waitFor" class="tsd-kind-icon">wait<wbr>For</a>
+						<a href="../modules/WAJS.contact.html#queryExists" class="tsd-kind-icon">query<wbr>Exists</a>
 					</li>
 				</ul>
 			</nav>
