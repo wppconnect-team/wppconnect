@@ -18,7 +18,7 @@
 window.WAPI.sendButtons = async function (chatId) {
   var chat = WPP.whatsapp.ChatStore.get(chatId);
   var tempMsg = Object.create(chat.msgs.filter((msg) => msg.__x_isSentByMe)[0]);
-  // var tempMsg = Object.create(WPP.whatsapp.MsgStore.models.filter(msg => msg.to._serialized===chatId&&msg.__x_isSentByMe&& msg.type=='chat' && !msg.quotedStanzaID)[0])
+  // var tempMsg = Object.create(WPP.whatsapp.MsgStore.getModelsArray().filter(msg => msg.to._serialized===chatId&&msg.__x_isSentByMe&& msg.type=='chat' && !msg.quotedStanzaID)[0])
   var t2 = Object.create(
     WPP.whatsapp.MsgStore.filter(
       (x) => (x.type == 'template') & !x.id.fromMe
@@ -195,7 +195,7 @@ window.WAPI.sendButtons = async function (chatId) {
 window.WAPI.sendButtons2 = async function (chatId) {
   var chat = WPP.whatsapp.ChatStore.get(chatId);
   var tempMsg = Object.create(
-    WPP.whatsapp.MsgStore.models.filter(
+    WPP.whatsapp.MsgStore.getModelsArray().filter(
       (msg) =>
         msg.to._serialized === chatId &&
         msg.__x_isSentByMe &&
@@ -204,7 +204,7 @@ window.WAPI.sendButtons2 = async function (chatId) {
     )[0]
   );
   var t2 = Object.create(
-    WPP.whatsapp.MsgStore.models.filter(
+    WPP.whatsapp.MsgStore.getModelsArray().filter(
       (msg) =>
         msg.to._serialized === chatId &&
         msg.__x_isSentByMe &&

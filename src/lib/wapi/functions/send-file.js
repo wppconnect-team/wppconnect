@@ -55,7 +55,7 @@ export async function sendFile(
 
     var mediaBlob = base64ToFile(imgBase64, filename);
     var mediaCollection = await processFiles(chat, mediaBlob);
-    var media = mediaCollection.models[0];
+    var media = mediaCollection.getModelsArray()[0];
     var result =
       (await media.sendToChat(chat, { caption, quotedMsg, isViewOnce })) || '';
     var m = { type: type, filename: filename, text: caption, mimeType: mime };

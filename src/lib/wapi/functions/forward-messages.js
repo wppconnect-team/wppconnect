@@ -58,7 +58,7 @@ export async function forwardMessages(chatId, messagesId, skipMyMessages) {
   await chat.forwardMessages(toForward);
   await new Promise((resolve) => setTimeout(resolve, 100)); // Wait collection update
 
-  const msgs = chat.msgs.models.slice(messagesId.length * -1);
+  const msgs = chat.msgs.getModelsArray().slice(messagesId.length * -1);
 
   return msgs.map((m) => m.id._serialized);
 }

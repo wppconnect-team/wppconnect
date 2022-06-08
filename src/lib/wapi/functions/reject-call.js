@@ -56,7 +56,7 @@ export async function rejectCall(callId) {
     return 1;
   }
 
-  const calls = WPP.whatsapp.CallStore.models.filter(
+  const calls = WPP.whatsapp.CallStore.getModelsArray().filter(
     (c) => c.getState() === 'INCOMING_RING'
   );
 

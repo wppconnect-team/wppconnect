@@ -21,7 +21,7 @@ export function getUnreadMessages(
   useUnreadCount,
   done
 ) {
-  const chats = WPP.whatsapp.ChatStore.models;
+  const chats = WPP.whatsapp.ChatStore.getModelsArray();
   const output = [];
 
   for (const chat in chats) {

@@ -51,7 +51,7 @@ export async function sendPtt(
 
     var mediaBlob = base64ToFile(imgBase64, filename);
     var mediaCollection = await processFiles(chat, mediaBlob);
-    var media = mediaCollection.models[0];
+    var media = mediaCollection.getModelsArray()[0];
     media.mediaPrep._mediaData.type = 'ptt';
 
     var result = (await media.sendToChat(chat, { caption, quotedMsg })) || '';

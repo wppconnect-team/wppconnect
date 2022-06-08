@@ -37,7 +37,7 @@ export async function sendVideoAsGif(
   if (!chat.erro) {
     var mediaBlob = base64ToFile(dataBase64, filename);
     var mediaCollection = await processFiles(chat, mediaBlob);
-    var media = mediaCollection.models[0];
+    var media = mediaCollection.getModelsArray()[0];
     media.mediaPrep._mediaData.isGif = true;
     media.mediaPrep._mediaData.gifAttribution = 1;
 

@@ -24,7 +24,7 @@ export async function getAllMessagesInChat(
   var chat = await WAPI.sendExist(id);
   let output = [];
   if (!chat.erro) {
-    const messages = chat.msgs.models;
+    const messages = chat.msgs.getModelsArray();
     for (const i in messages) {
       if (i === 'remove') {
         continue;

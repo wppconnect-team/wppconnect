@@ -24,7 +24,7 @@ export function addOnPresenceChanged() {
     WPP.whatsapp.PresenceStore.on('change:chatstate.type', (chatstate) => {
       try {
         // Search precense model from chatstate
-        const presence = WPP.whatsapp.PresenceStore.models.find(
+        const presence = WPP.whatsapp.PresenceStore.getModelsArray().find(
           (m) => m.chatstate === chatstate
         );
 
@@ -50,7 +50,8 @@ export function addOnPresenceChanged() {
         }
 
         if (presence.isGroup) {
-          data.participants = presence.chatstates.models
+          data.participants = presence.chatstates
+            .getModelsArray()
             .filter((c) => !!c.type)
             .map((c) => {
               const contact = WPP.whatsapp.ContactStore.get(c.id);
