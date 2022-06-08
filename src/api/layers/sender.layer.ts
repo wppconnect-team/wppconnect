@@ -16,7 +16,9 @@
  */
 
 import type {
+  FileMessageOptions,
   ListMessageOptions,
+  SendMessageReturn,
   TextMessageOptions,
 } from '@wppconnect/wa-js/dist/chat';
 import * as path from 'path';
@@ -492,84 +494,100 @@ export class SenderLayer extends ListenerLayer {
   /**
    * Sends file
    * base64 parameter should have mime type already defined
+   *
+   * Deprecated: please use sendFile with options: sendFile(to, content, options)
+   *
+   * @deprecated
+   *
    * @category Chat
-   * @param to Chat id
+   * @param chatId Chat id
    * @param base64 base64 data
    * @param filename
    * @param caption
    */
   public async sendFileFromBase64(
-    to: string,
+    chatId: string,
     base64: string,
     filename: string,
     caption?: string
-  ): Promise<SendFileResult> {
-    let mimeType = base64MimeType(base64);
-
-    if (!mimeType) {
-      const obj = {
-        erro: true,
-        to: to,
-        text: 'Invalid base64!',
-      };
-      throw obj;
-    }
-
-    filename = filenameFromMimeType(filename, mimeType);
-
-    const type = 'FileFromBase64';
-    const result = await evaluateAndReturn(
-      this.page,
-      ({ to, base64, filename, caption, type }) => {
-        return WAPI.sendFile(base64, to, filename, caption, type);
-      },
-      { to, base64, filename, caption, type }
-    );
-    if (result['erro'] == true) {
-      throw result;
-    }
-    return result;
+  ) {
+    return this.sendFile(chatId, base64, filename, caption);
   }
 
   /**
-   * Sends file from path
+   * Sends file from path or base64
    * @category Chat
    * @param to Chat id
-   * @param filePath File path
-   * @param filename
-   * @param caption
+   * @param pathOrBase64 File path
+   * @param options
    */
   public async sendFile(
     to: string,
-    filePath: string,
+    pathOrBase64: string,
+    options?: FileMessageOptions
+  ): Promise<SendMessageReturn>;
+  /**
+   * Sends file from path or base64
+   *
+   * Deprecated: please use sendFile with options: sendFile(to, content, options)
+   *
+   * @deprecated
+   *
+   * @category Chat
+   * @param to Chat id
+   * @param pathOrBase64 File path or base64
+   * @param filename The file name
+   * @param caption Caption for the filename
+   */
+  public async sendFile(
+    to: string,
+    pathOrBase64: string,
     filename?: string,
     caption?: string
-  ) {
-    return new Promise<SendFileResult>(async (resolve, reject) => {
-      let base64 = await downloadFileToBase64(filePath),
-        obj: { erro: boolean; to: string; text: string };
+  ): Promise<SendMessageReturn>;
+  public async sendFile(
+    to: string,
+    pathOrBase64: string,
+    nameOrOptions?: string | FileMessageOptions,
+    caption?: string
+  ): Promise<SendMessageReturn> {
+    let options: FileMessageOptions = { type: 'auto-detect' };
 
-      if (!base64) {
-        base64 = await fileToBase64(filePath);
+    if (typeof nameOrOptions === 'string') {
+      options.filename = nameOrOptions;
+      options.caption = caption;
+    } else if (typeof nameOrOptions === 'object') {
+      options = nameOrOptions;
+    }
+
+    let base64 = '';
+
+    if (pathOrBase64.startsWith('data:')) {
+      base64 = pathOrBase64;
+    } else {
+      let fileContent = await downloadFileToBase64(pathOrBase64);
+      if (!fileContent) {
+        fileContent = await fileToBase64(pathOrBase64);
       }
-
-      if (!base64) {
-        obj = {
-          erro: true,
-          to: to,
-          text: 'No such file or directory, open "' + filePath + '"',
-        };
-        return reject(obj);
+      if (fileContent) {
+        base64 = fileContent;
       }
+    }
 
-      if (!filename) {
-        filename = path.basename(filePath);
-      }
+    if (!base64) {
+      const error = new Error('Empty or invalid file or base64');
+      Object.assign(error, {
+        code: 'empty_file',
+      });
+      throw error;
+    }
 
-      this.sendFileFromBase64(to, base64, filename, caption)
-        .then(resolve)
-        .catch(reject);
-    });
+    return evaluateAndReturn(
+      this.page,
+      ({ to, base64, options }) =>
+        WPP.chat.sendFileMessage(to, base64, options),
+      { to, base64, options: options as any }
+    );
   }
 
   /**
