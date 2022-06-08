@@ -18,6 +18,7 @@
 import type {
   FileMessageOptions,
   ListMessageOptions,
+  LocationMessageOptions,
   SendMessageReturn,
   TextMessageOptions,
 } from '@wppconnect/wa-js/dist/chat';
@@ -530,7 +531,7 @@ export class SenderLayer extends ListenerLayer {
     to: string,
     pathOrBase64: string,
     options?: FileMessageOptions
-  ): Promise<SendMessageReturn>;
+  );
   /**
    * Sends file from path or base64
    *
@@ -549,13 +550,13 @@ export class SenderLayer extends ListenerLayer {
     pathOrBase64: string,
     filename?: string,
     caption?: string
-  ): Promise<SendMessageReturn>;
+  );
   public async sendFile(
     to: string,
     pathOrBase64: string,
     nameOrOptions?: string | FileMessageOptions,
     caption?: string
-  ): Promise<SendMessageReturn> {
+  ) {
     let options: FileMessageOptions = { type: 'auto-detect' };
 
     if (typeof nameOrOptions === 'string') {
@@ -943,7 +944,13 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
-   * TODO: Fix message not being delivered
+   * Sends location to given chat id
+   * @category Chat
+   * @param to Chat id
+   * @param options location options
+   */
+  public async sendLocation(to: string, options: LocationMessageOptions);
+  /**
    * Sends location to given chat id
    * @category Chat
    * @param to Chat id
@@ -956,19 +963,35 @@ export class SenderLayer extends ListenerLayer {
     latitude: string,
     longitude: string,
     title: string
+  );
+  public async sendLocation(
+    to: string,
+    latitudeOrOptions: string | LocationMessageOptions,
+    longitude?: string,
+    title?: string
   ) {
-    const result = await evaluateAndReturn(
+    const options: LocationMessageOptions =
+      typeof latitudeOrOptions === 'string'
+        ? {
+            lat: latitudeOrOptions,
+            lng: longitude,
+            title: title,
+          }
+        : latitudeOrOptions;
+
+    return await evaluateAndReturn(
       this.page,
-      ({ to, latitude, longitude, title }) => {
-        return WAPI.sendLocation(to, latitude, longitude, title);
+      async ({ to, options }) => {
+        const result = await WPP.chat.sendLocationMessage(to, options);
+
+        return {
+          ack: result.ack,
+          id: result.id,
+          sendMsgResult: await result.sendMsgResult,
+        };
       },
-      { to, latitude, longitude, title }
+      { to, options: options as any }
     );
-    if (result['erro'] == true) {
-      throw result;
-    } else {
-      return result;
-    }
   }
 
   /**
