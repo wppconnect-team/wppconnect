@@ -45,7 +45,7 @@ export const mediaTypes = {
 const processUA = (userAgent: string) => {
   let ua =
     userAgent ||
-    'WhatsApp/2.16.352 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.92 Safari/537.36';
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36';
   if (!ua.includes('WhatsApp')) ua = 'WhatsApp/2.16.352 ' + ua;
   return ua;
 };
