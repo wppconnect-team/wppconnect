@@ -28,6 +28,9 @@ import {
 } from '../api/model/initializer';
 import { SessionToken } from '../token-store';
 import { defaultLogger } from '../utils/logger';
+import * as path from 'path';
+import * as fs from 'fs';
+import sanitize from 'sanitize-filename';
 
 process.on(
   'unhandledRejection',
@@ -125,6 +128,32 @@ export async function create(
     // Get browser from page
     browser = page.browser();
   } else if (!browser && !page) {
+    if (
+      !mergedOptions.browserWS &&
+      !mergedOptions.puppeteerOptions?.userDataDir
+    ) {
+      mergedOptions.puppeteerOptions.userDataDir = path.resolve(
+        process.cwd(),
+        path.join(mergedOptions.folderNameToken, sanitize(session))
+      );
+
+      if (!fs.existsSync(mergedOptions.puppeteerOptions.userDataDir)) {
+        fs.mkdirSync(mergedOptions.puppeteerOptions.userDataDir, {
+          recursive: true,
+        });
+      }
+    }
+
+    if (!mergedOptions.browserWS) {
+      logger.error(
+        `Using browser folder '${mergedOptions.puppeteerOptions.userDataDir}'`,
+        {
+          session,
+          type: 'browser',
+        }
+      );
+    }
+
     // Initialize new browser
     logger.info('Initializing browser...', { session, type: 'browser' });
     browser = await initBrowser(session, mergedOptions, logger).catch((e) => {
