@@ -372,6 +372,11 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Replies to given mesage id of given chat id
+   *
+   * Deprecated: Please, use sendText with quotedMsg option
+   *
+   * @deprecated
+   *
    * @category Chat
    * @param to Chat id
    * @param content Message body
