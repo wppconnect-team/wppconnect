@@ -618,6 +618,10 @@ export class SenderLayer extends ListenerLayer {
       if (fileContent) {
         base64 = fileContent;
       }
+
+      if (!options.filename) {
+        options.filename = path.basename(pathOrBase64);
+      }
     }
 
     if (!base64) {
