@@ -1,3 +1,12 @@
+## 1.14.2 (2022-06-11)
+
+
+### Bug Fixes
+
+* Added filename for sendFile when is using path or URL (fix [#1168](https://github.com/wppconnect-team/wppconnect/issues/1168)) ([5534fad](https://github.com/wppconnect-team/wppconnect/commit/5534fad0e056563cc3ce6b7699ea06f5eaff6da8))
+
+
+
 ## 1.14.1 (2022-06-08)
 
 
