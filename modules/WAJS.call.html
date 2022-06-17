@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>profile | @wppconnect-team/wppconnect - v1.14.3</title>
+	<title>call | @wppconnect-team/wppconnect - v1.14.3</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.14.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -68,10 +68,10 @@
 					<a href="WAJS.html">WAJS</a>
 				</li>
 				<li>
-					<a href="WAJS.profile.html">profile</a>
+					<a href="WAJS.call.html">call</a>
 				</li>
 			</ul>
-			<h1>Namespace profile</h1>
+			<h1>Namespace call</h1>
 		</div>
 	</div>
 </header>
@@ -83,65 +83,45 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-external">
-							<h3>Chat Functions</h3>
+							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.profile.html#getMyStatus" class="tsd-kind-icon">get<wbr>MyStatus</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.profile.html#setMyStatus" class="tsd-kind-icon">set<wbr>MyStatus</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.call.html#rejectCall" class="tsd-kind-icon">reject<wbr>Call</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Chat Functions</h2>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-					<a name="getMyStatus" class="tsd-anchor"></a>
-					<h3>get<wbr>MyStatus</h3>
+					<a name="rejectCall" class="tsd-anchor"></a>
+					<h3>reject<wbr>Call</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>MyStatus<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">reject<wbr>Call<span class="tsd-signature-symbol">(</span>callId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/profile/functions/getMyStatus.d.ts:26</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/call/functions/rejectCall.d.ts:36</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get your current text status</p>
+									<p>Reject a incoming call</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">profile</span><span style="color: #000000">.</span><span style="color: #795E26">getMyStatus</span><span style="color: #000000">();</span>
-</code></pre>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-					<a name="setMyStatus" class="tsd-anchor"></a>
-					<h3>set<wbr>MyStatus</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>MyStatus<span class="tsd-signature-symbol">(</span>statusText<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/profile/functions/setMyStatus.d.ts:26</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Update your current text status</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>example</dt>
-									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">profile</span><span style="color: #000000">.</span><span style="color: #795E26">setMyStatus</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Example text&#039;</span><span style="color: #000000">);</span>
+									<dd><pre><code class="language-javascript"><span style="color: #008000">// Reject any incoming call</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">call</span><span style="color: #000000">.</span><span style="color: #795E26">rejectCall</span><span style="color: #000000">();</span>
+
+<span style="color: #008000">// Reject specific call id</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">call</span><span style="color: #000000">.</span><span style="color: #795E26">rejectCall</span><span style="color: #000000">(</span><span style="color: #001080">callId</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Reject any incoming call</span>
+<span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;call.incoming_call&#039;</span><span style="color: #000000">, (</span><span style="color: #001080">call</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">call</span><span style="color: #000000">.</span><span style="color: #795E26">rejectCall</span><span style="color: #000000">(</span><span style="color: #001080">call</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
 </code></pre>
 									</dd>
 								</dl>
@@ -149,10 +129,14 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>statusText: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> callId: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The call ID, empty to reject the first one</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>[return description]</p>
 						</li>
 					</ul>
 				</section>
@@ -188,7 +172,7 @@
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="WAJS.blocklist.html">blocklist</a>
 							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+							<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="WAJS.call.html">call</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
@@ -212,7 +196,7 @@
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="WAJS.labels.html">labels</a>
 							</li>
-							<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="WAJS.profile.html">profile</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
@@ -234,10 +218,7 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.profile.html#getMyStatus" class="tsd-kind-icon">get<wbr>MyStatus</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<a href="WAJS.profile.html#setMyStatus" class="tsd-kind-icon">set<wbr>MyStatus</a>
+						<a href="WAJS.call.html#rejectCall" class="tsd-kind-icon">reject<wbr>Call</a>
 					</li>
 				</ul>
 			</nav>

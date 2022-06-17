@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>WebpackEvents | @wppconnect-team/wppconnect - v1.14.3</title>
+	<title>CallEventTypes | @wppconnect-team/wppconnect - v1.14.3</title>
 	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.14.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -71,10 +71,10 @@
 					<a href="../modules/WAJS.ev.html">ev</a>
 				</li>
 				<li>
-					<a href="WAJS.ev.WebpackEvents.html">WebpackEvents</a>
+					<a href="WAJS.ev.CallEventTypes.html">CallEventTypes</a>
 				</li>
 			</ul>
-			<h1>Interface WebpackEvents</h1>
+			<h1>Interface CallEventTypes</h1>
 		</div>
 	</div>
 </header>
@@ -85,7 +85,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">WebpackEvents</span>
+						<span class="target">CallEventTypes</span>
 					</li>
 				</ul>
 			</section>
@@ -96,8 +96,7 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.ev.WebpackEvents.html#webpack_injected" class="tsd-kind-icon">webpack.injected</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.ev.WebpackEvents.html#webpack_ready" class="tsd-kind-icon">webpack.ready</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="WAJS.ev.CallEventTypes.html#call_incoming_call" class="tsd-kind-icon">call.incoming_<wbr>call</a></li>
 							</ul>
 						</section>
 					</div>
@@ -106,24 +105,82 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="webpack_injected" class="tsd-anchor"></a>
-					<h3>webpack.injected</h3>
-					<div class="tsd-signature tsd-kind-icon">webpack.injected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+					<a name="call_incoming_call" class="tsd-anchor"></a>
+					<h3>call.incoming_<wbr>call</h3>
+					<div class="tsd-signature tsd-kind-icon">call.incoming_<wbr>call<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>isGroup<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>isVideo<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>offerTime<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>peerJid<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">; </span>sender<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack/eventTypes.d.ts:17</li>
+							<li>Defined in node_modules/@wppconnect/wa-js/dist/call/events/eventTypes.d.ts:30</li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="webpack_ready" class="tsd-anchor"></a>
-					<h3>webpack.ready</h3>
-					<div class="tsd-signature tsd-kind-icon">webpack.ready<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@wppconnect/wa-js/dist/webpack/eventTypes.d.ts:18</li>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Triggered when you a incoming call</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>example</dt>
+							<dd><pre><code class="language-javascript"><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;call.incoming_call&#039;</span><span style="color: #000000">, (</span><span style="color: #001080">call</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// Your code</span>
+<span style="color: #000000">  </span><span style="color: #008000">//Example: Reject any incoming call</span>
+<span style="color: #000000">  </span><span style="color: #0070C1">WPP</span><span style="color: #000000">.</span><span style="color: #001080">call</span><span style="color: #000000">.</span><span style="color: #795E26">rejectCall</span><span style="color: #000000">(</span><span style="color: #001080">call</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+</code></pre>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>The call id</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>is<wbr>Group<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Is a call from a group</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>is<wbr>Video<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Is call with video</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>offer<wbr>Time<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>timestamp of offer</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>peer<wbr>Jid<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Wid of sender with device id</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>sender<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Wid of sender without device id</p>
+									</div>
+								</div>
+							</li>
 						</ul>
-					</aside>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -208,9 +265,18 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.ev.BlocklistEventTypes.html" class="tsd-kind-icon">Blocklist<wbr>Event<wbr>Types</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.ev.CallEventTypes.html" class="tsd-kind-icon">Call<wbr>Event<wbr>Types</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="WAJS.ev.CallEventTypes.html#call_incoming_call" class="tsd-kind-icon">call.incoming_<wbr>call</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.ev.ChatEventTypes.html" class="tsd-kind-icon">Chat<wbr>Event<wbr>Types</a>
 					</li>
@@ -220,21 +286,9 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.ev.StatusEventTypes.html" class="tsd-kind-icon">Status<wbr>Event<wbr>Types</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.ev.WebpackEvents.html" class="tsd-kind-icon">Webpack<wbr>Events</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.ev.WebpackEvents.html#webpack_injected" class="tsd-kind-icon">webpack.injected</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="WAJS.ev.WebpackEvents.html#webpack_ready" class="tsd-kind-icon">webpack.ready</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace tsd-is-external">
 						<a href="../modules/WAJS.ev.html#EventTypes" class="tsd-kind-icon">Event<wbr>Types</a>
 					</li>

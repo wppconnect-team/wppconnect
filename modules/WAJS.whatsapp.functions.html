@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>functions | @wppconnect-team/wppconnect - v1.14.2</title>
-	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.14.2">
+	<title>functions | @wppconnect-team/wppconnect - v1.14.3</title>
+	<meta name="description" content="Documentation for @wppconnect-team/wppconnect - v1.14.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -33,7 +33,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.14.2</a>
+					<a href="../index.html" class="title">@wppconnect-team/wppconnect - v1.14.3</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -62,7 +62,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@wppconnect-team/wppconnect - v1.14.2</a>
+					<a href="../modules.html">@wppconnect-team/wppconnect - v1.14.3</a>
 				</li>
 				<li>
 					<a href="WAJS.html">WAJS</a>
@@ -122,8 +122,11 @@
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.functions.html#getOrGenerate" class="tsd-kind-icon">get<wbr>OrGenerate</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.functions.html#getStatus" class="tsd-kind-icon">get<wbr>Status</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.functions.html#handleChatSimpleAck" class="tsd-kind-icon">handle<wbr>Chat<wbr>Simple<wbr>Ack</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.functions.html#handleChatSimpleReceipt" class="tsd-kind-icon">handle<wbr>Chat<wbr>Simple<wbr>Receipt</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.functions.html#handleGroupSimpleAck" class="tsd-kind-icon">handle<wbr>Group<wbr>Simple<wbr>Ack</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.functions.html#handleGroupSimpleReceipt" class="tsd-kind-icon">handle<wbr>Group<wbr>Simple<wbr>Receipt</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.functions.html#handleStatusSimpleAck" class="tsd-kind-icon">handle<wbr>Status<wbr>Simple<wbr>Ack</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.functions.html#handleStatusSimpleReceipt" class="tsd-kind-icon">handle<wbr>Status<wbr>Simple<wbr>Receipt</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.functions.html#isAuthenticated" class="tsd-kind-icon">is<wbr>Authenticated</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.functions.html#isLegacyWebdBackend" class="tsd-kind-icon">is<wbr>Legacy<wbr>Webd<wbr>Backend</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="WAJS.whatsapp.functions.html#isLoggedIn" class="tsd-kind-icon">is<wbr>Logged<wbr>In</a></li>
@@ -936,7 +939,39 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/functions/handleAck.d.ts:33</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/functions/handleAck.d.ts:39</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>whatsapp</dt>
+									<dd><p>48309</p>
+									</dd>
+									<dt>deprecated</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ackData: <a href="../interfaces/WAJS.whatsapp.functions.SimpleAckData.html" class="tsd-signature-type" data-tsd-kind="Interface">SimpleAckData</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="handleChatSimpleReceipt" class="tsd-anchor"></a>
+					<h3>handle<wbr>Chat<wbr>Simple<wbr>Receipt</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Chat<wbr>Simple<wbr>Receipt<span class="tsd-signature-symbol">(</span>ackData<span class="tsd-signature-symbol">: </span><a href="../interfaces/WAJS.whatsapp.functions.SimpleAckData.html" class="tsd-signature-type" data-tsd-kind="Interface">SimpleAckData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/functions/handleAck.d.ts:48</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -966,7 +1001,39 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/functions/handleAck.d.ts:35</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/functions/handleAck.d.ts:44</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>whatsapp</dt>
+									<dd><p>84947</p>
+									</dd>
+									<dt>deprecated</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ackData: <a href="../interfaces/WAJS.whatsapp.functions.SimpleAckData.html" class="tsd-signature-type" data-tsd-kind="Interface">SimpleAckData</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="handleGroupSimpleReceipt" class="tsd-anchor"></a>
+					<h3>handle<wbr>Group<wbr>Simple<wbr>Receipt</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Group<wbr>Simple<wbr>Receipt<span class="tsd-signature-symbol">(</span>ackData<span class="tsd-signature-symbol">: </span><a href="../interfaces/WAJS.whatsapp.functions.SimpleAckData.html" class="tsd-signature-type" data-tsd-kind="Interface">SimpleAckData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/functions/handleAck.d.ts:50</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -996,7 +1063,39 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/functions/handleAck.d.ts:31</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/functions/handleAck.d.ts:34</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>whatsapp</dt>
+									<dd><p>90756</p>
+									</dd>
+									<dt>deprecated</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ackData: <a href="../interfaces/WAJS.whatsapp.functions.SimpleAckData.html" class="tsd-signature-type" data-tsd-kind="Interface">SimpleAckData</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="handleStatusSimpleReceipt" class="tsd-anchor"></a>
+					<h3>handle<wbr>Status<wbr>Simple<wbr>Receipt</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Status<wbr>Simple<wbr>Receipt<span class="tsd-signature-symbol">(</span>ackData<span class="tsd-signature-symbol">: </span><a href="../interfaces/WAJS.whatsapp.functions.SimpleAckData.html" class="tsd-signature-type" data-tsd-kind="Interface">SimpleAckData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/functions/handleAck.d.ts:46</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1349,13 +1448,13 @@
 					<a name="sendCallSignalingMsg" class="tsd-anchor"></a>
 					<h3>send<wbr>Call<wbr>Signaling<wbr>Msg</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">send<wbr>Call<wbr>Signaling<wbr>Msg<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>common<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>call_id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>peer_jid<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">{ </span>call-creator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>call-id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>count<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span>, tagId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Call<wbr>Signaling<wbr>Msg<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>common<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>call_id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>peer_jid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">{ </span>call-creator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>call-id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>count<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span>, tagId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>status<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">200</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/functions/sendCallSignalingMsg.d.ts:19</li>
+									<li>Defined in node_modules/@wppconnect/wa-js/dist/whatsapp/functions/sendCallSignalingMsg.d.ts:17</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1368,16 +1467,16 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>data: <span class="tsd-signature-symbol">{ </span>common<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>call_id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>peer_jid<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">{ </span>call-creator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>call-id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>count<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span></h5>
+									<h5>data: <span class="tsd-signature-symbol">{ </span>common<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>call_id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>peer_jid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">{ </span>call-creator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>call-id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>count<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span></h5>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter">
-											<h5>common<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>call_id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>peer_jid<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h5>
+											<h5>common<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>call_id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>peer_jid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h5>
 											<ul class="tsd-parameters">
 												<li class="tsd-parameter">
 													<h5><span class="tsd-flag ts-flagOptional">Optional</span> call_<wbr>id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
 												</li>
 												<li class="tsd-parameter">
-													<h5>peer_<wbr>jid<span class="tsd-signature-symbol">: </span><a href="../classes/WAJS.whatsapp.Wid.html" class="tsd-signature-type" data-tsd-kind="Class">Wid</a></h5>
+													<h5>peer_<wbr>jid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
 												</li>
 												<li class="tsd-parameter">
 													<h5><span class="tsd-flag ts-flagOptional">Optional</span> type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
@@ -1393,7 +1492,7 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> tagId: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../classes/WAJS.whatsapp.ChatModel.html" class="tsd-signature-type" data-tsd-kind="Class">ChatModel</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>status<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">200</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -2196,39 +2295,6 @@
 					<li class="current tsd-kind-namespace tsd-is-external">
 						<a href="WAJS.html">WAJS</a>
 						<ul>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.blocklist.html">blocklist</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.chat.html">chat</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.conn.html">conn</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.contact.html">contact</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.ev.html">ev</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.group.html">group</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.labels.html">labels</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.profile.html">profile</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.status.html">status</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.util.html">util</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
-								<a href="WAJS.webpack.html">webpack</a>
-							</li>
 							<li class="current tsd-kind-namespace tsd-parent-kind-namespace tsd-is-external">
 								<a href="WAJS.whatsapp.html">whatsapp</a>
 								<ul>
@@ -2367,10 +2433,19 @@
 						<a href="WAJS.whatsapp.functions.html#handleChatSimpleAck" class="tsd-kind-icon">handle<wbr>Chat<wbr>Simple<wbr>Ack</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.whatsapp.functions.html#handleChatSimpleReceipt" class="tsd-kind-icon">handle<wbr>Chat<wbr>Simple<wbr>Receipt</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.whatsapp.functions.html#handleGroupSimpleAck" class="tsd-kind-icon">handle<wbr>Group<wbr>Simple<wbr>Ack</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.whatsapp.functions.html#handleGroupSimpleReceipt" class="tsd-kind-icon">handle<wbr>Group<wbr>Simple<wbr>Receipt</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.whatsapp.functions.html#handleStatusSimpleAck" class="tsd-kind-icon">handle<wbr>Status<wbr>Simple<wbr>Ack</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="WAJS.whatsapp.functions.html#handleStatusSimpleReceipt" class="tsd-kind-icon">handle<wbr>Status<wbr>Simple<wbr>Receipt</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="WAJS.whatsapp.functions.html#isAuthenticated" class="tsd-kind-icon">is<wbr>Authenticated</a>
