@@ -274,8 +274,8 @@ export class RetrieverLayer extends SenderLayer {
         const status = await WPP.contact.getStatus(contactId);
 
         return {
-          id: status.id.toString(),
-          status: status.status,
+          id: contactId,
+          status: (status as any)?.status || status,
         };
       },
       contactId
