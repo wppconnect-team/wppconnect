@@ -140,6 +140,9 @@ export class HostLayer {
 
     const options = {
       deviceName: this.options.deviceName,
+      disableGoogleAnalytics: this.options.disableGoogleAnalytics,
+      googleAnalyticsId: this.options.googleAnalyticsId,
+      linkPreviewApiServers: this.options.linkPreviewApiServers,
     };
 
     await evaluateAndReturn(
