@@ -85,7 +85,7 @@ export class SenderLayer extends ListenerLayer {
    *    useTemplateButtons: true, // False for legacy
    *    buttons: [
    *      {
-   *        url: 'https://wppconnect-team.github.io/',
+   *        url: 'https://wppconnect.io/',
    *        text: 'WPPConnect Site'
    *      },
    *      {
@@ -541,7 +541,7 @@ export class SenderLayer extends ListenerLayer {
    *    useTemplateButtons: true, // False for legacy
    *    buttons: [
    *      {
-   *        url: 'https://wppconnect-team.github.io/',
+   *        url: 'https://wppconnect.io/',
    *        text: 'WPPConnect Site'
    *      },
    *      {

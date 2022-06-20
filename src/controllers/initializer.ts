@@ -109,7 +109,7 @@ export async function create(
 
   if (usingDeprecatedCreate) {
     logger.warn(
-      'You are using deprecated create method, please use create({options}) See: https://wppconnect-team.github.io/wppconnect/pages/Getting%20Started/creating-client.html#passing-options-on-create'
+      'You are using deprecated create method, please use create({options}) See: https://wppconnect.io/wppconnect/pages/Getting%20Started/creating-client.html#passing-options-on-create'
     );
   }
 

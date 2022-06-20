@@ -14,7 +14,7 @@ We primarily use GitHub as an issue tracker; for usage and support questions, pl
 
 ---
 
-- Documentation: https://wppconnect-team.github.io/wppconnect/
+- Documentation: https://wppconnect.io/wppconnect/
 - Discord: https://discord.gg/qCJ95FVbzR
 - WhatsApp Group: [https://chat.whatsapp.com/EGLVbeFGgt40OkbOCX8Sei]
 - Also have a look at the readme for more information on how to get support:
