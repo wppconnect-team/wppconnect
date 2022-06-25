@@ -136,7 +136,27 @@ export interface CreateConfig {
    * @default 'WPPConnect'
    */
   deviceName?: string | false;
+
+  /**
+   * Set custom Link Preview API servers
+   * @default null
+   */
+  linkPreviewApiServers?: string[] | null;
+
+  /**
+   * Disable custom Google Analytics
+   * @default true
+   */
+  disableGoogleAnalytics?: boolean;
+
+  /**
+   * Custom Google Analytics Tracker Id, like 'G-XXXXXXXXXX'
+   * collect analytics data to your GA account
+   * @default null
+   */
+  googleAnalyticsId?: string | null;
 }
+
 export const defaultOptions: CreateConfig = {
   folderNameToken: './tokens',
   headless: true,
@@ -156,4 +176,7 @@ export const defaultOptions: CreateConfig = {
   tokenStore: 'file',
   whatsappVersion: '2.2220.x',
   deviceName: false,
+  linkPreviewApiServers: null,
+  disableGoogleAnalytics: true,
+  googleAnalyticsId: null,
 };
