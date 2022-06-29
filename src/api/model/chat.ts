@@ -34,6 +34,12 @@ export interface Chat {
   pin: number;
   msgs: null;
   kind: string;
+  isAnnounceGrpRestrict: boolean;
+  ephemeralDuration: number;
+  hasChatBeenOpened: boolean;
+  unreadMentionCount: number;
+  hasUnreadMention: boolean;
+  archiveAtMentionViewedInDrawer: boolean;
   isBroadcast: boolean;
   isGroup: boolean;
   isReadOnly: boolean;
