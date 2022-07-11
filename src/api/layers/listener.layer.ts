@@ -102,11 +102,14 @@ export class ListenerLayer extends ProfileLayer {
       .evaluate(() => {
         try {
           if (!window['onMessage'].exposed) {
-            window.WAPI.waitNewMessages(false, (data) => {
-              data.forEach((message) => {
-                window['onMessage'](message);
-              });
+            WPP.on('chat.new_message', (msg) => {
+              if (msg.isSentByMe || msg.isStatusV3) {
+                return;
+              }
+              const serialized = WAPI.processMessageObj(msg, false, false);
+              window['onMessage'](serialized);
             });
+
             window['onMessage'].exposed = true;
           }
         } catch (error) {

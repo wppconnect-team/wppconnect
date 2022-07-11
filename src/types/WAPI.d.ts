@@ -202,6 +202,11 @@ interface WAPI {
   waitNewMessages: (rmCallback: boolean, callback: Function) => void;
   _profilePicfunc: (contactId: string) => Promise<ProfilePicThumbObj>;
   _serializeChatObj: (chat: any) => any;
+  processMessageObj: (
+    messageObj: any,
+    includeMe: boolean,
+    includeNotifications: boolean
+  ) => any;
 }
 
 declare global {
