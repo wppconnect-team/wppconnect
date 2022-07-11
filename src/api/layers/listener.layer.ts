@@ -188,7 +188,7 @@ export class ListenerLayer extends ProfileLayer {
         }
         try {
           if (!window['onPresenceChanged'].exposed) {
-            window.WAPI.onPresenceChanged(window['onPresenceChanged']);
+            WPP.on('chat.presence_change', window['onPresenceChanged']);
             window['onPresenceChanged'].exposed = true;
           }
         } catch (error) {
