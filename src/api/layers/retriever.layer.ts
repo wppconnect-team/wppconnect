@@ -156,17 +156,23 @@ export class RetrieverLayer extends SenderLayer {
    * @category Group
    * @returns array of groups
    */
-  public async getAllGroups(withNewMessagesOnly = false) {
-    if (withNewMessagesOnly) {
-      // prettier-ignore
-      const chats = await evaluateAndReturn(this.page,() => WAPI.getAllChatsWithNewMsg());
-      return chats.filter((chat) => chat.isGroup);
-    } else {
-      const chats = await evaluateAndReturn(this.page, () =>
-        WAPI.getAllChats()
-      );
-      return chats.filter((chat) => chat.isGroup);
-    }
+  public async getAllGroups(withNewMessagesOnly = false): Promise<Chat[]> {
+    return await evaluateAndReturn(
+      this.page,
+      async ({ withNewMessagesOnly }) => {
+        const chats = await WPP.chat.list({
+          onlyGroups: true,
+          onlyWithUnreadMessage: withNewMessagesOnly,
+        });
+
+        const groups = await Promise.all(
+          chats.map((c) => WPP.group.ensureGroup(c.id))
+        );
+
+        return groups.map((g) => WAPI._serializeChatObj(g));
+      },
+      { withNewMessagesOnly }
+    );
   }
 
   /**
