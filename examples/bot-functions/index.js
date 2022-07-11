@@ -17,7 +17,12 @@
 const wppconnect = require('../../dist');
 
 wppconnect
-  .create()
+  .create({
+    session: 'teste',
+    onLoadingScreen: (percent, message) => {
+      console.log('LOADING_SCREEN', percent, message);
+    },
+  })
   .then((client) => start(client))
   .catch((erro) => {
     console.log(erro);

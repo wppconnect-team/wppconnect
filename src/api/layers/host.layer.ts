@@ -31,7 +31,12 @@ import {
 import { sleep } from '../../utils/sleep';
 import { defaultLogger, LogLevel } from '../../utils/logger';
 import { Logger } from 'winston';
-import { CatchQRCallback, HostDevice, StatusFindCallback } from '../model';
+import {
+  CatchQRCallback,
+  HostDevice,
+  LoadingScreenCallback,
+  StatusFindCallback,
+} from '../model';
 import {
   FileTokenStore,
   isValidSessionToken,
@@ -49,6 +54,8 @@ export class HostLayer {
   protected autoCloseInterval = null;
   protected autoCloseCalled = false;
   protected statusFind?: StatusFindCallback = null;
+
+  public onLoadingScreen?: LoadingScreenCallback = null;
 
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     this.session = session;
@@ -122,7 +129,8 @@ export class HostLayer {
       this.page,
       sessionToken,
       clear,
-      this.options.whatsappVersion
+      this.options.whatsappVersion,
+      this.onLoadingScreen
     );
 
     this.page.on('load', () => {

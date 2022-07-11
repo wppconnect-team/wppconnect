@@ -31,6 +31,7 @@ import { useragentOverride } from '../config/WAuserAgente';
 import { WebSocketTransport } from './websocket';
 import { Logger } from 'winston';
 import { SessionToken } from '../token-store';
+import { LoadingScreenCallback } from '../api/model';
 
 export async function unregisterServiceWorker(page: Page) {
   await page.evaluateOnNewDocument(() => {
@@ -84,7 +85,8 @@ export async function initWhatsapp(
   page: Page,
   token?: SessionToken,
   clear = true,
-  version?: string
+  version?: string,
+  onLoadingScreenCallBack?: LoadingScreenCallback
 ) {
   await page.setUserAgent(useragentOverride);
 
@@ -103,7 +105,66 @@ export async function initWhatsapp(
     })
     .catch(() => {});
 
+  await onLoadingScreen(page, onLoadingScreenCallBack);
+
   return page;
+}
+
+var lastPercent = null;
+var lastPercentMessage = null;
+export async function onLoadingScreen(
+  page: Page,
+  onLoadingScreenCallBack?: LoadingScreenCallback
+) {
+  await page.evaluate(`function getElementByXpath(path) {
+    return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+  }`);
+
+  await page.exposeFunction(
+    'loadingScreen',
+    async (percent: number, message: string) => {
+      if (lastPercent !== percent || lastPercentMessage !== message) {
+        onLoadingScreenCallBack && onLoadingScreenCallBack(percent, message);
+        lastPercent = percent;
+        lastPercentMessage = message;
+      }
+    }
+  );
+
+  await page.evaluate(
+    function (selectors) {
+      var observer = new MutationObserver(function () {
+        let window2: any = window;
+
+        let progressBar = window2.getElementByXpath(selectors.PROGRESS);
+        let progressMessage = window2.getElementByXpath(
+          selectors.PROGRESS_MESSAGE
+        );
+
+        if (progressBar) {
+          if (
+            this.lastPercent !== progressBar.value ||
+            this.lastPercentMessage !== progressMessage.innerText
+          ) {
+            window2.loadingScreen(progressBar.value, progressMessage.innerText);
+            this.lastPercent = progressBar.value;
+            this.lastPercentMessage = progressMessage.innerText;
+          }
+        }
+      });
+
+      observer.observe(document, {
+        attributes: true,
+        childList: true,
+        characterData: true,
+        subtree: true,
+      });
+    },
+    {
+      PROGRESS: "//*[@id='app']/div/div/div[2]/progress",
+      PROGRESS_MESSAGE: "//*[@id='app']/div/div/div[3]",
+    }
+  );
 }
 
 export async function injectApi(page: Page) {

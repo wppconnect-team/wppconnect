@@ -36,6 +36,11 @@ export type StatusFindCallback = (
   session: string
 ) => void;
 
+/**
+ * A callback will be received, informing data as percentage and loading screen message
+ */
+export type LoadingScreenCallback = (percent: number, message: string) => void;
+
 export interface CreateOptions extends CreateConfig {
   /**
    * You must pass a string type parameter, this parameter will be the name of the client's session. If the parameter is not passed, the section name will be "session".
@@ -49,6 +54,11 @@ export interface CreateOptions extends CreateConfig {
    * A callback will be received, informing the customer's status
    */
   statusFind?: StatusFindCallback;
+
+  /**
+   * A callback will be received, informing data as percentage and loading screen message
+   */
+  onLoadingScreen?: LoadingScreenCallback;
   /**
    * Pass the session token information you can receive this token with the await client.getSessionTokenBrowser () function
    * @deprecated in favor of `sessionToken`
