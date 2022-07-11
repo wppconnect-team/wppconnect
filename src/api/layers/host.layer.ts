@@ -143,6 +143,7 @@ export class HostLayer {
       disableGoogleAnalytics: this.options.disableGoogleAnalytics,
       googleAnalyticsId: this.options.googleAnalyticsId,
       linkPreviewApiServers: this.options.linkPreviewApiServers,
+      poweredBy: this.options.poweredBy,
     };
 
     await evaluateAndReturn(
