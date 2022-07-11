@@ -107,7 +107,9 @@ export class ListenerLayer extends ProfileLayer {
                 return;
               }
               const serialized = WAPI.processMessageObj(msg, false, false);
-              window['onMessage'](serialized);
+              if (serialized) {
+                window['onMessage'](serialized);
+              }
             });
 
             window['onMessage'].exposed = true;
@@ -125,7 +127,12 @@ export class ListenerLayer extends ProfileLayer {
         }
         try {
           if (!window['onAnyMessage'].exposed) {
-            window.WAPI.allNewMessagesListener(window['onAnyMessage']);
+            WPP.on('chat.new_message', (msg) => {
+              const serialized = WAPI.processMessageObj(msg, true, false);
+              if (serialized) {
+                window['onAnyMessage'](serialized);
+              }
+            });
             window['onAnyMessage'].exposed = true;
           }
         } catch (error) {
