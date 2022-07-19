@@ -298,4 +298,19 @@ export class GroupLayer extends RetrieverLayer {
       { groupId, property, value }
     );
   }
+
+  /**
+   * Set group subject (if allowed)
+   * @category Group
+   * @param groupId Group ID ('000000-000000@g.us')
+   * @param base64 Image in base64 ( data:image/jpeg;base64,..... )
+   * @returns empty object
+   */
+  public async setGroupIcon(groupId: string, base64: string) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ groupId, base64 }) => WPP.group.setIcon(groupId, base64),
+      { groupId, base64 }
+    );
+  }
 }
