@@ -94,6 +94,45 @@ export class StatusLayer extends HostLayer {
       { base64 }
     );
   }
+  /**
+   * Send a video message to status stories
+   *
+   * @example
+   * ```javascript
+   * client.sendVideoStatus('data:video/mp4;base64,<a long base64 file...>');
+   * ```
+   * @param pathOrBase64 Path or base 64 image
+   */
+  public async sendVideoStatus(pathOrBase64: string) {
+    let base64: string = '';
+    if (pathOrBase64.startsWith('data:')) {
+      base64 = pathOrBase64;
+    } else {
+      let fileContent = await downloadFileToBase64(pathOrBase64);
+      if (!fileContent) {
+        fileContent = await fileToBase64(pathOrBase64);
+      }
+      if (fileContent) {
+        base64 = fileContent;
+      }
+    }
+
+    if (!base64) {
+      const error = new Error('Empty or invalid file or base64');
+      Object.assign(error, {
+        code: 'empty_file',
+      });
+      throw error;
+    }
+
+    return await evaluateAndReturn(
+      this.page,
+      ({ base64 }) => {
+        WPP.status.sendVideoStatus(base64);
+      },
+      { base64 }
+    );
+  }
 
   /**
    * Send a text to status stories
