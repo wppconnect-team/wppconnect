@@ -81,6 +81,7 @@ export class ListenerLayer extends ProfileLayer {
       'onAddedToGroup',
       'onIncomingCall',
       'onRevokedMessage',
+      'onReactionMessage',
     ];
 
     for (const func of functions) {
@@ -215,6 +216,25 @@ export class ListenerLayer extends ProfileLayer {
               window['onRevokedMessage'](eventData);
             });
             window['onRevokedMessage'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        try {
+          if (!window['onReactionMessage'].exposed) {
+            WPP.on('chat.new_reaction', (data) => {
+              const eventData = {
+                id: data.id,
+                msgId: data.msgId,
+                reactionText: data.reactionText,
+                read: data.read,
+                orphan: data.orphan,
+                orphanReason: data.orphanReason,
+                timestamp: data.timestamp,
+              };
+              window['onReactionMessage'](eventData);
+            });
+            window['onReactionMessage'].exposed = true;
           }
         } catch (error) {
           console.error(error);
@@ -527,5 +547,23 @@ export class ListenerLayer extends ProfileLayer {
     }) => any
   ) {
     return this.registerEvent('onRevokedMessage', callback);
+  }
+
+  /**
+   * @event Listens to reaction messages
+   * @returns Disposable object to stop the listening
+   */
+  public onReactionMessage(
+    callback: (data: {
+      id: string;
+      msgId: string;
+      reactionText: string;
+      read: boolean;
+      orphan: number;
+      orphanReason: any;
+      timestamp: number;
+    }) => any
+  ) {
+    return this.registerEvent('onReactionMessage', callback);
   }
 }
