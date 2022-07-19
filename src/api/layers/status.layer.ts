@@ -30,14 +30,6 @@ export class StatusLayer extends HostLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
   }
-
-  /**
-   * Get My Status stories
-   */
-  public async getMyStatus() {
-    return await evaluateAndReturn(this.page, () => WPP.status.getMyStatus());
-  }
-
   /**
    * Send a image message to status stories
    *
