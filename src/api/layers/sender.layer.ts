@@ -1212,4 +1212,29 @@ export class SenderLayer extends ListenerLayer {
       { chatState, chatId }
     );
   }
+
+  /**
+   * Send reaction to message
+   * @example
+   * ```javascript
+   * // For send Reaction, just to send emoji
+   * await client.sendReactionToMessage('[number]@c.us', '🤯');
+   *
+   * // to remove reacition
+   * await client.startRecording('[number]@c.us', false);
+   * ```
+   * @category Chat
+   * @param to Chat Id
+   * @param duration Duration um miliseconds
+   */
+  public async sendReactionToMessage(msgId: string, reaction: string | false) {
+    return evaluateAndReturn(
+      this.page,
+      ({ msgId, reaction }) => WPP.chat.sendReactionToMessage(msgId, reaction),
+      {
+        msgId,
+        reaction,
+      }
+    );
+  }
 }
