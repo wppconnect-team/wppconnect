@@ -18,7 +18,7 @@
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { BusinessLayer } from './business.layer';
-import { HostLayer } from './host.layer';
+import { LabelsLayer } from './labels.layer';
 import {
   evaluateAndReturn,
   base64MimeType,
@@ -26,7 +26,7 @@ import {
   downloadFileToBase64,
 } from '../helpers';
 
-export class StatusLayer extends HostLayer {
+export class StatusLayer extends LabelsLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
   }
