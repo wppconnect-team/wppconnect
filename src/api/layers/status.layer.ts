@@ -16,79 +16,39 @@
  */
 
 import { Page } from 'puppeteer';
+import { CreateConfig } from '../../config/create-config';
+import { BusinessLayer } from './business.layer';
 import { HostLayer } from './host.layer';
 import {
+  evaluateAndReturn,
   base64MimeType,
   fileToBase64,
   downloadFileToBase64,
-  resizeImg,
-  evaluateAndReturn,
 } from '../helpers';
-import { CreateConfig } from '../../config/create-config';
-import { StatusLayer } from './status.layer';
 
-export class ProfileLayer extends StatusLayer {
+export class StatusLayer extends HostLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
   }
 
   /**
-   * @category Chat
-   * @param contactsId Example: 0000@c.us | [000@c.us, 1111@c.us]
-   * @param time duration of silence
-   * @param type kind of silence "hours" "minutes" "year"
-   * To remove the silence, just enter the contact parameter
+   * Get My Status stories
    */
-  public async sendMute(
-    id: string,
-    time: number,
-    type: string
-  ): Promise<object> {
-    const result = await evaluateAndReturn(
-      this.page,
-      (id, time, type) => WAPI.sendMute(id, time, type),
-      id,
-      time,
-      type
-    );
-    if (result['erro'] == true) {
-      throw result;
-    }
-    return result;
+  public async getMyStatus() {
+    return await evaluateAndReturn(this.page, () => WPP.status.getMyStatus());
   }
 
   /**
-   * Change the theme
-   * @category Host
-   * @param string types "dark" or "light"
+   * Send a image message to status stories
+   *
+   * @example
+   * ```javascript
+   * client.sendImageStatus('data:image/jpeg;base64,<a long base64 file...>');
+   * ```
+   * @param pathOrBase64 Path or base 64 image
    */
-  public setTheme(type: string) {
-    return evaluateAndReturn(this.page, (type) => WAPI.setTheme(type), type);
-  }
-
-  /**
-   * Sets current user profile status
-   * @category Profile
-   * @param status
-   */
-  public async setProfileStatus(status: string) {
-    return await evaluateAndReturn(
-      this.page,
-      ({ status }) => {
-        WPP.profile.setMyStatus(status);
-      },
-      { status }
-    );
-  }
-
-  /**
-   * Sets the user's current profile photo
-   * @category Profile
-   * @param name
-   */
-  public async setProfilePic(pathOrBase64: string, to?: string) {
+  public async sendImageStatus(pathOrBase64: string) {
     let base64: string = '';
-
     if (pathOrBase64.startsWith('data:')) {
       base64 = pathOrBase64;
     } else {
@@ -126,37 +86,31 @@ export class ProfileLayer extends StatusLayer {
       });
       throw error;
     }
-
-    const buff = Buffer.from(
-      base64.replace(/^data:image\/(png|jpe?g|webp);base64,/, ''),
-      'base64'
-    );
-    let _webb64_96 = await resizeImg(buff, { width: 96, height: 96 }),
-      _webb64_640 = await resizeImg(buff, { width: 640, height: 640 });
-    let obj = { a: _webb64_640, b: _webb64_96 };
-
     return await evaluateAndReturn(
       this.page,
-      ({ obj, to }) => WAPI.setProfilePic(obj, to),
-      {
-        obj,
-        to,
-      }
+      ({ base64 }) => {
+        WPP.status.sendImageStatus(base64);
+      },
+      { base64 }
     );
   }
 
   /**
-   * Sets current user profile name
-   * @category Profile
-   * @param name
+   * Send a text to status stories
+   *
+   * @example
+   * ```javascript
+   * client.sendTextStatus(`Bootstrap primary color: #0275d8`, { backgroundColor: '#0275d8', font: 2});
+   * ```
+   * @param pathOrBase64 Path or base 64 image
    */
-  public async setProfileName(name: string) {
-    return evaluateAndReturn(
+  public async sendTextStatus(text: string, options: string) {
+    return await evaluateAndReturn(
       this.page,
-      ({ name }) => {
-        WAPI.setMyName(name);
+      ({ text, options }) => {
+        WPP.status.sendTextStatus(text, options);
       },
-      { name }
+      { text, options }
     );
   }
 }
