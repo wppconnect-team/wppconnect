@@ -25,8 +25,9 @@ import {
   evaluateAndReturn,
 } from '../helpers';
 import { CreateConfig } from '../../config/create-config';
+import { StatusLayer } from './status.layer';
 
-export class ProfileLayer extends HostLayer {
+export class ProfileLayer extends StatusLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
   }
