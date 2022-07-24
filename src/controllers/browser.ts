@@ -110,8 +110,8 @@ export async function initWhatsapp(
   return page;
 }
 
-var lastPercent = null;
-var lastPercentMessage = null;
+let lastPercent = null;
+let lastPercentMessage = null;
 export async function onLoadingScreen(
   page: Page,
   onLoadingScreenCallBack?: LoadingScreenCallback
@@ -133,7 +133,7 @@ export async function onLoadingScreen(
 
   await page.evaluate(
     function (selectors) {
-      var observer = new MutationObserver(function () {
+      let observer = new MutationObserver(function () {
         let window2: any = window;
 
         let progressBar = window2.getElementByXpath(selectors.PROGRESS);
