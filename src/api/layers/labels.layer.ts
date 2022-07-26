@@ -82,9 +82,7 @@ export class LabelsLayer extends HostLayer {
    * ```
    */
   public async getAllLabels() {
-    return await evaluateAndReturn(this.page, () => {
-      WPP.labels.getAllLabels();
-    });
+    return evaluateAndReturn(this.page, () => WPP.labels.getAllLabels());
   }
   /**
    * Delete all Labels
