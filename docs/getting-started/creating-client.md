@@ -46,6 +46,9 @@ wppconnect.create({
       //Create session wss return "serverClose" case server for close
       console.log('Session name: ', session);
     },
+    onLoadingScreen: (percent, message) => {
+      console.log('LOADING_SCREEN', percent, message);
+    },
     headless: true, // Headless chrome
     devtools: false, // Open devtools by default
     useChrome: true, // If false will use Chromium instance

@@ -24,6 +24,7 @@ import { Browser } from 'puppeteer';
 import {
   CatchQRCallback,
   CreateOptions,
+  LoadingScreenCallback,
   StatusFindCallback,
 } from '../api/model/initializer';
 import { SessionToken } from '../token-store';
@@ -65,6 +66,7 @@ export async function create(
   sessionName: string,
   catchQR?: CatchQRCallback,
   statusFind?: StatusFindCallback,
+  onLoadingScreen?: LoadingScreenCallback,
   options?: CreateConfig,
   browserSessionToken?: SessionToken
 ): Promise<Whatsapp>;
@@ -73,6 +75,7 @@ export async function create(
   sessionOrOption: string | CreateOptions,
   catchQR?: CatchQRCallback,
   statusFind?: StatusFindCallback,
+  onLoadingScreen?: LoadingScreenCallback,
   options?: CreateConfig,
   browserSessionToken?: SessionToken
 ): Promise<Whatsapp> {
@@ -96,6 +99,7 @@ export async function create(
     session = sessionOrOption.session;
     catchQR = sessionOrOption.catchQR || catchQR;
     statusFind = sessionOrOption.statusFind || statusFind;
+    onLoadingScreen = sessionOrOption.onLoadingScreen || onLoadingScreen;
 
     if (!options.sessionToken) {
       options.sessionToken =
@@ -227,6 +231,7 @@ export async function create(
 
   if (page) {
     const client = new Whatsapp(page, session, mergedOptions);
+    client.onLoadingScreen = onLoadingScreen;
 
     if (mergedOptions.waitForLogin) {
       const isLogged = await client.waitForLogin(catchQR, statusFind);
