@@ -83,7 +83,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "gulp": "^4.0.2",
     "husky": "^8.0.1",
     "license-check-and-add": "^4.0.5",
