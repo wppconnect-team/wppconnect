@@ -1,4 +1,5 @@
 {
+  "$schema": "https://typedoc.org/schema.json",
   "disableSources": false,
   "entryPoints": ["src/index.ts"],
   "excludeExternals": false,
@@ -6,35 +7,43 @@
   "excludeProtected": true,
   "includeVersion": true,
   "out": "api-docs",
-  "theme": "pages-plugin",
-  "media": "media",
   "gaID": "G-LTZL26963K",
-  "pages": {
-    "groups": [
+  "visibilityFilters": {
+    "external": false
+  },
+  "pluginPages": {
+    "source": ".",
+    "pages": [
       {
         "title": "Getting Started",
-        "pages": [
+        "childrenDir": "docs/getting-started",
+        "childrenOutputDir": "getting-started",
+        "children": [
           {
             "title": "Installation",
-            "source": "./docs/getting-started/installation.md"
+            "source": "installation.md"
           },
           {
             "title": "Creating a Client",
-            "source": "./docs/getting-started/creating-client.md"
+            "source": "creating-client.md"
           },
           {
             "title": "Receiving Messages",
-            "source": "./docs/getting-started/receiving-messages.md"
+            "source": "receiving-messages.md"
           },
           {
             "title": "Configuring the logger",
-            "source": "./docs/getting-started/configuring-logger.md"
+            "source": "configuring-logger.md"
           },
           {
             "title": "Basic Functions",
-            "source": "./docs/getting-started/basic-functions.md"
+            "source": "basic-functions.md"
           }
         ]
+      },
+      {
+        "title": "Changelog",
+        "source": "CHANGELOG.md"
       }
     ]
   }

@@ -67,11 +67,6 @@
       "description": "Ignore major version",
       "matchPackageNames": ["latest-version"],
       "allowedVersions": "<6"
-    },
-    {
-      "description": "Ignore major version",
-      "matchPackageNames": ["typedoc"],
-      "allowedVersions": "<0.22"
     }
   ]
 }
