@@ -239,6 +239,16 @@ export class ListenerLayer extends ProfileLayer {
         } catch (error) {
           console.error(error);
         }
+        try {
+          if (!window['onParticipantsChanged'].exposed) {
+            WPP.on('group.participant_changed', (participantChangedEvent) => {
+              window['onParticipantsChanged'](participantChangedEvent);
+            });
+            window['onParticipantsChanged'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
       })
       .catch(() => {});
   }
@@ -377,9 +387,9 @@ export class ListenerLayer extends ProfileLayer {
    * @param to callback
    * @returns Stream of ParticipantEvent
    */
-  public onParticipantsChanged(
-    callback: (participantChangedEvent: ParticipantEvent) => void
-  ): { dispose: () => void };
+  public onParticipantsChanged(callback: (evData: ParticipantEvent) => void): {
+    dispose: () => void;
+  };
   /**
    * @event Listens to participants changed
    * @param to group id: xxxxx-yyyy@us.c
@@ -388,40 +398,30 @@ export class ListenerLayer extends ProfileLayer {
    */
   public onParticipantsChanged(
     groupId: string,
-    callback: (participantChangedEvent: ParticipantEvent) => void
+    callback: (evData: ParticipantEvent) => void
   ): { dispose: () => void };
   public onParticipantsChanged(
     groupId: any,
-    callback?: (participantChangedEvent: ParticipantEvent) => void
+    callback?: (evData: ParticipantEvent) => void
   ): { dispose: () => void } {
     if (typeof groupId === 'function') {
       callback = groupId;
       groupId = null;
     }
 
-    const subtypeEvents = ['invite', 'add', 'remove', 'leave'];
-
-    return this.registerEvent(
-      ExposedFn.onNotificationMessage,
-      (message: Message) => {
-        // Only group events
-        if (
-          message.type !== MessageType.GP2 ||
-          !subtypeEvents.includes(message.subtype)
-        ) {
-          return;
-        }
-        if (groupId && groupId !== message.id) {
-          return;
-        }
-        callback({
-          by: message.from,
-          groupId: message.chatId,
-          action: message.subtype as any,
-          who: message.recipients,
-        });
+    return this.registerEvent(ExposedFn.onParticipantsChanged, (evData) => {
+      if (groupId && groupId !== evData.groupId) {
+        return;
       }
-    );
+      callback({
+        by: evData.author,
+        byPushName: evData.authorPushName,
+        groupId: evData.groupId,
+        action: evData.action,
+        operation: evData.operation,
+        who: evData.participants,
+      });
+    });
   }
 
   /**
