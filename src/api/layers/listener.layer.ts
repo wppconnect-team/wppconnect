@@ -239,6 +239,16 @@ export class ListenerLayer extends ProfileLayer {
         } catch (error) {
           console.error(error);
         }
+        try {
+          if (!window['onParticipantsChanged'].exposed) {
+            WPP.on('group.participant_changed', (participantChangedEvent) => {
+              window['onParticipantsChanged'](participantChangedEvent);
+            });
+            window['onParticipantsChanged'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
       })
       .catch(() => {});
   }
@@ -378,13 +388,13 @@ export class ListenerLayer extends ProfileLayer {
    * @returns Stream of ParticipantEvent
    */
   public onParticipantsChanged(
-    callback: (participantChangedEvent: ParticipantEvent) => void
+    callback: (presenceChangedEvent: PresenceEvent) => void
   ): { dispose: () => void };
   /**
+   * Listens to participants changed
    * @event Listens to participants changed
-   * @param to group id: xxxxx-yyyy@us.c
-   * @param to callback
-   * @returns Stream of ParticipantEvent
+   * @param callback Callback of on participant changed
+   * @returns Disposable object to stop the listening
    */
   public onParticipantsChanged(
     groupId: string,
@@ -399,27 +409,13 @@ export class ListenerLayer extends ProfileLayer {
       groupId = null;
     }
 
-    const subtypeEvents = ['invite', 'add', 'remove', 'leave'];
-
     return this.registerEvent(
-      ExposedFn.onNotificationMessage,
-      (message: Message) => {
-        // Only group events
-        if (
-          message.type !== MessageType.GP2 ||
-          !subtypeEvents.includes(message.subtype)
-        ) {
+      ExposedFn.onParticipantsChanged,
+      (participantChangedEvent: ParticipantEvent) => {
+        if (groupId && groupId !== participantChangedEvent.groupId) {
           return;
         }
-        if (groupId && groupId !== message.id) {
-          return;
-        }
-        callback({
-          by: message.from,
-          groupId: message.chatId,
-          action: message.subtype as any,
-          who: message.recipients,
-        });
+        callback(participantChangedEvent);
       }
     );
   }
@@ -454,9 +450,8 @@ export class ListenerLayer extends ProfileLayer {
     callback: (presenceChangedEvent: PresenceEvent) => void
   ): { dispose: () => void };
   /**
-   * Listens to presence changed, the callback will triggered only for passed IDs
+   * Listens to presence changed
    * @event Listens to presence changed
-   * @param id contact id (xxxxx@c.us) or group id: xxxxx-yyyy@g.us
    * @param callback Callback of on presence changed
    * @returns Disposable object to stop the listening
    */
