@@ -388,7 +388,7 @@ export class ListenerLayer extends ProfileLayer {
    * @returns Stream of ParticipantEvent
    */
   public onParticipantsChanged(
-    callback: (presenceChangedEvent: PresenceEvent) => void
+    callback: (participantChangedEvent: ParticipantEvent) => void
   ): { dispose: () => void };
   /**
    * Listens to participants changed
