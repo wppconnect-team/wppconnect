@@ -15,11 +15,11 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { GroupChangeEvent } from './enum';
-
 export interface ParticipantEvent {
-  by: string;
+  author?: string;
+  authorPushName?: string;
   groupId: string;
-  action: GroupChangeEvent;
-  who: string[];
+  action: 'add' | 'remove' | 'demote' | 'promote' | 'leaver' | 'join';
+  operation: 'add' | 'remove' | 'demote' | 'promote';
+  participants: string[];
 }
