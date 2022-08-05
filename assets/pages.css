@@ -1,0 +1,14 @@
+.tsd-navigation li.pages-entry.pages-entry-page > a {
+	color: var(--color-link);
+}
+.tsd-navigation li.pages-entry > a {
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+}
+.tsd-page-toolbar .table-cell .pages-entry {
+	white-space: normal;
+}
+
+#tsd-search .results .pages-entry-page > a::before {
+	content: '📚 ';
+}
