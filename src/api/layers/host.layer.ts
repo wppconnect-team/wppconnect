@@ -129,8 +129,7 @@ export class HostLayer {
       this.page,
       sessionToken,
       clear,
-      this.options.whatsappVersion,
-      this.onLoadingScreen
+      this.options.whatsappVersion
     );
 
     this.page.on('load', () => {
@@ -162,7 +161,7 @@ export class HostLayer {
       options
     );
 
-    await injectApi(this.page)
+    await injectApi(this.page, this.onLoadingScreen)
       .then(() => {
         this.log('verbose', 'wapi.js injected');
         this.getWAVersion()

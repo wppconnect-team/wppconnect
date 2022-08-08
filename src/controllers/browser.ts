@@ -85,8 +85,7 @@ export async function initWhatsapp(
   page: Page,
   token?: SessionToken,
   clear = true,
-  version?: string,
-  onLoadingScreenCallBack?: LoadingScreenCallback
+  version?: string
 ) {
   await page.setUserAgent(useragentOverride);
 
@@ -104,8 +103,6 @@ export async function initWhatsapp(
       waitUntil: 'domcontentloaded',
     })
     .catch(() => {});
-
-  await onLoadingScreen(page, onLoadingScreenCallBack);
 
   return page;
 }
@@ -167,7 +164,10 @@ export async function onLoadingScreen(
   );
 }
 
-export async function injectApi(page: Page) {
+export async function injectApi(
+  page: Page,
+  onLoadingScreenCallBack?: LoadingScreenCallback
+) {
   const injected = await page
     .evaluate(() => {
       // @ts-ignore
@@ -209,6 +209,7 @@ export async function injectApi(page: Page) {
     ),
   });
 
+  await onLoadingScreen(page, onLoadingScreenCallBack);
   // Make sure WAPI is initialized
   return await page
     .waitForFunction(() => {
