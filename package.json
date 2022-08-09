@@ -67,7 +67,7 @@
     "@types/mocha": "^9.1.1",
     "@types/node": "^16.11.47",
     "@types/rimraf": "^3.0.2",
-    "@types/sharp": "^0.30.4",
+    "@types/sharp": "^0.30.5",
     "@types/shelljs": "^0.8.11",
     "@types/tmp": "^0.2.3",
     "@types/ws": "^8.5.3",
