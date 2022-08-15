@@ -17,20 +17,16 @@
 
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
-import { HostLayer } from './host.layer';
-import {
-  evaluateAndReturn,
-  base64MimeType,
-  fileToBase64,
-  downloadFileToBase64,
-} from '../helpers';
+import { evaluateAndReturn } from '../helpers';
+import { CatalogLayer } from './catalog.layer';
 
-export class LabelsLayer extends HostLayer {
+export class LabelsLayer extends CatalogLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
   }
   /**
    * Create New Label
+   * @category Labels
    *
    * @example
    * ```javascript
@@ -54,6 +50,7 @@ export class LabelsLayer extends HostLayer {
   }
   /**
    * Add or delete label of chatId
+   * @category Labels
    *
    * @example
    * ```javascript
@@ -61,7 +58,7 @@ export class LabelsLayer extends HostLayer {
    * [{labelId:'76', type:'add'},{labelId:'75', type:'remove'}]);
    * //or
    * ```
-   * @param name Name of label
+   * @param chatIds ChatIds
    * @param options options to remove or add
    */
   public async addOrRemoveLabels(chatIds: string, options: string) {
@@ -84,8 +81,29 @@ export class LabelsLayer extends HostLayer {
   public async getAllLabels() {
     return evaluateAndReturn(this.page, () => WPP.labels.getAllLabels());
   }
+
+  /**
+   * Get Label by id
+   * @category Labels
+   * @param id - Id of label
+   *
+   * @example
+   * ```javascript
+   * client.getLabelById('1');
+   * ```
+   */
+  public async getLabelById(id: string) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ id }) => {
+        WPP.labels.getLabelById(id);
+      },
+      { id }
+    );
+  }
   /**
    * Delete all Labels
+   * @category Labels
    *
    * @example
    * ```javascript
@@ -99,6 +117,7 @@ export class LabelsLayer extends HostLayer {
   }
   /**
    * Add or delete label of chatId
+   * @category Labels
    *
    * @example
    * ```javascript
