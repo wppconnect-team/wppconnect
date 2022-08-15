@@ -17,7 +17,6 @@
 
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
-import { BusinessLayer } from './business.layer';
 import { LabelsLayer } from './labels.layer';
 import {
   evaluateAndReturn,
@@ -32,6 +31,7 @@ export class StatusLayer extends LabelsLayer {
   }
   /**
    * Send a image message to status stories
+   * @category Status
    *
    * @example
    * ```javascript
@@ -88,6 +88,7 @@ export class StatusLayer extends LabelsLayer {
   }
   /**
    * Send a video message to status stories
+   * @category Status
    *
    * @example
    * ```javascript
@@ -128,6 +129,7 @@ export class StatusLayer extends LabelsLayer {
 
   /**
    * Send a text to status stories
+   * @category Status
    *
    * @example
    * ```javascript
@@ -142,6 +144,27 @@ export class StatusLayer extends LabelsLayer {
         WPP.status.sendTextStatus(text, options);
       },
       { text, options }
+    );
+  }
+
+  /**
+   * Mark status as read/seen
+   * @category Status
+   *
+   * @example
+   * ```javascript
+   * client.sendReadStatus('[phone_number]@c.us', 'false_status@broadcast_3A169E0FD4BC6E92212F_[]@c.us');
+   * ```
+   * @param chatId Chat ID of contact
+   * @param statusId ID of status msg
+   */
+  public async sendReadStatus(chatId: string, statusId: string) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ chatId, statusId }) => {
+        WPP.status.sendReadStatus(chatId, statusId);
+      },
+      { chatId, statusId }
     );
   }
 }
