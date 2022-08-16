@@ -429,4 +429,23 @@ export class RetrieverLayer extends SenderLayer {
       chatId
     );
   }
+
+  /**
+   * Get the platform message from message ID
+   *
+   * The platform can be:
+   * android
+   * iphone
+   * web
+   * unknown
+   * @category Chat
+   * @param chatId chat id: xxxxx@c.us
+   */
+  public async getPlatformFromMessage(msgId: string): Promise<string> {
+    return await evaluateAndReturn(
+      this.page,
+      (msgId: string) => WPP.chat.getPlatformFromMessage(msgId),
+      msgId
+    );
+  }
 }

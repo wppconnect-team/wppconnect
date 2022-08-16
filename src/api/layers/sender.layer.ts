@@ -1052,6 +1052,19 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
+   * Sets a audio or image view once. Marks message as played
+   * @category Chat
+   * @param msgId Message id: xxxxx@us.c
+   */
+  public async markPlayed(msgId: string) {
+    return evaluateAndReturn(
+      this.page,
+      (msgId) => WPP.chat.markPlayed(msgId),
+      msgId
+    );
+  }
+
+  /**
    * Starts typing ('Typing...' state)
    *
    * @example
