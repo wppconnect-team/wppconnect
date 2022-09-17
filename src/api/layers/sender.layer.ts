@@ -1145,7 +1145,7 @@ export class SenderLayer extends ListenerLayer {
   public async setOnlinePresence(online: boolean = true) {
     return evaluateAndReturn(
       this.page,
-      ({ online }) => WAPI.setOnlinePresence(online),
+      ({ online }) => WPP.conn.markAvailable(online),
       {
         online,
       }
