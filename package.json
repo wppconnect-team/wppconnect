@@ -89,7 +89,7 @@
     "release-it": "^15.4.2",
     "shx": "^0.3.4",
     "ts-node": "^10.9.1",
-    "typedoc": "^0.23.14",
+    "typedoc": "^0.23.15",
     "typescript": "^4.8.3",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
