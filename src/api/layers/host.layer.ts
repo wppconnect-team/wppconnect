@@ -125,13 +125,6 @@ export class HostLayer {
 
     let clear = !hasUserDataDir || (hasUserDataDir && !isValidToken);
 
-    await initWhatsapp(
-      this.page,
-      sessionToken,
-      clear,
-      this.options.whatsappVersion
-    );
-
     this.page.on('load', () => {
       this.log('verbose', 'Page loaded', { type: 'page' });
       this.afterPageLoad();
@@ -140,6 +133,13 @@ export class HostLayer {
       this.cancelAutoClose();
       this.log('verbose', 'Page Closed', { type: 'page' });
     });
+
+    await initWhatsapp(
+      this.page,
+      sessionToken,
+      clear,
+      this.options.whatsappVersion
+    );
   }
 
   protected async afterPageLoad() {
