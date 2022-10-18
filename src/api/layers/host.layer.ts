@@ -54,6 +54,8 @@ export class HostLayer {
   protected autoCloseInterval = null;
   protected autoCloseCalled = false;
   protected statusFind?: StatusFindCallback = null;
+  protected isInitialized = false;
+  protected isInjected = false;
 
   public onLoadingScreen?: LoadingScreenCallback = null;
 
@@ -141,6 +143,8 @@ export class HostLayer {
       this.log('verbose', 'Page loaded', { type: 'page' });
       this.afterPageLoad();
     });
+
+    this.isInitialized = true;
   }
 
   protected async afterPageLoad() {
@@ -162,12 +166,16 @@ export class HostLayer {
       options
     );
 
+    this.isInjected = false;
+
     await injectApi(this.page, this.onLoadingScreen)
       .then(() => {
+        this.isInjected = true;
         this.log('verbose', 'wapi.js injected');
         this.afterPageScriptInjected();
       })
       .catch((e) => {
+        console.log(e);
         this.log('verbose', 'wapi.js failed');
       });
   }
@@ -289,10 +297,11 @@ export class HostLayer {
   }
 
   public async waitForPageLoad() {
-    await this.page
-      .waitForFunction(`!document.querySelector('#initial_startup')`)
-      .catch(() => {});
-    await getInterfaceStatus(this.page).catch(() => null);
+    while (!this.isInjected) {
+      await sleep(200);
+    }
+
+    await this.page.waitForFunction(() => WPP.isReady).catch(() => {});
   }
 
   public async waitForLogin(

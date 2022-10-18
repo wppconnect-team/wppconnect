@@ -57,8 +57,6 @@ export async function unregisterServiceWorker(page: Page) {
  * @param version Versão ou expressão semver
  */
 export async function setWhatsappVersion(page: Page, version: string) {
-  await unregisterServiceWorker(page);
-
   const body = waVersion.getPageContent(version);
 
   await page.setRequestInterception(true);
@@ -89,6 +87,7 @@ export async function initWhatsapp(
 ) {
   await page.setUserAgent(useragentOverride);
 
+  await unregisterServiceWorker(page);
   // Auth with token
   await injectSessionToken(page, token, clear);
 
@@ -117,16 +116,18 @@ export async function onLoadingScreen(
     return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
   }`);
 
-  await page.exposeFunction(
-    'loadingScreen',
-    async (percent: number, message: string) => {
-      if (lastPercent !== percent || lastPercentMessage !== message) {
-        onLoadingScreenCallBack && onLoadingScreenCallBack(percent, message);
-        lastPercent = percent;
-        lastPercentMessage = message;
+  await page
+    .exposeFunction(
+      'loadingScreen',
+      async (percent: number, message: string) => {
+        if (lastPercent !== percent || lastPercentMessage !== message) {
+          onLoadingScreenCallBack && onLoadingScreenCallBack(percent, message);
+          lastPercent = percent;
+          lastPercentMessage = message;
+        }
       }
-    }
-  );
+    )
+    .catch(() => null);
 
   await page.evaluate(
     function (selectors) {

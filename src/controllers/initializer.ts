@@ -32,6 +32,7 @@ import { defaultLogger } from '../utils/logger';
 import * as path from 'path';
 import * as fs from 'fs';
 import sanitize from 'sanitize-filename';
+import { sleep } from '../utils/sleep';
 
 process.on(
   'unhandledRejection',
@@ -241,10 +242,10 @@ export async function create(
 
       let waitLoginPromise = null;
       client.onStateChange(async (state) => {
-        if (
-          state === SocketState.UNPAIRED ||
-          state === SocketState.UNPAIRED_IDLE
-        ) {
+        const connected = await page.evaluate(() => WPP.conn.isAuthenticated());
+        if (!connected) {
+          await sleep(2000);
+
           if (!waitLoginPromise) {
             waitLoginPromise = client
               .waitForLogin(catchQR, statusFind)

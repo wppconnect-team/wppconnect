@@ -160,10 +160,14 @@ export async function injectSessionToken(
   };
   page.on('request', reqHandler);
 
-  await page.goto(puppeteerConfig.whatsappUrl);
+  await page.goto(puppeteerConfig.whatsappUrl + '?_=' + Date.now());
 
   if (clear) {
     await page.evaluate((session) => {
+      if (document.title !== 'Initializing WhatsApp') {
+        return;
+      }
+
       localStorage.clear();
 
       window.indexedDB

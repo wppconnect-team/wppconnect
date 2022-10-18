@@ -30,6 +30,7 @@ export class Whatsapp extends BusinessLayer {
     super(page, session, options);
 
     let connected = false;
+    let interval: any = null;
 
     const removeToken = async () => {
       this.log('info', 'Session Unpaired', { type: 'session' });
@@ -47,6 +48,7 @@ export class Whatsapp extends BusinessLayer {
         if (!connected) {
           await removeToken();
         }
+        clearInterval(interval);
       });
 
       page
@@ -57,16 +59,17 @@ export class Whatsapp extends BusinessLayer {
         .catch(() => null);
     }
 
-    this.onStateChange(async (state) => {
-      connected = await page
+    interval = setInterval(async (state) => {
+      const newConnected = await page
         .evaluate(() => WPP.conn.isAuthenticated())
         .catch(() => null);
 
-      if (connected === null) {
+      if (newConnected === null || newConnected === connected) {
         return;
       }
 
-      if (connected) {
+      if (newConnected) {
+        connected = newConnected;
         setTimeout(async () => {
           this.log('verbose', 'Updating session token', { type: 'token' });
           const tokenData = await this.getSessionTokenBrowser();
@@ -85,18 +88,26 @@ export class Whatsapp extends BusinessLayer {
           }
         }, 1000);
       } else {
+        if (!newConnected && connected) {
+          setTimeout(async () => {
+            await page.evaluate(() => localStorage.clear());
+            await page.reload();
+          }, 1000);
+        }
+        connected = newConnected;
+
         setTimeout(async () => {
           await removeToken();
 
           // Fire only after a success connection and disconnection
-          if (connected && this.statusFind) {
+          if (newConnected && this.statusFind) {
             try {
               this.statusFind('desconnectedMobile', session);
             } catch (error) {}
           }
         }, 1000);
       }
-    });
+    }, 1000);
   }
 
   /**
