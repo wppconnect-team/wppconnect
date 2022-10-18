@@ -21,6 +21,7 @@ import * as puppeteer from 'puppeteer';
 import * as qrcode from 'qrcode-terminal';
 import { puppeteerConfig } from '../config/puppeteer.config';
 import { isValidSessionToken } from '../token-store';
+import { sleep } from '../utils/sleep';
 
 export const getInterfaceStatus = async (
   waPage: puppeteer.Page
@@ -190,13 +191,21 @@ export async function injectSessionToken(
         })
         .catch(() => null);
     });
+
+    await sleep(2000);
   }
-  await page.evaluate((session) => {
-    Object.keys(session).forEach((key) => {
-      localStorage.setItem(key, session[key]);
-    });
+
+  if (token.WASecretBundle !== 'MultiDevice') {
+    await page.evaluate((session) => {
+      Object.keys(session).forEach((key) => {
+        localStorage.setItem(key, session[key]);
+      });
+    }, token as any);
+  }
+
+  await page.evaluate(() => {
     localStorage.setItem('remember-me', 'true');
-  }, token as any);
+  });
 
   // Disable
   page.removeAllListeners('request');
