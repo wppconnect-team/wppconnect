@@ -1,3 +1,12 @@
+# 1.18.0 (2022-10-18)
+
+
+### Features
+
+* Improved QRCode re-scan (fix [#1189](https://github.com/wppconnect-team/wppconnect/issues/1189)) ([8ec5264](https://github.com/wppconnect-team/wppconnect/commit/8ec5264e55e01c15efd3e3c273c54e34cad166c9))
+
+
+
 ## 1.17.1 (2022-10-10)
 
 
