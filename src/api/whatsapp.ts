@@ -23,7 +23,6 @@ import { useragentOverride } from '../config/WAuserAgente';
 import { CreateConfig } from '../config/create-config';
 import axios from 'axios';
 import treekill = require('tree-kill');
-import { SocketState } from './model/enum';
 import { evaluateAndReturn } from './helpers';
 
 export class Whatsapp extends BusinessLayer {
@@ -49,77 +48,53 @@ export class Whatsapp extends BusinessLayer {
           await removeToken();
         }
       });
+
+      page
+        .evaluate(() => WPP.conn.isAuthenticated())
+        .then((isAuthenticated) => {
+          connected = isAuthenticated;
+        })
+        .catch(() => null);
     }
 
     this.onStateChange(async (state) => {
-      switch (state) {
-        case SocketState.CONNECTED:
-          connected = true;
-          // wait for localStore populate
-          setTimeout(async () => {
-            this.log('verbose', 'Updating session token', { type: 'token' });
-            const tokenData = await this.getSessionTokenBrowser();
-            const updated = await Promise.resolve(
-              this.tokenStore.setToken(this.session, tokenData)
-            );
+      connected = await page
+        .evaluate(() => WPP.conn.isAuthenticated())
+        .catch(() => null);
 
-            if (updated) {
-              this.log('verbose', 'Session token updated', {
-                type: 'token',
-              });
-            } else {
-              this.log('warn', 'Failed to update session token', {
-                type: 'token',
-              });
-            }
-          }, 1000);
-          break;
+      if (connected === null) {
+        return;
+      }
 
-        case SocketState.UNPAIRED:
-        case SocketState.UNPAIRED_IDLE:
-          setTimeout(async () => {
-            await removeToken();
+      if (connected) {
+        setTimeout(async () => {
+          this.log('verbose', 'Updating session token', { type: 'token' });
+          const tokenData = await this.getSessionTokenBrowser();
+          const updated = await Promise.resolve(
+            this.tokenStore.setToken(this.session, tokenData)
+          );
 
-            // Fire only after a success connection and disconnection
-            if (connected && this.statusFind) {
-              try {
-                this.statusFind('desconnectedMobile', session);
-              } catch (error) {}
-            }
+          if (updated) {
+            this.log('verbose', 'Session token updated', {
+              type: 'token',
+            });
+          } else {
+            this.log('warn', 'Failed to update session token', {
+              type: 'token',
+            });
+          }
+        }, 1000);
+      } else {
+        setTimeout(async () => {
+          await removeToken();
 
-            if (connected) {
-              await page.evaluate(() => localStorage.clear());
-              await page.evaluate(() => {
-                const promises = [];
-                window.indexedDB
-                  .databases()
-                  .then((dbs) => {
-                    dbs.forEach((db) => {
-                      promises.push(
-                        new Promise<void>((resolve) => {
-                          const r = window.indexedDB.deleteDatabase(db.name);
-                          r.onerror = r.onblocked = function () {
-                            this.result.close();
-                            window.indexedDB.deleteDatabase(db.name);
-                            resolve();
-                          };
-                          r.onsuccess = function () {
-                            resolve();
-                          };
-                        })
-                      );
-                    });
-                  })
-                  .catch(() => null);
-
-                return Promise.all(promises);
-              });
-              await page.reload();
-            }
-
-            connected = false;
-          }, 1000);
-          break;
+          // Fire only after a success connection and disconnection
+          if (connected && this.statusFind) {
+            try {
+              this.statusFind('desconnectedMobile', session);
+            } catch (error) {}
+          }
+        }, 1000);
       }
     });
   }

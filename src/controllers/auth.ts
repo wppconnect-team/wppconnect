@@ -67,39 +67,23 @@ export const getInterfaceStatus = async (
  * @param waPage
  */
 export const isAuthenticated = async (waPage: puppeteer.Page) => {
-  const status = await getInterfaceStatus(waPage);
-  if (typeof status !== 'string') {
-    return null;
-  }
-
-  return ['CONNECTED', 'PAIRING'].includes(status);
+  return await waPage.evaluate(() => WPP.conn.isAuthenticated());
 };
 
 export const needsToScan = async (waPage: puppeteer.Page) => {
-  const status = await getInterfaceStatus(waPage);
-  if (typeof status !== 'string') {
-    return null;
-  }
+  const connected = await isAuthenticated(waPage);
 
-  return status === 'UNPAIRED';
+  return !connected;
 };
 
 export const isInsideChat = async (waPage: puppeteer.Page) => {
-  const status = await getInterfaceStatus(waPage);
-  if (typeof status !== 'string') {
-    return null;
-  }
-
-  return status === 'CONNECTED';
+  return await waPage.evaluate(() => WPP.conn.isMainReady());
 };
 
 export const isConnectingToPhone = async (waPage: puppeteer.Page) => {
-  const status = await getInterfaceStatus(waPage);
-  if (typeof status !== 'string') {
-    return null;
-  }
-
-  return status === 'PAIRING';
+  return await waPage.evaluate(
+    () => WPP.conn.isMainLoaded() && !WPP.conn.isMainReady()
+  );
 };
 
 export async function asciiQr(code: string): Promise<string> {
