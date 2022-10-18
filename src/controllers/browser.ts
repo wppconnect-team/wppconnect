@@ -187,22 +187,12 @@ export async function injectApi(
   });
 
   await page
-    .waitForFunction(
-      () => {
-        return typeof window.WPP !== 'undefined' && window.WPP.isReady;
-      },
-      {
-        timeout: 60000,
-      }
-    )
-    .catch(() => false);
-
-  await page
     .evaluate(() => {
       WPP.chat.defaultSendMessageOptions.createChat = true;
       WPP.conn.setKeepAlive(true);
     })
     .catch(() => false);
+
   await page.addScriptTag({
     path: require.resolve(
       path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
@@ -211,11 +201,12 @@ export async function injectApi(
 
   await onLoadingScreen(page, onLoadingScreenCallBack);
   // Make sure WAPI is initialized
-  return await page
+  await page
     .waitForFunction(() => {
       return (
         typeof window.WAPI !== 'undefined' &&
-        typeof window.Store !== 'undefined'
+        typeof window.Store !== 'undefined' &&
+        window.WPP.isReady
       );
     })
     .catch(() => false);

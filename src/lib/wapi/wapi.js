@@ -128,26 +128,33 @@ import {
 import { getBusinessProfilesProducts, getOrderbyMsg } from './business';
 import { storeObjects } from './store/store-objects';
 
-window['webpackJsonp'] = window['webpackJsonp'] || [];
-window['webpackChunkbuild'] = window['webpackChunkbuild'] || [];
+const readyPromise = new Promise((resolve) => {
+  if (WPP.isReady) {
+    resolve();
+    return;
+  }
+  WPP.webpack.onReady(resolve);
+});
 
 if (typeof window.Store === 'undefined') {
   window.Store = {};
   window.Store.promises = {};
 
-  for (const store of storeObjects) {
-    window.Store.promises[store.id] = Promise.resolve(
-      WPP.webpack.search(store.conditions)
-    )
-      .then(store.conditions)
-      .then((m) => {
-        if (store.id === 'Store') {
-          window.Store = Object.assign({}, window.Store, m);
-        } else {
-          window.Store[store.id] = m;
-        }
-      });
-  }
+  readyPromise.then(() => {
+    for (const store of storeObjects) {
+      window.Store.promises[store.id] = Promise.resolve(
+        WPP.webpack.search(store.conditions)
+      )
+        .then(store.conditions)
+        .then((m) => {
+          if (store.id === 'Store') {
+            window.Store = Object.assign({}, window.Store, m);
+          } else {
+            window.Store[store.id] = m;
+          }
+        });
+    }
+  });
 }
 
 if (typeof window.WAPI === 'undefined') {
@@ -449,15 +456,15 @@ if (typeof window.WAPI === 'undefined') {
     return await WPP.conn.logout();
   };
 
-  addOnStreamChange();
-  addOnStateChange();
-  initNewMessagesListener();
-  addNewMessagesListener();
-  allNewMessagesListener();
-  addOnNewAcks();
-  addOnAddedToGroup();
-  addOnLiveLocation();
-  addOnParticipantsChange();
-  addOnNotificationMessage();
-  addOnPresenceChanged();
+  readyPromise.then(addOnStreamChange);
+  readyPromise.then(addOnStateChange);
+  readyPromise.then(initNewMessagesListener);
+  readyPromise.then(addNewMessagesListener);
+  readyPromise.then(allNewMessagesListener);
+  readyPromise.then(addOnNewAcks);
+  readyPromise.then(addOnAddedToGroup);
+  readyPromise.then(addOnLiveLocation);
+  readyPromise.then(addOnParticipantsChange);
+  readyPromise.then(addOnNotificationMessage);
+  readyPromise.then(addOnPresenceChanged);
 }

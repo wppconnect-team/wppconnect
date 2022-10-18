@@ -125,10 +125,6 @@ export class HostLayer {
 
     let clear = !hasUserDataDir || (hasUserDataDir && !isValidToken);
 
-    this.page.on('load', () => {
-      this.log('verbose', 'Page loaded', { type: 'page' });
-      this.afterPageLoad();
-    });
     this.page.on('close', () => {
       this.cancelAutoClose();
       this.log('verbose', 'Page Closed', { type: 'page' });
@@ -140,6 +136,11 @@ export class HostLayer {
       clear,
       this.options.whatsappVersion
     );
+
+    this.page.on('load', () => {
+      this.log('verbose', 'Page loaded', { type: 'page' });
+      this.afterPageLoad();
+    });
   }
 
   protected async afterPageLoad() {
@@ -164,20 +165,24 @@ export class HostLayer {
     await injectApi(this.page, this.onLoadingScreen)
       .then(() => {
         this.log('verbose', 'wapi.js injected');
-        this.getWAVersion()
-          .then((version) => {
-            this.log('info', `WhatsApp WEB version: ${version}`);
-          })
-          .catch(() => null);
-        this.getWAJSVersion()
-          .then((version) => {
-            this.log('info', `WA-JS version: ${version}`);
-          })
-          .catch(() => null);
+        this.afterPageScriptInjected();
       })
       .catch((e) => {
         this.log('verbose', 'wapi.js failed');
       });
+  }
+
+  protected async afterPageScriptInjected() {
+    this.getWAVersion()
+      .then((version) => {
+        this.log('info', `WhatsApp WEB version: ${version}`);
+      })
+      .catch(() => null);
+    this.getWAJSVersion()
+      .then((version) => {
+        this.log('info', `WA-JS version: ${version}`);
+      })
+      .catch(() => null);
   }
 
   protected tryAutoClose() {
