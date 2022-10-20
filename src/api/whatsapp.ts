@@ -26,10 +26,11 @@ import treekill = require('tree-kill');
 import { evaluateAndReturn } from './helpers';
 
 export class Whatsapp extends BusinessLayer {
+  private connected: boolean | null = null;
+
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
 
-    let connected = false;
     let interval: any = null;
 
     const removeToken = async () => {
@@ -45,31 +46,24 @@ export class Whatsapp extends BusinessLayer {
 
     if (this.page) {
       this.page.on('close', async () => {
-        if (!connected) {
+        if (this.connected === false) {
           await removeToken();
         }
         clearInterval(interval);
       });
-
-      page
-        .evaluate(() => WPP.conn.isAuthenticated())
-        .then((isAuthenticated) => {
-          connected = isAuthenticated;
-        })
-        .catch(() => null);
     }
 
     interval = setInterval(async (state) => {
       const newConnected = await page
-        .evaluate(() => WPP.conn.isAuthenticated())
+        .evaluate(() => WAPI.isRegistered())
         .catch(() => null);
 
-      if (newConnected === null || newConnected === connected) {
+      if (newConnected === null || newConnected === this.connected) {
         return;
       }
 
       if (newConnected) {
-        connected = newConnected;
+        this.connected = newConnected;
         setTimeout(async () => {
           this.log('verbose', 'Updating session token', { type: 'token' });
           const tokenData = await this.getSessionTokenBrowser();
@@ -88,13 +82,13 @@ export class Whatsapp extends BusinessLayer {
           }
         }, 1000);
       } else {
-        if (!newConnected && connected) {
+        if (!newConnected && this.connected) {
           setTimeout(async () => {
             await page.evaluate(() => localStorage.clear());
             await page.reload();
           }, 1000);
         }
-        connected = newConnected;
+        this.connected = newConnected;
 
         setTimeout(async () => {
           await removeToken();
@@ -110,6 +104,15 @@ export class Whatsapp extends BusinessLayer {
     }, 1000);
   }
 
+  protected async afterPageScriptInjected() {
+    await super.afterPageScriptInjected();
+    this.page
+      .evaluate(() => WAPI.isRegistered())
+      .then((isAuthenticated) => {
+        this.connected = isAuthenticated;
+      })
+      .catch(() => null);
+  }
   /**
    * Decrypts message file
    * @param data Message object

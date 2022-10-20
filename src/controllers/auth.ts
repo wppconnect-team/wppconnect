@@ -67,7 +67,7 @@ export const getInterfaceStatus = async (
  * @param waPage
  */
 export const isAuthenticated = async (waPage: puppeteer.Page) => {
-  return await waPage.evaluate(() => WPP.conn.isAuthenticated());
+  return await waPage.evaluate(() => WAPI.isRegistered());
 };
 
 export const needsToScan = async (waPage: puppeteer.Page) => {

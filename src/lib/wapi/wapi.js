@@ -456,6 +456,14 @@ if (typeof window.WAPI === 'undefined') {
     return await WPP.conn.logout();
   };
 
+  /**
+   * @todo Temporary fix while is not implemented on WA-JS
+   */
+  window.WAPI.isRegistered = function () {
+    const m = WPP.webpack.search((m) => m.isRegistered);
+    return m.isRegistered();
+  };
+
   readyPromise.then(addOnStreamChange);
   readyPromise.then(addOnStateChange);
   readyPromise.then(initNewMessagesListener);

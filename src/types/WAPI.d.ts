@@ -82,6 +82,7 @@ interface WAPI {
   getWAVersion: () => string;
   isConnected: () => boolean;
   isLoggedIn: () => boolean;
+  isRegistered: () => boolean;
   joinGroup: (groupId: string) => Promise<string | boolean>;
   killServiceWorker: () => boolean;
   leaveGroup: (groupId: string) => any;

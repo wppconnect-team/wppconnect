@@ -242,7 +242,7 @@ export async function create(
 
       let waitLoginPromise = null;
       client.onStateChange(async (state) => {
-        const connected = await page.evaluate(() => WPP.conn.isAuthenticated());
+        const connected = await page.evaluate(() => WAPI.isRegistered());
         if (!connected) {
           await sleep(2000);
 

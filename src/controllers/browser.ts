@@ -102,17 +102,19 @@ export async function initWhatsapp(
     await setWhatsappVersion(page, version);
   }
 
-  log?.('verbose', `Loading WhatsApp WEB`);
+  setTimeout(() => {
+    log?.('verbose', `Loading WhatsApp WEB`);
 
-  const timeout = 10 * 1000;
-  page
-    .goto(puppeteerConfig.whatsappUrl, {
-      timeout,
-      waitUntil: 'domcontentloaded',
-    })
-    .catch(() => {});
+    const timeout = 10 * 1000;
+    page
+      .goto(puppeteerConfig.whatsappUrl, {
+        timeout,
+        waitUntil: 'domcontentloaded',
+      })
+      .catch(() => {});
 
-  log?.('verbose', `WhatsApp WEB loaded`);
+    log?.('verbose', `WhatsApp WEB loaded`);
+  }, 1000);
 
   return page;
 }
