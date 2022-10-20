@@ -1,3 +1,12 @@
+## 1.18.1 (2022-10-20)
+
+
+### Bug Fixes
+
+* Fixed "Checking phone is connected" without autoClose ([ad63fb5](https://github.com/wppconnect-team/wppconnect/commit/ad63fb56a2255a67bcb16227fa6a61210f8633d1))
+
+
+
 # 1.18.0 (2022-10-18)
 
 
