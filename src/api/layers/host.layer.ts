@@ -290,8 +290,14 @@ export class HostLayer {
   public async waitForInChat() {
     let inChat = await isInsideChat(this.page);
 
+    const start = Date.now();
+
     while (inChat === false) {
-      await sleep(200);
+      if (Date.now() - start >= 60000) {
+        return false;
+      }
+
+      await sleep(1000);
       inChat = await isInsideChat(this.page);
     }
     return inChat;
@@ -350,9 +356,9 @@ export class HostLayer {
     if (authenticated === true) {
       // Reinicia o contador do autoclose
       this.cancelAutoClose();
-      this.startAutoClose();
       // Wait for interface update
       await sleep(200);
+      this.startAutoClose();
       this.log('http', 'Checking phone is connected...');
       const inChat = await this.waitForInChat();
 
