@@ -32,6 +32,7 @@ import { WebSocketTransport } from './websocket';
 import { Logger } from 'winston';
 import { SessionToken } from '../token-store';
 import { LoadingScreenCallback } from '../api/model';
+import { LogLevel } from '../utils/logger';
 
 export async function unregisterServiceWorker(page: Page) {
   await page.evaluateOnNewDocument(() => {
@@ -83,25 +84,35 @@ export async function initWhatsapp(
   page: Page,
   token?: SessionToken,
   clear = true,
-  version?: string
+  version?: string,
+  log?: (level: LogLevel, message: string, meta?: object) => any
 ) {
   await page.setUserAgent(useragentOverride);
 
   await unregisterServiceWorker(page);
+
+  if (clear) {
+    log?.('verbose', 'Cleaning localStorage');
+  }
   // Auth with token
   await injectSessionToken(page, token, clear);
 
   if (version) {
+    log?.('verbose', `Setting WhatsApp WEB version to ${version}`);
     await setWhatsappVersion(page, version);
   }
 
+  log?.('verbose', `Loading WhatsApp WEB`);
+
   const timeout = 10 * 1000;
-  await page
+  page
     .goto(puppeteerConfig.whatsappUrl, {
       timeout,
       waitUntil: 'domcontentloaded',
     })
     .catch(() => {});
+
+  log?.('verbose', `WhatsApp WEB loaded`);
 
   return page;
 }

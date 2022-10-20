@@ -136,7 +136,8 @@ export class HostLayer {
       this.page,
       sessionToken,
       clear,
-      this.options.whatsappVersion
+      this.options.whatsappVersion,
+      this.log.bind(this)
     );
 
     this.page.on('load', () => {
