@@ -21,6 +21,7 @@ import type {
   LocationMessageOptions,
   SendMessageReturn,
   TextMessageOptions,
+  PoolMessageOptions,
 } from '@wppconnect/wa-js/dist/chat';
 import * as path from 'path';
 import { JSONObject, Page } from 'puppeteer';
@@ -1208,6 +1209,54 @@ export class SenderLayer extends ListenerLayer {
     );
   }
 
+  /**
+   * Send a create poll message
+   *
+   * Note: This only works for groups
+   *
+   * @example
+   * ```javascript
+   * // Single pool
+   * client.sendPollMessage(
+   *  '[number]@g.us',
+   *  'A poll name',
+   *  ['Option 1', 'Option 2', 'Option 3']
+   * );
+   * ```
+   * // Selectable Count
+   * ```javascript
+   * // Single pool
+   * client.sendPollMessage(
+   *  '[number]@g.us',
+   *  'A poll name',
+   *  ['Option 1', 'Option 2', 'Option 3'],
+   *  {
+   *    selectableCount: 1,
+   *  }
+   * );
+   * ```
+   *
+   * @category Chat
+   */
+  public async sendPollMessage(
+    chatId: string,
+    name: string,
+    choices: string[],
+    options?: PoolMessageOptions
+  ) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ chatId, name, choices, options }) => {
+        WPP.chat.sendCreatePollMessage(chatId, name, choices, options);
+      },
+      {
+        chatId,
+        name,
+        choices,
+        options: options as unknown as JSONObject,
+      }
+    );
+  }
   /**
    * Sets the chat state
    * Deprecated in favor of Use startTyping or startRecording functions
