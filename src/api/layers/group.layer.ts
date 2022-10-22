@@ -168,14 +168,12 @@ export class GroupLayer extends RetrieverLayer {
     groupId: string,
     participantId: string | string[]
   ) {
-    await evaluateAndReturn(
+    return await evaluateAndReturn(
       this.page,
       ({ groupId, participantId }) =>
         WPP.group.addParticipants(groupId, participantId),
       { groupId, participantId }
     );
-
-    return true;
   }
 
   /**
