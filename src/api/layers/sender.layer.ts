@@ -1244,11 +1244,10 @@ export class SenderLayer extends ListenerLayer {
     choices: string[],
     options?: PoolMessageOptions
   ) {
-    return await evaluateAndReturn(
+    const sendResult = await evaluateAndReturn(
       this.page,
-      ({ chatId, name, choices, options }) => {
-        WPP.chat.sendCreatePollMessage(chatId, name, choices, options);
-      },
+      ({ chatId, name, choices, options }) =>
+        WPP.chat.sendCreatePollMessage(chatId, name, choices, options),
       {
         chatId,
         name,
@@ -1256,6 +1255,22 @@ export class SenderLayer extends ListenerLayer {
         options: options as unknown as JSONObject,
       }
     );
+
+    // I don't know why the evaluate is returning undefined for direct call
+    // To solve that, I added `JSON.parse(JSON.stringify(<message>))` to solve that
+    const result = (await evaluateAndReturn(
+      this.page,
+      async ({ messageId }) => {
+        return JSON.parse(JSON.stringify(await WAPI.getMessageById(messageId)));
+      },
+      { messageId: sendResult.id }
+    )) as Message;
+
+    if (result['erro'] == true) {
+      throw result;
+    }
+
+    return result;
   }
   /**
    * Sets the chat state
