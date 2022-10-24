@@ -46,7 +46,7 @@ export class MemoryTokenStore implements TokenStore {
   }
   public setToken(
     sessionName: string,
-    tokenData: SessionToken | void
+    tokenData: SessionToken | null
   ): boolean {
     if (!tokenData) {
       return false;

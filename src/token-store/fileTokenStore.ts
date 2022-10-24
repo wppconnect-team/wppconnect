@@ -137,7 +137,7 @@ export class FileTokenStore implements TokenStore {
 
   public async setToken(
     sessionName: string,
-    tokenData: SessionToken | void
+    tokenData: SessionToken | null
   ): Promise<boolean> {
     if (!tokenData || !isValidSessionToken(tokenData)) {
       return false;
