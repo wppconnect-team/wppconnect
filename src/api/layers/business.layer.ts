@@ -19,6 +19,8 @@ import { Page } from 'puppeteer';
 import { ControlsLayer } from './controls.layer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
+import { BusinessProfileModel } from '@wppconnect/wa-js/dist/whatsapp';
+import { Chat } from '../model';
 
 export class BusinessLayer extends ControlsLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -36,7 +38,21 @@ export class BusinessLayer extends ControlsLayer {
       { id }
     );
   }
-
+  /**
+   * Get Business Profile
+   * @param id Buisness profile id ('00000@c.us')
+   */
+  public async getBusinessProfile(id: string) {
+    return evaluateAndReturn(
+      this.page,
+      async ({ id }) => {
+        return JSON.parse(
+          JSON.stringify(await WPP.contact.getBusinessProfile(id))
+        );
+      },
+      { id }
+    );
+  }
   /**
    * Querys order catalog
    * @param messageId string
@@ -47,6 +63,173 @@ export class BusinessLayer extends ControlsLayer {
       this.page,
       ({ messageId }) => WAPI.getOrderbyMsg(messageId),
       { messageId }
+    );
+  }
+
+  /**
+ * Update your business profile
+ *
+ * @example
+ * ```javascript
+ * await client.editBusinessProfile({description: 'New description for profile'});
+ * ```
+ *
+ * ```javascript
+ * await client.editBusinessProfile({categories: {
+    id: "133436743388217",
+    localized_display_name: "Artes e entretenimento",
+    not_a_biz: false,
+  }});
+ * ```
+ *
+ * ```javascript
+ * await client.editBusinessProfile({address: 'Street 01, New York'});
+ * ```
+ *
+ * ```javascript
+ * await client.editBusinessProfile({email: 'test@test.com.br'});
+ * ```
+ *
+ * Change website of profile (max 2 sites)
+ * ```javascript
+ * await client.editBusinessProfile({website: [
+  "https://www.wppconnect.io",
+  "https://www.teste2.com.br",
+]});
+ * ```
+ *
+ * Change businessHours for Specific Hours
+ * ```javascript
+ * await client.editBusinessProfile({ businessHours: {
+ * {
+      tue: {
+        mode: "specific_hours",
+        hours: [
+          [
+            540,
+            1080,
+          ],
+        ],
+      },
+      wed: {
+        mode: "specific_hours",
+        hours: [
+          [
+            540,
+            1080,
+          ],
+        ],
+      },
+      thu: {
+        mode: "specific_hours",
+        hours: [
+          [
+            540,
+            1080,
+          ],
+        ],
+      },
+      fri: {
+        mode: "specific_hours",
+        hours: [
+          [
+            540,
+            1080,
+          ],
+        ],
+      },
+      sat: {
+        mode: "specific_hours",
+        hours: [
+          [
+            540,
+            1080,
+          ],
+        ],
+      },
+      sun: {
+        mode: "specific_hours",
+        hours: [
+          [
+            540,
+            1080,
+          ],
+        ],
+      },
+    }
+  },
+  timezone: "America/Sao_Paulo"
+  });
+ *
+ * Change businessHours for Always Opened
+ * ```javascript
+ * await client.editBusinessProfile({ businessHours: {
+    {
+      mon: {
+        mode: "open_24h",
+      },
+      tue: {
+        mode: "open_24h",
+      },
+      wed: {
+        mode: "open_24h",
+      },
+      thu: {
+        mode: "open_24h",
+      },
+      fri: {
+        mode: "open_24h",
+      },
+      sat: {
+        mode: "open_24h",
+      },
+      sun: {
+        mode: "open_24h",
+      },
+    }
+    timezone: "America/Sao_Paulo"
+  });
+ *
+ * Change businessHours for Appointment Only
+ * ```javascript
+ * await client.editBusinessProfile({ businessHours: { {
+    mon: {
+      mode: "appointment_only",
+    },
+    tue: {
+      mode: "appointment_only",
+    },
+    wed: {
+      mode: "appointment_only",
+    },
+    thu: {
+      mode: "appointment_only",
+    },
+    fri: {
+      mode: "appointment_only",
+    },
+    sat: {
+      mode: "appointment_only",
+    },
+    sun: {
+      mode: "appointment_only",
+    },
+  }
+    timezone: "America/Sao_Paulo"
+  });
+ *
+ *
+ * ```
+ */
+  public async editBusinessProfile(options: any) {
+    return await evaluateAndReturn(
+      this.page,
+      async ({ options }) => {
+        return JSON.parse(
+          JSON.stringify(await WPP.profile.editBusinessProfile(options))
+        );
+      },
+      { options }
     );
   }
 
