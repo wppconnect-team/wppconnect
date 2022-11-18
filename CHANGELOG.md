@@ -1,3 +1,12 @@
+## 1.19.1 (2022-11-18)
+
+
+### Bug Fixes
+
+* Fixed onMessage method (fix [#1351](https://github.com/wppconnect-team/wppconnect/issues/1351)) ([e8549a1](https://github.com/wppconnect-team/wppconnect/commit/e8549a10cf7b3ed5a04209bdd7d58b9a3c073f32))
+
+
+
 # 1.19.0 (2022-11-02)
 
 
