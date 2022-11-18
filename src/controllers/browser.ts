@@ -33,6 +33,7 @@ import { Logger } from 'winston';
 import { SessionToken } from '../token-store';
 import { LoadingScreenCallback } from '../api/model';
 import { LogLevel } from '../utils/logger';
+import { sleep } from '../utils/sleep';
 
 export async function unregisterServiceWorker(page: Page) {
   await page.evaluateOnNewDocument(() => {
@@ -49,6 +50,11 @@ export async function unregisterServiceWorker(page: Page) {
     // Disable service worker registration
     // @ts-ignore
     navigator.serviceWorker.register = new Promise(() => {});
+
+    setInterval(() => {
+      window.onerror = console.error;
+      window.onunhandledrejection = console.error;
+    }, 500);
   });
 }
 
@@ -195,6 +201,15 @@ export async function injectApi(
   if (injected) {
     return;
   }
+
+  // Wait for some loaded modules
+  await page
+    .waitForFunction(
+      () => ((window as any)?.webpackChunkwhatsapp_web_client?.length || 0) > 3
+    )
+    .catch(() => null);
+
+  await sleep(100);
 
   await page.addScriptTag({
     path: require.resolve('@wppconnect/wa-js'),
