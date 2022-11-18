@@ -63,20 +63,16 @@ import {
   sendFile,
   sendPtt,
   sendImage,
-  sendImageAsSticker,
   sendImageWithProduct,
   sendLocation,
   sendMessage,
   sendMessage2,
   sendMessageWithTags,
   sendMessageWithThumb,
-  sendSticker,
   sendVideoAsGif,
   setMyName,
   getTheme,
   setTheme,
-  restartService,
-  killServiceWorker,
   sendLinkPreview,
   scope,
   getchatId,
@@ -145,6 +141,12 @@ if (typeof window.Store === 'undefined') {
       window.Store.promises[store.id] = Promise.resolve(
         WPP.webpack.search(store.conditions)
       )
+        .then((m) => {
+          if (!m) {
+            console.error(`Store Object '${store.id}' was not found`);
+          }
+          return m;
+        })
         .then(store.conditions)
         .then((m) => {
           if (store.id === 'Store') {
@@ -202,10 +204,7 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.processFiles = processFiles;
   window.WAPI.sendImageWithProduct = sendImageWithProduct;
   window.WAPI.forwardMessages = forwardMessages;
-  window.WAPI._sendSticker = sendSticker;
   window.WAPI.encryptAndUploadFile = encryptAndUploadFile;
-  window.WAPI.sendImageAsSticker = sendImageAsSticker;
-  window.WAPI.sendImageAsStickerGif = sendImageAsSticker;
   window.WAPI.setOnlinePresence = setOnlinePresence;
   window.WAPI.sendLocation = sendLocation;
   window.WAPI.sendLinkPreview = sendLinkPreview;
@@ -260,8 +259,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.getBatteryLevel = getBatteryLevel;
   window.WAPI.base64ImageToFile = base64ToFile;
   window.WAPI.base64ToFile = base64ToFile;
-  window.WAPI.restartService = restartService;
-  window.WAPI.killServiceWorker = killServiceWorker;
   window.WAPI.sendMute = sendMute;
   window.WAPI.startPhoneWatchdog = startPhoneWatchdog;
   window.WAPI.stopPhoneWatchdog = stopPhoneWatchdog;

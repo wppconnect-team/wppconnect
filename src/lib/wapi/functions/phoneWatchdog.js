@@ -21,7 +21,7 @@ let pong = true;
 async function sendPing() {
   // Check only if the interface is in CHAT and not disconnected
   if (
-    window.Store.Stream.mode !== 'MAIN' ||
+    WPP.whatsapp.Stream.mode !== 'MAIN' ||
     WPP.whatsapp.Socket.state === 'TIMEOUT'
   ) {
     return;

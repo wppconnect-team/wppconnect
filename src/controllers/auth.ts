@@ -37,10 +37,7 @@ export const getInterfaceStatus = async (
           return 'UNPAIRED';
         }
 
-        const streamStatus =
-          window['Store'] &&
-          window['Store'].Stream &&
-          window['Store'].Stream.displayInfo;
+        const streamStatus = WPP?.whatsapp?.Stream?.displayInfo;
         if (['PAIRING', 'RESUMING', 'SYNCING'].includes(streamStatus)) {
           return 'PAIRING';
         }

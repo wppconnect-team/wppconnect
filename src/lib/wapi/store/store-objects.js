@@ -37,33 +37,6 @@ export const storeObjects = [
     conditions: (module) => (module.sendQueryGroupInviteCode ? module : null),
   },
   {
-    id: 'ServiceWorker',
-    conditions: (module) =>
-      module.default && module.default.killServiceWorker ? module : null,
-  },
-  {
-    id: 'WapQuery',
-    conditions: (module) =>
-      module.default &&
-      module.default.queryExist &&
-      module.default.getCapabilities
-        ? module.default
-        : null,
-  },
-  {
-    id: 'CryptoLib',
-    conditions: (module) => (module.decryptE2EMedia ? module : null),
-  },
-  {
-    id: 'OpenChat',
-    conditions: (module) =>
-      module.default &&
-      module.default.prototype &&
-      module.default.prototype.openChat
-        ? module.default
-        : null,
-  },
-  {
     id: 'Archive',
     conditions: (module) => (module.setArchive ? module : null),
   },
@@ -82,21 +55,6 @@ export const storeObjects = [
         : null,
   },
   {
-    id: 'Parser',
-    conditions: (module) =>
-      module.convertToTextWithoutSpecialEmojis ? module.default : null,
-  },
-  {
-    id: 'Builders',
-    conditions: (module) =>
-      module.TemplateMessage && module.HydratedFourRowTemplate ? module : null,
-  },
-  {
-    id: 'CallUtils',
-    conditions: (module) =>
-      module.sendCallEnd && module.parseCall ? module : null,
-  },
-  {
     id: 'Identity',
     conditions: (module) =>
       module.queryIdentity && module.updateIdentity ? module : null,
@@ -109,57 +67,6 @@ export const storeObjects = [
       module.sendChatStateComposing
         ? module
         : null,
-  },
-  {
-    id: 'MessageUtils',
-    conditions: (module) =>
-      module.storeMessages && module.appendMessage ? module : null,
-  },
-  {
-    id: 'WebMessageInfo',
-    conditions: (module) =>
-      module.WebMessageInfo && module.WebFeatures
-        ? module.WebMessageInfo
-        : null,
-  },
-  {
-    id: 'createMessageKey',
-    conditions: (module) =>
-      module.createMessageKey && module.createDeviceSentMessage
-        ? module.createMessageKey
-        : null,
-  },
-  {
-    id: 'Base',
-    conditions: (module) =>
-      module.setSubProtocol && module.binSend && module.actionNode
-        ? module
-        : null,
-  },
-  {
-    id: 'Base2',
-    conditions: (module) =>
-      module.supportsFeatureFlags &&
-      module.parseMsgStubProto &&
-      module.binSend &&
-      module.subscribeLiveLocation
-        ? module
-        : null,
-  },
-  {
-    id: 'Versions',
-    conditions: (module) =>
-      module.loadProtoVersions &&
-      module.default['15'] &&
-      module.default['16'] &&
-      module.default['17']
-        ? module
-        : null,
-  },
-  {
-    id: 'Sticker',
-    conditions: (module) =>
-      module.StickerCollection && module.default ? module : null,
   },
   {
     id: 'MediaObject',
@@ -190,20 +97,6 @@ export const storeObjects = [
   {
     id: 'Validators',
     conditions: (module) => (module.findLinks ? module : null),
-  },
-  {
-    id: 'Wap2',
-    conditions: (module) => (module.Wap ? module : null),
-  },
-  {
-    id: 'Stream',
-    conditions: (module) =>
-      module.default && module.default.unobscure ? module.default : null,
-  },
-  {
-    id: 'ws2',
-    conditions: (module) =>
-      module.default && module.default.destroyStorage ? module.default : null,
   },
   {
     id: 'sendSetGroupSubject',

@@ -113,9 +113,7 @@ export async function sendMessageOptions(chatId, content, options = {}) {
     delete options.linkPreview;
     const link = await window.Store.Validators.findLink(content);
     if (link && !WPP.conn.isMultiDevice()) {
-      const preview = await window.Store.Wap2.default.queryLinkPreview(
-        link.url
-      );
+      const preview = await WPP.whatsapp.functions.queryLinkPreview(link.url);
       preview.preview = true;
       preview.subtype = 'url';
       options = { ...options, ...preview };

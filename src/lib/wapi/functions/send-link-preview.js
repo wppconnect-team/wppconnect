@@ -46,7 +46,7 @@ export async function sendLinkPreview(chatId, url, text) {
     // There are no support for link preview with MD
     const linkPreview = WPP.conn.isMultiDevice()
       ? undefined
-      : await Store.WapQuery.queryLinkPreview(url);
+      : await WPP.whatsapp.functions.queryLinkPreview(url);
     var result =
       (await chat.sendMessage(text.includes(url) ? text : `${url}\n${text}`, {
         linkPreview,
