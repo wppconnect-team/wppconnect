@@ -52,6 +52,8 @@ export class ListenerLayer extends ProfileLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
 
+    this.listenerEmitter.setMaxListeners(0);
+
     this.listenerEmitter.on(ExposedFn.onInterfaceChange, (state) => {
       this.log('http', `Current state: ${state.mode} (${state.displayInfo})`);
     });
@@ -92,9 +94,17 @@ export class ListenerLayer extends ProfileLayer {
       if (!has) {
         this.log('debug', `Exposing ${func} function`);
         await this.page
-          .exposeFunction(func, (...args) =>
-            this.listenerEmitter.emit(func, ...args)
-          )
+          .exposeFunction(func, (...args) => {
+            Promise.resolve().then(() => {
+              this.log(
+                'debug',
+                `Emitting ${func} event (${this.listenerEmitter.listenerCount(
+                  func
+                )} registered)`
+              );
+              this.listenerEmitter.emit(func, ...args);
+            });
+          })
           .catch(() => {});
       }
     }
@@ -263,6 +273,7 @@ export class ListenerLayer extends ProfileLayer {
     event: string | symbol,
     listener: (...args: any[]) => void
   ) {
+    this.log('debug', `Registering ${event.toString()} event`);
     this.listenerEmitter.on(event, listener);
     return {
       dispose: () => {
