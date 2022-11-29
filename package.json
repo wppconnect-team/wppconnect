@@ -64,7 +64,7 @@
     "@knodes/typedoc-plugin-pages": "^0.23.1",
     "@types/atob": "^2.1.2",
     "@types/mime-types": "^2.1.1",
-    "@types/mocha": "^10.0.0",
+    "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.9",
     "@types/rimraf": "^3.0.2",
     "@types/sharp": "^0.31.0",
