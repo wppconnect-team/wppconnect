@@ -25,7 +25,7 @@ import { sleep } from '../utils/sleep';
 
 export const getInterfaceStatus = async (
   waPage: puppeteer.Page
-): Promise<string | null> => {
+): Promise<puppeteer.HandleFor<Awaited<ReturnType<any>>>> => {
   return await waPage
     .waitForFunction(
       () => {
@@ -52,8 +52,10 @@ export const getInterfaceStatus = async (
         polling: 100,
       }
     )
-    .then(async (element) => {
-      return (await element.evaluate((a) => a)) as string;
+    .then(async (element: puppeteer.HandleFor<Awaited<ReturnType<any>>>) => {
+      return (await element.evaluate((a: any) => a)) as puppeteer.HandleFor<
+        ReturnType<any>
+      >;
     })
     .catch(() => null);
 };
@@ -160,7 +162,7 @@ export async function injectSessionToken(
   await page.goto(puppeteerConfig.whatsappUrl + '?_=' + Date.now());
 
   if (clear) {
-    await page.evaluate((session) => {
+    await page.evaluate(() => {
       if (document.title !== 'Initializing WhatsApp') {
         return;
       }
