@@ -24,7 +24,7 @@ import type {
   PoolMessageOptions,
 } from '@wppconnect/wa-js/dist/chat';
 import * as path from 'path';
-import { JSONObject, Page } from 'puppeteer';
+import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { convertToMP4GIF } from '../../utils/ffmpeg';
 import { sleep } from '../../utils/sleep';
@@ -1200,19 +1200,34 @@ export class SenderLayer extends ListenerLayer {
    * @category Chat
    */
   public async sendListMessage(to: string, options: ListMessageOptions) {
-    return await evaluateAndReturn(
+    const sendResult = await evaluateAndReturn(
       this.page,
-      ({ to, options }) => {
-        WPP.chat.sendListMessage(to, options);
-      },
-      { to, options: options as unknown as JSONObject }
+      ({ to, options }) => WPP.chat.sendListMessage(to, options),
+      {
+        to,
+        options: options,
+      }
     );
+
+    // I don't know why the evaluate is returning undefined for direct call
+    // To solve that, I added `JSON.parse(JSON.stringify(<message>))` to solve that
+    const result = (await evaluateAndReturn(
+      this.page,
+      async ({ messageId }) => {
+        return JSON.parse(JSON.stringify(await WAPI.getMessageById(messageId)));
+      },
+      { messageId: sendResult.id }
+    )) as Message;
+
+    if (result['erro'] == true) {
+      throw result;
+    }
+
+    return result;
   }
 
   /**
    * Send a create poll message
-   *
-   * Note: This only works for groups
    *
    * @example
    * ```javascript
@@ -1252,7 +1267,7 @@ export class SenderLayer extends ListenerLayer {
         chatId,
         name,
         choices,
-        options: options as unknown as JSONObject,
+        options: options,
       }
     );
 
