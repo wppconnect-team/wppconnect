@@ -27,6 +27,7 @@ import {
   Message,
   ParticipantEvent,
   PresenceEvent,
+  Wid,
 } from '../model';
 import { MessageType, SocketState, SocketStream } from '../model/enum';
 import { InterfaceMode } from '../model/enum/interface-mode';
@@ -84,6 +85,7 @@ export class ListenerLayer extends ProfileLayer {
       'onIncomingCall',
       'onRevokedMessage',
       'onReactionMessage',
+      'onPollResponse',
     ];
 
     for (const func of functions) {
@@ -245,6 +247,23 @@ export class ListenerLayer extends ProfileLayer {
               window['onReactionMessage'](eventData);
             });
             window['onReactionMessage'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        try {
+          if (!window['onPollResponse'].exposed) {
+            WPP.on('chat.poll_response', (data) => {
+              const eventData = {
+                msgId: data.msgId,
+                chatId: data.chatId,
+                selectedOptions: data.selectedOptions,
+                timestamp: data.timestamp,
+                sender: data.sender,
+              };
+              window['onPollResponse'](eventData);
+            });
+            window['onPollResponse'].exposed = true;
           }
         } catch (error) {
           console.error(error);
@@ -576,5 +595,21 @@ export class ListenerLayer extends ProfileLayer {
     }) => any
   ) {
     return this.registerEvent('onReactionMessage', callback);
+  }
+
+  /**
+   * @event Listens to poll response messages
+   * @returns Disposable object to stop the listening
+   */
+  public onPollResponse(
+    callback: (data: {
+      msgId: string;
+      chatId: Wid;
+      selectedOptions: any;
+      timestamp: number;
+      sender: Wid;
+    }) => any
+  ) {
+    return this.registerEvent('onPollResponse', callback);
   }
 }
