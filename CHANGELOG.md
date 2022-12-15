@@ -1,3 +1,12 @@
+# 1.20.0 (2022-12-15)
+
+
+### Features
+
+* Added getVotes and getReactions functions ([49bb58f](https://github.com/wppconnect-team/wppconnect/commit/49bb58f9c0db9271a36cea4d650857f2ddbde74a))
+
+
+
 ## 1.19.2 (2022-12-11)
 
 
