@@ -24,6 +24,7 @@ import {
   ContactStatus,
   ProfilePicThumbObj,
   WhatsappProfile,
+  Wid,
 } from '../model';
 import { SenderLayer } from './sender.layer';
 
@@ -445,6 +446,63 @@ export class RetrieverLayer extends SenderLayer {
     return await evaluateAndReturn(
       this.page,
       (msgId: string) => WPP.chat.getPlatformFromMessage(msgId),
+      msgId
+    );
+  }
+
+  /**
+   * Get the reactions of a message
+   *
+   * @category Chat
+   */
+  public async getReactions(msgId: string): Promise<{
+    reactionByMe: {
+      id: any;
+      orphan: number;
+      msgId: any;
+      reactionText: string;
+      read: boolean;
+      senderUserJid: string;
+      timestamp: number;
+    };
+    reactions: {
+      aggregateEmoji: string;
+      hasReactionByMe: boolean;
+      senders: {
+        id: any;
+        orphan: number;
+        msgId: any;
+        reactionText: string;
+        read: boolean;
+        senderUserJid: string;
+        timestamp: number;
+      }[];
+    }[];
+  }> {
+    return await evaluateAndReturn(
+      this.page,
+      (msgId: string) => WPP.chat.getReactions(msgId),
+      msgId
+    );
+  }
+
+  /**
+   * Get the votes of a poll message
+   *
+   * @category Chat
+   */
+  public async getVotes(msgId: string): Promise<{
+    msgId: any;
+    chatId: Wid;
+    votes: {
+      selectedOptions: number[];
+      timestamp: number;
+      sender: Wid;
+    }[];
+  }> {
+    return await evaluateAndReturn(
+      this.page,
+      (msgId: string) => WPP.chat.getVotes(msgId),
       msgId
     );
   }
