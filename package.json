@@ -73,7 +73,7 @@
     "@types/ws": "^8.5.4",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
-    "babel-loader": "^9.1.0",
+    "babel-loader": "^9.1.2",
     "commitizen": "^4.2.6",
     "concurrently": "^7.6.0",
     "conventional-changelog-cli": "^2.2.2",
