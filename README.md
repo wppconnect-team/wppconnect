@@ -72,6 +72,10 @@ interested please open a Pull Request.
 Pull requests are welcome. For major changes, please open an issue first to
 discuss what you would like to change.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=wppconnect-team/wppconnect,wppconnect-team/wa-js&type=Date)](https://star-history.com/#wppconnect-team/wppconnect&wppconnect-team/wa-js&Date)
+
 ## License
 
 This file is part of WPPConnect.
