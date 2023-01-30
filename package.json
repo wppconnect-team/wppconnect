@@ -110,7 +110,7 @@
     "logform": "^2.4.2",
     "lookpath": "^1.2.2",
     "mime-types": "^2.1.35",
-    "puppeteer": "^19.5.2",
+    "puppeteer": "^19.6.2",
     "puppeteer-extra": "^3.3.4",
     "puppeteer-extra-plugin-stealth": "^2.11.1",
     "puppeteer-extra-plugin-user-data-dir": "^2.4.0",
