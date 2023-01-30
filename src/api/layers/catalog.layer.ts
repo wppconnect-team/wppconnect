@@ -26,6 +26,64 @@ export class CatalogLayer extends HostLayer {
   }
 
   /**
+   * Create a product on catalog
+   * @param name Product name
+   * @param image Product image
+   * @param description Product description
+   * @param price Product price
+   * @param isHidden Product visibility
+   * @param url Product url
+   * @param retailerId Product own ID system
+   * @param currency Product currency
+   * @example
+   * ```javascript
+   * client.createtProduct(
+   *    'Product name',
+   *    'image in base64',
+   *    'product description',
+   *    '89.90',
+   *    true,
+   *    'https://wppconnect.io',
+   *    'AKA001',
+   *   );
+   * ```
+   */
+  public async createProduct(
+    name: string,
+    image: string,
+    description: string,
+    price: number,
+    isHidden: boolean,
+    url: string,
+    retailerId: string,
+    currency: string
+  ) {
+    return evaluateAndReturn(
+      this.page,
+      ({
+        name,
+        image,
+        description,
+        price,
+        isHidden,
+        url,
+        retailerId,
+        currency,
+      }) =>
+        WPP.catalog.createProduct({
+          name,
+          image,
+          description,
+          price,
+          isHidden,
+          url,
+          retailerId,
+          currency,
+        }),
+      { name, image, description, price, isHidden, url, retailerId, currency }
+    );
+  }
+  /**
    * Querys all products
    * @param id Buisness profile id ('00000@c.us')
    * @param qnt limit to load products - Default: 10
