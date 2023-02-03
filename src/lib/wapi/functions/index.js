@@ -80,6 +80,7 @@ export { setProfilePic } from './set-profile-pic';
 export { pinChat } from './fix-chat';
 export { getSessionTokenBrowser } from './get-session-token';
 export { sendMute } from './send-mute';
+export { createProduct } from './create-product';
 export { getListMute, interfaceMute } from './get-list-mute';
 export * from './phoneWatchdog';
 export * from './presence';

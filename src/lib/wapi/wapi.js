@@ -64,6 +64,7 @@ import {
   sendPtt,
   sendImage,
   sendImageWithProduct,
+  createProduct,
   sendLocation,
   sendMessage,
   sendMessage2,
@@ -203,6 +204,7 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.sendVideoAsGif = sendVideoAsGif;
   window.WAPI.processFiles = processFiles;
   window.WAPI.sendImageWithProduct = sendImageWithProduct;
+  window.WAPI.createProduct = createProduct;
   window.WAPI.forwardMessages = forwardMessages;
   window.WAPI.encryptAndUploadFile = encryptAndUploadFile;
   window.WAPI.setOnlinePresence = setOnlinePresence;
