@@ -1,393 +1,256 @@
-# 1.20.0 (2022-12-15)
+# 1.21.0 (2023-02-03)
 
+### Bug Fixes
+
+- **deps:** update dependency @wppconnect/wa-js to ^2.19.0 ([#1531](https://github.com/wppconnect-team/wppconnect/issues/1531)) ([09626d0](https://github.com/wppconnect-team/wppconnect/commit/09626d0b4921609633b77a1fcc2a67e9882a9dc4))
+
+# 1.20.0 (2022-12-15)
 
 ### Features
 
-* Added getVotes and getReactions functions ([49bb58f](https://github.com/wppconnect-team/wppconnect/commit/49bb58f9c0db9271a36cea4d650857f2ddbde74a))
-
-
+- Added getVotes and getReactions functions ([49bb58f](https://github.com/wppconnect-team/wppconnect/commit/49bb58f9c0db9271a36cea4d650857f2ddbde74a))
 
 ## 1.19.2 (2022-12-11)
 
-
-
 ## 1.19.1 (2022-11-18)
-
 
 ### Bug Fixes
 
-* Fixed onMessage method (fix [#1351](https://github.com/wppconnect-team/wppconnect/issues/1351)) ([e8549a1](https://github.com/wppconnect-team/wppconnect/commit/e8549a10cf7b3ed5a04209bdd7d58b9a3c073f32))
-
-
+- Fixed onMessage method (fix [#1351](https://github.com/wppconnect-team/wppconnect/issues/1351)) ([e8549a1](https://github.com/wppconnect-team/wppconnect/commit/e8549a10cf7b3ed5a04209bdd7d58b9a3c073f32))
 
 # 1.19.0 (2022-11-02)
 
-
-
 ## 1.18.1 (2022-10-20)
-
 
 ### Bug Fixes
 
-* Fixed "Checking phone is connected" without autoClose ([ad63fb5](https://github.com/wppconnect-team/wppconnect/commit/ad63fb56a2255a67bcb16227fa6a61210f8633d1))
-
-
+- Fixed "Checking phone is connected" without autoClose ([ad63fb5](https://github.com/wppconnect-team/wppconnect/commit/ad63fb56a2255a67bcb16227fa6a61210f8633d1))
 
 # 1.18.0 (2022-10-18)
 
-
 ### Features
 
-* Improved QRCode re-scan (fix [#1189](https://github.com/wppconnect-team/wppconnect/issues/1189)) ([8ec5264](https://github.com/wppconnect-team/wppconnect/commit/8ec5264e55e01c15efd3e3c273c54e34cad166c9))
-
-
+- Improved QRCode re-scan (fix [#1189](https://github.com/wppconnect-team/wppconnect/issues/1189)) ([8ec5264](https://github.com/wppconnect-team/wppconnect/commit/8ec5264e55e01c15efd3e3c273c54e34cad166c9))
 
 ## 1.17.1 (2022-10-10)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @wppconnect/wa-js to ^2.13.1 ([#1364](https://github.com/wppconnect-team/wppconnect/issues/1364)) ([ff92035](https://github.com/wppconnect-team/wppconnect/commit/ff92035cb05abc21a8e241d8c7d3d5be4614edfb))
-
-
+- **deps:** update dependency @wppconnect/wa-js to ^2.13.1 ([#1364](https://github.com/wppconnect-team/wppconnect/issues/1364)) ([ff92035](https://github.com/wppconnect-team/wppconnect/commit/ff92035cb05abc21a8e241d8c7d3d5be4614edfb))
 
 # 1.17.0 (2022-09-17)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @wppconnect/wa-version to ^1.1.154 ([#1334](https://github.com/wppconnect-team/wppconnect/issues/1334)) ([daa94ef](https://github.com/wppconnect-team/wppconnect/commit/daa94ef808660bd5acb143ceb8c9bff9a3a25a18))
-
-
+- **deps:** update dependency @wppconnect/wa-version to ^1.1.154 ([#1334](https://github.com/wppconnect-team/wppconnect/issues/1334)) ([daa94ef](https://github.com/wppconnect-team/wppconnect/commit/daa94ef808660bd5acb143ceb8c9bff9a3a25a18))
 
 ## 1.16.1 (2022-08-09)
 
-
-
 # 1.16.0 (2022-08-05)
-
 
 ### Bug Fixes
 
-* **deps:** update dependency @wppconnect/wa-js to ^2.10.0 ([dc8133a](https://github.com/wppconnect-team/wppconnect/commit/dc8133a2896c011830c874c94c780acd9368a25a))
-
-
+- **deps:** update dependency @wppconnect/wa-js to ^2.10.0 ([dc8133a](https://github.com/wppconnect-team/wppconnect/commit/dc8133a2896c011830c874c94c780acd9368a25a))
 
 # 1.15.0 (2022-07-20)
 
-
-
 ## 1.14.5 (2022-07-11)
-
-
 
 ## 1.14.4 (2022-06-20)
 
-
-
 ## 1.14.3 (2022-06-17)
-
 
 ### Bug Fixes
 
-* **deps:** update dependency @wppconnect/wa-js to ^2.7.2 ([#1181](https://github.com/wppconnect-team/wppconnect/issues/1181)) ([5208e62](https://github.com/wppconnect-team/wppconnect/commit/5208e621cf79ca5d80cca5ecf3c7b9068ca44e91))
-
-
+- **deps:** update dependency @wppconnect/wa-js to ^2.7.2 ([#1181](https://github.com/wppconnect-team/wppconnect/issues/1181)) ([5208e62](https://github.com/wppconnect-team/wppconnect/commit/5208e621cf79ca5d80cca5ecf3c7b9068ca44e91))
 
 ## 1.14.2 (2022-06-11)
 
-
 ### Bug Fixes
 
-* Added filename for sendFile when is using path or URL (fix [#1168](https://github.com/wppconnect-team/wppconnect/issues/1168)) ([5534fad](https://github.com/wppconnect-team/wppconnect/commit/5534fad0e056563cc3ce6b7699ea06f5eaff6da8))
-
-
+- Added filename for sendFile when is using path or URL (fix [#1168](https://github.com/wppconnect-team/wppconnect/issues/1168)) ([5534fad](https://github.com/wppconnect-team/wppconnect/commit/5534fad0e056563cc3ce6b7699ea06f5eaff6da8))
 
 ## 1.14.1 (2022-06-08)
 
-
-
 # 1.14.0 (2022-06-08)
-
 
 ### Bug Fixes
 
-* **deps:** update dependency @wppconnect/wa-js to ^2.6.0 ([27d5a52](https://github.com/wppconnect-team/wppconnect/commit/27d5a523c1dfa1a22c8be08cd7ff6d03af1fc0b1))
-
-
+- **deps:** update dependency @wppconnect/wa-js to ^2.6.0 ([27d5a52](https://github.com/wppconnect-team/wppconnect/commit/27d5a523c1dfa1a22c8be08cd7ff6d03af1fc0b1))
 
 ## 1.13.3 (2022-06-01)
 
-
 ### Bug Fixes
 
-* Clear all token data when disconnected (fix [#1147](https://github.com/wppconnect-team/wppconnect/issues/1147)) ([4abcfed](https://github.com/wppconnect-team/wppconnect/commit/4abcfed97778ddb619df65fec0b1c3d0dc4debac))
-
-
+- Clear all token data when disconnected (fix [#1147](https://github.com/wppconnect-team/wppconnect/issues/1147)) ([4abcfed](https://github.com/wppconnect-team/wppconnect/commit/4abcfed97778ddb619df65fec0b1c3d0dc4debac))
 
 ## 1.13.2 (2022-05-28)
 
-
 ### Bug Fixes
 
-* Migrate archiveChat and pinChat methods to WA-JS ([cee7e1c](https://github.com/wppconnect-team/wppconnect/commit/cee7e1ced23409d66365e42a35602265e0c09536))
-
-
+- Migrate archiveChat and pinChat methods to WA-JS ([cee7e1c](https://github.com/wppconnect-team/wppconnect/commit/cee7e1ced23409d66365e42a35602265e0c09536))
 
 ## 1.13.1 (2022-05-10)
 
-
-
 # 1.13.0 (2022-04-25)
-
 
 ### Features
 
-* Improved chat state to keep alive and online ([ba82005](https://github.com/wppconnect-team/wppconnect/commit/ba82005f11b8ecc8dacee08304b7d3a66bbea6b0))
-
-
+- Improved chat state to keep alive and online ([ba82005](https://github.com/wppconnect-team/wppconnect/commit/ba82005f11b8ecc8dacee08304b7d3a66bbea6b0))
 
 ## 1.12.8 (2022-03-13)
 
-
 ### Bug Fixes
 
-* Fixed stuck state after logout ([bb9695a](https://github.com/wppconnect-team/wppconnect/commit/bb9695a61404a062daf1d0995ad2bb10af7c5006))
-
-
+- Fixed stuck state after logout ([bb9695a](https://github.com/wppconnect-team/wppconnect/commit/bb9695a61404a062daf1d0995ad2bb10af7c5006))
 
 ## 1.12.7 (2022-03-03)
 
-
 ### Bug Fixes
 
-* Fixed onParticipantsChanged and onPresenceChanged function (fix [#864](https://github.com/wppconnect-team/wppconnect/issues/864), fix [#911](https://github.com/wppconnect-team/wppconnect/issues/911)) ([aff7f6c](https://github.com/wppconnect-team/wppconnect/commit/aff7f6cd34c22c086789ca4871c3113d8d8b2bb8))
-
-
+- Fixed onParticipantsChanged and onPresenceChanged function (fix [#864](https://github.com/wppconnect-team/wppconnect/issues/864), fix [#911](https://github.com/wppconnect-team/wppconnect/issues/911)) ([aff7f6c](https://github.com/wppconnect-team/wppconnect/commit/aff7f6cd34c22c086789ca4871c3113d8d8b2bb8))
 
 ## 1.12.6 (2022-02-22)
 
-
 ### Bug Fixes
 
-* Fixed getGroupMembersIds and getGroupMembers for large chats (fix [#892](https://github.com/wppconnect-team/wppconnect/issues/892)) ([9cc34a5](https://github.com/wppconnect-team/wppconnect/commit/9cc34a5fddef52b01feba6194fff31aa19b388f0))
-
-
+- Fixed getGroupMembersIds and getGroupMembers for large chats (fix [#892](https://github.com/wppconnect-team/wppconnect/issues/892)) ([9cc34a5](https://github.com/wppconnect-team/wppconnect/commit/9cc34a5fddef52b01feba6194fff31aa19b388f0))
 
 ## 1.12.5 (2022-02-06)
 
-
-
 ## 1.12.4 (2022-01-22)
-
 
 ### Bug Fixes
 
-* Fixed getMessageById where the message is from status (fix [#823](https://github.com/wppconnect-team/wppconnect/issues/823)) ([ed57b97](https://github.com/wppconnect-team/wppconnect/commit/ed57b9700efd72f3de7c0c8d658d24b41f4da5d9))
-
-
+- Fixed getMessageById where the message is from status (fix [#823](https://github.com/wppconnect-team/wppconnect/issues/823)) ([ed57b97](https://github.com/wppconnect-team/wppconnect/commit/ed57b9700efd72f3de7c0c8d658d24b41f4da5d9))
 
 ## 1.12.3 (2022-01-21)
 
-
 ### Bug Fixes
 
-* Updated @wppconnect/wa-js to v1.1.9 ([5074de1](https://github.com/wppconnect-team/wppconnect/commit/5074de182f401b8f8e6b382aa513ca2cc65ef488))
-
-
+- Updated @wppconnect/wa-js to v1.1.9 ([5074de1](https://github.com/wppconnect-team/wppconnect/commit/5074de182f401b8f8e6b382aa513ca2cc65ef488))
 
 ## 1.12.2 (2022-01-15)
 
-
-
 ## 1.12.1 (2022-01-14)
-
-
 
 # 1.12.0 (2022-01-08)
 
-
 ### Bug Fixes
 
-* Fixed downloadMedia (fix [#463](https://github.com/wppconnect-team/wppconnect/issues/463)) ([ea9ba75](https://github.com/wppconnect-team/wppconnect/commit/ea9ba75ec3e24103a7ccf55b0df43ffc8d46271b))
-
-
+- Fixed downloadMedia (fix [#463](https://github.com/wppconnect-team/wppconnect/issues/463)) ([ea9ba75](https://github.com/wppconnect-team/wppconnect/commit/ea9ba75ec3e24103a7ccf55b0df43ffc8d46271b))
 
 ## 1.11.1 (2021-12-09)
 
-
 ### Bug Fixes
 
-* Fixed getNumberProfile function (fix [#717](https://github.com/wppconnect-team/wppconnect/issues/717)) ([89a0720](https://github.com/wppconnect-team/wppconnect/commit/89a072066991213d301739b0788d19f05a9b0912))
-
-
+- Fixed getNumberProfile function (fix [#717](https://github.com/wppconnect-team/wppconnect/issues/717)) ([89a0720](https://github.com/wppconnect-team/wppconnect/commit/89a072066991213d301739b0788d19f05a9b0912))
 
 # 1.11.0 (2021-12-09)
 
-
 ### Bug Fixes
 
-* Fixed initialization of onPresenceChanged (fix [#704](https://github.com/wppconnect-team/wppconnect/issues/704)) ([0470ea8](https://github.com/wppconnect-team/wppconnect/commit/0470ea8a0fd15727f91e18c913b96f3c1e1f79a9))
-
-
+- Fixed initialization of onPresenceChanged (fix [#704](https://github.com/wppconnect-team/wppconnect/issues/704)) ([0470ea8](https://github.com/wppconnect-team/wppconnect/commit/0470ea8a0fd15727f91e18c913b96f3c1e1f79a9))
 
 ## 1.10.3 (2021-11-18)
 
-
-
 ## 1.10.2 (2021-11-15)
-
 
 ### Bug Fixes
 
-* Fixed call of createWid function (fix [#647](https://github.com/wppconnect-team/wppconnect/issues/647)) ([c381000](https://github.com/wppconnect-team/wppconnect/commit/c3810003a4f145f9c3ec54f49cde97ddbe01a164))
-
-
+- Fixed call of createWid function (fix [#647](https://github.com/wppconnect-team/wppconnect/issues/647)) ([c381000](https://github.com/wppconnect-team/wppconnect/commit/c3810003a4f145f9c3ec54f49cde97ddbe01a164))
 
 ## 1.10.1 (2021-11-11)
 
-
 ### Features
 
-* Updated to latest version of WhatsApp ([f6d01a3](https://github.com/wppconnect-team/wppconnect/commit/f6d01a390db9577f46fee0072637ece981e54780))
-
-
+- Updated to latest version of WhatsApp ([f6d01a3](https://github.com/wppconnect-team/wppconnect/commit/f6d01a390db9577f46fee0072637ece981e54780))
 
 # 1.10.0 (2021-11-06)
 
-
-
 ## 1.9.4 (2021-10-21)
-
-
 
 ## 1.9.3 (2021-10-21)
 
-
 ### Bug Fixes
 
-* Fixed close method ([#579](https://github.com/wppconnect-team/wppconnect/issues/579)) ([ef42485](https://github.com/wppconnect-team/wppconnect/commit/ef42485505e9920b5b7826674949ed9d5e36d4e1))
-
-
+- Fixed close method ([#579](https://github.com/wppconnect-team/wppconnect/issues/579)) ([ef42485](https://github.com/wppconnect-team/wppconnect/commit/ef42485505e9920b5b7826674949ed9d5e36d4e1))
 
 ## 1.9.2 (2021-10-12)
 
-
 ### Features
 
-* Added onRevokedMessage (close [#434](https://github.com/wppconnect-team/wppconnect/issues/434)) ([b5df5bb](https://github.com/wppconnect-team/wppconnect/commit/b5df5bbcc3418204744057cf45089c3bb2228c57))
-
-
+- Added onRevokedMessage (close [#434](https://github.com/wppconnect-team/wppconnect/issues/434)) ([b5df5bb](https://github.com/wppconnect-team/wppconnect/commit/b5df5bbcc3418204744057cf45089c3bb2228c57))
 
 ## 1.9.1 (2021-10-02)
 
-
 ### Features
 
-* Added option to use setProfilePic using base64 (close [#505](https://github.com/wppconnect-team/wppconnect/issues/505)) ([87f1841](https://github.com/wppconnect-team/wppconnect/commit/87f184128c2b458f128ff26ac9ea081537b4c2a4))
-
-
+- Added option to use setProfilePic using base64 (close [#505](https://github.com/wppconnect-team/wppconnect/issues/505)) ([87f1841](https://github.com/wppconnect-team/wppconnect/commit/87f184128c2b458f128ff26ac9ea081537b4c2a4))
 
 # 1.9.0 (2021-10-02)
 
-
-
 ## 1.8.14 (2021-09-19)
-
 
 ### Bug Fixes
 
-* Allow to define chat type in sendMessageOptions (close [#504](https://github.com/wppconnect-team/wppconnect/issues/504)) ([bf76179](https://github.com/wppconnect-team/wppconnect/commit/bf761794559c02a5f7a2d842e68fd6562b68b0cb))
-
-
+- Allow to define chat type in sendMessageOptions (close [#504](https://github.com/wppconnect-team/wppconnect/issues/504)) ([bf76179](https://github.com/wppconnect-team/wppconnect/commit/bf761794559c02a5f7a2d842e68fd6562b68b0cb))
 
 ## 1.8.13 (2021-08-19)
 
-
 ### Bug Fixes
 
-* Fixed file mime-type detection (fix [#409](https://github.com/wppconnect-team/wppconnect/issues/409)) ([1609e34](https://github.com/wppconnect-team/wppconnect/commit/1609e34e89b02eaba57cd2c0ef17e94393e89916))
-
-
+- Fixed file mime-type detection (fix [#409](https://github.com/wppconnect-team/wppconnect/issues/409)) ([1609e34](https://github.com/wppconnect-team/wppconnect/commit/1609e34e89b02eaba57cd2c0ef17e94393e89916))
 
 ## 1.8.12 (2021-08-05)
 
-
-
 ## 1.8.11 (2021-08-04)
-
 
 ### Features
 
-* Added setOnlinePresence function to define your presence ([627d1a5](https://github.com/wppconnect-team/wppconnect/commit/627d1a5f3a76ea4813420a4fc25784362497da39))
-
-
+- Added setOnlinePresence function to define your presence ([627d1a5](https://github.com/wppconnect-team/wppconnect/commit/627d1a5f3a76ea4813420a4fc25784362497da39))
 
 ## 1.8.10 (2021-07-31)
 
-
 ### Bug Fixes
 
-* Corrigido erro "null to object" ao enviar mensagem (fix [#378](https://github.com/wppconnect-team/wppconnect/issues/378)) ([ec103b9](https://github.com/wppconnect-team/wppconnect/commit/ec103b9cae33b993f95cacdb2a1d35fd3e4ecacc))
-
-
+- Corrigido erro "null to object" ao enviar mensagem (fix [#378](https://github.com/wppconnect-team/wppconnect/issues/378)) ([ec103b9](https://github.com/wppconnect-team/wppconnect/commit/ec103b9cae33b993f95cacdb2a1d35fd3e4ecacc))
 
 ## 1.8.9 (2021-07-27)
 
-
 ### Bug Fixes
 
-* Corrigido a função de fixar conversas (pinChat) (fix [#338](https://github.com/wppconnect-team/wppconnect/issues/338)) ([f6bf1f3](https://github.com/wppconnect-team/wppconnect/commit/f6bf1f3f1598719d38eeb9d84bf3a9c0d87de18d))
-
-
+- Corrigido a função de fixar conversas (pinChat) (fix [#338](https://github.com/wppconnect-team/wppconnect/issues/338)) ([f6bf1f3](https://github.com/wppconnect-team/wppconnect/commit/f6bf1f3f1598719d38eeb9d84bf3a9c0d87de18d))
 
 ## 1.8.8 (2021-07-27)
 
-
 ### Bug Fixes
 
-* Corrigido problema de ES Module (fix [#362](https://github.com/wppconnect-team/wppconnect/issues/362)) ([dcdefc4](https://github.com/wppconnect-team/wppconnect/commit/dcdefc4e7e0dbeb5cd3678ee0b7e7f92e8210dba))
-
-
+- Corrigido problema de ES Module (fix [#362](https://github.com/wppconnect-team/wppconnect/issues/362)) ([dcdefc4](https://github.com/wppconnect-team/wppconnect/commit/dcdefc4e7e0dbeb5cd3678ee0b7e7f92e8210dba))
 
 ## 1.8.7 (2021-07-26)
 
-
-
 ## 1.8.6 (2021-07-23)
-
-
 
 ## [1.8.5](https://github.com/wppconnect-team/wppconnect/compare/v1.8.4...v1.8.5) (2021-07-20)
 
-
-
 ## 1.8.4 (2021-07-20)
-
 
 ### Bug Fixes
 
-* Corrigido o envio de arquivos de tipos de áudio via URL (fix [#329](https://github.com/wppconnect-team/wppconnect/issues/329)) ([6e8b836](https://github.com/wppconnect-team/wppconnect/commit/6e8b836f40ecda9df4870b09d6fc11410a15e1f6))
-
-
+- Corrigido o envio de arquivos de tipos de áudio via URL (fix [#329](https://github.com/wppconnect-team/wppconnect/issues/329)) ([6e8b836](https://github.com/wppconnect-team/wppconnect/commit/6e8b836f40ecda9df4870b09d6fc11410a15e1f6))
 
 ## 1.8.3 (2021-07-14)
 
-
 ### Bug Fixes
 
-* Corrigido disparos de onNotificationMessage e onParticipantsChanged ao iniciar ([d421f7b](https://github.com/wppconnect-team/wppconnect/commit/d421f7bc860ec4cee503340c14e676692094ac1d))
-
-
+- Corrigido disparos de onNotificationMessage e onParticipantsChanged ao iniciar ([d421f7b](https://github.com/wppconnect-team/wppconnect/commit/d421f7bc860ec4cee503340c14e676692094ac1d))
 
 ## 1.8.2 (2021-07-14)
 
-
 ### Features
 
-* Adicionado recurso de recusar ligação do WhatsApp (close [#299](https://github.com/wppconnect-team/wppconnect/issues/299)) ([e7ef0b6](https://github.com/wppconnect-team/wppconnect/commit/e7ef0b6db0aecf57bd058c681127a0bdd756636b))
-
-
+- Adicionado recurso de recusar ligação do WhatsApp (close [#299](https://github.com/wppconnect-team/wppconnect/issues/299)) ([e7ef0b6](https://github.com/wppconnect-team/wppconnect/commit/e7ef0b6db0aecf57bd058c681127a0bdd756636b))
 
 ## [1.8.1](https://github.com/wppconnect-team/wppconnect/compare/v1.8.0...v1.8.1) (2021-07-12)
 
