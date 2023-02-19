@@ -63,8 +63,23 @@ export async function unregisterServiceWorker(page: Page) {
  * @param page Página a ser injetada
  * @param version Versão ou expressão semver
  */
-export async function setWhatsappVersion(page: Page, version: string) {
-  const body = waVersion.getPageContent(version);
+export async function setWhatsappVersion(
+  page: Page,
+  version: string,
+  log?: (level: LogLevel, message: string, meta?: object) => any
+) {
+  let body: string | null = null;
+  try {
+    body = waVersion.getPageContent(version);
+  } catch (error) {}
+
+  if (!body) {
+    log?.(
+      'error',
+      `Version not available for ${version}, using latest as fallback`
+    );
+    return;
+  }
 
   await page.setRequestInterception(true);
 
@@ -105,7 +120,7 @@ export async function initWhatsapp(
 
   if (version) {
     log?.('verbose', `Setting WhatsApp WEB version to ${version}`);
-    await setWhatsappVersion(page, version);
+    await setWhatsappVersion(page, version, log);
   }
 
   setTimeout(() => {
