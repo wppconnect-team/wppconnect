@@ -200,7 +200,7 @@ export class HostLayer {
     }
 
     if (
-      this.options.autoClose > 0 &&
+      (this.options.autoClose > 0 || this.options.deviceSyncTimeout > 0) &&
       !this.autoCloseInterval &&
       !this.page.isClosed()
     ) {
@@ -213,9 +213,13 @@ export class HostLayer {
     }
   }
 
-  protected startAutoClose() {
-    if (this.options.autoClose > 0 && !this.autoCloseInterval) {
-      const seconds = Math.round(this.options.autoClose / 1000);
+  protected startAutoClose(time: number | null = null) {
+    if (time === null || time === undefined) {
+      time = this.options.autoClose;
+    }
+
+    if (time > 0 && !this.autoCloseInterval) {
+      const seconds = Math.round(time / 1000);
       this.log('info', `Auto close configured to ${seconds}s`);
 
       let remain = seconds;
@@ -358,7 +362,7 @@ export class HostLayer {
       this.cancelAutoClose();
       // Wait for interface update
       await sleep(200);
-      this.startAutoClose();
+      this.startAutoClose(this.options.deviceSyncTimeout);
       this.log('http', 'Checking phone is connected...');
       const inChat = await this.waitForInChat();
 

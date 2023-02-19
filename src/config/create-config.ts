@@ -82,6 +82,11 @@ export interface CreateConfig {
    */
   autoClose?: number;
   /**
+   * Automatically closes the wppconnect only when is syncing the device (default 180000 miliseconds, 3 minutes, if you want to turn it off, assign 0 or false)
+   * @default 180000 (3 minutes)
+   */
+  deviceSyncTimeout?: number;
+  /**
    * Wait for in chat to return a instance of {@link Whatsapp}
    * @default false
    */
@@ -176,6 +181,7 @@ export const defaultOptions: CreateConfig = {
   disableWelcome: false,
   updatesLog: true,
   autoClose: 60000,
+  deviceSyncTimeout: 180000,
   createPathFileToken: true,
   waitForLogin: true,
   logger: defaultLogger,
