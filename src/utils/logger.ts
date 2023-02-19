@@ -54,7 +54,7 @@ export const formatLabelSession: FormatWrap = format(
 );
 
 export const defaultLogger = createLogger({
-  level: 'info',
+  level: 'silly',
   levels: config.npm.levels,
   format: format.combine(
     formatLabelSession(),
