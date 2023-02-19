@@ -1,3 +1,9 @@
+# 1.22.0 (2023-02-19)
+
+### Features
+
+- Added deviceSyncTimeout option (close [#1551](https://github.com/wppconnect-team/wppconnect/issues/1551)) ([d4458e5](https://github.com/wppconnect-team/wppconnect/commit/d4458e5c3727b4d96e1595a6f5fa2d798a2bd69a))
+
 # 1.21.0 (2023-02-03)
 
 ### Bug Fixes
