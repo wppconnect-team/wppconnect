@@ -55,11 +55,6 @@ export const storeObjects = [
         : null,
   },
   {
-    id: 'Identity',
-    conditions: (module) =>
-      module.queryIdentity && module.updateIdentity ? module : null,
-  },
-  {
     id: 'ChatStates',
     conditions: (module) =>
       module.sendChatStatePaused &&
@@ -74,11 +69,6 @@ export const storeObjects = [
       module.getOrCreateMediaObject && module.disassociateMediaFromStickerPack
         ? module
         : null,
-  },
-  {
-    id: 'MediaUpload',
-    conditions: (module) =>
-      module.default && module.default.mediaUpload ? module.default : null,
   },
   {
     id: 'UploadUtils',
@@ -97,18 +87,6 @@ export const storeObjects = [
   {
     id: 'Validators',
     conditions: (module) => (module.findLinks ? module : null),
-  },
-  {
-    id: 'sendSetGroupSubject',
-    conditions: (module) => module.sendSetGroupSubject,
-  },
-  {
-    id: 'sendSetGroupProperty',
-    conditions: (module) => module.sendSetGroupProperty,
-  },
-  {
-    id: 'sendSetGroupDescription',
-    conditions: (module) => module.sendSetGroupDescription,
   },
   {
     id: 'changeEphemeralDuration',
