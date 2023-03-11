@@ -41,7 +41,7 @@ export class Whatsapp extends BusinessLayer {
 
     interval = setInterval(async (state) => {
       const newConnected = await page
-        .evaluate(() => WAPI.isRegistered())
+        .evaluate(() => WPP.conn.isRegistered())
         .catch(() => null);
 
       if (newConnected === null || newConnected === this.connected) {
@@ -65,7 +65,7 @@ export class Whatsapp extends BusinessLayer {
   protected async afterPageScriptInjected() {
     await super.afterPageScriptInjected();
     this.page
-      .evaluate(() => WAPI.isRegistered())
+      .evaluate(() => WPP.conn.isRegistered())
       .then((isAuthenticated) => {
         this.connected = isAuthenticated;
       })
@@ -218,7 +218,7 @@ export class Whatsapp extends BusinessLayer {
   public async rejectCall(callId?: string) {
     return await evaluateAndReturn(
       this.page,
-      ({ callId }) => WAPI.rejectCall(callId),
+      ({ callId }) => WPP.call.rejectCall(callId),
       {
         callId,
       }

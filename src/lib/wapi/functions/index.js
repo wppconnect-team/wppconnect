@@ -84,7 +84,6 @@ export { createProduct } from './create-product';
 export { getListMute, interfaceMute } from './get-list-mute';
 export * from './phoneWatchdog';
 export * from './presence';
-export * from './reject-call';
 export * from './set-online-presence';
 export * from './set-temporary-messages';
 export * from './star-messages';

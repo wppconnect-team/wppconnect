@@ -91,7 +91,6 @@ import {
   subscribePresence,
   unsubscribePresence,
   getMessages,
-  rejectCall,
   setOnlinePresence,
 } from './functions';
 import {
@@ -270,9 +269,6 @@ if (typeof window.WAPI === 'undefined') {
   // business functions
   window.WAPI.getBusinessProfilesProducts = getBusinessProfilesProducts;
   window.WAPI.getOrderbyMsg = getOrderbyMsg;
-
-  // call functions
-  window.WAPI.rejectCall = rejectCall;
 
   // Listeners initialization
   window.WAPI._newMessagesQueue = [];
