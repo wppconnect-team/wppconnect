@@ -15,15 +15,15 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import axios from 'axios';
 import { Page } from 'puppeteer';
+import { CreateConfig } from '../config/create-config';
+import { useragentOverride } from '../config/WAuserAgente';
+import { evaluateAndReturn } from './helpers';
+import { magix, makeOptions, timeout } from './helpers/decrypt';
 import { BusinessLayer } from './layers/business.layer';
 import { GetMessagesParam, Message } from './model';
-import { magix, timeout, makeOptions } from './helpers/decrypt';
-import { useragentOverride } from '../config/WAuserAgente';
-import { CreateConfig } from '../config/create-config';
-import axios from 'axios';
 import treekill = require('tree-kill');
-import { evaluateAndReturn } from './helpers';
 
 export class Whatsapp extends BusinessLayer {
   private connected: boolean | null = null;
@@ -33,22 +33,8 @@ export class Whatsapp extends BusinessLayer {
 
     let interval: any = null;
 
-    const removeToken = async () => {
-      this.log('info', 'Session Unpaired', { type: 'session' });
-      const removed = await Promise.resolve(
-        this.tokenStore.removeToken(this.session)
-      );
-
-      if (removed) {
-        this.log('verbose', 'Token removed', { type: 'token' });
-      }
-    };
-
     if (this.page) {
       this.page.on('close', async () => {
-        if (this.connected === false) {
-          await removeToken();
-        }
         clearInterval(interval);
       });
     }
@@ -62,39 +48,11 @@ export class Whatsapp extends BusinessLayer {
         return;
       }
 
-      if (newConnected) {
-        this.connected = newConnected;
+      this.connected = newConnected;
+      if (!newConnected) {
+        this.log('info', 'Session Unpaired', { type: 'session' });
         setTimeout(async () => {
-          this.log('verbose', 'Updating session token', { type: 'token' });
-          const tokenData = await this.getSessionTokenBrowser();
-          const updated = await Promise.resolve(
-            this.tokenStore.setToken(this.session, tokenData)
-          );
-
-          if (updated) {
-            this.log('verbose', 'Session token updated', {
-              type: 'token',
-            });
-          } else {
-            this.log('warn', 'Failed to update session token', {
-              type: 'token',
-            });
-          }
-        }, 1000);
-      } else {
-        if (!newConnected && this.connected) {
-          setTimeout(async () => {
-            await page.evaluate(() => localStorage.clear());
-            await page.reload();
-          }, 1000);
-        }
-        this.connected = newConnected;
-
-        setTimeout(async () => {
-          await removeToken();
-
-          // Fire only after a success connection and disconnection
-          if (newConnected && this.statusFind) {
+          if (this.statusFind) {
             try {
               this.statusFind('desconnectedMobile', session);
             } catch (error) {}

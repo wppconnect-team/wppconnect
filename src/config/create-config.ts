@@ -100,12 +100,14 @@ export interface CreateConfig {
   /**
    * Initial token to log in in WhatsApp.
    * If not passed, the client will get it from {@link tokenStore}.
+   * @deprecated
    */
   sessionToken?: SessionToken;
 
   /**
    * Token store used to manage token {@link tokenStore}
    * @default 'file'
+   * @deprecated
    */
   tokenStore?: TokenStore | string;
 

@@ -26,7 +26,6 @@ import puppeteer from 'puppeteer-extra';
 import { CreateConfig } from '../config/create-config';
 import { puppeteerConfig } from '../config/puppeteer.config';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
-import { injectSessionToken } from './auth';
 import { useragentOverride } from '../config/WAuserAgente';
 import { WebSocketTransport } from './websocket';
 import { Logger } from 'winston';
@@ -111,12 +110,6 @@ export async function initWhatsapp(
   await page.setUserAgent(useragentOverride);
 
   await unregisterServiceWorker(page);
-
-  if (clear) {
-    log?.('verbose', 'Cleaning localStorage');
-  }
-  // Auth with token
-  await injectSessionToken(page, token, clear);
 
   if (version) {
     log?.('verbose', `Setting WhatsApp WEB version to ${version}`);
