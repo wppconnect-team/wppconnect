@@ -1,3 +1,9 @@
+# 1.23.0 (2023-03-12)
+
+### Bug Fixes
+
+- Reduced the number of log for events ([5b39646](https://github.com/wppconnect-team/wppconnect/commit/5b396467c594396741f61495da1c23bac19c8c94))
+
 # 1.22.0 (2023-02-19)
 
 ### Features
