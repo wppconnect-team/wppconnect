@@ -98,12 +98,13 @@ export class ListenerLayer extends ProfileLayer {
         await this.page
           .exposeFunction(func, (...args) => {
             Promise.resolve().then(() => {
-              this.log(
-                'debug',
-                `Emitting ${func} event (${this.listenerEmitter.listenerCount(
-                  func
-                )} registered)`
-              );
+              const count = this.listenerEmitter.listenerCount(func);
+              if (count > 0) {
+                this.log(
+                  'debug',
+                  `Emitting ${func} event (${count} registered)`
+                );
+              }
               this.listenerEmitter.emit(func, ...args);
             });
           })
