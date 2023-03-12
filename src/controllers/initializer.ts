@@ -232,23 +232,27 @@ export async function create(
 
   if (page) {
     const client = new Whatsapp(page, session, mergedOptions);
+    client.catchQR = catchQR;
+    client.statusFind = statusFind;
     client.onLoadingScreen = onLoadingScreen;
 
+    await client.start();
+
     if (mergedOptions.waitForLogin) {
-      const isLogged = await client.waitForLogin(catchQR, statusFind);
+      const isLogged = await client.waitForLogin();
       if (!isLogged) {
         throw 'Not Logged';
       }
 
       let waitLoginPromise = null;
       client.onStateChange(async (state) => {
-        const connected = await page.evaluate(() => WAPI.isRegistered());
+        const connected = await page.evaluate(() => WPP.conn.isRegistered());
         if (!connected) {
           await sleep(2000);
 
           if (!waitLoginPromise) {
             waitLoginPromise = client
-              .waitForLogin(catchQR, statusFind)
+              .waitForLogin()
               .catch(() => {})
               .finally(() => {
                 waitLoginPromise = null;
