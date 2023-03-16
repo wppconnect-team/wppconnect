@@ -54,8 +54,8 @@
   },
   "homepage": "https://github.com/wppconnect-team/wppconnect#readme",
   "devDependencies": {
-    "@babel/core": "^7.21.0",
-    "@babel/eslint-parser": "^7.19.1",
+    "@babel/core": "^7.21.3",
+    "@babel/eslint-parser": "^7.21.3",
     "@babel/eslint-plugin": "^7.19.1",
     "@babel/preset-env": "^7.20.2",
     "@commitlint/cli": "^17.4.4",
