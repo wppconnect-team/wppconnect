@@ -78,7 +78,7 @@
     "concurrently": "^7.6.0",
     "conventional-changelog-cli": "^2.2.2",
     "eslint": "^8.34.0",
-    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.3",
