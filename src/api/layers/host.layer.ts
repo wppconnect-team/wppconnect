@@ -214,7 +214,7 @@ export class HostLayer {
   }
 
   protected async checkInChat() {
-    const inChat = isInsideChat(this.page).catch(() => null);
+    const inChat = await isInsideChat(this.page).catch(() => null);
 
     this.isInChat = !!inChat;
 
