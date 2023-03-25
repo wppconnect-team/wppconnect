@@ -1,3 +1,9 @@
+## 1.23.1 (2023-03-25)
+
+### Bug Fixes
+
+- Fixed multiple inChat emit events ([#1598](https://github.com/wppconnect-team/wppconnect/issues/1598)) ([4900765](https://github.com/wppconnect-team/wppconnect/commit/4900765f20a7c879e597ce01ebcce05bf244006b))
+
 # 1.23.0 (2023-03-12)
 
 ### Bug Fixes
