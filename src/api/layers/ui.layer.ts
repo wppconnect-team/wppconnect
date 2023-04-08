@@ -52,4 +52,11 @@ export class UILayer extends GroupLayer {
       chatId
     );
   }
+  /**
+   * Return the current active chat
+   * @category UI
+   */
+  public async getActiveChat() {
+    return evaluateAndReturn(this.page, () => WPP.chat.getActiveChat());
+  }
 }
