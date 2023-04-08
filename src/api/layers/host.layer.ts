@@ -507,4 +507,35 @@ export class HostLayer {
   public async isMultiDevice() {
     return await evaluateAndReturn(this.page, () => WPP.conn.isMultiDevice());
   }
+  /**
+   * Retrieve main interface is authenticated, loaded and synced
+   * @category Host
+   */
+  public async isMainReady() {
+    return await evaluateAndReturn(this.page, () => WPP.conn.isMainReady());
+  }
+
+  /**
+   * Retrieve if is authenticated
+   * @category Host
+   */
+  public async isAuthenticated() {
+    return await evaluateAndReturn(this.page, () => WPP.conn.isAuthenticated());
+  }
+
+  /**
+   * Retrieve if main interface is authenticated and loaded, bot not synced
+   * @category Host
+   */
+  public async isMainLoaded() {
+    return await evaluateAndReturn(this.page, () => WPP.conn.isMainLoaded());
+  }
+
+  /**
+   * Retrieve if main interface is initializing
+   * @category Host
+   */
+  public async isMainInit() {
+    return await evaluateAndReturn(this.page, () => WPP.conn.isMainInit());
+  }
 }
