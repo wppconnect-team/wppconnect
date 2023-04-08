@@ -355,4 +355,32 @@ export class GroupLayer extends RetrieverLayer {
       { groupId, base64 }
     );
   }
+  /**
+   * Set group subject (if allowed)
+   * @category Group
+   * @param groupId Group ID ('0000000000@g.us')
+   * @returns empty object
+   */
+  public async removeGroupIcon(groupId: string) {
+    if (!groupId) {
+      throw new Error('Empty or invalid group id');
+    }
+
+    return await evaluateAndReturn(
+      this.page,
+      ({ groupId }) => WPP.group.removeIcon(groupId),
+      { groupId }
+    );
+  }
+
+  /**
+   * Get the max number of participants for a group
+   * @category Group
+   * @returns number
+   */
+  public async getGroupSizeLimit() {
+    return await evaluateAndReturn(this.page, () =>
+      WPP.group.getGroupSizeLimit()
+    );
+  }
 }
