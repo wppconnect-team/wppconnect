@@ -151,12 +151,19 @@ export class ProfileLayer extends StatusLayer {
    * @param name
    */
   public async setProfileName(name: string) {
-    return evaluateAndReturn(
+    return await evaluateAndReturn(
       this.page,
-      ({ name }) => {
-        WAPI.setMyName(name);
-      },
+      ({ name }) => WPP.profile.setMyProfileName(name),
       { name }
+    );
+  }
+  /**
+   * Remove your profile picture
+   * @category Profile
+   */
+  public async removeMyProfilePicture() {
+    return await evaluateAndReturn(this.page, () =>
+      WPP.profile.removeMyProfilePicture()
     );
   }
 }
