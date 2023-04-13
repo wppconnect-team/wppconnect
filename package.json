@@ -68,7 +68,7 @@
     "@types/node": "^18.15.11",
     "@types/rimraf": "^3.0.2",
     "@types/sharp": "^0.31.1",
-    "@types/shelljs": "^0.8.11",
+    "@types/shelljs": "^0.8.12",
     "@types/tmp": "^0.2.3",
     "@types/ws": "^8.5.4",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
