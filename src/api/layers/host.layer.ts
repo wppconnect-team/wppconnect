@@ -463,6 +463,14 @@ export class HostLayer {
   }
 
   /**
+   * Check is online
+   * @category Host
+   */
+  public async isOnline(): Promise<boolean> {
+    return await evaluateAndReturn(this.page, () => WPP.conn.isOnline());
+  }
+
+  /**
    * Retrieves if the phone is online. Please note that this may not be real time.
    * @category Host
    */
