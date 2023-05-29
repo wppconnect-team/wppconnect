@@ -546,4 +546,17 @@ export class HostLayer {
   public async isMainInit() {
     return await evaluateAndReturn(this.page, () => WPP.conn.isMainInit());
   }
+
+  /**
+   * Join or leave of WhatsApp Web beta program.
+   * Will return the value seted
+   * @category Host
+   */
+  public async joinWebBeta(value: boolean): Promise<boolean> {
+    return await evaluateAndReturn(
+      this.page,
+      (value) => WPP.conn.joinWebBeta(value),
+      value
+    );
+  }
 }
