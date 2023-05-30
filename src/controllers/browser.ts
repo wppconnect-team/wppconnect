@@ -282,7 +282,7 @@ export async function initBrowser(
     browser = await puppeteer.connect({ transport });
   } else {
     browser = await puppeteer.launch({
-      headless: options.headless,
+      headless: options.headless ? 'new' : false,
       devtools: options.devtools,
       args: options.browserArgs
         ? options.browserArgs
