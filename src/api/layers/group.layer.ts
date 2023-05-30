@@ -429,4 +429,26 @@ export class GroupLayer extends RetrieverLayer {
       { groupId, membershipIds }
     );
   }
+
+  /**
+   * Retrieve a list of a membership approval requests
+   * @category Group
+   * @param groupId Group ID ('000000-000000@g.us')
+   * @returns Promise
+   */
+  public async getGroupMembershipRequests(groupId: string): Promise<
+    {
+      addedBy: Wid;
+      id: Wid;
+      parentGroupId?: Wid;
+      requestMethod: 'InviteLink' | 'LinkedGroupJoin' | 'NonAdminAdd';
+      t: number;
+    }[]
+  > {
+    return await evaluateAndReturn(
+      this.page,
+      ({ groupId }) => WPP.group.getMembershipRequests(groupId),
+      { groupId }
+    );
+  }
 }
