@@ -406,4 +406,27 @@ export class GroupLayer extends RetrieverLayer {
       { groupId, membershipIds }
     );
   }
+
+  /**
+   * Reject a membership request to group
+   * @category Group
+   * @param groupId Group ID ('000000-000000@g.us')
+   * @param wid <number>@c.us
+   * @returns Promise
+   */
+  public async rejectGroupMembershipRequest(
+    groupId: string,
+    membershipIds: string | string[]
+  ): Promise<
+    {
+      error: any;
+      wid: Wid;
+    }[]
+  > {
+    return await evaluateAndReturn(
+      this.page,
+      ({ groupId, membershipIds }) => WPP.group.reject(groupId, membershipIds),
+      { groupId, membershipIds }
+    );
+  }
 }
