@@ -33,6 +33,7 @@ import { MessageType, SocketState, SocketStream } from '../model/enum';
 import { InterfaceMode } from '../model/enum/interface-mode';
 import { InterfaceState } from '../model/enum/interface-state';
 import { ProfileLayer } from './profile.layer';
+import { Label } from '../model/label';
 
 declare global {
   interface Window {
@@ -86,6 +87,7 @@ export class ListenerLayer extends ProfileLayer {
       'onRevokedMessage',
       'onReactionMessage',
       'onPollResponse',
+      'onUpdateLabel',
     ];
 
     for (const func of functions) {
@@ -265,6 +267,22 @@ export class ListenerLayer extends ProfileLayer {
               window['onPollResponse'](eventData);
             });
             window['onPollResponse'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        try {
+          if (!window['onUpdateLabel'].exposed) {
+            WPP.on('chat.update_label', (data) => {
+              const eventData = {
+                chat: data.chat,
+                ids: data.ids,
+                labels: data.labels,
+                type: data.type,
+              };
+              window['onUpdateLabel'](eventData);
+            });
+            window['onUpdateLabel'].exposed = true;
           }
         } catch (error) {
           console.error(error);
@@ -612,5 +630,20 @@ export class ListenerLayer extends ProfileLayer {
     }) => any
   ) {
     return this.registerEvent('onPollResponse', callback);
+  }
+
+  /**
+   * @event Listens to update label
+   * @returns Disposable object to stop the listening
+   */
+  public onUpdateLabel(
+    callback: (data: {
+      chat: Chat;
+      ids: string[];
+      labels: Label[];
+      type: 'add' | 'remove';
+    }) => any
+  ) {
+    return this.registerEvent('onUpdateLabel', callback);
   }
 }
