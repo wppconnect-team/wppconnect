@@ -92,7 +92,7 @@
     "typedoc": "^0.23.28",
     "typescript": "^5.0.4",
     "webpack": "^5.84.1",
-    "webpack-cli": "^5.0.2"
+    "webpack-cli": "^5.1.1"
   },
   "dependencies": {
     "@wppconnect/wa-js": "^2.24.2",
