@@ -23,7 +23,7 @@ import {
   fileToBase64,
   downloadFileToBase64,
 } from '../helpers';
-import { Id } from '../model';
+import { Id, Wid } from '../model';
 import { GroupProperty } from '../model/enum';
 import { RetrieverLayer } from './retriever.layer';
 
@@ -303,7 +303,7 @@ export class GroupLayer extends RetrieverLayer {
   }
 
   /**
-   * Set group subject (if allowed)
+   * Set group icon
    * @category Group
    * @param groupId Group ID ('000000-000000@g.us')
    * @param base64 Image in base64 ( data:image/jpeg;base64,..... )
@@ -381,6 +381,29 @@ export class GroupLayer extends RetrieverLayer {
   public async getGroupSizeLimit() {
     return await evaluateAndReturn(this.page, () =>
       WPP.group.getGroupSizeLimit()
+    );
+  }
+
+  /**
+   * Approve a membership request to group
+   * @category Group
+   * @param groupId Group ID ('000000-000000@g.us')
+   * @param wid <number>@c.us
+   * @returns Promise
+   */
+  public async approveGroupMembershipRequest(
+    groupId: string,
+    membershipIds: string | string[]
+  ): Promise<
+    {
+      error: any;
+      wid: Wid;
+    }[]
+  > {
+    return await evaluateAndReturn(
+      this.page,
+      ({ groupId, membershipIds }) => WPP.group.approve(groupId, membershipIds),
+      { groupId, membershipIds }
     );
   }
 }
