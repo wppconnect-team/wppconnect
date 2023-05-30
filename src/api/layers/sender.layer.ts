@@ -425,13 +425,15 @@ export class SenderLayer extends ListenerLayer {
    * @param filename
    * @param caption
    * @param quotedMessageId Quoted message id
+   * @param messageId Set the id for this message
    */
   public async sendPttFromBase64(
     to: string,
     base64: string,
     filename: string,
     caption?: string,
-    quotedMessageId?: string
+    quotedMessageId?: string,
+    messageId?: string
   ) {
     const result = await evaluateAndReturn(
       this.page,
@@ -443,6 +445,7 @@ export class SenderLayer extends ListenerLayer {
           caption,
           quotedMsg: quotedMessageId,
           waitForAck: true,
+          messageId: messageId,
         });
 
         return {
@@ -465,13 +468,15 @@ export class SenderLayer extends ListenerLayer {
    * @param filename
    * @param caption
    * @param quotedMessageId Quoted message id
+   * @param messageId Set the id for this message
    */
   public async sendPtt(
     to: string,
     filePath: string,
     filename?: string,
     caption?: string,
-    quotedMessageId?: string
+    quotedMessageId?: string,
+    messageId?: string
   ) {
     return new Promise(async (resolve, reject) => {
       let base64 = await downloadFileToBase64(filePath, [/^audio/]),
@@ -499,7 +504,8 @@ export class SenderLayer extends ListenerLayer {
         base64,
         filename,
         caption,
-        quotedMessageId
+        quotedMessageId,
+        messageId
       )
         .then(resolve)
         .catch(reject);
