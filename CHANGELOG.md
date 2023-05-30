@@ -1,3 +1,9 @@
+# 1.25.0 (2023-05-30)
+
+### Bug Fixes
+
+- **deps:** update dependency @wppconnect/wa-version to ^1.2.42 ([#1700](https://github.com/wppconnect-team/wppconnect/issues/1700)) ([1c07a4b](https://github.com/wppconnect-team/wppconnect/commit/1c07a4b410037dbb748749e9faefde0fc4f04903))
+
 # 1.24.0 (2023-04-29)
 
 ## 1.23.2 (2023-04-03)
