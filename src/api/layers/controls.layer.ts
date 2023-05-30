@@ -218,4 +218,41 @@ export class ControlsLayer extends UILayer {
       { chatOrGroupId, value }
     );
   }
+
+  /**
+   * Change limits of whatsapp web
+   *  * @example
+   * ```javascript
+   *  //Change the maximum size (bytes) for uploading media (max 70MB)
+   *  WPP.conn.setLimit('maxMediaSize',16777216);
+   *
+   *  //Change the maximum size (bytes) for uploading files (max 1GB)
+   *  WPP.conn.setLimit('maxFileSize',104857600);
+   *
+   *  //Change the maximum number of contacts that can be selected when sharing (Default 5)
+   *  WPP.conn.setLimit('maxShare',100);
+   *
+   *  //Change the maximum time (seconds) of a video status
+   *  WPP.conn.setLimit('statusVideoMaxDuration',120);
+   *
+   *  //Remove pinned conversation limit (only whatsapp web) (Default 3)
+   *  WPP.conn.setLimit('unlimitedPin',true);
+   * ```
+   * @category Chat
+   */
+  public async setLimit(
+    key:
+      | 'maxMediaSize'
+      | 'maxFileSize'
+      | 'maxShare'
+      | 'statusVideoMaxDuration'
+      | 'unlimitedPin',
+    value: boolean | number
+  ) {
+    return await evaluateAndReturn(
+      this.page,
+      ({ key, value }) => WPP.conn.setLimit(key as any, value),
+      { key, value }
+    );
+  }
 }
