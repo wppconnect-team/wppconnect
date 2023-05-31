@@ -111,6 +111,16 @@ export class Whatsapp extends BusinessLayer {
   }
 
   /**
+   * Get the puppeteer page screenshot
+   * @returns The Whatsapp page screenshot encoded in base64
+   */
+  public async takeScreenshot() {
+    if (this.page) {
+      return await this.page.screenshot({ encoding: 'base64' });
+    }
+  }
+
+  /**
    * Clicks on 'use here' button (When it get unlaunched)
    * This method tracks the class of the button
    * Whatsapp web might change this class name over the time
