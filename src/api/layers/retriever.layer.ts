@@ -506,4 +506,15 @@ export class RetrieverLayer extends SenderLayer {
       msgId
     );
   }
+
+  /**
+   * Get the max number of participants for a group
+   *
+   * @category Group
+   */
+  public async getGroupSizeLimit(): Promise<number> {
+    return await evaluateAndReturn(this.page, () =>
+      WPP.group.getGroupSizeLimit()
+    );
+  }
 }
