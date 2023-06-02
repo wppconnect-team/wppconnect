@@ -19,8 +19,9 @@ import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
 import { HostLayer } from './host.layer';
+import { CommunityLayer } from './community.layer';
 
-export class CatalogLayer extends HostLayer {
+export class CatalogLayer extends CommunityLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
   }
