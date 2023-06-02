@@ -114,10 +114,16 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves all chats
+   * Deprecated in favor of {@link listChats}
+   *
    * @category Chat
    * @returns array of [Chat]
+   * @deprecated Deprecated in favor of listChats.
    */
   public async getAllChats(withNewMessageOnly = false) {
+    this.logger.warn(
+      'Deprecated: This function [getAllChats] is deprecated in favor of the getList function. Please update your code accordingly.'
+    );
     if (withNewMessageOnly) {
       return evaluateAndReturn(this.page, () => WAPI.getAllChatsWithNewMsg());
     } else {
@@ -185,10 +191,16 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieves all chats with messages
+   * Deprecated in favor of {@link listChats}
+   *
    * @category Chat
    * @returns array of [Chat]
+   * @deprecated Deprecated in favor of listChats.
    */
   public async getAllChatsWithMessages(withNewMessageOnly = false) {
+    this.logger.warn(
+      'Deprecated: This function [getAllChatsWithMessages] is deprecated in favor of the getList function. Please update your code accordingly.'
+    );
     return evaluateAndReturn(
       this.page,
       (withNewMessageOnly: boolean) =>
@@ -199,10 +211,16 @@ export class RetrieverLayer extends SenderLayer {
 
   /**
    * Retrieve all groups
+   * Deprecated in favor of {@link listChats}
+   *
    * @category Group
    * @returns array of groups
+   * @deprecated Deprecated in favor of listChats.
    */
   public async getAllGroups(withNewMessagesOnly = false): Promise<Chat[]> {
+    this.logger.warn(
+      'Deprecated: This function [getAllGroups] is deprecated in favor of the getList function. Please update your code accordingly.'
+    );
     return await evaluateAndReturn(
       this.page,
       async ({ withNewMessagesOnly }) => {
