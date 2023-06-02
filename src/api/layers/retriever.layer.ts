@@ -27,6 +27,7 @@ import {
   Wid,
 } from '../model';
 import { SenderLayer } from './sender.layer';
+import { ChatListOptions } from '@wppconnect/wa-js/dist/chat';
 
 export class RetrieverLayer extends SenderLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -122,6 +123,50 @@ export class RetrieverLayer extends SenderLayer {
     } else {
       return evaluateAndReturn(this.page, () => WAPI.getAllChats());
     }
+  }
+
+  /**
+   * Return list of chats
+   *  * @example
+   * ```javascript
+   * // All chats
+   * const chats = await client.chatList();
+   *
+   * // Some chats
+   * const chats = client.chatList({count: 20});
+   *
+   * // 20 chats before specific chat
+   * const chats = client.chatList({count: 20, direction: 'before', id: '[number]@c.us'});
+   *
+   * // Only users chats
+   * const chats = await client.chatList({onlyUsers: true});
+   *
+   * // Only groups chats
+   * const chats = await client.chatList({onlyGroups: true});
+   *
+   * // Only with label Text
+   * const chats = await client.chatList({withLabels: ['Test']});
+   *
+   * // Only with label id
+   * const chats = await client.chatList({withLabels: ['1']});
+   *
+   * // Only with label with one of text or id
+   * const chats = await client.chatList({withLabels: ['Alfa','5']});
+   * ```
+   * @category Chat
+   * @returns array of [Chat]
+   */
+  public async listChats(options?: ChatListOptions): Promise<Chat[]> {
+    return await evaluateAndReturn(
+      this.page,
+      async ({ options }) => {
+        const chats = await WPP.chat.list(options);
+
+        const serialized = chats.map((c) => WAPI._serializeChatObj(c));
+        return serialized;
+      },
+      { options }
+    );
   }
 
   /**
