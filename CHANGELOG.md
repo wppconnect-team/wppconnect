@@ -1,3 +1,9 @@
+## 1.27.1 (2023-06-04)
+
+### Bug Fixes
+
+- Reverting to previous fix as a temporary workaround ([#1718](https://github.com/wppconnect-team/wppconnect/issues/1718)) ([a0375b6](https://github.com/wppconnect-team/wppconnect/commit/a0375b6086507882600b4d24e12be23add1c4e29))
+
 # 1.27.0 (2023-06-02)
 
 ### Bug Fixes
