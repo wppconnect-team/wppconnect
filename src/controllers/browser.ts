@@ -281,8 +281,12 @@ export async function initBrowser(
     const transport = await getTransport(options.browserWS);
     browser = await puppeteer.connect({ transport });
   } else {
+    /**
+     * Setting the headless mode to the old Puppeteer mode, when using the 'new' mode, results in an error on CentOS7 and Debian11.
+     * Temporary fix.
+     */
     browser = await puppeteer.launch({
-      headless: options.headless ? 'new' : false,
+      headless: options.headless,
       devtools: options.devtools,
       args: options.browserArgs
         ? options.browserArgs
