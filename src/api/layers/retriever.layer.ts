@@ -122,7 +122,7 @@ export class RetrieverLayer extends SenderLayer {
    */
   public async getAllChats(withNewMessageOnly = false) {
     this.logger.warn(
-      'Deprecated: This function [getAllChats] is deprecated in favor of the getList function. Please update your code accordingly.'
+      'Deprecated: This function [getAllChats] is deprecated in favor of the listChats function. Please update your code accordingly.'
     );
     if (withNewMessageOnly) {
       return evaluateAndReturn(this.page, () => WAPI.getAllChatsWithNewMsg());
@@ -136,28 +136,28 @@ export class RetrieverLayer extends SenderLayer {
    *  * @example
    * ```javascript
    * // All chats
-   * const chats = await client.chatList();
+   * const chats = await client.listChats();
    *
    * // Some chats
-   * const chats = client.chatList({count: 20});
+   * const chats = client.listChats({count: 20});
    *
    * // 20 chats before specific chat
-   * const chats = client.chatList({count: 20, direction: 'before', id: '[number]@c.us'});
+   * const chats = client.listChats({count: 20, direction: 'before', id: '[number]@c.us'});
    *
    * // Only users chats
-   * const chats = await client.chatList({onlyUsers: true});
+   * const chats = await client.listChats({onlyUsers: true});
    *
    * // Only groups chats
-   * const chats = await client.chatList({onlyGroups: true});
+   * const chats = await client.listChats({onlyGroups: true});
    *
    * // Only with label Text
-   * const chats = await client.chatList({withLabels: ['Test']});
+   * const chats = await client.listChats({withLabels: ['Test']});
    *
    * // Only with label id
-   * const chats = await client.chatList({withLabels: ['1']});
+   * const chats = await client.listChats({withLabels: ['1']});
    *
    * // Only with label with one of text or id
-   * const chats = await client.chatList({withLabels: ['Alfa','5']});
+   * const chats = await client.listChats({withLabels: ['Alfa','5']});
    * ```
    * @category Chat
    * @returns array of [Chat]
@@ -199,7 +199,7 @@ export class RetrieverLayer extends SenderLayer {
    */
   public async getAllChatsWithMessages(withNewMessageOnly = false) {
     this.logger.warn(
-      'Deprecated: This function [getAllChatsWithMessages] is deprecated in favor of the getList function. Please update your code accordingly.'
+      'Deprecated: This function [getAllChatsWithMessages] is deprecated in favor of the listChats function. Please update your code accordingly.'
     );
     return evaluateAndReturn(
       this.page,
@@ -219,7 +219,7 @@ export class RetrieverLayer extends SenderLayer {
    */
   public async getAllGroups(withNewMessagesOnly = false): Promise<Chat[]> {
     this.logger.warn(
-      'Deprecated: This function [getAllGroups] is deprecated in favor of the getList function. Please update your code accordingly.'
+      'Deprecated: This function [getAllGroups] is deprecated in favor of the listChats function. Please update your code accordingly.'
     );
     return await evaluateAndReturn(
       this.page,
