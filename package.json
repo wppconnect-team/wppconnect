@@ -70,7 +70,7 @@
     "@types/sharp": "^0.31.1",
     "@types/shelljs": "^0.8.12",
     "@types/tmp": "^0.2.3",
-    "@types/ws": "^8.5.4",
+    "@types/ws": "^8.5.5",
     "@typescript-eslint/eslint-plugin": "^5.59.9",
     "@typescript-eslint/parser": "^5.59.9",
     "babel-loader": "^9.1.2",
