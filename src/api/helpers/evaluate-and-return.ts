@@ -134,7 +134,9 @@ export async function evaluateAndReturn<T extends EvaluateFn>(
     let jsStack = error.stack;
     Error.captureStackTrace(error);
     if (jsStack) {
-      error.stack = (error.stack || '') + '\nJS Stack: ' + jsStack;
+      error.stack = `${
+        error.stack || ''
+      }\nJS Stack: ${jsStack}\nFunction: ${functionText}`;
     }
 
     throw error;

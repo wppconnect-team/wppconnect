@@ -16,7 +16,7 @@
  */
 
 export function getChatByName(name, done) {
-  const found = WPP.whatsapp.ChatStore.find((chat) => chat.name === name);
+  const found = WPP.chat.find((chat) => chat.name === name);
   if (done !== undefined) done(found);
   return found;
 }
