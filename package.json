@@ -61,7 +61,6 @@
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
     "@commitlint/cz-commitlint": "^17.5.0",
-    "@knodes/typedoc-plugin-pages": "^0.23.4",
     "@types/atob": "^2.1.2",
     "@types/mime-types": "^2.1.1",
     "@types/mocha": "^10.0.1",
