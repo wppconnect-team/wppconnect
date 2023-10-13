@@ -22,6 +22,7 @@ import type {
   SendMessageReturn,
   TextMessageOptions,
   PoolMessageOptions,
+  ForwardMessagesOptions,
 } from '@wppconnect/wa-js/dist/chat';
 import * as path from 'path';
 import { Page } from 'puppeteer';
@@ -835,11 +836,8 @@ export class SenderLayer extends ListenerLayer {
   public async forwardMessage(
     toChatId: string,
     msgId: string | string[],
-    options?: {
-      displayCaptionText?: boolean;
-      multicast?: boolean;
-    }
-  ): Promise<string[]> {
+    options?: ForwardMessagesOptions
+  ): Promise<boolean> {
     return evaluateAndReturn(
       this.page,
       ({ toChatId, msgId, options }) =>
