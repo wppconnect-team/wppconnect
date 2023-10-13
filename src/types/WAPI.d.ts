@@ -48,7 +48,7 @@ interface WAPI {
       displayCaptionText?: boolean;
       multicast?: boolean;
     }
-  ) => string[];
+  ) => boolean;
   getAllChats: () => Chat[];
   getAllChatsWithMessages: (withNewMessageOnly?: boolean) => Chat[];
   getAllChatsWithNewMsg: () => Chat[];
