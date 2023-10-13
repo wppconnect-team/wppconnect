@@ -832,16 +832,19 @@ export class SenderLayer extends ListenerLayer {
    * @param skipMyMessages
    * @returns array of messages ID
    */
-  public async forwardMessages(
-    to: string,
-    messages: string | string[],
-    skipMyMessages: boolean
+  public async forwardMessage(
+    toChatId: string,
+    msgId: string | string[],
+    options?: {
+      displayCaptionText?: boolean;
+      multicast?: boolean;
+    }
   ): Promise<string[]> {
     return evaluateAndReturn(
       this.page,
-      ({ to, messages, skipMyMessages }) =>
-        WAPI.forwardMessages(to, messages, skipMyMessages),
-      { to, messages, skipMyMessages }
+      ({ toChatId, msgId, options }) =>
+        WAPI.forwardMessage(toChatId, msgId, options),
+      { toChatId, msgId, options }
     );
   }
 
