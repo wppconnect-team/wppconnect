@@ -172,7 +172,7 @@ export interface CreateConfig {
 
 export const defaultOptions: CreateConfig = {
   folderNameToken: './tokens',
-  headless: true,
+  headless: 'new',
   devtools: false,
   useChrome: true,
   debug: false,
