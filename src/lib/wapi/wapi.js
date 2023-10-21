@@ -393,7 +393,6 @@ if (typeof window.WAPI === 'undefined') {
     return window.Debug.VERSION;
   };
 
-
   /**
    * @param NumberChatsDelete Number of chats that will be deleted
    */
@@ -401,7 +400,7 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.deleteOldChats = async function (NumberChatsDelete) {
     const options = {
       onlyWithUnreadMessage: false,
-      onlyUsers: true
+      onlyUsers: true,
     };
 
     try {
@@ -413,8 +412,8 @@ if (typeof window.WAPI === 'undefined') {
 
       for (let i = 0; i < numChatsToDelete; i++) {
         await window.WAPI.chat.delete(chats[i].id._serialized).then(result => {});
-      return;
-    }
+        return;
+      }
     } catch (e) {
       console.error('Erro:', e);
       return e;
