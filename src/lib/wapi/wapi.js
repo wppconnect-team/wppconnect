@@ -413,7 +413,8 @@ if (typeof window.WAPI === 'undefined') {
       for (let i = 0; i < numChatsToDelete; i++) {
         await window.WAPI.chat
           .delete(chats[i].id._serialized)
-          .then(result => {});
+          .then((_) => true)
+          .catch((_) => true);
       }
     } catch (e) {
       console.error('Erro:', e);
