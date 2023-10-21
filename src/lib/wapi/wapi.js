@@ -393,7 +393,7 @@ if (typeof window.WAPI === 'undefined') {
     return window.Debug.VERSION;
   };
 
-  
+
   /**
    * @param NumberChatsDelete Number of chats that will be deleted
    */
@@ -412,14 +412,14 @@ if (typeof window.WAPI === 'undefined') {
         const numChatsToDelete = Math.min(NumberChatsDelete, chats.length);
 
         for (let i = 0; i < numChatsToDelete; i++) {
-            await WPP.chat.delete(chats[i].id._serialized).then(result => {
+            await window.WAPI.chat.delete(chats[i].id._serialized).then(result => {
                 //console.log('Chat ${chats[i].id._serialized} deleted:', result);
             });
         }
     } catch (e) {
         console.error('Erro:', e);
     }
-  }
+  };
 
   /**
    * @param id The id of the conversation
