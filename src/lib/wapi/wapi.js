@@ -412,11 +412,10 @@ if (typeof window.WAPI === 'undefined') {
       const numChatsToDelete = Math.min(NumberChatsDelete, chats.length);
 
       for (let i = 0; i < numChatsToDelete; i++) {
-        await window.WAPI.chat.delete(chats[i].id._serialized).then(result => {          
-        });
-      return;  
-      }
-    } catch (e) {      
+        await window.WAPI.chat.delete(chats[i].id._serialized).then(result => {});
+      return;
+    }
+    } catch (e) {
       console.error('Erro:', e);
       return e;
     }
