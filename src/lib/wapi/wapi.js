@@ -405,19 +405,19 @@ if (typeof window.WAPI === 'undefined') {
     };
 
     try {
-        const chats = await window.WAPI.chat.list(options);
+      const chats = await window.WAPI.chat.list(options);
 
-        //Sort chats in reverse (from newest to oldest)
-        chats.reverse();        
-        const numChatsToDelete = Math.min(NumberChatsDelete, chats.length);
+      //Sort chats in reverse (from newest to oldest)
+      chats.reverse();
+      const numChatsToDelete = Math.min(NumberChatsDelete, chats.length);
 
-        for (let i = 0; i < numChatsToDelete; i++) {
-            await window.WAPI.chat.delete(chats[i].id._serialized).then(result => {
-                //console.log('Chat ${chats[i].id._serialized} deleted:', result);
-            });
-        }
+      for (let i = 0; i < numChatsToDelete; i++) {
+        await window.WAPI.chat.delete(chats[i].id._serialized).then(result => {
+          //console.log('Chat ${chats[i].id._serialized} deleted:', result);
+        });
+      }
     } catch (e) {
-        console.error('Erro:', e);
+      console.error('Erro:', e);
     }
   };
 
