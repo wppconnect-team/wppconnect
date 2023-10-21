@@ -404,9 +404,7 @@ if (typeof window.WAPI === 'undefined') {
     };
 
     try {
-      const chats = await window.WAPI.chat.list(options);
-
-      //Sort chats in reverse (from newest to oldest)
+      const chats = await window.WAPI.chat.list(options);      
       chats.reverse();
       const numChatsToDelete = Math.min(NumberChatsDelete, chats.length);
 
@@ -414,7 +412,7 @@ if (typeof window.WAPI === 'undefined') {
         await window.WAPI.chat
           .delete(chats[i].id._serialized)
           .then((_) => true)
-          .catch((_) => true);
+          .catch((_) => false);
       }
     } catch (e) {
       console.error('Erro:', e);
