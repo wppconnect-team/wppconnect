@@ -404,7 +404,7 @@ if (typeof window.WAPI === 'undefined') {
     };
 
     try {
-      const chats = await window.WAPI.chat.list(options);      
+      const chats = await window.WAPI.chat.list(options);
       chats.reverse();
       const numChatsToDelete = Math.min(NumberChatsDelete, chats.length);
 
