@@ -393,6 +393,34 @@ if (typeof window.WAPI === 'undefined') {
     return window.Debug.VERSION;
   };
 
+  
+  /**
+   * @param NumberChatsDelete Number of chats that will be deleted
+   */
+  //Add Marcelo 21/10/2023
+  window.WAPI.deleteOldChats = async function (NumberChatsDelete) {
+    const options = {
+      onlyWithUnreadMessage: false,
+      onlyUsers: true
+    };
+
+    try {
+        const chats = await window.WAPI.chat.list(options);
+
+        //Sort chats in reverse (from newest to oldest)
+        chats.reverse();        
+        const numChatsToDelete = Math.min(NumberChatsDelete, chats.length);
+
+        for (let i = 0; i < numChatsToDelete; i++) {
+            await WPP.chat.delete(chats[i].id._serialized).then(result => {
+                //console.log('Chat ${chats[i].id._serialized} deleted:', result);
+            });
+        }
+    } catch (e) {
+        console.error('Erro:', e);
+    }
+  }
+
   /**
    * @param id The id of the conversation
    * @param archive boolean true => archive, false => unarchive
