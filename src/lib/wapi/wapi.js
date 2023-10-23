@@ -409,6 +409,19 @@ if (typeof window.WAPI === 'undefined') {
     return await Promise.resolve(promise);
   };
 
+  /**
+   * @param name Name for your newsletter
+   * @param options {description: 'Description for that', picture: '<base64_string',}
+   */
+  window.WAPI.createNewsletter = async function(name, options) {
+    try {
+      const result = await WPP.newsletter.create(name, options);
+      return result;
+    } catch (err) {
+      console.log(err);
+    };
+  };
+
   window.WAPI.takeOver = async function () {
     await WPP.whatsapp.Socket.takeover();
     return true;
