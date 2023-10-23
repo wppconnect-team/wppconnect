@@ -442,19 +442,6 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   /**
-   * @param name Name for your newsletter
-   * @param options {description: 'Description for that', picture: '<base64_string',}
-   */
-  window.WAPI.createNewsletter = async function(name, options) {        
-    try {
-      const result = await WPP.newsletter.create(name, options);
-      return result;
-    } catch (err) {
-      console.log(err);
-    };
-  };
-
-  /**
    * Registers a callback to be called when your phone receives a new call request.
    * @param callback - function - Callback function to be called upon a new call. returns a call object.
    * @returns {boolean}
