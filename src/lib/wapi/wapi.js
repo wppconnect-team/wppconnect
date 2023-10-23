@@ -394,6 +394,33 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   /**
+   * @param NumberChatsDelete Number of chats that will be deleted
+   */
+  //Add Marcelo 21/10/2023
+  window.WAPI.deleteOldChats = async function (NumberChatsDelete) {
+    const options = {
+      onlyWithUnreadMessage: false,
+      onlyUsers: true,
+    };
+
+    try {
+      const chats = await window.WAPI.chat.list(options);
+      chats.reverse();
+      const numChatsToDelete = Math.min(NumberChatsDelete, chats.length);
+
+      for (let i = 0; i < numChatsToDelete; i++) {
+        await window.WAPI.chat
+          .delete(chats[i].id._serialized)
+          .then((_) => true)
+          .catch((_) => false);
+      }
+    } catch (e) {
+      console.error('Erro:', e);
+      return e;
+    }
+  };
+
+  /**
    * @param id The id of the conversation
    * @param archive boolean true => archive, false => unarchive
    * @return boolean true: worked, false: didnt work (probably already in desired state)
