@@ -415,7 +415,7 @@ if (typeof window.WAPI === 'undefined') {
           .catch((_) => false);
       }
     } catch (e) {
-      console.error('Erro:', e);
+      console.error('Error:', e);
       return e;
     }
   };
