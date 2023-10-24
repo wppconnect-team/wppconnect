@@ -413,7 +413,7 @@ if (typeof window.WAPI === 'undefined') {
    * @param content Status Message Text
    * @param options {backgroundColor: '#0275d8', font: 2}
    */
-  window.WAPI.sendTextStatus = async function(content, options) {
+  window.WAPI.sendTextStatus = async function (content, options) {
     try {
       const result = await WPP.status.sendTextStatus(content, options);
       return result;
@@ -427,7 +427,7 @@ if (typeof window.WAPI === 'undefined') {
    * @param base64 data:image/jpeg;base64,<a long base64 file...>
    * @param options {backgroundColor: '#0275d8', font: 2}
    */
-  window.WAPI.sendImageStatus = async function(base64, options) {
+  window.WAPI.sendImageStatus = async function (base64, options) {
     try {
       const result = await WPP.status.sendImageStatus(base64, options);
       return result;
@@ -441,7 +441,7 @@ if (typeof window.WAPI === 'undefined') {
    * @param base64 data:video/mp4;base64,<a long base64 file...>
    * @param options {backgroundColor: '#0275d8', font: 2}
    */
-  window.WAPI.sendVideoStatus = async function(base64, options) {
+  window.WAPI.sendVideoStatus = async function (base64, options) {
     try {
       const result = await WPP.status.sendVideoStatus(base64, options);
       return result;
