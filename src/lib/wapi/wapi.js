@@ -449,7 +449,7 @@ if (typeof window.WAPI === 'undefined') {
     }
   };
 
-  /** 
+  /**
    * @param content Status Message Text
    * @param options {backgroundColor: '#0275d8', font: 2}
    */
