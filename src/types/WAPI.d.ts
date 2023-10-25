@@ -41,11 +41,14 @@ interface WAPI {
   arrayBufferToBase64: (buffer: ArrayBuffer) => string;
   checkNumberStatus: (contactId: string) => Promise<WhatsappProfile>;
   downloadFile: (data: string) => Promise<string | boolean>;
-  forwardMessages: (
-    to: string,
-    messages: string | string[],
-    skipMyMessages: boolean
-  ) => string[];
+  forwardMessage: (
+    toChatId: string | Wid,
+    msgId: string | MsgKey,
+    options?: {
+      displayCaptionText?: boolean;
+      multicast?: boolean;
+    }
+  ) => boolean;
   getAllChats: () => Chat[];
   getAllChatsWithMessages: (withNewMessageOnly?: boolean) => Chat[];
   getAllChatsWithNewMsg: () => Chat[];
