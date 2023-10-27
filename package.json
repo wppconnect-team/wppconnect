@@ -74,7 +74,7 @@
     "@typescript-eslint/parser": "^5.62.0",
     "babel-loader": "^9.1.3",
     "commitizen": "^4.3.0",
-    "concurrently": "^8.2.1",
+    "concurrently": "^8.2.2",
     "conventional-changelog-cli": "^4.1.0",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
