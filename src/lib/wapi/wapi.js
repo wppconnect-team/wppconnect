@@ -394,6 +394,33 @@ if (typeof window.WAPI === 'undefined') {
   };
 
   /**
+   * @param NumberChatsDelete Number of chats that will be deleted
+   */
+  //Add Marcelo 21/10/2023
+  window.WAPI.deleteOldChats = async function (NumberChatsDelete) {
+    const options = {
+      onlyWithUnreadMessage: false,
+      onlyUsers: true,
+    };
+
+    try {
+      const chats = await window.WAPI.chat.list(options);
+      chats.reverse();
+      const numChatsToDelete = Math.min(NumberChatsDelete, chats.length);
+
+      for (let i = 0; i < numChatsToDelete; i++) {
+        await window.WAPI.chat
+          .delete(chats[i].id._serialized)
+          .then((_) => true)
+          .catch((_) => false);
+      }
+    } catch (e) {
+      console.error('Erro:', e);
+      return e;
+    }
+  };
+
+  /**
    * @param id The id of the conversation
    * @param archive boolean true => archive, false => unarchive
    * @return boolean true: worked, false: didnt work (probably already in desired state)
@@ -407,6 +434,48 @@ if (typeof window.WAPI === 'undefined') {
       .catch((_) => false);
 
     return await Promise.resolve(promise);
+  };
+
+  /**
+   * @param content Status Message Text
+   * @param options {backgroundColor: '#0275d8', font: 2}
+   */
+  window.WAPI.sendTextStatus = async function (content, options) {
+    try {
+      const result = await WPP.status.sendTextStatus(content, options);
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  };
+
+  /**
+   * @param base64 data:image/jpeg;base64,<a long base64 file...>
+   * @param options {backgroundColor: '#0275d8', font: 2}
+   */
+  window.WAPI.sendImageStatus = async function (base64, options) {
+    try {
+      const result = await WPP.status.sendImageStatus(base64, options);
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  };
+
+  /**
+   * @param base64 data:video/mp4;base64,<a long base64 file...>
+   * @param options {backgroundColor: '#0275d8', font: 2}
+   */
+  window.WAPI.sendVideoStatus = async function (base64, options) {
+    try {
+      const result = await WPP.status.sendVideoStatus(base64, options);
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
   };
 
   window.WAPI.takeOver = async function () {
