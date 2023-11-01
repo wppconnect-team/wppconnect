@@ -1,3 +1,7 @@
+## <small>1.28.1 (2023-11-01)</small>
+
+- fix : update version whatsappVersion 2.2347.x ([6fe090a](https://github.com/wppconnect-team/wppconnect/commit/6fe090a))
+
 # 1.28.0 (2023-08-16)
 
 ## 1.27.3 (2023-06-14)
