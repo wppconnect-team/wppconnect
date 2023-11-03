@@ -168,7 +168,7 @@ export class HostLayer {
     this.checkStartInterval = setInterval(() => this.checkStart(), 5000);
 
     this.page.on('close', () => {
-      clearInterval(this.checkStartInterval);
+      clearInterval(this.checkStartInterval as NodeJS.Timeout);
     });
   }
 
