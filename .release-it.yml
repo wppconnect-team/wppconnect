@@ -2,6 +2,7 @@ git:
   commitMessage: 'chore(release): v${version}'
   tagAnnotation: 'chore(release): v${version}'
   tagName: 'v${version}'
+  requireCleanWorkingDir: false
 
 hooks:
   after:bump:
