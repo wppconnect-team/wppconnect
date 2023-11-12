@@ -184,7 +184,7 @@ export class ControlsLayer extends UILayer {
    * @example
    * ```javascript
    * // Simple message
-   * client.sendText('true_<number>@c.us_messageId', 'new Text For Simple Message');
+   * client.editMessage('true_<number>@c.us_messageId', 'new Text For Simple Message');
    * ```
    */
   public async editMessage(
