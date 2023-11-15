@@ -1,6 +1,4 @@
-# Simple example to start the Wppconnect and send a order message
-
-Is necessary to login with a business account
+# Simple example to start the Wppconnect
 
 > Wppconnect is a high-performance system developed with JavaScript to create a bot for WhatsApp, support for creating any interaction, such as customer service, media sending, sentence recognition based on artificial intelligence and all types of design architecture for WhatsApp.
 
