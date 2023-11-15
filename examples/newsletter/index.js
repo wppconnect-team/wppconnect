@@ -17,21 +17,26 @@
 const wppconnect = require('../../dist');
 
 wppconnect
-  .create()
+  .create({
+    session: 'teste',
+  })
   .then((client) => start(client))
   .catch((erro) => {
     console.log(erro);
   });
 
 function start(client) {
-  client.onMessage((message) => {
-    if (message.body === 'Hi' && message.isGroupMsg === false) {
-      client
-        .sendText(message.from, 'Welcome Wppconnect')
-        .then((result) => {})
-        .catch((erro) => {
-          console.error('Error when sending: ', erro); //return object error
-        });
+  client.onMessage(async (message) => {
+    if (message.body === 'create newsletter' && message.isGroupMsg === false) {
+      const t = await client.createNewsletter('WPP Test Newsletter2', {
+        description: 'test',
+      });
+      console.log(t);
+      await client.sendText(message.from, '```' + JSON.stringify(t) + '```');
+      await client.sendText(
+        message.from,
+        'Check the channels of connected device'
+      );
     }
   });
 }

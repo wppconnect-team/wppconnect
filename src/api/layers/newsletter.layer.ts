@@ -17,38 +17,96 @@
 
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
-import { LabelsLayer } from './labels.layer';
-import {
-  evaluateAndReturn,
-  base64MimeType,
-  fileToBase64,
-  downloadFileToBase64,
-} from '../helpers';
+import { evaluateAndReturn } from '../helpers';
+import { HostLayer } from './host.layer';
 
-export class NewsletterLayer extends LabelsLayer {
+export class NewsletterLayer extends HostLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
   }
 
   /**
    * Create Newsletter
-   * @category newsletter
+   * @category Newsletter
    *
    * @example
    * ```javascript
-   * client.createNewsletter('Name for your newsletter', {description: 'Description for that',picture: '<base64_string',});
+   * client.createNewsletter('Name for your newsletter', {description: 'Description for that', picture: '<base64_string',});
    * ```
    * @param name Name Newsletter
    * @param options options Newsletter, description and picture
    */
 
-  public async createNewsletter(name: string, options: string) {
-    return await evaluateAndReturn(
+  public async createNewsletter(
+    name: string,
+    options?: {
+      description?: string;
+      picture?: string;
+    }
+  ) {
+    return evaluateAndReturn(
       this.page,
-      ({ name, options }) => {
-        WPP.newsletter.create(name, options);
-      },
-      { name, options }
+      (name, options) => WPP.newsletter.create(name, options),
+      name,
+      options
     );
+  }
+
+  /**
+   * Destroy a Newsletter
+   * @category Newsletter
+   *
+   * @example
+   * ```javascript
+   * client.destroyNewsletter('[newsletter-id]@newsletter');
+   * ```
+   * @param name id of Newsletter
+   */
+  public async destroyNewsletter(id: string) {
+    return evaluateAndReturn(this.page, (id) => WPP.newsletter.destroy(id), id);
+  }
+
+  /**
+   * Edit a Newsletter
+   * @category Newsletter
+   *
+   * @example
+   * ```javascript
+   * client.editNewsletter('[newsletter-id]@newsletter', {
+      description: 'new description';
+      name: 'new name';
+      picture: '<new pic base64>';
+    });
+   * ```
+   * @param name id of Newsletter
+   */
+  public async editNewsletter(
+    id: string,
+    opts?: {
+      description?: string;
+      name?: string;
+      picture?: string | null;
+    }
+  ) {
+    return evaluateAndReturn(
+      this.page,
+      (id, opts) => WPP.newsletter.edit(id, opts),
+      id,
+      opts
+    );
+  }
+
+  /**
+   * Mute a Newsletter
+   * @category Newsletter
+   *
+   * @example
+   * ```javascript
+   * client.muteNewsletter('[newsletter-id]@newsletter');
+   * ```
+   * @param name id of Newsletter
+   */
+  public async muteNesletter(id: string) {
+    return evaluateAndReturn(this.page, (id) => WPP.newsletter.mute(id), id);
   }
 }
