@@ -34,6 +34,7 @@ import { InterfaceMode } from '../model/enum/interface-mode';
 import { InterfaceState } from '../model/enum/interface-state';
 import { ProfileLayer } from './profile.layer';
 import { Label } from '../model/label';
+import { MsgKey } from '@wppconnect/wa-js/dist/whatsapp';
 
 declare global {
   interface Window {
@@ -88,6 +89,7 @@ export class ListenerLayer extends ProfileLayer {
       'onReactionMessage',
       'onPollResponse',
       'onUpdateLabel',
+      'onOrderStatusUpdate',
     ];
 
     for (const func of functions) {
@@ -283,6 +285,22 @@ export class ListenerLayer extends ProfileLayer {
               window['onUpdateLabel'](eventData);
             });
             window['onUpdateLabel'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        try {
+          if (!window['onOrderStatusUpdate'].exposed) {
+            WPP.on('order.payment_status', (data) => {
+              const eventData = {
+                method: data.method,
+                timestamp: data.timestamp,
+                reference_id: data.reference_id,
+                msgId: data.msgId,
+              };
+              window['onOrderStatusUpdate'](eventData);
+            });
+            window['onOrderStatusUpdate'].exposed = true;
           }
         } catch (error) {
           console.error(error);
@@ -645,5 +663,20 @@ export class ListenerLayer extends ProfileLayer {
     }) => any
   ) {
     return this.registerEvent('onUpdateLabel', callback);
+  }
+
+  /**
+   * @event Listens to update order status
+   * @returns Disposable object to stop the listening
+   */
+  public onOrderStatusUpdate(
+    callback: (data: {
+      method: string;
+      timestamp: number;
+      reference_id: string;
+      msgId: MsgKey;
+    }) => any
+  ) {
+    return this.registerEvent('onOrderStatusUpdate', callback);
   }
 }
