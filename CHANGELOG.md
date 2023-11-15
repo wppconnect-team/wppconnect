@@ -1,3 +1,7 @@
+## <small>1.28.3 (2023-11-15)</small>
+
+- feat: Added client.getCommonGroups function ([194c898](https://github.com/wppconnect-team/wppconnect/commit/194c898))
+
 ## <small>1.28.2 (2023-11-04)</small>
 
 - chore: Update release-it ([4869dc8](https://github.com/wppconnect-team/wppconnect/commit/4869dc8))
