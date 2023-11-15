@@ -580,4 +580,18 @@ export class RetrieverLayer extends SenderLayer {
       WPP.group.getGroupSizeLimit()
     );
   }
+
+  /**
+   * Get info of your sended order
+   *
+   * @example
+   * ```javascript
+   * const orderInfo = await client.getOrder('<orderId>');
+   * ```
+   * @category Order
+   * @return Your order
+   */
+  public async getOrder(msgId: string) {
+    return evaluateAndReturn(this.page, (msgId) => WPP.order.get(msgId), msgId);
+  }
 }
