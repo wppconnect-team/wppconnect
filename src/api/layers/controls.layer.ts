@@ -15,10 +15,13 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { EditMessageOptions } from '@wppconnect/wa-js/dist/chat/functions/editMessage';
+import { MsgKey } from '@wppconnect/wa-js/dist/whatsapp';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
 import { UILayer } from './ui.layer';
+import { Message } from '../model';
 
 export class ControlsLayer extends UILayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -169,6 +172,44 @@ export class ControlsLayer extends UILayer {
     );
 
     return true;
+  }
+
+  /**
+   * Edits message of given message id
+   * @category Chat
+   * @param msgId The specific message id of the message to be edited
+   * @param newText New content of specified message
+   * @param options Common message options
+   *
+   * @example
+   * ```javascript
+   * // Simple message
+   * client.editMessage('true_<number>@c.us_messageId', 'new Text For Simple Message');
+   * ```
+   */
+  public async editMessage(
+    msgId: string | MsgKey,
+    newText: string,
+    options: EditMessageOptions = {}
+  ) {
+    const editResult = await evaluateAndReturn(
+      this.page,
+      ({ msgId, newText, options }) =>
+        WPP.chat.editMessage(msgId, newText, options),
+      { msgId, newText, options }
+    );
+
+    const result = (await evaluateAndReturn(
+      this.page,
+      async ({ messageId }) => {
+        return JSON.parse(JSON.stringify(await WAPI.getMessageById(messageId)));
+      },
+      { messageId: editResult.id }
+    )) as Message;
+
+    if (result.body !== newText) throw editResult;
+
+    return result;
   }
 
   /**
