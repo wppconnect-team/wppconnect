@@ -40,6 +40,10 @@ import { filenameFromMimeType } from '../helpers/filename-from-mimetype';
 import { Message, SendFileResult, SendStickerResult } from '../model';
 import { ChatState } from '../model/enum';
 import { ListenerLayer } from './listener.layer';
+import {
+  OrderItems,
+  OrderMessageOptions,
+} from '@wppconnect/wa-js/dist/chat/functions/sendOrderMessage';
 
 export class SenderLayer extends ListenerLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -1335,5 +1339,64 @@ export class SenderLayer extends ListenerLayer {
         reaction,
       }
     );
+  }
+
+  /**
+   * Send a order message
+   * To send (prices, tax, shipping or discount), for example: USD 12.90, send them without dots or commas, like: 12900
+   *
+   * @example
+   * ```javascript
+   * // Send Order with a product
+   * client.sendOrderMessage('[number]@c.us', [
+   *   { type: 'product', id: '67689897878', qnt: 2 },
+   *   { type: 'product', id: '37878774457', qnt: 1 },
+   * ]
+   *
+   * // Send Order with a custom item
+   * client.sendOrderMessage('[number]@c.us', [
+   *   { type: 'custom', name: 'Item de cost test', price: 120000, qnt: 2 },
+   * ]
+   *
+   * // Send Order with custom options
+   * client.sendOrderMessage('[number]@c.us', [
+   *   { type: 'product', id: '37878774457', qnt: 1 },
+   *   { type: 'custom', name: 'Item de cost test', price: 120000, qnt: 2 },
+   * ],
+   * { tax: 10000, shipping: 4000, discount: 10000 }
+   * ```
+   *
+   * @category Chat
+   */
+  public async sendOrderMessage(
+    to: string,
+    items: OrderItems[],
+    options?: OrderMessageOptions
+  ) {
+    const sendResult = await evaluateAndReturn(
+      this.page,
+      ({ to, items, options }) => WPP.chat.sendOrderMessage(to, items, options),
+      {
+        to,
+        items,
+        options,
+      }
+    );
+
+    // I don't know why the evaluate is returning undefined for direct call
+    // To solve that, I added `JSON.parse(JSON.stringify(<message>))` to solve that
+    const result = (await evaluateAndReturn(
+      this.page,
+      async ({ messageId }) => {
+        return JSON.parse(JSON.stringify(await WAPI.getMessageById(messageId)));
+      },
+      { messageId: sendResult.id }
+    )) as Message;
+
+    if (result['erro'] == true) {
+      throw result;
+    }
+
+    return result;
   }
 }
