@@ -89,7 +89,7 @@
     "shx": "^0.3.4",
     "ts-node": "^10.9.1",
     "typedoc": "^0.25.3",
-    "typescript": "^5.2.2",
+    "typescript": "^5.3.2",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   },
