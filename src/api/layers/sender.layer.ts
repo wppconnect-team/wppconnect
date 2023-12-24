@@ -845,7 +845,7 @@ export class SenderLayer extends ListenerLayer {
     return evaluateAndReturn(
       this.page,
       ({ toChatId, msgId, options }) =>
-        WAPI.forwardMessage(toChatId, msgId, options),
+        WPP.chat.forwardMessage(toChatId, msgId, options),
       { toChatId, msgId, options }
     );
   }
