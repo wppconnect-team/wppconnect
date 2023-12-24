@@ -162,6 +162,16 @@ export class Whatsapp extends BusinessLayer {
   }
 
   /**
+   * Return PID process
+   * @internal
+   */
+  public getPID() {
+    const browser = this.page.browser();
+    const process = browser.process();
+    return process.pid;
+  }
+
+  /**
    * Get message by id
    * @param messageId string
    * @returns Message object
