@@ -51,6 +51,7 @@ export enum MessageType {
   LIST = 'list',
   LIST_RESPONSE = 'list_response',
   BUTTONS_RESPONSE = 'buttons_response',
+  POLL_CREATION = 'poll_creation',
   UNKNOWN = 'unknown',
 }
 
