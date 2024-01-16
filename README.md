@@ -13,9 +13,9 @@
 > WPPConnect is an open source project developed by the JavaScript community with the aim of exporting functions from WhatsApp Web to the node, which can be used to support the creation of any interaction, such as customer service, media sending, intelligence recognition based on phrases artificial and many other things, use your imagination... 😀🤔💭
 
 <p align="center">
-  <a href="https://wppconnect.io/wppconnect/pages/getting-started/installation.html">Getting Started</a> •
-  <a href="https://wppconnect.io/wppconnect/pages/getting-started/basic-functions.html">Basic Function</a> •
-  <a href="https://wppconnect.io/wppconnect/">Documentation</a>
+  <a target="_blank" href="https://wppconnect.io/docs/tutorial/basics/installation">Getting Started</a> •
+  <a target="_blank" href="https://wppconnect.io/docs/tutorial/basics/basic-functions">Basic Function</a> •
+  <a target="_blank" href="https://wppconnect.io/wppconnect">Documentation</a>
 </p>
 
 ## Our online channels
@@ -42,7 +42,7 @@
 | Send _location_                                            | ✔   |
 | **and much more**                                          | ✔   |
 
-See more at <a href="https://wppconnect.io/wppconnect/classes/Whatsapp.html">WhatsApp methods</a>
+See more at <a target="_blank" href="https://wppconnect.io/wppconnect/classes/Whatsapp.html">WhatsApp methods</a>
 
 ## Installation
 
@@ -52,7 +52,7 @@ The first thing that you had to do is install the `npm package` :
 npm i --save @wppconnect-team/wppconnect
 ```
 
-See more at <a href="https://wppconnect.io/wppconnect/pages/getting-started/installation.html">Getting Started</a>
+See more at <a target="_blank" href="https://wppconnect.io/docs/tutorial/basics/installation">Getting Started</a>
 
 ## Development
 
