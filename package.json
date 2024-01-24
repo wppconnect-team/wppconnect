@@ -83,7 +83,7 @@
     "husky": "^8.0.3",
     "mocha": "^10.2.0",
     "prettier": "^2.8.8",
-    "pretty-quick": "^3.3.1",
+    "pretty-quick": "^4.0.0",
     "regenerator-runtime": "^0.14.1",
     "release-it": "^17.0.1",
     "shx": "^0.3.4",
