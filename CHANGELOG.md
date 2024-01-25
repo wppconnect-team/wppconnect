@@ -1,3 +1,7 @@
+## 1.29.0 (2024-01-25)
+
+- [FIX] version whatsapp web ([716cd97](https://github.com/wppconnect-team/wppconnect/commit/716cd97))
+
 ## <small>1.28.4 (2023-12-25)</small>
 
 - fix: Remove unnecessary code for close instance (close #1835) ([43f2a9b](https://github.com/wppconnect-team/wppconnect/commit/43f2a9b)), closes [#1835](https://github.com/wppconnect-team/wppconnect/issues/1835)
