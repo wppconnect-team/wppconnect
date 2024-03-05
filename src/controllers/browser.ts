@@ -116,7 +116,14 @@ export async function initWhatsapp(
     await setWhatsappVersion(page, version, log);
   }
 
-  setTimeout(() => {
+  log?.('verbose', `Loading WhatsApp WEB`);
+  await page.goto(puppeteerConfig.whatsappUrl, {
+    waitUntil: 'load',
+    timeout: 0,
+    referer: 'https://whatsapp.com/',
+  });
+  log?.('verbose', 'WhatsApp WEB loaded');
+  /*setTimeout(() => {
     log?.('verbose', `Loading WhatsApp WEB`);
 
     const timeout = 10 * 1000;
@@ -129,6 +136,7 @@ export async function initWhatsapp(
 
     log?.('verbose', `WhatsApp WEB loaded`);
   }, 1000);
+  */
 
   return page;
 }
