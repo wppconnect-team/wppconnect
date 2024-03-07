@@ -24,6 +24,7 @@ import {
   fileToBase64,
   downloadFileToBase64,
 } from '../helpers';
+import { SendStatusOptions } from '@wppconnect/wa-js/dist/status';
 
 export class StatusLayer extends LabelsLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -37,9 +38,18 @@ export class StatusLayer extends LabelsLayer {
    * ```javascript
    * client.sendImageStatus('data:image/jpeg;base64,<a long base64 file...>');
    * ```
+   *
+   * @example
+   * ```javascript
+   * // Send with caption
+   * client.sendImageStatus('data:image/jpeg;base64,<a long base64 file...>', { caption: 'example test' } );
+   * ```
    * @param pathOrBase64 Path or base 64 image
    */
-  public async sendImageStatus(pathOrBase64: string) {
+  public async sendImageStatus(
+    pathOrBase64: string,
+    options?: SendStatusOptions & { caption?: string }
+  ) {
     let base64: string = '';
     if (pathOrBase64.startsWith('data:')) {
       base64 = pathOrBase64;
@@ -81,7 +91,7 @@ export class StatusLayer extends LabelsLayer {
     return await evaluateAndReturn(
       this.page,
       ({ base64 }) => {
-        WPP.status.sendImageStatus(base64);
+        WPP.status.sendImageStatus(base64, options);
       },
       { base64 }
     );
@@ -94,9 +104,17 @@ export class StatusLayer extends LabelsLayer {
    * ```javascript
    * client.sendVideoStatus('data:video/mp4;base64,<a long base64 file...>');
    * ```
+   * @example
+   * ```javascript
+   * // Send with caption
+   * client.sendVideoStatus('data:video/mp4;base64,<a long base64 file...>', { caption: 'example test' } );
+   * ```
    * @param pathOrBase64 Path or base 64 image
    */
-  public async sendVideoStatus(pathOrBase64: string) {
+  public async sendVideoStatus(
+    pathOrBase64: string,
+    options?: SendStatusOptions & { caption?: string }
+  ) {
     let base64: string = '';
     if (pathOrBase64.startsWith('data:')) {
       base64 = pathOrBase64;
@@ -121,7 +139,7 @@ export class StatusLayer extends LabelsLayer {
     return await evaluateAndReturn(
       this.page,
       ({ base64 }) => {
-        WPP.status.sendVideoStatus(base64);
+        WPP.status.sendVideoStatus(base64, options);
       },
       { base64 }
     );
