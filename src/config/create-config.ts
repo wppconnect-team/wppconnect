@@ -168,6 +168,12 @@ export interface CreateConfig {
    * @default 'WPPConnect'
    */
   poweredBy?: string;
+
+  /**
+   * Custom variable for Google Analytics
+   * @default false
+   */
+  enableCache?: boolean;
 }
 
 export const defaultOptions: CreateConfig = {
@@ -194,4 +200,5 @@ export const defaultOptions: CreateConfig = {
   disableGoogleAnalytics: true,
   googleAnalyticsId: null,
   poweredBy: 'WPPConnect',
+  enableCache: true,
 };

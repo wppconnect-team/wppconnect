@@ -231,6 +231,7 @@ export async function create(
   }
 
   if (page) {
+    page.setCacheEnabled(mergedOptions.enableCache);
     const client = new Whatsapp(page, session, mergedOptions);
     client.catchQR = catchQR;
     client.statusFind = statusFind;
