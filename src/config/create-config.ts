@@ -168,6 +168,11 @@ export interface CreateConfig {
    * @default 'WPPConnect'
    */
   poweredBy?: string;
+
+  /**
+   * Insert the phone number for connect by link phone, qr code not wil generate
+   */
+  phoneNumber?: string;
 }
 
 export const defaultOptions: CreateConfig = {
