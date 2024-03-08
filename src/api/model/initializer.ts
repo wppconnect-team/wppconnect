@@ -41,6 +41,11 @@ export type StatusFindCallback = (
  */
 export type LoadingScreenCallback = (percent: number, message: string) => void;
 
+/**
+ * A callback will be received, informing a code to you connect
+ */
+export type LinkByCodeCallback = (code: string) => void;
+
 export interface CreateOptions extends CreateConfig {
   /**
    * You must pass a string type parameter, this parameter will be the name of the client's session. If the parameter is not passed, the section name will be "session".
@@ -50,6 +55,12 @@ export interface CreateOptions extends CreateConfig {
    * A callback will be received, informing the status of the qrcode
    */
   catchQR?: CatchQRCallback;
+
+  /**
+   * A callback will be received, informing a code to you connect
+   */
+  catchLinkCode?: LinkByCodeCallback;
+
   /**
    * A callback will be received, informing the customer's status
    */

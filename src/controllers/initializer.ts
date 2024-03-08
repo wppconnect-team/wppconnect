@@ -24,6 +24,7 @@ import { Browser } from 'puppeteer';
 import {
   CatchQRCallback,
   CreateOptions,
+  LinkByCodeCallback,
   LoadingScreenCallback,
   StatusFindCallback,
 } from '../api/model/initializer';
@@ -68,6 +69,7 @@ export async function create(
   catchQR?: CatchQRCallback,
   statusFind?: StatusFindCallback,
   onLoadingScreen?: LoadingScreenCallback,
+  catchLinkCode?: LinkByCodeCallback,
   options?: CreateConfig,
   browserSessionToken?: SessionToken
 ): Promise<Whatsapp>;
@@ -77,6 +79,7 @@ export async function create(
   catchQR?: CatchQRCallback,
   statusFind?: StatusFindCallback,
   onLoadingScreen?: LoadingScreenCallback,
+  catchLinkCode?: LinkByCodeCallback,
   options?: CreateConfig,
   browserSessionToken?: SessionToken
 ): Promise<Whatsapp> {
@@ -101,6 +104,7 @@ export async function create(
     catchQR = sessionOrOption.catchQR || catchQR;
     statusFind = sessionOrOption.statusFind || statusFind;
     onLoadingScreen = sessionOrOption.onLoadingScreen || onLoadingScreen;
+    catchLinkCode = sessionOrOption.catchLinkCode || catchLinkCode;
 
     if (!options.sessionToken) {
       options.sessionToken =
@@ -235,6 +239,7 @@ export async function create(
     client.catchQR = catchQR;
     client.statusFind = statusFind;
     client.onLoadingScreen = onLoadingScreen;
+    client.catchLinkCode = catchLinkCode;
 
     await client.start();
 
