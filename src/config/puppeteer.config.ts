@@ -53,6 +53,8 @@ const puppeteerConfig = {
     '--disable-app-list-dismiss-on-blur',
     '--disable-accelerated-video-decode',
     '--disable-dev-shm-usage',
+    '--autoplay-policy=no-user-gesture-required',
+    '--disable-blink-features=AutomationControlled',
   ],
 };
 
