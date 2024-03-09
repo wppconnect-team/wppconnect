@@ -31,6 +31,7 @@ import { evaluateAndReturn, scrapeImg } from '../helpers';
 import {
   CatchQRCallback,
   HostDevice,
+  LinkByCodeCallback,
   LoadingScreenCallback,
   StatusFindCallback,
 } from '../model';
@@ -57,6 +58,7 @@ export class HostLayer {
   public catchQR?: CatchQRCallback = null;
   public statusFind?: StatusFindCallback = null;
   public onLoadingScreen?: LoadingScreenCallback = null;
+  public catchLinkCode?: LinkByCodeCallback = null;
 
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     this.session = session;
@@ -143,8 +145,8 @@ export class HostLayer {
     evaluateAndReturn(this.page, () => {
       WPP.on('conn.main_ready', (window as any).checkInChat);
     }).catch(() => null);
-    this.checkQrCode();
     this.checkInChat();
+    this.checkQrCode();
   }
 
   public async start() {
@@ -163,6 +165,9 @@ export class HostLayer {
     );
 
     await this.page.exposeFunction('checkQrCode', () => this.checkQrCode());
+    await this.page.exposeFunction('loginByCode', (phone: string) =>
+      this.loginByCode(phone)
+    );
     await this.page.exposeFunction('checkInChat', () => this.checkInChat());
 
     this.checkStartInterval = setInterval(() => this.checkStart(), 5000);
@@ -188,8 +193,12 @@ export class HostLayer {
     }
 
     const result = await this.getQrCode();
+
     if (!result?.urlCode || this.urlCode === result.urlCode) {
       return;
+    }
+    if (typeof this.options.phoneNumber !== undefined) {
+      return this.loginByCode(this.options.phoneNumber);
     }
     this.urlCode = result.urlCode;
     this.attempt++;
@@ -211,6 +220,24 @@ export class HostLayer {
     }
 
     this.catchQR?.(result.base64Image, qr, this.attempt, result.urlCode);
+  }
+
+  protected async loginByCode(phone: string) {
+    const code = await evaluateAndReturn(
+      this.page,
+      async ({ phone }) => {
+        return JSON.parse(
+          JSON.stringify(await WPP.conn.genLinkDeviceCodeForPhoneNumber(phone))
+        );
+      },
+      { phone }
+    );
+    if (this.options.logQR) {
+      this.log('info', `Waiting for Login By Code (Code: ${code})\n`);
+    } else {
+      this.log('verbose', `Waiting for Login By Code`);
+    }
+    this.catchLinkCode?.(code);
   }
 
   protected async checkInChat() {
@@ -339,11 +366,21 @@ export class HostLayer {
     this.startAutoClose();
 
     if (authenticated === false) {
-      this.log('http', 'Waiting for QRCode Scan...');
+      this.log(
+        'http',
+        typeof this.options.phoneNumber !== undefined
+          ? 'Waiting for Login by Code...'
+          : 'Waiting for QRCode Scan...'
+      );
       this.statusFind?.('notLogged', this.session);
       await this.waitForQrCodeScan();
 
-      this.log('http', 'Checking QRCode status...');
+      this.log(
+        'http',
+        typeof this.options.phoneNumber !== undefined
+          ? 'Checking Login by Code status...'
+          : 'Checking QRCode status...'
+      );
       // Wait for interface update
       await sleep(200);
       authenticated = await isAuthenticated(this.page).catch(() => null);
@@ -352,10 +389,10 @@ export class HostLayer {
         this.log('warn', 'Failed to authenticate');
         this.statusFind?.('qrReadError', this.session);
       } else if (authenticated) {
-        this.log('http', 'QRCode Success');
+        this.log('http', 'Login with success');
         this.statusFind?.('qrReadSuccess', this.session);
       } else {
-        this.log('warn', 'QRCode Fail');
+        this.log('warn', 'Login Fail');
         this.statusFind?.('qrReadFail', this.session);
         this.tryAutoClose();
         throw 'Failed to read the QRCode';
