@@ -1,3 +1,7 @@
+## 1.30.0 (2024-03-10)
+
+- fix(deps): update dependency @wppconnect/wa-js to v3 (#2103) ([3f5a658](https://github.com/wppconnect-team/wppconnect/commit/3f5a658)), closes [#2103](https://github.com/wppconnect-team/wppconnect/issues/2103)
+
 ## 1.29.0 (2024-01-25)
 
 - [FIX] version whatsapp web ([716cd97](https://github.com/wppconnect-team/wppconnect/commit/716cd97))
