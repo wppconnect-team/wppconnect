@@ -165,9 +165,9 @@ export class HostLayer {
     );
 
     await this.page.exposeFunction('checkQrCode', () => this.checkQrCode());
-    await this.page.exposeFunction('loginByCode', (phone: string) =>
+    /*await this.page.exposeFunction('loginByCode', (phone: string) =>
       this.loginByCode(phone)
-    );
+    );*/
     await this.page.exposeFunction('checkInChat', () => this.checkInChat());
 
     this.checkStartInterval = setInterval(() => this.checkStart(), 5000);
@@ -197,7 +197,7 @@ export class HostLayer {
     if (!result?.urlCode || this.urlCode === result.urlCode) {
       return;
     }
-    if (typeof this.options.phoneNumber !== undefined) {
+    if (typeof this.options.phoneNumber === 'string') {
       return this.loginByCode(this.options.phoneNumber);
     }
     this.urlCode = result.urlCode;
@@ -368,7 +368,7 @@ export class HostLayer {
     if (authenticated === false) {
       this.log(
         'http',
-        typeof this.options.phoneNumber !== undefined
+        typeof this.options.phoneNumber === 'string'
           ? 'Waiting for Login by Code...'
           : 'Waiting for QRCode Scan...'
       );
@@ -377,7 +377,7 @@ export class HostLayer {
 
       this.log(
         'http',
-        typeof this.options.phoneNumber !== undefined
+        typeof this.options.phoneNumber === 'string'
           ? 'Checking Login by Code status...'
           : 'Checking QRCode status...'
       );
