@@ -1,3 +1,7 @@
+## <small>1.30.1 (2024-03-11)</small>
+
+- fix: Fixed login by qr code ([5ebd5f5](https://github.com/wppconnect-team/wppconnect/commit/5ebd5f5))
+
 ## 1.30.0 (2024-03-10)
 
 - fix(deps): update dependency @wppconnect/wa-js to v3 (#2103) ([3f5a658](https://github.com/wppconnect-team/wppconnect/commit/3f5a658)), closes [#2103](https://github.com/wppconnect-team/wppconnect/issues/2103)
