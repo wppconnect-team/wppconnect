@@ -235,6 +235,8 @@ export async function create(
   }
 
   if (page) {
+    await page.setBypassCSP(true);
+
     const client = new Whatsapp(page, session, mergedOptions);
     client.catchQR = catchQR;
     client.statusFind = statusFind;
