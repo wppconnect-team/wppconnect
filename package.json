@@ -95,7 +95,7 @@
   },
   "dependencies": {
     "@wppconnect/wa-js": "^3.0.1",
-    "@wppconnect/wa-version": "^1.4.6",
+    "@wppconnect/wa-version": "^1.4.8",
     "atob": "^2.1.2",
     "axios": "^1.6.8",
     "boxen": "^5.1.2",
