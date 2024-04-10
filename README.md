@@ -1,4 +1,4 @@
-# WPPConnect 📞
+# WPPConnect 📞1
 
 ![WPPConnect Banner](./img/wppconnect-banner.jpeg)
 
