@@ -85,7 +85,7 @@
     "prettier": "^2.8.8",
     "pretty-quick": "^4.0.0",
     "regenerator-runtime": "^0.14.1",
-    "release-it": "^17.1.1",
+    "release-it": "^17.2.0",
     "shx": "^0.3.4",
     "ts-node": "^10.9.2",
     "typedoc": "^0.25.13",
