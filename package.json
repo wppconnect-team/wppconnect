@@ -65,7 +65,7 @@
     "@types/mime-types": "^2.1.4",
     "@types/mocha": "^10.0.6",
     "@types/node": "^18.19.31",
-    "@types/rimraf": "^3.0.2",
+    "@types/rimraf": "^4.0.5",
     "@types/sharp": "^0.32.0",
     "@types/shelljs": "^0.8.15",
     "@types/tmp": "^0.2.6",
