@@ -1,3 +1,9 @@
+## 1.30.2 (2024-04-25)
+
+### Bug Fixes
+
+- Upgrade whatsappVersion ([b8b1ec7](https://github.com/wppconnect-team/wppconnect/commit/b8b1ec75e5b2926e96fe83f21921f49824eea9cc))
+
 ## <small>1.30.1 (2024-03-11)</small>
 
 - fix: Fixed login by qr code ([5ebd5f5](https://github.com/wppconnect-team/wppconnect/commit/5ebd5f5))
