@@ -234,6 +234,7 @@ export class SenderLayer extends ListenerLayer {
    * @param caption
    * @param quotedMessageId Quoted message id
    * @param isViewOnce Enable single view
+   * @param mentionedList
    */
   public async sendImageFromBase64(
     to: string,
@@ -241,7 +242,8 @@ export class SenderLayer extends ListenerLayer {
     filename: string,
     caption?: string,
     quotedMessageId?: string,
-    isViewOnce?: boolean
+    isViewOnce?: boolean,
+    mentionedList?: any
   ) {
     let mimeType = base64MimeType(base64);
 
@@ -274,6 +276,7 @@ export class SenderLayer extends ListenerLayer {
         caption,
         quotedMessageId,
         isViewOnce,
+        mentionedList,
       }) => {
         const result = await WPP.chat.sendFileMessage(to, base64, {
           type: 'image',
@@ -282,6 +285,8 @@ export class SenderLayer extends ListenerLayer {
           caption,
           quotedMsg: quotedMessageId,
           waitForAck: true,
+          detectMentioned: true,
+          mentionedList: mentionedList,
         });
 
         return {
@@ -290,7 +295,15 @@ export class SenderLayer extends ListenerLayer {
           sendMsgResult: await result.sendMsgResult,
         };
       },
-      { to, base64, filename, caption, quotedMessageId, isViewOnce }
+      {
+        to,
+        base64,
+        filename,
+        caption,
+        quotedMessageId,
+        isViewOnce,
+        mentionedList,
+      }
     );
 
     return result;
