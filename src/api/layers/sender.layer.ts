@@ -221,7 +221,7 @@ export class SenderLayer extends ListenerLayer {
       filename,
       caption,
       quotedMessageId,
-      isViewOnce,
+      isViewOnce
     );
   }
 
@@ -243,7 +243,7 @@ export class SenderLayer extends ListenerLayer {
     caption?: string,
     quotedMessageId?: string,
     isViewOnce?: boolean,
-    mentionedList?: any,
+    mentionedList?: any
   ) {
     let mimeType = base64MimeType(base64);
 
@@ -295,7 +295,15 @@ export class SenderLayer extends ListenerLayer {
           sendMsgResult: await result.sendMsgResult,
         };
       },
-      { to, base64, filename, caption, quotedMessageId, isViewOnce, mentionedList }
+      {
+        to,
+        base64,
+        filename,
+        caption,
+        quotedMessageId,
+        isViewOnce,
+        mentionedList,
+      }
     );
 
     return result;
