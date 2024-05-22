@@ -118,7 +118,7 @@
     "reflect-metadata": "^0.2.1",
     "rimraf": "^3.0.2",
     "sanitize-filename": "^1.6.3",
-    "sharp": "0.33.3",
+    "sharp": "0.33.4",
     "tmp": "^0.2.3",
     "tree-kill": "^1.2.2",
     "winston": "^3.13.0",
