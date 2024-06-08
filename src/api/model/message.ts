@@ -65,13 +65,13 @@ export interface Message {
   isNotification: boolean;
   isPSA: boolean;
   /**
-   * @deprecated Use o getChat para obter detalhes do chat
+   * @deprecated Use `getChat` to get chat details
    */
   chat: Chat;
   lastSeen: null | number | boolean;
   chatId: string;
   /**
-   * @deprecated Use o atributo quotedMsgId em getMessageById para obter detalhes da mensagem
+   * @deprecated Use the `quotedMsgId` attribute in `getMessageById` to get the message details
    */
   quotedMsgObj: null;
   quotedMsgId: null;
