@@ -25,5 +25,6 @@ function start(client) {
         });
     }
   });
+  client.start()
 }
 ```
