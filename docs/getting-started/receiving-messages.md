@@ -9,7 +9,7 @@ const wppconnect = require('@wppconnect-team/wppconnect');
 
 wppconnect
   .create()
-  .then((client) => start(client))
+  .then((client) => client.start())
   .catch((error) => console.log(error));
 
 function start(client) {
