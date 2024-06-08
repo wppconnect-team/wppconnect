@@ -19,9 +19,11 @@ import { Chat } from './chat';
 import { Contact } from './contact';
 import { MessageType } from './enum';
 
+/** available during the `onMessage` event */
 export interface Message {
   id: string;
-  body: string;
+  /** exists when it is a displayable message (i.e. `MessageType.CHAT` / `"chat"`); the body is not included in notifications like group removal, etc. (`gp2`) */
+  body?: string;
   type: MessageType;
   /**
    * When type is GP2: {@link GroupNotificationType}
