@@ -183,11 +183,29 @@ export class RetrieverLayer extends SenderLayer {
    * @returns contact detial as promise
    */
   public async checkNumberStatus(contactId: string): Promise<WhatsappProfile> {
-    return await evaluateAndReturn(
+    const result = await evaluateAndReturn(
       this.page,
-      (contactId) => WAPI.checkNumberStatus(contactId),
+      (contactId) => WPP.contact.queryExists(contactId),
       contactId
     );
+
+    if (!result) {
+      return {
+        id: contactId as any,
+        isBusiness: false,
+        canReceiveMessage: false,
+        numberExists: false,
+        status: 404,
+      };
+    }
+
+    return {
+      id: result.wid as any,
+      isBusiness: result.biz,
+      canReceiveMessage: true,
+      numberExists: true,
+      status: 200,
+    };
   }
 
   /**
