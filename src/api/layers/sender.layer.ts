@@ -86,6 +86,11 @@ export class SenderLayer extends ListenerLayer {
    * // Simple message
    * client.sendText('<number>@c.us', 'A simple message');
    *
+   * // A message with reply
+   * client.sendText('<number>@c.us', 'A simple message', {
+   *  quotedMsg: 'true_...@c.us_3EB01DE65ACC6_out'
+   * });
+   *
    * // With buttons
    * client.sendText('<number>@c.us', 'WPPConnect message with buttons', {
    *    useTemplateButtons: true, // False for legacy
