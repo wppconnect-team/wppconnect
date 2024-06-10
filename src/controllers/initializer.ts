@@ -100,7 +100,7 @@ export async function create(
       typeof browserSessionToken !== 'undefined';
   } else if (typeof sessionOrOption === 'object') {
     options = sessionOrOption;
-    session = sessionOrOption.session;
+    if (sessionOrOption.session) session = sessionOrOption.session;
     catchQR = sessionOrOption.catchQR || catchQR;
     statusFind = sessionOrOption.statusFind || statusFind;
     onLoadingScreen = sessionOrOption.onLoadingScreen || onLoadingScreen;
