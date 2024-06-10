@@ -16,7 +16,7 @@
  */
 
 export const _profilePicfunc = async (id) => {
-  const wid = WPP.whatsapp.WidFactory.createDeviceWid(id);
+  const wid = WPP.whatsapp.WidFactory.createWid(id);
   let pic = WPP.whatsapp.ProfilePicThumbStore.get(wid);
 
   if (!pic) {
