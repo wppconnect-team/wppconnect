@@ -1,3 +1,9 @@
+# 1.31.0 (2024-06-10)
+
+### Bug Fixes
+
+- **deps:** update dependency @wppconnect/wa-js to ^3.3.1 ([#2205](https://github.com/wppconnect-team/wppconnect/issues/2205)) ([89c3298](https://github.com/wppconnect-team/wppconnect/commit/89c3298209aed64e68fa28a9bd2102f1ae366d31))
+
 ## 1.30.3 (2024-05-03)
 
 ### Bug Fixes
