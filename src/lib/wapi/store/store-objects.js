@@ -47,12 +47,7 @@ export const storeObjects = [
   },
   {
     id: 'Perfil',
-    conditions: (module) =>
-      module.__esModule === true &&
-      module.setPushname &&
-      !module.getComposeContents
-        ? module
-        : null,
+    conditions: (module) => module.setPushname && !module.getComposeContents,
   },
   {
     id: 'ChatStates',
