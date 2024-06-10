@@ -55,13 +55,22 @@ export class LabelsLayer extends CatalogLayer {
    * @example
    * ```javascript
    * client.addOrRemoveLabels(['[number]@c.us','[number]@c.us'],
-   * [{labelId:'76', type:'add'},{labelId:'75', type:'remove'}]);
+   * [
+   *   { labelId:'76', type:'add' },
+   *   { labelId:'75', type:'remove' }
+   * ]);
    * //or
    * ```
    * @param chatIds ChatIds
    * @param options options to remove or add
    */
-  public async addOrRemoveLabels(chatIds: string, options: string) {
+  public async addOrRemoveLabels(
+    chatIds: string,
+    options: {
+      labelId: string;
+      type: 'add' | 'remove';
+    }[]
+  ) {
     return await evaluateAndReturn(
       this.page,
       ({ chatIds, options }) => {
