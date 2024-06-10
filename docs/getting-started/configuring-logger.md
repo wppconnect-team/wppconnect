@@ -1,10 +1,10 @@
 # Configuring the logger
 
-`Wppconnect Bot` use [winston](https://github.com/winstonjs/winston) package for log management.
+`Wppconnect Bot` uses the [winston](https://github.com/winstonjs/winston) package for log management.
 
-`wppconnect.defaultLogger` is a instance of `winston.createLogger`.
+`wppconnect.defaultLogger` is an instance of `winston.createLogger`.
 
-## Default Log level
+## Default log level
 
 The default log level is `info`
 
@@ -17,11 +17,11 @@ const wppconnect = require('@wppconnect-team/wppconnect');
 // All logs: 'silly'
 wppconnect.defaultLogger.level = 'silly';
 
-// If you want stop console logging
+// If you want to stop console logging
 wppconnect.defaultLogger.transports.forEach((t) => (t.silent = true));
 ```
 
-## Using a custon logger
+## Using a custom logger
 
 ```javascript
 // Supports ES6
@@ -50,7 +50,7 @@ wppconnect
     logger: logger,
   })
   .then((client) => {
-    start(client);
+    client.start();
   })
   .catch((erro) => {
     console.log(erro);
@@ -59,7 +59,7 @@ wppconnect
 
 ## Log to file
 
-By default, wppconnect use the Console transport for logging.
+By default, wppconnect uses the Console transport for logging.
 
 If you want to save the log to a file, you can configure
 using the [winston transport](https://github.com/winstonjs/winston#transports)
@@ -78,10 +78,10 @@ wppconnect.defaultLogger.clear(); // Remove all transports
 const files = new winston.transports.File({ filename: 'combined.log' });
 wppconnect.defaultLogger.add(files); // Add file transport
 
-// Optinal: create a custom console with error level
+//Optional: create a custom console with error level
 const console = new winston.transports.Console({ level: 'erro' });
 wppconnect.defaultLogger.add(console); // Add console transport
 
-// Optinal: Remove the custom transport
+//Optional: Remove the custom transport
 wppconnect.defaultLogger.remove(console); // Remove console transport
 ```
