@@ -1,7 +1,7 @@
 # Creating a Client
 
-To start using `Wppconnect Bot`, you need to create a file and call the {@link create} method.\
-That method returns an `Promise` of {@link Whatsapp}.
+To start using `Wppconnect Bot`, create a file and call the {@link create} method.\
+That method returns a `Promise` of {@link Whatsapp}.
 
 ```javascript
 // Supports ES6
@@ -10,7 +10,7 @@ const wppconnect = require('@wppconnect-team/wppconnect');
 
 wppconnect
   .create()
-  .then((client) => start(client))
+  .then((client) => client.start())
   .catch((error) => console.log(error));
 ```
 
@@ -21,11 +21,11 @@ in case you have different departments in your project,
 then you had to specify it in your code like in that example:
 
 ```javascript
-// Init sales whatsapp bot
-wppconnect.create({session: 'sales'}).then((client) => startClient(client));
+// Init sales WhatsApp bot
+wppconnect.create({session: 'sales'}).then((client) => client.start());
 
-// Init support whatsapp bot
-wppconnect.create({session: 'support'}).then((client) => startSupport(client));
+// Init support WhatsApp bot
+wppconnect.create({session: 'support'}).then((client) => client.start());
 ```
 
 ## Passing options on create
@@ -49,21 +49,21 @@ wppconnect.create({
     onLoadingScreen: (percent, message) => {
       console.log('LOADING_SCREEN', percent, message);
     },
-    headless: true, // Headless chrome
+    headless: true, // Headless Chrome
     devtools: false, // Open devtools by default
     useChrome: true, // If false will use Chromium instance
     debug: false, // Opens a debug session
     logQR: true, // Logs QR automatically in terminal
-    browserWS: '', // If u want to use browserWSEndpoint
-    browserArgs: [''], // Parameters to be added into the chrome browser instance
+    browserWS: '', // If you want to use browserWSEndpoint
+    browserArgs: [''], // Parameters to be added into the Chrome browser instance
     puppeteerOptions: {}, // Will be passed to puppeteer.launch
     disableWelcome: false, // Option to disable the welcoming message which appears in the beginning
     updatesLog: true, // Logs info updates automatically in terminal
     autoClose: 60000, // Automatically closes the wppconnect only when scanning the QR code (default 60 seconds, if you want to turn it off, assign 0 or false)
-    tokenStore: 'file', // Define how work with tokens, that can be a custom interface
+    tokenStore: 'file', // Define how to work with tokens, which can be a custom interface
     folderNameToken: './tokens', //folder name when saving tokens
     // BrowserSessionToken
-    // To receive the client's token use the function await clinet.getSessionTokenBrowser()
+    // To receive the client's token use the function await client.getSessionTokenBrowser()
     sessionToken: {
       WABrowserId: '"UnXjH....."',
       WASecretBundle: '{"key":"+i/nRgWJ....","encKey":"kGdMR5t....","macKey":"+i/nRgW...."}',
@@ -71,7 +71,7 @@ wppconnect.create({
       WAToken2: '"1@lPpzwC...."',
     }
   })
-  .then((client) => start(client))
+  .then((client) => client.start())
   .catch((error) => console.log(error));
 ```
 
@@ -103,7 +103,7 @@ wppconnect
       console.log('Session name: ', session);
     },
   })
-  .then((client) => start(client))
+  .then((client) => client.start())
   .catch((error) => console.log(error));
 ```
 
@@ -122,8 +122,8 @@ client.stopPhoneWatchdog();
 
 ### Exporting QR Code
 
-By default, QR code will appear on the terminal. If you need to pass the QR
-somewhere else heres how (See {@link CatchQRCallback}):
+By default, a QR code will appear on the terminal. If you need to pass the QR
+somewhere else here is how (See {@link CatchQRCallback}):
 
 ```javascript
 const fs = require('fs');
@@ -157,7 +157,7 @@ wppconnect
     },
     logQR: false,
   })
-  .then((client) => start(client))
+  .then((client) => client.start())
   .catch((error) => console.log(error));
 ```
 
@@ -167,10 +167,10 @@ Read the {@link TokenStore}
 
 ### Multidevice (BETA)
 
-To use multidevice account, you have to setup a fixed user data dir for browser to keep it logged,
-because WhatsApp changed the way of autentication.
+To use multidevice account, you have to set a fixed user data dir for the browser to keep it logged,
+because WhatsApp changed the way of authentication.
 
-To setup this, you can use the example bellow:
+To setup this, you can use the example below:
 
 ```javascript
 wppconnect
@@ -182,7 +182,7 @@ wppconnect
     },
     // ...
   })
-  .then((client) => start(client))
+  .then((client) => client.start())
   .catch((error) => console.log(error));
 ```
 

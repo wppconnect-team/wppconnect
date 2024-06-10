@@ -1,4 +1,4 @@
-# Basic Functions (usage)
+# Basic functions (usage)
 
 Not every available function will be listed, for further look, every function
 available can be found in {@link Whatsapp}
@@ -96,7 +96,7 @@ await client
 
 ### sendLinkPreview
 
-Automatically sends a link with the auto generated link preview. You can also add a custom message to be added.
+Automatically sends a link with the auto-generated link preview. You can also add a custom message to be added.
 
 ```javascript
 await client
@@ -135,7 +135,7 @@ await client
 
 ### sendFile
 
-Send a file (wppconnect will take care of mime types, just need the path).\
+Send a file (wppconnect will take care of mime types, just needs the path).\
 You can also upload an image using a valid HTTP protocol
 
 ```javascript
@@ -178,8 +178,8 @@ await client
 
 ### sendImageAsStickerGif
 
-Generates a sticker from the provided animated gif image and sends it (Send an image as animated sticker)\
-Image path imageBase64 A valid gif and webp image will be required. You can also send via http/https (<http://www.website.com/img.gif>)
+Generates a sticker from the provided animated gif image and sends it (Send an image as an animated sticker)\
+Image path imageBase64 A valid gif and webp image will be required. You can also send it via HTTP/HTTPS (<http://www.website.com/img.gif>)
 
 ```javascript
 await client
@@ -194,8 +194,8 @@ await client
 
 ### sendImageAsSticker
 
-Generates a sticker from given image and sends it (Send Image As Sticker)\
-image path imageBase64 A valid png, jpg and webp image will be required. You can also send via http/https (<http://www.website.com/img.jpg>)
+Generates a sticker from a given image and sends it (Send Image As Sticker)\
+image path imageBase64 A valid PNG, JPG, and WebP image will be required. You can also send it via HTTP/HTTPS (<http://www.website.com/img.jpg>)
 
 ```javascript
 await client
@@ -234,7 +234,7 @@ await client.reply(
 
 ### reply with mention
 
-Reply to a message with mention
+Reply to a message with a mention
 
 ```javascript
 await client.reply(

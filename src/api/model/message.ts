@@ -19,9 +19,11 @@ import { Chat } from './chat';
 import { Contact } from './contact';
 import { MessageType } from './enum';
 
+/** available during the `onMessage` event */
 export interface Message {
   id: string;
-  body: string;
+  /** exists when it is a displayable message (i.e. `MessageType.CHAT` / `"chat"`); the body is not included in notifications like group removal, etc. (`gp2`) */
+  body?: string;
   type: MessageType;
   /**
    * When type is GP2: {@link GroupNotificationType}
@@ -63,13 +65,13 @@ export interface Message {
   isNotification: boolean;
   isPSA: boolean;
   /**
-   * @deprecated Use o getChat para obter detalhes do chat
+   * @deprecated Use `getChat` to get chat details
    */
   chat: Chat;
   lastSeen: null | number | boolean;
   chatId: string;
   /**
-   * @deprecated Use o atributo quotedMsgId em getMessageById para obter detalhes da mensagem
+   * @deprecated Use the `quotedMsgId` attribute in `getMessageById` to get the message details
    */
   quotedMsgObj: null;
   quotedMsgId: null;
