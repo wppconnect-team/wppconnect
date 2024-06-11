@@ -37,13 +37,13 @@ export interface Contact {
   msgs: any;
 
   /**
-   * Name of contact in your agenda
+   * Name of the contact in your agenda
    */
   name?: string;
   plaintextDisabled: boolean;
 
   /**
-   * @deprecated Depreciated in favor of the function `getProfilePicFromServer` {@link getProfilePicFromServer}
+   * @deprecated Deprecated in favor of the function `getProfilePicFromServer` {@link getProfilePicFromServer}
    */
   profilePicThumbObj: ProfilePicThumbObj;
 
