@@ -37,13 +37,13 @@ export interface Contact {
   msgs: any;
 
   /**
-   * Name of concat in your agenda
+   * Name of contact in your agenda
    */
   name?: string;
   plaintextDisabled: boolean;
 
   /**
-   * @deprecated Depreciado em favor da função {@link getProfilePicFromServer}
+   * @deprecated Depreciated in favor of the function `getProfilePicFromServer` {@link getProfilePicFromServer}
    */
   profilePicThumbObj: ProfilePicThumbObj;
 
