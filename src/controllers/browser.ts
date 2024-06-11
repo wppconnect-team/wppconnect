@@ -206,10 +206,10 @@ export async function injectApi(
 ) {
   const injected = await page
     .evaluate(() => {
-      // @ts-ignore
       return (
         typeof window.WAPI !== 'undefined' &&
-        typeof window.Store !== 'undefined'
+        typeof window.Store !== 'undefined' &&
+        window.WPP.isReady
       );
     })
     .catch(() => false);
@@ -218,19 +218,18 @@ export async function injectApi(
     return;
   }
 
+  await sleep(500);
+  await page.addScriptTag({
+    path: require.resolve('@wppconnect/wa-js'),
+  });
   // Wait for some loaded modules
+  /*
   await page
     .waitForFunction(
       () => ((window as any)?.webpackChunkwhatsapp_web_client?.length || 0) > 3
     )
     .catch(() => null);
-
-  await sleep(100);
-
-  await page.addScriptTag({
-    path: require.resolve('@wppconnect/wa-js'),
-  });
-
+  */
   await page
     .evaluate(() => {
       WPP.chat.defaultSendMessageOptions.createChat = true;

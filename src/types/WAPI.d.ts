@@ -37,21 +37,10 @@ import { SessionToken } from '../token-store';
 
 interface WAPI {
   allNewMessagesListener: (callback: Function) => void;
-  archiveChat: (chatId: string, option: boolean) => boolean;
   arrayBufferToBase64: (buffer: ArrayBuffer) => string;
   checkNumberStatus: (contactId: string) => Promise<WhatsappProfile>;
   downloadFile: (data: string) => Promise<string | boolean>;
-  forwardMessage: (
-    toChatId: string | Wid,
-    msgId: string | MsgKey,
-    options?: {
-      displayCaptionText?: boolean;
-      multicast?: boolean;
-    }
-  ) => boolean;
   getAllChats: () => Chat[];
-  getAllChatsWithMessages: (withNewMessageOnly?: boolean) => Chat[];
-  getAllChatsWithNewMsg: () => Chat[];
   getAllContacts: () => Contact[];
   getAllMessagesInChat: (
     chatId: string,
@@ -82,7 +71,6 @@ interface WAPI {
     includeNotifications: boolean,
     useUnreadCount: boolean
   ) => any;
-  getWAVersion: () => string;
   isConnected: () => boolean;
   isLoggedIn: () => boolean;
   isRegistered: () => boolean;
@@ -174,7 +162,6 @@ interface WAPI {
     caption: string
   ) => void;
   setMessagesAdminsOnly: (chatId: string, option: boolean) => boolean;
-  setMyName: (name: string) => void;
   setOnlinePresence: (online: boolean) => void;
   setProfilePic: (path: string, to?: string) => Promise<boolean>;
   setTemporaryMessages: (chatId: string, value: string) => Promise<boolean>;

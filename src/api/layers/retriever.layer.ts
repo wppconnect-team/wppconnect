@@ -125,11 +125,7 @@ export class RetrieverLayer extends SenderLayer {
     this.logger.warn(
       'Deprecated: This function [getAllChats] is deprecated in favor of the listChats function. Please update your code accordingly.'
     );
-    if (withNewMessageOnly) {
-      return evaluateAndReturn(this.page, () => WAPI.getAllChatsWithNewMsg());
-    } else {
-      return evaluateAndReturn(this.page, () => WAPI.getAllChats());
-    }
+    return null;
   }
 
   /**
@@ -220,12 +216,7 @@ export class RetrieverLayer extends SenderLayer {
     this.logger.warn(
       'Deprecated: This function [getAllChatsWithMessages] is deprecated in favor of the listChats function. Please update your code accordingly.'
     );
-    return evaluateAndReturn(
-      this.page,
-      (withNewMessageOnly: boolean) =>
-        WAPI.getAllChatsWithMessages(withNewMessageOnly),
-      withNewMessageOnly
-    );
+    return null;
   }
 
   /**

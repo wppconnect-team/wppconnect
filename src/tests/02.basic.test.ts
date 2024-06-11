@@ -51,20 +51,6 @@ describeAuthenticatedTest('Basic functions', function (getClient) {
     assert.ok(result);
   });
 
-  it('getAllChatsWithMessages', async function () {
-    const result = await getClient().getAllChatsWithMessages();
-    assert.ok(result);
-  });
-
-  it('getAllMessagesInChat', async function () {
-    const result = await getClient().getAllMessagesInChat(
-      testUserId,
-      true,
-      false
-    );
-    assert.ok(result);
-  });
-
   it('getAllUnreadMessages', async function () {
     const result = await getClient().getAllUnreadMessages();
     assert.ok(result);

@@ -46,10 +46,6 @@ export const storeObjects = [
       module.setPin.toString().includes('.unproxy') ? module : null,
   },
   {
-    id: 'Perfil',
-    conditions: (module) => module.setPushname && !module.getComposeContents,
-  },
-  {
     id: 'ChatStates',
     conditions: (module) =>
       module.sendChatStatePaused &&
@@ -86,14 +82,5 @@ export const storeObjects = [
   {
     id: 'changeEphemeralDuration',
     conditions: (module) => module.changeEphemeralDuration,
-  },
-  {
-    id: 'sendCreateGroup',
-    conditions: (module) => module.sendCreateGroup,
-  },
-  {
-    id: 'sendQueryGroupInvite',
-    conditions: (module) =>
-      module.sendQueryGroupInvite ? module.sendQueryGroupInvite : null,
   },
 ];

@@ -349,7 +349,7 @@ export class HostLayer {
 
   public async waitForPageLoad() {
     while (!this.isInjected) {
-      await sleep(200);
+      await sleep(50);
     }
 
     await this.page.waitForFunction(() => WPP.isReady).catch(() => {});
@@ -465,10 +465,10 @@ export class HostLayer {
    */
   public async getWAVersion() {
     await this.page
-      .waitForFunction(() => WAPI.getWAVersion())
+      .waitForFunction(() => window.Debug.VERSION)
       .catch(() => null);
 
-    return await evaluateAndReturn(this.page, () => WAPI.getWAVersion());
+    return await evaluateAndReturn(this.page, () => window.Debug.VERSION);
   }
 
   /**

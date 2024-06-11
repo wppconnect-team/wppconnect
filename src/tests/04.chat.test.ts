@@ -102,9 +102,9 @@ describeAuthenticatedTest('Chat functions', function (getClient) {
       'Message to forward'
     );
 
-    const r = await client.forwardMessages(testUserId, msg.id, false);
+    const r = await client.forwardMessage(testUserId as any, msg.id, false);
 
-    assert.strictEqual(r.length, 1);
+    assert.strictEqual(r, 1);
 
     const fmsg = await client.getMessageById(r[0]);
 
@@ -146,41 +146,41 @@ describeAuthenticatedTest('Chat functions', function (getClient) {
     const client = getClient();
 
     // Ensure chat is not archived
-    await client.sendText(testUserId, 'unarchive chat');
+    await client.sendText(testUserId as any, 'unarchive chat');
 
     await sleep(1000);
-    let chat = await client.getChatById(testUserId);
+    let chat = await client.getChatById(testUserId as any);
 
     assert.strictEqual(chat.archive, false);
 
     // ensure the first archive is OK
-    let result = await client.archiveChat(testUserId, true);
+    let result = await client.archiveChat(testUserId as any, true);
 
     assert.strictEqual(result, true);
 
     await sleep(1000);
     // ensure the second archive is not OK
-    result = await client.archiveChat(testUserId, true);
+    result = await client.archiveChat(testUserId as any, true);
 
     assert.strictEqual(result, false);
 
     await sleep(1000);
-    chat = await client.getChatById(testUserId);
+    chat = await client.getChatById(testUserId as any);
 
     assert.strictEqual(chat.archive, true);
 
     // ensure the first unarchive is OK
-    result = await client.archiveChat(testUserId, false);
+    result = await client.archiveChat(testUserId as any, false);
 
     assert.strictEqual(result, true);
 
     await sleep(1000);
-    chat = await client.getChatById(testUserId);
+    chat = await client.getChatById(testUserId as any);
 
     assert.strictEqual(chat.archive, false);
 
     // ensure the second unarchive is not OK
-    result = await client.archiveChat(testUserId, false);
+    result = await client.archiveChat(testUserId as any, false);
 
     assert.strictEqual(result, false);
   });

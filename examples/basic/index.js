@@ -17,15 +17,20 @@
 const wppconnect = require('../../dist');
 
 wppconnect
-  .create()
+  .create({
+    whatsappVersion: '2.3000.1012058694-alpha',
+    headless: false,
+    autoClose: false,
+  })
   .then((client) => start(client))
   .catch((erro) => {
     console.log(erro);
   });
 
 function start(client) {
-  client.onMessage((message) => {
-    if (message.body === 'Hi' && message.isGroupMsg === false) {
+  client.onMessage(async (message) => {
+    console.log(message);
+    if (message.body === 'Hi') {
       client
         .sendText(message.from, 'Welcome Wppconnect')
         .then((result) => {})
@@ -33,5 +38,9 @@ function start(client) {
           console.error('Error when sending: ', erro); //return object error
         });
     }
+  });
+  client.onAnyMessage((message) => {
+    console.log('any');
+    console.log(message);
   });
 }

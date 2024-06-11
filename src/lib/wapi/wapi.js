@@ -21,10 +21,8 @@ import {
   asyncLoadAllEarlierMessages,
   downloadFile,
   encryptAndUploadFile,
-  forwardMessages,
   getAllChatIds,
   getAllChats,
-  getAllChatsWithMessages,
   getAllChatsWithNewMessages,
   getAllContacts,
   getAllGroupMetadata,
@@ -67,11 +65,9 @@ import {
   createProduct,
   sendLocation,
   sendMessage,
-  sendMessage2,
   sendMessageWithTags,
   sendMessageWithThumb,
   sendVideoAsGif,
-  setMyName,
   getTheme,
   setTheme,
   sendLinkPreview,
@@ -195,16 +191,13 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.processMessageObj = processMessageObj;
   window.WAPI.sendMessageWithTags = sendMessageWithTags;
   window.WAPI.sendMessage = sendMessage;
-  window.WAPI.sendMessage2 = sendMessage2;
   window.WAPI.sendImage = sendImage;
   window.WAPI.sendPtt = sendPtt;
   window.WAPI.sendFile = sendFile;
-  window.WAPI.setMyName = setMyName;
   window.WAPI.sendVideoAsGif = sendVideoAsGif;
   window.WAPI.processFiles = processFiles;
   window.WAPI.sendImageWithProduct = sendImageWithProduct;
   window.WAPI.createProduct = createProduct;
-  window.WAPI.forwardMessages = forwardMessages;
   window.WAPI.encryptAndUploadFile = encryptAndUploadFile;
   window.WAPI.setOnlinePresence = setOnlinePresence;
   window.WAPI.sendLocation = sendLocation;
@@ -222,7 +215,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.getAllChatIds = getAllChatIds;
   window.WAPI.getAllNewMessages = getAllNewMessages;
   window.WAPI.getAllUnreadMessages = getAllUnreadMessages;
-  window.WAPI.getAllChatsWithMessages = getAllChatsWithMessages;
   window.WAPI.getAllGroups = getAllGroups;
   window.WAPI.getChat = getChat;
   window.WAPI.getChatByName = getChatByName;
@@ -389,10 +381,6 @@ if (typeof window.WAPI === 'undefined') {
     return chat.presence.chatstate.t || false;
   };
 
-  window.WAPI.getWAVersion = function () {
-    return window.Debug.VERSION;
-  };
-
   /**
    * @param NumberChatsDelete Number of chats that will be deleted
    */
@@ -418,22 +406,6 @@ if (typeof window.WAPI === 'undefined') {
       console.error('Erro:', e);
       return e;
     }
-  };
-
-  /**
-   * @param id The id of the conversation
-   * @param archive boolean true => archive, false => unarchive
-   * @return boolean true: worked, false: didnt work (probably already in desired state)
-   */
-  window.WAPI.archiveChat = async function (id, archive) {
-    const promise = Store.Archive.setArchive(
-      WPP.whatsapp.ChatStore.get(id),
-      archive
-    )
-      .then((_) => true)
-      .catch((_) => false);
-
-    return await Promise.resolve(promise);
   };
 
   /**
