@@ -124,6 +124,7 @@ export class HostLayer {
       .catch((e) => {
         console.log(e);
         this.log('verbose', 'wapi.js failed');
+        this.log('error', e);
       });
   }
 
@@ -464,11 +465,7 @@ export class HostLayer {
    * @category Host
    */
   public async getWAVersion() {
-    await this.page
-      .waitForFunction(() => WAPI.getWAVersion())
-      .catch(() => null);
-
-    return await evaluateAndReturn(this.page, () => WAPI.getWAVersion());
+    return await evaluateAndReturn(this.page, () => window.Debug?.VERSION);
   }
 
   /**

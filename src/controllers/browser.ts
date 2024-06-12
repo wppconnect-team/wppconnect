@@ -217,44 +217,23 @@ export async function injectApi(
   if (injected) {
     return;
   }
+  setTimeout(async () => {
+    await page.addScriptTag({
+      path: require.resolve('@wppconnect/wa-js'),
+    });
 
-  // Wait for some loaded modules
-  await page
-    .waitForFunction(
-      () => ((window as any)?.webpackChunkwhatsapp_web_client?.length || 0) > 3
-    )
-    .catch(() => null);
-
-  await sleep(100);
-
-  await page.addScriptTag({
-    path: require.resolve('@wppconnect/wa-js'),
-  });
-
-  await page
-    .evaluate(() => {
+    await page.evaluate(() => {
       WPP.chat.defaultSendMessageOptions.createChat = true;
       WPP.conn.setKeepAlive(true);
-    })
-    .catch(() => false);
+    });
+    await page.addScriptTag({
+      path: require.resolve(
+        path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
+      ),
+    });
+  }, 1000);
 
-  await page.addScriptTag({
-    path: require.resolve(
-      path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
-    ),
-  });
-
-  await onLoadingScreen(page, onLoadingScreenCallBack);
-  // Make sure WAPI is initialized
-  await page
-    .waitForFunction(() => {
-      return (
-        typeof window.WAPI !== 'undefined' &&
-        typeof window.Store !== 'undefined' &&
-        window.WPP.isReady
-      );
-    })
-    .catch(() => false);
+  onLoadingScreen(page, onLoadingScreenCallBack);
 }
 
 /**
