@@ -217,7 +217,6 @@ export async function injectApi(
   if (injected) {
     return;
   }
-  setTimeout(async () => {
     await page.addScriptTag({
       path: require.resolve('@wppconnect/wa-js'),
     });
@@ -231,8 +230,6 @@ export async function injectApi(
         path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
       ),
     });
-  }, 1000);
-
   onLoadingScreen(page, onLoadingScreenCallBack);
 }
 
