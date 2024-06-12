@@ -1,3 +1,9 @@
+## 1.31.1 (2024-06-12)
+
+### Bug Fixes
+
+- Downgrade whatsappVersion to 2.2413.x ([22ca707](https://github.com/wppconnect-team/wppconnect/commit/22ca707c17a66441a4c19098d238899992a7c4bc))
+
 # 1.31.0 (2024-06-10)
 
 ### Bug Fixes
