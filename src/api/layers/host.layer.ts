@@ -465,7 +465,11 @@ export class HostLayer {
    * @category Host
    */
   public async getWAVersion() {
-    return await evaluateAndReturn(this.page, () => window.Debug?.VERSION);
+    await this.page
+      .waitForFunction(() => WAPI.getWAVersion())
+      .catch(() => null);
+
+    return await evaluateAndReturn(this.page, () => WAPI.getWAVersion());
   }
 
   /**
