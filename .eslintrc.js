@@ -1,0 +1,100 @@
+// eslint-disable-next-line no-undef, header/header
+module.exports = {
+  root: true,
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', 'header'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
+  rules: {
+    // @todo more restrictive
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/no-namespace': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/prefer-namespace-keyword': 'off',
+    'no-async-promise-executor': 'off',
+    'no-constant-condition': 'off',
+    'no-empty': ['error', { allowEmptyCatch: true }],
+    'no-useless-catch': 'off',
+    'no-useless-escape': 'off',
+    'prefer-const': 'off',
+    'header/header': [
+      2,
+      'block',
+      [
+        '',
+        ' * This file is part of WPPConnect.',
+        ' *',
+        ' * WPPConnect is free software: you can redistribute it and/or modify',
+        ' * it under the terms of the GNU Lesser General Public License as published by',
+        ' * the Free Software Foundation, either version 3 of the License, or',
+        ' * (at your option) any later version.',
+        ' *',
+        ' * WPPConnect is distributed in the hope that it will be useful,',
+        ' * but WITHOUT ANY WARRANTY; without even the implied warranty of',
+        ' * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the',
+        ' * GNU Lesser General Public License for more details.',
+        ' *',
+        ' * You should have received a copy of the GNU Lesser General Public License',
+        ' * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.',
+        ' ',
+      ],
+      1,
+    ],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
+  },
+  overrides: [
+    {
+      files: ['src/lib/**/*.js'],
+      parser: '@babel/eslint-parser',
+      plugins: ['@babel'],
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+      },
+      env: {
+        amd: true,
+        commonjs: true,
+        es6: true,
+        browser: true,
+        node: false,
+      },
+      globals: {
+        axios: true,
+        Debug: true,
+        Store: true,
+        WAPI: true,
+        WPP: true,
+        webpackJsonp: true,
+        WWebJS: true,
+      },
+      rules: {
+        // @todo more restrictive
+        '@typescript-eslint/no-array-constructor': 'off',
+        'no-prototype-builtins': 'off',
+        'no-redeclare': 'off',
+      },
+    },
+    {
+      files: ['src/lib/**/webpack.*.js', 'src/lib/**/gulpfile.js'],
+      env: {
+        browser: false,
+        node: true,
+      },
+    },
+  ],
+};

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":prHourlyLimitNone",
+    ":prNotPending",
+    ":semanticCommits"
+  ],
+  "prConcurrentLimit": 3,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "description": "Use bump strategy",
+      "matchPackagePatterns": ["*"],
+      "rangeStrategy": "bump",
+      "semanticCommitType": "build"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "semanticCommitType": "ci",
+      "addLabels": ["github_actions"]
+    },
+    {
+      "matchManagers": ["npm"],
+      "addLabels": ["javascript"]
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "semanticCommitScope": "deps-dev"
+    },
+    {
+      "description": "Show in changelog package updates",
+      "matchPackagePatterns": ["^@wppconnect/"],
+      "semanticCommitType": "fix"
+    },
+    {
+      "description": "Automatically merge minor and patch-level updates",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeStrategy": "squash",
+      "automergeType": "pr"
+    },
+    {
+      "description": "Ignore major version",
+      "matchPackageNames": ["boxen"],
+      "allowedVersions": "<6"
+    },
+    {
+      "description": "Ignore major version",
+      "matchPackageNames": ["chalk"],
+      "allowedVersions": "<5"
+    },
+    {
+      "description": "Ignore major version",
+      "matchPackageNames": ["execa"],
+      "allowedVersions": "<6"
+    },
+    {
+      "description": "Ignore major version",
+      "matchPackageNames": ["file-type"],
+      "allowedVersions": "<17"
+    },
+    {
+      "description": "Ignore major version",
+      "matchPackageNames": ["latest-version"],
+      "allowedVersions": "<6"
+    }
+  ]
+}

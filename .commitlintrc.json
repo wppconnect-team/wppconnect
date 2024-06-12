@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/commitlintrc.json",
+  "extends": ["@commitlint/config-conventional"],
+  "rules": {
+    "body-max-line-length": [0, "always", 100],
+    "header-max-length": [2, "always", 120],
+    "subject-case": [
+      1,
+      "never",
+      ["sentence-case", "start-case", "pascal-case", "upper-case"]
+    ]
+  }
+}
