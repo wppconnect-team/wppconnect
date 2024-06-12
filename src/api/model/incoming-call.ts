@@ -30,5 +30,5 @@ export interface IncomingCall {
   isSilenced: boolean;
   offerReceivedWhileOffline: boolean;
   webClientShouldHandle: boolean;
-  participants: any[]
+  participants: any[];
 }
