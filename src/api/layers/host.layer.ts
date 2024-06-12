@@ -124,6 +124,7 @@ export class HostLayer {
       .catch((e) => {
         console.log(e);
         this.log('verbose', 'wapi.js failed');
+        this.log('error', e);
       });
   }
 
