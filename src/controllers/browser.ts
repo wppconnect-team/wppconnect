@@ -217,19 +217,19 @@ export async function injectApi(
   if (injected) {
     return;
   }
-    await page.addScriptTag({
-      path: require.resolve('@wppconnect/wa-js'),
-    });
+  await page.addScriptTag({
+    path: require.resolve('@wppconnect/wa-js'),
+  });
 
-    await page.evaluate(() => {
-      WPP.chat.defaultSendMessageOptions.createChat = true;
-      WPP.conn.setKeepAlive(true);
-    });
-    await page.addScriptTag({
-      path: require.resolve(
-        path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
-      ),
-    });
+  await page.evaluate(() => {
+    WPP.chat.defaultSendMessageOptions.createChat = true;
+    WPP.conn.setKeepAlive(true);
+  });
+  await page.addScriptTag({
+    path: require.resolve(
+      path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
+    ),
+  });
   onLoadingScreen(page, onLoadingScreenCallBack);
 }
 
