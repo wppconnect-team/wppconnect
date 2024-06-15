@@ -80,7 +80,7 @@ function logUpdateAvailable(current: string, latest: string) {
   logger.info(boxen(newVersionLog, { padding: 1 }));
   logger.info(
     `For more info visit: ${chalk.underline(
-      'https://github.com/wppconnect-team/wppconnect/blob/master/Update.md'
+      'https://github.com/wppconnect-team/wppconnect/blob/master/README.md#update-checking'
     )}\n`
   );
 }
