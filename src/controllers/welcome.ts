@@ -47,7 +47,7 @@ export async function checkUpdates() {
 }
 
 /**
- * Checs for a new versoin of wppconnect and logs
+ * Checks for a new version of WPPConnect and logs the result
  */
 async function checkWPPConnectVersion() {
   logger.info('Checking for updates');
@@ -61,7 +61,7 @@ async function checkWPPConnectVersion() {
       }
     })
     .catch(() => {
-      logger.warn('Failed to check updates');
+      logger.warn('Failed to check for updates');
     });
 }
 
