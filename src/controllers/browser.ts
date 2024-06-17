@@ -230,7 +230,17 @@ export async function injectApi(
       path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
     ),
   });
-  onLoadingScreen(page, onLoadingScreenCallBack);
+  await onLoadingScreen(page, onLoadingScreenCallBack);
+  // Make sure WAPI is initialized
+  await page
+    .waitForFunction(() => {
+      return (
+        typeof window.WAPI !== 'undefined' &&
+        typeof window.Store !== 'undefined' &&
+        window.WPP.isReady
+      );
+    })
+    .catch(() => false);
 }
 
 /**
