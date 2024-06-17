@@ -1,3 +1,7 @@
+## <small>1.32.1 (2024-06-17)</small>
+
+- fix: Fixed emitting events ([95e934d](https://github.com/wppconnect-team/wppconnect/commit/95e934d))
+
 ## 1.32.0 (2024-06-12)
 
 - fix: Improovment whatsappVersion to 2.3000.10139x ([d246c58](https://github.com/wppconnect-team/wppconnect/commit/d246c58))
