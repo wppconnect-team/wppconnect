@@ -19,18 +19,18 @@ const wppconnect = require('../../dist');
 wppconnect
   .create()
   .then((client) => start(client))
-  .catch((erro) => {
-    console.log(erro);
+  .catch((error) => {
+    console.log(error);
   });
 
 function start(client) {
   client.onMessage((message) => {
     if (message.body === 'Hi' && message.isGroupMsg === false) {
       client
-        .sendText(message.from, 'Welcome Wppconnect')
+        .sendText(message.from, 'Welcome to Wppconnect')
         .then((result) => {})
-        .catch((erro) => {
-          console.error('Error when sending: ', erro); //return object error
+        .catch((error) => {
+          console.error('Error when sending: ', error); //return error object
         });
     }
   });
