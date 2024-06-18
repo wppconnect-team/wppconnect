@@ -23,6 +23,7 @@ import type {
   TextMessageOptions,
   PoolMessageOptions,
   ForwardMessagesOptions,
+  AllMessageOptions,
 } from '@wppconnect/wa-js/dist/chat';
 import * as path from 'path';
 import { Page } from 'puppeteer';
@@ -870,11 +871,28 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Generates sticker from the provided animated gif image and sends it (Send image as animated sticker)
+   *
+   * @example
+   * ```javascript
+   * client.sendImageAsStickerGif('000000000000@c.us', 'base64....');
+   * ```
+   *
+   * @example
+   * Send Sticker with reply
+   * ```javascript
+   * client.sendImageAsStickerGif('000000000000@c.us', 'base64....', {
+   *     quotedMsg: 'msgId',
+   * });
+   * ```
    * @category Chat
    * @param pathOrBase64 image path imageBase64 A valid gif image is required. You can also send via http/https (http://www.website.com/img.gif)
    * @param to chatId '000000000000@c.us'
    */
-  public async sendImageAsStickerGif(to: string, pathOrBase64: string) {
+  public async sendImageAsStickerGif(
+    to: string,
+    pathOrBase64: string,
+    options?: AllMessageOptions
+  ) {
     let base64: string = '';
 
     if (pathOrBase64.startsWith('data:')) {
@@ -931,22 +949,41 @@ export class SenderLayer extends ListenerLayer {
 
     return await evaluateAndReturn(
       this.page,
-      ({ to, webpBase64 }) => {
+      ({ to, webpBase64, options }) => {
         return WPP.chat.sendFileMessage(to, webpBase64, {
           type: 'sticker',
+          ...options,
         });
       },
-      { to, webpBase64 }
+      { to, webpBase64, options }
     );
   }
 
   /**
    * Generates sticker from given image and sends it (Send Image As Sticker)
+   *
+   * @example
+   * ```javascript
+   * client.sendImageAsSticker('000000000000@c.us', 'base64....');
+   * ```
+   *
+   * @example
+   * Send Sticker with reply
+   * ```javascript
+   * client.sendImageAsSticker('000000000000@c.us', 'base64....', {
+   *     quotedMsg: 'msgId',
+   * });
+   * ```
+   *
    * @category Chat
    * @param pathOrBase64 image path imageBase64 A valid png, jpg and webp image is required. You can also send via http/https (http://www.website.com/img.gif)
    * @param to chatId '000000000000@c.us'
    */
-  public async sendImageAsSticker(to: string, pathOrBase64: string) {
+  public async sendImageAsSticker(
+    to: string,
+    pathOrBase64: string,
+    options?: AllMessageOptions
+  ) {
     let base64: string = '';
 
     if (pathOrBase64.startsWith('data:')) {
@@ -1008,12 +1045,13 @@ export class SenderLayer extends ListenerLayer {
 
     return await evaluateAndReturn(
       this.page,
-      ({ to, webpBase64 }) => {
+      ({ to, webpBase64, options }) => {
         return WPP.chat.sendFileMessage(to, webpBase64, {
           type: 'sticker',
+          ...options,
         });
       },
-      { to, webpBase64 }
+      { to, webpBase64, options }
     );
   }
 
