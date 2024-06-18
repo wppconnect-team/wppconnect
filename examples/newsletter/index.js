@@ -18,11 +18,11 @@ const wppconnect = require('../../dist');
 
 wppconnect
   .create({
-    session: 'teste',
+    session: 'test',
   })
   .then((client) => start(client))
-  .catch((erro) => {
-    console.log(erro);
+  .catch((error) => {
+    console.log(error);
   });
 
 function start(client) {
