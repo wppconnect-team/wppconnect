@@ -18,7 +18,7 @@ const wppconnect = require('../../dist');
 
 wppconnect
   .create({
-    session: 'teste',
+    session: 'test',
     onLoadingScreen: (percent, message) => {
       console.log('LOADING_SCREEN', percent, message);
     },
@@ -84,22 +84,22 @@ function start(client) {
           await client.setChatState(msg.from, '2');
         }
       } else if (msg.body.startsWith('!btn')) {
-        await client.sendMessageOptions(msg.from, 'teste', {
-          title: 'CALÇA JEN FEMININA',
-          footer: 'Escolha uma opção abaixo',
+        await client.sendMessageOptions(msg.from, 'test', {
+          title: "WOMEN'S JEANS PANTS",
+          footer: 'Choose an option below',
           isDynamicReplyButtonsMsg: true,
           dynamicReplyButtons: [
             {
-              buttonId: 'idSim',
+              buttonId: 'idYes',
               buttonText: {
-                displayText: 'SIM',
+                displayText: 'YES',
               },
               type: 1,
             },
             {
-              buttonId: 'idNao',
+              buttonId: 'idNo',
               buttonText: {
-                displayText: 'NÃO',
+                displayText: 'NO',
               },
               type: 1,
             },
