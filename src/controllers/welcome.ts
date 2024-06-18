@@ -31,7 +31,7 @@ export function welcomeScreen() {
   }
   welcomeShown = true;
   logger.info(`
-  _       ______  ____  ______                            __ 
+   _       ______  ____  ______                            __ 
   | |     / / __ \\/ __ \\/ ____/___  ____  ____  ___  _____/ /_
   | | /| / / /_/ / /_/ / /   / __ \\/ __ \\/ __ \\/ _ \\/ ___/ __/
   | |/ |/ / ____/ ____/ /___/ /_/ / / / / / / /  __/ /__/ /_  
@@ -47,7 +47,7 @@ export async function checkUpdates() {
 }
 
 /**
- * Checs for a new versoin of wppconnect and logs
+ * Checks for a new version of WPPConnect and logs the result
  */
 async function checkWPPConnectVersion() {
   logger.info('Checking for updates');
@@ -61,7 +61,7 @@ async function checkWPPConnectVersion() {
       }
     })
     .catch(() => {
-      logger.warn('Failed to check updates');
+      logger.warn('Failed to check for updates');
     });
 }
 
@@ -80,7 +80,7 @@ function logUpdateAvailable(current: string, latest: string) {
   logger.info(boxen(newVersionLog, { padding: 1 }));
   logger.info(
     `For more info visit: ${chalk.underline(
-      'https://github.com/wppconnect-team/wppconnect/blob/master/Update.md'
+      'https://github.com/wppconnect-team/wppconnect/blob/master/README.md#update-checking'
     )}\n`
   );
 }
