@@ -1,3 +1,7 @@
+## <small>1.32.2 (2024-06-18)</small>
+
+- chore: Remove unused deps ([a600ce0](https://github.com/wppconnect-team/wppconnect/commit/a600ce0))
+
 ## <small>1.32.1 (2024-06-17)</small>
 
 - fix: Fixed emitting events ([95e934d](https://github.com/wppconnect-team/wppconnect/commit/95e934d))
