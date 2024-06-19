@@ -5,7 +5,7 @@ The first thing that you had to do is install the `npm package`:
 ```bash
 npm i --save @wppconnect-team/wppconnect
 ```
-Or with Yarn:
+or with Yarn:
 ```bash
 yarn add @wppconnect-team/wppconnect
 ```
