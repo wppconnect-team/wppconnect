@@ -43,8 +43,8 @@ export interface GroupMetadata {
   support: boolean;
   suspended: boolean;
   terminated: boolean;
-  uniqueShortNameMap: Object, //TODO: type is too generic
-  isLidAddressingMode: boolean,
+  uniqueShortNameMap: Object; //TODO: type is too generic
+  isLidAddressingMode: boolean;
   isParentGroup: boolean;
   isParentGroupClosed: boolean;
   defaultSubgroup: boolean;
@@ -52,9 +52,9 @@ export interface GroupMetadata {
   generalChatAutoAddDisabled: boolean;
   allowNonAdminSubGroupCreation: boolean;
   lastActivityTimestamp: number,
-  lastSeenActivityTimestamp: number,
-  incognito: boolean,
-  hasCapi: boolean,
+  lastSeenActivityTimestamp: number;
+  incognito: boolean;
+  hasCapi: boolean;
   displayCadminPromotion: boolean;
   participants: any[];
   /** members who applied for membership but still need admin approval */
