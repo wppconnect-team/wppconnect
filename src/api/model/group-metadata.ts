@@ -51,7 +51,7 @@ export interface GroupMetadata {
   generalSubgroup: boolean;
   generalChatAutoAddDisabled: boolean;
   allowNonAdminSubGroupCreation: boolean;
-  lastActivityTimestamp: number,
+  lastActivityTimestamp: number;
   lastSeenActivityTimestamp: number;
   incognito: boolean;
   hasCapi: boolean;
