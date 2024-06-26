@@ -73,7 +73,6 @@ export interface Message {
   isAvatar: boolean;
   lastUpdateFromServerTs: number;
   invokedBotWid: null | WID;
-  invokedBotWid: null; //TODO: amend this type definition
   bizBotType: null; //TODO: amend this type definition
   botResponseTargetId: null; //TODO: amend this type definition
   botPluginType: null; //TODO: amend this type definition
