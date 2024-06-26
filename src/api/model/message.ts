@@ -72,7 +72,7 @@ export interface Message {
   stickerSentTs: number;
   isAvatar: boolean;
   lastUpdateFromServerTs: number;
-  invokedBotWid: null | WID;
+  invokedBotWid: null | Wid;
   bizBotType: null; //TODO: amend this type definition
   botResponseTargetId: null; //TODO: amend this type definition
   botPluginType: null; //TODO: amend this type definition
