@@ -234,13 +234,18 @@ export class SenderLayer extends ListenerLayer {
   /**
    * Sends image message
    * @category Chat
-   * @param to Chat id
-   * @param base64 File path, http link or base64Encoded
+   * @param to ID of the chat to send the image to
+   * @param base64 File path, HTTP link, or a base64-encoded data URI (with mime type)
    * @param filename
    * @param caption
    * @param quotedMessageId Quoted message id
    * @param isViewOnce Enable single view
    * @param mentionedList
+   * @example
+   * ```javascript
+   * const base64picture = "/9j/4AA[...]VZoCn9Lp//Z"
+   * await client.sendImageFromBase64("120[...]381@g.us'", "data:image/png;base64," + base64picture, "picture.png")
+   * ```
    */
   public async sendImageFromBase64(
     to: string,
