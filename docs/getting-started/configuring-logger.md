@@ -79,7 +79,7 @@ const files = new winston.transports.File({ filename: 'combined.log' });
 wppconnect.defaultLogger.add(files); // Add file transport
 
 //Optional: create a custom console with error level
-const console = new winston.transports.Console({ level: 'erro' });
+const console = new winston.transports.Console({ level: 'error' });
 wppconnect.defaultLogger.add(console); // Add console transport
 
 //Optional: Remove the custom transport

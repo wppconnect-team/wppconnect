@@ -18,10 +18,10 @@ function start(client) {
       client
         .sendText(message.from, 'Hello, how I may help you?')
         .then((result) => {
-          console.log('Result: ', result); //return object success
+          console.log('Result: ', result); //return success object
         })
-        .catch((erro) => {
-          console.error('Error when sending: ', erro); //return object error
+        .catch((error) => {
+          console.error('Error when sending: ', error); //return error object
         });
     }
   });
