@@ -18,9 +18,15 @@
 import { Wid } from './wid';
 
 export interface GroupMetadata {
+  /** unique identifier for the group */
   id: Wid;
+  /** timestamp of when the group was created */
   creation: number;
   owner: Wid;
+  /** title/name of the group */
+  subject: string;
+  subjectTime: number;
+  /** description of the group */
   desc: string;
   descId: string;
   descTime: number;
@@ -29,13 +35,32 @@ export interface GroupMetadata {
   announce: boolean;
   noFrequentlyForwarded: boolean;
   ephemeralDuration: number;
+  membershipApprovalMode: boolean;
+  memberAddMode: 'admin_add' | string; //TODO: complete the union type and then remove `strong`
+  reportToAdminMode: boolean;
+  /** current amount of members including admins */
   size: number;
   support: boolean;
   suspended: boolean;
   terminated: boolean;
+  uniqueShortNameMap: Object; //TODO: type is too generic
+  isLidAddressingMode: boolean;
   isParentGroup: boolean;
+  isParentGroupClosed: boolean;
   defaultSubgroup: boolean;
+  generalSubgroup: boolean;
+  generalChatAutoAddDisabled: boolean;
+  allowNonAdminSubGroupCreation: boolean;
+  lastActivityTimestamp: number;
+  lastSeenActivityTimestamp: number;
+  incognito: boolean;
+  hasCapi: boolean;
   displayCadminPromotion: boolean;
   participants: any[];
+  /** members who applied for membership but still need admin approval */
   pendingParticipants: any[];
+  /** former members who left the group or were kicked out */
+  pastParticipants: any[];
+  membershipApprovalRequests: any[];
+  subgroupSuggestions: any[];
 }
