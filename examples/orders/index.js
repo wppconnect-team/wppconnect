@@ -20,8 +20,8 @@ const froms = [];
 wppconnect
   .create()
   .then((client) => start(client))
-  .catch((erro) => {
-    console.log(erro);
+  .catch((error) => {
+    console.log(error);
   });
 
 function start(client) {
@@ -33,7 +33,7 @@ function start(client) {
       froms.push(message.from);
       client.sendText(
         message.from,
-        `Please, save your order id, and get order for test porpouse`
+        `Please save your order ID, and get your order for testing purposes`
       );
       client.sendText(message.from, `${order.id}`);
     }
