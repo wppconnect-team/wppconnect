@@ -1436,7 +1436,8 @@ export class SenderLayer extends ListenerLayer {
   ) {
     const sendResult = await evaluateAndReturn(
       this.page,
-      ({ to, items, options }) => WPP.chat.sendOrderMessage(to, items, options),
+      ({ to, items, options }) =>
+        WPP.chat.sendChargeMessage(to, items, options),
       {
         to,
         items,
