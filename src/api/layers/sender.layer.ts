@@ -44,7 +44,7 @@ import { ListenerLayer } from './listener.layer';
 import {
   OrderItems,
   OrderMessageOptions,
-} from '@wppconnect/wa-js/dist/chat/functions/sendOrderMessage';
+} from '@wppconnect/wa-js/dist/chat/functions/sendChargeMessage';
 
 export class SenderLayer extends ListenerLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
