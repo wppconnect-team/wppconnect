@@ -15,7 +15,6 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Wid } from './wid';
 import { ProfilePicThumbObj } from './profile-pic-thumb';
 
 /**
@@ -23,7 +22,7 @@ import { ProfilePicThumbObj } from './profile-pic-thumb';
  */
 export interface Contact {
   formattedName: string;
-  id: Wid;
+  id: string;
   isBusiness: boolean;
   isEnterprise: boolean;
   isHighLevelVerified: any;
