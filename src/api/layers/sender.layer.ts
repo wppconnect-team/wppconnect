@@ -23,6 +23,7 @@ import type {
   TextMessageOptions,
   PoolMessageOptions,
   ForwardMessagesOptions,
+  AllMessageOptions,
 } from '@wppconnect/wa-js/dist/chat';
 import * as path from 'path';
 import { Page } from 'puppeteer';
@@ -43,7 +44,7 @@ import { ListenerLayer } from './listener.layer';
 import {
   OrderItems,
   OrderMessageOptions,
-} from '@wppconnect/wa-js/dist/chat/functions/sendOrderMessage';
+} from '@wppconnect/wa-js/dist/chat/functions/sendChargeMessage';
 
 export class SenderLayer extends ListenerLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -233,13 +234,18 @@ export class SenderLayer extends ListenerLayer {
   /**
    * Sends image message
    * @category Chat
-   * @param to Chat id
+   * @param to ID of the chat to send the image to
    * @param base64 A base64-encoded data URI (with mime type)
    * @param filename
    * @param caption
    * @param quotedMessageId Quoted message id
    * @param isViewOnce Enable single view
    * @param mentionedList
+   * @example
+   * ```javascript
+   * const base64picture = "/9j/4AA[...]VZoCn9Lp//Z"
+   * await client.sendImageFromBase64("120[...]381@g.us'", "data:image/png;base64," + base64picture, "picture.png")
+   * ```
    */
   public async sendImageFromBase64(
     to: string,
@@ -870,11 +876,28 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Generates sticker from the provided animated gif image and sends it (Send image as animated sticker)
+   *
+   * @example
+   * ```javascript
+   * client.sendImageAsStickerGif('000000000000@c.us', 'base64....');
+   * ```
+   *
+   * @example
+   * Send Sticker with reply
+   * ```javascript
+   * client.sendImageAsStickerGif('000000000000@c.us', 'base64....', {
+   *     quotedMsg: 'msgId',
+   * });
+   * ```
    * @category Chat
    * @param pathOrBase64 image path imageBase64 A valid gif image is required. You can also send via http/https (http://www.website.com/img.gif)
    * @param to chatId '000000000000@c.us'
    */
-  public async sendImageAsStickerGif(to: string, pathOrBase64: string) {
+  public async sendImageAsStickerGif(
+    to: string,
+    pathOrBase64: string,
+    options?: AllMessageOptions
+  ) {
     let base64: string = '';
 
     if (pathOrBase64.startsWith('data:')) {
@@ -931,22 +954,41 @@ export class SenderLayer extends ListenerLayer {
 
     return await evaluateAndReturn(
       this.page,
-      ({ to, webpBase64 }) => {
+      ({ to, webpBase64, options }) => {
         return WPP.chat.sendFileMessage(to, webpBase64, {
           type: 'sticker',
+          ...options,
         });
       },
-      { to, webpBase64 }
+      { to, webpBase64, options }
     );
   }
 
   /**
    * Generates sticker from given image and sends it (Send Image As Sticker)
+   *
+   * @example
+   * ```javascript
+   * client.sendImageAsSticker('000000000000@c.us', 'base64....');
+   * ```
+   *
+   * @example
+   * Send Sticker with reply
+   * ```javascript
+   * client.sendImageAsSticker('000000000000@c.us', 'base64....', {
+   *     quotedMsg: 'msgId',
+   * });
+   * ```
+   *
    * @category Chat
    * @param pathOrBase64 image path imageBase64 A valid png, jpg and webp image is required. You can also send via http/https (http://www.website.com/img.gif)
    * @param to chatId '000000000000@c.us'
    */
-  public async sendImageAsSticker(to: string, pathOrBase64: string) {
+  public async sendImageAsSticker(
+    to: string,
+    pathOrBase64: string,
+    options?: AllMessageOptions
+  ) {
     let base64: string = '';
 
     if (pathOrBase64.startsWith('data:')) {
@@ -1008,12 +1050,13 @@ export class SenderLayer extends ListenerLayer {
 
     return await evaluateAndReturn(
       this.page,
-      ({ to, webpBase64 }) => {
+      ({ to, webpBase64, options }) => {
         return WPP.chat.sendFileMessage(to, webpBase64, {
           type: 'sticker',
+          ...options,
         });
       },
-      { to, webpBase64 }
+      { to, webpBase64, options }
     );
   }
 
@@ -1393,7 +1436,8 @@ export class SenderLayer extends ListenerLayer {
   ) {
     const sendResult = await evaluateAndReturn(
       this.page,
-      ({ to, items, options }) => WPP.chat.sendOrderMessage(to, items, options),
+      ({ to, items, options }) =>
+        WPP.chat.sendChargeMessage(to, items, options),
       {
         to,
         items,

@@ -33,7 +33,7 @@ export async function getOrderbyMsg(msgId) {
       message: 'Message is not an order',
     };
   }
-  let order = WPP.whatsapp.OrderStore.get(msg.orderId);
+  let order = WPP.order.get(msgId);
   if (!order) {
     order = await WPP.whatsapp.OrderStore.findOrder(
       msg.orderId,

@@ -28,6 +28,7 @@ export { LiveLocation } from './live-location';
 export { ContactStatus } from './contact-status';
 export { GroupCreation } from './group-creation';
 export { WhatsappProfile } from './whatsapp-profile';
+export { IncomingCall } from './incoming-call';
 export * from './result';
 export * from './get-messages-param';
 export * from './initializer';

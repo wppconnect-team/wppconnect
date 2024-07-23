@@ -1,3 +1,15 @@
+## <small>1.32.4 (2024-07-16)</small>
+
+- fix(deps): update dependency @wppconnect/wa-js to ^3.6.0 (#2275) ([4d56011](https://github.com/wppconnect-team/wppconnect/commit/4d56011)), closes [#2275](https://github.com/wppconnect-team/wppconnect/issues/2275)
+
+## <small>1.32.3 (2024-06-24)</small>
+
+- chore: upgrade @wppconnect/wa-js ([50775a8](https://github.com/wppconnect-team/wppconnect/commit/50775a8))
+
+## <small>1.32.2 (2024-06-18)</small>
+
+- chore: Remove unused deps ([a600ce0](https://github.com/wppconnect-team/wppconnect/commit/a600ce0))
+
 ## <small>1.32.1 (2024-06-17)</small>
 
 - fix: Fixed emitting events ([95e934d](https://github.com/wppconnect-team/wppconnect/commit/95e934d))

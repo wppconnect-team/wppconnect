@@ -14,29 +14,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
-const wppconnect = require('../../dist');
 
-wppconnect
-  .create({
-    session: 'test',
-  })
-  .then((client) => start(client))
-  .catch((error) => {
-    console.log(error);
-  });
-
-function start(client) {
-  client.onMessage(async (message) => {
-    if (message.body === 'create newsletter' && message.isGroupMsg === false) {
-      const t = await client.createNewsletter('WPP Test Newsletter2', {
-        description: 'test',
-      });
-      console.log(t);
-      await client.sendText(message.from, '```' + JSON.stringify(t) + '```');
-      await client.sendText(
-        message.from,
-        'Check the channels of connected device'
-      );
-    }
-  });
+export interface IncomingCall {
+  /** alphanumeric ID of the call, can e.g. usable for hanging up */
+  id: string;
+  /** ID of the caller, can be used to message them directly */
+  peerJid: string;
+  /** Epoch timestamp (seconds) */
+  offerTime: number;
+  isVideo: boolean;
+  isGroup: boolean;
+  groupJid: string | null;
+  canHandleLocally: boolean;
+  outgoing: boolean;
+  isSilenced: boolean;
+  offerReceivedWhileOffline: boolean;
+  webClientShouldHandle: boolean;
+  participants: any[];
 }

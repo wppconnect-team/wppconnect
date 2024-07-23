@@ -112,7 +112,7 @@ export class Whatsapp extends BusinessLayer {
 
   /**
    * Get the puppeteer page screenshot
-   * @returns The Whatsapp page screenshot encoded in base64
+   * @returns The Whatsapp page screenshot as a PNG encoded in base64 (not the full data URI, just the base64 section)
    */
   public async takeScreenshot() {
     if (this.page) {
@@ -121,17 +121,17 @@ export class Whatsapp extends BusinessLayer {
   }
 
   /**
-   * Clicks on 'use here' button (When it get unlaunched)
+   * Clicks on 'use here' button (When it gets unlaunched)
    * This method tracks the class of the button
-   * Whatsapp web might change this class name over the time
-   * Dont rely on this method
+   * WhatsApp Web might change this class name over time
+   * Don't rely on this method
    */
   public async useHere() {
     return await evaluateAndReturn(this.page, () => WAPI.takeOver());
   }
 
   /**
-   * Logout whastapp
+   * Logout WhatsApp
    * @returns boolean
    */
   public async logout() {
@@ -150,7 +150,7 @@ export class Whatsapp extends BusinessLayer {
 
       await browser.close().catch(() => null);
       /*
-      Code removed as it is not necessary.
+      Code was removed as it is not necessary.
       try {
         const process = browser.process();
         if (process) {
@@ -187,9 +187,9 @@ export class Whatsapp extends BusinessLayer {
   }
 
   /**
-   * Retorna uma lista de mensagens de um chat
-   * @param chatId string ID da conversa ou do grupo
-   * @param params GetMessagesParam Opções de filtragem de resultados (count, id, direction) veja {@link GetMessagesParam}.
+   * Returns a list of messages from a chat
+   * @param chatId string ID of the conversation or group
+   * @param params GetMessagesParam Result filtering options (count, id, direction) see {@link GetMessagesParam}.
    * @returns Message object
    */
   public async getMessages(chatId: string, params: GetMessagesParam = {}) {
@@ -233,9 +233,9 @@ export class Whatsapp extends BusinessLayer {
   }
 
   /**
-   * Rejeita uma ligação recebida pelo WhatsApp
-   * @param callId string ID da ligação, caso não passado, todas ligações serão rejeitadas
-   * @returns Número de ligações rejeitadas
+   * Rejects a call received via WhatsApp
+   * @param callId string Call ID, if not passed, all calls will be rejected
+   * @returns Number of rejected calls
    */
   public async rejectCall(callId?: string) {
     return await evaluateAndReturn(

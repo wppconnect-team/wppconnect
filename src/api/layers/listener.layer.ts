@@ -28,6 +28,7 @@ import {
   ParticipantEvent,
   PresenceEvent,
   Wid,
+  IncomingCall,
 } from '../model';
 import { MessageType, SocketState, SocketStream } from '../model/enum';
 import { InterfaceMode } from '../model/enum/interface-mode';
@@ -501,18 +502,16 @@ export class ListenerLayer extends ProfileLayer {
   }
 
   /**
-   * @event Escuta por ligações recebidas, seja de áudio ou vídeo.
-   *
-   * Para recusar a ligação, basta chamar o `rejectCall` {@link rejectCall}
-   *
-   * @returns Objeto descartável para parar de ouvir
+   * @event Listen for incoming calls, whether audio or video (pending a reaction).
+   * To reject the call, simply call `rejectCall` {@link rejectCall}
+   * @returns Disposable object to stop listening
    */
-  public onIncomingCall(callback: (call: any) => any) {
+  public onIncomingCall(callback: (call: IncomingCall) => any) {
     return this.registerEvent('onIncomingCall', callback);
   }
 
   /**
-   * Listens to presence changed, by default, it will triggered for active chats only or contacts subscribed (see {@link subscribePresence})
+   * Listens to presence changed, by default, it will be triggered for active chats only or contacts subscribed (see {@link subscribePresence})
    * @event Listens to presence changed
    * @param callback Callback of on presence changed
    * @returns Disposable object to stop the listening
