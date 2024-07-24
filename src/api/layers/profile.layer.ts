@@ -158,6 +158,15 @@ export class ProfileLayer extends StatusLayer {
     );
   }
   /**
+   * Gets the current user profile name
+   * @category Profile
+   */
+  public getProfileName() {
+    return evaluateAndReturn(this.page, () =>
+      WPP.profile.getMyProfileName()
+    );
+  }
+  /**
    * Remove your profile picture
    * @category Profile
    */
