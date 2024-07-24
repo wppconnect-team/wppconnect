@@ -162,9 +162,7 @@ export class ProfileLayer extends StatusLayer {
    * @category Profile
    */
   public getProfileName() {
-    return evaluateAndReturn(this.page, () =>
-      WPP.profile.getMyProfileName()
-    );
+    return evaluateAndReturn(this.page, () => WPP.profile.getMyProfileName());
   }
   /**
    * Remove your profile picture
