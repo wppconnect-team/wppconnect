@@ -52,6 +52,16 @@ export class UILayer extends GroupLayer {
       chatId
     );
   }
+
+  /**
+   * Closes the currently opened chat (if any).
+   * The boolean result reflects if there was any chat that got closed.
+   * @category UI
+   */
+  public async closeChat() {
+    return evaluateAndReturn(this.page, () => WPP.chat.closeChat());
+  }
+
   /**
    * Return the current active chat
    * @category UI
