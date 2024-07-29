@@ -67,7 +67,7 @@
     "@types/node": "^18.19.42",
     "@types/shelljs": "^0.8.15",
     "@types/tmp": "^0.2.6",
-    "@types/ws": "^8.5.11",
+    "@types/ws": "^8.5.12",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "babel-loader": "^9.1.3",
