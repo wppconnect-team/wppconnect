@@ -225,10 +225,10 @@ await client.sendMentioned(
 Reply to a message
 
 ```javascript
-await client.reply(
+await client.sendText(
   '000000000000@c.us',
   'This is a reply!',
-  message.id.toString()
+  { quotedMsg: message.id.toString() }
 );
 ```
 
@@ -237,11 +237,15 @@ await client.reply(
 Reply to a message with a mention
 
 ```javascript
-await client.reply(
+await client.sendText(
   '000000000000@c.us',
   'Hello @5218113130740 and @5218243160777! This is a reply with mention!',
-  message.id.toString(),
-  ['5218113130740', '5218243160777']
+  {
+    quotedMsg: message.id.toString(),
+    detectMentioned: true, //either automatically detect the mentions
+    mentionedList: ['5218113130740', '5218243160777'] //or supply them manually
+  }
+}
 );
 ```
 
@@ -255,7 +259,7 @@ await client
       '000000000000@c.us',
       'This is a reply!',
        {
-          quotedMessageId: reply,
+          quotedMessage: message.id,
         }
     )
     .then((result) => {
