@@ -235,7 +235,7 @@ export class SenderLayer extends ListenerLayer {
    * Sends image message
    * @category Chat
    * @param to ID of the chat to send the image to
-   * @param base64 File path, HTTP link, or a base64-encoded data URI (with mime type)
+   * @param base64 A base64-encoded data URI (with mime type)
    * @param filename
    * @param caption
    * @param quotedMessageId Quoted message id
