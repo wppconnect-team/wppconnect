@@ -1,3 +1,7 @@
+## 1.33.0 (2024-08-05)
+
+- feat: Added client.closeChat function (close #2271) (#2290) ([539e5d9](https://github.com/wppconnect-team/wppconnect/commit/539e5d9)), closes [#2271](https://github.com/wppconnect-team/wppconnect/issues/2271) [#2290](https://github.com/wppconnect-team/wppconnect/issues/2290)
+
 ## <small>1.32.4 (2024-07-16)</small>
 
 - fix(deps): update dependency @wppconnect/wa-js to ^3.6.0 (#2275) ([4d56011](https://github.com/wppconnect-team/wppconnect/commit/4d56011)), closes [#2275](https://github.com/wppconnect-team/wppconnect/issues/2275)
