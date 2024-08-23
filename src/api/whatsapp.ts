@@ -300,7 +300,10 @@ export class Whatsapp extends BusinessLayer {
   ) => {
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
-        const response = await axios.get(url, makeOptions(useragentOverride));
+        const response = await axios.get(
+          url,
+          makeOptions(useragentOverride, 'stream')
+        );
 
         await new Promise((resolve, reject) => {
           const writer = fs.createWriteStream(outputPath);
