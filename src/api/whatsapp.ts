@@ -20,10 +20,11 @@ import { Page } from 'puppeteer';
 import { CreateConfig } from '../config/create-config';
 import { useragentOverride } from '../config/WAuserAgente';
 import { evaluateAndReturn } from './helpers';
-import { magix, makeOptions, timeout } from './helpers/decrypt';
+import { magix, makeOptions, newMagix, timeout } from './helpers/decrypt';
 import { BusinessLayer } from './layers/business.layer';
 import { GetMessagesParam, Message } from './model';
-import treekill = require('tree-kill');
+import * as fs from 'fs';
+import { sleep } from '../utils/sleep';
 
 export class Whatsapp extends BusinessLayer {
   private connected: boolean | null = null;
@@ -39,7 +40,7 @@ export class Whatsapp extends BusinessLayer {
       });
     }
 
-    interval = setInterval(async (state) => {
+    interval = setInterval(async () => {
       const newConnected = await page
         .evaluate(() => WPP.conn.isRegistered())
         .catch(() => null);
@@ -231,6 +232,101 @@ export class Whatsapp extends BusinessLayer {
     const buff = Buffer.from(res.data, 'binary');
     return magix(buff, message.mediaKey, message.type, message.size);
   }
+
+  public async decryptAndSaveFile(
+    message: Message,
+    savePath: string
+  ): Promise<void> {
+    const mediaUrl = message.clientUrl || message.deprecatedMms3Url;
+
+    if (!mediaUrl) {
+      throw new Error(
+        'Message is missing critical data needed to download the file.'
+      );
+    }
+
+    try {
+      const tempSavePath: string = savePath + '.encrypted';
+      await this.downloadEncryptedFile(mediaUrl.trim(), tempSavePath);
+
+      const inputReadStream = fs.createReadStream(tempSavePath);
+      const outputWriteStream = fs.createWriteStream(savePath);
+      const decryptedStream = newMagix(
+        message.mediaKey,
+        message.type,
+        message.size
+      );
+
+      inputReadStream.pipe(decryptedStream).pipe(outputWriteStream);
+
+      await new Promise<void>((resolve, reject) => {
+        outputWriteStream.on('finish', () => {
+          console.log(
+            `Deciphering complete. Deleting the encrypted file: ${tempSavePath}`
+          );
+          fs.unlink(tempSavePath, (error) => {
+            if (error) {
+              console.error(
+                `Error deleting the input file: ${tempSavePath}`,
+                error
+              );
+              reject(error);
+            } else {
+              console.log('Encrypted file deleted successfully');
+              resolve();
+            }
+          });
+        });
+
+        outputWriteStream.on('error', (error) => {
+          console.error(`Error during writing file: ${savePath}`, error);
+          reject(error);
+        });
+
+        decryptedStream.on('error', (error) => {
+          console.error('An error occurred while decrypting the file', error);
+          reject(error);
+        });
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  downloadEncryptedFile = async (
+    url: string,
+    outputPath: string,
+    retries: number = 3
+  ) => {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const response = await axios.get(url, makeOptions(useragentOverride));
+
+        await new Promise((resolve, reject) => {
+          const writer = fs.createWriteStream(outputPath);
+          response.data.pipe(writer);
+          writer.on('finish', resolve);
+          writer.on('error', reject);
+        });
+
+        console.log(`Encrypted file downloaded at ${outputPath}`);
+        return;
+      } catch (error) {
+        console.error(`Attempt ${attempt} failed: `, error.message);
+        if (attempt === retries) {
+          console.error(
+            `${outputPath} - All attempt failed to download the file: ${url}`
+          );
+          throw error;
+        }
+
+        console.log(
+          `${outputPath} - Retrying to download the file: ${url} in 5 seconds...`
+        );
+        await sleep(5000);
+      }
+    }
+  };
 
   /**
    * Rejects a call received via WhatsApp
