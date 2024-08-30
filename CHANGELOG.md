@@ -1,3 +1,7 @@
+## <small>1.33.1 (2024-08-30)</small>
+
+- fix: Fixed client.openChatAt (close #2293) ([68e011c](https://github.com/wppconnect-team/wppconnect/commit/68e011c)), closes [#2293](https://github.com/wppconnect-team/wppconnect/issues/2293)
+
 ## 1.33.0 (2024-08-05)
 
 - feat: Added client.closeChat function (close #2271) (#2290) ([539e5d9](https://github.com/wppconnect-team/wppconnect/commit/539e5d9)), closes [#2271](https://github.com/wppconnect-team/wppconnect/issues/2271) [#2290](https://github.com/wppconnect-team/wppconnect/issues/2290)
