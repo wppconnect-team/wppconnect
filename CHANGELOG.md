@@ -1,3 +1,7 @@
+## 1.34.0 (2024-09-09)
+
+- fix(deps): update dependency @wppconnect/wa-js to ^3.10.1 (#2336) ([cc29475](https://github.com/wppconnect-team/wppconnect/commit/cc29475)), closes [#2336](https://github.com/wppconnect-team/wppconnect/issues/2336)
+
 ## <small>1.33.1 (2024-08-30)</small>
 
 - fix: Fixed client.openChatAt (close #2293) ([68e011c](https://github.com/wppconnect-team/wppconnect/commit/68e011c)), closes [#2293](https://github.com/wppconnect-team/wppconnect/issues/2293)
