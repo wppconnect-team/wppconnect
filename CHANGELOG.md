@@ -1,3 +1,7 @@
+## <small>1.34.2 (2024-09-27)</small>
+
+- build(deps): update dependency puppeteer to ^23.4.1 (#2349) ([fe16137](https://github.com/wppconnect-team/wppconnect/commit/fe16137)), closes [#2349](https://github.com/wppconnect-team/wppconnect/issues/2349)
+
 ## <small>1.34.1 (2024-09-09)</small>
 
 - chore: rollback typedoc ([077ff9b](https://github.com/wppconnect-team/wppconnect/commit/077ff9b))
