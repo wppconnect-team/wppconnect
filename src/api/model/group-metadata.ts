@@ -47,6 +47,8 @@ export interface GroupMetadata {
   isLidAddressingMode: boolean;
   isParentGroup: boolean;
   isParentGroupClosed: boolean;
+  /** serialized chat ID of the parent group (community) */
+  parentGroup: string | undefined;
   defaultSubgroup: boolean;
   generalSubgroup: boolean;
   generalChatAutoAddDisabled: boolean;
