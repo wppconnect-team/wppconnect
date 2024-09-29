@@ -296,7 +296,7 @@ export class RetrieverLayer extends SenderLayer {
    * @returns chat details as promise
    * @deprecated
    */
-  public async getChat(contactId: string) {
+  public async getChat(contactId: string | Wid) {
     return this.getChatById(contactId);
   }
 
