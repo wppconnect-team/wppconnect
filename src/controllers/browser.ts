@@ -135,14 +135,6 @@ export async function initWhatsapp(
     referer: 'https://whatsapp.com/',
   });
 
-  if (proxy) {
-    await page.goto('https://ip.smartproxy.com/json', {
-      waitUntil: 'load',
-      timeout: 0,
-      referer: 'https://whatsapp.com/',
-    });
-  }
-
   log?.('verbose', 'WhatsApp WEB loaded');
   /*setTimeout(() => {
     log?.('verbose', `Loading WhatsApp WEB`);
