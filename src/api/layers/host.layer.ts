@@ -162,6 +162,7 @@ export class HostLayer {
       null,
       false,
       this.options.whatsappVersion,
+      this.options.proxy,
       this.log.bind(this)
     );
 
