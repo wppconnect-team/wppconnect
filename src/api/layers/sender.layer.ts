@@ -38,7 +38,7 @@ import {
   stickerSelect,
 } from '../helpers';
 import { filenameFromMimeType } from '../helpers/filename-from-mimetype';
-import { Message, SendFileResult, SendStickerResult } from '../model';
+import { Message, SendFileResult, SendStickerResult, Wid } from '../model';
 import { ChatState } from '../model/enum';
 import { ListenerLayer } from './listener.layer';
 import {
@@ -604,7 +604,7 @@ export class SenderLayer extends ListenerLayer {
    * @param options
    */
   public async sendFile(
-    to: string,
+    to: string | Wid,
     pathOrBase64: string,
     options?: FileMessageOptions
   );
