@@ -30,6 +30,7 @@ export interface Chat {
   archive: boolean;
   muteExpiration: number;
   name: string;
+  /** Whatsapp provides us with built-in spam detection and this is its indicator */
   notSpam: boolean;
   pin: number;
   msgs: null;
