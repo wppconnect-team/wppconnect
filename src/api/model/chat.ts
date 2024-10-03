@@ -51,5 +51,5 @@ export interface Chat {
   hasChatBeenOpened: boolean;
   restricted: boolean;
   /** if you can send messages into the chat without having to be an admin (refers to group chats, see the `isGroup` attribute) */
-  hasOpened boolean;
+  hasOpened: boolean;
 }
