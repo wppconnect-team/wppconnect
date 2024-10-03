@@ -32,6 +32,7 @@ export interface GroupMetadata {
   descTime: number;
   descOwner: Wid;
   restrict: boolean;
+  /** whether it is an announcement channel of a community */
   announce: boolean;
   noFrequentlyForwarded: boolean;
   ephemeralDuration: number;
