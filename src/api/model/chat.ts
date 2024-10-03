@@ -36,6 +36,7 @@ export interface Chat {
   kind: string;
   isAnnounceGrpRestrict: boolean;
   ephemeralDuration: number;
+  /** whether the chat is visually open in WhatsApp Web (see `UILayer.openChat()`) */
   hasChatBeenOpened: boolean;
   unreadMentionCount: number;
   hasUnreadMention: boolean;
@@ -47,8 +48,6 @@ export interface Chat {
   contact: Contact;
   groupMetadata: GroupMetadata;
   presence: Presence;
-  /** whether the chat is visually open in WhatsApp Web (see `UILayer.openChat()`) */
-  hasChatBeenOpened: boolean;
   restricted: boolean;
   /** if you can send messages into the chat without having to be an admin (refers to group chats, see the `isGroup` attribute) */
   hasOpened: boolean;
