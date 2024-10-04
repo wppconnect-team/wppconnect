@@ -57,11 +57,22 @@ export interface GroupMetadata {
   incognito: boolean;
   hasCapi: boolean;
   displayCadminPromotion: boolean;
-  participants: any[];
+  /** Current members of the group. See `pastParticipants` for former members. */
+  participants: {
+    id: Wid,
+    isAdmin: boolean,
+    isSuperAdmin: boolean
+  }[];
   /** members who applied for membership but still need admin approval */
   pendingParticipants: any[];
   /** former members who left the group or were kicked out */
-  pastParticipants: any[];
+  pastParticipants: {
+    id: Wid,
+    /** UNIX timestamp in seconds of when the leaving occurred */
+    leaveTs: number,
+    /** was leaving volumtary ('"Left"') or forceful (`"Removed"`) */
+    leaveReason: "Left" | "Removed"
+  }[];
   membershipApprovalRequests: any[];
   subgroupSuggestions: any[];
 }
