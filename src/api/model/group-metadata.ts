@@ -59,19 +59,19 @@ export interface GroupMetadata {
   displayCadminPromotion: boolean;
   /** Current members of the group. See `pastParticipants` for former members. */
   participants: {
-    id: Wid,
-    isAdmin: boolean,
-    isSuperAdmin: boolean
+    id: Wid;
+    isAdmin: boolean;
+    isSuperAdmin: boolean;
   }[];
   /** members who applied for membership but still need admin approval */
   pendingParticipants: any[];
   /** former members who left the group or were kicked out */
   pastParticipants: {
-    id: Wid,
+    id: Wid;
     /** UNIX timestamp in seconds of when the leaving occurred */
-    leaveTs: number,
+    leaveTs: number;
     /** was leaving volumtary ('"Left"') or forceful (`"Removed"`) */
-    leaveReason: "Left" | "Removed"
+    leaveReason: "Left" | "Removed";
   }[];
   membershipApprovalRequests: any[];
   subgroupSuggestions: any[];
