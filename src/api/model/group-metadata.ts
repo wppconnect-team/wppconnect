@@ -70,8 +70,8 @@ export interface GroupMetadata {
     id: Wid;
     /** UNIX timestamp in seconds of when the leaving occurred */
     leaveTs: number;
-    /** was leaving volumtary ('"Left"') or forceful (`"Removed"`) */
-    leaveReason: "Left" | "Removed";
+    /** was leaving volumtary (`"Left"`) or forceful (`"Removed"`) */
+    leaveReason: 'Left' | 'Removed';
   }[];
   membershipApprovalRequests: any[];
   subgroupSuggestions: any[];
