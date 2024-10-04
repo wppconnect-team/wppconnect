@@ -569,7 +569,10 @@ export class SenderLayer extends ListenerLayer {
    *
    * @example
    * ```javascript
-   * // Simple message
+   * // File message from a path
+   * client.sendFile('<number>@c.us', './someFile.txt');
+   * // Simple message from base64
+   *
    * client.sendFile('<number>@c.us', 'data:text/plain;base64,V1BQQ29ubmVjdA==');
    *
    * // With buttons
