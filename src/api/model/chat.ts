@@ -27,6 +27,7 @@ export interface Chat {
   lastReceivedKey: MessageId;
   t: number;
   unreadCount: number;
+  /** whether the message was archived */
   archive: boolean;
   muteExpiration: number;
   name: string;
