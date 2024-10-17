@@ -62,7 +62,8 @@ export class GroupLayer extends RetrieverLayer {
   }
 
   /**
-   * Returns group members [Contact] objects
+   * Returns current group members as [Contact] objects
+   * For previous members, see `groupMetadata.pastParticipants`.
    * @category Group
    * @param groupId
    */
