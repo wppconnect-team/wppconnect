@@ -50,7 +50,7 @@ export interface CreateOptions extends CreateConfig {
   /**
    * You must pass a string type parameter, this parameter will be the name of the client's session. If the parameter is not passed, the section name will be "session".
    */
-  session: string;
+  session?: string;
   /**
    * A callback will be received, informing the status of the qrcode
    */
