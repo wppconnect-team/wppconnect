@@ -397,7 +397,7 @@ export class ListenerLayer extends ProfileLayer {
   }
 
   /**
-   * @event Listens to messages acknowledgement Changes
+   * @event Listens to message acknowledgement changes
    * @returns Disposable object to stop the listening
    */
   public onAck(callback: (ack: Ack) => void) {
@@ -405,20 +405,20 @@ export class ListenerLayer extends ProfileLayer {
   }
 
   /**
-   * Escuta os eventos de Localização em tempo real de todos os chats
-   * @event Eventos de Localização em tempo real
-   * @param callback Função para ser executada quando houver alterações
-   * @returns Objeto descartável para parar de ouvir
+   * Listens to real-time location events of all chats
+   * @event Real-time location events
+   * @param callback Function to be executed when changes are made
+   * @returns Disposable object to stop listening
    */
   public onLiveLocation(callback: (liveLocationEvent: LiveLocation) => void): {
     dispose: () => void;
   };
   /**
-   * Escuta os eventos de Localização em tempo real
-   * @event Eventos de Localização em tempo real
-   * @param id Único ID ou lista de IDs de contatos para acompanhar a localização
-   * @param callback Função para ser executada quando houver alterações
-   * @returns Objeto descartável para parar de ouvir
+   * Listens to location events in real time
+   * @event Location events in real time
+   * @param id Unique ID or list of contact IDs to track location
+   * @param callback Function to be executed when changes are made
+   * @returns Disposable object to stop listening
    */
   public onLiveLocation(
     id: string | string[],
@@ -451,17 +451,17 @@ export class ListenerLayer extends ProfileLayer {
   }
 
   /**
-   * @event Listens to participants changed
-   * @param to callback
+   * @event Listens to participant changes
+   * @param callback Function to be executed when participant changes occur
    * @returns Stream of ParticipantEvent
    */
   public onParticipantsChanged(callback: (evData: ParticipantEvent) => void): {
     dispose: () => void;
   };
   /**
-   * @event Listens to participants changed
-   * @param to group id: xxxxx-yyyy@us.c
-   * @param to callback
+   * @event Listens to participant changes in a certain group
+   * @param groupId xxxxx-yyyy@us.c
+   * @param callback Function to be executed when participant changes occur
    * @returns Stream of ParticipantEvent
    */
   public onParticipantsChanged(
@@ -520,8 +520,8 @@ export class ListenerLayer extends ProfileLayer {
     callback: (presenceChangedEvent: PresenceEvent) => void
   ): { dispose: () => void };
   /**
-   * Listens to presence changed, the callback will triggered only for passed IDs
-   * @event Listens to presence changed
+   * Listens to presence changes, the callback will triggered only for passed IDs
+   * @event Listens to presence changes
    * @param id contact id (xxxxx@c.us) or group id: xxxxx-yyyy@g.us
    * @param callback Callback of on presence changed
    * @returns Disposable object to stop the listening
@@ -600,7 +600,7 @@ export class ListenerLayer extends ProfileLayer {
   }
 
   /**
-   * @event Listens to revoked messages
+   * @event Listens to message revocation
    * @returns Disposable object to stop the listening
    */
   public onRevokedMessage(
@@ -616,7 +616,7 @@ export class ListenerLayer extends ProfileLayer {
   }
 
   /**
-   * @event Listens to reaction messages
+   * @event Listens to message reactions
    * @returns Disposable object to stop the listening
    */
   public onReactionMessage(
