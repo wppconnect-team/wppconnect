@@ -484,7 +484,7 @@ export class HostLayer {
   }
 
   /**
-   * Retrieves the connecction state
+   * Retrieves the connection state
    * @category Host
    */
   public async getConnectionState(): Promise<SocketState> {
