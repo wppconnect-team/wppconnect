@@ -12,6 +12,7 @@
     "changelog:preview": "conventional-changelog -p angular -u",
     "changelog:update": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "clean": "shx rm -rf session dist",
+    "example": "node ./examples/basic/index.js",
     "commit": "cz",
     "docs:build": "npm run docs:clean && typedoc && npm run docs:copy-images",
     "docs:clean": "shx rm -rf api-docs",
