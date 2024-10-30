@@ -28,9 +28,9 @@ export enum StatusFind {
    */
   browserClose = 'browserClose',
   /**
-   * Client has disconnected in to mobile.
+   * Client has disconnected to the mobile device.
    */
-  desconnectedMobile = 'desconnectedMobile',
+  disconnectedMobile = 'disconnectedMobile',
   /**
    * Client is ready to send and receive messages.
    */
