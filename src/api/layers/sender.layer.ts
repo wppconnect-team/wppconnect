@@ -1394,7 +1394,10 @@ export class SenderLayer extends ListenerLayer {
    * @param msgId Message Id or `Message` object
    * @param reaction Emoji as string or `false` to remove an existing reaction
    */
-  public async sendReactionToMessage(msgId: string | Message, reaction: string | false) {
+  public async sendReactionToMessage(
+    msgId: string | Message,
+    reaction: string | false
+  ) {
     return evaluateAndReturn(
       this.page,
       ({ msgId, reaction }) => WPP.chat.sendReactionToMessage(msgId, reaction),
