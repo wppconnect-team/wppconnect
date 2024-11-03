@@ -173,6 +173,25 @@ export interface CreateConfig {
    * Insert the phone number for connect by link phone, qr code not wil generate
    */
   phoneNumber?: string;
+
+  /**
+   * Define the proxy settings for the connection
+   * @default null
+   */
+  proxy?: {
+    /**
+     * The URL of the proxy server
+     */
+    url: string;
+    /**
+     * The username for the proxy server
+     */
+    username: string;
+    /**
+     * The password for the proxy server
+     */
+    password: string;
+  };
 }
 
 export const defaultOptions: CreateConfig = {
@@ -193,10 +212,11 @@ export const defaultOptions: CreateConfig = {
   waitForLogin: true,
   logger: defaultLogger,
   tokenStore: 'file',
-  whatsappVersion: '2.3000.10156x',
+  whatsappVersion: '2.3000.10173x',
   deviceName: false,
   linkPreviewApiServers: null,
   disableGoogleAnalytics: true,
   googleAnalyticsId: null,
   poweredBy: 'WPPConnect',
+  proxy: null,
 };

@@ -82,6 +82,14 @@ export class ProfileLayer extends StatusLayer {
   }
 
   /**
+   * Gets current user profile status
+   * @category Profile
+   */
+  public getProfileStatus() {
+    return evaluateAndReturn(this.page, () => WPP.profile.getMyStatus());
+  }
+
+  /**
    * Sets the user's current profile photo
    * @category Profile
    * @param name

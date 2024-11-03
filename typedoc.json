@@ -7,7 +7,7 @@
   "excludeProtected": true,
   "includeVersion": true,
   "out": "api-docs",
-  "gaID": "G-LTZL26963K",
+  //"gaID": "G-LTZL26963K",
   "visibilityFilters": {
     "external": false
   }

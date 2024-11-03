@@ -55,6 +55,8 @@ export interface Message {
   mediaKeyTimestamp: number;
   width: number;
   height: number;
+  /** exists when `type` is set to {@link MessageType.VIDEO} || {@link MessageType.IMAGE} */
+  isViewOnce?: boolean;
   broadcast: boolean;
   /** array of the users who were mentioned in this message; given in the serialized format: "xxxxxxxxxx@c.us" / "xxxxxxxxxx@g.us" */
   mentionedJidList: string[];

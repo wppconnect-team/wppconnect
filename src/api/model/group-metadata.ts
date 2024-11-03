@@ -32,6 +32,7 @@ export interface GroupMetadata {
   descTime: number;
   descOwner: Wid;
   restrict: boolean;
+  /** whether it is an announcement channel of a community */
   announce: boolean;
   noFrequentlyForwarded: boolean;
   ephemeralDuration: number;
@@ -47,6 +48,8 @@ export interface GroupMetadata {
   isLidAddressingMode: boolean;
   isParentGroup: boolean;
   isParentGroupClosed: boolean;
+  /** serialized chat ID of the parent group (community) */
+  parentGroup: string | undefined;
   defaultSubgroup: boolean;
   generalSubgroup: boolean;
   generalChatAutoAddDisabled: boolean;
@@ -56,11 +59,22 @@ export interface GroupMetadata {
   incognito: boolean;
   hasCapi: boolean;
   displayCadminPromotion: boolean;
-  participants: any[];
+  /** Current members of the group. See `pastParticipants` for former members. */
+  participants: {
+    id: Wid;
+    isAdmin: boolean;
+    isSuperAdmin: boolean;
+  }[];
   /** members who applied for membership but still need admin approval */
   pendingParticipants: any[];
   /** former members who left the group or were kicked out */
-  pastParticipants: any[];
+  pastParticipants: {
+    id: Wid;
+    /** UNIX timestamp in seconds of when the leaving occurred */
+    leaveTs: number;
+    /** was leaving volumtary (`"Left"`) or forceful (`"Removed"`) */
+    leaveReason: 'Left' | 'Removed';
+  }[];
   membershipApprovalRequests: any[];
   subgroupSuggestions: any[];
 }

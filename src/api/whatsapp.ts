@@ -87,7 +87,7 @@ export class Whatsapp extends BusinessLayer {
 
   /**
    * Download and returns the media content in base64 format
-   * @param messageId Message ou id
+   * @param messageId Message or id
    * @returns Base64 of media
    */
   public async downloadMedia(messageId: string | Message): Promise<string> {
@@ -132,7 +132,7 @@ export class Whatsapp extends BusinessLayer {
   }
 
   /**
-   * Logout WhatsApp
+   * Log out of WhatsApp
    * @returns boolean
    */
   public async logout() {
@@ -175,7 +175,7 @@ export class Whatsapp extends BusinessLayer {
   }
 
   /**
-   * Get message by id
+   * Get a message by its ID
    * @param messageId string
    * @returns Message object
    */
@@ -204,7 +204,7 @@ export class Whatsapp extends BusinessLayer {
   /**
    * Decrypts message file
    * @param message Message object
-   * @returns Decrypted file buffer (null otherwise)
+   * @returns Decrypted file buffer (`null` otherwise)
    */
   public async decryptFile(message: Message) {
     const mediaUrl = message.clientUrl || message.deprecatedMms3Url;
@@ -213,7 +213,7 @@ export class Whatsapp extends BusinessLayer {
 
     if (!mediaUrl)
       throw new Error(
-        'message is missing critical data needed to download the file.'
+        'message is missing critical data (`mediaUrl`) needed to download the file.'
       );
     let haventGottenImageYet = true;
     let res: any;

@@ -105,8 +105,20 @@ export async function initWhatsapp(
   token?: SessionToken,
   clear = true,
   version?: string,
+  proxy?: {
+    url: string;
+    username: string;
+    password: string;
+  },
   log?: (level: LogLevel, message: string, meta?: object) => any
 ) {
+  if (proxy) {
+    await page.authenticate({
+      username: proxy.username,
+      password: proxy.password,
+    });
+  }
+
   await page.setUserAgent(useragentOverride);
 
   await unregisterServiceWorker(page);
@@ -122,6 +134,7 @@ export async function initWhatsapp(
     timeout: 0,
     referer: 'https://whatsapp.com/',
   });
+
   log?.('verbose', 'WhatsApp WEB loaded');
   /*setTimeout(() => {
     log?.('verbose', `Loading WhatsApp WEB`);
@@ -278,13 +291,22 @@ export async function initBrowser(
     /**
      * Setting the headless mode to the old Puppeteer mode, when using the 'new' mode, results in an error on CentOS7 and Debian11.
      * Temporary fix.
+     *
+     * If proxy settings are provided, they are applied to the browser launch arguments.
+     * This allows the browser to use the specified proxy server for all network requests.
      */
+
+    const args = options.browserArgs
+      ? options.browserArgs
+      : [...puppeteerConfig.chromiumArgs];
+    if (options.proxy && options.proxy.url) {
+      args.push(`--proxy-server=${options.proxy.url}`);
+    }
+
     browser = await puppeteer.launch({
       headless: options.headless,
       devtools: options.devtools,
-      args: options.browserArgs
-        ? options.browserArgs
-        : [...puppeteerConfig.chromiumArgs],
+      args,
       ...options.puppeteerOptions,
     });
 

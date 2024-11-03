@@ -180,7 +180,7 @@ export class RetrieverLayer extends SenderLayer {
    * Checks if a number is a valid WA number
    * @category Contact
    * @param contactId, you need to include the @c.us at the end.
-   * @returns contact detial as promise
+   * @returns contact details as promise
    */
   public async checkNumberStatus(contactId: string): Promise<WhatsappProfile> {
     return await evaluateAndReturn(
@@ -256,7 +256,7 @@ export class RetrieverLayer extends SenderLayer {
    * Retrieves contact detail object of given contact id
    * @category Contact
    * @param contactId
-   * @returns contact detial as promise
+   * @returns contact details as promise
    */
   public async getContact(contactId: string) {
     return evaluateAndReturn(
@@ -279,9 +279,9 @@ export class RetrieverLayer extends SenderLayer {
    * Retrieves chat object of given contact id
    * @category Chat
    * @param contactId
-   * @returns contact detial as promise
+   * @returns chat details as promise
    */
-  public async getChatById(contactId: string): Promise<Chat> {
+  public async getChatById(contactId: string | Wid): Promise<Chat> {
     return evaluateAndReturn(
       this.page,
       (contactId) => WAPI.getChatById(contactId),
@@ -293,10 +293,10 @@ export class RetrieverLayer extends SenderLayer {
    * Retrieves chat object of given contact id
    * @category Chat
    * @param contactId
-   * @returns contact detial as promise
+   * @returns chat details as promise
    * @deprecated
    */
-  public async getChat(contactId: string) {
+  public async getChat(contactId: string | Wid) {
     return this.getChatById(contactId);
   }
 
@@ -323,7 +323,7 @@ export class RetrieverLayer extends SenderLayer {
    * @deprecated Depreciado em favor de getMessages
    * @category Chat
    * @param contactId
-   * @returns contact detial as promise
+   * @returns contact details as promise
    */
   public async loadEarlierMessages(contactId: string) {
     return evaluateAndReturn(
@@ -360,7 +360,7 @@ export class RetrieverLayer extends SenderLayer {
    * @deprecated Deprecated in favor of checkNumberStatus
    * @category Contact
    * @param contactId, you need to include the @c.us at the end.
-   * @returns contact detial as promise
+   * @returns contact details as promise
    */
   public async getNumberProfile(contactId: string) {
     this.log(
