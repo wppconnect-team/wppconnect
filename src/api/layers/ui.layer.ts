@@ -18,7 +18,7 @@
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
-import { Wid } from '../model';
+import { Wid, Chat } from '../model';
 import { GroupLayer } from './group.layer';
 
 export class UILayer extends GroupLayer {
@@ -68,7 +68,7 @@ export class UILayer extends GroupLayer {
    * Return the currently active chat (visually open)
    * @category UI
    */
-  public getActiveChat() {
+  public getActiveChat(): Chat {
     return evaluateAndReturn(this.page, () => WPP.chat.getActiveChat());
   }
 }
