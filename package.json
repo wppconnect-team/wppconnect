@@ -81,7 +81,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^9.1.6",
     "mocha": "^10.7.3",
-    "prettier": "^2.8.8",
+    "prettier": "^3.4.2",
     "pretty-quick": "^4.0.0",
     "regenerator-runtime": "^0.14.1",
     "release-it": "^17.10.0",
