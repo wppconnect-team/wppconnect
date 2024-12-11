@@ -212,7 +212,7 @@ export const defaultOptions: CreateConfig = {
   waitForLogin: true,
   logger: defaultLogger,
   tokenStore: 'file',
-  whatsappVersion: '2.3000.10173x',
+  whatsappVersion: '2.3000.10177x',
   deviceName: false,
   linkPreviewApiServers: null,
   disableGoogleAnalytics: true,
