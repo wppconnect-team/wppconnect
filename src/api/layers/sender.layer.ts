@@ -1381,20 +1381,23 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
-   * Send reaction to message
+   * Send reaction to a message
    * @example
    * ```javascript
-   * // For send Reaction, just to send emoji
-   * await client.sendReactionToMessage('[number]@c.us', '🤯');
+   * // to send an emoji reaction
+   * await client.sendReactionToMessage('true_<number>@c.us_messageId', '🤯');
    *
-   * // to remove reacition
-   * await client.startRecording('[number]@c.us', false);
+   * // to remove a reaction
+   * await client.sendReactionToMessage('true_<number>@c.us_messageId', false);
    * ```
    * @category Chat
-   * @param to Chat Id
-   * @param duration Duration um miliseconds
+   * @param msgId Message Id or `Message` object
+   * @param reaction Emoji as string or `false` to remove an existing reaction
    */
-  public async sendReactionToMessage(msgId: string, reaction: string | false) {
+  public async sendReactionToMessage(
+    msgId: string | Message,
+    reaction: string | false
+  ) {
     return evaluateAndReturn(
       this.page,
       ({ msgId, reaction }) => WPP.chat.sendReactionToMessage(msgId, reaction),
