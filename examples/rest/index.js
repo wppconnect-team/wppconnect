@@ -96,7 +96,7 @@ async function startWPP (){
         catchQR: (base64Qr, asciiQR, attempts, urlCode) => {
     },  
     statusFind: (statusSession, session) => {
-        console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail || autocloseCalled || desconnectedMobile || deleteToken
+        console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail || autocloseCalled || disconnectedMobile || deleteToken
         //Create session wss return "serverClose" case server for close
         console.log('Session name: ', session);
     },
