@@ -1,3 +1,7 @@
+## <small>1.35.2 (2024-12-20)</small>
+
+- fix(deps): update dependency @wppconnect/wa-js to ^3.16.0 (#2425) ([28384fd](https://github.com/wppconnect-team/wppconnect/commit/28384fd)), closes [#2425](https://github.com/wppconnect-team/wppconnect/issues/2425)
+
 ## <small>1.35.1 (2024-10-30)</small>
 
 - fix: Upgrade whatsappVersion to 2.3000.10173x ([2b609f5](https://github.com/wppconnect-team/wppconnect/commit/2b609f5))
