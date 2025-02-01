@@ -115,7 +115,7 @@
     "puppeteer-extra-plugin-user-preferences": "^2.4.1",
     "qrcode-terminal": "^0.12.0",
     "reflect-metadata": "^0.2.1",
-    "rimraf": "^3.0.2",
+    "rimraf": "^6.0.1",
     "sanitize-filename": "^1.6.3",
     "sharp": "0.33.5",
     "tmp": "^0.2.3",
