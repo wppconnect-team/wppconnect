@@ -55,7 +55,7 @@ export class Whatsapp extends BusinessLayer {
         setTimeout(async () => {
           if (this.statusFind) {
             try {
-              this.statusFind('desconnectedMobile', session);
+              this.statusFind('disconnectedMobile', session);
             } catch (error) {}
           }
         }, 1000);
