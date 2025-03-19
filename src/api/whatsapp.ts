@@ -305,7 +305,7 @@ export class Whatsapp extends BusinessLayer {
           makeOptions(useragentOverride, 'stream')
         );
 
-        await new Promise((resolve, reject) => {
+        await new Promise<void>((resolve, reject) => {
           const writer = fs.createWriteStream(outputPath);
           response.data.pipe(writer);
           writer.on('finish', resolve);
