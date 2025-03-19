@@ -91,7 +91,7 @@ const fixPadding = (data: Buffer, expectedSize: number) => {
     } else if (data.length + padding == expectedSize) {
       // console.log(`adding: ${padding} bytes`);
       let arr = new Uint16Array(padding).map((b) => padding);
-      data = Buffer.concat([data, Buffer.from(arr)]);
+      data = Buffer.concat([data, Buffer.from(arr as any)]);
     }
   }
   //@ts-ignore
