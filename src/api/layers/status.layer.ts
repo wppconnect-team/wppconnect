@@ -155,7 +155,13 @@ export class StatusLayer extends LabelsLayer {
    * ```
    * @param pathOrBase64 Path or base 64 image
    */
-  public async sendTextStatus(text: string, options: string) {
+  public async sendTextStatus(
+    text: string,
+    options: {
+      backgroundColor?: string;
+      font?: number;
+    }
+  ) {
     return await evaluateAndReturn(
       this.page,
       ({ text, options }) => {
