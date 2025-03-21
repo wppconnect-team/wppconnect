@@ -189,6 +189,9 @@ export async function onLoadingScreen(
         let progressMessage = window2.getElementByXpath(
           selectors.PROGRESS_MESSAGE
         );
+        let progressMessageNewTheme = window2.getElementByXpath(
+          selectors.PROGRESS_MESSAGE_NEW_THEME
+        );
 
         if (progressBar) {
           if (
@@ -200,13 +203,17 @@ export async function onLoadingScreen(
             this.lastPercentMessage = progressMessage.innerText;
           }
         } else if (progressBarNewTheme) {
-          if (this.lastPercent !== progressBarNewTheme.value) {
-            window2.loadingScreen(
-              progressBarNewTheme.value,
-              progressMessage.innerText
-            );
+          if (
+            this.lastPercent !== progressBarNewTheme.value ||
+            this.lastPercentMessage !== progressMessageNewTheme.innerText
+          ) {
+            const progressMsg =
+              progressMessageNewTheme.innerText != 'WhatsApp'
+                ? progressMessageNewTheme.innerText
+                : '';
+            window2.loadingScreen(progressBarNewTheme.value, progressMsg);
             this.lastPercent = progressBarNewTheme.value;
-            this.lastPercentMessage = '';
+            this.lastPercentMessage = progressMsg;
           }
         }
       });
@@ -221,8 +228,8 @@ export async function onLoadingScreen(
     {
       PROGRESS: "//*[@id='app']/div/div/div[2]/progress",
       PROGRESS_NEW_THEME: "//*[@id='app']/div/div/div[3]/progress",
-      // No novo tema do whatsapp não há mensagem de progresso, apenas a barra
       PROGRESS_MESSAGE: "//*[@id='app']/div/div/div[3]",
+      PROGRESS_MESSAGE_NEW_THEME: "//*[@id='app']/div/div/div[2]",
     }
   );
 }
