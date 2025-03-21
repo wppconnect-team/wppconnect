@@ -194,7 +194,11 @@ export class SenderLayer extends ListenerLayer {
     filename?: string,
     caption?: string,
     quotedMessageId?: string,
-    isViewOnce?: boolean
+    isViewOnce?: boolean,
+    options?: {
+      msgId?: string;
+      mentionedList?: string[];
+    }
   ) {
     let base64 = await downloadFileToBase64(filePath, [
       'image/gif',
@@ -227,7 +231,9 @@ export class SenderLayer extends ListenerLayer {
       filename,
       caption,
       quotedMessageId,
-      isViewOnce
+      isViewOnce,
+      options.mentionedList,
+      options
     );
   }
 
@@ -254,7 +260,10 @@ export class SenderLayer extends ListenerLayer {
     caption?: string,
     quotedMessageId?: string,
     isViewOnce?: boolean,
-    mentionedList?: any
+    mentionedList?: any,
+    options?: {
+      msgId?: string;
+    }
   ) {
     let mimeType = base64MimeType(base64);
 
@@ -292,6 +301,7 @@ export class SenderLayer extends ListenerLayer {
         const result = await WPP.chat.sendFileMessage(to, base64, {
           type: 'image',
           isViewOnce,
+          messageId: options?.msgId,
           filename,
           caption,
           quotedMsg: quotedMessageId,
