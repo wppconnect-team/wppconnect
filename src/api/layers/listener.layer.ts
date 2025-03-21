@@ -45,6 +45,7 @@ declare global {
     onStreamChange: any;
     onIncomingCall: any;
     onAck: any;
+    onMessageEdit: any;
   }
 }
 
@@ -140,6 +141,21 @@ export class ListenerLayer extends ProfileLayer {
           if (!window['onAck'].exposed) {
             window.WAPI.waitNewAcknowledgements(window['onAck']);
             window['onAck'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        try {
+          if (!window['onMessageEdit'].exposed) {
+            WPP.on('chat.msg_edited', (data) => {
+              const eventData = {
+                chat: data.chat,
+                id: data.id,
+                msg: WAPI.processMessageObj(data.msg, true, false),
+              };
+              window['onMessageEdit'](eventData);
+            });
+            window['onMessageEdit'].exposed = true;
           }
         } catch (error) {
           console.error(error);
@@ -402,6 +418,16 @@ export class ListenerLayer extends ProfileLayer {
    */
   public onAck(callback: (ack: Ack) => void) {
     return this.registerEvent(ExposedFn.onAck, callback);
+  }
+
+  /**
+   * @event Listens to message edited changes
+   * @returns Disposable object to stop the listening
+   */
+  public onMessageEdit(
+    callback: (chat: Wid, id: string, msg: Message) => void
+  ) {
+    return this.registerEvent(ExposedFn.onMessageEdit, callback);
   }
 
   /**
