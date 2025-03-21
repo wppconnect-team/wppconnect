@@ -183,6 +183,9 @@ export async function onLoadingScreen(
         let window2: any = window;
 
         let progressBar = window2.getElementByXpath(selectors.PROGRESS);
+        let progressBarNewTheme = window2.getElementByXpath(
+          selectors.PROGRESS_NEW_THEME
+        );
         let progressMessage = window2.getElementByXpath(
           selectors.PROGRESS_MESSAGE
         );
@@ -196,6 +199,15 @@ export async function onLoadingScreen(
             this.lastPercent = progressBar.value;
             this.lastPercentMessage = progressMessage.innerText;
           }
+        } else if (progressBarNewTheme) {
+          if (this.lastPercent !== progressBarNewTheme.value) {
+            window2.loadingScreen(
+              progressBarNewTheme.value,
+              progressMessage.innerText
+            );
+            this.lastPercent = progressBarNewTheme.value;
+            this.lastPercentMessage = '';
+          }
         }
       });
 
@@ -208,6 +220,8 @@ export async function onLoadingScreen(
     },
     {
       PROGRESS: "//*[@id='app']/div/div/div[2]/progress",
+      PROGRESS_NEW_THEME: "//*[@id='app']/div/div/div[3]/progress",
+      // No novo tema do whatsapp não há mensagem de progresso, apenas a barra
       PROGRESS_MESSAGE: "//*[@id='app']/div/div/div[3]",
     }
   );

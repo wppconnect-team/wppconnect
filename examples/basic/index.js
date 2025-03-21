@@ -17,21 +17,15 @@
 const wppconnect = require('../../dist');
 
 wppconnect
-  .create()
+  .create({
+    headless: false,
+    onLoadingScreen: (percent, message) => {
+      console.log('LOADING_SCREEN', percent, message);
+    },
+  })
   .then((client) => start(client))
   .catch((error) => {
     console.log(error);
   });
 
-function start(client) {
-  client.onMessage((message) => {
-    if (message.body === 'Hi' && message.isGroupMsg === false) {
-      client
-        .sendText(message.from, 'Welcome to Wppconnect')
-        .then((result) => {})
-        .catch((error) => {
-          console.error('Error when sending: ', error); //return error object
-        });
-    }
-  });
-}
+async function start(client) {}
