@@ -1,3 +1,7 @@
+## <small>1.36.1 (2025-03-21)</small>
+
+- chore: update workflow for launch release ([7dd3739](https://github.com/wppconnect-team/wppconnect/commit/7dd3739))
+
 ## 1.36.0 (2025-03-21)
 
 - feat: Added client.onMessageEdit event (close #2092) ([874f8c4](https://github.com/wppconnect-team/wppconnect/commit/874f8c4)), closes [#2092](https://github.com/wppconnect-team/wppconnect/issues/2092)
