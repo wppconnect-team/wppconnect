@@ -1,3 +1,7 @@
+## 1.36.0 (2025-03-21)
+
+- feat: Added client.onMessageEdit event (close #2092) ([874f8c4](https://github.com/wppconnect-team/wppconnect/commit/874f8c4)), closes [#2092](https://github.com/wppconnect-team/wppconnect/issues/2092)
+
 ## <small>1.35.2 (2024-12-20)</small>
 
 - fix(deps): update dependency @wppconnect/wa-js to ^3.16.0 (#2425) ([28384fd](https://github.com/wppconnect-team/wppconnect/commit/28384fd)), closes [#2425](https://github.com/wppconnect-team/wppconnect/issues/2425)
