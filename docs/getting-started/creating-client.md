@@ -42,7 +42,7 @@ wppconnect.create({
       console.log('urlCode (data-ref): ', urlCode);
     },
     statusFind: (statusSession, session) => {
-      console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail || autocloseCalled || desconnectedMobile || deleteToken
+      console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail || autocloseCalled || disconnectedMobile || deleteToken
       //Create session wss return "serverClose" case server for close
       console.log('Session name: ', session);
     },
@@ -87,7 +87,7 @@ More details in {@link StatusFind}
 | `qrReadSuccess`      | If the user is not logged in, the QR code is passed on the terminal a callback is returned. After the correct reading by cell phone this parameter is returned |
 | `qrReadFail`         | If the browser stops when the QR code scan is in progress, this parameter is returned                                                                          |
 | `autocloseCalled`    | The browser was closed using the autoClose command                                                                                                             |
-| `desconnectedMobile` | Client has disconnected in to mobile                                                                                                                           |
+| `disconnectedMobile` | Client has disconnected to the mobile device                                                                                                                           |
 | `serverClose`        | Client has disconnected in to wss                                                                                                                              |
 | `deleteToken`        | If you pass true within the function `client.getSessionTokenBrowser(true)`                                                                                     |
 
@@ -97,7 +97,7 @@ wppconnect
   .create({
     session: 'sessionName',
     statusFind: (statusSession, session) => {
-      // return: isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail || autocloseCalled || desconnectedMobile || deleteToken
+      // return: isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail || autocloseCalled || disconnectedMobile || deleteToken
       console.log('Status Session: ', statusSession);
       // create session wss return "serverClose" case server for close
       console.log('Session name: ', session);
