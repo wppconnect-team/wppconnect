@@ -232,8 +232,8 @@ export class SenderLayer extends ListenerLayer {
       caption,
       quotedMessageId,
       isViewOnce,
-      options.mentionedList,
-      options
+      options?.mentionedList,
+      options || {}
     );
   }
 
@@ -297,6 +297,7 @@ export class SenderLayer extends ListenerLayer {
         quotedMessageId,
         isViewOnce,
         mentionedList,
+        options
       }) => {
         const result = await WPP.chat.sendFileMessage(to, base64, {
           type: 'image',
@@ -324,6 +325,7 @@ export class SenderLayer extends ListenerLayer {
         quotedMessageId,
         isViewOnce,
         mentionedList,
+        options
       }
     );
 
@@ -1475,3 +1477,4 @@ export class SenderLayer extends ListenerLayer {
     return result;
   }
 }
+=
