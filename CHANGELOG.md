@@ -1,3 +1,7 @@
+## <small>1.36.2 (2025-03-26)</small>
+
+- fix: Fixed lint errors ([73da91f](https://github.com/wppconnect-team/wppconnect/commit/73da91f))
+
 ## <small>1.36.1 (2025-03-21)</small>
 
 - chore: update workflow for launch release ([7dd3739](https://github.com/wppconnect-team/wppconnect/commit/7dd3739))
