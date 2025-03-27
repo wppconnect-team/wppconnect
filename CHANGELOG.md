@@ -1,3 +1,7 @@
+## <small>1.36.3 (2025-03-27)</small>
+
+- fix(deps): update dependency @wppconnect/wa-version to ^1.5.1244 (#2471) ([b83713c](https://github.com/wppconnect-team/wppconnect/commit/b83713c)), closes [#2471](https://github.com/wppconnect-team/wppconnect/issues/2471)
+
 ## <small>1.36.2 (2025-03-26)</small>
 
 - fix: Fixed lint errors ([73da91f](https://github.com/wppconnect-team/wppconnect/commit/73da91f))
