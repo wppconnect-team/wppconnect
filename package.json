@@ -93,7 +93,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@wppconnect/wa-js": "^3.16.9",
+    "@wppconnect/wa-js": "^3.17.0",
     "@wppconnect/wa-version": "^1.5.1261",
     "atob": "^2.1.2",
     "axios": "^1.8.4",
