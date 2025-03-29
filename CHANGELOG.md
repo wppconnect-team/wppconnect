@@ -1,3 +1,7 @@
+## <small>1.36.4 (2025-03-29)</small>
+
+- fix(deps): update dependency @wppconnect/wa-js to ^3.17.0 (#2473) ([597a6ac](https://github.com/wppconnect-team/wppconnect/commit/597a6ac)), closes [#2473](https://github.com/wppconnect-team/wppconnect/issues/2473)
+
 ## <small>1.36.3 (2025-03-27)</small>
 
 - fix(deps): update dependency @wppconnect/wa-version to ^1.5.1244 (#2471) ([b83713c](https://github.com/wppconnect-team/wppconnect/commit/b83713c)), closes [#2471](https://github.com/wppconnect-team/wppconnect/issues/2471)
