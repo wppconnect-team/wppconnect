@@ -17,7 +17,7 @@
 
 export enum GroupNotificationType {
   Add = 'add',
-  Inivite = 'invite',
+  Invite = 'invite',
   Remove = 'remove',
   Leave = 'leave',
   Subject = 'subject',
