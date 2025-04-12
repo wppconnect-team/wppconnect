@@ -17,3 +17,4 @@ session-*
 src/app.ts
 tokens
 yarn.lock
+package-lock.json
