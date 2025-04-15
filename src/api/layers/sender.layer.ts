@@ -19,17 +19,16 @@ import type {
   FileMessageOptions,
   ListMessageOptions,
   LocationMessageOptions,
-  SendMessageReturn,
   TextMessageOptions,
   PoolMessageOptions,
   ForwardMessagesOptions,
   AllMessageOptions,
+  SendMessageOptions,
 } from '@wppconnect/wa-js/dist/chat';
 import * as path from 'path';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { convertToMP4GIF } from '../../utils/ffmpeg';
-import { sleep } from '../../utils/sleep';
 import {
   base64MimeType,
   downloadFileToBase64,
@@ -38,13 +37,14 @@ import {
   stickerSelect,
 } from '../helpers';
 import { filenameFromMimeType } from '../helpers/filename-from-mimetype';
-import { Message, SendFileResult, SendStickerResult, Wid } from '../model';
+import { Message, Wid } from '../model';
 import { ChatState } from '../model/enum';
 import { ListenerLayer } from './listener.layer';
 import {
   OrderItems,
   OrderMessageOptions,
 } from '@wppconnect/wa-js/dist/chat/functions/sendChargeMessage';
+import { PixParams } from '../../types/WAPI';
 
 export class SenderLayer extends ListenerLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -131,6 +131,55 @@ export class SenderLayer extends ListenerLayer {
           waitForAck: true,
         }),
       { to, content, options: options as any }
+    );
+
+    // I don't know why the evaluate is returning undefined for direct call
+    // To solve that, I added `JSON.parse(JSON.stringify(<message>))` to solve that
+    const result = (await evaluateAndReturn(
+      this.page,
+      async ({ messageId }) => {
+        return JSON.parse(JSON.stringify(await WAPI.getMessageById(messageId)));
+      },
+      { messageId: sendResult.id }
+    )) as Message;
+
+    if (result['erro'] == true) {
+      throw result;
+    }
+
+    return result;
+  }
+
+  /**
+   * Sends a pix message to given chat
+   * @category Chat
+   * @param to chat id: xxxxx@us.c
+   * @param content pix message
+   *
+   * @example
+   * ```javascript
+   * // Simple message
+   * client.sendPix('<number>@c.us', {
+          keyType: 'PHONE',
+          name: 'WPPCONNECT-TEAM',
+          key: '+5567123456789',
+          instructions: 'teste',
+        });
+   * ```
+   */
+  public async sendPixKey(
+    to: string,
+    params: PixParams,
+    options?: SendMessageOptions
+  ): Promise<Message> {
+    const sendResult = await evaluateAndReturn(
+      this.page,
+      ({ to, params, options }) =>
+        WPP.chat.sendPixKeyMessage(to, params, {
+          ...options,
+          waitForAck: true,
+        }),
+      { to, params, options: options as any }
     );
 
     // I don't know why the evaluate is returning undefined for direct call

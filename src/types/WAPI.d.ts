@@ -205,3 +205,10 @@ declare global {
   }
   const WAPI: WAPI;
 }
+
+interface PixParams {
+  keyType: 'CNPJ' | 'CPF' | 'PHONE' | 'EMAIL' | 'EVP';
+  name: string;
+  key: string;
+  instructions?: string;
+}
