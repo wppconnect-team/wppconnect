@@ -167,7 +167,7 @@ export class SenderLayer extends ListenerLayer {
         });
    * ```
    */
-  public async sendPix(
+  public async sendPixKey(
     to: string,
     params: PixParams,
     options?: SendMessageOptions
