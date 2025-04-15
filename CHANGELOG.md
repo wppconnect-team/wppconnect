@@ -1,3 +1,7 @@
+## 1.37.0 (2025-04-15)
+
+- build(deps-dev): update dependency @types/node to ^20.17.30 (#2481) ([dcd6088](https://github.com/wppconnect-team/wppconnect/commit/dcd6088)), closes [#2481](https://github.com/wppconnect-team/wppconnect/issues/2481)
+
 ## <small>1.36.4 (2025-03-29)</small>
 
 - fix(deps): update dependency @wppconnect/wa-js to ^3.17.0 (#2473) ([597a6ac](https://github.com/wppconnect-team/wppconnect/commit/597a6ac)), closes [#2473](https://github.com/wppconnect-team/wppconnect/issues/2473)
