@@ -65,7 +65,7 @@
     "@types/atob": "^2.1.4",
     "@types/mime-types": "^2.1.4",
     "@types/mocha": "^10.0.9",
-    "@types/node": "^20.17.24",
+    "@types/node": "^20.17.30",
     "@types/shelljs": "^0.8.15",
     "@types/tmp": "^0.2.6",
     "@types/ws": "^8.18.0",
