@@ -1,3 +1,7 @@
+## <small>1.37.2 (2025-05-28)</small>
+
+- fix: Upgrade whatsappversion ([9c06639](https://github.com/wppconnect-team/wppconnect/commit/9c06639))
+
 ## <small>1.37.1 (2025-05-01)</small>
 
 - fix(deps): update dependency @wppconnect/wa-js to ^3.17.2 (#2490) ([95a6d9e](https://github.com/wppconnect-team/wppconnect/commit/95a6d9e)), closes [#2490](https://github.com/wppconnect-team/wppconnect/issues/2490)
