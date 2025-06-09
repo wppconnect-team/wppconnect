@@ -98,7 +98,7 @@
     "atob": "^2.1.2",
     "axios": "^1.9.0",
     "boxen": "^5.1.2",
-    "catch-exit": "^1.2.2",
+    "catch-exit": "^2.0.0",
     "chalk": "~4.1.2",
     "chrome-launcher": "^0.15.2",
     "execa": "^5.1.1",
