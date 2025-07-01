@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4.3.0
         with:
-          node-version: 18.x
+          node-version: 22.17.0
 
       - name: Get npm cache directory
         id: npm-cache
