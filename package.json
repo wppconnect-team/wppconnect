@@ -68,7 +68,7 @@
     "@types/node": "^22.16.0",
     "@types/shelljs": "^0.8.17",
     "@types/tmp": "^0.2.6",
-    "@types/ws": "^8.18.0",
+    "@types/ws": "^8.18.1",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "babel-loader": "^9.2.1",
@@ -121,7 +121,7 @@
     "tmp": "^0.2.3",
     "tree-kill": "^1.2.2",
     "winston": "^3.17.0",
-    "ws": "^8.18.1"
+    "ws": "^8.18.3"
   },
   "optionalDependencies": {
     "@img/sharp-win32-x64": "^0.33.5",
