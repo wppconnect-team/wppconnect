@@ -22,7 +22,11 @@ import { ProfilePicThumbObj } from './profile-pic-thumb';
  */
 export interface Contact {
   formattedName: string;
-  id: string;
+  id: {
+    user: string;
+    server: string;
+    _serialized: string;
+  };
   isBusiness: boolean;
   isEnterprise: boolean;
   isHighLevelVerified: any;
