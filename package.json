@@ -89,7 +89,7 @@
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.7",
     "typescript": "^5.8.3",
-    "webpack": "^5.98.0",
+    "webpack": "^5.100.1",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
