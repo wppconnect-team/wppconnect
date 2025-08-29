@@ -1,3 +1,7 @@
+## <small>1.37.4 (2025-08-29)</small>
+
+- fix(deps): update dependency @wppconnect/wa-version to ^1.5.2110 (#2555) ([baad13c](https://github.com/wppconnect-team/wppconnect/commit/baad13c)), closes [#2555](https://github.com/wppconnect-team/wppconnect/issues/2555)
+
 ## <small>1.37.3 (2025-07-08)</small>
 
 - fix(deps): update dependency @wppconnect/wa-version to ^1.5.1804 (#2514) ([0503c9f](https://github.com/wppconnect-team/wppconnect/commit/0503c9f)), closes [#2514](https://github.com/wppconnect-team/wppconnect/issues/2514)
