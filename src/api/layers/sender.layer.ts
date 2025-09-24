@@ -516,6 +516,7 @@ export class SenderLayer extends ListenerLayer {
    * @param caption
    * @param quotedMessageId Quoted message id
    * @param messageId Set the id for this message
+   * @param isPtt Set as ptt audio
    */
   public async sendPttFromBase64(
     to: string,
@@ -523,14 +524,15 @@ export class SenderLayer extends ListenerLayer {
     filename: string,
     caption?: string,
     quotedMessageId?: string,
-    messageId?: string
+    messageId?: string,
+    isPtt: boolean = true
   ) {
     const result = await evaluateAndReturn(
       this.page,
       async ({ to, base64, filename, caption, quotedMessageId, messageId }) => {
         const result = await WPP.chat.sendFileMessage(to, base64, {
           type: 'audio',
-          isPtt: true,
+          isPtt: isPtt,
           filename,
           caption,
           quotedMsg: quotedMessageId,
@@ -559,6 +561,7 @@ export class SenderLayer extends ListenerLayer {
    * @param caption
    * @param quotedMessageId Quoted message id
    * @param messageId Set the id for this message
+   * @param isPtt Set as ptt audio
    */
   public async sendPtt(
     to: string,
@@ -566,7 +569,8 @@ export class SenderLayer extends ListenerLayer {
     filename?: string,
     caption?: string,
     quotedMessageId?: string,
-    messageId?: string
+    messageId?: string,
+    isPtt: boolean = true
   ) {
     return new Promise(async (resolve, reject) => {
       let base64 = await downloadFileToBase64(filePath, [/^audio/]),
@@ -595,7 +599,8 @@ export class SenderLayer extends ListenerLayer {
         filename,
         caption,
         quotedMessageId,
-        messageId
+        messageId,
+        isPtt
       )
         .then(resolve)
         .catch(reject);
