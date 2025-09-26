@@ -17,7 +17,9 @@
 const wppconnect = require('../../dist');
 
 wppconnect
-  .create()
+  .create({
+    headless: false,
+  })
   .then((client) => start(client))
   .catch((error) => {
     console.log(error);
@@ -25,7 +27,11 @@ wppconnect
 
 function start(client) {
   client.onMessage((message) => {
-    if (message.body === 'Hi' && message.isGroupMsg === false) {
+    if (message.body === 'hi' && message.isGroupMsg === false) {
+      client
+        .createGroup('teste vai', ['5521967865110'])
+        .then((a) => console.log(a))
+        .catch((e) => console.log(e));
       client
         .sendText(message.from, 'Welcome to Wppconnect')
         .then((result) => {})
