@@ -124,7 +124,7 @@
     "ws": "^8.18.3"
   },
   "optionalDependencies": {
-    "@img/sharp-win32-x64": "^0.34.3",
+    "@img/sharp-win32-x64": "^0.34.4",
     "fsevents": "^2.3.3"
   },
   "directories": {
