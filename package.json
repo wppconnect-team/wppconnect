@@ -96,7 +96,7 @@
     "@wppconnect/wa-js": "^v3.18.7",
     "@wppconnect/wa-version": "^1.5.2434",
     "atob": "^2.1.2",
-    "axios": "^1.11.0",
+    "axios": "^1.12.2",
     "boxen": "^5.1.2",
     "catch-exit": "^2.0.0",
     "chalk": "~4.1.2",
