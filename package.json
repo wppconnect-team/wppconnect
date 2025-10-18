@@ -87,7 +87,7 @@
     "release-it": "^19.0.5",
     "shx": "^0.4.0",
     "ts-node": "^10.9.2",
-    "typedoc": "^0.28.13",
+    "typedoc": "^0.28.14",
     "typescript": "^5.9.3",
     "webpack": "^5.101.3",
     "webpack-cli": "^6.0.1"
