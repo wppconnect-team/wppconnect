@@ -60,11 +60,6 @@ interface WAPI {
   ) => Message[];
   getAllNewMessages: () => Message[];
   getAllUnreadMessages: () => PartialMessage[];
-  getUnreadMessagesInChat: (
-    chatId: string,
-    includeMe?: boolean,
-    includeNotifications?: boolean
-  ) => PartialMessage[];
   getBatteryLevel: () => number;
   getBusinessProfilesProducts: (to: string) => any;
   getOrderbyMsg: (messageId: string) => any;
