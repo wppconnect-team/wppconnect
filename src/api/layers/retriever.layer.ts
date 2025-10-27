@@ -26,9 +26,16 @@ import {
   ProfilePicThumbObj,
   WhatsappProfile,
   Wid,
+  PartialMessage,
 } from '../model';
 import { SenderLayer } from './sender.layer';
 import { ChatListOptions } from '@wppconnect/wa-js/dist/chat';
+
+export interface GetAllUnreadMessagesOptions {
+  onlyUsers?: boolean;
+  onlyGroups?: boolean;
+  limit?: number;
+}
 
 export class RetrieverLayer extends SenderLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -399,10 +406,26 @@ export class RetrieverLayer extends SenderLayer {
   /**
    * Retrieves all unread messages (where ack is -1)
    * @category Chat
+   * @param options optional filters to narrow down the result
    * @returns list of messages
+   *
+   * @example
+   * // At most 20 unread messages from individual chats
+   * client.getAllUnreadMessages({ onlyUsers: true, limit: 20 });
+   *
+   * @example
+   * // All unread messages from group chats
+   * client.getAllUnreadMessages({ onlyGroups: true });
    */
-  public async getAllUnreadMessages() {
-    return evaluateAndReturn(this.page, () => WAPI.getAllUnreadMessages());
+  public async getAllUnreadMessages(
+    options?: GetAllUnreadMessagesOptions
+  ): Promise<PartialMessage[]> {
+    return evaluateAndReturn(
+      this.page,
+      (opts: GetAllUnreadMessagesOptions | undefined) =>
+        WAPI.getAllUnreadMessages(opts),
+      options
+    );
   }
 
   /**
