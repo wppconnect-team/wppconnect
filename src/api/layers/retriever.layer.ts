@@ -23,6 +23,7 @@ import {
   Chat,
   Contact,
   ContactStatus,
+  PartialMessage,
   ProfilePicThumbObj,
   WhatsappProfile,
   Wid,
@@ -393,6 +394,28 @@ export class RetrieverLayer extends SenderLayer {
       ({ includeMe, includeNotifications, useUnreadCount }) =>
         WAPI.getUnreadMessages(includeMe, includeNotifications, useUnreadCount),
       { includeMe, includeNotifications, useUnreadCount }
+    );
+  }
+
+  /**
+   * Retrieves unread messages for a specific chat
+   * @category Chat
+   * @param chatId chat identifier (e.g. `5511999999999@c.us`)
+   * @param includeMe include messages sent by the current user
+   * @param includeNotifications include system notification messages
+   * @example
+   * const unread = await client.getUnreadMessagesInChat(chatId, false, false);
+   */
+  public async getUnreadMessagesInChat(
+    chatId: string,
+    includeMe = false,
+    includeNotifications = false
+  ): Promise<PartialMessage[]> {
+    return evaluateAndReturn(
+      this.page,
+      ({ chatId, includeMe, includeNotifications }) =>
+        WAPI.getUnreadMessagesInChat(chatId, includeMe, includeNotifications),
+      { chatId, includeMe, includeNotifications }
     );
   }
 
