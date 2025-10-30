@@ -16,18 +16,23 @@
  */
 
 import type {
+  AllMessageOptions,
   FileMessageOptions,
+  ForwardMessagesOptions,
   ListMessageOptions,
   LocationMessageOptions,
-  TextMessageOptions,
   PoolMessageOptions,
-  ForwardMessagesOptions,
-  AllMessageOptions,
   SendMessageOptions,
+  TextMessageOptions,
 } from '@wppconnect/wa-js/dist/chat';
+import {
+  OrderItems,
+  OrderMessageOptions,
+} from '@wppconnect/wa-js/dist/chat/functions/sendChargeMessage';
 import * as path from 'path';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
+import { PixParams } from '../../types/WAPI';
 import { convertToMP4GIF } from '../../utils/ffmpeg';
 import {
   base64MimeType,
@@ -40,11 +45,6 @@ import { filenameFromMimeType } from '../helpers/filename-from-mimetype';
 import { Message, Wid } from '../model';
 import { ChatState } from '../model/enum';
 import { ListenerLayer } from './listener.layer';
-import {
-  OrderItems,
-  OrderMessageOptions,
-} from '@wppconnect/wa-js/dist/chat/functions/sendChargeMessage';
-import { PixParams } from '../../types/WAPI';
 
 export class SenderLayer extends ListenerLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -934,11 +934,17 @@ export class SenderLayer extends ListenerLayer {
     toChatId: string,
     msgId: string | string[],
     options?: ForwardMessagesOptions
-  ): Promise<boolean> {
+  ): Promise<Array<any>> {
+    const normalizedMsgIds: string[] = [];
+
+    if (!Array.isArray(msgId)) {
+      normalizedMsgIds.push(msgId);
+    }
+
     return evaluateAndReturn(
       this.page,
-      ({ toChatId, msgId, options }) =>
-        WPP.chat.forwardMessage(toChatId, msgId, options),
+      ({ toChatId, normalizedMsgIds, options }) =>
+        WPP.chat.forwardMessages(toChatId, normalizedMsgIds, options),
       { toChatId, msgId, options }
     );
   }
