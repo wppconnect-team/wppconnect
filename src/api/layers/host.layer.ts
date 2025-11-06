@@ -598,4 +598,15 @@ export class HostLayer {
       value
     );
   }
+
+  /**
+   * Get WhatsApp build constants
+   * @category Host
+   * @returns Build constants information
+   */
+  public async getBuildConstants() {
+    return await evaluateAndReturn(this.page, () =>
+      WPP.conn.getBuildConstants()
+    );
+  }
 }
