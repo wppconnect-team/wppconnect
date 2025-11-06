@@ -135,5 +135,5 @@ export declare class HostLayer {
      * @category Host
      * @returns Build constants information
      */
-    getBuildConstants(): Promise<any>;
+    getBuildConstants(): Promise<string>;
 }

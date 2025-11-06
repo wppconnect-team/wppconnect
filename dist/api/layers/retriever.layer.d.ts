@@ -324,5 +324,5 @@ export declare class RetrieverLayer extends SenderLayer {
      * @param phoneOrLid Contact ID (phone number or LID)
      * @returns Promise with lid, phoneNumber and contact information
      */
-    getPnLidEntry(phoneOrLid: string): Promise<import("@wppconnect/wa-js/dist/contact/functions/getPnLidEntry").PnLidEntryResult>;
+    getPnLidEntry(phoneOrLid: string): Promise<import("@wppconnect/wa-js/dist/contact").PnLidEntryResult>;
 }
