@@ -93,7 +93,7 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "@wppconnect/wa-js": "https://github.com/manfe/wa-js/archive/refs/tags/20251106-2.tar.gz",
+    "@wppconnect/wa-js": "https://github.com/manfe/wa-js/archive/refs/tags/20251107-1.tar.gz",
     "@wppconnect/wa-version": "^1.5.2588",
     "atob": "^2.1.2",
     "axios": "^1.13.1",
