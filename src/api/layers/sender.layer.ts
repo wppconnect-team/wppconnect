@@ -16,18 +16,23 @@
  */
 
 import type {
+  AllMessageOptions,
   FileMessageOptions,
+  ForwardMessagesOptions,
   ListMessageOptions,
   LocationMessageOptions,
-  TextMessageOptions,
   PoolMessageOptions,
-  ForwardMessagesOptions,
-  AllMessageOptions,
   SendMessageOptions,
+  TextMessageOptions,
 } from '@wppconnect/wa-js/dist/chat';
+import {
+  OrderItems,
+  OrderMessageOptions,
+} from '@wppconnect/wa-js/dist/chat/functions/sendChargeMessage';
 import * as path from 'path';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
+import { PixParams } from '../../types/WAPI';
 import { convertToMP4GIF } from '../../utils/ffmpeg';
 import {
   base64MimeType,
@@ -40,11 +45,6 @@ import { filenameFromMimeType } from '../helpers/filename-from-mimetype';
 import { Message, Wid } from '../model';
 import { ChatState } from '../model/enum';
 import { ListenerLayer } from './listener.layer';
-import {
-  OrderItems,
-  OrderMessageOptions,
-} from '@wppconnect/wa-js/dist/chat/functions/sendChargeMessage';
-import { PixParams } from '../../types/WAPI';
 
 export class SenderLayer extends ListenerLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -948,6 +948,32 @@ export class SenderLayer extends ListenerLayer {
       ({ toChatId, msgId, options }) =>
         WPP.chat.forwardMessage(toChatId, msgId, options),
       { toChatId, msgId, options }
+    );
+  }
+
+  /**
+   * Forwards array of messages (could be ids or message objects)
+   * What is the difference between forwardMessage and forwardMessagesV2?
+   * forwardMessage was used to forward a single message
+   * forwardMessagesV2 is used to forward multiple messages
+   * Also, it fixes how we pass the arguments to the whatsapp original function
+   * From positional args to named args (object)
+   * @category Chat
+   * @param to Chat id
+   * @param messages Array of messages ids to be forwarded
+   * @param options
+   * @returns array of messages ID
+   */
+  public async forwardMessagesV2(
+    toChatId: string,
+    messages: string | string[],
+    options?: ForwardMessagesOptions
+  ): Promise<Array<any>> {
+    return evaluateAndReturn(
+      this.page,
+      ({ toChatId, messages, options }) =>
+        WPP.chat.forwardMessages(toChatId, messages, options),
+      { toChatId, messages, options }
     );
   }
 
