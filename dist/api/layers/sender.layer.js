@@ -959,6 +959,29 @@ var SenderLayer = /** @class */ (function (_super) {
         });
     };
     /**
+     * Forwards array of messages (could be ids or message objects)
+     * What is the difference between forwardMessage and forwardMessagesV2?
+     * forwardMessage was used to forward a single message
+     * forwardMessagesV2 is used to forward multiple messages
+     * Also, it fixes how we pass the arguments to the whatsapp original function
+     * From positional args to named args (object)
+     * @category Chat
+     * @param to Chat id
+     * @param messages Array of messages ids to be forwarded
+     * @param options
+     * @returns array of messages ID
+     */
+    SenderLayer.prototype.forwardMessagesV2 = function (toChatId, messages, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, helpers_1.evaluateAndReturn)(this.page, function (_a) {
+                        var toChatId = _a.toChatId, messages = _a.messages, options = _a.options;
+                        return WPP.chat.forwardMessages(toChatId, messages, options);
+                    }, { toChatId: toChatId, messages: messages, options: options })];
+            });
+        });
+    };
+    /**
      * Generates sticker from the provided animated gif image and sends it (Send image as animated sticker)
      *
      * @example

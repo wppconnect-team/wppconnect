@@ -1,11 +1,11 @@
-import type { FileMessageOptions, ListMessageOptions, LocationMessageOptions, TextMessageOptions, PoolMessageOptions, ForwardMessagesOptions, AllMessageOptions, SendMessageOptions } from '@wppconnect/wa-js/dist/chat';
+import type { AllMessageOptions, FileMessageOptions, ForwardMessagesOptions, ListMessageOptions, LocationMessageOptions, PoolMessageOptions, SendMessageOptions, TextMessageOptions } from '@wppconnect/wa-js/dist/chat';
+import { OrderItems, OrderMessageOptions } from '@wppconnect/wa-js/dist/chat/functions/sendChargeMessage';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
+import { PixParams } from '../../types/WAPI';
 import { Message, Wid } from '../model';
 import { ChatState } from '../model/enum';
 import { ListenerLayer } from './listener.layer';
-import { OrderItems, OrderMessageOptions } from '@wppconnect/wa-js/dist/chat/functions/sendChargeMessage';
-import { PixParams } from '../../types/WAPI';
 export declare class SenderLayer extends ListenerLayer {
     page: Page;
     constructor(page: Page, session?: string, options?: CreateConfig);
@@ -338,6 +338,20 @@ export declare class SenderLayer extends ListenerLayer {
      * @returns array of messages ID
      */
     forwardMessage(toChatId: string, msgId: string | string[], options?: ForwardMessagesOptions): Promise<boolean>;
+    /**
+     * Forwards array of messages (could be ids or message objects)
+     * What is the difference between forwardMessage and forwardMessagesV2?
+     * forwardMessage was used to forward a single message
+     * forwardMessagesV2 is used to forward multiple messages
+     * Also, it fixes how we pass the arguments to the whatsapp original function
+     * From positional args to named args (object)
+     * @category Chat
+     * @param to Chat id
+     * @param messages Array of messages ids to be forwarded
+     * @param options
+     * @returns array of messages ID
+     */
+    forwardMessagesV2(toChatId: string, messages: string | string[], options?: ForwardMessagesOptions): Promise<Array<any>>;
     /**
      * Generates sticker from the provided animated gif image and sends it (Send image as animated sticker)
      *
