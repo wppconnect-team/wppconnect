@@ -615,4 +615,25 @@ export class RetrieverLayer extends SenderLayer {
       { wid }
     );
   }
+
+  /**
+   * Get LID/PhoneNumber mapping and Contact information
+   *
+   * @example
+   * ```javascript
+   * const info = await client.getPnLidEntry('[number]@c.us');
+   * const info = await client.getPnLidEntry('[number]@lid');
+   * ```
+   *
+   * @category Contact
+   * @param phoneOrLid Contact ID (phone number or LID)
+   * @returns Promise with lid, phoneNumber and contact information
+   */
+  public async getPnLidEntry(phoneOrLid: string) {
+    return await evaluateAndReturn(
+      this.page,
+      (phoneOrLid) => WPP.contact.getPnLidEntry(phoneOrLid),
+      phoneOrLid
+    );
+  }
 }
