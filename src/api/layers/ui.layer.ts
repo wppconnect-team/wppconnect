@@ -68,7 +68,7 @@ export class UILayer extends GroupLayer {
    * Return the currently active chat (visually open)
    * @category UI
    */
-  public getActiveChat(): Chat {
+  public getActiveChat() {
     return evaluateAndReturn(this.page, () => WPP.chat.getActiveChat());
   }
 }
