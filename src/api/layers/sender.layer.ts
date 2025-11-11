@@ -1229,7 +1229,7 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
-   * Sets a audio or image view once. Marks message as played
+   * Sets an audio or image view once. Marks message as played
    * @category Chat
    * @param msgId Message id: xxxxx@us.c
    */
@@ -1254,7 +1254,7 @@ export class SenderLayer extends ListenerLayer {
    * ```
    * @category Chat
    * @param to Chat Id
-   * @param duration Duration um miliseconds
+   * @param duration Duration in milliseconds
    */
   public async startTyping(to: string, duration?: number) {
     return evaluateAndReturn(
@@ -1282,7 +1282,7 @@ export class SenderLayer extends ListenerLayer {
    * Starts recording ('Recording...' state)
    * @example
    * ```javascript
-   * // Keep sending recording state, use stopRecoring to finish
+   * // Keep sending recording state, use `stopRecording` to finish
    * await client.startRecording('[number]@c.us');
    *
    * // Keep sending typing state for 5 seconds
@@ -1290,7 +1290,7 @@ export class SenderLayer extends ListenerLayer {
    * ```
    * @category Chat
    * @param to Chat Id
-   * @param duration Duration um miliseconds
+   * @param duration Duration in milliseconds
    */
   public async startRecording(to: string, duration?: number) {
     return evaluateAndReturn(
@@ -1305,10 +1305,22 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Stops recording ('Recording...' state)
+   * @deprecated please use {@link stopRecording} this function will be removed in future releases
    * @category Chat
    * @param to Chat Id
    */
   public async stopRecoring(to: string) {
+    return evaluateAndReturn(this.page, ({ to }) => WPP.chat.markIsPaused(to), {
+      to,
+    });
+  }
+
+  /**
+   * Stops recording ('Recording...' state)
+   * @category Chat
+   * @param to Chat Id
+   */
+  public async stopRecording(to: string) {
     return evaluateAndReturn(this.page, ({ to }) => WPP.chat.markIsPaused(to), {
       to,
     });
@@ -1493,7 +1505,7 @@ export class SenderLayer extends ListenerLayer {
    * ```
    * @category Chat
    * @param to Chat Id
-   * @param duration Duration um miliseconds
+   * @param duration Duration in milliseconds
    */
   public async sendReactionToMessage(msgId: string, reaction: string | false) {
     return evaluateAndReturn(
@@ -1507,12 +1519,12 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
-   * Send a order message
+   * Send an order message
    * To send (prices, tax, shipping or discount), for example: USD 12.90, send them without dots or commas, like: 12900
    *
    * @example
    * ```javascript
-   * // Send Order with a product
+   * // Send an order with a product
    * client.sendOrderMessage('[number]@c.us', [
    *   { type: 'product', id: '67689897878', qnt: 2 },
    *   { type: 'product', id: '37878774457', qnt: 1 },

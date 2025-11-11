@@ -14,3 +14,6 @@ jobs:
         uses: wagoid/commitlint-github-action@v5.5.1
         with:
           configFile: './.commitlintrc.js'
+          # Only check commits in the PR, not the entire history
+          firstParent: true
+          failOnWarnings: false
