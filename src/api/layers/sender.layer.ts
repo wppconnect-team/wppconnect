@@ -1290,7 +1290,7 @@ export class SenderLayer extends ListenerLayer {
    * ```
    * @category Chat
    * @param to Chat Id
-   * @param duration Duration um milliseconds
+   * @param duration Duration in milliseconds
    */
   public async startRecording(to: string, duration?: number) {
     return evaluateAndReturn(
