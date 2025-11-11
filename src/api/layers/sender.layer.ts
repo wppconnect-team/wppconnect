@@ -1158,6 +1158,18 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Stops recording ('Recording...' state)
+   * @deprecated please use {@link stopRecording} this function will be removed in future releases
+   * @category Chat
+   * @param to Chat Id
+   */
+  public async stopRecoring(to: string) {
+    return evaluateAndReturn(this.page, ({ to }) => WPP.chat.markIsPaused(to), {
+      to,
+    });
+  }
+
+  /**
+   * Stops recording ('Recording...' state)
    * @category Chat
    * @param to Chat Id
    */
