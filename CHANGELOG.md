@@ -1,3 +1,7 @@
+## <small>1.37.6 (2025-11-11)</small>
+
+- [update] version whatsapp web (#2609) ([cf04c5d](https://github.com/wppconnect-team/wppconnect/commit/cf04c5d)), closes [#2609](https://github.com/wppconnect-team/wppconnect/issues/2609)
+
 ## <small>1.37.5 (2025-09-16)</small>
 
 - chore: update wajs ([9b3f4d5](https://github.com/wppconnect-team/wppconnect/commit/9b3f4d5))
