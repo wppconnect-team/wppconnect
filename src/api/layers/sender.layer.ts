@@ -1505,7 +1505,7 @@ export class SenderLayer extends ListenerLayer {
    * ```
    * @category Chat
    * @param to Chat Id
-   * @param duration Duration um milliseconds
+   * @param duration Duration in milliseconds
    */
   public async sendReactionToMessage(msgId: string, reaction: string | false) {
     return evaluateAndReturn(
