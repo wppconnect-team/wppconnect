@@ -124,6 +124,7 @@ export class HostLayer {
       .catch((e) => {
         console.log(e);
         this.log('verbose', 'wapi.js failed');
+        this.log('error', e);
       });
   }
 
@@ -161,6 +162,7 @@ export class HostLayer {
       null,
       false,
       this.options.whatsappVersion,
+      this.options.proxy,
       this.log.bind(this)
     );
 
@@ -482,7 +484,7 @@ export class HostLayer {
   }
 
   /**
-   * Retrieves the connecction state
+   * Retrieves the connection state
    * @category Host
    */
   public async getConnectionState(): Promise<SocketState> {
@@ -594,6 +596,16 @@ export class HostLayer {
       this.page,
       (value) => WPP.conn.joinWebBeta(value),
       value
+    );
+  }
+  /**
+   * Get WhatsApp build constants
+   * @category Host
+   * @returns Build constants information
+   */
+  public async getBuildConstants() {
+    return await evaluateAndReturn(this.page, () =>
+      WPP.conn.getBuildConstants()
     );
   }
 }

@@ -16,19 +16,24 @@
  */
 
 import type {
+  AllMessageOptions,
   FileMessageOptions,
+  ForwardMessagesOptions,
   ListMessageOptions,
   LocationMessageOptions,
-  SendMessageReturn,
-  TextMessageOptions,
   PoolMessageOptions,
-  ForwardMessagesOptions,
+  SendMessageOptions,
+  TextMessageOptions,
 } from '@wppconnect/wa-js/dist/chat';
+import {
+  OrderItems,
+  OrderMessageOptions,
+} from '@wppconnect/wa-js/dist/chat/functions/sendChargeMessage';
 import * as path from 'path';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
+import { PixParams } from '../../types/WAPI';
 import { convertToMP4GIF } from '../../utils/ffmpeg';
-import { sleep } from '../../utils/sleep';
 import {
   base64MimeType,
   downloadFileToBase64,
@@ -37,13 +42,9 @@ import {
   stickerSelect,
 } from '../helpers';
 import { filenameFromMimeType } from '../helpers/filename-from-mimetype';
-import { Message, SendFileResult, SendStickerResult } from '../model';
+import { Message, Wid } from '../model';
 import { ChatState } from '../model/enum';
 import { ListenerLayer } from './listener.layer';
-import {
-  OrderItems,
-  OrderMessageOptions,
-} from '@wppconnect/wa-js/dist/chat/functions/sendOrderMessage';
 
 export class SenderLayer extends ListenerLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
@@ -150,6 +151,55 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
+   * Sends a pix message to given chat
+   * @category Chat
+   * @param to chat id: xxxxx@us.c
+   * @param content pix message
+   *
+   * @example
+   * ```javascript
+   * // Simple message
+   * client.sendPix('<number>@c.us', {
+          keyType: 'PHONE',
+          name: 'WPPCONNECT-TEAM',
+          key: '+5567123456789',
+          instructions: 'teste',
+        });
+   * ```
+   */
+  public async sendPixKey(
+    to: string,
+    params: PixParams,
+    options?: SendMessageOptions
+  ): Promise<Message> {
+    const sendResult = await evaluateAndReturn(
+      this.page,
+      ({ to, params, options }) =>
+        WPP.chat.sendPixKeyMessage(to, params, {
+          ...options,
+          waitForAck: true,
+        }),
+      { to, params, options: options as any }
+    );
+
+    // I don't know why the evaluate is returning undefined for direct call
+    // To solve that, I added `JSON.parse(JSON.stringify(<message>))` to solve that
+    const result = (await evaluateAndReturn(
+      this.page,
+      async ({ messageId }) => {
+        return JSON.parse(JSON.stringify(await WAPI.getMessageById(messageId)));
+      },
+      { messageId: sendResult.id }
+    )) as Message;
+
+    if (result['erro'] == true) {
+      throw result;
+    }
+
+    return result;
+  }
+
+  /**
    *
    * @category Chat
    * @param chat
@@ -193,7 +243,11 @@ export class SenderLayer extends ListenerLayer {
     filename?: string,
     caption?: string,
     quotedMessageId?: string,
-    isViewOnce?: boolean
+    isViewOnce?: boolean,
+    options?: {
+      msgId?: string;
+      mentionedList?: string[];
+    }
   ) {
     let base64 = await downloadFileToBase64(filePath, [
       'image/gif',
@@ -226,20 +280,27 @@ export class SenderLayer extends ListenerLayer {
       filename,
       caption,
       quotedMessageId,
-      isViewOnce
+      isViewOnce,
+      options?.mentionedList,
+      options || {}
     );
   }
 
   /**
    * Sends image message
    * @category Chat
-   * @param to Chat id
-   * @param base64 File path, http link or base64Encoded
+   * @param to ID of the chat to send the image to
+   * @param base64 A base64-encoded data URI (with mime type)
    * @param filename
    * @param caption
    * @param quotedMessageId Quoted message id
    * @param isViewOnce Enable single view
    * @param mentionedList
+   * @example
+   * ```javascript
+   * const base64picture = "/9j/4AA[...]VZoCn9Lp//Z"
+   * await client.sendImageFromBase64("120[...]381@g.us'", "data:image/png;base64," + base64picture, "picture.png")
+   * ```
    */
   public async sendImageFromBase64(
     to: string,
@@ -248,7 +309,10 @@ export class SenderLayer extends ListenerLayer {
     caption?: string,
     quotedMessageId?: string,
     isViewOnce?: boolean,
-    mentionedList?: any
+    mentionedList?: any,
+    options?: {
+      msgId?: string;
+    }
   ) {
     let mimeType = base64MimeType(base64);
 
@@ -282,10 +346,12 @@ export class SenderLayer extends ListenerLayer {
         quotedMessageId,
         isViewOnce,
         mentionedList,
+        options,
       }) => {
         const result = await WPP.chat.sendFileMessage(to, base64, {
           type: 'image',
           isViewOnce,
+          messageId: options?.msgId,
           filename,
           caption,
           quotedMsg: quotedMessageId,
@@ -308,6 +374,7 @@ export class SenderLayer extends ListenerLayer {
         quotedMessageId,
         isViewOnce,
         mentionedList,
+        options,
       }
     );
 
@@ -449,6 +516,7 @@ export class SenderLayer extends ListenerLayer {
    * @param caption
    * @param quotedMessageId Quoted message id
    * @param messageId Set the id for this message
+   * @param isPtt Set as ptt audio
    */
   public async sendPttFromBase64(
     to: string,
@@ -456,14 +524,23 @@ export class SenderLayer extends ListenerLayer {
     filename: string,
     caption?: string,
     quotedMessageId?: string,
-    messageId?: string
+    messageId?: string,
+    isPtt: boolean = true
   ) {
     const result = await evaluateAndReturn(
       this.page,
-      async ({ to, base64, filename, caption, quotedMessageId, messageId }) => {
+      async ({
+        to,
+        base64,
+        filename,
+        caption,
+        quotedMessageId,
+        messageId,
+        isPtt,
+      }) => {
         const result = await WPP.chat.sendFileMessage(to, base64, {
           type: 'audio',
-          isPtt: true,
+          isPtt: isPtt,
           filename,
           caption,
           quotedMsg: quotedMessageId,
@@ -477,7 +554,7 @@ export class SenderLayer extends ListenerLayer {
           sendMsgResult: await result.sendMsgResult,
         };
       },
-      { to, base64, filename, caption, quotedMessageId, messageId }
+      { to, base64, filename, caption, quotedMessageId, messageId, isPtt }
     );
 
     return result;
@@ -492,6 +569,7 @@ export class SenderLayer extends ListenerLayer {
    * @param caption
    * @param quotedMessageId Quoted message id
    * @param messageId Set the id for this message
+   * @param isPtt Set as ptt audio
    */
   public async sendPtt(
     to: string,
@@ -499,7 +577,8 @@ export class SenderLayer extends ListenerLayer {
     filename?: string,
     caption?: string,
     quotedMessageId?: string,
-    messageId?: string
+    messageId?: string,
+    isPtt: boolean = true
   ) {
     return new Promise(async (resolve, reject) => {
       let base64 = await downloadFileToBase64(filePath, [/^audio/]),
@@ -528,7 +607,8 @@ export class SenderLayer extends ListenerLayer {
         filename,
         caption,
         quotedMessageId,
-        messageId
+        messageId,
+        isPtt
       )
         .then(resolve)
         .catch(reject);
@@ -563,7 +643,10 @@ export class SenderLayer extends ListenerLayer {
    *
    * @example
    * ```javascript
-   * // Simple message
+   * // File message from a path
+   * client.sendFile('<number>@c.us', './someFile.txt');
+   * // Simple message from base64
+   *
    * client.sendFile('<number>@c.us', 'data:text/plain;base64,V1BQQ29ubmVjdA==');
    *
    * // With buttons
@@ -598,7 +681,7 @@ export class SenderLayer extends ListenerLayer {
    * @param options
    */
   public async sendFile(
-    to: string,
+    to: string | Wid,
     pathOrBase64: string,
     options?: FileMessageOptions
   );
@@ -849,6 +932,7 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Forwards array of messages (could be ids or message objects)
+   * @deprecated please use {@link forwardMessagesV2}
    * @category Chat
    * @param to Chat id
    * @param messages Array of messages ids to be forwarded
@@ -869,12 +953,55 @@ export class SenderLayer extends ListenerLayer {
   }
 
   /**
+   * Forwards array of messages (could be ids or message objects)
+   * What is the difference between forwardMessage and forwardMessagesV2?
+   * forwardMessage was used to forward a single message
+   * forwardMessagesV2 is used to forward multiple messages
+   * Also, it fixes how we pass the arguments to the whatsapp original function
+   * From positional args to named args (object)
+   * @category Chat
+   * @param to Chat id
+   * @param messages Array of messages ids to be forwarded
+   * @param options
+   * @returns array of messages ID
+   */
+  public async forwardMessagesV2(
+    toChatId: string,
+    messages: string | string[],
+    options?: ForwardMessagesOptions
+  ): Promise<Array<any>> {
+    return evaluateAndReturn(
+      this.page,
+      ({ toChatId, messages, options }) =>
+        WPP.chat.forwardMessages(toChatId, messages, options),
+      { toChatId, messages, options }
+    );
+  }
+
+  /**
    * Generates sticker from the provided animated gif image and sends it (Send image as animated sticker)
+   *
+   * @example
+   * ```javascript
+   * client.sendImageAsStickerGif('000000000000@c.us', 'base64....');
+   * ```
+   *
+   * @example
+   * Send Sticker with reply
+   * ```javascript
+   * client.sendImageAsStickerGif('000000000000@c.us', 'base64....', {
+   *     quotedMsg: 'msgId',
+   * });
+   * ```
    * @category Chat
    * @param pathOrBase64 image path imageBase64 A valid gif image is required. You can also send via http/https (http://www.website.com/img.gif)
    * @param to chatId '000000000000@c.us'
    */
-  public async sendImageAsStickerGif(to: string, pathOrBase64: string) {
+  public async sendImageAsStickerGif(
+    to: string,
+    pathOrBase64: string,
+    options?: AllMessageOptions
+  ) {
     let base64: string = '';
 
     if (pathOrBase64.startsWith('data:')) {
@@ -931,22 +1058,41 @@ export class SenderLayer extends ListenerLayer {
 
     return await evaluateAndReturn(
       this.page,
-      ({ to, webpBase64 }) => {
+      ({ to, webpBase64, options }) => {
         return WPP.chat.sendFileMessage(to, webpBase64, {
           type: 'sticker',
+          ...options,
         });
       },
-      { to, webpBase64 }
+      { to, webpBase64, options }
     );
   }
 
   /**
    * Generates sticker from given image and sends it (Send Image As Sticker)
+   *
+   * @example
+   * ```javascript
+   * client.sendImageAsSticker('000000000000@c.us', 'base64....');
+   * ```
+   *
+   * @example
+   * Send Sticker with reply
+   * ```javascript
+   * client.sendImageAsSticker('000000000000@c.us', 'base64....', {
+   *     quotedMsg: 'msgId',
+   * });
+   * ```
+   *
    * @category Chat
    * @param pathOrBase64 image path imageBase64 A valid png, jpg and webp image is required. You can also send via http/https (http://www.website.com/img.gif)
    * @param to chatId '000000000000@c.us'
    */
-  public async sendImageAsSticker(to: string, pathOrBase64: string) {
+  public async sendImageAsSticker(
+    to: string,
+    pathOrBase64: string,
+    options?: AllMessageOptions
+  ) {
     let base64: string = '';
 
     if (pathOrBase64.startsWith('data:')) {
@@ -1008,12 +1154,13 @@ export class SenderLayer extends ListenerLayer {
 
     return await evaluateAndReturn(
       this.page,
-      ({ to, webpBase64 }) => {
+      ({ to, webpBase64, options }) => {
         return WPP.chat.sendFileMessage(to, webpBase64, {
           type: 'sticker',
+          ...options,
         });
       },
-      { to, webpBase64 }
+      { to, webpBase64, options }
     );
   }
 
@@ -1405,7 +1552,8 @@ export class SenderLayer extends ListenerLayer {
   ) {
     const sendResult = await evaluateAndReturn(
       this.page,
-      ({ to, items, options }) => WPP.chat.sendOrderMessage(to, items, options),
+      ({ to, items, options }) =>
+        WPP.chat.sendChargeMessage(to, items, options),
       {
         to,
         items,

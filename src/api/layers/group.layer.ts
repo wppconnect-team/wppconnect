@@ -62,7 +62,8 @@ export class GroupLayer extends RetrieverLayer {
   }
 
   /**
-   * Returns group members [Contact] objects
+   * Returns current group members as [Contact] objects
+   * For previous members, see `groupMetadata.pastParticipants`.
    * @category Group
    * @param groupId
    */
@@ -91,7 +92,7 @@ export class GroupLayer extends RetrieverLayer {
   }
 
   /**
-   * Revokes group-invite link and generate new one.
+   * Revokes group-invite link and generates a new one.
    * @category Group
    * @param chatId
    * @returns Invitation link
@@ -107,10 +108,12 @@ export class GroupLayer extends RetrieverLayer {
   }
 
   /**
-   * Generates group-invite link
+   * Displays group info from an invitation link (or invitation ID)
    * @category Group
    * @param inviteCode
-   * @returns Invite code from group link. Example: CMJYfPFqRyE2GxrnkldYED
+   * @returns Invite code or group link. Example: CMJYfPFqRyE2GxrnkldYED
+   * @example getGroupInfoFromInviteLink('https://chat.whatsapp.com/invite/CMJYfPFqRyE2GxrnkldYED')
+   * @example getGroupInfoFromInviteLink('CMJYfPFqRyE2GxrnkldYED')
    */
   public async getGroupInfoFromInviteLink(inviteCode: string) {
     inviteCode = inviteCode.replace('chat.whatsapp.com/', '');
@@ -232,9 +235,11 @@ export class GroupLayer extends RetrieverLayer {
     return participants.filter((p) => p.isAdmin).map((p) => p.id);
   }
   /**
-   * Join a group with invite code
+   * Join a group with an invite code or link
    * @category Group
    * @param inviteCode
+   * @example joinGroup('https://chat.whatsapp.com/invite/CMJYfPFqRyE2GxrnkldYED')
+   * @example joinGroup('CMJYfPFqRyE2GxrnkldYED')
    */
   public async joinGroup(inviteCode: string) {
     inviteCode = inviteCode.replace('chat.whatsapp.com/', '');

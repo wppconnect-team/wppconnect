@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -18,9 +18,9 @@ jobs:
         run: git fetch --tags -f || true
 
       - name: Setup Node
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v6.0.0
         with:
-          node-version: 18.x
+          node-version: 24.11.0
           registry-url: 'https://registry.npmjs.org'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -74,7 +74,7 @@ jobs:
         continue-on-error: true
 
       - name: Deploy API-Docs
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         continue-on-error: true
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

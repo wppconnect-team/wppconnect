@@ -17,11 +17,15 @@
 
 import * as crypto from 'crypto';
 import hkdf from 'futoin-hkdf';
-import atob = require('atob');
+import atob from 'atob';
 import { ResponseType } from 'axios';
+import { Transform } from 'stream';
 
-export const makeOptions = (useragentOverride: string) => ({
-  responseType: 'arraybuffer' as ResponseType,
+export const makeOptions = (
+  useragentOverride: string,
+  responseType: ResponseType = 'arraybuffer'
+) => ({
+  responseType: responseType,
   headers: {
     'User-Agent': processUA(useragentOverride),
     DNT: '1',
@@ -87,7 +91,7 @@ const fixPadding = (data: Buffer, expectedSize: number) => {
     } else if (data.length + padding == expectedSize) {
       // console.log(`adding: ${padding} bytes`);
       let arr = new Uint16Array(padding).map((b) => padding);
-      data = Buffer.concat([data, Buffer.from(arr)]);
+      data = Buffer.concat([data, Buffer.from(arr as any)]);
     }
   }
   //@ts-ignore
@@ -110,3 +114,55 @@ const base64ToBytes = (base64Str: any) => {
   }
   return byteArray;
 };
+
+export const newMagix = (
+  mediaKeyBase64: string,
+  mediaType: string,
+  expectedSize: number
+) => {
+  const mediaKeyBytes = newBase64ToBytes(mediaKeyBase64);
+  const info = `WhatsApp ${mediaTypes[mediaType.toUpperCase()]} Keys`;
+  const hash = 'sha256';
+  const salt = Buffer.alloc(32);
+  const expandedSize = 112;
+  const mediaKeyExpanded = hkdf(mediaKeyBytes, expandedSize, {
+    salt,
+    info,
+    hash,
+  });
+  const iv = mediaKeyExpanded.slice(0, 16);
+  const cipherKey = mediaKeyExpanded.slice(16, 48);
+
+  const decipher = crypto.createDecipheriv('aes-256-cbc', cipherKey, iv);
+  let processedBytes: number = 0;
+  let buffer = Buffer.alloc(0);
+
+  const transformStream = new Transform({
+    transform(chunk, encoding, callback) {
+      try {
+        const decryptedChunk = decipher.update(chunk);
+        processedBytes += decryptedChunk.length;
+        if (processedBytes > expectedSize) {
+          const paddedChunk = Buffer.from(decryptedChunk).slice(
+            0,
+            buffer.length - (processedBytes - expectedSize)
+          );
+          callback(null, paddedChunk);
+        } else {
+          callback(null, decryptedChunk);
+        }
+      } catch (error: any) {
+        callback(error);
+      }
+    },
+  });
+
+  transformStream.on('error', (error) => {
+    console.error('Error during decryption:', error);
+  });
+
+  return transformStream;
+};
+
+const newBase64ToBytes = (base64Str: string) =>
+  Buffer.from(base64Str, 'base64');

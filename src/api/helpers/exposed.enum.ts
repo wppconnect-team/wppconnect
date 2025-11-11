@@ -19,6 +19,7 @@ export enum ExposedFn {
   OnMessage = 'onMessage',
   OnAnyMessage = 'onAnyMessage',
   onAck = 'onAck',
+  onMessageEdit = 'onMessageEdit',
   onNotificationMessage = 'onNotificationMessage',
   onParticipantsChanged = 'onParticipantsChanged',
   onStateChange = 'onStateChange',

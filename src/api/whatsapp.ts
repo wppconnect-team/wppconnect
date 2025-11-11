@@ -20,10 +20,11 @@ import { Page } from 'puppeteer';
 import { CreateConfig } from '../config/create-config';
 import { useragentOverride } from '../config/WAuserAgente';
 import { evaluateAndReturn } from './helpers';
-import { magix, makeOptions, timeout } from './helpers/decrypt';
+import { magix, makeOptions, newMagix, timeout } from './helpers/decrypt';
 import { BusinessLayer } from './layers/business.layer';
 import { GetMessagesParam, Message } from './model';
-import treekill = require('tree-kill');
+import * as fs from 'fs';
+import { sleep } from '../utils/sleep';
 
 export class Whatsapp extends BusinessLayer {
   private connected: boolean | null = null;
@@ -39,7 +40,7 @@ export class Whatsapp extends BusinessLayer {
       });
     }
 
-    interval = setInterval(async (state) => {
+    interval = setInterval(async () => {
       const newConnected = await page
         .evaluate(() => WPP.conn.isRegistered())
         .catch(() => null);
@@ -86,7 +87,7 @@ export class Whatsapp extends BusinessLayer {
 
   /**
    * Download and returns the media content in base64 format
-   * @param messageId Message ou id
+   * @param messageId Message or id
    * @returns Base64 of media
    */
   public async downloadMedia(messageId: string | Message): Promise<string> {
@@ -112,7 +113,7 @@ export class Whatsapp extends BusinessLayer {
 
   /**
    * Get the puppeteer page screenshot
-   * @returns The Whatsapp page screenshot encoded in base64
+   * @returns The Whatsapp page screenshot as a PNG encoded in base64 (not the full data URI, just the base64 section)
    */
   public async takeScreenshot() {
     if (this.page) {
@@ -121,17 +122,17 @@ export class Whatsapp extends BusinessLayer {
   }
 
   /**
-   * Clicks on 'use here' button (When it get unlaunched)
+   * Clicks on 'use here' button (When it gets unlaunched)
    * This method tracks the class of the button
-   * Whatsapp web might change this class name over the time
-   * Dont rely on this method
+   * WhatsApp Web might change this class name over time
+   * Don't rely on this method
    */
   public async useHere() {
     return await evaluateAndReturn(this.page, () => WAPI.takeOver());
   }
 
   /**
-   * Logout whastapp
+   * Log out of WhatsApp
    * @returns boolean
    */
   public async logout() {
@@ -150,7 +151,7 @@ export class Whatsapp extends BusinessLayer {
 
       await browser.close().catch(() => null);
       /*
-      Code removed as it is not necessary.
+      Code was removed as it is not necessary.
       try {
         const process = browser.process();
         if (process) {
@@ -174,7 +175,7 @@ export class Whatsapp extends BusinessLayer {
   }
 
   /**
-   * Get message by id
+   * Get a message by its ID
    * @param messageId string
    * @returns Message object
    */
@@ -187,9 +188,9 @@ export class Whatsapp extends BusinessLayer {
   }
 
   /**
-   * Retorna uma lista de mensagens de um chat
-   * @param chatId string ID da conversa ou do grupo
-   * @param params GetMessagesParam Opções de filtragem de resultados (count, id, direction) veja {@link GetMessagesParam}.
+   * Returns a list of messages from a chat
+   * @param chatId string ID of the conversation or group
+   * @param params GetMessagesParam Result filtering options (count, id, direction) see {@link GetMessagesParam}.
    * @returns Message object
    */
   public async getMessages(chatId: string, params: GetMessagesParam = {}) {
@@ -203,7 +204,7 @@ export class Whatsapp extends BusinessLayer {
   /**
    * Decrypts message file
    * @param message Message object
-   * @returns Decrypted file buffer (null otherwise)
+   * @returns Decrypted file buffer (`null` otherwise)
    */
   public async decryptFile(message: Message) {
     const mediaUrl = message.clientUrl || message.deprecatedMms3Url;
@@ -212,7 +213,7 @@ export class Whatsapp extends BusinessLayer {
 
     if (!mediaUrl)
       throw new Error(
-        'message is missing critical data needed to download the file.'
+        'message is missing critical data (`mediaUrl`) needed to download the file.'
       );
     let haventGottenImageYet = true;
     let res: any;
@@ -232,10 +233,108 @@ export class Whatsapp extends BusinessLayer {
     return magix(buff, message.mediaKey, message.type, message.size);
   }
 
+  public async decryptAndSaveFile(
+    message: Message,
+    savePath: string
+  ): Promise<void> {
+    const mediaUrl = message.clientUrl || message.deprecatedMms3Url;
+
+    if (!mediaUrl) {
+      throw new Error(
+        'Message is missing critical data needed to download the file.'
+      );
+    }
+
+    try {
+      const tempSavePath: string = savePath + '.encrypted';
+      await this.downloadEncryptedFile(mediaUrl.trim(), tempSavePath);
+
+      const inputReadStream = fs.createReadStream(tempSavePath);
+      const outputWriteStream = fs.createWriteStream(savePath);
+      const decryptedStream = newMagix(
+        message.mediaKey,
+        message.type,
+        message.size
+      );
+
+      inputReadStream.pipe(decryptedStream).pipe(outputWriteStream);
+
+      await new Promise<void>((resolve, reject) => {
+        outputWriteStream.on('finish', () => {
+          console.log(
+            `Deciphering complete. Deleting the encrypted file: ${tempSavePath}`
+          );
+          fs.unlink(tempSavePath, (error) => {
+            if (error) {
+              console.error(
+                `Error deleting the input file: ${tempSavePath}`,
+                error
+              );
+              reject(error);
+            } else {
+              console.log('Encrypted file deleted successfully');
+              resolve();
+            }
+          });
+        });
+
+        outputWriteStream.on('error', (error) => {
+          console.error(`Error during writing file: ${savePath}`, error);
+          reject(error);
+        });
+
+        decryptedStream.on('error', (error) => {
+          console.error('An error occurred while decrypting the file', error);
+          reject(error);
+        });
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  downloadEncryptedFile = async (
+    url: string,
+    outputPath: string,
+    retries: number = 3
+  ) => {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const response = await axios.get(
+          url,
+          makeOptions(useragentOverride, 'stream')
+        );
+
+        await new Promise<void>((resolve, reject) => {
+          const writer = fs.createWriteStream(outputPath);
+          response.data.pipe(writer);
+          writer.on('finish', resolve);
+          writer.on('error', reject);
+        });
+
+        console.log(`Encrypted file downloaded at ${outputPath}`);
+        return;
+      } catch (error) {
+        console.error(`Attempt ${attempt} failed: `, error.message);
+        if (attempt === retries) {
+          console.error(
+            `${outputPath} - All attempt failed to download the file: ${url}`
+          );
+          throw error;
+        }
+
+        console.log(
+          `${outputPath} - Retrying to download the file: ${url} in 5 seconds...`
+        );
+        await sleep(5000);
+      }
+    }
+  };
+
   /**
-   * Rejeita uma ligação recebida pelo WhatsApp
-   * @param callId string ID da ligação, caso não passado, todas ligações serão rejeitadas
-   * @returns Número de ligações rejeitadas
+   * Rejects a call received via WhatsApp
+   * @param callId string Call ID, if not passed, all calls will be rejected
+   * @returns Number of rejected calls
    */
   public async rejectCall(callId?: string) {
     return await evaluateAndReturn(

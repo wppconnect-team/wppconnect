@@ -105,8 +105,20 @@ export async function initWhatsapp(
   token?: SessionToken,
   clear = true,
   version?: string,
+  proxy?: {
+    url: string;
+    username: string;
+    password: string;
+  },
   log?: (level: LogLevel, message: string, meta?: object) => any
 ) {
+  if (proxy) {
+    await page.authenticate({
+      username: proxy.username,
+      password: proxy.password,
+    });
+  }
+
   await page.setUserAgent(useragentOverride);
 
   await unregisterServiceWorker(page);
@@ -122,6 +134,7 @@ export async function initWhatsapp(
     timeout: 0,
     referer: 'https://whatsapp.com/',
   });
+
   log?.('verbose', 'WhatsApp WEB loaded');
   /*setTimeout(() => {
     log?.('verbose', `Loading WhatsApp WEB`);
@@ -170,8 +183,14 @@ export async function onLoadingScreen(
         let window2: any = window;
 
         let progressBar = window2.getElementByXpath(selectors.PROGRESS);
+        let progressBarNewTheme = window2.getElementByXpath(
+          selectors.PROGRESS_NEW_THEME
+        );
         let progressMessage = window2.getElementByXpath(
           selectors.PROGRESS_MESSAGE
+        );
+        let progressMessageNewTheme = window2.getElementByXpath(
+          selectors.PROGRESS_MESSAGE_NEW_THEME
         );
 
         if (progressBar) {
@@ -182,6 +201,19 @@ export async function onLoadingScreen(
             window2.loadingScreen(progressBar.value, progressMessage.innerText);
             this.lastPercent = progressBar.value;
             this.lastPercentMessage = progressMessage.innerText;
+          }
+        } else if (progressBarNewTheme) {
+          if (
+            this.lastPercent !== progressBarNewTheme.value ||
+            this.lastPercentMessage !== progressMessageNewTheme.innerText
+          ) {
+            const progressMsg =
+              progressMessageNewTheme.innerText != 'WhatsApp'
+                ? progressMessageNewTheme.innerText
+                : '';
+            window2.loadingScreen(progressBarNewTheme.value, progressMsg);
+            this.lastPercent = progressBarNewTheme.value;
+            this.lastPercentMessage = progressMsg;
           }
         }
       });
@@ -195,7 +227,9 @@ export async function onLoadingScreen(
     },
     {
       PROGRESS: "//*[@id='app']/div/div/div[2]/progress",
+      PROGRESS_NEW_THEME: "//*[@id='app']/div/div/div[3]/progress",
       PROGRESS_MESSAGE: "//*[@id='app']/div/div/div[3]",
+      PROGRESS_MESSAGE_NEW_THEME: "//*[@id='app']/div/div/div[2]",
     }
   );
 }
@@ -217,33 +251,19 @@ export async function injectApi(
   if (injected) {
     return;
   }
-
-  // Wait for some loaded modules
-  await page
-    .waitForFunction(
-      () => ((window as any)?.webpackChunkwhatsapp_web_client?.length || 0) > 3
-    )
-    .catch(() => null);
-
-  await sleep(100);
-
   await page.addScriptTag({
     path: require.resolve('@wppconnect/wa-js'),
   });
 
-  await page
-    .evaluate(() => {
-      WPP.chat.defaultSendMessageOptions.createChat = true;
-      WPP.conn.setKeepAlive(true);
-    })
-    .catch(() => false);
-
+  await page.evaluate(() => {
+    WPP.chat.defaultSendMessageOptions.createChat = true;
+    WPP.conn.setKeepAlive(true);
+  });
   await page.addScriptTag({
     path: require.resolve(
       path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
     ),
   });
-
   await onLoadingScreen(page, onLoadingScreenCallBack);
   // Make sure WAPI is initialized
   await page
@@ -292,13 +312,22 @@ export async function initBrowser(
     /**
      * Setting the headless mode to the old Puppeteer mode, when using the 'new' mode, results in an error on CentOS7 and Debian11.
      * Temporary fix.
+     *
+     * If proxy settings are provided, they are applied to the browser launch arguments.
+     * This allows the browser to use the specified proxy server for all network requests.
      */
+
+    const args = options.browserArgs
+      ? options.browserArgs
+      : [...puppeteerConfig.chromiumArgs];
+    if (options.proxy && options.proxy.url) {
+      args.push(`--proxy-server=${options.proxy.url}`);
+    }
+
     browser = await puppeteer.launch({
       headless: options.headless,
       devtools: options.devtools,
-      args: options.browserArgs
-        ? options.browserArgs
-        : [...puppeteerConfig.chromiumArgs],
+      args,
       ...options.puppeteerOptions,
     });
 

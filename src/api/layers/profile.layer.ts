@@ -82,6 +82,14 @@ export class ProfileLayer extends StatusLayer {
   }
 
   /**
+   * Gets current user profile status
+   * @category Profile
+   */
+  public getProfileStatus() {
+    return evaluateAndReturn(this.page, () => WPP.profile.getMyStatus());
+  }
+
+  /**
    * Sets the user's current profile photo
    * @category Profile
    * @param name
@@ -156,6 +164,13 @@ export class ProfileLayer extends StatusLayer {
       ({ name }) => WPP.profile.setMyProfileName(name),
       { name }
     );
+  }
+  /**
+   * Gets the current user profile name
+   * @category Profile
+   */
+  public getProfileName() {
+    return evaluateAndReturn(this.page, () => WPP.profile.getMyProfileName());
   }
   /**
    * Remove your profile picture

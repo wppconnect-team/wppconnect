@@ -15,7 +15,6 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Wid } from './wid';
 import { ProfilePicThumbObj } from './profile-pic-thumb';
 
 /**
@@ -23,7 +22,7 @@ import { ProfilePicThumbObj } from './profile-pic-thumb';
  */
 export interface Contact {
   formattedName: string;
-  id: Wid;
+  id: string;
   isBusiness: boolean;
   isEnterprise: boolean;
   isHighLevelVerified: any;
@@ -37,13 +36,13 @@ export interface Contact {
   msgs: any;
 
   /**
-   * Name of concat in your agenda
+   * Name of the contact in your agenda
    */
   name?: string;
   plaintextDisabled: boolean;
 
   /**
-   * @deprecated Depreciado em favor da função {@link getProfilePicFromServer}
+   * @deprecated Deprecated in favor of the function `getProfilePicFromServer` {@link getProfilePicFromServer}
    */
   profilePicThumbObj: ProfilePicThumbObj;
 

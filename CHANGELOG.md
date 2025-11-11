@@ -1,3 +1,105 @@
+## <small>1.37.5 (2025-09-16)</small>
+
+- chore: update wajs ([9b3f4d5](https://github.com/wppconnect-team/wppconnect/commit/9b3f4d5))
+
+## <small>1.37.4 (2025-08-29)</small>
+
+- fix(deps): update dependency @wppconnect/wa-version to ^1.5.2110 (#2555) ([baad13c](https://github.com/wppconnect-team/wppconnect/commit/baad13c)), closes [#2555](https://github.com/wppconnect-team/wppconnect/issues/2555)
+
+## <small>1.37.3 (2025-07-08)</small>
+
+- fix(deps): update dependency @wppconnect/wa-version to ^1.5.1804 (#2514) ([0503c9f](https://github.com/wppconnect-team/wppconnect/commit/0503c9f)), closes [#2514](https://github.com/wppconnect-team/wppconnect/issues/2514)
+
+## <small>1.37.2 (2025-05-28)</small>
+
+- fix: Upgrade whatsappversion ([9c06639](https://github.com/wppconnect-team/wppconnect/commit/9c06639))
+
+## <small>1.37.1 (2025-05-01)</small>
+
+- fix(deps): update dependency @wppconnect/wa-js to ^3.17.2 (#2490) ([95a6d9e](https://github.com/wppconnect-team/wppconnect/commit/95a6d9e)), closes [#2490](https://github.com/wppconnect-team/wppconnect/issues/2490)
+
+## 1.37.0 (2025-04-15)
+
+- build(deps-dev): update dependency @types/node to ^20.17.30 (#2481) ([dcd6088](https://github.com/wppconnect-team/wppconnect/commit/dcd6088)), closes [#2481](https://github.com/wppconnect-team/wppconnect/issues/2481)
+
+## <small>1.36.4 (2025-03-29)</small>
+
+- fix(deps): update dependency @wppconnect/wa-js to ^3.17.0 (#2473) ([597a6ac](https://github.com/wppconnect-team/wppconnect/commit/597a6ac)), closes [#2473](https://github.com/wppconnect-team/wppconnect/issues/2473)
+
+## <small>1.36.3 (2025-03-27)</small>
+
+- fix(deps): update dependency @wppconnect/wa-version to ^1.5.1244 (#2471) ([b83713c](https://github.com/wppconnect-team/wppconnect/commit/b83713c)), closes [#2471](https://github.com/wppconnect-team/wppconnect/issues/2471)
+
+## <small>1.36.2 (2025-03-26)</small>
+
+- fix: Fixed lint errors ([73da91f](https://github.com/wppconnect-team/wppconnect/commit/73da91f))
+
+## <small>1.36.1 (2025-03-21)</small>
+
+- chore: update workflow for launch release ([7dd3739](https://github.com/wppconnect-team/wppconnect/commit/7dd3739))
+
+## 1.36.0 (2025-03-21)
+
+- feat: Added client.onMessageEdit event (close #2092) ([874f8c4](https://github.com/wppconnect-team/wppconnect/commit/874f8c4)), closes [#2092](https://github.com/wppconnect-team/wppconnect/issues/2092)
+
+## <small>1.35.2 (2024-12-20)</small>
+
+- fix(deps): update dependency @wppconnect/wa-js to ^3.16.0 (#2425) ([28384fd](https://github.com/wppconnect-team/wppconnect/commit/28384fd)), closes [#2425](https://github.com/wppconnect-team/wppconnect/issues/2425)
+
+## <small>1.35.1 (2024-10-30)</small>
+
+- fix: Upgrade whatsappVersion to 2.3000.10173x ([2b609f5](https://github.com/wppconnect-team/wppconnect/commit/2b609f5))
+
+## 1.35.0 (2024-10-24)
+
+- fix(deps): update dependency @wppconnect/wa-version to ^1.5.557 (#2399) ([4bc22a5](https://github.com/wppconnect-team/wppconnect/commit/4bc22a5)), closes [#2399](https://github.com/wppconnect-team/wppconnect/issues/2399)
+
+## <small>1.34.2 (2024-09-27)</small>
+
+- build(deps): update dependency puppeteer to ^23.4.1 (#2349) ([fe16137](https://github.com/wppconnect-team/wppconnect/commit/fe16137)), closes [#2349](https://github.com/wppconnect-team/wppconnect/issues/2349)
+
+## <small>1.34.1 (2024-09-09)</small>
+
+- chore: rollback typedoc ([077ff9b](https://github.com/wppconnect-team/wppconnect/commit/077ff9b))
+
+## 1.34.0 (2024-09-09)
+
+- fix(deps): update dependency @wppconnect/wa-js to ^3.10.1 (#2336) ([cc29475](https://github.com/wppconnect-team/wppconnect/commit/cc29475)), closes [#2336](https://github.com/wppconnect-team/wppconnect/issues/2336)
+
+## <small>1.33.1 (2024-08-30)</small>
+
+- fix: Fixed client.openChatAt (close #2293) ([68e011c](https://github.com/wppconnect-team/wppconnect/commit/68e011c)), closes [#2293](https://github.com/wppconnect-team/wppconnect/issues/2293)
+
+## 1.33.0 (2024-08-05)
+
+- feat: Added client.closeChat function (close #2271) (#2290) ([539e5d9](https://github.com/wppconnect-team/wppconnect/commit/539e5d9)), closes [#2271](https://github.com/wppconnect-team/wppconnect/issues/2271) [#2290](https://github.com/wppconnect-team/wppconnect/issues/2290)
+
+## <small>1.32.4 (2024-07-16)</small>
+
+- fix(deps): update dependency @wppconnect/wa-js to ^3.6.0 (#2275) ([4d56011](https://github.com/wppconnect-team/wppconnect/commit/4d56011)), closes [#2275](https://github.com/wppconnect-team/wppconnect/issues/2275)
+
+## <small>1.32.3 (2024-06-24)</small>
+
+- chore: upgrade @wppconnect/wa-js ([50775a8](https://github.com/wppconnect-team/wppconnect/commit/50775a8))
+
+## <small>1.32.2 (2024-06-18)</small>
+
+- chore: Remove unused deps ([a600ce0](https://github.com/wppconnect-team/wppconnect/commit/a600ce0))
+
+## <small>1.32.1 (2024-06-17)</small>
+
+- fix: Fixed emitting events ([95e934d](https://github.com/wppconnect-team/wppconnect/commit/95e934d))
+
+## 1.32.0 (2024-06-12)
+
+- fix: Improovment whatsappVersion to 2.3000.10139x ([d246c58](https://github.com/wppconnect-team/wppconnect/commit/d246c58))
+
+## 1.31.1 (2024-06-12)
+
+### Bug Fixes
+
+- Downgrade whatsappVersion to 2.2413.x ([22ca707](https://github.com/wppconnect-team/wppconnect/commit/22ca707c17a66441a4c19098d238899992a7c4bc))
+
 # 1.31.0 (2024-06-10)
 
 ### Bug Fixes

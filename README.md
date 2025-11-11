@@ -62,6 +62,13 @@ Building WPPConnect is really simple, to build the entire project just run
 > npm run build
 ```
 
+# Update checking
+
+Whatsapp is in constant change. In order to tackle this issue, we suggest always keeping your Wppconnect package up-to-date.
+
+The method/function names won't change, only their core algorithm. This way you won't have to makes changes in your code at every update.
+They will remain the same forever but might experience deprecation.
+
 ## Maintainers
 
 Maintainers are needed, I cannot keep with all the updates by myself. If you are
