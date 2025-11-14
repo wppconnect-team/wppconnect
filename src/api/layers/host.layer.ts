@@ -608,4 +608,16 @@ export class HostLayer {
       WPP.conn.getBuildConstants()
     );
   }
+
+  /**
+   * Check if the account has been migrated to LID
+   * @category Host
+   * @returns true if the account has been migrated to LID, false otherwise
+   */
+  public async isLidMigrated(): Promise<boolean> {
+    return await evaluateAndReturn(
+      this.page,
+      () => WPP.whatsapp.functions.isLidMigrated() as boolean
+    );
+  }
 }
