@@ -15,10 +15,10 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Wid } from './wid';
 import { Chat } from './chat';
 import { Contact } from './contact';
 import { MessageType } from './enum';
+import { Wid } from './wid';
 
 /** available during the `onMessage` event */
 export interface Message {
@@ -116,6 +116,24 @@ export interface Message {
   recipients?: string[];
   /** exists for image and video types {@link GroupNotificationType} */
   caption?: string;
+  // Messages originated from ads have this ctwaContext
+  ctwaContext?: {
+    conversionSource?: string;
+    conversionData?: object;
+    sourceUrl?: string;
+    description?: string;
+    title?: string;
+    thumbnail?: string;
+    thumbnailUrl?: string;
+    mediaType?: number;
+    adContextPreviewDismissed?: boolean;
+    sourceApp?: string;
+    greetingMessageBody?: string;
+    automatedGreetingMessageShown?: boolean;
+    sourceId?: string;
+    originalImageUrl?: string;
+    mediaUrl?: string;
+  };
 }
 
 export interface MediaData {
