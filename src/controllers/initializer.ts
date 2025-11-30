@@ -248,7 +248,7 @@ export async function create(
     if (mergedOptions.waitForLogin) {
       const isLogged = await client.waitForLogin();
       if (!isLogged) {
-        throw 'Not Logged';
+        throw new Error('Not Logged');
       }
 
       let waitLoginPromise = null;
