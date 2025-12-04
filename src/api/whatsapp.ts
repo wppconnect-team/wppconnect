@@ -227,7 +227,7 @@ export class Whatsapp extends BusinessLayer {
         }
       }
     } catch (error) {
-      throw 'Error trying to download the file.';
+      throw new Error('Error trying to download the file.');
     }
     const buff = Buffer.from(res.data, 'binary');
     return magix(buff, message.mediaKey, message.type, message.size);
