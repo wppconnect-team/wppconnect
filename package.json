@@ -120,7 +120,7 @@
     "sharp": "0.34.5",
     "tmp": "^0.2.5",
     "tree-kill": "^1.2.2",
-    "winston": "^3.18.3",
+    "winston": "^3.19.0",
     "ws": "^8.18.3"
   },
   "optionalDependencies": {
