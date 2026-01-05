@@ -6,7 +6,7 @@ on:
       - 'v*'
 permissions:
   id-token: write 
-  contents: read
+  contents: write
   
 jobs:
   publish:
@@ -42,7 +42,6 @@ jobs:
         run: npm ci || npm install
         env:
           PUPPETEER_SKIP_DOWNLOAD: true
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish in NPM
         run: npm publish

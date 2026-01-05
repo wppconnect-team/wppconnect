@@ -33,7 +33,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wppconnect-team/wppconnect.git"
+    "url": "https://github.com/wppconnect-team/wppconnect.git"
   },
   "keywords": [
     "whatsapp",
