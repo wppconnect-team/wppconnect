@@ -1,3 +1,7 @@
+## <small>1.37.9 (2026-01-05)</small>
+
+- fix: Upgrade whatsapp version ([5a02155](https://github.com/wppconnect-team/wppconnect/commit/5a02155))
+
 ## <small>1.37.8 (2025-11-26)</small>
 
 - Merge pull request #2628 from wppconnect-team/manfe/bump-wa-js-versions ([f4117cb](https://github.com/wppconnect-team/wppconnect/commit/f4117cb)), closes [#2628](https://github.com/wppconnect-team/wppconnect/issues/2628)
