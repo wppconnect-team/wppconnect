@@ -121,7 +121,7 @@
     "tmp": "^0.2.5",
     "tree-kill": "^1.2.2",
     "winston": "^3.19.0",
-    "ws": "^8.18.3"
+    "ws": "^8.19.0"
   },
   "optionalDependencies": {
     "@img/sharp-win32-x64": "^0.34.5",
