@@ -20,6 +20,19 @@ export const _profilePicfunc = async (id) => {
   let pic = WPP.whatsapp.ProfilePicThumbStore.get(wid);
 
   if (!pic) {
+    try {
+      // Forçar carregar contato para popular ProfilePicThumbStore
+      if (WPP.contact && typeof WPP.contact.queryExists === 'function') {
+        await WPP.contact.queryExists(id);
+      }
+      // Tentar buscar contato do store
+      if (WPP.contact && typeof WPP.contact.getContact === 'function') {
+        await WPP.contact.getContact(id);
+      }
+    } catch (e) {
+      // Falha silenciosa - continua mesmo se não conseguir carregar
+    }
+
     pic = await WPP.whatsapp.ProfilePicThumbStore.find(wid);
   }
 
