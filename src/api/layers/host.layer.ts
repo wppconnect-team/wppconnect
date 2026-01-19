@@ -397,7 +397,7 @@ export class HostLayer {
         this.log('warn', 'Login Fail');
         this.statusFind?.('qrReadFail', this.session);
         this.tryAutoClose();
-        throw 'Failed to read the QRCode';
+        throw new Error('Failed to read the QRCode');
       }
     } else if (authenticated === true) {
       this.log('http', 'Authenticated');
@@ -417,7 +417,7 @@ export class HostLayer {
         this.log('warn', 'Phone not connected');
         this.statusFind?.('phoneNotConnected', this.session);
         this.tryAutoClose();
-        throw 'Phone not connected';
+        throw new Error('Phone not connected');
       }
       this.cancelAutoClose();
       return true;
@@ -426,23 +426,23 @@ export class HostLayer {
     if (authenticated === false) {
       this.tryAutoClose();
       this.log('warn', 'Not logged');
-      throw 'Not logged';
+      throw new Error('Not logged');
     }
 
     this.tryAutoClose();
 
     if (this.autoCloseCalled) {
       this.log('error', 'Auto Close Called');
-      throw 'Auto Close Called';
+      throw new Error('Auto Close Called');
     }
 
     if (this.page.isClosed()) {
       this.log('error', 'Page Closed');
-      throw 'Page Closed';
+      throw new Error('Page Closed');
     }
 
     this.log('error', 'Unknow error');
-    throw 'Unknow error';
+    throw new Error('Unknow error');
   }
 
   /**
