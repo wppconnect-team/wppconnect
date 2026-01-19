@@ -94,7 +94,7 @@
   },
   "dependencies": {
     "@wppconnect/wa-js": "^3.19.8",
-    "@wppconnect/wa-version": "^1.5.2981",
+    "@wppconnect/wa-version": "^1.5.3081",
     "atob": "^2.1.2",
     "axios": "^1.13.2",
     "boxen": "^5.1.2",
@@ -108,7 +108,7 @@
     "logform": "^2.7.0",
     "lookpath": "^1.2.3",
     "mime-types": "^3.0.2",
-    "puppeteer": "^24.34.0",
+    "puppeteer": "^24.35.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
     "puppeteer-extra-plugin-user-data-dir": "^2.4.1",

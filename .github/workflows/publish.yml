@@ -5,9 +5,9 @@ on:
     tags:
       - 'v*'
 permissions:
-  id-token: write 
+  id-token: write
   contents: write
-  
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -21,7 +21,7 @@ jobs:
         run: git fetch --tags -f || true
 
       - name: Setup Node
-        uses: actions/setup-node@v6.1.0
+        uses: actions/setup-node@v6.2.0
         with:
           node-version: 24.13.0
           registry-url: 'https://registry.npmjs.org'
