@@ -1,3 +1,7 @@
+## <small>1.37.10 (2026-01-19)</small>
+
+- Merge pull request #2629 from uriva/master ([61670a9](https://github.com/wppconnect-team/wppconnect/commit/61670a9)), closes [#2629](https://github.com/wppconnect-team/wppconnect/issues/2629)
+
 ## <small>1.37.9 (2026-01-05)</small>
 
 - fix: Upgrade whatsapp version ([5a02155](https://github.com/wppconnect-team/wppconnect/commit/5a02155))
