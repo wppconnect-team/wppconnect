@@ -108,7 +108,7 @@
     "logform": "^2.7.0",
     "lookpath": "^1.2.3",
     "mime-types": "^3.0.2",
-    "puppeteer": "^24.34.0",
+    "puppeteer": "^24.35.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
     "puppeteer-extra-plugin-user-data-dir": "^2.4.1",
