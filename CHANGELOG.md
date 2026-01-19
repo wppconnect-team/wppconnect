@@ -1,3 +1,7 @@
+## <small>1.37.11 (2026-01-19)</small>
+
+- chore(deps): update setup-node action to v6.2.0 and bump wa-version and puppeteer dependencies (#267 ([6da2727](https://github.com/wppconnect-team/wppconnect/commit/6da2727)), closes [#2670](https://github.com/wppconnect-team/wppconnect/issues/2670)
+
 ## <small>1.37.10 (2026-01-19)</small>
 
 - Merge pull request #2629 from uriva/master ([61670a9](https://github.com/wppconnect-team/wppconnect/commit/61670a9)), closes [#2629](https://github.com/wppconnect-team/wppconnect/issues/2629)
