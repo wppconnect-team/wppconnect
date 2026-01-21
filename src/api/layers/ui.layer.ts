@@ -15,10 +15,11 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { AutoDownloadSettings, Theme } from '@wppconnect/wa-js/dist/conn';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
-import { Wid, Chat } from '../model';
+import { Wid } from '../model';
 import { GroupLayer } from './group.layer';
 
 export class UILayer extends GroupLayer {
@@ -71,5 +72,55 @@ export class UILayer extends GroupLayer {
    */
   public getActiveChat() {
     return evaluateAndReturn(this.page, () => WPP.chat.getActiveChat());
+  }
+
+  /**
+   * Get current theme
+   * @category UI
+   * @returns Current theme ('dark' or 'light')
+   */
+  public async getTheme() {
+    return await evaluateAndReturn(this.page, () => WPP.conn.getTheme());
+  }
+
+  /**
+   * Set theme
+   * Note: This will force a reload of WhatsApp Web to take effect
+   * @category UI
+   * @param theme Theme to set ('dark' or 'light')
+   * @returns void
+   */
+  public async setTheme(theme: Theme) {
+    return await evaluateAndReturn(
+      this.page,
+      (theme) => WPP.conn.setTheme(theme),
+      theme
+    );
+  }
+
+  /**
+   * Get auto download settings
+   * @category UI
+   * @returns Auto download settings
+   */
+  public async getAutoDownloadSettings() {
+    return await evaluateAndReturn(this.page, () =>
+      WPP.conn.getAutoDownloadSettings()
+    );
+  }
+
+  /**
+   * Set auto download settings
+   * Note: This will force a reload of WhatsApp Web to take effect
+   * @category UI
+   * @param settings Auto download settings to set
+   * @returns void
+   */
+  public async setAutoDownloadSettings(settings: AutoDownloadSettings) {
+    return await evaluateAndReturn(
+      this.page,
+      (settings) => WPP.conn.setAutoDownloadSettings(settings),
+      settings
+    );
   }
 }

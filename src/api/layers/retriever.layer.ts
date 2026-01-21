@@ -94,15 +94,6 @@ export class RetrieverLayer extends SenderLayer {
   }
 
   /**
-   * Receive the current theme
-   * @category Host
-   * @returns string light or dark
-   */
-  public async getTheme() {
-    return await evaluateAndReturn(this.page, () => WAPI.getTheme());
-  }
-
-  /**
    * Receive all blocked contacts
    * @category Blocklist
    * @returns array of [0,1,2,3....]
