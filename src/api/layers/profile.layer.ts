@@ -58,15 +58,6 @@ export class ProfileLayer extends StatusLayer {
   }
 
   /**
-   * Change the theme
-   * @category Host
-   * @param string types "dark" or "light"
-   */
-  public setTheme(type: string) {
-    return evaluateAndReturn(this.page, (type) => WAPI.setTheme(type), type);
-  }
-
-  /**
    * Sets current user profile status
    * @category Profile
    * @param status
