@@ -16,6 +16,7 @@
  */
 
 import { ChatListOptions } from '@wppconnect/wa-js/dist/chat';
+import { GetMessagesFromRowIdOptions } from '@wppconnect/wa-js/dist/indexdb';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { SessionToken } from '../../token-store';
@@ -655,15 +656,13 @@ export class RetrieverLayer extends SenderLayer {
    * @param options Options for fetching messages
    * @returns Promise that resolves to an array of message objects from IndexedDB
    */
-  public async getMessagesFromRowId(options: {
-    minRowId: number;
-    limit?: number;
-  }): Promise<any[]> {
+  public async getMessagesFromRowId(
+    input: GetMessagesFromRowIdOptions
+  ): Promise<any[]> {
     return await evaluateAndReturn(
       this.page,
-      // TODO: Change to WPP.indexdb.getMessagesFromRowId when version is released with this function
-      (options) => (WPP as any).indexdb.getMessagesFromRowId(options),
-      options
+      (options) => WPP.indexdb.getMessagesFromRowId(options),
+      input
     );
   }
 }
