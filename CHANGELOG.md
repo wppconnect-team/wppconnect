@@ -1,3 +1,9 @@
+# 1.40.0 (2026-02-27)
+
+### Features
+
+- add event listener for new chat and expose onNewChat method ([#2712](https://github.com/wppconnect-team/wppconnect/issues/2712)) ([081f355](https://github.com/wppconnect-team/wppconnect/commit/081f35543bac9181bccfc1e815b1c7c5e4123cdd))
+
 # 1.39.0 (2026-02-27)
 
 ### Features
