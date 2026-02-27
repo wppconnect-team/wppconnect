@@ -15,6 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { MsgKey } from '@wppconnect/wa-js/dist/whatsapp';
 import { EventEmitter, captureRejectionSymbol } from 'events';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
@@ -23,19 +24,18 @@ import { ExposedFn } from '../helpers/exposed.enum';
 import {
   Ack,
   Chat,
+  IncomingCall,
   LiveLocation,
   Message,
   ParticipantEvent,
   PresenceEvent,
   Wid,
-  IncomingCall,
 } from '../model';
-import { MessageType, SocketState, SocketStream } from '../model/enum';
+import { SocketState, SocketStream } from '../model/enum';
 import { InterfaceMode } from '../model/enum/interface-mode';
 import { InterfaceState } from '../model/enum/interface-state';
-import { ProfileLayer } from './profile.layer';
 import { Label } from '../model/label';
-import { MsgKey } from '@wppconnect/wa-js/dist/whatsapp';
+import { ProfileLayer } from './profile.layer';
 
 declare global {
   interface Window {
@@ -92,6 +92,8 @@ export class ListenerLayer extends ProfileLayer {
       'onPollResponse',
       'onUpdateLabel',
       'onOrderStatusUpdate',
+      'onParticipantsChanged',
+      'onNewChat',
     ];
 
     for (const func of functions) {
@@ -121,7 +123,7 @@ export class ListenerLayer extends ProfileLayer {
     await this.page
       .evaluate(() => {
         try {
-          if (!window['onMessage'].exposed) {
+          if (!window['onMessage']?.exposed) {
             WPP.on('chat.new_message', (msg) => {
               if (msg.isSentByMe || msg.isStatusV3) {
                 return;
@@ -138,7 +140,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onAck'].exposed) {
+          if (!window['onAck']?.exposed) {
             window.WAPI.waitNewAcknowledgements(window['onAck']);
             window['onAck'].exposed = true;
           }
@@ -146,7 +148,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onMessageEdit'].exposed) {
+          if (!window['onMessageEdit']?.exposed) {
             WPP.on('chat.msg_edited', (data) => {
               const eventData = {
                 chat: data.chat,
@@ -161,7 +163,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onAnyMessage'].exposed) {
+          if (!window['onAnyMessage']?.exposed) {
             WPP.on('chat.new_message', (msg) => {
               const serialized = WAPI.processMessageObj(msg, true, false);
               if (serialized) {
@@ -174,7 +176,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onStateChange'].exposed) {
+          if (!window['onStateChange']?.exposed) {
             window.WAPI.onStateChange(window['onStateChange']);
             window['onStateChange'].exposed = true;
           }
@@ -182,7 +184,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onStreamChange'].exposed) {
+          if (!window['onStreamChange']?.exposed) {
             window.WAPI.onStreamChange(window['onStreamChange']);
             window['onStreamChange'].exposed = true;
           }
@@ -190,7 +192,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onAddedToGroup'].exposed) {
+          if (!window['onAddedToGroup']?.exposed) {
             window.WAPI.onAddedToGroup(window['onAddedToGroup']);
             window['onAddedToGroup'].exposed = true;
           }
@@ -198,7 +200,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onIncomingCall'].exposed) {
+          if (!window['onIncomingCall']?.exposed) {
             window.WAPI.onIncomingCall(window['onIncomingCall']);
             window['onIncomingCall'].exposed = true;
           }
@@ -206,7 +208,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onInterfaceChange'].exposed) {
+          if (!window['onInterfaceChange']?.exposed) {
             window.WAPI.onInterfaceChange(window['onInterfaceChange']);
             window['onInterfaceChange'].exposed = true;
           }
@@ -214,7 +216,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onNotificationMessage'].exposed) {
+          if (!window['onNotificationMessage']?.exposed) {
             window.WAPI.onNotificationMessage(window['onNotificationMessage']);
             window['onNotificationMessage'].exposed = true;
           }
@@ -222,7 +224,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onPresenceChanged'].exposed) {
+          if (!window['onPresenceChanged']?.exposed) {
             WPP.on('chat.presence_change', window['onPresenceChanged']);
             window['onPresenceChanged'].exposed = true;
           }
@@ -230,7 +232,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onLiveLocation'].exposed) {
+          if (!window['onLiveLocation']?.exposed) {
             window.WAPI.onLiveLocation(window['onLiveLocation']);
             window['onLiveLocation'].exposed = true;
           }
@@ -238,7 +240,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onRevokedMessage'].exposed) {
+          if (!window['onRevokedMessage']?.exposed) {
             WPP.on('chat.msg_revoke', (data) => {
               const eventData = {
                 author: data.author,
@@ -255,7 +257,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onReactionMessage'].exposed) {
+          if (!window['onReactionMessage']?.exposed) {
             WPP.on('chat.new_reaction', (data) => {
               const eventData = {
                 id: data.id,
@@ -274,7 +276,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onPollResponse'].exposed) {
+          if (!window['onPollResponse']?.exposed) {
             WPP.on('chat.poll_response', (data) => {
               const eventData = {
                 msgId: data.msgId,
@@ -291,7 +293,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onUpdateLabel'].exposed) {
+          if (!window['onUpdateLabel']?.exposed) {
             WPP.on('chat.update_label', (data) => {
               const eventData = {
                 chat: data.chat,
@@ -307,7 +309,7 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onOrderStatusUpdate'].exposed) {
+          if (!window['onOrderStatusUpdate']?.exposed) {
             WPP.on('order.payment_status', (data) => {
               const eventData = {
                 method: data.method,
@@ -323,11 +325,21 @@ export class ListenerLayer extends ProfileLayer {
           console.error(error);
         }
         try {
-          if (!window['onParticipantsChanged'].exposed) {
+          if (!window['onParticipantsChanged']?.exposed) {
             WPP.on('group.participant_changed', (participantChangedEvent) => {
               window['onParticipantsChanged'](participantChangedEvent);
             });
             window['onParticipantsChanged'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        try {
+          if (!window['onNewChat']?.exposed) {
+            WPP.on('chat.new_chat', (chat) => {
+              window['onNewChat'](chat);
+            });
+            window['onNewChat'].exposed = true;
           }
         } catch (error) {
           console.error(error);
@@ -703,5 +715,13 @@ export class ListenerLayer extends ProfileLayer {
     }) => any
   ) {
     return this.registerEvent('onOrderStatusUpdate', callback);
+  }
+
+  /**
+   * @event Listens to chats being added to ChatStore (Cache Layer)
+   * @returns Disposable object to stop the listening
+   */
+  public onNewChat(callback: (chat: Chat) => any) {
+    return this.registerEvent('onNewChat', callback);
   }
 }
