@@ -1,3 +1,9 @@
+# 1.39.0 (2026-02-27)
+
+### Features
+
+- update @wppconnect/wa-js to version 3.22.0 and refactor getMessagesFromRowId method ([#2710](https://github.com/wppconnect-team/wppconnect/issues/2710)) ([88c8457](https://github.com/wppconnect-team/wppconnect/commit/88c845786e419cd6e3187fe4e78cdfaf32f78cdd))
+
 ## 1.38.0 (2026-01-21)
 
 - feat(ui): add theme and auto download settings management methods (#2677) ([b2a63d3](https://github.com/wppconnect-team/wppconnect/commit/b2a63d3)), closes [#2677](https://github.com/wppconnect-team/wppconnect/issues/2677)
