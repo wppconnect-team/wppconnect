@@ -1,3 +1,9 @@
+## 1.40.1 (2026-02-28)
+
+### Bug Fixes
+
+- bump wa-js version ([#2713](https://github.com/wppconnect-team/wppconnect/issues/2713)) ([4647644](https://github.com/wppconnect-team/wppconnect/commit/46476440010e8c12e02dbfb1ba962342c3c1a39e))
+
 # 1.40.0 (2026-02-27)
 
 ### Features
