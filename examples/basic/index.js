@@ -14,12 +14,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
-const wppconnect = require('../../dist');
+import { create } from '../../dist/index.js';
 
-wppconnect
-  .create({
-    headless: false,
-  })
+create({
+  headless: false,
+  onStreamModeChanged: (mode) => {
+    console.log('Stream mode changed:', mode);
+  },
+  onStreamInfoChanged: (info) => {
+    console.log('Stream info changed:', info);
+  },
+})
   .then((client) => start(client))
   .catch((error) => {
     console.log(error);

@@ -16,6 +16,7 @@
  */
 
 import { MsgKey } from '@wppconnect/wa-js/dist/whatsapp';
+import { StreamInfo, StreamMode } from '@wppconnect/wa-js/dist/whatsapp/enums';
 import { EventEmitter, captureRejectionSymbol } from 'events';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
@@ -43,6 +44,8 @@ declare global {
     onAnyMessage: any;
     onStateChange: any;
     onStreamChange: any;
+    onStreamModeChanged: any;
+    onStreamInfoChanged: any;
     onIncomingCall: any;
     onAck: any;
     onMessageEdit: any;
@@ -187,6 +190,22 @@ export class ListenerLayer extends ProfileLayer {
           if (!window['onStreamChange']?.exposed) {
             window.WAPI.onStreamChange(window['onStreamChange']);
             window['onStreamChange'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        try {
+          if (!window['onStreamModeChanged']?.exposed) {
+            window.WAPI.onStreamModeChanged(window['onStreamModeChanged']);
+            window['onStreamModeChanged'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        try {
+          if (!window['onStreamInfoChanged']?.exposed) {
+            window.WAPI.onStreamInfoChanged(window['onStreamInfoChanged']);
+            window['onStreamInfoChanged'].exposed = true;
           }
         } catch (error) {
           console.error(error);
@@ -404,11 +423,28 @@ export class ListenerLayer extends ProfileLayer {
   }
 
   /**
+   * @deprecated in favor of {@link onStreamModeChanged}
    * @event Returns the current state of the connection
    * @returns Disposable object to stop the listening
    */
   public onStreamChange(callback: (state: SocketStream) => void) {
     return this.registerEvent(ExposedFn.onStreamChange, callback);
+  }
+
+  /**
+   * @event Listens to Stream mode changes
+   * @returns Disposable object to stop the listening
+   */
+  public onStreamModeChanged(callback: (mode: StreamMode) => void) {
+    return this.registerEvent(ExposedFn.onStreamModeChanged, callback);
+  }
+
+  /**
+   * @event Listens to Stream info changes
+   * @returns Disposable object to stop the listening
+   */
+  public onStreamInfoChanged(callback: (info: StreamInfo) => void) {
+    return this.registerEvent(ExposedFn.onStreamInfoChanged, callback);
   }
 
   /**

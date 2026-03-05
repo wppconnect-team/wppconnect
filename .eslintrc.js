@@ -96,5 +96,13 @@ module.exports = {
         node: true,
       },
     },
+    {
+      files: ['examples/**/*.js'],
+      env: {
+        node: true,
+        commonjs: true,
+        es6: true,
+      },
+    },
   ],
 };

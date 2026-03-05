@@ -15,12 +15,10 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Whatsapp } from '../api/whatsapp';
-import { CreateConfig, defaultOptions } from '../config/create-config';
-import { initBrowser, getOrCreatePage } from './browser';
-import { checkUpdates, welcomeScreen } from './welcome';
-import { SocketState, StatusFind } from '../api/model/enum';
+import * as fs from 'fs';
+import * as path from 'path';
 import { Browser } from 'puppeteer';
+import sanitize from 'sanitize-filename';
 import {
   CatchQRCallback,
   CreateOptions,
@@ -28,12 +26,13 @@ import {
   LoadingScreenCallback,
   StatusFindCallback,
 } from '../api/model/initializer';
+import { Whatsapp } from '../api/whatsapp';
+import { CreateConfig, defaultOptions } from '../config/create-config';
 import { SessionToken } from '../token-store';
 import { defaultLogger } from '../utils/logger';
-import * as path from 'path';
-import * as fs from 'fs';
-import sanitize from 'sanitize-filename';
 import { sleep } from '../utils/sleep';
+import { getOrCreatePage, initBrowser } from './browser';
+import { checkUpdates, welcomeScreen } from './welcome';
 
 process.on(
   'unhandledRejection',
@@ -111,6 +110,9 @@ export async function create(
         sessionOrOption.browserSessionToken || browserSessionToken;
     }
   }
+
+  const { onStreamModeChanged, onStreamInfoChanged } =
+    sessionOrOption as CreateOptions; // Only available in new create method
 
   const mergedOptions = { ...defaultOptions, ...options };
 
@@ -242,6 +244,13 @@ export async function create(
     client.statusFind = statusFind;
     client.onLoadingScreen = onLoadingScreen;
     client.catchLinkCode = catchLinkCode;
+
+    if (onStreamModeChanged) {
+      client.onStreamModeChanged(onStreamModeChanged);
+    }
+    if (onStreamInfoChanged) {
+      client.onStreamInfoChanged(onStreamInfoChanged);
+    }
 
     await client.start();
 

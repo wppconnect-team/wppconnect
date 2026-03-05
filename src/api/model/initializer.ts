@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
+import { StreamInfo, StreamMode } from '@wppconnect/wa-js/dist/whatsapp/enums';
 import { CreateConfig } from '../../config/create-config';
 import { SessionToken } from '../../token-store';
 import { StatusFind } from './enum';
@@ -40,6 +41,16 @@ export type StatusFindCallback = (
  * A callback will be received, informing data as percentage and loading screen message
  */
 export type LoadingScreenCallback = (percent: number, message: string) => void;
+
+/**
+ * A callback will be received, informing the stream mode has changed
+ */
+export type OnStreamModeCallback = (mode: StreamMode) => void;
+
+/**
+ * A callback will be received, informing the stream info has changed
+ */
+export type OnStreamInfoCallback = (info: StreamInfo) => void;
 
 /**
  * A callback will be received, informing a code to you connect
@@ -70,6 +81,15 @@ export interface CreateOptions extends CreateConfig {
    * A callback will be received, informing data as percentage and loading screen message
    */
   onLoadingScreen?: LoadingScreenCallback;
+
+  /**
+   * A callback will be received, informing the stream mode has changed
+   */
+  onStreamModeChanged?: OnStreamModeCallback;
+  /**
+   * A callback will be received, informing the stream info has changed
+   */
+  onStreamInfoChanged?: OnStreamInfoCallback;
   /**
    * Pass the session token information you can receive this token with the await client.getSessionTokenBrowser () function
    * @deprecated in favor of `sessionToken`

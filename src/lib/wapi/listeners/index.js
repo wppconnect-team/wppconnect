@@ -15,13 +15,18 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export { initNewMessagesListener } from './init-listeners';
-export { addNewMessagesListener } from './add-new-messages';
 export { allNewMessagesListener } from './add-all-new-messages';
-export { addOnStateChange, addOnStreamChange } from './add-on-state-change';
-export { addOnNewAcks } from './add-on-new-ack';
+export { addNewMessagesListener } from './add-new-messages';
+export { addOnAddedToGroup } from './add-on-added-to-group';
 export { addOnLiveLocation } from './add-on-live-location';
+export { addOnNewAcks } from './add-on-new-ack';
+export { addOnNotificationMessage } from './add-on-notification-message';
 export { addOnParticipantsChange } from './add-on-participants-change';
 export { addOnPresenceChanged } from './add-on-presence-changed';
-export { addOnAddedToGroup } from './add-on-added-to-group';
-export { addOnNotificationMessage } from './add-on-notification-message';
+export {
+  addOnStateChange,
+  addOnStreamChange,
+  addOnStreamInfoChanged,
+  addOnStreamModeChanged,
+} from './add-on-state-change';
+export { initNewMessagesListener } from './init-listeners';
