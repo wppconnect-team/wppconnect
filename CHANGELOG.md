@@ -1,3 +1,9 @@
+# 1.41.0 (2026-03-05)
+
+### Features
+
+- exposing new stream events and bump wa-version lib ([#2716](https://github.com/wppconnect-team/wppconnect/issues/2716)) ([7c6355e](https://github.com/wppconnect-team/wppconnect/commit/7c6355e5f3e6b0cbeb2066dc3441c959be8d80f5))
+
 ## 1.40.1 (2026-02-28)
 
 ### Bug Fixes
