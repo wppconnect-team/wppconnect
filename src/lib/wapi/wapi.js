@@ -15,10 +15,12 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { getBusinessProfilesProducts, getOrderbyMsg } from './business';
 import {
   _getGroupParticipants,
   areAllMessagesLoaded,
   asyncLoadAllEarlierMessages,
+  createProduct,
   downloadFile,
   encryptAndUploadFile,
   forwardMessages,
@@ -36,68 +38,67 @@ import {
   getChat,
   getChatById,
   getChatByName,
+  getchatId,
   getCommonGroups,
   getContact,
   getGroupMetadata,
   getGroupParticipantIDs,
   getHost,
-  getWid,
+  getListMute,
   getMe,
   getMessageById,
+  getMessages,
   getMyContacts,
   getNewId,
   getNumberProfile,
+  getSessionTokenBrowser,
+  getTheme,
   getUnreadMessages,
   getUnreadMessagesInChat,
+  getWid,
   hasUndreadMessages,
+  interfaceMute,
   isConnected,
   isLoggedIn,
   loadAllEarlierMessages,
   loadAndGetAllMessagesInChat,
   loadChatEarlierMessages,
   loadEarlierMessagesTillDate,
+  pinChat,
   processFiles,
   processMessageObj,
-  sendMessageOptions,
+  scope,
   sendChatstate,
+  sendExist,
   sendFile,
-  sendPtt,
   sendImage,
   sendImageWithProduct,
-  createProduct,
+  sendLinkPreview,
   sendLocation,
   sendMessage,
   sendMessage2,
+  sendMessageOptions,
   sendMessageWithTags,
   sendMessageWithThumb,
+  sendMute,
+  sendPtt,
   sendVideoAsGif,
   setMyName,
-  getTheme,
-  setTheme,
-  sendLinkPreview,
-  scope,
-  getchatId,
-  sendExist,
+  setOnlinePresence,
   setProfilePic,
-  pinChat,
-  getSessionTokenBrowser,
-  sendMute,
-  getListMute,
-  interfaceMute,
+  setTemporaryMessages,
+  setTheme,
+  starMessages,
   startPhoneWatchdog,
   stopPhoneWatchdog,
-  setTemporaryMessages,
-  starMessages,
   subscribePresence,
   unsubscribePresence,
-  getMessages,
-  setOnlinePresence,
 } from './functions';
 import {
+  arrayBufferToBase64,
   base64ToFile,
   generateMediaKey,
   getFileHash,
-  arrayBufferToBase64,
 } from './helper';
 import {
   addNewMessagesListener,
@@ -113,15 +114,14 @@ import {
   initNewMessagesListener,
 } from './listeners';
 import {
+  _profilePicfunc,
   _serializeChatObj,
   _serializeContactObj,
   _serializeMessageObj,
   _serializeNumberStatusObj,
   _serializeProfilePicThumb,
   _serializeRawObj,
-  _profilePicfunc,
 } from './serializers';
-import { getBusinessProfilesProducts, getOrderbyMsg } from './business';
 import { storeObjects } from './store/store-objects';
 
 const readyPromise = new Promise((resolve) => {
@@ -507,6 +507,22 @@ if (typeof window.WAPI === 'undefined') {
     callback(getData());
     WPP.whatsapp.Stream.on('change:info change:displayInfo change:mode', () => {
       callback(getData());
+    });
+    return true;
+  };
+
+  window.WAPI.onStreamModeChanged = function (callback) {
+    callback(WPP.conn.getStreamData().mode);
+    WPP.on('conn.stream_mode_changed', (mode) => {
+      callback(mode);
+    });
+    return true;
+  };
+
+  window.WAPI.onStreamInfoChanged = function (callback) {
+    callback(WPP.conn.getStreamData().info);
+    WPP.on('conn.stream_info_changed', (info) => {
+      callback(info);
     });
     return true;
   };

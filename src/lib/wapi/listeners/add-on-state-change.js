@@ -31,6 +31,9 @@ export function addOnStateChange() {
   };
 }
 
+/**
+ * @deprecated in favor of {@link addOnStreamModeChanged}
+ */
 export function addOnStreamChange() {
   let initialized = false;
   let getData = () => {
@@ -42,6 +45,24 @@ export function addOnStreamChange() {
       initialized = true;
       callback(getData());
     }
+    return true;
+  };
+}
+
+export function addOnStreamModeChanged() {
+  window.WAPI.onStreamModeChanged = function (callback) {
+    WPP.on('conn.stream_mode_changed', (mode) => {
+      callback(mode);
+    });
+    return true;
+  };
+}
+
+export function addOnStreamInfoChanged() {
+  window.WAPI.onStreamInfoChanged = function (callback) {
+    WPP.on('conn.stream_info_changed', (info) => {
+      callback(info);
+    });
     return true;
   };
 }

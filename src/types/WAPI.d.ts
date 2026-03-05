@@ -18,9 +18,7 @@
 import {
   Chat,
   Contact,
-  ContactStatus,
   GetMessagesParam,
-  GroupCreation,
   HostDevice,
   Id,
   Message,
@@ -30,7 +28,6 @@ import {
   SendFileResult,
   SendLinkResult,
   SendPttResult,
-  SendStickerResult,
   WhatsappProfile,
 } from '../api/model';
 import { SessionToken } from '../token-store';
@@ -102,7 +99,13 @@ interface WAPI {
   onNotificationMessage: (callback: (message: Message) => void) => any;
   onParticipantsChanged: (groupId: string, callback: Function) => any;
   onStateChange: (callback: Function) => void;
+  /**
+   *
+   * @deprecated in favor of {@link onStreamModeChanged}
+   */
   onStreamChange: (callback: Function) => void;
+  onStreamModeChanged: (callback: Function) => void;
+  onStreamInfoChanged: (callback: Function) => void;
   onPresenceChanged: (callback: (presence: PresenceEvent) => void) => void;
   pinChat: (
     chatId: string,

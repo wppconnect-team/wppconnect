@@ -23,7 +23,9 @@ export enum ExposedFn {
   onNotificationMessage = 'onNotificationMessage',
   onParticipantsChanged = 'onParticipantsChanged',
   onStateChange = 'onStateChange',
-  onStreamChange = 'onStreamChange',
+  onStreamChange = 'onStreamChange', // deprecated
+  onStreamModeChanged = 'onStreamModeChanged',
+  onStreamInfoChanged = 'onStreamInfoChanged',
   onIncomingCall = 'onIncomingCall',
   onInterfaceChange = 'onInterfaceChange',
   onPresenceChanged = 'onPresenceChanged',
