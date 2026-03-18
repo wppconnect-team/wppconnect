@@ -1,3 +1,9 @@
+## 1.41.1 (2026-03-18)
+
+### Bug Fixes
+
+- t is not a function ([#2718](https://github.com/wppconnect-team/wppconnect/issues/2718)) ([3d65a1c](https://github.com/wppconnect-team/wppconnect/commit/3d65a1cf0ff0ea70d38e79d9a2b788f1050845ed))
+
 # 1.41.0 (2026-03-05)
 
 ### Features
