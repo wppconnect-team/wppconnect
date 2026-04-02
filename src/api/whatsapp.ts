@@ -95,10 +95,22 @@ export class Whatsapp extends BusinessLayer {
       messageId = messageId.id;
     }
 
+    if (!messageId) {
+      throw new Error(
+        'downloadMedia: messageId is undefined or null. ' +
+          'Make sure the message object (e.g. quotedMsgObj) exists before calling downloadMedia.'
+      );
+    }
+
     return await evaluateAndReturn(
       this.page,
-      async (messageId) =>
-        WPP.util.blobToBase64(await WPP.chat.downloadMedia(messageId)),
+      async (messageId) => {
+        const media = await WPP.chat.downloadMedia(messageId);
+        if (!media) {
+          throw new Error(`downloadMedia: no media found for message id "${messageId}". The message may not contain downloadable media.`);
+        }
+        return WPP.util.blobToBase64(media);
+      },
       messageId
     );
   }
