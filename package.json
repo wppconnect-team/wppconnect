@@ -76,7 +76,7 @@
     "conventional-changelog-cli": "^5.0.0",
     "eslint": "10.1.0",
     "eslint-config-prettier": "^10.1.8",
-    "@tony.ganchev/eslint-plugin-header": "^3.3.4",
+    "@tony.ganchev/eslint-plugin-header": "^3.4.3",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^17.4.0",
     "husky": "^9.1.7",
