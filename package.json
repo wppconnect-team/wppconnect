@@ -90,7 +90,7 @@
     "typedoc": "^0.28.18",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.58.1",
-    "webpack": "^5.105.4",
+    "webpack": "^5.106.1",
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
