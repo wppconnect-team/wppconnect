@@ -78,7 +78,7 @@
     "eslint-config-prettier": "^10.1.8",
     "@tony.ganchev/eslint-plugin-header": "^3.4.3",
     "eslint-plugin-prettier": "^5.5.5",
-    "globals": "^17.4.0",
+    "globals": "^17.5.0",
     "husky": "^9.1.7",
     "mocha": "^11.7.5",
     "prettier": "^2.8.8",
