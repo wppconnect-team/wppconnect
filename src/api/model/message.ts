@@ -134,6 +134,7 @@ export interface Message {
     originalImageUrl?: string;
     mediaUrl?: string;
   };
+  viewMode?: string;
 }
 
 export interface MediaData {
