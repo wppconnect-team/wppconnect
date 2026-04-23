@@ -1,3 +1,9 @@
+## 1.41.3 (2026-04-23)
+
+### Features
+
+- add optional viewMode and associationType property to Message interface ([#2755](https://github.com/wppconnect-team/wppconnect/issues/2755)) ([454128a](https://github.com/wppconnect-team/wppconnect/commit/454128a74c0afc2291b5a21beaa940cca35744dd))
+
 ## 1.41.2 (2026-04-17)
 
 ### Bug Fixes
