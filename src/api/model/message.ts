@@ -135,6 +135,7 @@ export interface Message {
     mediaUrl?: string;
   };
   viewMode?: string;
+  associationType?: string;
 }
 
 export interface MediaData {
