@@ -107,7 +107,9 @@ export class Whatsapp extends BusinessLayer {
       async (messageId) => {
         const media = await WPP.chat.downloadMedia(messageId);
         if (!media) {
-          throw new Error(`downloadMedia: no media found for message id "${messageId}". The message may not contain downloadable media.`);
+          throw new Error(
+            `downloadMedia: no media found for message id "${messageId}". The message may not contain downloadable media.`
+          );
         }
         return WPP.util.blobToBase64(media);
       },
