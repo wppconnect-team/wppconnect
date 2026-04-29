@@ -31,6 +31,10 @@ create({
   });
 
 function start(client) {
+  client.onBackendEvent((eventName, ...args) => {
+    console.log('Backend event:', eventName, args);
+  });
+
   client.onMessage((message) => {
     if (message.body === 'hi' && message.isGroupMsg === false) {
       client

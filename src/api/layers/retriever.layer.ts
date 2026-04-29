@@ -181,6 +181,9 @@ export class RetrieverLayer extends SenderLayer {
     );
   }
 
+  // TODO: implement usernameExists(username: string, key?: string) wrapping
+  // WPP.contact.queryUsernameExists — added in wa-js v4.0.0, address in a future version.
+
   /**
    * Retrieves all chats with messages
    * Deprecated in favor of {@link listChats}
