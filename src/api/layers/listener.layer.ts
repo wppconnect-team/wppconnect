@@ -15,7 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { MsgKey } from '@wppconnect/wa-js/dist/whatsapp';
+import { BackendEventName, MsgKey } from '@wppconnect/wa-js/dist/whatsapp';
 import { StreamInfo, StreamMode } from '@wppconnect/wa-js/dist/whatsapp/enums';
 import { EventEmitter, captureRejectionSymbol } from 'events';
 import { Page } from 'puppeteer';
@@ -363,6 +363,16 @@ export class ListenerLayer extends ProfileLayer {
         } catch (error) {
           console.error(error);
         }
+        try {
+          if (!window['onBackendEvent']?.exposed) {
+            WPP.on('conn.backend_event', (eventName, ...args) => {
+              window['onBackendEvent'](eventName, ...args);
+            });
+            window['onBackendEvent'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
       })
       .catch(() => {});
   }
@@ -445,6 +455,17 @@ export class ListenerLayer extends ProfileLayer {
    */
   public onStreamInfoChanged(callback: (info: StreamInfo) => void) {
     return this.registerEvent(ExposedFn.onStreamInfoChanged, callback);
+  }
+
+  /**
+   * @event Listens to all internal WhatsApp Web BackendEventBus events.
+   * The first argument is the event name; additional arguments vary by event.
+   * @returns Disposable object to stop the listening
+   */
+  public onBackendEvent(
+    callback: (eventName: BackendEventName, ...args: any[]) => void
+  ) {
+    return this.registerEvent(ExposedFn.onBackendEvent, callback);
   }
 
   /**
