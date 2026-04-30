@@ -1,3 +1,9 @@
+# 2.0.0 (2026-04-30)
+
+### Features
+
+- support to wa-js v4 ([#2759](https://github.com/wppconnect-team/wppconnect/issues/2759)) ([16d05cd](https://github.com/wppconnect-team/wppconnect/commit/16d05cd6b7078a3c0a78acc676a12057b28091cc))
+
 ## 1.41.3 (2026-04-23)
 
 ### Features
