@@ -129,7 +129,7 @@ const readyPromise = new Promise((resolve) => {
     resolve();
     return;
   }
-  WPP.webpack.onReady(resolve);
+  WPP.loader.onReady(resolve);
 });
 
 if (typeof window.Store === 'undefined') {
@@ -139,7 +139,7 @@ if (typeof window.Store === 'undefined') {
   readyPromise.then(() => {
     for (const store of storeObjects) {
       window.Store.promises[store.id] = Promise.resolve(
-        WPP.webpack.search(store.conditions)
+        WPP.loader.search(store.conditions)
       )
         .then((m) => {
           if (!m) {
@@ -540,7 +540,7 @@ if (typeof window.WAPI === 'undefined') {
    * @todo Temporary fix while is not implemented on WA-JS
    */
   window.WAPI.isRegistered = function () {
-    const m = WPP.webpack.search((m) => m.isRegistered);
+    const m = WPP.loader.search((m) => m.isRegistered);
     return m.isRegistered();
   };
 

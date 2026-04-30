@@ -16,15 +16,15 @@
  */
 
 import axios from 'axios';
+import * as fs from 'fs';
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../config/create-config';
 import { useragentOverride } from '../config/WAuserAgente';
+import { sleep } from '../utils/sleep';
 import { evaluateAndReturn } from './helpers';
 import { magix, makeOptions, newMagix, timeout } from './helpers/decrypt';
 import { BusinessLayer } from './layers/business.layer';
 import { GetMessagesParam, Message } from './model';
-import * as fs from 'fs';
-import { sleep } from '../utils/sleep';
 
 export class Whatsapp extends BusinessLayer {
   private connected: boolean | null = null;
@@ -55,7 +55,7 @@ export class Whatsapp extends BusinessLayer {
         setTimeout(async () => {
           if (this.statusFind) {
             try {
-              this.statusFind('disconnectedMobile', session);
+              this.statusFind('disconnectedMobile', session || '');
             } catch (error) {}
           }
         }, 1000);
@@ -107,7 +107,9 @@ export class Whatsapp extends BusinessLayer {
       async (messageId) => {
         const media = await WPP.chat.downloadMedia(messageId);
         if (!media) {
-          throw new Error(`downloadMedia: no media found for message id "${messageId}". The message may not contain downloadable media.`);
+          throw new Error(
+            `downloadMedia: no media found for message id "${messageId}". The message may not contain downloadable media.`
+          );
         }
         return WPP.util.blobToBase64(media);
       },
@@ -183,7 +185,7 @@ export class Whatsapp extends BusinessLayer {
   public getPID() {
     const browser = this.page.browser();
     const process = browser.process();
-    return process.pid;
+    return process?.pid;
   }
 
   /**
@@ -327,7 +329,9 @@ export class Whatsapp extends BusinessLayer {
         console.log(`Encrypted file downloaded at ${outputPath}`);
         return;
       } catch (error) {
-        console.error(`Attempt ${attempt} failed: `, error.message);
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
+        console.error(`Attempt ${attempt} failed: `, errorMessage);
         if (attempt === retries) {
           console.error(
             `${outputPath} - All attempt failed to download the file: ${url}`

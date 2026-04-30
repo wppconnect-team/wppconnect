@@ -30,4 +30,5 @@ export enum ExposedFn {
   onInterfaceChange = 'onInterfaceChange',
   onPresenceChanged = 'onPresenceChanged',
   onLiveLocation = 'onLiveLocation',
+  onBackendEvent = 'onBackendEvent',
 }
