@@ -37,7 +37,7 @@ export async function downloadFileToBase64(
       responseType: 'arraybuffer',
     });
 
-    const mimeType = response.headers['content-type'];
+    const mimeType = String(response.headers['content-type'] ?? '');
 
     if (_mines.length) {
       const isValidMime = _mines.some((m) => {

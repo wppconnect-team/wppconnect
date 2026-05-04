@@ -94,10 +94,10 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "@wppconnect/wa-js": "^4.0.0",
+    "@wppconnect/wa-js": "^4.1.0",
     "@wppconnect/wa-version": "^1.5.3829",
     "atob": "^2.1.2",
-    "axios": "^1.15.0",
+    "axios": "^1.16.0",
     "boxen": "^5.1.2",
     "catch-exit": "^2.0.0",
     "chalk": "~4.1.2",
