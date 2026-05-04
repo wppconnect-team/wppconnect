@@ -365,8 +365,8 @@ export class ListenerLayer extends ProfileLayer {
         }
         try {
           if (!window['onBackendEvent']?.exposed) {
-            WPP.on('conn.backend_event', (args) => {
-              window['onBackendEvent'](args);
+            WPP.on('conn.backend_event', (eventName, ...args) => {
+              window['onBackendEvent'](eventName, ...args);
             });
             window['onBackendEvent'].exposed = true;
           }

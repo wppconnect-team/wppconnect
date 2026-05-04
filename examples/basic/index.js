@@ -18,6 +18,7 @@ import { create } from '../../dist/index.js';
 
 create({
   headless: false,
+  autoClose: 0, // turn off auto close
   onStreamModeChanged: (mode) => {
     console.log('Stream mode changed:', mode);
   },
