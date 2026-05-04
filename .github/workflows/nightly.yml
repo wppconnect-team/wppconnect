@@ -66,7 +66,7 @@ jobs:
           tag_name: nightly
 
       - name: Update Nightly Release
-        uses: meeDamian/github-release@2.0
+        uses: meeDamian/github-release@v2.0.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
