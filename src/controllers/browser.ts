@@ -34,29 +34,6 @@ import { LoadingScreenCallback } from '../api/model';
 import { LogLevel } from '../utils/logger';
 import { sleep } from '../utils/sleep';
 
-export async function unregisterServiceWorker(page: Page) {
-  await page.evaluateOnNewDocument(() => {
-    // Remove existent service worker
-    navigator.serviceWorker
-      .getRegistrations()
-      .then((registrations) => {
-        for (let registration of registrations) {
-          registration.unregister();
-        }
-      })
-      .catch((err) => null);
-
-    // Disable service worker registration
-    // @ts-ignore
-    navigator.serviceWorker.register = new Promise(() => {});
-
-    setInterval(() => {
-      window.onerror = console.error;
-      window.onunhandledrejection = console.error;
-    }, 500);
-  });
-}
-
 /**
  * Força o carregamento de uma versão específica do WhatsApp WEB
  * @param page Página a ser injetada
@@ -120,8 +97,6 @@ export async function initWhatsapp(
   }
 
   await page.setUserAgent(useragentOverride);
-
-  await unregisterServiceWorker(page);
 
   if (version) {
     log?.('verbose', `Setting WhatsApp WEB version to ${version}`);
