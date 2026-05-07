@@ -1,3 +1,9 @@
+## 2.0.3-alpha.0 (2026-05-07)
+
+### Features
+
+- add alpha tag support for npm publish and release process ([ab7603a](https://github.com/wppconnect-team/wppconnect/commit/ab7603a928211762d69a2bdf8a7fb5cbfd94ac58))
+
 ## 2.0.2 (2026-05-04)
 
 ### Bug Fixes
