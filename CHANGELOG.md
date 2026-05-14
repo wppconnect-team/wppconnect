@@ -1,3 +1,9 @@
+## 2.0.3-alpha.1 (2026-05-14)
+
+### Bug Fixes
+
+- version to increment it ([38f4e56](https://github.com/wppconnect-team/wppconnect/commit/38f4e567e5ba2f9ec65987581e0441391c8546ff))
+
 ## 2.0.2 (2026-05-04)
 
 ### Bug Fixes
