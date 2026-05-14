@@ -15,24 +15,21 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import * as waVersion from '@wppconnect/wa-version';
+import axios from 'axios';
 import * as ChromeLauncher from 'chrome-launcher';
 import * as os from 'os';
 import * as path from 'path';
+import puppeteer, { Browser, BrowserContext, Page } from 'puppeteer';
 import * as rimraf from 'rimraf';
-import * as waVersion from '@wppconnect/wa-version';
-import axios from 'axios';
-import { Browser, BrowserContext, Page } from 'puppeteer';
-import puppeteer from 'puppeteer-extra';
+import { Logger } from 'winston';
+import { LoadingScreenCallback } from '../api/model';
 import { CreateConfig } from '../config/create-config';
 import { puppeteerConfig } from '../config/puppeteer.config';
-import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { useragentOverride } from '../config/WAuserAgente';
-import { WebSocketTransport } from './websocket';
-import { Logger } from 'winston';
 import { SessionToken } from '../token-store';
-import { LoadingScreenCallback } from '../api/model';
 import { LogLevel } from '../utils/logger';
-import { sleep } from '../utils/sleep';
+import { WebSocketTransport } from './websocket';
 
 export async function unregisterServiceWorker(page: Page) {
   await page.evaluateOnNewDocument(() => {
@@ -154,8 +151,8 @@ export async function initWhatsapp(
   return page;
 }
 
-let lastPercent = null;
-let lastPercentMessage = null;
+let lastPercent: number | null = null;
+let lastPercentMessage: string | null = null;
 export async function onLoadingScreen(
   page: Page,
   onLoadingScreenCallBack?: LoadingScreenCallback
@@ -195,25 +192,25 @@ export async function onLoadingScreen(
 
         if (progressBar) {
           if (
-            this.lastPercent !== progressBar.value ||
-            this.lastPercentMessage !== progressMessage.innerText
+            lastPercent !== progressBar.value ||
+            lastPercentMessage !== progressMessage.innerText
           ) {
             window2.loadingScreen(progressBar.value, progressMessage.innerText);
-            this.lastPercent = progressBar.value;
-            this.lastPercentMessage = progressMessage.innerText;
+            lastPercent = progressBar.value;
+            lastPercentMessage = progressMessage.innerText;
           }
         } else if (progressBarNewTheme) {
           if (
-            this.lastPercent !== progressBarNewTheme.value ||
-            this.lastPercentMessage !== progressMessageNewTheme.innerText
+            lastPercent !== progressBarNewTheme.value ||
+            lastPercentMessage !== progressMessageNewTheme.innerText
           ) {
             const progressMsg =
               progressMessageNewTheme.innerText != 'WhatsApp'
                 ? progressMessageNewTheme.innerText
                 : '';
             window2.loadingScreen(progressBarNewTheme.value, progressMsg);
-            this.lastPercent = progressBarNewTheme.value;
-            this.lastPercentMessage = progressMsg;
+            lastPercent = progressBarNewTheme.value;
+            lastPercentMessage = progressMsg;
           }
         }
       });
@@ -301,10 +298,7 @@ export async function initBrowser(
     }
   }
 
-  // Use stealth plugin to avoid being detected as a bot
-  puppeteer.use(StealthPlugin());
-
-  let browser = null;
+  let browser: Browser | null = null;
   if (options.browserWS && options.browserWS != '') {
     const transport = await getTransport(options.browserWS);
     browser = await puppeteer.connect({ transport });
@@ -335,7 +329,7 @@ export async function initBrowser(
     try {
       const arg = browser
         .process()
-        .spawnargs.find((s: string) => s.startsWith('--user-data-dir='));
+        ?.spawnargs.find((s: string) => s.startsWith('--user-data-dir='));
 
       if (arg) {
         const tmpUserDataDir = arg.split('=')[1];

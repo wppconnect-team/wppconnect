@@ -239,6 +239,13 @@ export async function create(
   if (page) {
     await page.setBypassCSP(true);
 
+    // Grant persistent-storage permission so WhatsApp Web's IndexedDB is never
+    // evicted by Chrome under memory pressure (prevents storage-related disconnections)
+    await page
+      .browserContext()
+      .overridePermissions('https://web.whatsapp.com', ['persistent-storage'])
+      .catch(() => null);
+
     const client = new Whatsapp(page, session, mergedOptions);
     client.catchQR = catchQR;
     client.statusFind = statusFind;
