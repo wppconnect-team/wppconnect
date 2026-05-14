@@ -11,7 +11,7 @@ on:
           - patch
           - minor
           - major
-          - pre*
+          - alpha
         default: 'patch'
 
 jobs:
@@ -51,4 +51,9 @@ jobs:
           PUPPETEER_SKIP_DOWNLOAD: true
 
       - name: Release
-        run: 'npx release-it --increment ${{ github.event.inputs.increment }}'
+        run: |
+          if [ "${{ github.event.inputs.increment }}" = "alpha" ]; then
+            npx release-it --preRelease=alpha --ci
+          else
+            npx release-it --increment ${{ github.event.inputs.increment }} --ci
+          fi
