@@ -1,3 +1,9 @@
+## 2.0.3-alpha.2 (2026-05-14)
+
+### Bug Fixes
+
+- more attempts from wa-js ([3c5d70d](https://github.com/wppconnect-team/wppconnect/commit/3c5d70d54aec76e011875ed3a86e7ce50e02c863))
+
 ## 2.0.3-alpha.1 (2026-05-14)
 
 ### Bug Fixes
