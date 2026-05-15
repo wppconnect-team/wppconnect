@@ -1,3 +1,9 @@
+# 2.1.0-alpha.0 (2026-05-15)
+
+### Features
+
+- removed wajs patches ([dedbbeb](https://github.com/wppconnect-team/wppconnect/commit/dedbbeb5076c866f453dfa65f9d83f20d78f1654))
+
 ## 2.0.2 (2026-05-04)
 
 ### Bug Fixes
