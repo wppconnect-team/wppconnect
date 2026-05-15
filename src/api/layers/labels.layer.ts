@@ -18,9 +18,9 @@
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
-import { CatalogLayer } from './catalog.layer';
+import { ListsLayer } from './lists.layer';
 
-export class LabelsLayer extends CatalogLayer {
+export class LabelsLayer extends ListsLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
   }
