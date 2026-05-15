@@ -5,14 +5,21 @@ on:
     inputs:
       increment:
         type: choice
-        description: 'Tipo de incremento: patch, minor, major ou pre*'
+        description: 'Tipo de incremento: patch, minor, major, prepatch, preminor, premajor ou prerelease'
         required: true
         options:
           - patch
           - minor
           - major
-          - pre*
+          - prepatch
+          - preminor
+          - premajor
+          - prerelease
         default: 'patch'
+      preRelease:
+        type: string
+        description: 'Tag de pré-lançamento (ex: alpha, beta, rc). Deixe vazio para versões estáveis.'
+        required: false
 
 jobs:
   release:
@@ -51,4 +58,9 @@ jobs:
           PUPPETEER_SKIP_DOWNLOAD: true
 
       - name: Release
-        run: 'npx release-it --increment ${{ github.event.inputs.increment }}'
+        run: |
+          RELEASE_ARGS="--increment ${{ github.event.inputs.increment }}"
+          if [ -n "${{ github.event.inputs.preRelease }}" ]; then
+            RELEASE_ARGS="$RELEASE_ARGS --preRelease ${{ github.event.inputs.preRelease }}"
+          fi
+          npx release-it $RELEASE_ARGS
