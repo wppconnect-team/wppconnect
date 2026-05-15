@@ -44,7 +44,12 @@ jobs:
           PUPPETEER_SKIP_DOWNLOAD: true
 
       - name: Publish in NPM
-        run: npm publish
+        run: |
+          if [[ "${{ github.ref }}" == *"-alpha"* ]]; then
+            npm publish --tag alpha
+          else
+            npm publish
+          fi
 
       - name: Generate Changelog
         id: generate_changelog
@@ -65,7 +70,7 @@ jobs:
           release_name: ${{ github.ref }}
           body: ${{ steps.generate_changelog.outputs.changelog }}
           draft: false
-          prerelease: false
+          prerelease: ${{ contains(github.ref, '-alpha') }}
 
       - name: Build API-Docs
         run: npm run docs:build
