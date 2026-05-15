@@ -1,3 +1,9 @@
+# 2.1.0 (2026-05-15)
+
+### Features
+
+- bump @wppconnect/wa-js to ^4.2.0 and @wppconnect/wa-version to ^1.5.3941 ([#2779](https://github.com/wppconnect-team/wppconnect/issues/2779)) ([3ec91eb](https://github.com/wppconnect-team/wppconnect/commit/3ec91eb11cda9cf3743307f17bb20366ba710301))
+
 ## 2.0.2 (2026-05-04)
 
 ### Bug Fixes
