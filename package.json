@@ -63,6 +63,7 @@
     "@commitlint/config-conventional": "^20.5.3",
     "@commitlint/cz-commitlint": "^20.5.3",
     "@eslint/js": "^10.0.1",
+    "@tony.ganchev/eslint-plugin-header": "^3.4.4",
     "@types/atob": "^2.1.4",
     "@types/mime-types": "^3.0.1",
     "@types/mocha": "^10.0.10",
@@ -76,7 +77,6 @@
     "conventional-changelog-cli": "^5.0.0",
     "eslint": "10.4.0",
     "eslint-config-prettier": "^10.1.8",
-    "@tony.ganchev/eslint-plugin-header": "^3.4.4",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^17.6.0",
     "husky": "^9.1.7",
@@ -94,7 +94,7 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "@wppconnect/wa-js": "^4.2.0",
+    "@wppconnect/wa-js": "^4.3.0",
     "@wppconnect/wa-version": "^1.5.3941",
     "atob": "^2.1.2",
     "axios": "^1.16.1",
