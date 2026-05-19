@@ -1,3 +1,9 @@
+# 2.2.0 (2026-05-19)
+
+### Features
+
+- add ListsLayer for personal account chat grouping (WPP.lists) ([#2780](https://github.com/wppconnect-team/wppconnect/issues/2780)) ([dca5aa0](https://github.com/wppconnect-team/wppconnect/commit/dca5aa0c0dc6201b083a344c3c64a295eea77973))
+
 # 2.1.0 (2026-05-15)
 
 ### Features
