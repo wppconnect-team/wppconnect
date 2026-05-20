@@ -360,10 +360,12 @@ export class SenderLayer extends ListenerLayer {
           mentionedList: mentionedList,
         });
 
+        let awaitedResult = await result.sendMsgResult;
+
         return {
           ack: result.ack,
           id: result.id,
-          sendMsgResult: await result.sendMsgResult,
+          sendMsgResult: awaitedResult,
         };
       },
       {
@@ -548,10 +550,12 @@ export class SenderLayer extends ListenerLayer {
           messageId: messageId,
         });
 
+        let awaitedResult = await result.sendMsgResult;
+
         return {
           ack: result.ack,
           id: result.id,
-          sendMsgResult: await result.sendMsgResult,
+          sendMsgResult: awaitedResult,
         };
       },
       { to, base64, filename, caption, quotedMessageId, messageId, isPtt }
@@ -749,10 +753,13 @@ export class SenderLayer extends ListenerLayer {
       this.page,
       async ({ to, base64, options }) => {
         const result = await WPP.chat.sendFileMessage(to, base64, options);
+
+        let awaitedResult = await result.sendMsgResult;
+
         return {
           ack: result.ack,
           id: result.id,
-          sendMsgResult: await result.sendMsgResult,
+          sendMsgResult: awaitedResult,
         };
       },
       { to, base64, options: options as any }
@@ -823,10 +830,12 @@ export class SenderLayer extends ListenerLayer {
           waitForAck: true,
         });
 
+        let awaitedResult = await result.sendMsgResult;
+
         return {
           ack: result.ack,
           id: result.id,
-          sendMsgResult: await result.sendMsgResult,
+          sendMsgResult: awaitedResult,
         };
       },
       { to, base64, filename, caption, quotedMessageId }
@@ -1205,10 +1214,12 @@ export class SenderLayer extends ListenerLayer {
       async ({ to, options }) => {
         const result = await WPP.chat.sendLocationMessage(to, options);
 
+        let awaitedResult = await result.sendMsgResult;
+
         return {
           ack: result.ack,
           id: result.id,
-          sendMsgResult: await result.sendMsgResult,
+          sendMsgResult: awaitedResult,
         };
       },
       { to, options: options as any }
