@@ -51,6 +51,98 @@ export class SenderLayer extends ListenerLayer {
     super(page, session, options);
   }
 
+  private async sendFileMessage(
+    to: string | Wid,
+    base64: string,
+    options: FileMessageOptions
+  ) {
+    return evaluateAndReturn(
+      this.page,
+      async ({ to, base64, options }) => {
+        const serializeWid = (wid: any) => {
+          if (!wid || typeof wid !== 'object') {
+            return wid;
+          }
+
+          return wid._serialized || wid.serialized || wid.user || wid.id;
+        };
+
+        const serializeMessageId = (id: any) => {
+          if (!id || typeof id !== 'object') {
+            return id;
+          }
+
+          const serialized =
+            id._serialized ||
+            id.serialized ||
+            (typeof id.toString === 'function' ? id.toString() : undefined);
+
+          if (serialized && serialized !== '[object Object]') {
+            return serialized;
+          }
+
+          return {
+            fromMe: id.fromMe,
+            remote: serializeWid(id.remote),
+            id: id.id,
+            _serialized: id._serialized,
+          };
+        };
+
+        const serializeMessage = (message: any) => {
+          if (!message || typeof message !== 'object') {
+            return message;
+          }
+
+          return {
+            id: serializeMessageId(message.id),
+            ack: message.ack,
+            type: message.type,
+            subtype: message.subtype,
+            from: serializeWid(message.from),
+            to: serializeWid(message.to),
+            author: serializeWid(message.author),
+            fromMe: message.fromMe || message.id?.fromMe,
+            t: message.t,
+          };
+        };
+
+        const serializeSendMsgResult = (sendMsgResult: any) => {
+          if (!sendMsgResult || typeof sendMsgResult !== 'object') {
+            return sendMsgResult;
+          }
+
+          const serialized: any = {};
+
+          for (const key of Object.keys(sendMsgResult)) {
+            const value = sendMsgResult[key];
+            if (
+              value === null ||
+              ['string', 'number', 'boolean'].includes(typeof value)
+            ) {
+              serialized[key] = value;
+            }
+          }
+
+          if ('msg' in sendMsgResult) {
+            serialized.msg = serializeMessage(sendMsgResult.msg);
+          }
+
+          return serialized;
+        };
+
+        const result = await WPP.chat.sendFileMessage(to, base64, options);
+
+        return {
+          ack: result.ack,
+          id: serializeMessageId(result.id),
+          sendMsgResult: serializeSendMsgResult(await result.sendMsgResult),
+        };
+      },
+      { to, base64, options: options as any }
+    );
+  }
+
   /**
    * Automatically sends a link with the auto generated link preview. You can also add a custom message to be added.
    *
@@ -336,47 +428,17 @@ export class SenderLayer extends ListenerLayer {
 
     filename = filenameFromMimeType(filename, mimeType);
 
-    const result = await evaluateAndReturn(
-      this.page,
-      async ({
-        to,
-        base64,
-        filename,
-        caption,
-        quotedMessageId,
-        isViewOnce,
-        mentionedList,
-        options,
-      }) => {
-        const result = await WPP.chat.sendFileMessage(to, base64, {
-          type: 'image',
-          isViewOnce,
-          messageId: options?.msgId,
-          filename,
-          caption,
-          quotedMsg: quotedMessageId,
-          waitForAck: true,
-          detectMentioned: true,
-          mentionedList: mentionedList,
-        });
-
-        return {
-          ack: result.ack,
-          id: result.id,
-          sendMsgResult: await result.sendMsgResult,
-        };
-      },
-      {
-        to,
-        base64,
-        filename,
-        caption,
-        quotedMessageId,
-        isViewOnce,
-        mentionedList,
-        options,
-      }
-    );
+    const result = await this.sendFileMessage(to, base64, {
+      type: 'image',
+      isViewOnce,
+      messageId: options?.msgId,
+      filename,
+      caption,
+      quotedMsg: quotedMessageId,
+      waitForAck: true,
+      detectMentioned: true,
+      mentionedList: mentionedList,
+    } as any);
 
     return result;
   }
@@ -527,35 +589,15 @@ export class SenderLayer extends ListenerLayer {
     messageId?: string,
     isPtt: boolean = true
   ) {
-    const result = await evaluateAndReturn(
-      this.page,
-      async ({
-        to,
-        base64,
-        filename,
-        caption,
-        quotedMessageId,
-        messageId,
-        isPtt,
-      }) => {
-        const result = await WPP.chat.sendFileMessage(to, base64, {
-          type: 'audio',
-          isPtt: isPtt,
-          filename,
-          caption,
-          quotedMsg: quotedMessageId,
-          waitForAck: true,
-          messageId: messageId,
-        });
-
-        return {
-          ack: result.ack,
-          id: result.id,
-          sendMsgResult: await result.sendMsgResult,
-        };
-      },
-      { to, base64, filename, caption, quotedMessageId, messageId, isPtt }
-    );
+    const result = await this.sendFileMessage(to, base64, {
+      type: 'audio',
+      isPtt: isPtt,
+      filename,
+      caption,
+      quotedMsg: quotedMessageId,
+      waitForAck: true,
+      messageId: messageId,
+    } as any);
 
     return result;
   }
@@ -745,18 +787,7 @@ export class SenderLayer extends ListenerLayer {
       throw error;
     }
 
-    return evaluateAndReturn(
-      this.page,
-      async ({ to, base64, options }) => {
-        const result = await WPP.chat.sendFileMessage(to, base64, options);
-        return {
-          ack: result.ack,
-          id: result.id,
-          sendMsgResult: await result.sendMsgResult,
-        };
-      },
-      { to, base64, options: options as any }
-    );
+    return this.sendFileMessage(to, base64, options);
   }
 
   /**
@@ -811,26 +842,14 @@ export class SenderLayer extends ListenerLayer {
     caption?: string,
     quotedMessageId?: string
   ) {
-    const result = await evaluateAndReturn(
-      this.page,
-      async ({ to, base64, filename, caption, quotedMessageId }) => {
-        const result = await WPP.chat.sendFileMessage(to, base64, {
-          type: 'video',
-          isGif: true,
-          filename,
-          caption,
-          quotedMsg: quotedMessageId,
-          waitForAck: true,
-        });
-
-        return {
-          ack: result.ack,
-          id: result.id,
-          sendMsgResult: await result.sendMsgResult,
-        };
-      },
-      { to, base64, filename, caption, quotedMessageId }
-    );
+    const result = await this.sendFileMessage(to, base64, {
+      type: 'video',
+      isGif: true,
+      filename,
+      caption,
+      quotedMsg: quotedMessageId,
+      waitForAck: true,
+    } as any);
 
     return result;
   }
@@ -1203,12 +1222,84 @@ export class SenderLayer extends ListenerLayer {
     return await evaluateAndReturn(
       this.page,
       async ({ to, options }) => {
+        const serializeWid = (wid: any) => {
+          if (!wid || typeof wid !== 'object') {
+            return wid;
+          }
+
+          return wid._serialized || wid.serialized || wid.user || wid.id;
+        };
+
+        const serializeMessageId = (id: any) => {
+          if (!id || typeof id !== 'object') {
+            return id;
+          }
+
+          const serialized =
+            id._serialized ||
+            id.serialized ||
+            (typeof id.toString === 'function' ? id.toString() : undefined);
+
+          if (serialized && serialized !== '[object Object]') {
+            return serialized;
+          }
+
+          return {
+            fromMe: id.fromMe,
+            remote: serializeWid(id.remote),
+            id: id.id,
+            _serialized: id._serialized,
+          };
+        };
+
+        const serializeMessage = (message: any) => {
+          if (!message || typeof message !== 'object') {
+            return message;
+          }
+
+          return {
+            id: serializeMessageId(message.id),
+            ack: message.ack,
+            type: message.type,
+            subtype: message.subtype,
+            from: serializeWid(message.from),
+            to: serializeWid(message.to),
+            author: serializeWid(message.author),
+            fromMe: message.fromMe || message.id?.fromMe,
+            t: message.t,
+          };
+        };
+
+        const serializeSendMsgResult = (sendMsgResult: any) => {
+          if (!sendMsgResult || typeof sendMsgResult !== 'object') {
+            return sendMsgResult;
+          }
+
+          const serialized: any = {};
+
+          for (const key of Object.keys(sendMsgResult)) {
+            const value = sendMsgResult[key];
+            if (
+              value === null ||
+              ['string', 'number', 'boolean'].includes(typeof value)
+            ) {
+              serialized[key] = value;
+            }
+          }
+
+          if ('msg' in sendMsgResult) {
+            serialized.msg = serializeMessage(sendMsgResult.msg);
+          }
+
+          return serialized;
+        };
+
         const result = await WPP.chat.sendLocationMessage(to, options);
 
         return {
           ack: result.ack,
-          id: result.id,
-          sendMsgResult: await result.sendMsgResult,
+          id: serializeMessageId(result.id),
+          sendMsgResult: serializeSendMsgResult(await result.sendMsgResult),
         };
       },
       { to, options: options as any }
