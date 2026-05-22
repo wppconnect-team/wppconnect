@@ -41,14 +41,36 @@ import {
   fileToBase64,
   stickerSelect,
 } from '../helpers';
+import { LocalFileServer } from '../helpers/local-file-server';
+import { resolveLocalContent } from '../helpers/resolve-local-content';
 import { filenameFromMimeType } from '../helpers/filename-from-mimetype';
 import { Message, Wid } from '../model';
 import { ChatState } from '../model/enum';
 import { ListenerLayer } from './listener.layer';
 
 export class SenderLayer extends ListenerLayer {
+  private fileServerReady: Promise<LocalFileServer> | null = null;
+
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
+  }
+
+  /**
+   * Returns the shared {@link LocalFileServer} for this session, creating it
+   * lazily on the first call.  The server is stopped when the Puppeteer page
+   * closes so no port is left open after the session ends.
+   */
+  private getFileServer(): Promise<LocalFileServer> {
+    if (!this.fileServerReady) {
+      this.fileServerReady = LocalFileServer.create();
+      this.fileServerReady.then((server) => {
+        this.page.once('close', () => {
+          server.stop();
+          this.fileServerReady = null;
+        });
+      });
+    }
+    return this.fileServerReady;
   }
 
   /**
@@ -719,43 +741,42 @@ export class SenderLayer extends ListenerLayer {
       options = nameOrOptions;
     }
 
-    let base64 = '';
+    let contentUrl: string;
 
-    if (pathOrBase64.startsWith('data:')) {
-      base64 = pathOrBase64;
-    } else {
-      let fileContent = await downloadFileToBase64(pathOrBase64);
-      if (!fileContent) {
-        fileContent = await fileToBase64(pathOrBase64);
-      }
-      if (fileContent) {
-        base64 = fileContent;
-      }
-
+    if (/^https?:\/\//i.test(pathOrBase64)) {
+      // External URL — wa-js fetches it directly inside the browser via fetch().
+      // Nothing is downloaded or buffered in Node.js; no local server needed.
+      contentUrl = pathOrBase64;
       if (!options.filename) {
-        options.filename = path.basename(pathOrBase64);
+        try {
+          options.filename =
+            path.basename(new URL(pathOrBase64).pathname) || 'file';
+        } catch {
+          options.filename = 'file';
+        }
       }
-    }
-
-    if (!base64) {
-      const error = new Error('Empty or invalid file or base64');
-      Object.assign(error, {
-        code: 'empty_file',
-      });
-      throw error;
+    } else {
+      // Local file path or base64 data-URI — stream via LocalFileServer to
+      // avoid the Puppeteer CDP serialisation limit (issue #2413).
+      const server = await this.getFileServer();
+      const { url, filename } = resolveLocalContent(pathOrBase64, server);
+      contentUrl = url;
+      if (!options.filename) {
+        options.filename = filename;
+      }
     }
 
     return evaluateAndReturn(
       this.page,
-      async ({ to, base64, options }) => {
-        const result = await WPP.chat.sendFileMessage(to, base64, options);
+      async ({ to, contentUrl, options }) => {
+        const result = await WPP.chat.sendFileMessage(to, contentUrl, options);
         return {
           ack: result.ack,
           id: result.id,
           sendMsgResult: await result.sendMsgResult,
         };
       },
-      { to, base64, options: options as any }
+      { to, contentUrl, options: options as any }
     );
   }
 
