@@ -28,4 +28,5 @@ export enum AckType {
   RECEIVED = 2,
   READ = 3,
   PLAYED = 4,
+  PEER = 5,
 }
