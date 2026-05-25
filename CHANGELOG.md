@@ -1,3 +1,9 @@
+## 2.2.1 (2026-05-25)
+
+### Bug Fixes
+
+- send media returning undefined ([#2792](https://github.com/wppconnect-team/wppconnect/issues/2792)) ([607fe8b](https://github.com/wppconnect-team/wppconnect/commit/607fe8be1897db34f5d1a87797a682897117114f))
+
 # 2.2.0 (2026-05-19)
 
 ### Features
