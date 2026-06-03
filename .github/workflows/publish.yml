@@ -21,7 +21,7 @@ jobs:
         run: git fetch --tags -f || true
 
       - name: Setup Node
-        uses: actions/setup-node@v6.2.0
+        uses: actions/setup-node@v6.4.0
         with:
           node-version: 24.15.0
           registry-url: 'https://registry.npmjs.org'
