@@ -73,7 +73,7 @@
     "@types/ws": "^8.18.1",
     "babel-loader": "^10.1.1",
     "commitizen": "^4.3.2",
-    "concurrently": "^9.2.1",
+    "concurrently": "^9.2.3",
     "conventional-changelog-cli": "^5.0.0",
     "eslint": "10.4.1",
     "eslint-config-prettier": "^10.1.8",
