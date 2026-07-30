@@ -1,3 +1,9 @@
+## 2.2.6 (2026-07-30)
+
+### Bug Fixes
+
+- **deps:** update dependency @wppconnect/wa-version to ^1.5.4472 ([#2833](https://github.com/wppconnect-team/wppconnect/issues/2833)) ([2513821](https://github.com/wppconnect-team/wppconnect/commit/2513821bb63172ac43f4e39ee3ecc98fd03009c3))
+
 ## 2.2.5 (2026-07-30)
 
 ### Bug Fixes
