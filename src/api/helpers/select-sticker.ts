@@ -15,7 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import sharp from 'sharp';
+import sharp, { type Sharp } from 'sharp';
 
 interface selectOutput {
   webpBase64: string;
@@ -26,13 +26,13 @@ interface selectOutput {
 }
 
 export async function stickerSelect(_B: Buffer, _t: number) {
-  let _w: sharp.Sharp, _ins: Buffer;
+  let _w: Sharp, _ins: Buffer;
   switch (_t) {
     case 0:
-      _ins = await sharp(_B, { failOnError: false })
+      _ins = await sharp(_B, { failOn: 'none' })
         .resize({ width: 512, height: 512 })
         .toBuffer();
-      _w = sharp(_ins, { failOnError: false }).webp();
+      _w = sharp(_ins, { failOn: 'none' }).webp();
       break;
     case 1:
       _w = sharp(_B, { animated: true }).webp();
@@ -67,10 +67,10 @@ interface CreateSize {
   height?: number;
 }
 export async function resizeImg(buff: Buffer, size: CreateSize) {
-  const _ins = await sharp(buff, { failOnError: false })
+  const _ins = await sharp(buff, { failOn: 'none' })
       .resize({ width: size.width, height: size.height })
       .toBuffer(),
-    _w = sharp(_ins, { failOnError: false }).jpeg(),
+    _w = sharp(_ins, { failOn: 'none' }).jpeg(),
     _webb64 = (await _w.toBuffer()).toString('base64');
 
   return _webb64;
