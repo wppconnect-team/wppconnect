@@ -1,3 +1,9 @@
+## 2.2.7 (2026-08-10)
+
+### Bug Fixes
+
+- remove unreachable group demotion return ([#2851](https://github.com/wppconnect-team/wppconnect/issues/2851)) ([eb57e3c](https://github.com/wppconnect-team/wppconnect/commit/eb57e3c32975871fc2191f0ca2d6a9e1609e268b))
+
 ## 2.2.6 (2026-07-30)
 
 ### Bug Fixes
