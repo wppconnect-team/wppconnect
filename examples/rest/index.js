@@ -50,7 +50,7 @@ app.post('/sendmessage', async function (req, res) {
   const executa = async () => {
     if (typeof Instancia === 'object') {
       // Validando se a lib está iniciada .... Validating if lib is started
-      status = await Instancia.getConnectionState(); // validadado o estado da conexão com o whats
+      const status = await Instancia.getConnectionState(); // validadado o estado da conexão com o whats
       //whats connection status validated
       if (status === 'CONNECTED') {
         let numeroexiste = await Instancia.checkNumberStatus(
@@ -107,7 +107,7 @@ app.post('/sendpixmessage', async function (req, res) {
   const executa = async () => {
     if (typeof Instancia === 'object') {
       // Validando se a lib está iniciada .... Validating if lib is started
-      status = await Instancia.getConnectionState(); // validadado o estado da conexão com o whats
+      const status = await Instancia.getConnectionState(); // validadado o estado da conexão com o whats
       //whats connection status validated
       if (status === 'CONNECTED') {
         let numeroexiste = await Instancia.checkNumberStatus(

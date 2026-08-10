@@ -16,7 +16,6 @@
  */
 
 import { Page } from 'puppeteer';
-import { HostLayer } from './host.layer';
 import {
   base64MimeType,
   fileToBase64,

@@ -19,8 +19,6 @@ import { Page } from 'puppeteer';
 import { ControlsLayer } from './controls.layer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
-import { BusinessProfileModel } from '@wppconnect/wa-js/dist/whatsapp';
-import { Chat } from '../model';
 
 export class BusinessLayer extends ControlsLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {

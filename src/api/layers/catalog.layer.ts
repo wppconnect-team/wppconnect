@@ -18,7 +18,6 @@
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
-import { HostLayer } from './host.layer';
 import { CommunityLayer } from './community.layer';
 
 export class CatalogLayer extends CommunityLayer {
