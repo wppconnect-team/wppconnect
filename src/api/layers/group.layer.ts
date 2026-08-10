@@ -211,8 +211,6 @@ export class GroupLayer extends RetrieverLayer {
         WPP.group.demoteParticipants(groupId, participantId),
       { groupId, participantId }
     );
-
-    return true;
   }
 
   /**
