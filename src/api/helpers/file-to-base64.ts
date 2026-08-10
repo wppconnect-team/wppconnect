@@ -16,7 +16,6 @@
  */
 
 import * as mimeTypes from 'mime-types';
-import * as fileType from 'file-type';
 import * as fs from 'fs';
 
 /**
@@ -29,10 +28,6 @@ export async function fileToBase64(path: string, mime?: string | false) {
     const base64 = fs.readFileSync(path, { encoding: 'base64' });
     if (mime === undefined) {
       mime = mimeTypes.lookup(path);
-    }
-    if (!mime) {
-      const result = await fileType.fromFile(path);
-      mime = result?.mime;
     }
     if (!mime) {
       mime = 'application/octet-stream';
