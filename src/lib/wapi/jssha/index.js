@@ -620,8 +620,7 @@
     return (a >>> b) | (a << (32 - b));
   }
   function t(e, b) {
-    var d = null,
-      d = new a(e.a, e.b);
+    var d = new a(e.a, e.b);
     return (d =
       32 >= b
         ? new a(
