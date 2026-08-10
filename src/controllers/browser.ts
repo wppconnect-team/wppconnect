@@ -32,7 +32,6 @@ import { Logger } from 'winston';
 import { SessionToken } from '../token-store';
 import { LoadingScreenCallback } from '../api/model';
 import { LogLevel } from '../utils/logger';
-import { sleep } from '../utils/sleep';
 
 export async function unregisterServiceWorker(page: Page) {
   await page.evaluateOnNewDocument(() => {
