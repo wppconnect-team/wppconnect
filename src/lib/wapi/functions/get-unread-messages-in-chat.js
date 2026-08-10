@@ -30,11 +30,6 @@ export function getUnreadMessagesInChat(
 
   // look for unread messages, newest is at the end of array
   for (let i = messages.length - 1; i >= 0; i--) {
-    // system message: skip it
-    if (i === 'remove') {
-      continue;
-    }
-
     // get message
     let messageObj = messages[i];
 

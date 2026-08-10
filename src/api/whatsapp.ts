@@ -18,6 +18,7 @@
 import axios from 'axios';
 import * as fs from 'fs';
 import { Page } from 'puppeteer';
+import { pipeline } from 'stream/promises';
 import { CreateConfig } from '../config/create-config';
 import { useragentOverride } from '../config/WAuserAgente';
 import { sleep } from '../utils/sleep';
@@ -271,37 +272,13 @@ export class Whatsapp extends BusinessLayer {
         message.size
       );
 
-      inputReadStream.pipe(decryptedStream).pipe(outputWriteStream);
+      await pipeline(inputReadStream, decryptedStream, outputWriteStream);
 
-      await new Promise<void>((resolve, reject) => {
-        outputWriteStream.on('finish', () => {
-          console.log(
-            `Deciphering complete. Deleting the encrypted file: ${tempSavePath}`
-          );
-          fs.unlink(tempSavePath, (error) => {
-            if (error) {
-              console.error(
-                `Error deleting the input file: ${tempSavePath}`,
-                error
-              );
-              reject(error);
-            } else {
-              console.log('Encrypted file deleted successfully');
-              resolve();
-            }
-          });
-        });
-
-        outputWriteStream.on('error', (error) => {
-          console.error(`Error during writing file: ${savePath}`, error);
-          reject(error);
-        });
-
-        decryptedStream.on('error', (error) => {
-          console.error('An error occurred while decrypting the file', error);
-          reject(error);
-        });
-      });
+      console.log(
+        `Deciphering complete. Deleting the encrypted file: ${tempSavePath}`
+      );
+      await fs.promises.unlink(tempSavePath);
+      console.log('Encrypted file deleted successfully');
     } catch (error) {
       throw error;
     }
@@ -319,12 +296,8 @@ export class Whatsapp extends BusinessLayer {
           makeOptions(useragentOverride, 'stream')
         );
 
-        await new Promise<void>((resolve, reject) => {
-          const writer = fs.createWriteStream(outputPath);
-          response.data.pipe(writer);
-          writer.on('finish', resolve);
-          writer.on('error', reject);
-        });
+        const writer = fs.createWriteStream(outputPath);
+        await pipeline(response.data, writer);
 
         console.log(`Encrypted file downloaded at ${outputPath}`);
         return;

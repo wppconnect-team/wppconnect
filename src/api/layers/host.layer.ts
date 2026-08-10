@@ -423,12 +423,6 @@ export class HostLayer {
       return true;
     }
 
-    if (authenticated === false) {
-      this.tryAutoClose();
-      this.log('warn', 'Not logged');
-      throw new Error('Not logged');
-    }
-
     this.tryAutoClose();
 
     if (this.autoCloseCalled) {
