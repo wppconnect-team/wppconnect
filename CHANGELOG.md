@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/wppconnect-team/wppconnect/compare/v2.2.7...v2.3.0) (2026-08-15)
+
+### Bug Fixes
+
+- bump wa-js version to 4.6.0 ([#2861](https://github.com/wppconnect-team/wppconnect/issues/2861)) ([36e0b05](https://github.com/wppconnect-team/wppconnect/commit/36e0b05ab010563a064acb54b9728488507db0cf))
+- **changelog:** restore full CHANGELOG history ([#2862](https://github.com/wppconnect-team/wppconnect/issues/2862)) ([cb85826](https://github.com/wppconnect-team/wppconnect/commit/cb85826e4fc878c4374ebeb61f8f935934b09ba5))
+
 ## [2.2.7](https://github.com/wppconnect-team/wppconnect/compare/v2.2.6...v2.2.7) (2026-08-10)
 
 ### Bug Fixes
