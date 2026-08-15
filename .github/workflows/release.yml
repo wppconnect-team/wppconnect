@@ -29,6 +29,10 @@ jobs:
         uses: actions/checkout@v6
         with:
           token: ${{ secrets.PERSONAL_TOKEN }}
+          # `changelog:update` walks the commits since the previous tag. On the
+          # default shallow clone it saw a single commit and no tags, so every
+          # release wrote a single bullet into CHANGELOG.md.
+          fetch-depth: 0
 
       - name: Setup GIT
         run: |
