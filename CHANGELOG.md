@@ -1,3 +1,9 @@
+## [2.3.1](https://github.com/wppconnect-team/wppconnect/compare/v2.3.0...v2.3.1) (2026-08-18)
+
+### Bug Fixes
+
+- sticker send resolving undefined ([#2867](https://github.com/wppconnect-team/wppconnect/issues/2867)) ([a4c82a8](https://github.com/wppconnect-team/wppconnect/commit/a4c82a8c7a8f4ed72cd3d0e38192a23b6a1fea33)), closes [#2792](https://github.com/wppconnect-team/wppconnect/issues/2792)
+
 # [2.3.0](https://github.com/wppconnect-team/wppconnect/compare/v2.2.7...v2.3.0) (2026-08-15)
 
 ### Bug Fixes
