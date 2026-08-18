@@ -1045,16 +1045,25 @@ export class SenderLayer extends ListenerLayer {
 
     const { webpBase64 } = obj;
 
-    return await evaluateAndReturn(
+    // Map only the fields we need instead of returning the raw result:
+    // `sendMsgResult` carries a non-serializable object from WhatsApp for media
+    // sends and page.evaluate resolves `undefined` for any return value that
+    // JSON cannot serialize. Same reason as the other send methods (see #2792).
+    const sendResult = await evaluateAndReturn(
       this.page,
-      ({ to, webpBase64, options }) => {
-        return WPP.chat.sendFileMessage(to, webpBase64, {
+      async ({ to, webpBase64, options }) => {
+        const result = await WPP.chat.sendFileMessage(to, webpBase64, {
           type: 'sticker',
+          waitForAck: true,
           ...options,
         });
+
+        return { ack: result.ack, id: result.id };
       },
       { to, webpBase64, options }
     );
+
+    return sendResult;
   }
 
   /**
@@ -1141,16 +1150,25 @@ export class SenderLayer extends ListenerLayer {
 
     const { webpBase64 } = obj;
 
-    return await evaluateAndReturn(
+    // Map only the fields we need instead of returning the raw result:
+    // `sendMsgResult` carries a non-serializable object from WhatsApp for media
+    // sends and page.evaluate resolves `undefined` for any return value that
+    // JSON cannot serialize. Same reason as the other send methods (see #2792).
+    const sendResult = await evaluateAndReturn(
       this.page,
-      ({ to, webpBase64, options }) => {
-        return WPP.chat.sendFileMessage(to, webpBase64, {
+      async ({ to, webpBase64, options }) => {
+        const result = await WPP.chat.sendFileMessage(to, webpBase64, {
           type: 'sticker',
+          waitForAck: true,
           ...options,
         });
+
+        return { ack: result.ack, id: result.id };
       },
       { to, webpBase64, options }
     );
+
+    return sendResult;
   }
 
   /**
