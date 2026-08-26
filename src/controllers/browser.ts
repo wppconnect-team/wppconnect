@@ -265,15 +265,13 @@ export async function injectApi(
   });
   await onLoadingScreen(page, onLoadingScreenCallBack);
   // Make sure WAPI is initialized
-  await page
-    .waitForFunction(() => {
-      return (
-        typeof window.WAPI !== 'undefined' &&
-        typeof window.Store !== 'undefined' &&
-        window.WPP.isReady
-      );
-    })
-    .catch(() => false);
+  await page.waitForFunction(() => {
+    return (
+      typeof window.WAPI !== 'undefined' &&
+      typeof window.Store !== 'undefined' &&
+      window.WPP.isReady
+    );
+  });
 }
 
 /**
