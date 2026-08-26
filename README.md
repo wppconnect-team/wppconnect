@@ -81,7 +81,7 @@ discuss what you would like to change.
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=wppconnect-team/wppconnect,wppconnect-team/wa-js&type=Date)](https://star-history.com/#wppconnect-team/wppconnect&wppconnect-team/wa-js&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=wppconnect-team/wppconnect,wppconnect-team/wa-js&type=Date)](https://star-history.dera.page/#wppconnect-team/wppconnect&wppconnect-team/wa-js&Date)
 
 ## License
 
