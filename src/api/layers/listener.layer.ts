@@ -283,6 +283,7 @@ export class ListenerLayer extends ProfileLayer {
                 msgId: data.msgId,
                 reactionText: data.reactionText,
                 read: data.read,
+                sender: data.sender,
                 orphan: data.orphan,
                 orphanReason: data.orphanReason,
                 timestamp: data.timestamp,
@@ -491,10 +492,11 @@ export class ListenerLayer extends ProfileLayer {
 
   /**
    * @event Listens to message edited changes
+   * @param callback Receives the edited message data
    * @returns Disposable object to stop the listening
    */
   public onMessageEdit(
-    callback: (chat: Wid, id: string, msg: Message) => void
+    callback: (data: { chat: Wid; id: string; msg: Message }) => void
   ) {
     return this.registerEvent(ExposedFn.onMessageEdit, callback);
   }
@@ -716,10 +718,11 @@ export class ListenerLayer extends ProfileLayer {
    */
   public onReactionMessage(
     callback: (data: {
-      id: string;
-      msgId: string;
+      id: MsgKey;
+      msgId: MsgKey;
       reactionText: string;
       read: boolean;
+      sender: Wid;
       orphan: number;
       orphanReason: any;
       timestamp: number;
