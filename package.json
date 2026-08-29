@@ -127,7 +127,7 @@
     "serialize-javascript": "7.1.0"
   },
   "optionalDependencies": {
-    "@img/sharp-win32-x64": "^0.35.3",
+    "@img/sharp-win32-x64": "^0.35.4",
     "fsevents": "^2.3.3"
   },
   "directories": {
