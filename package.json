@@ -104,7 +104,6 @@
     "chrome-launcher": "^0.15.2",
     "execa": "^5.1.1",
     "futoin-hkdf": "^1.5.3",
-    "latest-version": "^9.0.0",
     "logform": "^2.7.0",
     "lookpath": "^1.2.3",
     "mime-types": "^3.0.2",

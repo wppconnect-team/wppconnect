@@ -16,7 +16,6 @@
  */
 import boxen from 'boxen';
 import chalk from 'chalk';
-import latestVersion from 'latest-version';
 import { defaultLogger as logger } from '../utils/logger';
 import { upToDate } from '../utils/semver';
 const { version } = require('../../package.json');
@@ -51,18 +50,30 @@ export async function checkUpdates() {
  */
 async function checkWPPConnectVersion() {
   logger.info('Checking for updates');
-  await latestVersion('@wppconnect-team/wppconnect')
-    .then((latest) => {
-      if (upToDate(version, latest)) {
-        logger.info("You're up to date");
-      } else {
-        logger.info('There is a new version available');
-        logUpdateAvailable(version, latest);
-      }
-    })
-    .catch(() => {
-      logger.warn('Failed to check for updates');
-    });
+  try {
+    const packageName = encodeURIComponent('@wppconnect-team/wppconnect');
+    const response = await fetch(
+      `https://registry.npmjs.org/${packageName}/latest`,
+      { headers: { accept: 'application/vnd.npm.install-v1+json' } }
+    );
+    if (!response.ok) {
+      throw new Error(`Registry returned HTTP ${response.status}`);
+    }
+
+    const metadata = (await response.json()) as { version?: unknown };
+    if (typeof metadata.version !== 'string') {
+      throw new Error('Registry response did not include a version');
+    }
+
+    if (upToDate(version, metadata.version)) {
+      logger.info("You're up to date");
+    } else {
+      logger.info('There is a new version available');
+      logUpdateAvailable(version, metadata.version);
+    }
+  } catch {
+    logger.warn('Failed to check for updates');
+  }
 }
 
 /**
