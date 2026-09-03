@@ -33,7 +33,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install Dependencies
-        run: npm ci || npm install
+        run: npm ci --no-audit || npm install --no-audit
         env:
           PUPPETEER_SKIP_DOWNLOAD: true
 
