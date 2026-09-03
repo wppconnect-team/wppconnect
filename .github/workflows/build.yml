@@ -33,9 +33,34 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install Dependencies
-        run: npm ci || npm install
+        run: npm ci --no-audit || npm install --no-audit
         env:
           PUPPETEER_SKIP_DOWNLOAD: true
 
       - name: Build source
         run: npm run build
+
+      - name: Verify CommonJS entry point
+        run: |
+          node - <<'NODE'
+          require('./dist/index.js');
+          let requested = '';
+          global.fetch = async (url) => {
+            requested = String(url);
+            return {
+              ok: true,
+              status: 200,
+              json: async () => ({ version: require('./package.json').version }),
+            };
+          };
+          const { checkUpdates } = require('./dist/controllers/welcome.js');
+          (async () => {
+            await checkUpdates();
+            if (!requested.includes('%40wppconnect-team%2Fwppconnect/latest')) {
+              throw new Error(`Unexpected registry URL: ${requested}`);
+            }
+          })().catch((error) => {
+            console.error(error);
+            process.exitCode = 1;
+          });
+          NODE
