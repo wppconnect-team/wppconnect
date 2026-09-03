@@ -1,3 +1,12 @@
+## [2.3.2](https://github.com/wppconnect-team/wppconnect/compare/v2.3.1...v2.3.2) (2026-09-03)
+
+### Bug Fixes
+
+- keep CommonJS entry point loadable ([#2887](https://github.com/wppconnect-team/wppconnect/issues/2887)) ([e070c47](https://github.com/wppconnect-team/wppconnect/commit/e070c47478ad884f56026f11d01f00ebc94a92e4))
+- **listener:** align edit and reaction event types ([#2874](https://github.com/wppconnect-team/wppconnect/issues/2874)) ([550622b](https://github.com/wppconnect-team/wppconnect/commit/550622bcffa1cbcd219fcd2f0caaa5bc04ed53fe))
+- preserve phone link code lifecycle ([#2870](https://github.com/wppconnect-team/wppconnect/issues/2870)) ([05a7769](https://github.com/wppconnect-team/wppconnect/commit/05a77693d0b068df9dd6cce957d051430d74eca0))
+- wait for WAPI reinjection after page loads ([#2873](https://github.com/wppconnect-team/wppconnect/issues/2873)) ([ccdc452](https://github.com/wppconnect-team/wppconnect/commit/ccdc4525b1791bffa6672b1f264b8f5a8c02dc38))
+
 ## [2.3.1](https://github.com/wppconnect-team/wppconnect/compare/v2.3.0...v2.3.1) (2026-08-18)
 
 ### Bug Fixes
