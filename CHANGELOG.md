@@ -1,3 +1,9 @@
+## [2.3.3](https://github.com/wppconnect-team/wppconnect/compare/v2.3.2...v2.3.3) (2026-09-07)
+
+### Bug Fixes
+
+- preserve QR authentication state during navigation ([#2891](https://github.com/wppconnect-team/wppconnect/issues/2891)) ([4951d60](https://github.com/wppconnect-team/wppconnect/commit/4951d60886338de1e19bb4f0bbeacf3e3777c0bc))
+
 ## [2.3.2](https://github.com/wppconnect-team/wppconnect/compare/v2.3.1...v2.3.2) (2026-09-03)
 
 ### Bug Fixes
