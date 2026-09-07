@@ -103,3 +103,84 @@ describe('HostLayer page reinjection', function () {
     );
   });
 });
+
+class AuthenticationPage extends FakePage {
+  constructor(private results: Array<boolean | Error>) {
+    super();
+  }
+
+  async evaluate() {
+    this.evaluateCalls += 1;
+    const result = this.results.shift();
+    if (result instanceof Error) throw result;
+    return result ?? false;
+  }
+}
+
+class AuthenticationHostLayer extends HostLayer {
+  protected log() {}
+
+  begin(logged = false) {
+    this.isStarted = true;
+    this.isLogged = logged;
+  }
+
+  get logged() {
+    return this.isLogged;
+  }
+
+  readQr() {
+    return this.checkQrCode();
+  }
+}
+
+describe('HostLayer authentication during navigation', function () {
+  this.timeout(5000);
+
+  it('keeps waiting for registration after a destroyed execution context', async function () {
+    const page = new AuthenticationPage([
+      new Error(
+        'Execution context was destroyed, most likely because of a navigation.'
+      ),
+      false,
+      true,
+    ]);
+    const client = new AuthenticationHostLayer(
+      page as unknown as Page,
+      'navigation'
+    );
+    client.begin();
+
+    await client.waitForQrCodeScan();
+
+    assert.strictEqual(page.evaluateCalls, 3);
+    assert.strictEqual(client.logged, true);
+  });
+
+  it('does not mark a QR session authenticated when a QR callback races navigation', async function () {
+    const page = new AuthenticationPage([
+      new Error('Execution context was destroyed'),
+    ]);
+    const client = new AuthenticationHostLayer(
+      page as unknown as Page,
+      'qr-callback'
+    );
+    client.begin();
+
+    await client.readQr();
+
+    assert.strictEqual(client.logged, false);
+  });
+
+  it('waits for the resolved chat readiness value', async function () {
+    const page = new AuthenticationPage([false, true]);
+    const client = new AuthenticationHostLayer(
+      page as unknown as Page,
+      'chat-ready'
+    );
+    client.begin(true);
+
+    assert.strictEqual(await client.waitForInChat(), true);
+    assert.strictEqual(page.evaluateCalls, 2);
+  });
+});
