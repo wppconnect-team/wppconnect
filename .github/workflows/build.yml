@@ -40,6 +40,11 @@ jobs:
       - name: Build source
         run: npm run build
 
+      - name: Test page lifecycle and authentication
+        run: npx mocha -r ts-node/register src/tests/00.host-layer-page-load.test.ts
+        env:
+          TS_NODE_FILES: 'true'
+
       - name: Verify CommonJS entry point
         run: |
           node - <<'NODE'

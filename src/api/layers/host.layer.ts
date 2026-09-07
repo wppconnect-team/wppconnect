@@ -214,6 +214,9 @@ export class HostLayer {
   protected async checkQrCode() {
     const needScan = await needsToScan(this.page).catch(() => null);
 
+    // A navigation can invalidate the execution context while waiting for QR.
+    // An unknown result is not proof that the session has registered.
+    if (needScan === null) return;
     this.isLogged = !needScan;
     if (!needScan) {
       this.attempt = 0;
@@ -353,6 +356,7 @@ export class HostLayer {
     while (!this.page.isClosed() && !this.isLogged) {
       await sleep(200);
       const needScan = await needsToScan(this.page).catch(() => null);
+      if (needScan === null) continue;
       this.isLogged = !needScan;
     }
   }
@@ -377,7 +381,7 @@ export class HostLayer {
       }
 
       await sleep(1000);
-      const inChat = isInsideChat(this.page).catch(() => null);
+      const inChat = await isInsideChat(this.page).catch(() => null);
       this.isInChat = !!inChat;
     }
     return this.isInChat;
