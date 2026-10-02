@@ -8,6 +8,7 @@ app.ts
 app2.js
 assets
 bot-functions
+changelog.config.cjs
 CONTRIBUTING.md
 debug.log
 docs
