@@ -1,3 +1,22 @@
+## <small>2.3.4 (2026-10-02)</small>
+
+### Bug Fixes
+
+- bump wa-js version to 4.6.1 (#2898) ([dd904d4](https://github.com/wppconnect-team/wppconnect/commit/dd904d4)), closes [#2898](https://github.com/wppconnect-team/wppconnect/issues/2898)
+
+### Build System
+
+- **deps-dev:** bump browserslist from 4.28.2 to 4.28.8 (#2883) ([ff9f551](https://github.com/wppconnect-team/wppconnect/commit/ff9f551)), closes [#2883](https://github.com/wppconnect-team/wppconnect/issues/2883)
+- **deps-dev:** bump fast-uri from 3.1.5 to 3.1.7 (#2884) ([824f6e1](https://github.com/wppconnect-team/wppconnect/commit/824f6e1)), closes [#2884](https://github.com/wppconnect-team/wppconnect/issues/2884)
+- **deps:** bump brace-expansion (#2900) ([f32645b](https://github.com/wppconnect-team/wppconnect/commit/f32645b)), closes [#2900](https://github.com/wppconnect-team/wppconnect/issues/2900)
+- **deps:** bump ip-address from 10.5.0 to 10.7.2 (#2897) ([505466e](https://github.com/wppconnect-team/wppconnect/commit/505466e)), closes [#2897](https://github.com/wppconnect-team/wppconnect/issues/2897)
+- **deps:** bump js-yaml from 4.3.1 to 4.3.2 (#2893) ([39a1e46](https://github.com/wppconnect-team/wppconnect/commit/39a1e46)), closes [#2893](https://github.com/wppconnect-team/wppconnect/issues/2893)
+- **deps:** update dependency serialize-javascript to v7.1.2 [security] (#2899) ([b96bbd1](https://github.com/wppconnect-team/wppconnect/commit/b96bbd1)), closes [#2899](https://github.com/wppconnect-team/wppconnect/issues/2899)
+
+### Continuous Integration
+
+- list every commit type in release notes (#2902) ([954be8c](https://github.com/wppconnect-team/wppconnect/commit/954be8c)), closes [#2902](https://github.com/wppconnect-team/wppconnect/issues/2902)
+
 ## [2.3.3](https://github.com/wppconnect-team/wppconnect/compare/v2.3.2...v2.3.3) (2026-09-07)
 
 ### Bug Fixes
