@@ -24,7 +24,11 @@ import {
   isInsideChat,
   needsToScan,
 } from '../../controllers/auth';
-import { initWhatsapp, injectApi } from '../../controllers/browser';
+import {
+  initWhatsapp,
+  injectApi,
+  waitForWppReady,
+} from '../../controllers/browser';
 import { defaultLogger, LogLevel } from '../../utils/logger';
 import { sleep } from '../../utils/sleep';
 import { evaluateAndReturn, scrapeImg } from '../helpers';
@@ -49,6 +53,7 @@ export class HostLayer {
   protected isInitialized = false;
   protected isInjected = false;
   protected pageLoadPromise?: Promise<void>;
+  protected pageLoadAbort?: AbortController;
   protected isStarted = false;
   protected isLogged = false;
   protected isInChat = false;
@@ -91,9 +96,14 @@ export class HostLayer {
       this.log('verbose', 'Page loaded', { type: 'page' });
       this.isInjected = false;
 
+      // The previous wait keeps polling the new document, which only the next injection can satisfy
+      this.pageLoadAbort?.abort();
+      const abort = new AbortController();
+      this.pageLoadAbort = abort;
+
       const previousPageLoad = this.pageLoadPromise?.catch(() => undefined);
       const pageLoad = (previousPageLoad || Promise.resolve()).then(() =>
-        this.afterPageLoad()
+        this.afterPageLoad(abort.signal)
       );
 
       this.pageLoadPromise = pageLoad;
@@ -103,7 +113,11 @@ export class HostLayer {
     this.isInitialized = true;
   }
 
-  protected async afterPageLoad() {
+  protected async afterPageLoad(signal?: AbortSignal) {
+    if (signal?.aborted) {
+      return;
+    }
+
     this.log('verbose', 'Injecting wapi.js');
 
     const options = {
@@ -123,15 +137,28 @@ export class HostLayer {
     );
 
     try {
-      await injectApi(this.page, this.onLoadingScreen);
-      this.isInjected = true;
-      this.log('verbose', 'wapi.js injected');
-      this.afterPageScriptInjected();
+      await injectApi(this.page, this.onLoadingScreen, {
+        timeout: this.options.injectionTimeout,
+        signal,
+      });
     } catch (error) {
+      // A newer load owns the page now; its injection decides the outcome
+      if (signal?.aborted) {
+        this.log('verbose', 'wapi.js injection superseded by page reload');
+        return;
+      }
       this.log('verbose', 'wapi.js failed');
       this.log('error', error);
       throw error;
     }
+
+    if (signal?.aborted) {
+      return;
+    }
+
+    this.isInjected = true;
+    this.log('verbose', 'wapi.js injected');
+    this.afterPageScriptInjected().catch((error) => this.log('error', error));
   }
 
   protected async afterPageScriptInjected() {
@@ -396,10 +423,36 @@ export class HostLayer {
         continue;
       }
 
-      await pageLoad;
+      const failure = await pageLoad.then(
+        () => null,
+        (error) => ({ error })
+      );
 
-      if (pageLoad === this.pageLoadPromise && this.isInjected) {
-        await this.page.waitForFunction(() => WPP.isReady);
+      // Superseded by a newer load: wait for that injection instead
+      if (pageLoad !== this.pageLoadPromise) {
+        continue;
+      }
+      if (failure) {
+        throw failure.error;
+      }
+      if (!this.isInjected) {
+        await sleep(50);
+        continue;
+      }
+
+      try {
+        await waitForWppReady(this.page, {
+          timeout: this.options.injectionTimeout,
+          signal: this.pageLoadAbort?.signal,
+        });
+      } catch (error) {
+        if (pageLoad !== this.pageLoadPromise) {
+          continue;
+        }
+        throw error;
+      }
+
+      if (pageLoad === this.pageLoadPromise) {
         return;
       }
     }

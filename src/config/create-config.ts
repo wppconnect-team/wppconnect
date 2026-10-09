@@ -87,6 +87,14 @@ export interface CreateConfig {
    */
   deviceSyncTimeout?: number;
   /**
+   * Maximum time in milliseconds to wait for WhatsApp Web to become ready (`WPP.isReady`)
+   * after injecting wa-js on each page load. Until then a slow load only delays the login;
+   * when exceeded, `create()` rejects with "WPP.isReady not reached after Xms".
+   * Use 0 to wait until the page is ready, reloads or is closed.
+   * @default 0
+   */
+  injectionTimeout?: number;
+  /**
    * Wait for in chat to return a instance of {@link Whatsapp}
    * @default false
    */
@@ -208,6 +216,7 @@ export const defaultOptions: CreateConfig = {
   updatesLog: true,
   autoClose: 60000,
   deviceSyncTimeout: 180000,
+  injectionTimeout: 0,
   createPathFileToken: true,
   waitForLogin: true,
   logger: defaultLogger,

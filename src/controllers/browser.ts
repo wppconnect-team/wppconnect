@@ -233,9 +233,47 @@ export async function onLoadingScreen(
   );
 }
 
+export interface WaitForReadyOptions {
+  /** Milliseconds; 0 waits until ready, aborted or closed */
+  timeout?: number;
+  signal?: AbortSignal;
+}
+
+/**
+ * Waits for WAPI, Store and WPP.isReady on the current document
+ */
+export async function waitForWppReady(
+  page: Page,
+  options: WaitForReadyOptions = {}
+) {
+  // Explicit timeout so puppeteer's 30s default never applies
+  const timeout = options.timeout ?? 0;
+
+  try {
+    await page.waitForFunction(
+      () => {
+        return (
+          typeof window.WAPI !== 'undefined' &&
+          typeof window.Store !== 'undefined' &&
+          !!window.WPP?.isReady
+        );
+      },
+      { timeout, signal: options.signal }
+    );
+  } catch (error) {
+    if ((error as Error)?.name === 'TimeoutError') {
+      throw new Error(`WPP.isReady not reached after ${timeout}ms`, {
+        cause: error,
+      });
+    }
+    throw error;
+  }
+}
+
 export async function injectApi(
   page: Page,
-  onLoadingScreenCallBack?: LoadingScreenCallback
+  onLoadingScreenCallBack?: LoadingScreenCallback,
+  options: WaitForReadyOptions = {}
 ) {
   const injected = await page
     .evaluate(() => {
@@ -265,13 +303,7 @@ export async function injectApi(
   });
   await onLoadingScreen(page, onLoadingScreenCallBack);
   // Make sure WAPI is initialized
-  await page.waitForFunction(() => {
-    return (
-      typeof window.WAPI !== 'undefined' &&
-      typeof window.Store !== 'undefined' &&
-      window.WPP.isReady
-    );
-  });
+  await waitForWppReady(page, options);
 }
 
 /**

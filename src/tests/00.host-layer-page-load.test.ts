@@ -184,3 +184,155 @@ describe('HostLayer authentication during navigation', function () {
     assert.strictEqual(page.evaluateCalls, 2);
   });
 });
+
+class SlowReadyPage extends FakePage {
+  // Mirrors page.setDefaultTimeout(): applies when no timeout is passed
+  defaultTimeout = 30;
+  scriptTags = 0;
+  private document = 0;
+  private injected?: { document: number; at: number };
+
+  constructor(private readyDelay: number) {
+    super();
+  }
+
+  reload() {
+    this.document += 1;
+    this.emit('load');
+  }
+
+  async evaluate(fn?: unknown) {
+    this.evaluateCalls += 1;
+    // Fresh document: wa-js is not there yet
+    return !String(fn).includes('typeof window.WAPI');
+  }
+
+  async addScriptTag() {
+    this.scriptTags += 1;
+    this.injected = { document: this.document, at: Date.now() };
+  }
+
+  async exposeFunction() {}
+
+  private isReady() {
+    return (
+      this.injected?.document === this.document &&
+      Date.now() - this.injected.at >= this.readyDelay
+    );
+  }
+
+  async waitForFunction(
+    fn?: unknown,
+    options: { timeout?: number; signal?: AbortSignal } = {}
+  ) {
+    if (!String(fn).includes('isReady')) return true;
+
+    const timeout = options.timeout ?? this.defaultTimeout;
+    // Like puppeteer, keeps polling across navigations until ready, timeout or abort
+    return new Promise<boolean>((resolve, reject) => {
+      const done = (fn: () => void) => {
+        clearInterval(poll);
+        clearTimeout(timer);
+        options.signal?.removeEventListener('abort', onAbort);
+        fn();
+      };
+      const onAbort = () => done(() => reject(options.signal.reason));
+      const poll = setInterval(() => {
+        if (this.isReady()) done(() => resolve(true));
+      }, 5);
+      const timer =
+        timeout > 0
+          ? setTimeout(() => {
+              const error = new Error(`Waiting failed: ${timeout}ms exceeded`);
+              error.name = 'TimeoutError';
+              done(() => reject(error));
+            }, timeout)
+          : undefined;
+      options.signal?.addEventListener('abort', onAbort);
+    });
+  }
+}
+
+class SlowReadyHostLayer extends HostLayer {
+  // Not a field initializer: the base constructor already logs
+  declare logs: string[];
+
+  protected log(level: string, message: unknown) {
+    (this.logs ??= []).push(String(message));
+  }
+
+  begin() {
+    this.isStarted = true;
+    this.isLogged = true;
+  }
+}
+
+describe('HostLayer slow WhatsApp Web initialization', function () {
+  this.timeout(5000);
+
+  let unhandled: unknown[];
+  const onUnhandled = (reason: unknown) => unhandled.push(reason);
+
+  beforeEach(function () {
+    unhandled = [];
+    process.on('unhandledRejection', onUnhandled);
+  });
+
+  afterEach(async function () {
+    // Let pending rejections surface before checking
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    process.off('unhandledRejection', onUnhandled);
+    assert.deepStrictEqual(unhandled, []);
+  });
+
+  function createClient(page: SlowReadyPage, options = {}) {
+    const client = new SlowReadyHostLayer(page as unknown as Page, 'slow', {
+      autoClose: 0,
+      deviceSyncTimeout: 0,
+      ...options,
+    });
+    client.begin();
+    return client;
+  }
+
+  it('keeps waiting past the default timeout and reaches login', async function () {
+    const page = new SlowReadyPage(120);
+    const client = createClient(page);
+
+    page.emit('load');
+
+    assert.strictEqual(await client.waitForLogin(), true);
+    assert.ok(client.logs.includes('wapi.js injected'));
+    assert.ok(client.logs.includes('Checking is logged...'));
+    assert.ok(!client.logs.includes('wapi.js failed'));
+  });
+
+  it('fails once, naming the stage, when injectionTimeout is exceeded', async function () {
+    const page = new SlowReadyPage(Infinity);
+    const client = createClient(page, { injectionTimeout: 40 });
+
+    page.emit('load');
+
+    await assert.rejects(
+      client.waitForLogin(),
+      /WPP\.isReady not reached after 40ms/
+    );
+  });
+
+  it('reinjects after a reload instead of waiting on the stale injection', async function () {
+    const page = new SlowReadyPage(50);
+    const client = createClient(page);
+
+    page.emit('load');
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    page.reload();
+
+    await client.waitForPageLoad();
+
+    assert.strictEqual(page.scriptTags, 4);
+    assert.ok(
+      client.logs.includes('wapi.js injection superseded by page reload')
+    );
+    assert.ok(client.logs.includes('wapi.js injected'));
+  });
+});
