@@ -27,7 +27,8 @@ import {
 import {
   initWhatsapp,
   injectApi,
-  waitForWppReady,
+  InjectionTimeoutError,
+  isNavigationError,
 } from '../../controllers/browser';
 import { defaultLogger, LogLevel } from '../../utils/logger';
 import { sleep } from '../../utils/sleep';
@@ -54,6 +55,7 @@ export class HostLayer {
   protected isInjected = false;
   protected pageLoadPromise?: Promise<void>;
   protected pageLoadAbort?: AbortController;
+  protected injectionStartedAt?: number;
   protected isStarted = false;
   protected isLogged = false;
   protected isInChat = false;
@@ -96,6 +98,9 @@ export class HostLayer {
       this.log('verbose', 'Page loaded', { type: 'page' });
       this.isInjected = false;
 
+      // One budget per injection cycle, so a reload loop cannot extend it
+      this.injectionStartedAt ??= Date.now();
+
       // The previous wait keeps polling the new document, which only the next injection can satisfy
       this.pageLoadAbort?.abort();
       const abort = new AbortController();
@@ -128,37 +133,71 @@ export class HostLayer {
       poweredBy: this.options.poweredBy,
     };
 
-    await evaluateAndReturn(
-      this.page,
-      (options) => {
-        (window as any).WPPConfig = options;
-      },
-      options
-    );
-
     try {
+      await evaluateAndReturn(
+        this.page,
+        (options) => {
+          (window as any).WPPConfig = options;
+        },
+        options
+      );
+
       await injectApi(this.page, this.onLoadingScreen, {
         timeout: this.options.injectionTimeout,
+        startedAt: this.injectionStartedAt,
         signal,
       });
     } catch (error) {
+      // The new document fails injection steps before its 'load' event fires
+      if (!signal?.aborted && isNavigationError(error)) {
+        await this.waitForNextLoad(signal);
+      }
       // A newer load owns the page now; its injection decides the outcome
       if (signal?.aborted) {
         this.log('verbose', 'wapi.js injection superseded by page reload');
         return;
       }
+
+      const failure =
+        this.isInjectionExpired() && !(error instanceof InjectionTimeoutError)
+          ? new InjectionTimeoutError(this.options.injectionTimeout, {
+              cause: error,
+            })
+          : error;
+
+      this.injectionStartedAt = undefined;
       this.log('verbose', 'wapi.js failed');
-      this.log('error', error);
-      throw error;
+      this.log('error', failure);
+      throw failure;
     }
 
     if (signal?.aborted) {
       return;
     }
 
+    this.injectionStartedAt = undefined;
     this.isInjected = true;
     this.log('verbose', 'wapi.js injected');
     this.afterPageScriptInjected().catch((error) => this.log('error', error));
+  }
+
+  protected isInjectionExpired() {
+    const timeout = this.options.injectionTimeout;
+    return (
+      timeout > 0 &&
+      this.injectionStartedAt !== undefined &&
+      Date.now() >= this.injectionStartedAt + timeout
+    );
+  }
+
+  protected async waitForNextLoad(signal?: AbortSignal) {
+    while (
+      !signal?.aborted &&
+      !this.page.isClosed() &&
+      !this.isInjectionExpired()
+    ) {
+      await sleep(50);
+    }
   }
 
   protected async afterPageScriptInjected() {
@@ -192,9 +231,9 @@ export class HostLayer {
       await evaluateAndReturn(this.page, () => {
         WPP.on('conn.auth_code_change', (window as any).checkQrCode);
       }).catch(() => null);
-      this.checkQrCode();
+      this.checkQrCode().catch((error) => this.log('error', error));
     }
-    this.checkInChat();
+    this.checkInChat().catch((error) => this.log('error', error));
   }
 
   public async start() {
@@ -435,26 +474,11 @@ export class HostLayer {
       if (failure) {
         throw failure.error;
       }
-      if (!this.isInjected) {
-        await sleep(50);
-        continue;
-      }
-
-      try {
-        await waitForWppReady(this.page, {
-          timeout: this.options.injectionTimeout,
-          signal: this.pageLoadAbort?.signal,
-        });
-      } catch (error) {
-        if (pageLoad !== this.pageLoadPromise) {
-          continue;
-        }
-        throw error;
-      }
-
-      if (pageLoad === this.pageLoadPromise) {
+      // injectApi only resolves once WPP.isReady is reached
+      if (this.isInjected) {
         return;
       }
+      await sleep(50);
     }
 
     throw new Error('Page closed before WAPI injection completed');

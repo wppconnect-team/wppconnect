@@ -185,40 +185,77 @@ describe('HostLayer authentication during navigation', function () {
   });
 });
 
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+type FakeWindow = {
+  WPP?: { isReady: boolean };
+  WAPI?: object;
+  Store?: object;
+};
+
+function runInWindow(fn: unknown, window: FakeWindow) {
+  return new Function('window', `return (${String(fn)})();`)(window);
+}
+
 class SlowReadyPage extends FakePage {
   // Mirrors page.setDefaultTimeout(): applies when no timeout is passed
   defaultTimeout = 30;
   scriptTags = 0;
-  private document = 0;
-  private injected?: { document: number; at: number };
+  closed = false;
+  window: FakeWindow = {};
+  onExposeFunction?: () => void;
+  stepDelay = 0;
+  beforeEvaluate?: () => void;
+  private cleanups = new Set<() => void>();
 
   constructor(private readyDelay: number) {
     super();
   }
 
   reload() {
-    this.document += 1;
+    this.window = {};
     this.emit('load');
+  }
+
+  close() {
+    this.closed = true;
+    for (const cleanup of this.cleanups) cleanup();
+  }
+
+  isClosed() {
+    return this.closed;
   }
 
   async evaluate(fn?: unknown) {
     this.evaluateCalls += 1;
-    // Fresh document: wa-js is not there yet
-    return !String(fn).includes('typeof window.WAPI');
+    this.beforeEvaluate?.();
+    return String(fn).includes('typeof window.WAPI')
+      ? runInWindow(fn, this.window)
+      : true;
   }
 
   async addScriptTag() {
     this.scriptTags += 1;
-    this.injected = { document: this.document, at: Date.now() };
+    const window = this.window;
+
+    if (window.WPP) {
+      window.WAPI = {};
+      window.Store = {};
+      return;
+    }
+
+    window.WPP = { isReady: false };
+    if (Number.isFinite(this.readyDelay)) {
+      const timer = setTimeout(() => {
+        window.WPP.isReady = true;
+      }, this.readyDelay);
+      this.cleanups.add(() => clearTimeout(timer));
+    }
   }
 
-  async exposeFunction() {}
-
-  private isReady() {
-    return (
-      this.injected?.document === this.document &&
-      Date.now() - this.injected.at >= this.readyDelay
-    );
+  async exposeFunction() {
+    this.onExposeFunction?.();
+    await delay(this.stepDelay);
   }
 
   async waitForFunction(
@@ -228,17 +265,20 @@ class SlowReadyPage extends FakePage {
     if (!String(fn).includes('isReady')) return true;
 
     const timeout = options.timeout ?? this.defaultTimeout;
-    // Like puppeteer, keeps polling across navigations until ready, timeout or abort
+    // Like puppeteer: polls whatever document is current, only listens for a
+    // later abort, and rejects when the page closes
     return new Promise<boolean>((resolve, reject) => {
-      const done = (fn: () => void) => {
+      const done = (settle: () => void) => {
         clearInterval(poll);
         clearTimeout(timer);
         options.signal?.removeEventListener('abort', onAbort);
-        fn();
+        this.cleanups.delete(onClose);
+        settle();
       };
       const onAbort = () => done(() => reject(options.signal.reason));
+      const onClose = () => done(() => reject(new Error('Waiting failed')));
       const poll = setInterval(() => {
-        if (this.isReady()) done(() => resolve(true));
+        if (runInWindow(fn, this.window)) done(() => resolve(true));
       }, 5);
       const timer =
         timeout > 0
@@ -249,6 +289,7 @@ class SlowReadyPage extends FakePage {
             }, timeout)
           : undefined;
       options.signal?.addEventListener('abort', onAbort);
+      this.cleanups.add(onClose);
     });
   }
 }
@@ -256,9 +297,17 @@ class SlowReadyPage extends FakePage {
 class SlowReadyHostLayer extends HostLayer {
   // Not a field initializer: the base constructor already logs
   declare logs: string[];
+  failAfterInjection = false;
 
   protected log(level: string, message: unknown) {
     (this.logs ??= []).push(String(message));
+  }
+
+  protected async afterPageScriptInjected() {
+    if (this.failAfterInjection) {
+      throw new Error('afterPageScriptInjected failed');
+    }
+    return super.afterPageScriptInjected();
   }
 
   begin() {
@@ -271,33 +320,37 @@ describe('HostLayer slow WhatsApp Web initialization', function () {
   this.timeout(5000);
 
   let unhandled: unknown[];
+  let pages: SlowReadyPage[];
   const onUnhandled = (reason: unknown) => unhandled.push(reason);
 
   beforeEach(function () {
     unhandled = [];
+    pages = [];
     process.on('unhandledRejection', onUnhandled);
   });
 
   afterEach(async function () {
-    // Let pending rejections surface before checking
-    await new Promise((resolve) => setTimeout(resolve, 20));
+    // Settle pending waits so a failing test cannot keep mocha alive
+    pages.forEach((page) => page.close());
+    await delay(20);
     process.off('unhandledRejection', onUnhandled);
     assert.deepStrictEqual(unhandled, []);
   });
 
-  function createClient(page: SlowReadyPage, options = {}) {
+  function createClient(readyDelay: number, options = {}) {
+    const page = new SlowReadyPage(readyDelay);
+    pages.push(page);
     const client = new SlowReadyHostLayer(page as unknown as Page, 'slow', {
       autoClose: 0,
       deviceSyncTimeout: 0,
       ...options,
     });
     client.begin();
-    return client;
+    return { page, client };
   }
 
   it('keeps waiting past the default timeout and reaches login', async function () {
-    const page = new SlowReadyPage(120);
-    const client = createClient(page);
+    const { page, client } = createClient(120);
 
     page.emit('load');
 
@@ -308,8 +361,7 @@ describe('HostLayer slow WhatsApp Web initialization', function () {
   });
 
   it('fails once, naming the stage, when injectionTimeout is exceeded', async function () {
-    const page = new SlowReadyPage(Infinity);
-    const client = createClient(page, { injectionTimeout: 40 });
+    const { page, client } = createClient(Infinity, { injectionTimeout: 40 });
 
     page.emit('load');
 
@@ -317,14 +369,17 @@ describe('HostLayer slow WhatsApp Web initialization', function () {
       client.waitForLogin(),
       /WPP\.isReady not reached after 40ms/
     );
+    assert.strictEqual(
+      client.logs.filter((log) => log === 'wapi.js failed').length,
+      1
+    );
   });
 
-  it('reinjects after a reload instead of waiting on the stale injection', async function () {
-    const page = new SlowReadyPage(50);
-    const client = createClient(page);
+  it('reinjects after a reload during the readiness wait', async function () {
+    const { page, client } = createClient(50);
 
     page.emit('load');
-    await new Promise((resolve) => setTimeout(resolve, 20));
+    await delay(20);
     page.reload();
 
     await client.waitForPageLoad();
@@ -334,5 +389,96 @@ describe('HostLayer slow WhatsApp Web initialization', function () {
       client.logs.includes('wapi.js injection superseded by page reload')
     );
     assert.ok(client.logs.includes('wapi.js injected'));
+  });
+
+  it('reinjects after a reload before the readiness wait starts', async function () {
+    const { page, client } = createClient(50);
+    let reloaded = false;
+    page.onExposeFunction = () => {
+      if (reloaded) return;
+      reloaded = true;
+      page.reload();
+    };
+
+    page.emit('load');
+    await client.waitForPageLoad();
+
+    assert.ok(
+      client.logs.includes('wapi.js injection superseded by page reload')
+    );
+    assert.ok(client.logs.includes('wapi.js injected'));
+  });
+
+  it('waits for the next load when navigation breaks injection first', async function () {
+    const { page, client } = createClient(50);
+    let navigated = false;
+    page.beforeEvaluate = () => {
+      if (navigated) return;
+      navigated = true;
+      // The new document's 'load' arrives after the step already failed
+      setTimeout(() => page.reload(), 30);
+      throw new Error(
+        'Execution context was destroyed, most likely because of a navigation.'
+      );
+    };
+
+    page.emit('load');
+    await client.waitForPageLoad();
+
+    assert.ok(!client.logs.includes('wapi.js failed'));
+    assert.ok(client.logs.includes('wapi.js injected'));
+  });
+
+  it('does not restart the budget on every reload', async function () {
+    const { page, client } = createClient(100, { injectionTimeout: 150 });
+    const reloads = setInterval(() => page.reload(), 60);
+
+    page.emit('load');
+    try {
+      await assert.rejects(
+        client.waitForPageLoad(),
+        /WPP\.isReady not reached after 150ms/
+      );
+    } finally {
+      clearInterval(reloads);
+    }
+  });
+
+  it('does not let a stuck injection step stretch the budget', async function () {
+    const { page, client } = createClient(Infinity, { injectionTimeout: 80 });
+    page.stepDelay = 500;
+    const startedAt = Date.now();
+
+    page.emit('load');
+    await assert.rejects(
+      client.waitForPageLoad(),
+      /WPP\.isReady not reached after 80ms/
+    );
+    assert.ok(Date.now() - startedAt < 120);
+  });
+
+  it('gives a later page load a fresh budget after a successful injection', async function () {
+    const { page, client } = createClient(60, { injectionTimeout: 100 });
+
+    page.emit('load');
+    await client.waitForPageLoad();
+    await delay(80);
+    page.reload();
+
+    await client.waitForPageLoad();
+    assert.ok(!client.logs.includes('wapi.js failed'));
+  });
+
+  it('logs a failure after injection instead of leaking it', async function () {
+    const { page, client } = createClient(10);
+    client.failAfterInjection = true;
+
+    page.emit('load');
+    await client.waitForPageLoad();
+    await delay(10);
+
+    assert.ok(
+      client.logs.some((log) => log.includes('afterPageScriptInjected failed'))
+    );
   });
 });

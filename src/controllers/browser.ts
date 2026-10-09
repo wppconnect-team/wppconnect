@@ -236,7 +236,29 @@ export async function onLoadingScreen(
 export interface WaitForReadyOptions {
   /** Milliseconds; 0 waits until ready, aborted or closed */
   timeout?: number;
+  /** Epoch ms the timeout counts from; defaults to the call time */
+  startedAt?: number;
   signal?: AbortSignal;
+}
+
+export class InjectionTimeoutError extends Error {
+  name = 'InjectionTimeoutError';
+
+  constructor(readonly timeout: number, options?: ErrorOptions) {
+    super(`WPP.isReady not reached after ${timeout}ms`, options);
+  }
+}
+
+/**
+ * Errors raised when the document is replaced mid-injection
+ */
+export function isNavigationError(error: unknown) {
+  const message = (error as Error)?.message || '';
+  return (
+    message.includes('Execution context was destroyed') ||
+    message.includes('Cannot find context with specified id') ||
+    /\b(WPP|WAPI|Store) is not defined\b/.test(message)
+  );
 }
 
 /**
@@ -248,25 +270,47 @@ export async function waitForWppReady(
 ) {
   // Explicit timeout so puppeteer's 30s default never applies
   const timeout = options.timeout ?? 0;
+  const deadline =
+    timeout > 0 ? (options.startedAt ?? Date.now()) + timeout : Infinity;
 
-  try {
-    await page.waitForFunction(
-      () => {
-        return (
-          typeof window.WAPI !== 'undefined' &&
-          typeof window.Store !== 'undefined' &&
-          !!window.WPP?.isReady
-        );
-      },
-      { timeout, signal: options.signal }
-    );
-  } catch (error) {
-    if ((error as Error)?.name === 'TimeoutError') {
-      throw new Error(`WPP.isReady not reached after ${timeout}ms`, {
-        cause: error,
-      });
+  for (;;) {
+    // puppeteer ignores a signal that is already aborted
+    options.signal?.throwIfAborted();
+    if (Date.now() >= deadline) {
+      throw new InjectionTimeoutError(timeout);
     }
-    throw error;
+
+    try {
+      await page.waitForFunction(
+        () => {
+          return (
+            typeof window.WAPI !== 'undefined' &&
+            typeof window.Store !== 'undefined' &&
+            !!window.WPP?.isReady
+          );
+        },
+        {
+          // 0 would mean no limit to puppeteer
+          timeout:
+            deadline === Infinity ? 0 : Math.max(deadline - Date.now(), 1),
+          signal: options.signal,
+        }
+      );
+      return;
+    } catch (error) {
+      if ((error as Error)?.name === 'TimeoutError') {
+        throw new InjectionTimeoutError(timeout, { cause: error });
+      }
+      // puppeteer's own 30s wait for an execution context: still loading
+      if (
+        (error as Error)?.cause?.['name'] === 'TimeoutError' &&
+        !page.isClosed() &&
+        Date.now() < deadline
+      ) {
+        continue;
+      }
+      throw error;
+    }
   }
 }
 
@@ -275,6 +319,38 @@ export async function injectApi(
   onLoadingScreenCallBack?: LoadingScreenCallback,
   options: WaitForReadyOptions = {}
 ) {
+  // The injection steps count against the same timeout
+  const waitOptions = { startedAt: Date.now(), ...options };
+  const timeout = waitOptions.timeout ?? 0;
+  const injection = runInjection(page, onLoadingScreenCallBack, waitOptions);
+
+  if (!(timeout > 0)) {
+    return injection;
+  }
+
+  // A step stuck in a starved renderer must not stretch the deadline
+  let timer: NodeJS.Timeout;
+  const expired = new Promise<never>((_, reject) => {
+    timer = setTimeout(
+      () => reject(new InjectionTimeoutError(timeout)),
+      waitOptions.startedAt + timeout - Date.now()
+    );
+  });
+  injection.catch(() => undefined);
+
+  try {
+    await Promise.race([injection, expired]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function runInjection(
+  page: Page,
+  onLoadingScreenCallBack: LoadingScreenCallback | undefined,
+  waitOptions: WaitForReadyOptions
+) {
+  const { signal } = waitOptions;
   const injected = await page
     .evaluate(() => {
       // @ts-ignore
@@ -285,25 +361,32 @@ export async function injectApi(
     })
     .catch(() => false);
 
-  if (injected) {
-    return;
-  }
-  await page.addScriptTag({
-    path: require.resolve('@wppconnect/wa-js'),
-  });
+  // Stop between steps so a superseded injection never writes into a newer document
+  if (!injected) {
+    signal?.throwIfAborted();
+    await page.addScriptTag({
+      path: require.resolve('@wppconnect/wa-js'),
+    });
 
-  await page.evaluate(() => {
-    WPP.chat.defaultSendMessageOptions.createChat = true;
-    WPP.conn.setKeepAlive(true);
-  });
-  await page.addScriptTag({
-    path: require.resolve(
-      path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
-    ),
-  });
-  await onLoadingScreen(page, onLoadingScreenCallBack);
+    signal?.throwIfAborted();
+    await page.evaluate(() => {
+      WPP.chat.defaultSendMessageOptions.createChat = true;
+      WPP.conn.setKeepAlive(true);
+    });
+
+    signal?.throwIfAborted();
+    await page.addScriptTag({
+      path: require.resolve(
+        path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
+      ),
+    });
+
+    signal?.throwIfAborted();
+    await onLoadingScreen(page, onLoadingScreenCallBack);
+  }
+
   // Make sure WAPI is initialized
-  await waitForWppReady(page, options);
+  await waitForWppReady(page, waitOptions);
 }
 
 /**
