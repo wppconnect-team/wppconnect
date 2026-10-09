@@ -241,6 +241,11 @@ export interface WaitForReadyOptions {
   signal?: AbortSignal;
 }
 
+export interface InjectApiOptions extends WaitForReadyOptions {
+  /** Assigned to window.WPPConfig before wa-js loads */
+  config?: object;
+}
+
 export class InjectionTimeoutError extends Error {
   name = 'InjectionTimeoutError';
 
@@ -249,17 +254,8 @@ export class InjectionTimeoutError extends Error {
   }
 }
 
-/**
- * Errors raised when the document is replaced mid-injection
- */
-export function isNavigationError(error: unknown) {
-  const message = (error as Error)?.message || '';
-  return (
-    message.includes('Execution context was destroyed') ||
-    message.includes('Cannot find context with specified id') ||
-    /\b(WPP|WAPI|Store) is not defined\b/.test(message)
-  );
-}
+const isTimeoutError = (error: unknown) =>
+  error instanceof Error && error.name === 'TimeoutError';
 
 /**
  * Waits for WAPI, Store and WPP.isReady on the current document
@@ -267,101 +263,107 @@ export function isNavigationError(error: unknown) {
 export async function waitForWppReady(
   page: Page,
   options: WaitForReadyOptions = {}
-) {
+): Promise<void> {
   // Explicit timeout so puppeteer's 30s default never applies
   const timeout = options.timeout ?? 0;
-  const deadline =
-    timeout > 0 ? (options.startedAt ?? Date.now()) + timeout : Infinity;
+  const startedAt = options.startedAt ?? Date.now();
+  const deadline = timeout > 0 ? startedAt + timeout : Infinity;
 
-  for (;;) {
-    // puppeteer ignores a signal that is already aborted
-    options.signal?.throwIfAborted();
-    if (Date.now() >= deadline) {
-      throw new InjectionTimeoutError(timeout);
-    }
+  // puppeteer ignores a signal that is already aborted
+  options.signal?.throwIfAborted();
 
-    try {
-      await page.waitForFunction(
-        () => {
-          return (
-            typeof window.WAPI !== 'undefined' &&
-            typeof window.Store !== 'undefined' &&
-            !!window.WPP?.isReady
-          );
-        },
-        {
-          // 0 would mean no limit to puppeteer
-          timeout:
-            deadline === Infinity ? 0 : Math.max(deadline - Date.now(), 1),
-          signal: options.signal,
-        }
-      );
-      return;
-    } catch (error) {
-      if ((error as Error)?.name === 'TimeoutError') {
-        throw new InjectionTimeoutError(timeout, { cause: error });
+  try {
+    await page.waitForFunction(
+      () => {
+        return (
+          typeof window.WAPI !== 'undefined' &&
+          typeof window.Store !== 'undefined' &&
+          !!window.WPP?.isReady
+        );
+      },
+      {
+        // 0 would mean no limit to puppeteer
+        timeout: deadline === Infinity ? 0 : Math.max(deadline - Date.now(), 1),
+        signal: options.signal,
       }
-      // puppeteer's own 30s wait for an execution context: still loading
-      if (
-        (error as Error)?.cause?.['name'] === 'TimeoutError' &&
-        !page.isClosed() &&
-        Date.now() < deadline
-      ) {
-        continue;
-      }
-      throw error;
+    );
+  } catch (error) {
+    if (isTimeoutError(error)) {
+      throw new InjectionTimeoutError(timeout, { cause: error });
     }
+    // puppeteer's own 30s wait for an execution context: still loading
+    if (isTimeoutError((error as Error)?.cause) && !page.isClosed()) {
+      return waitForWppReady(page, { ...options, startedAt });
+    }
+    throw error;
   }
 }
 
 export async function injectApi(
   page: Page,
   onLoadingScreenCallBack?: LoadingScreenCallback,
-  options: WaitForReadyOptions = {}
+  options: InjectApiOptions = {}
 ) {
-  // The injection steps count against the same timeout
-  const waitOptions = { startedAt: Date.now(), ...options };
-  const timeout = waitOptions.timeout ?? 0;
-  const injection = runInjection(page, onLoadingScreenCallBack, waitOptions);
+  const timeout = options.timeout ?? 0;
+  const startedAt = options.startedAt ?? Date.now();
 
-  if (!(timeout > 0)) {
-    return injection;
-  }
+  // Stops the remaining steps once superseded or out of time
+  const controller = new AbortController();
+  const abort = () => controller.abort();
+  if (options.signal?.aborted) abort();
+  options.signal?.addEventListener('abort', abort);
 
-  // A step stuck in a starved renderer must not stretch the deadline
   let timer: NodeJS.Timeout;
   const expired = new Promise<never>((_, reject) => {
-    timer = setTimeout(
-      () => reject(new InjectionTimeoutError(timeout)),
-      waitOptions.startedAt + timeout - Date.now()
-    );
+    if (timeout > 0) {
+      timer = setTimeout(() => {
+        reject(new InjectionTimeoutError(timeout));
+        abort();
+      }, startedAt + timeout - Date.now());
+    }
   });
-  injection.catch(() => undefined);
 
   try {
-    await Promise.race([injection, expired]);
+    // A step stuck in a starved renderer must not stretch the deadline
+    await Promise.race([
+      runInjection(page, onLoadingScreenCallBack, {
+        ...options,
+        startedAt,
+        signal: controller.signal,
+      }),
+      expired,
+    ]);
   } finally {
     clearTimeout(timer);
+    options.signal?.removeEventListener('abort', abort);
   }
 }
 
 async function runInjection(
   page: Page,
   onLoadingScreenCallBack: LoadingScreenCallback | undefined,
-  waitOptions: WaitForReadyOptions
+  options: InjectApiOptions
 ) {
-  const { signal } = waitOptions;
+  const { signal } = options;
+
+  if (options.config) {
+    await page.evaluate((config) => {
+      (window as any).WPPConfig = config;
+    }, options.config);
+  }
+
   const injected = await page
     .evaluate(() => {
-      // @ts-ignore
+      // wapi.js defines WAPI and Store even when wa-js is missing
       return (
+        typeof window.WPP !== 'undefined' &&
         typeof window.WAPI !== 'undefined' &&
         typeof window.Store !== 'undefined'
       );
     })
     .catch(() => false);
 
-  // Stop between steps so a superseded injection never writes into a newer document
+  // Stop between steps so a superseded injection does not keep writing
   if (!injected) {
     signal?.throwIfAborted();
     await page.addScriptTag({
@@ -386,7 +388,7 @@ async function runInjection(
   }
 
   // Make sure WAPI is initialized
-  await waitForWppReady(page, waitOptions);
+  await waitForWppReady(page, options);
 }
 
 /**

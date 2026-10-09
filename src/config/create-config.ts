@@ -87,11 +87,8 @@ export interface CreateConfig {
    */
   deviceSyncTimeout?: number;
   /**
-   * Maximum time in milliseconds for WhatsApp Web to become ready (`WPP.isReady`), counted
-   * from the first page load until wa-js is injected. Reloads in between share this budget.
-   * Until then a slow load only delays the login; when exceeded, the page load fails with
-   * "WPP.isReady not reached after Xms" (with `waitForLogin`, `create()` rejects with it).
-   * Use 0 to wait until the page is ready or closed.
+   * Time in ms for wa-js to be injected and `WPP.isReady`, from the first page load (reloads share it).
+   * Exceeding it fails the page load with `InjectionTimeoutError`; 0 waits until ready or closed.
    * @default 120000 (2 minutes)
    */
   injectionTimeout?: number;
