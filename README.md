@@ -99,3 +99,23 @@ GNU Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public License
 along with WPPConnect. If not, see <https://www.gnu.org/licenses/>.
+
+### Community announcement replies
+
+Requires a WA-JS build exposing `chat.getComments`, `chat.sendCommentMessage`
+and `chat.comment` (the community-comments WA-JS change must be released first).
+Older builds raise a clear capability error when these methods are invoked.
+
+```ts
+const comments = await client.getComments(announcementMessageId);
+const result = await client.sendCommentMessage(announcementMessageId, 'Thank you!');
+// Only result.messageSendResult === 'OK' confirms sending. Check before retrying.
+const listener = client.onCommentMessage(({action, comment}) => {
+  // Upsert by comment.id. Route by parentMsgId. Handle update/remove/revoked.
+});
+listener.dispose();
+```
+
+Reading does not mark comments as read. Only locally synchronized history is
+returned. Events can include hydrated history, encrypted placeholders and
+revocations, so consumers should retain the type and deduplicate by id.
