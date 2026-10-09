@@ -41,6 +41,7 @@ jobs:
         run: npm run build
 
       - name: Test page lifecycle and authentication
+        timeout-minutes: 5
         run: npx mocha -r ts-node/register src/tests/00.host-layer-page-load.test.ts
         env:
           TS_NODE_FILES: 'true'

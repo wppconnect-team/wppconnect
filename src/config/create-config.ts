@@ -87,6 +87,12 @@ export interface CreateConfig {
    */
   deviceSyncTimeout?: number;
   /**
+   * Time in ms for wa-js to be injected and `WPP.isReady`, from the first page load (reloads share it).
+   * Exceeding it fails the page load with `InjectionTimeoutError`; 0 waits until ready or closed.
+   * @default 120000 (2 minutes)
+   */
+  injectionTimeout?: number;
+  /**
    * Wait for in chat to return a instance of {@link Whatsapp}
    * @default false
    */
@@ -208,6 +214,7 @@ export const defaultOptions: CreateConfig = {
   updatesLog: true,
   autoClose: 60000,
   deviceSyncTimeout: 180000,
+  injectionTimeout: 120000,
   createPathFileToken: true,
   waitForLogin: true,
   logger: defaultLogger,
