@@ -24,7 +24,11 @@ import {
   isInsideChat,
   needsToScan,
 } from '../../controllers/auth';
-import { initWhatsapp, injectApi } from '../../controllers/browser';
+import {
+  initWhatsapp,
+  injectApi,
+  InjectionTimeoutError,
+} from '../../controllers/browser';
 import { defaultLogger, LogLevel } from '../../utils/logger';
 import { sleep } from '../../utils/sleep';
 import { evaluateAndReturn, scrapeImg } from '../helpers';
@@ -49,6 +53,10 @@ export class HostLayer {
   protected isInitialized = false;
   protected isInjected = false;
   protected pageLoadPromise?: Promise<void>;
+  protected pageLoadAbort?: AbortController;
+  protected injectionStartedAt?: number;
+  protected documentWatch?: Promise<void>;
+  protected isNavigating = false;
   protected isStarted = false;
   protected isLogged = false;
   protected isInChat = false;
@@ -91,47 +99,127 @@ export class HostLayer {
       this.log('verbose', 'Page loaded', { type: 'page' });
       this.isInjected = false;
 
+      // One budget per injection cycle, so a reload loop cannot extend it
+      this.injectionStartedAt ??= Date.now();
+
+      // Also aborted on document change; this covers pages without a CDP session
+      this.pageLoadAbort?.abort();
+      const abort = new AbortController();
+      this.pageLoadAbort = abort;
+
       const previousPageLoad = this.pageLoadPromise?.catch(() => undefined);
       const pageLoad = (previousPageLoad || Promise.resolve()).then(() =>
-        this.afterPageLoad()
+        this.afterPageLoad(abort.signal)
       );
 
       this.pageLoadPromise = pageLoad;
       void pageLoad.catch(() => undefined);
     });
 
+    this.documentWatch = this.watchDocumentChanges();
     this.isInitialized = true;
   }
 
-  protected async afterPageLoad() {
+  protected async watchDocumentChanges() {
+    try {
+      // Page 'framenavigated' also fires on pushState; these CDP events only for a new document
+      const session = await this.page.createCDPSession();
+      await session.send('Page.enable');
+      const { frameTree } = await session.send('Page.getFrameTree');
+      let mainFrameId = frameTree.frame.id;
+
+      // Steps in flight fail from here on, before the new document exists
+      session.on('Page.frameStartedNavigating', (event) => {
+        if (
+          event.frameId === mainFrameId &&
+          !/samedocument/i.test(event.navigationType)
+        ) {
+          this.isNavigating = true;
+        }
+      });
+      session.on('Page.frameNavigated', ({ frame }) => {
+        if (frame.parentId) return;
+        mainFrameId = frame.id;
+        this.isNavigating = false;
+        this.isInjected = false;
+        this.pageLoadAbort?.abort();
+      });
+    } catch (error) {
+      this.log('warn', 'Could not watch document changes', { error });
+    }
+  }
+
+  protected async afterPageLoad(signal?: AbortSignal) {
+    if (signal?.aborted) {
+      return;
+    }
+
     this.log('verbose', 'Injecting wapi.js');
 
-    const options = {
-      deviceName: this.options.deviceName,
-      disableGoogleAnalytics: this.options.disableGoogleAnalytics,
-      googleAnalyticsId: this.options.googleAnalyticsId,
-      linkPreviewApiServers: this.options.linkPreviewApiServers,
-      poweredBy: this.options.poweredBy,
-    };
-
-    await evaluateAndReturn(
-      this.page,
-      (options) => {
-        (window as any).WPPConfig = options;
-      },
-      options
-    );
-
     try {
-      await injectApi(this.page, this.onLoadingScreen);
-      this.isInjected = true;
-      this.log('verbose', 'wapi.js injected');
-      this.afterPageScriptInjected();
+      await injectApi(this.page, this.onLoadingScreen, {
+        timeout: this.options.injectionTimeout,
+        startedAt: this.injectionStartedAt,
+        signal,
+        config: {
+          deviceName: this.options.deviceName,
+          disableGoogleAnalytics: this.options.disableGoogleAnalytics,
+          googleAnalyticsId: this.options.googleAnalyticsId,
+          linkPreviewApiServers: this.options.linkPreviewApiServers,
+          poweredBy: this.options.poweredBy,
+        },
+      });
     } catch (error) {
+      if (this.isNavigating) {
+        await this.waitForNavigationCommit(signal);
+      }
+      // A newer document owns the page now; its injection decides the outcome
+      if (signal?.aborted) {
+        this.log('verbose', 'wapi.js injection superseded by page reload');
+        return;
+      }
+
+      const failure =
+        this.isInjectionExpired() && !(error instanceof InjectionTimeoutError)
+          ? new InjectionTimeoutError(this.options.injectionTimeout, {
+              cause: error,
+            })
+          : error;
+
+      this.injectionStartedAt = undefined;
       this.log('verbose', 'wapi.js failed');
-      this.log('error', error);
-      throw error;
+      this.log('error', failure);
+      throw failure;
     }
+
+    if (signal?.aborted) {
+      return;
+    }
+
+    this.injectionStartedAt = undefined;
+    this.isInjected = true;
+    this.log('verbose', 'wapi.js injected');
+    this.afterPageScriptInjected().catch((error) => this.log('error', error));
+  }
+
+  protected async waitForNavigationCommit(signal?: AbortSignal) {
+    while (
+      this.isNavigating &&
+      !signal?.aborted &&
+      !this.page.isClosed() &&
+      !this.isInjectionExpired()
+    ) {
+      await sleep(50);
+    }
+  }
+
+  protected isInjectionExpired() {
+    const timeout = this.options.injectionTimeout;
+    return (
+      timeout > 0 &&
+      this.injectionStartedAt !== undefined &&
+      Date.now() >= this.injectionStartedAt + timeout
+    );
   }
 
   protected async afterPageScriptInjected() {
@@ -165,9 +253,9 @@ export class HostLayer {
       await evaluateAndReturn(this.page, () => {
         WPP.on('conn.auth_code_change', (window as any).checkQrCode);
       }).catch(() => null);
-      this.checkQrCode();
+      this.checkQrCode().catch((error) => this.log('error', error));
     }
-    this.checkInChat();
+    this.checkInChat().catch((error) => this.log('error', error));
   }
 
   public async start() {
@@ -177,6 +265,7 @@ export class HostLayer {
 
     this.isStarted = true;
 
+    await this.documentWatch;
     await initWhatsapp(
       this.page,
       null,
@@ -396,12 +485,26 @@ export class HostLayer {
         continue;
       }
 
-      await pageLoad;
+      const failure = await pageLoad.then(
+        () => null,
+        (error) => ({ error })
+      );
 
-      if (pageLoad === this.pageLoadPromise && this.isInjected) {
-        await this.page.waitForFunction(() => WPP.isReady);
+      // Superseded by a newer load: wait for that injection instead
+      if (pageLoad !== this.pageLoadPromise) {
+        continue;
+      }
+      if (failure) {
+        throw failure.error;
+      }
+      if (this.isInjected) {
         return;
       }
+      // Superseded by a navigation whose 'load' has not fired yet
+      if (this.isInjectionExpired()) {
+        throw new InjectionTimeoutError(this.options.injectionTimeout);
+      }
+      await sleep(50);
     }
 
     throw new Error('Page closed before WAPI injection completed');

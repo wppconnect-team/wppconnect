@@ -233,45 +233,162 @@ export async function onLoadingScreen(
   );
 }
 
+export interface WaitForReadyOptions {
+  /** Milliseconds; 0 waits until ready, aborted or closed */
+  timeout?: number;
+  /** Epoch ms the timeout counts from; defaults to the call time */
+  startedAt?: number;
+  signal?: AbortSignal;
+}
+
+export interface InjectApiOptions extends WaitForReadyOptions {
+  /** Assigned to window.WPPConfig before wa-js loads */
+  config?: object;
+}
+
+export class InjectionTimeoutError extends Error {
+  name = 'InjectionTimeoutError';
+
+  constructor(readonly timeout: number, options?: ErrorOptions) {
+    super(`WPP.isReady not reached after ${timeout}ms`, options);
+  }
+}
+
+const isTimeoutError = (error: unknown) =>
+  error instanceof Error && error.name === 'TimeoutError';
+
+/**
+ * Waits for WAPI, Store and WPP.isReady on the current document
+ */
+export async function waitForWppReady(
+  page: Page,
+  options: WaitForReadyOptions = {}
+): Promise<void> {
+  // Explicit timeout so puppeteer's 30s default never applies
+  const timeout = options.timeout ?? 0;
+  const startedAt = options.startedAt ?? Date.now();
+  const deadline = timeout > 0 ? startedAt + timeout : Infinity;
+
+  // puppeteer ignores a signal that is already aborted
+  options.signal?.throwIfAborted();
+
+  try {
+    await page.waitForFunction(
+      () => {
+        return (
+          typeof window.WAPI !== 'undefined' &&
+          typeof window.Store !== 'undefined' &&
+          !!window.WPP?.isReady
+        );
+      },
+      {
+        // 0 would mean no limit to puppeteer
+        timeout: deadline === Infinity ? 0 : Math.max(deadline - Date.now(), 1),
+        signal: options.signal,
+      }
+    );
+  } catch (error) {
+    if (isTimeoutError(error)) {
+      throw new InjectionTimeoutError(timeout, { cause: error });
+    }
+    // puppeteer's own 30s wait for an execution context: still loading
+    if (isTimeoutError((error as Error)?.cause) && !page.isClosed()) {
+      return waitForWppReady(page, { ...options, startedAt });
+    }
+    throw error;
+  }
+}
+
 export async function injectApi(
   page: Page,
-  onLoadingScreenCallBack?: LoadingScreenCallback
+  onLoadingScreenCallBack?: LoadingScreenCallback,
+  options: InjectApiOptions = {}
 ) {
+  const timeout = options.timeout ?? 0;
+  const startedAt = options.startedAt ?? Date.now();
+
+  // Stops the remaining steps once superseded or out of time
+  const controller = new AbortController();
+  const abort = () => controller.abort();
+  if (options.signal?.aborted) abort();
+  options.signal?.addEventListener('abort', abort);
+
+  let timer: NodeJS.Timeout;
+  const expired = new Promise<never>((_, reject) => {
+    if (timeout > 0) {
+      timer = setTimeout(() => {
+        reject(new InjectionTimeoutError(timeout));
+        abort();
+      }, startedAt + timeout - Date.now());
+    }
+  });
+
+  try {
+    // A step stuck in a starved renderer must not stretch the deadline
+    await Promise.race([
+      runInjection(page, onLoadingScreenCallBack, {
+        ...options,
+        startedAt,
+        signal: controller.signal,
+      }),
+      expired,
+    ]);
+  } finally {
+    clearTimeout(timer);
+    options.signal?.removeEventListener('abort', abort);
+  }
+}
+
+async function runInjection(
+  page: Page,
+  onLoadingScreenCallBack: LoadingScreenCallback | undefined,
+  options: InjectApiOptions
+) {
+  const { signal } = options;
+
+  if (options.config) {
+    await page.evaluate((config) => {
+      (window as any).WPPConfig = config;
+    }, options.config);
+  }
+
   const injected = await page
     .evaluate(() => {
-      // @ts-ignore
+      // wapi.js defines WAPI and Store even when wa-js is missing
       return (
+        typeof window.WPP !== 'undefined' &&
         typeof window.WAPI !== 'undefined' &&
         typeof window.Store !== 'undefined'
       );
     })
     .catch(() => false);
 
-  if (injected) {
-    return;
-  }
-  await page.addScriptTag({
-    path: require.resolve('@wppconnect/wa-js'),
-  });
+  // Stop between steps so a superseded injection does not keep writing
+  if (!injected) {
+    signal?.throwIfAborted();
+    await page.addScriptTag({
+      path: require.resolve('@wppconnect/wa-js'),
+    });
 
-  await page.evaluate(() => {
-    WPP.chat.defaultSendMessageOptions.createChat = true;
-    WPP.conn.setKeepAlive(true);
-  });
-  await page.addScriptTag({
-    path: require.resolve(
-      path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
-    ),
-  });
-  await onLoadingScreen(page, onLoadingScreenCallBack);
+    signal?.throwIfAborted();
+    await page.evaluate(() => {
+      WPP.chat.defaultSendMessageOptions.createChat = true;
+      WPP.conn.setKeepAlive(true);
+    });
+
+    signal?.throwIfAborted();
+    await page.addScriptTag({
+      path: require.resolve(
+        path.join(__dirname, '../../dist/lib/wapi', 'wapi.js')
+      ),
+    });
+
+    signal?.throwIfAborted();
+    await onLoadingScreen(page, onLoadingScreenCallBack);
+  }
+
   // Make sure WAPI is initialized
-  await page.waitForFunction(() => {
-    return (
-      typeof window.WAPI !== 'undefined' &&
-      typeof window.Store !== 'undefined' &&
-      window.WPP.isReady
-    );
-  });
+  await waitForWppReady(page, options);
 }
 
 /**
