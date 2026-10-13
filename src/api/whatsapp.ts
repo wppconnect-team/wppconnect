@@ -159,6 +159,7 @@ export class Whatsapp extends BusinessLayer {
    * @internal
    */
   public async close() {
+    this.cancelQrLoop();
     const browser = this.page.browser();
 
     if (!this.page.isClosed()) {

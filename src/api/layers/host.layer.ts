@@ -58,6 +58,7 @@ export class HostLayer {
   protected documentWatch?: Promise<void>;
   protected isNavigating = false;
   protected isStarted = false;
+  protected qrLoopCancelled = false;
   protected isLogged = false;
   protected isInChat = false;
   protected checkStartInterval?: NodeJS.Timer = null;
@@ -287,9 +288,12 @@ export class HostLayer {
     );
     await this.page.exposeFunction('checkInChat', () => this.checkInChat());
 
-    this.checkStartInterval = setInterval(() => this.checkStart(), 5000);
+    if (!this.qrLoopCancelled) {
+      this.checkStartInterval = setInterval(() => this.checkStart(), 5000);
+    }
 
     this.page.on('close', () => {
+      this.cancelQrLoop();
       clearInterval(this.checkStartInterval as NodeJS.Timeout);
     });
   }
@@ -301,7 +305,9 @@ export class HostLayer {
   }
 
   protected async checkQrCode() {
+    if (this.qrLoopCancelled || this.page.isClosed()) return;
     const needScan = await needsToScan(this.page).catch(() => null);
+    if (this.qrLoopCancelled || this.page.isClosed()) return;
 
     // A navigation can invalidate the execution context while waiting for QR.
     // An unknown result is not proof that the session has registered.
@@ -313,6 +319,7 @@ export class HostLayer {
     }
 
     const result = await this.getQrCode();
+    if (this.qrLoopCancelled || this.page.isClosed()) return;
 
     if (!result?.urlCode || this.urlCode === result.urlCode) {
       return;
@@ -325,6 +332,7 @@ export class HostLayer {
     if (this.options.logQR || this.catchQR) {
       qr = await asciiQr(this.urlCode);
     }
+    if (this.qrLoopCancelled || this.page.isClosed()) return;
 
     if (this.options.logQR) {
       this.log(
@@ -337,6 +345,16 @@ export class HostLayer {
     }
 
     this.catchQR?.(result.base64Image, qr, this.attempt, result.urlCode);
+  }
+
+  /**
+   * Stop QR attempts and suppress pending QR callbacks for this client.
+   * Create a new client to start pairing again.
+   * @category Host
+   */
+  public cancelQrLoop(): void {
+    this.qrLoopCancelled = true;
+    clearInterval(this.checkStartInterval as NodeJS.Timeout);
   }
 
   protected async loginByCode(phone: string) {
