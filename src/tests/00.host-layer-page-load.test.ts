@@ -18,6 +18,7 @@ import * as assert from 'assert';
 import { Page } from 'puppeteer';
 
 import { HostLayer } from '../api/layers/host.layer';
+import { Whatsapp } from '../api/whatsapp';
 import {
   InjectionTimeoutError,
   injectApi,
@@ -137,6 +138,74 @@ class AuthenticationHostLayer extends HostLayer {
     return this.checkQrCode();
   }
 }
+
+class CancellableQrHostLayer extends AuthenticationHostLayer {
+  finishQr?: () => void;
+  logs: string[] = [];
+
+  protected log(_level?: string, message?: string) {
+    if (message) this.logs?.push(message);
+  }
+
+  async getQrCode() {
+    await new Promise<void>((resolve) => (this.finishQr = resolve));
+    return { urlCode: 'late-qr', base64Image: 'image' } as any;
+  }
+}
+
+describe('QR cancellation', () => {
+  it('stops future QR checks before querying the page', async () => {
+    const page = new AuthenticationPage([false]);
+    const client = new AuthenticationHostLayer(
+      page as unknown as Page,
+      'cancel'
+    );
+    client.cancelQrLoop();
+    await client.readQr();
+    assert.strictEqual(page.evaluateCalls, 0);
+  });
+
+  it('does not log or publish a QR result that finishes after cancellation', async () => {
+    const page = new AuthenticationPage([false]);
+    const client = new CancellableQrHostLayer(
+      page as unknown as Page,
+      'cancel'
+    );
+    let callbacks = 0;
+    client.catchQR = () => callbacks++;
+    const checking = client.readQr();
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.ok(client.finishQr);
+    client.logs = [];
+    client.cancelQrLoop();
+    client.finishQr();
+    await checking;
+    assert.strictEqual(callbacks, 0);
+    assert.deepStrictEqual(client.logs, []);
+  });
+
+  it('cancels QR callbacks before close waits for the browser page', async () => {
+    const page = new AuthenticationPage([false]);
+    const client = new CancellableQrHostLayer(page as unknown as Page, 'close');
+    let finishClose!: () => void;
+    const browser = { close: async () => undefined };
+    (page as any).browser = () => browser;
+    (page as any).close = () =>
+      new Promise<void>((resolve) => (finishClose = resolve));
+    let callbacks = 0;
+    client.catchQR = () => callbacks++;
+    const checking = client.readQr();
+    await new Promise((resolve) => setImmediate(resolve));
+    const closing = Whatsapp.prototype.close.call(client);
+    client.logs = [];
+    client.finishQr!();
+    await checking;
+    assert.strictEqual(callbacks, 0);
+    assert.deepStrictEqual(client.logs, []);
+    finishClose();
+    await closing;
+  });
+});
 
 describe('HostLayer authentication during navigation', function () {
   this.timeout(5000);
