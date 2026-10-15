@@ -1,3 +1,26 @@
+## <small>2.3.5 (2026-10-15)</small>
+
+### Bug Fixes
+
+- **auth:** cancel pending QR attempts on close (#2915) ([1ada250](https://github.com/wppconnect-team/wppconnect/commit/1ada250)), closes [#2915](https://github.com/wppconnect-team/wppconnect/issues/2915)
+- **browser:** tolerate slow WPP.isReady during injection (#2909) ([9ab531c](https://github.com/wppconnect-team/wppconnect/commit/9ab531c)), closes [#2909](https://github.com/wppconnect-team/wppconnect/issues/2909) [#2873](https://github.com/wppconnect-team/wppconnect/issues/2873)
+- bump wa-js version to 4.7.1 (#2917) ([f988414](https://github.com/wppconnect-team/wppconnect/commit/f988414)), closes [#2917](https://github.com/wppconnect-team/wppconnect/issues/2917)
+
+### Build System
+
+- **deps-dev:** bump handlebars from 4.7.9 to 4.7.10 (#2911) ([22184d9](https://github.com/wppconnect-team/wppconnect/commit/22184d9)), closes [#2911](https://github.com/wppconnect-team/wppconnect/issues/2911)
+- **deps-dev:** bump markdown-it from 14.3.0 to 14.3.2 (#2901) ([820ef4e](https://github.com/wppconnect-team/wppconnect/commit/820ef4e)), closes [#2901](https://github.com/wppconnect-team/wppconnect/issues/2901)
+- **deps-dev:** update commitlint monorepo to ^21.2.3 (#2903) ([6ab0ccc](https://github.com/wppconnect-team/wppconnect/commit/6ab0ccc)), closes [#2903](https://github.com/wppconnect-team/wppconnect/issues/2903)
+- **deps-dev:** update dependency @babel/eslint-parser to ^7.29.9 (#2904) ([a1c771b](https://github.com/wppconnect-team/wppconnect/commit/a1c771b)), closes [#2904](https://github.com/wppconnect-team/wppconnect/issues/2904)
+- **deps-dev:** update dependency concurrently to ^10.0.6 (#2913) ([2c44b8e](https://github.com/wppconnect-team/wppconnect/commit/2c44b8e)), closes [#2913](https://github.com/wppconnect-team/wppconnect/issues/2913)
+- **deps-dev:** update dependency eslint to v10.12.0 (#2908) ([f115c57](https://github.com/wppconnect-team/wppconnect/commit/f115c57)), closes [#2908](https://github.com/wppconnect-team/wppconnect/issues/2908)
+- **deps-dev:** update dependency globals to ^17.13.0 (#2910) ([c2b3f7b](https://github.com/wppconnect-team/wppconnect/commit/c2b3f7b)), closes [#2910](https://github.com/wppconnect-team/wppconnect/issues/2910)
+- **deps-dev:** update dependency mocha to v12 (#2889) ([0d922dd](https://github.com/wppconnect-team/wppconnect/commit/0d922dd)), closes [#2889](https://github.com/wppconnect-team/wppconnect/issues/2889)
+- **deps-dev:** update dependency release-it to ^21.1.1 (#2914) ([05b2463](https://github.com/wppconnect-team/wppconnect/commit/05b2463)), closes [#2914](https://github.com/wppconnect-team/wppconnect/issues/2914)
+- **deps-dev:** update dependency typescript-eslint to ^8.71.2 (#2916) ([e1a8767](https://github.com/wppconnect-team/wppconnect/commit/e1a8767)), closes [#2916](https://github.com/wppconnect-team/wppconnect/issues/2916)
+- **deps:** update dependency @img/sharp-win32-x64 to ^0.35.5 (#2905) ([3a313d7](https://github.com/wppconnect-team/wppconnect/commit/3a313d7)), closes [#2905](https://github.com/wppconnect-team/wppconnect/issues/2905)
+- **deps:** update dependency sharp to v0.35.5 [security] (#2907) ([79fa1aa](https://github.com/wppconnect-team/wppconnect/commit/79fa1aa)), closes [#2907](https://github.com/wppconnect-team/wppconnect/issues/2907)
+
 ## <small>2.3.4 (2026-10-02)</small>
 
 ### Bug Fixes
