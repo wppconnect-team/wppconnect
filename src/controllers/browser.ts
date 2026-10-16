@@ -485,6 +485,17 @@ export async function getOrCreatePage(
 }
 
 /**
+ * Returns whether at least one open, non-blank page remains.
+ *
+ * Puppeteer commonly leaves an `about:blank` tab behind after the session page
+ * is closed, so a non-empty `browser.pages()` does not prove a real page is
+ * still alive. This drives the auto-close guard in `create()`.
+ */
+export function hasAlivePage(pages: Page[]): boolean {
+  return pages.some((page) => !page.isClosed() && page.url() !== 'about:blank');
+}
+
+/**
  * Retrieves chrome instance path
  */
 function getChrome() {
