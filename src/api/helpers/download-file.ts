@@ -17,6 +17,12 @@
 
 import axios from 'axios';
 
+/** Upper bound so one remote file cannot exhaust a small host (100 MB). */
+export const MAX_DOWNLOAD_BYTES = 100 * 1024 * 1024;
+
+/** Remote fetches must not wedge a send forever. */
+export const DOWNLOAD_TIMEOUT_MS = 30000;
+
 export async function downloadFileToBase64(
   _path: string,
   _mines: (string | RegExp)[] = []
@@ -35,7 +41,15 @@ export async function downloadFileToBase64(
   try {
     const response = await axios.get<any>(_path, {
       responseType: 'arraybuffer',
+      timeout: DOWNLOAD_TIMEOUT_MS,
+      maxContentLength: MAX_DOWNLOAD_BYTES,
     });
+
+    // Refuse to materialize a huge body (headers arrive before the bytes)
+    const contentLength = Number(response.headers['content-length']);
+    if (Number.isFinite(contentLength) && contentLength > MAX_DOWNLOAD_BYTES) {
+      return false;
+    }
 
     const mimeType = String(response.headers['content-type'] ?? '');
 
