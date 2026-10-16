@@ -27,6 +27,47 @@ import { magix, makeOptions, newMagix, timeout } from './helpers/decrypt';
 import { BusinessLayer } from './layers/business.layer';
 import { GetMessagesParam, Message } from './model';
 
+/** Per-request timeout so a single fetch cannot hang a send indefinitely. */
+export const DECRYPT_TIMEOUT_MS = 30000;
+
+/**
+ * GETs a URL until HTTP 200, retrying transient failures (including a rejected
+ * status) with linear backoff. Replaces an unbounded `while` loop that wedged
+ * `decryptFile` forever on a persistently failing download. Each attempt is
+ * bounded by `timeout` (defaults to {@link DECRYPT_TIMEOUT_MS}) so a stalled
+ * response cannot hang either.
+ */
+export async function getUntilOk(
+  url: string,
+  options?: any,
+  maxAttempts = 3
+): Promise<any> {
+  const requestOptions = { timeout: DECRYPT_TIMEOUT_MS, ...options };
+  let lastError: any;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      const res = await axios.get<any>(url, requestOptions);
+      if (res.status == 200) {
+        return res;
+      }
+      lastError = new Error(`unexpected status ${res.status}`);
+    } catch (error) {
+      lastError = error;
+    }
+
+    if (attempt < maxAttempts) {
+      await timeout(2000 * attempt);
+    }
+  }
+
+  throw new Error(
+    `Error trying to download the file (${
+      (lastError && lastError.message) || lastError
+    }).`
+  );
+}
+
 export class Whatsapp extends BusinessLayer {
   private connected: boolean | null = null;
 
@@ -231,17 +272,9 @@ export class Whatsapp extends BusinessLayer {
       throw new Error(
         'message is missing critical data (`mediaUrl`) needed to download the file.'
       );
-    let haventGottenImageYet = true;
     let res: any;
     try {
-      while (haventGottenImageYet) {
-        res = await axios.get<any>(mediaUrl.trim(), options);
-        if (res.status == 200) {
-          haventGottenImageYet = false;
-        } else {
-          await timeout(2000);
-        }
-      }
+      res = await getUntilOk(mediaUrl.trim(), options);
     } catch (error) {
       throw new Error('Error trying to download the file.');
     }

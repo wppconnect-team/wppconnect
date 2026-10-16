@@ -19,24 +19,45 @@ import * as mimeTypes from 'mime-types';
 import * as fs from 'fs';
 
 /**
+ * Upper bound for a single file read. A base64 data URI is ~1.37x the file
+ * size in one contiguous string, so an unbounded read can exhaust a small
+ * host on a single send.
+ */
+export const MAX_FILE_BYTES = 100 * 1024 * 1024;
+
+/**
  * Converts given file into base64 string
  * @param path file path
  * @param mime Optional, will retrieve file mime automatically if not defined (Example: 'image/png')
  */
 export async function fileToBase64(path: string, mime?: string | false) {
-  if (fs.existsSync(path)) {
-    const base64 = fs.readFileSync(path, { encoding: 'base64' });
-    if (mime === undefined) {
-      mime = mimeTypes.lookup(path);
+  let size: number;
+  try {
+    const stat = await fs.promises.stat(path);
+    if (!stat.isFile()) {
+      return false;
     }
-    if (!mime) {
-      mime = 'application/octet-stream';
-    }
-    const data = `data:${mime};base64,${base64}`;
-    return data;
-  } else {
+    size = stat.size;
+  } catch {
     return false;
   }
+
+  if (size > MAX_FILE_BYTES) {
+    console.error(
+      `fileToBase64: "${path}" is ${size} bytes, exceeding the ${MAX_FILE_BYTES} byte limit.`
+    );
+    return false;
+  }
+
+  const base64 = (await fs.promises.readFile(path)).toString('base64');
+  if (mime === undefined) {
+    mime = mimeTypes.lookup(path);
+  }
+  if (!mime) {
+    mime = 'application/octet-stream';
+  }
+  const data = `data:${mime};base64,${base64}`;
+  return data;
 }
 
 export async function Mine(path: string) {
