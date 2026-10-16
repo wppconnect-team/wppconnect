@@ -208,7 +208,6 @@ export const defaultOptions: CreateConfig = {
   debug: false,
   logQR: true,
   browserWS: '',
-  browserArgs: [''],
   puppeteerOptions: {},
   disableWelcome: false,
   updatesLog: true,

@@ -392,6 +392,25 @@ async function runInjection(
 }
 
 /**
+ * Resolves the Chromium launch arguments.
+ *
+ * When the caller passes no arguments (or an empty list) the hardened
+ * `puppeteerConfig.chromiumArgs` are used. A plain truthiness check is not
+ * enough: the legacy default `['']` is truthy and silently replaced the whole
+ * hardened list.
+ *
+ * Security tradeoffs: the fallback list disables several browser protections
+ * for headless/container compatibility. In particular it passes `--no-sandbox`
+ * and `--disable-setuid-sandbox` (no renderer sandbox), and
+ * `--ignore-certificate-errors` / `--disable-site-isolation-trials`. Sessions
+ * that must keep those protections should pass an explicit `browserArgs`, or
+ * override `puppeteerConfig.chromiumArgs`; either fully replaces this fallback.
+ */
+export function resolveBrowserArgs(requested?: string[]): string[] {
+  return [...(requested?.length ? requested : puppeteerConfig.chromiumArgs)];
+}
+
+/**
  * Initializes browser, will try to use chrome as default
  * @param session
  */
@@ -431,9 +450,7 @@ export async function initBrowser(
      * This allows the browser to use the specified proxy server for all network requests.
      */
 
-    const args = options.browserArgs
-      ? options.browserArgs
-      : [...puppeteerConfig.chromiumArgs];
+    const args = resolveBrowserArgs(options.browserArgs);
     if (options.proxy && options.proxy.url) {
       args.push(`--proxy-server=${options.proxy.url}`);
     }
