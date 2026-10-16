@@ -61,7 +61,6 @@ export class HostLayer {
   protected qrLoopCancelled = false;
   protected isLogged = false;
   protected isInChat = false;
-  protected checkStartInterval?: NodeJS.Timer = null;
   protected urlCode = '';
   protected attempt = 0;
 
@@ -311,20 +310,9 @@ export class HostLayer {
     );
     await this.exposePageFunction('checkInChat', () => this.checkInChat());
 
-    if (!this.qrLoopCancelled) {
-      this.checkStartInterval = setInterval(() => this.checkStart(), 5000);
-    }
-
     this.page.on('close', () => {
       this.cancelQrLoop();
-      clearInterval(this.checkStartInterval as NodeJS.Timeout);
     });
-  }
-
-  protected async checkStart() {
-    needsToScan(this.page)
-      .then((need) => {})
-      .catch(() => null);
   }
 
   protected async checkQrCode() {
@@ -377,7 +365,6 @@ export class HostLayer {
    */
   public cancelQrLoop(): void {
     this.qrLoopCancelled = true;
-    clearInterval(this.checkStartInterval as NodeJS.Timeout);
   }
 
   protected async loginByCode(phone: string) {
