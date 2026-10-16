@@ -69,10 +69,13 @@ export class GroupLayer extends RetrieverLayer {
    */
   public async getGroupMembers(groupId: string) {
     const membersIds = await this.getGroupMembersIds(groupId);
-    const actions = membersIds.map((memberId) => {
-      return this.getContact(memberId._serialized);
-    });
-    return Promise.all(actions);
+    const membersIdValues = membersIds.map((memberId) => memberId._serialized);
+    return evaluateAndReturn(
+      this.page,
+      (membersIdValues: string[]) =>
+        membersIdValues.map((memberId) => WAPI.getContact(memberId)),
+      membersIdValues
+    );
   }
 
   /**
