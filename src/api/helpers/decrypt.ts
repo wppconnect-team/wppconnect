@@ -60,9 +60,14 @@ export const magix = (
   mediaType: any,
   expectedSize?: number
 ) => {
-  const encodedHex = fileData.toString('hex');
-  const encodedBytes = hexToBytes(encodedHex);
-  const mediaKeyBytes: any = base64ToBytes(mediaKeyBase64);
+  // fileData is already raw bytes. Converting it to hex and back per byte
+  // (substr + parseInt per byte, multi-MB intermediate strings) is pure
+  // overhead on every decrypt.
+  const encodedBytes = Buffer.isBuffer(fileData)
+    ? fileData
+    : Buffer.from(fileData);
+  // atob + charCodeAt per byte === base64 decode
+  const mediaKeyBytes: any = Buffer.from(mediaKeyBase64, 'base64');
   const info = `WhatsApp ${mediaTypes[mediaType.toUpperCase()]} Keys`;
   const hash: string = 'sha256';
   const salt: any = new Uint8Array(32);
@@ -96,23 +101,6 @@ const fixPadding = (data: Buffer, expectedSize: number) => {
   }
   //@ts-ignore
   return Buffer.from(data, 'utf-8');
-};
-
-const hexToBytes = (hexStr: any) => {
-  const intArray = [];
-  for (let i = 0; i < hexStr.length; i += 2) {
-    intArray.push(parseInt(hexStr.substr(i, 2), 16));
-  }
-  return new Uint8Array(intArray);
-};
-
-const base64ToBytes = (base64Str: any) => {
-  const binaryStr = atob(base64Str);
-  const byteArray = new Uint8Array(binaryStr.length);
-  for (let i = 0; i < binaryStr.length; i++) {
-    byteArray[i] = binaryStr.charCodeAt(i);
-  }
-  return byteArray;
 };
 
 export const newMagix = (
