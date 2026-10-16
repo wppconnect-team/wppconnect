@@ -31,7 +31,7 @@ import { CreateConfig, defaultOptions } from '../config/create-config';
 import { SessionToken } from '../token-store';
 import { defaultLogger } from '../utils/logger';
 import { sleep } from '../utils/sleep';
-import { getOrCreatePage, initBrowser } from './browser';
+import * as browserModule from './browser';
 import { checkUpdates, welcomeScreen } from './welcome';
 
 process.on(
@@ -134,6 +134,7 @@ export async function create(
 
   let browser = mergedOptions.browser;
   let page = mergedOptions.page;
+  let browserCreated = false;
 
   if (!browser && page) {
     // Get browser from page
@@ -167,24 +168,26 @@ export async function create(
 
     // Initialize new browser
     logger.info('Initializing browser...', { session, type: 'browser' });
-    browser = await initBrowser(session, mergedOptions, logger).catch((e) => {
-      if (mergedOptions.browserWS && mergedOptions.browserWS != '') {
-        logger.error(`Error when try to connect ${mergedOptions.browserWS}`, {
+    browser = await browserModule
+      .initBrowser(session, mergedOptions, logger)
+      .catch((e) => {
+        if (mergedOptions.browserWS && mergedOptions.browserWS != '') {
+          logger.error(`Error when try to connect ${mergedOptions.browserWS}`, {
+            session,
+            type: 'browser',
+          });
+        } else {
+          logger.error(`Error no open browser`, {
+            session,
+            type: 'browser',
+          });
+        }
+        logger.error(e.message, {
           session,
           type: 'browser',
         });
-      } else {
-        logger.error(`Error no open browser`, {
-          session,
-          type: 'browser',
-        });
-      }
-      logger.error(e.message, {
-        session,
-        type: 'browser',
+        throw e;
       });
-      throw e;
-    });
 
     logger.http('checking headless...', {
       session,
@@ -202,6 +205,8 @@ export async function create(
         type: 'browser',
       });
     }
+
+    browserCreated = !mergedOptions.browserWS;
   }
 
   if (!mergedOptions.browserWS && browser['_process']) {
@@ -231,54 +236,62 @@ export async function create(
     }
   });
 
-  if (!page) {
-    // Initialize a page
-    page = await getOrCreatePage(browser);
-  }
-
-  if (page) {
-    await page.setBypassCSP(true);
-
-    const client = new Whatsapp(page, session, mergedOptions);
-    client.catchQR = catchQR;
-    client.statusFind = statusFind;
-    client.onLoadingScreen = onLoadingScreen;
-    client.catchLinkCode = catchLinkCode;
-
-    if (onStreamModeChanged) {
-      client.onStreamModeChanged(onStreamModeChanged);
-    }
-    if (onStreamInfoChanged) {
-      client.onStreamInfoChanged(onStreamInfoChanged);
+  try {
+    if (!page) {
+      // Initialize a page
+      page = await browserModule.getOrCreatePage(browser);
     }
 
-    await client.start();
+    if (page) {
+      await page.setBypassCSP(true);
 
-    if (mergedOptions.waitForLogin) {
-      const isLogged = await client.waitForLogin();
-      if (!isLogged) {
-        throw new Error('Not Logged');
+      const client = new Whatsapp(page, session, mergedOptions);
+      client.catchQR = catchQR;
+      client.statusFind = statusFind;
+      client.onLoadingScreen = onLoadingScreen;
+      client.catchLinkCode = catchLinkCode;
+
+      if (onStreamModeChanged) {
+        client.onStreamModeChanged(onStreamModeChanged);
+      }
+      if (onStreamInfoChanged) {
+        client.onStreamInfoChanged(onStreamInfoChanged);
       }
 
-      let waitLoginPromise = null;
-      client.onStateChange(async (state) => {
-        const connected = await page.evaluate(() => WPP.conn.isRegistered());
-        if (!connected) {
-          await sleep(2000);
+      await client.start();
 
-          if (!waitLoginPromise) {
-            waitLoginPromise = client
-              .waitForLogin()
-              .catch(() => {})
-              .finally(() => {
-                waitLoginPromise = null;
-              });
-          }
-          await waitLoginPromise;
+      if (mergedOptions.waitForLogin) {
+        const isLogged = await client.waitForLogin();
+        if (!isLogged) {
+          throw new Error('Not Logged');
         }
-      });
-    }
 
-    return client;
+        let waitLoginPromise = null;
+        client.onStateChange(async (state) => {
+          const connected = await page.evaluate(() => WPP.conn.isRegistered());
+          if (!connected) {
+            await sleep(2000);
+
+            if (!waitLoginPromise) {
+              waitLoginPromise = client
+                .waitForLogin()
+                .catch(() => {})
+                .finally(() => {
+                  waitLoginPromise = null;
+                });
+            }
+            await waitLoginPromise;
+          }
+        });
+      }
+
+      return client;
+    }
+  } catch (error) {
+    // Release a browser launched here; the caller never got a reference
+    if (browserCreated) {
+      await browserModule.closeBrowser(browser as Browser);
+    }
+    throw error;
   }
 }
