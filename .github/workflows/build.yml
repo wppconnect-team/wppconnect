@@ -46,6 +46,12 @@ jobs:
         env:
           TS_NODE_FILES: 'true'
 
+      - name: Test regression specs
+        timeout-minutes: 5
+        run: npx mocha -r ts-node/register src/tests/0[6-9].*.test.ts src/tests/1[0-9].*.test.ts
+        env:
+          TS_NODE_FILES: 'true'
+
       - name: Verify CommonJS entry point
         run: |
           node - <<'NODE'

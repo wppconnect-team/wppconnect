@@ -150,6 +150,29 @@ export class HostLayer {
     }
   }
 
+  /**
+   * Exposes a Node callback on the page. A page reused across clients
+   * (`browserWS` or an injected `page`) still carries the binding from the
+   * previous client, and puppeteer refuses to overwrite it (`... already
+   * exists!`). Drop the stale binding first so the newest client's callback
+   * wins; any other error propagates unchanged.
+   */
+  protected async exposePageFunction(
+    name: string,
+    fn: (...args: any[]) => any
+  ): Promise<void> {
+    try {
+      await this.page.exposeFunction(name, fn);
+    } catch (error) {
+      if (!/already exists/i.test((error as Error)?.message ?? '')) {
+        throw error;
+      }
+
+      await this.page.removeExposedFunction(name).catch(() => null);
+      await this.page.exposeFunction(name, fn);
+    }
+  }
+
   protected async afterPageLoad(signal?: AbortSignal) {
     if (signal?.aborted) {
       return;
@@ -276,17 +299,17 @@ export class HostLayer {
       this.log.bind(this)
     );
 
-    await this.page.exposeFunction('checkQrCode', () => this.checkQrCode());
-    await this.page.exposeFunction('onLinkCode', (code: string) =>
+    await this.exposePageFunction('checkQrCode', () => this.checkQrCode());
+    await this.exposePageFunction('onLinkCode', (code: string) =>
       this.onLinkCode(code)
     );
-    await this.page.exposeFunction('onLinkCodeExpired', () =>
+    await this.exposePageFunction('onLinkCodeExpired', () =>
       this.log('warn', 'Login by code expired; call refreshLinkCode() to retry')
     );
-    await this.page.exposeFunction('onLinkCodeError', (message: string) =>
+    await this.exposePageFunction('onLinkCodeError', (message: string) =>
       this.log('error', `Login by code failed: ${message}`)
     );
-    await this.page.exposeFunction('checkInChat', () => this.checkInChat());
+    await this.exposePageFunction('checkInChat', () => this.checkInChat());
 
     if (!this.qrLoopCancelled) {
       this.checkStartInterval = setInterval(() => this.checkStart(), 5000);
