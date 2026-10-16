@@ -33,6 +33,12 @@ import { SessionToken } from '../token-store';
 import { LoadingScreenCallback } from '../api/model';
 import { LogLevel } from '../utils/logger';
 
+const treeKill = require('tree-kill') as (
+  pid: number,
+  signal?: string,
+  callback?: (error?: Error) => void
+) => void;
+
 export async function unregisterServiceWorker(page: Page) {
   await page.evaluateOnNewDocument(() => {
     // Remove existent service worker
@@ -470,6 +476,48 @@ export async function initBrowser(
   }
 
   return browser;
+}
+
+/**
+ * Closes a browser and, when it was launched by this process, guarantees its
+ * OS process tree is terminated even if the graceful close fails or hangs.
+ * Remote browsers (`browserWS`) expose no process handle and are only
+ * disconnected. Safe to call when the page/browser was already closed.
+ */
+export async function closeBrowser(browser: Browser): Promise<void> {
+  // Only browsers launched by this process expose a process handle
+  const pid = browser.process?.()?.pid;
+
+  if (!pid) {
+    // Caller-supplied remote connection: detach this client only. Closing it
+    // would terminate the browser shared with every other connected client.
+    // Connections that expose neither a process handle nor a disconnect method
+    // (e.g. test doubles) fall back to close().
+    if (typeof browser.disconnect === 'function') {
+      await browser.disconnect().catch(() => null);
+    } else {
+      await browser.close().catch(() => null);
+    }
+    return;
+  }
+
+  const gracefulClose = browser.close().catch(() => null);
+
+  // Bound the graceful close so an unresponsive browser cannot hang teardown
+  let timer: NodeJS.Timeout;
+  const timedOut = new Promise<void>((resolve) => {
+    timer = setTimeout(resolve, 5000);
+  });
+  try {
+    await Promise.race([gracefulClose, timedOut]);
+  } finally {
+    clearTimeout(timer);
+  }
+
+  // Force kill the process tree if the graceful close did not take it down
+  await new Promise<void>((resolve) => {
+    treeKill(pid, 'SIGKILL', () => resolve());
+  });
 }
 
 export async function getOrCreatePage(
