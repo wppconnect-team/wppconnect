@@ -50,8 +50,13 @@ export class Whatsapp extends BusinessLayer {
         return;
       }
 
+      const wasConnected = this.connected;
       this.connected = newConnected;
-      if (!newConnected) {
+      // Only a registered -> unregistered transition is a disconnection. The
+      // first check on a fresh page can run before afterPageScriptInjected()
+      // records the initial state, and a page that was never paired is not a
+      // phone that disconnected.
+      if (!newConnected && wasConnected === true) {
         this.log('info', 'Session Unpaired', { type: 'session' });
         setTimeout(async () => {
           if (this.statusFind) {
