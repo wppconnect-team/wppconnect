@@ -599,6 +599,10 @@ export class HostLayer {
     }
 
     if (authenticated === true) {
+      // A stored session takes the "Authenticated" branch above without going
+      // through waitForQrCodeScan(), so nothing else may have recorded the
+      // login yet. waitForInChat() bails out early when isLogged is false.
+      this.isLogged = true;
       // Reinicia o contador do autoclose
       this.cancelAutoClose();
       // Wait for interface update
