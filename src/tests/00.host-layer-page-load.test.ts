@@ -207,6 +207,10 @@ describe('QR cancellation', () => {
   });
 });
 
+class RestoredSessionHostLayer extends AuthenticationHostLayer {
+  async waitForPageLoad() {}
+}
+
 describe('HostLayer authentication during navigation', function () {
   this.timeout(5000);
 
@@ -243,6 +247,25 @@ describe('HostLayer authentication during navigation', function () {
     await client.readQr();
 
     assert.strictEqual(client.logged, false);
+  });
+
+  it('treats a restored registered session as logged before waiting for chat', async function () {
+    // isRegistered() from waitForLogin(), then isMainReady() from waitForInChat()
+    const page = new AuthenticationPage([true, true]);
+    const client = new RestoredSessionHostLayer(
+      page as unknown as Page,
+      'restored'
+    );
+    let phoneNotConnected = false;
+    client.statusFind = (status: string) => {
+      if (status === 'phoneNotConnected') phoneNotConnected = true;
+    };
+    client.begin();
+
+    assert.strictEqual(await client.waitForLogin(), true);
+    assert.strictEqual(client.logged, true);
+    assert.strictEqual(phoneNotConnected, false);
+    assert.strictEqual(page.evaluateCalls, 2);
   });
 
   it('waits for the resolved chat readiness value', async function () {
