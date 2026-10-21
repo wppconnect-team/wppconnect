@@ -19,6 +19,7 @@ import axios from 'axios';
 import * as fs from 'fs';
 import { Page } from 'puppeteer';
 import { pipeline } from 'stream/promises';
+import { closeBrowser } from '../controllers/browser';
 import { CreateConfig } from '../config/create-config';
 import { useragentOverride } from '../config/WAuserAgente';
 import { sleep } from '../utils/sleep';
@@ -160,22 +161,11 @@ export class Whatsapp extends BusinessLayer {
    */
   public async close() {
     this.cancelQrLoop();
-    const browser = this.page.browser();
 
-    if (!this.page.isClosed()) {
-      await this.page.close().catch(() => null);
-
-      await browser.close().catch(() => null);
-      /*
-      Code was removed as it is not necessary.
-      try {
-        const process = browser.process();
-        if (process) {
-          treekill(process.pid, 'SIGKILL');
-        }
-      } catch (error) {}
-      */
-    }
+    // The page may already be closed (autoClose, crash or logout), but the
+    // browser and its OS process tree must still be released
+    await this.page.close().catch(() => null);
+    await closeBrowser(this.page.browser());
 
     return true;
   }
