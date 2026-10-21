@@ -33,6 +33,7 @@ import { defaultLogger } from '../utils/logger';
 import { sleep } from '../utils/sleep';
 import * as browserModule from './browser';
 import { checkUpdates, welcomeScreen } from './welcome';
+import { hasAlivePage } from './browser';
 
 process.on(
   'unhandledRejection',
@@ -216,6 +217,11 @@ export async function create(
   }
 
   (browser as Browser).on('targetdestroyed', async (target: any) => {
+    // The handler is registered before the session page is acquired, so ignore
+    // targets destroyed during startup: there is nothing to auto-close yet.
+    if (!page) {
+      return;
+    }
     if (
       typeof (browser as Browser).isConnected === 'function' &&
       !(browser as Browser).isConnected()
@@ -223,7 +229,10 @@ export async function create(
       return;
     }
     const pages = await browser.pages();
-    if (!pages.length) {
+    // An `about:blank` tab often remains after the session page is closed, so
+    // close only once the session page itself is gone and no real page is left
+    // (#2896). A temporarily blank session page must not be mistaken for it.
+    if (page.isClosed() && !hasAlivePage(pages)) {
       browser.close().catch(() => null);
     }
   });
