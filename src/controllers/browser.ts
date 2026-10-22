@@ -55,10 +55,10 @@ export async function unregisterServiceWorker(page: Page) {
     // @ts-ignore
     navigator.serviceWorker.register = new Promise(() => {});
 
-    setInterval(() => {
-      window.onerror = console.error;
-      window.onunhandledrejection = console.error;
-    }, 500);
+    // Assign once per document; re-running this on an interval only wakes the
+    // renderer every 500ms for no benefit
+    window.onerror = console.error;
+    window.onunhandledrejection = console.error;
   });
 }
 

@@ -999,24 +999,18 @@ describe('HostLayer slow WhatsApp Web initialization', function () {
   });
 });
 
-class RegistrationPage extends FakePage {
-  constructor(private states: boolean[]) {
-    super();
-  }
-
-  async evaluate() {
-    this.evaluateCalls += 1;
-    return this.states.length > 1 ? this.states.shift() : this.states[0];
-  }
-}
-
-async function statusesAfter(states: boolean[], ms: number) {
-  const page = new RegistrationPage(states);
+async function statusesAfter(states: boolean[]) {
+  const page = new FakePage();
   const client = new Whatsapp(page as unknown as Page, 'unpaired');
   (client as any).log = () => undefined;
   const statuses: string[] = [];
   client.statusFind = (status: string) => statuses.push(status);
-  await delay(ms);
+
+  for (const connected of states) {
+    (client as any).onConnectionChange(connected);
+  }
+
+  await delay(1100);
   page.emit('close');
   return statuses;
 }
@@ -1025,11 +1019,11 @@ describe('Whatsapp pairing state watcher', function () {
   this.timeout(10000);
 
   it('does not report disconnectedMobile for a page that was never paired', async function () {
-    assert.deepStrictEqual(await statusesAfter([false], 2500), []);
+    assert.deepStrictEqual(await statusesAfter([false]), []);
   });
 
   it('reports disconnectedMobile when a registered session becomes unpaired', async function () {
-    assert.deepStrictEqual(await statusesAfter([true, false], 3500), [
+    assert.deepStrictEqual(await statusesAfter([true, false]), [
       'disconnectedMobile',
     ]);
   });
