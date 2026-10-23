@@ -70,55 +70,96 @@ export async function getUntilOk(
 }
 
 export class Whatsapp extends BusinessLayer {
+  /**
+   * The page binding exposed by `wireConnectionEvents` can only be registered
+   * once per page, but a page may be reused by a later client. This maps each
+   * page to the callback of the client that most recently wired it, so the
+   * existing binding can be redirected to the current client.
+   */
+  private static readonly connectionDispatchers = new WeakMap<
+    Page,
+    (isRegistered: boolean) => void
+  >();
+
   private connected: boolean | null = null;
 
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
-
-    let interval: any = null;
-
-    if (this.page) {
-      this.page.on('close', async () => {
-        clearInterval(interval);
-      });
-    }
-
-    interval = setInterval(async () => {
-      const newConnected = await page
-        .evaluate(() => WPP.conn.isRegistered())
-        .catch(() => null);
-
-      if (newConnected === null || newConnected === this.connected) {
-        return;
-      }
-
-      const wasConnected = this.connected;
-      this.connected = newConnected;
-      // Only a registered -> unregistered transition is a disconnection. The
-      // first check on a fresh page can run before afterPageScriptInjected()
-      // records the initial state, and a page that was never paired is not a
-      // phone that disconnected.
-      if (!newConnected && wasConnected === true) {
-        this.log('info', 'Session Unpaired', { type: 'session' });
-        setTimeout(async () => {
-          if (this.statusFind) {
-            try {
-              this.statusFind('disconnectedMobile', session || '');
-            } catch (error) {}
-          }
-        }, 1000);
-      }
-    }, 1000);
   }
 
   protected async afterPageScriptInjected() {
     await super.afterPageScriptInjected();
+    await this.wireConnectionEvents();
+
     this.page
       .evaluate(() => WPP.conn.isRegistered())
       .then((isAuthenticated) => {
-        this.connected = isAuthenticated;
+        // Do not overwrite a connection event that arrived while the initial
+        // state was being read.
+        if (this.connected === null) {
+          this.connected = isAuthenticated;
+        }
       })
       .catch(() => null);
+  }
+
+  /**
+   * Forwards wa-js connection events to the Node side instead of polling
+   * `WPP.conn.isRegistered()` every second. Re-registered after every page
+   * load, since the in-page listeners do not survive navigation.
+   */
+  protected async wireConnectionEvents() {
+    const page = this.page;
+
+    // `exposeFunction` can only bind a given name once and a page can be
+    // reused by a later client, so route the page binding through a per-page
+    // dispatcher. A second client re-points the existing binding at itself
+    // instead of leaving the previous client's callback installed.
+    await page
+      .exposeFunction('onConnectionChange', (isRegistered: boolean) => {
+        Whatsapp.connectionDispatchers.get(page)?.(isRegistered);
+      })
+      .catch(() => null);
+
+    Whatsapp.connectionDispatchers.set(page, (isRegistered: boolean) =>
+      this.onConnectionChange(isRegistered)
+    );
+
+    await evaluateAndReturn(page, () => {
+      const handler = (window as any).onConnectionChange;
+      if (typeof handler !== 'function' || handler.__wppWired) {
+        return;
+      }
+      handler.__wppWired = true;
+      WPP.on('conn.authenticated', () => handler(true));
+      WPP.on('conn.main_ready', () => handler(true));
+      WPP.on('conn.logout', () => handler(false));
+      WPP.on('conn.require_auth', () => handler(false));
+    }).catch(() => null);
+  }
+
+  protected onConnectionChange(isRegistered: boolean) {
+    if (isRegistered === this.connected) {
+      return;
+    }
+
+    const wasConnected = this.connected;
+    this.connected = isRegistered;
+
+    // Only a registered -> unregistered transition is a disconnection. The
+    // first event on a fresh page can arrive before afterPageScriptInjected()
+    // records the initial state, and a page that was never paired is not a
+    // phone that disconnected.
+    if (!isRegistered && wasConnected === true) {
+      this.log('info', 'Session Unpaired', { type: 'session' });
+      setTimeout(() => {
+        if (this.statusFind) {
+          try {
+            this.statusFind('disconnectedMobile', this.session || '');
+          } catch (error) {}
+        }
+      }, 1000);
+    }
   }
   /**
    * Decrypts message file
