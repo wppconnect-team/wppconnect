@@ -1,3 +1,37 @@
+## <small>2.3.6 (2026-10-23)</small>
+
+### Bug Fixes
+
+- **auth:** keep unpaired QR sessions out of chat readiness ([8f46042](https://github.com/wppconnect-team/wppconnect/commit/8f46042))
+- **auth:** mark restored sessions as logged before waiting for chat ([366e3c0](https://github.com/wppconnect-team/wppconnect/commit/366e3c0))
+- **auth:** only report disconnectedMobile after a real unpair ([111633b](https://github.com/wppconnect-team/wppconnect/commit/111633b))
+- **browser:** apply default launch args and opt-in protection bypasses ([c2e0c06](https://github.com/wppconnect-team/wppconnect/commit/c2e0c06))
+- **browser:** auto-close when only blank or closed tabs remain ([c165218](https://github.com/wppconnect-team/wppconnect/commit/c165218))
+- **browser:** release the browser process tree on close and failed create ([b1407bf](https://github.com/wppconnect-team/wppconnect/commit/b1407bf))
+- **deps:** require wa-js 4.7.2 for unread actions ([6b2a41b](https://github.com/wppconnect-team/wppconnect/commit/6b2a41b))
+- **host:** guard exposeFunction against reused pages ([a778f5a](https://github.com/wppconnect-team/wppconnect/commit/a778f5a))
+- **media:** bound resource use in file and download helpers ([5f5d9de](https://github.com/wppconnect-team/wppconnect/commit/5f5d9de))
+
+### Performance Improvements
+
+- **decrypt:** decode media buffers directly instead of per-byte loops ([b03a29d](https://github.com/wppconnect-team/wppconnect/commit/b03a29d))
+- **group:** fetch group member contacts in a single page call ([a41709e](https://github.com/wppconnect-team/wppconnect/commit/a41709e))
+- **polling:** remove idle polling from live sessions ([de07dab](https://github.com/wppconnect-team/wppconnect/commit/de07dab))
+
+### Build System
+
+- **deps-dev:** bump markdown-it from 14.3.2 to 14.3.3 ([7698abf](https://github.com/wppconnect-team/wppconnect/commit/7698abf))
+- **deps-dev:** update commitlint monorepo to ^21.2.4 (#2932) ([b03defc](https://github.com/wppconnect-team/wppconnect/commit/b03defc)), closes [#2932](https://github.com/wppconnect-team/wppconnect/issues/2932)
+- **deps-dev:** update dependency eslint to v10.13.0 (#2928) ([fd42ca9](https://github.com/wppconnect-team/wppconnect/commit/fd42ca9)), closes [#2928](https://github.com/wppconnect-team/wppconnect/issues/2928)
+- **deps-dev:** update dependency eslint-plugin-prettier to ^5.5.7 (#2927) ([cdb3572](https://github.com/wppconnect-team/wppconnect/commit/cdb3572)), closes [#2927](https://github.com/wppconnect-team/wppconnect/issues/2927)
+- **deps-dev:** update dependency typescript-eslint to ^8.72.0 (#2935) ([bb16ae6](https://github.com/wppconnect-team/wppconnect/commit/bb16ae6)), closes [#2935](https://github.com/wppconnect-team/wppconnect/issues/2935)
+- **deps:** bump follow-redirects from 1.16.0 to 1.16.1 ([385ed97](https://github.com/wppconnect-team/wppconnect/commit/385ed97))
+- **deps:** bump ip-address from 10.7.2 to 10.7.4 ([8a54f25](https://github.com/wppconnect-team/wppconnect/commit/8a54f25))
+
+### Chores
+
+- **ci:** associate schedule with joaosouz4dev ([488d952](https://github.com/wppconnect-team/wppconnect/commit/488d952))
+
 ## <small>2.3.5 (2026-10-15)</small>
 
 ### Bug Fixes
