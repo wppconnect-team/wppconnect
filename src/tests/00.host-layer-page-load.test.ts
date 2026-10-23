@@ -977,7 +977,7 @@ describe('HostLayer slow WhatsApp Web initialization', function () {
     );
   });
 
-  it('logs throwing user callbacks instead of leaking them', async function () {
+  it('logs throwing QR callbacks without reporting an unpaired session inChat', async function () {
     const { page, client } = await createClient(10);
     client.statusFind = () => {
       throw new Error('statusFind failed');
@@ -994,8 +994,21 @@ describe('HostLayer slow WhatsApp Web initialization', function () {
     await client.waitForPageLoad();
     await delay(50);
 
-    assert.ok(client.logs.some((log) => log.includes('statusFind failed')));
+    assert.ok(!client.logs.some((log) => log.includes('statusFind failed')));
     assert.ok(client.logs.some((log) => log.includes('catchQR failed')));
+  });
+
+  it('logs throwing status callbacks for a registered ready session', async function () {
+    const { page, client } = await createClient(10);
+    client.statusFind = () => {
+      throw new Error('statusFind failed');
+    };
+
+    page.emit('load');
+    await client.waitForPageLoad();
+    await delay(50);
+
+    assert.ok(client.logs.some((log) => log.includes('statusFind failed')));
   });
 });
 

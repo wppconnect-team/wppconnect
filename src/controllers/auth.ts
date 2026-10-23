@@ -71,7 +71,11 @@ export const needsToScan = async (waPage: puppeteer.Page) => {
 };
 
 export const isInsideChat = async (waPage: puppeteer.Page) => {
-  return await waPage.evaluate(() => WPP.conn.isMainReady());
+  // Some WhatsApp versions report main_ready while still showing the QR screen.
+  // Read both conditions in the same document before treating it as a chat.
+  return await waPage.evaluate(
+    () => WPP.conn.isRegistered() && WPP.conn.isMainReady()
+  );
 };
 
 export const isConnectingToPhone = async (waPage: puppeteer.Page) => {

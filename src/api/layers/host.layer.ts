@@ -398,14 +398,18 @@ export class HostLayer {
 
   protected async checkInChat() {
     const inChat = await isInsideChat(this.page).catch(() => null);
-
+    const wasInChat = this.isInChat;
     this.isInChat = !!inChat;
 
-    if (!inChat) {
+    if (!inChat || wasInChat) {
       return;
     }
     this.log('http', 'Connected');
-    this.statusFind?.('inChat', this.session);
+    try {
+      this.statusFind?.('inChat', this.session);
+    } catch (error) {
+      this.log('error', error);
+    }
   }
 
   protected tryAutoClose() {
@@ -498,8 +502,9 @@ export class HostLayer {
       }
 
       await sleep(1000);
-      const inChat = await isInsideChat(this.page).catch(() => null);
-      this.isInChat = !!inChat;
+      // main_ready may already have fired on the QR screen, so pairing can
+      // finish without another event. Publish only the verified transition.
+      await this.checkInChat();
     }
     return this.isInChat;
   }
