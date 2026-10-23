@@ -398,6 +398,35 @@ async function runInjection(
 }
 
 /**
+ * Resolves the Chromium launch arguments.
+ *
+ * When the caller passes no arguments (or an empty list) the default
+ * `puppeteerConfig.chromiumArgs` are used. A non-empty list replaces the
+ * defaults, matching the existing `browserArgs` contract. The default list only
+ * contains launch and performance flags; the flags that disable browser
+ * protections live in `puppeteerConfig.protectionDisablingChromiumArgs` and are
+ * only merged in when `useInsecureChromiumArgs` is explicitly enabled.
+ */
+export function resolveBrowserArgs(
+  requested?: string[],
+  useInsecure = false
+): string[] {
+  const args = [
+    ...(requested?.length ? requested : puppeteerConfig.chromiumArgs),
+  ];
+
+  if (useInsecure) {
+    for (const arg of puppeteerConfig.protectionDisablingChromiumArgs) {
+      if (!args.includes(arg)) {
+        args.push(arg);
+      }
+    }
+  }
+
+  return args;
+}
+
+/**
  * Initializes browser, will try to use chrome as default
  * @param session
  */
@@ -437,9 +466,10 @@ export async function initBrowser(
      * This allows the browser to use the specified proxy server for all network requests.
      */
 
-    const args = options.browserArgs
-      ? options.browserArgs
-      : [...puppeteerConfig.chromiumArgs];
+    const args = resolveBrowserArgs(
+      options.browserArgs,
+      options.useInsecureChromiumArgs
+    );
     if (options.proxy && options.proxy.url) {
       args.push(`--proxy-server=${options.proxy.url}`);
     }

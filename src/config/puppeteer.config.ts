@@ -17,28 +17,26 @@
 
 const puppeteerConfig = {
   whatsappUrl: 'https://web.whatsapp.com',
+  /**
+   * Default launch and performance flags for headless/container environments.
+   * They do not disable browser protection; callers that need the flags in
+   * `protectionDisablingChromiumArgs` must opt in explicitly.
+   */
   chromiumArgs: [
     // `--app=${WAUrl}`,
     '--log-level=3', // fatal only
     //'--start-maximized',
     '--no-default-browser-check',
-    '--disable-site-isolation-trials',
     '--no-experiments',
     '--ignore-gpu-blacklist',
-    '--ignore-certificate-errors',
-    '--ignore-certificate-errors-spki-list',
     '--disable-gpu',
     '--disable-extensions',
     '--disable-default-apps',
     '--enable-features=NetworkService',
-    '--disable-setuid-sandbox',
-    '--no-sandbox',
     // Extras
     '--disable-webgl',
     '--disable-infobars',
     '--window-position=0,0',
-    '--ignore-certifcate-errors',
-    '--ignore-certifcate-errors-spki-list',
     '--disable-threaded-animation',
     '--disable-threaded-scrolling',
     '--disable-in-process-stack-traces',
@@ -55,6 +53,18 @@ const puppeteerConfig = {
     '--disable-dev-shm-usage',
     '--autoplay-policy=no-user-gesture-required',
     '--disable-blink-features=AutomationControlled',
+  ],
+  /**
+   * Flags that disable browser protections. They are never applied by default:
+   * use `useInsecureChromiumArgs: true` or add them to `browserArgs` when an
+   * environment explicitly requires them (for example a container that cannot
+   * use the Chromium sandbox).
+   */
+  protectionDisablingChromiumArgs: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--ignore-certificate-errors',
+    '--disable-site-isolation-trials',
   ],
 };
 

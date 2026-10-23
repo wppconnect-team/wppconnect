@@ -50,6 +50,16 @@ export interface CreateConfig {
    */
   browserArgs?: string[];
   /**
+   * Adds the protection-disabling launch flags (`--no-sandbox`,
+   * `--disable-setuid-sandbox`, `--ignore-certificate-errors` and
+   * `--disable-site-isolation-trials`) to the resolved launch arguments.
+   * Disabling these protections weakens the browser sandbox and certificate
+   * validation, so it is opt-in and should only be used where the environment
+   * requires it.
+   * @default false
+   */
+  useInsecureChromiumArgs?: boolean;
+  /**
    * Will be passed to puppeteer.launch
    */
   puppeteerOptions?: Parameters<typeof launch>[0];
@@ -208,7 +218,7 @@ export const defaultOptions: CreateConfig = {
   debug: false,
   logQR: true,
   browserWS: '',
-  browserArgs: [''],
+  useInsecureChromiumArgs: false,
   puppeteerOptions: {},
   disableWelcome: false,
   updatesLog: true,
