@@ -150,7 +150,7 @@ export interface CreateConfig {
    * Normalmente, versões mais antigas continuam funcionando por mais um tempo,
    * assim, com essa opção, é possível ter uma janela de tempo maior para se preparar para atualizações.
    * Caso seja definido vazio ou null, será usado a versão atual, ou seja, sem forçar versão específica.
-   * @default 2.2134.x
+   * @default ''
    */
   whatsappVersion?: string;
 
@@ -229,7 +229,7 @@ export const defaultOptions: CreateConfig = {
   waitForLogin: true,
   logger: defaultLogger,
   tokenStore: 'file',
-  whatsappVersion: '2.3000.10305x',
+  whatsappVersion: '',
   deviceName: false,
   linkPreviewApiServers: null,
   disableGoogleAnalytics: true,
