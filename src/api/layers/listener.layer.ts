@@ -25,6 +25,7 @@ import { ExposedFn } from '../helpers/exposed.enum';
 import {
   Ack,
   Chat,
+  CommentEvent,
   IncomingCall,
   LiveLocation,
   Message,
@@ -291,6 +292,16 @@ export class ListenerLayer extends ProfileLayer {
               window['onReactionMessage'](eventData);
             });
             window['onReactionMessage'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        try {
+          if (!window['onCommentMessage']?.exposed) {
+            WPP.on('chat.comment' as any, (data: CommentEvent) => {
+              window['onCommentMessage'](data);
+            });
+            window['onCommentMessage'].exposed = true;
           }
         } catch (error) {
           console.error(error);
@@ -729,6 +740,15 @@ export class ListenerLayer extends ProfileLayer {
     }) => any
   ) {
     return this.registerEvent('onReactionMessage', callback);
+  }
+
+  /**
+   * @event Comment additions, updates and removals, including hydrated history.
+   * Upsert by comment.id; use parentMsgId to select the announcement.
+   * @returns Disposable object to stop listening.
+   */
+  public onCommentMessage(callback: (data: CommentEvent) => any) {
+    return this.registerEvent(ExposedFn.onCommentMessage, callback);
   }
 
   /**
