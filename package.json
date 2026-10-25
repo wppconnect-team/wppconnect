@@ -123,7 +123,7 @@
     "ws": "^8.21.3"
   },
   "overrides": {
-    "serialize-javascript": "7.1.2"
+    "serialize-javascript": "7.1.4"
   },
   "optionalDependencies": {
     "@img/sharp-win32-x64": "^0.35.5",
