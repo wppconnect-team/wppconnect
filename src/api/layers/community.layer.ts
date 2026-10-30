@@ -18,12 +18,55 @@
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
-import { Wid } from '../model';
+import { CommentApi, Wid } from '../model';
 import { NewsletterLayer } from './newsletter.layer';
 
 export class CommunityLayer extends NewsletterLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
+  }
+
+  /**
+   * Read locally synchronized replies to a community announcement, oldest first.
+   * This does not mark the comments as read. Missing linked-device history is not fetched.
+   * @category Community
+   */
+  public async getComments(messageId: string) {
+    return evaluateAndReturn(
+      this.page,
+      (messageId) => {
+        const api = WPP.chat as typeof WPP.chat & CommentApi;
+        if (typeof api.getComments !== 'function') {
+          throw new Error(
+            'Community comments require a WA-JS build with comment support'
+          );
+        }
+        return api.getComments(messageId);
+      },
+      messageId
+    );
+  }
+
+  /**
+   * Send a text reply inside a community announcement.
+   * Only messageSendResult === 'OK' confirms sending. Check before retrying any failure.
+   * @category Community
+   */
+  public async sendCommentMessage(messageId: string, text: string) {
+    return evaluateAndReturn(
+      this.page,
+      (messageId, text) => {
+        const api = WPP.chat as typeof WPP.chat & CommentApi;
+        if (typeof api.sendCommentMessage !== 'function') {
+          throw new Error(
+            'Community comments require a WA-JS build with comment support'
+          );
+        }
+        return api.sendCommentMessage(messageId, text);
+      },
+      messageId,
+      text
+    );
   }
 
   /**
