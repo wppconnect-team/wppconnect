@@ -1,110 +1,119 @@
-<!-- wppconnect-official-brand -->
+**English** | [Português (Brasil)](./README.pt-BR.md)
+
 <p align="center">
-  <a href="https://wppconnect-team.github.io/">
+  <a href="https://wppconnect.io/">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://wppconnect-team.github.io/brand/wppconnect-dark.png" />
       <img src="https://wppconnect-team.github.io/brand/wppconnect-light.png" alt="WPPConnect" width="220" height="121" />
     </picture>
   </a>
 </p>
-<!-- /wppconnect-official-brand -->
 
-# WPPConnect 📞
+# WPPConnect
 
-[![npm version](https://img.shields.io/npm/v/@wppconnect-team/wppconnect.svg?color=green)](https://www.npmjs.com/package/@wppconnect-team/wppconnect)
-[![Downloads](https://img.shields.io/npm/dm/@wppconnect-team/wppconnect.svg)](https://www.npmjs.com/package/@wppconnect-team/wppconnect)
-[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/wppconnect-team/wppconnect.svg)](https://isitmaintained.com/project/wppconnect-team/wppconnect 'Average time to resolve an issue')
-[![Percentage of issues still open](https://isitmaintained.com/badge/open/wppconnect-team/wppconnect.svg)](https://isitmaintained.com/project/wppconnect-team/wppconnect 'Percentage of issues still open')
-[![Build Status](https://img.shields.io/github/actions/workflow/status/wppconnect-team/wppconnect/build.yml?branch=master)](https://github.com/wppconnect-team/wppconnect/actions)
-[![Lint Status](https://img.shields.io/github/actions/workflow/status/wppconnect-team/wppconnect/lint.yml?branch=master&label=lint)](https://github.com/wppconnect-team/wppconnect/actions)
-[![release-it](https://img.shields.io/badge/%F0%9F%93%A6%F0%9F%9A%80-release--it-e10079.svg)](https://github.com/release-it/release-it)
+Control WhatsApp Web from Node.js applications.
 
-> WPPConnect is an open source project developed by the JavaScript community with the aim of exporting functions from WhatsApp Web to the node, which can be used to support the creation of any interaction, such as customer service, media sending, intelligence recognition based on phrases artificial and many other things, use your imagination... 😀🤔💭
+A project in the WPPConnect ecosystem, maintained by WPPConnect Team.
 
-<p align="center">
-  <a target="_blank" href="https://wppconnect.io/docs/tutorial/basics/installation">Getting Started</a> •
-  <a target="_blank" href="https://wppconnect.io/docs/tutorial/basics/basic-functions">Basic Function</a> •
-  <a target="_blank" href="https://wppconnect.io/wppconnect">Documentation</a>
-</p>
+[Getting started](#getting-started) | [Documentation](#documentation) | [Contributing](#contributing) | [Support WPPConnect](#support-the-project)
 
-## Our online channels
+[![License: LGPL-3.0-or-later](https://img.shields.io/badge/license-LGPL--3.0--or--later-blue)](./LICENSE.md) [![npm version](https://img.shields.io/npm/v/@wppconnect-team/wppconnect)](https://www.npmjs.com/package/@wppconnect-team/wppconnect) [![CI](https://github.com/wppconnect-team/wppconnect/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/wppconnect-team/wppconnect/actions/workflows/build.yml) [![Open Collective](https://img.shields.io/badge/Open%20Collective-WPPConnect-blue)](https://opencollective.com/wppconnect)
 
-[![Discord](https://img.shields.io/discord/844351092758413353?color=blueviolet&label=Discord&logo=discord&style=flat)](https://discord.gg/JU5JGGKGNG)
-[![Telegram Group](https://img.shields.io/badge/Telegram-Group-32AFED?logo=telegram)](https://t.me/wppconnect)
-[![WhatsApp Group](https://img.shields.io/badge/WhatsApp-Group-25D366?logo=whatsapp)](https://chat.whatsapp.com/LJaQu6ZyNvnBPNAVRbX00K)
-[![YouTube](https://img.shields.io/youtube/channel/subscribers/UCD7J9LG08PmGQrF5IS7Yv9A?label=YouTube)](https://www.youtube.com/c/wppconnect)
+## Overview
 
-## Functions
+For developers building bots and integrations who want to manage the browser and session lifecycle in their own application. WPPConnect combines Puppeteer with the browser automation layer used by the ecosystem.
 
-|                                                            |     |
-| ---------------------------------------------------------- | --- |
-| Automatic QR Refresh                                       | ✔   |
-| Send **text, image, video, audio and docs**                | ✔   |
-| Get **contacts, chats, groups, group members, Block List** | ✔   |
-| Send contacts                                              | ✔   |
-| Send stickers                                              | ✔   |
-| Send stickers GIF                                          | ✔   |
-| Multiple Sessions                                          | ✔   |
-| Forward Messages                                           | ✔   |
-| Receive message                                            | ✔   |
-| insert user section                                        | ✔   |
-| Send _location_                                            | ✔   |
-| **and much more**                                          | ✔   |
+## Features
 
-See more at <a target="_blank" href="https://wppconnect.io/wppconnect/classes/Whatsapp.html">WhatsApp methods</a>
+- Send and receive text, images, video, audio, documents, contacts, locations and stickers.
+- Manage multiple sessions, QR pairing, chats, contacts and groups.
+- Handle incoming messages and session events through the JavaScript/TypeScript API.
 
-## Installation
+## Getting started
 
-The first thing that you had to do is install the `npm package` :
+Use Node.js and npm, plus Chrome/Chromium and its operating-system dependencies. CI builds with Node.js 24.22.2; the package does not declare a minimum Node version.
 
-```bash
-npm i --save @wppconnect-team/wppconnect
+```sh
+npm install @wppconnect-team/wppconnect
 ```
 
-See more at <a target="_blank" href="https://wppconnect.io/docs/tutorial/basics/installation">Getting Started</a>
+Save this as `index.cjs`, run `node index.cjs`, and scan the QR code with WhatsApp Linked devices. Send `ping` from an authorized test contact to receive `pong`.
 
-## Development
+```javascript
+const wppconnect = require("@wppconnect-team/wppconnect");
 
-Building WPPConnect is really simple, to build the entire project just run
-
-```bash
-> npm run build
+wppconnect.create({ session: "readme-demo" })
+  .then((client) => {
+    client.onMessage(async (message) => {
+      if (!message.isGroupMsg && message.body === "ping") {
+        await client.sendText(message.from, "pong");
+      }
+    });
+  })
+  .catch(console.error);
 ```
 
-# Update checking
+## Configuration
 
-Whatsapp is in constant change. In order to tackle this issue, we suggest always keeping your Wppconnect package up-to-date.
+Pass session and browser options to `create(...)`; see [client creation](docs/getting-started/creating-client.md). Store session credentials privately. WhatsApp Web changes can require package updates; review release notes and deprecations when upgrading.
 
-The method/function names won't change, only their core algorithm. This way you won't have to makes changes in your code at every update.
-They will remain the same forever but might experience deprecation.
+## Documentation
 
-## Maintainers
+- [Installation guide](https://wppconnect.io/docs/tutorial/basics/installation)
+- [API reference](https://wppconnect.io/wppconnect/)
+- [Runnable examples](./examples/)
+- [Retained technical details and acknowledgments](documentation/readme-reference.md)
 
-Maintainers are needed, I cannot keep with all the updates by myself. If you are
-interested please open a Pull Request.
+## WPPConnect ecosystem
+
+| Project | Purpose | When to use it |
+| --- | --- | --- |
+| [WPPConnect/WA-JS](https://github.com/wppconnect-team/wa-js) | Expose WhatsApp Web functions through the browser-side `WPP` API. | Run browser-side code in WhatsApp Web. |
+| [WPPConnect Server](https://github.com/wppconnect-team/wppconnect-server) | Run a REST API for WhatsApp sessions, messages and webhooks. | Expose session and messaging operations over HTTP. |
+| [WPPConnect Manager](https://github.com/wppconnect-team/wppconnect-manager) | Manage WPPConnect Server sessions and conversations in a self-hosted web workspace. | Operate compatible Server sessions and chats through a UI. |
+
+## Support the project
+
+WPPConnect is maintained by an open-source community. Your support helps fund maintenance, infrastructure, documentation, and the people working on the ecosystem.
+
+If WPPConnect helps your project or business, consider making a one-time contribution or becoming a recurring supporter.
+
+**[Support WPPConnect on Open Collective](https://opencollective.com/wppconnect)**
+
+Contributions are voluntary. See the official page for current financial information. You can also help with code, tests, documentation, translations and well-described issue reports.
+
+Additional official beneficiaries in [.github/FUNDING.yml](.github/FUNDING.yml): [joaosouz4dev](https://github.com/sponsors/joaosouz4dev), [manfe](https://github.com/sponsors/manfe).
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to
-discuss what you would like to change.
+Contributions of code, tests, examples, documentation and translations are welcome. For larger changes, discuss the approach in an issue first. Include the project/runtime versions, a minimal reproduction and sanitized logs when reporting a problem. Update both `README.md` and `README.pt-BR.md` in the same change when installation, configuration, features, examples, licensing or funding changes.
 
-## Star History
+Read [CONTRIBUTING.md](CONTRIBUTING.md).
 
-[![Star History Chart](https://star-history.dera.page/svg?repos=wppconnect-team/wppconnect,wppconnect-team/wa-js&type=Date)](https://star-history.dera.page/#wppconnect-team/wppconnect&wppconnect-team/wa-js&Date)
+After installing the development dependencies, use the repository checks relevant to your change:
+
+```sh
+npm run build
+npm run lint
+npm test
+```
+
+Account-dependent examples and tests require separate validation with an authorized test account. Never attach credentials or session files to an issue.
+
+## Community and support
+
+Use [repository issues](https://github.com/wppconnect-team/wppconnect/issues) for reproducible bugs and feature proposals. For usage questions, join the community through the official channels:
+
+- [Discord](https://discord.gg/JU5JGGKGNG)
+- [Telegram](https://t.me/wppconnect)
+- [YouTube](https://www.youtube.com/c/wppconnect)
+
+This project is independent and is not affiliated with or endorsed by WhatsApp or Meta. Follow applicable terms and obtain authorization for account and messaging operations.
 
 ## License
 
-This file is part of WPPConnect.
+[GNU Lesser General Public License v3.0 or later (LGPL-3.0-or-later)](./LICENSE.md).
 
-WPPConnect is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+WPPConnect Team and contributors.
 
-WPPConnect is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with WPPConnect. If not, see <https://www.gnu.org/licenses/>.
+The original legal document and existing copyright notices are preserved. Third-party components retain their own terms.
