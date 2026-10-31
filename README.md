@@ -1,6 +1,15 @@
-# WPPConnect 📞
+<!-- wppconnect-official-brand -->
+<p align="center">
+  <a href="https://wppconnect-team.github.io/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://wppconnect-team.github.io/brand/wppconnect-dark.png" />
+      <img src="https://wppconnect-team.github.io/brand/wppconnect-light.png" alt="WPPConnect" width="220" height="121" />
+    </picture>
+  </a>
+</p>
+<!-- /wppconnect-official-brand -->
 
-![WPPConnect Banner](./img/wppconnect-banner.jpeg)
+# WPPConnect 📞
 
 [![npm version](https://img.shields.io/npm/v/@wppconnect-team/wppconnect.svg?color=green)](https://www.npmjs.com/package/@wppconnect-team/wppconnect)
 [![Downloads](https://img.shields.io/npm/dm/@wppconnect-team/wppconnect.svg)](https://www.npmjs.com/package/@wppconnect-team/wppconnect)
