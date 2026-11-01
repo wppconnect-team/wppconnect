@@ -34,7 +34,7 @@ code, pre, .tsd-signature { font-family: "SFMono-Regular", Consolas, "Liberation
 .tsd-navigation a { border-radius: 6px; padding-block: .4rem; line-height: 1.5; }
 .tsd-navigation a.current { color: var(--color-link); font-weight: 600; }
 .tsd-typography pre { border: 1px solid var(--color-accent); border-radius: 10px; padding: 1.2rem; }
-.tsd-typography table { border-radius: 8px; overflow-x: auto; }
+.tsd-typography table { display: block; max-width: 100%; border-radius: 8px; overflow-x: auto; }
 .tsd-typography img { max-width: 100%; height: auto; }
 a { text-underline-offset: 3px; }
 :where(a, button, input, select, summary):focus-visible { outline: 3px solid var(--color-focus-outline); outline-offset: 3px; }
