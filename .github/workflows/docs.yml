@@ -1,0 +1,40 @@
+name: Documentation
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - '.github/brand/**'
+      - '.github/workflows/docs.yml'
+      - 'typedoc.json'
+      - 'README.md'
+      - 'README.pt-BR.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: documentation
+  cancel-in-progress: false
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6.5.0
+        with:
+          node-version: 24.22.2
+          cache: npm
+      - run: npm ci --ignore-scripts
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
+      - run: npm run docs:build
+      - name: Publish documentation
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./api-docs
