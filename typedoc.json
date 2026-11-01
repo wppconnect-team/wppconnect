@@ -1,6 +1,6 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "favicon": ".github/brand/favicon.ico",
+  "favicon": ".github/brand/v2/favicon.ico",
   "disableSources": false,
   "entryPoints": ["src/index.ts"],
   "excludeExternals": false,
