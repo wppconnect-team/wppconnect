@@ -1,6 +1,6 @@
-<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@wppconnect-team/wppconnect - v2.3.6</title><meta name="description" content="Documentation for @wppconnect-team/wppconnect"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script><script async src="assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@wppconnect-team/wppconnect - v2.3.6</title><link rel="icon" href="assets/favicon.ico"/><meta name="description" content="Documentation for @wppconnect-team/wppconnect"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><link rel="stylesheet" href="assets/custom.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script><script async src="assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container"><a href="index.html" class="title">@wppconnect-team/wppconnect - v2.3.6</a>
-<div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
+<div id="tsd-toolbar-links"><a href="https://wppconnect.io">WPPConnect</a><a href="https://wppconnect.io/docs/">Guides</a><a href="https://github.com/wppconnect-team">GitHub</a></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
 <ul role="listbox" id="tsd-search-results"></ul>
 <div id="tsd-search-status" aria-live="polite" aria-atomic="true">
 <div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header>
@@ -8,123 +8,99 @@
 <div class="col-content">
 <div class="tsd-page-title">
 <h1>@wppconnect-team/wppconnect - v2.3.6</h1></div>
-<div class="tsd-panel tsd-typography"><h1 id="wppconnect-📞" class="tsd-anchor-link">WPPConnect 📞<a href="#wppconnect-📞" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
-<p><img src="media/wppconnect-banner.jpeg" alt="WPPConnect Banner"></p>
-<p><a href="https://www.npmjs.com/package/@wppconnect-team/wppconnect"><img src="https://img.shields.io/npm/v/@wppconnect-team/wppconnect.svg?color=green" alt="npm version"></a>
-<a href="https://www.npmjs.com/package/@wppconnect-team/wppconnect"><img src="https://img.shields.io/npm/dm/@wppconnect-team/wppconnect.svg" alt="Downloads"></a>
-<a href="https://isitmaintained.com/project/wppconnect-team/wppconnect" title="Average time to resolve an issue"><img src="https://isitmaintained.com/badge/resolution/wppconnect-team/wppconnect.svg" alt="Average time to resolve an issue"></a>
-<a href="https://isitmaintained.com/project/wppconnect-team/wppconnect" title="Percentage of issues still open"><img src="https://isitmaintained.com/badge/open/wppconnect-team/wppconnect.svg" alt="Percentage of issues still open"></a>
-<a href="https://github.com/wppconnect-team/wppconnect/actions"><img src="https://img.shields.io/github/actions/workflow/status/wppconnect-team/wppconnect/build.yml?branch=master" alt="Build Status"></a>
-<a href="https://github.com/wppconnect-team/wppconnect/actions"><img src="https://img.shields.io/github/actions/workflow/status/wppconnect-team/wppconnect/lint.yml?branch=master&amp;label=lint" alt="Lint Status"></a>
-<a href="https://github.com/release-it/release-it"><img src="https://img.shields.io/badge/%F0%9F%93%A6%F0%9F%9A%80-release--it-e10079.svg" alt="release-it"></a></p>
-<blockquote>
-<p>WPPConnect is an open source project developed by the JavaScript community with the aim of exporting functions from WhatsApp Web to the node, which can be used to support the creation of any interaction, such as customer service, media sending, intelligence recognition based on phrases artificial and many other things, use your imagination... 😀🤔💭</p>
-</blockquote>
+<div class="tsd-panel tsd-typography"><p><strong>English</strong> | <a href="media/README.pt-BR.md">Português (Brasil)</a></p>
 <p align="center">
-  <a target="_blank" href="https://wppconnect.io/docs/tutorial/basics/installation">Getting Started</a> •
-  <a target="_blank" href="https://wppconnect.io/docs/tutorial/basics/basic-functions">Basic Function</a> •
-  <a target="_blank" href="https://wppconnect.io/wppconnect">Documentation</a>
+  <a href="https://wppconnect.io/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://wppconnect-team.github.io/brand/v2/wppconnect-dark.png" />
+      <img src="https://wppconnect-team.github.io/brand/v2/wppconnect-light.png" alt="WPPConnect" width="220" height="121" />
+    </picture>
+  </a>
 </p>
-<h2 id="our-online-channels" class="tsd-anchor-link">Our online channels<a href="#our-online-channels" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<p><a href="https://discord.gg/JU5JGGKGNG"><img src="https://img.shields.io/discord/844351092758413353?color=blueviolet&amp;label=Discord&amp;logo=discord&amp;style=flat" alt="Discord"></a>
-<a href="https://t.me/wppconnect"><img src="https://img.shields.io/badge/Telegram-Group-32AFED?logo=telegram" alt="Telegram Group"></a>
-<a href="https://chat.whatsapp.com/LJaQu6ZyNvnBPNAVRbX00K"><img src="https://img.shields.io/badge/WhatsApp-Group-25D366?logo=whatsapp" alt="WhatsApp Group"></a>
-<a href="https://www.youtube.com/c/wppconnect"><img src="https://img.shields.io/youtube/channel/subscribers/UCD7J9LG08PmGQrF5IS7Yv9A?label=YouTube" alt="YouTube"></a></p>
-<h2 id="functions" class="tsd-anchor-link">Functions<a href="#functions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h1 id="wppconnect" class="tsd-anchor-link">WPPConnect<a href="#wppconnect" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p>Control WhatsApp Web from Node.js applications.</p>
+<p>A project in the WPPConnect ecosystem, maintained by WPPConnect Team.</p>
+<p><a href="#getting-started">Getting started</a> | <a href="#documentation">Documentation</a> | <a href="#contributing">Contributing</a> | <a href="#support-the-project">Support WPPConnect</a></p>
+<p><a href="./LICENSE.md"><img src="https://img.shields.io/badge/license-LGPL--3.0--or--later-blue" alt="License: LGPL-3.0-or-later"></a> <a href="https://www.npmjs.com/package/@wppconnect-team/wppconnect"><img src="https://img.shields.io/npm/v/@wppconnect-team/wppconnect" alt="npm version"></a> <a href="https://github.com/wppconnect-team/wppconnect/actions/workflows/build.yml"><img src="https://github.com/wppconnect-team/wppconnect/actions/workflows/build.yml/badge.svg?branch=master" alt="CI"></a> <a href="https://opencollective.com/wppconnect"><img src="https://img.shields.io/badge/Open%20Collective-WPPConnect-blue" alt="Open Collective"></a></p>
+<h2 id="overview" class="tsd-anchor-link">Overview<a href="#overview" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>For developers building bots and integrations who want to manage the browser and session lifecycle in their own application. WPPConnect combines Puppeteer with the browser automation layer used by the ecosystem.</p>
+<h2 id="features" class="tsd-anchor-link">Features<a href="#features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li>Send and receive text, images, video, audio, documents, contacts, locations and stickers.</li>
+<li>Manage multiple sessions, QR pairing, chats, contacts and groups.</li>
+<li>Handle incoming messages and session events through the JavaScript/TypeScript API.</li>
+</ul>
+<h2 id="getting-started" class="tsd-anchor-link">Getting started<a href="#getting-started" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Use Node.js and npm, plus Chrome/Chromium and its operating-system dependencies. CI builds with Node.js 24.22.2; the package does not declare a minimum Node version.</p>
+<pre><code class="sh"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">@wppconnect-team/wppconnect</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Save this as <code>index.cjs</code>, run <code>node index.cjs</code>, and scan the QR code with WhatsApp Linked devices. Send <code>ping</code> from an authorized test contact to receive <code>pong</code>.</p>
+<pre><code class="javascript"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-4">wppconnect</span><span class="hl-1"> = </span><span class="hl-0">require</span><span class="hl-1">(</span><span class="hl-2">&quot;@wppconnect-team/wppconnect&quot;</span><span class="hl-1">);</span><br/><br/><span class="hl-5">wppconnect</span><span class="hl-1">.</span><span class="hl-0">create</span><span class="hl-1">({ </span><span class="hl-5">session:</span><span class="hl-1"> </span><span class="hl-2">&quot;readme-demo&quot;</span><span class="hl-1"> })</span><br/><span class="hl-1">  .</span><span class="hl-0">then</span><span class="hl-1">((</span><span class="hl-5">client</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-5">client</span><span class="hl-1">.</span><span class="hl-0">onMessage</span><span class="hl-1">(</span><span class="hl-3">async</span><span class="hl-1"> (</span><span class="hl-5">message</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">      </span><span class="hl-6">if</span><span class="hl-1"> (!</span><span class="hl-5">message</span><span class="hl-1">.</span><span class="hl-5">isGroupMsg</span><span class="hl-1"> &amp;&amp; </span><span class="hl-5">message</span><span class="hl-1">.</span><span class="hl-5">body</span><span class="hl-1"> === </span><span class="hl-2">&quot;ping&quot;</span><span class="hl-1">) {</span><br/><span class="hl-1">        </span><span class="hl-6">await</span><span class="hl-1"> </span><span class="hl-5">client</span><span class="hl-1">.</span><span class="hl-0">sendText</span><span class="hl-1">(</span><span class="hl-5">message</span><span class="hl-1">.</span><span class="hl-5">from</span><span class="hl-1">, </span><span class="hl-2">&quot;pong&quot;</span><span class="hl-1">);</span><br/><span class="hl-1">      }</span><br/><span class="hl-1">    });</span><br/><span class="hl-1">  })</span><br/><span class="hl-1">  .</span><span class="hl-0">catch</span><span class="hl-1">(</span><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-5">error</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="configuration" class="tsd-anchor-link">Configuration<a href="#configuration" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Pass session and browser options to <code>create(...)</code>; see <a href="media/creating-client.md">client creation</a>. Store session credentials privately. WhatsApp Web changes can require package updates; review release notes and deprecations when upgrading.</p>
+<h2 id="documentation" class="tsd-anchor-link">Documentation<a href="#documentation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li><a href="https://wppconnect.io/docs/tutorial/basics/installation">Installation guide</a></li>
+<li><a href="https://wppconnect.io/wppconnect/">API reference</a></li>
+<li><a href="media/examples">Runnable examples</a></li>
+<li><a href="media/readme-reference.md">Retained technical details and acknowledgments</a></li>
+</ul>
+<h2 id="wppconnect-ecosystem" class="tsd-anchor-link">WPPConnect ecosystem<a href="#wppconnect-ecosystem" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
+<th>Project</th>
+<th>Purpose</th>
+<th>When to use it</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Automatic QR Refresh</td>
-<td>✔</td>
+<td><a href="https://github.com/wppconnect-team/wa-js">WPPConnect/WA-JS</a></td>
+<td>Expose WhatsApp Web functions through the browser-side <code>WPP</code> API.</td>
+<td>Run browser-side code in WhatsApp Web.</td>
 </tr>
 <tr>
-<td>Send <strong>text, image, video, audio and docs</strong></td>
-<td>✔</td>
+<td><a href="https://github.com/wppconnect-team/wppconnect-server">WPPConnect Server</a></td>
+<td>Run a REST API for WhatsApp sessions, messages and webhooks.</td>
+<td>Expose session and messaging operations over HTTP.</td>
 </tr>
 <tr>
-<td>Get <strong>contacts, chats, groups, group members, Block List</strong></td>
-<td>✔</td>
-</tr>
-<tr>
-<td>Send contacts</td>
-<td>✔</td>
-</tr>
-<tr>
-<td>Send stickers</td>
-<td>✔</td>
-</tr>
-<tr>
-<td>Send stickers GIF</td>
-<td>✔</td>
-</tr>
-<tr>
-<td>Multiple Sessions</td>
-<td>✔</td>
-</tr>
-<tr>
-<td>Forward Messages</td>
-<td>✔</td>
-</tr>
-<tr>
-<td>Receive message</td>
-<td>✔</td>
-</tr>
-<tr>
-<td>insert user section</td>
-<td>✔</td>
-</tr>
-<tr>
-<td>Send <em>location</em></td>
-<td>✔</td>
-</tr>
-<tr>
-<td><strong>and much more</strong></td>
-<td>✔</td>
+<td><a href="https://github.com/wppconnect-team/wppconnect-manager">WPPConnect Manager</a></td>
+<td>Manage WPPConnect Server sessions and conversations in a self-hosted web workspace.</td>
+<td>Operate compatible Server sessions and chats through a UI.</td>
 </tr>
 </tbody>
 </table>
-<p>See more at <a target="_blank" href="https://wppconnect.io/wppconnect/classes/Whatsapp.html">WhatsApp methods</a></p>
-<h2 id="installation" class="tsd-anchor-link">Installation<a href="#installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<p>The first thing that you had to do is install the <code>npm package</code> :</p>
-<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">i</span><span class="hl-1"> </span><span class="hl-3">--save</span><span class="hl-1"> </span><span class="hl-2">@wppconnect-team/wppconnect</span>
-</code><button type="button">Copy</button></pre>
-
-<p>See more at <a target="_blank" href="https://wppconnect.io/docs/tutorial/basics/installation">Getting Started</a></p>
-<h2 id="development" class="tsd-anchor-link">Development<a href="#development" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<p>Building WPPConnect is really simple, to build the entire project just run</p>
-<pre><code class="bash"><span class="hl-1">&gt; npm run build</span>
-</code><button type="button">Copy</button></pre>
-
-<h1 id="update-checking" class="tsd-anchor-link">Update checking<a href="#update-checking" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
-<p>Whatsapp is in constant change. In order to tackle this issue, we suggest always keeping your Wppconnect package up-to-date.</p>
-<p>The method/function names won't change, only their core algorithm. This way you won't have to makes changes in your code at every update.
-They will remain the same forever but might experience deprecation.</p>
-<h2 id="maintainers" class="tsd-anchor-link">Maintainers<a href="#maintainers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<p>Maintainers are needed, I cannot keep with all the updates by myself. If you are
-interested please open a Pull Request.</p>
+<h2 id="support-the-project" class="tsd-anchor-link">Support the project<a href="#support-the-project" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>WPPConnect is maintained by an open-source community. Your support helps fund maintenance, infrastructure, documentation, and the people working on the ecosystem.</p>
+<p>If WPPConnect helps your project or business, consider making a one-time contribution or becoming a recurring supporter.</p>
+<p><strong><a href="https://opencollective.com/wppconnect">Support WPPConnect on Open Collective</a></strong></p>
+<p>Contributions are voluntary. See the official page for current financial information. You can also help with code, tests, documentation, translations and well-described issue reports.</p>
+<p>Additional official beneficiaries in <a href="media/FUNDING.yml">.github/FUNDING.yml</a>: <a href="https://github.com/sponsors/joaosouz4dev">joaosouz4dev</a>, <a href="https://github.com/sponsors/manfe">manfe</a>.</p>
 <h2 id="contributing" class="tsd-anchor-link">Contributing<a href="#contributing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<p>Pull requests are welcome. For major changes, please open an issue first to
-discuss what you would like to change.</p>
-<h2 id="star-history" class="tsd-anchor-link">Star History<a href="#star-history" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<p><a href="https://star-history.dera.page/#wppconnect-team/wppconnect&amp;wppconnect-team/wa-js&amp;Date"><img src="https://star-history.dera.page/svg?repos=wppconnect-team/wppconnect,wppconnect-team/wa-js&amp;type=Date" alt="Star History Chart"></a></p>
+<p>Contributions of code, tests, examples, documentation and translations are welcome. For larger changes, discuss the approach in an issue first. Include the project/runtime versions, a minimal reproduction and sanitized logs when reporting a problem. Update both <code>README.md</code> and <code>README.pt-BR.md</code> in the same change when installation, configuration, features, examples, licensing or funding changes.</p>
+<p>Read <a href="media/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
+<p>After installing the development dependencies, use the repository checks relevant to your change:</p>
+<pre><code class="sh"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">build</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">lint</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">test</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Account-dependent examples and tests require separate validation with an authorized test account. Never attach credentials or session files to an issue.</p>
+<h2 id="community-and-support" class="tsd-anchor-link">Community and support<a href="#community-and-support" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Use <a href="https://github.com/wppconnect-team/wppconnect/issues">repository issues</a> for reproducible bugs and feature proposals. For usage questions, join the community through the official channels:</p>
+<ul>
+<li><a href="https://discord.gg/JU5JGGKGNG">Discord</a></li>
+<li><a href="https://t.me/wppconnect">Telegram</a></li>
+<li><a href="https://www.youtube.com/c/wppconnect">YouTube</a></li>
+</ul>
+<p>This project is independent and is not affiliated with or endorsed by WhatsApp or Meta. Follow applicable terms and obtain authorization for account and messaging operations.</p>
 <h2 id="license" class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<p>This file is part of WPPConnect.</p>
-<p>WPPConnect is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.</p>
-<p>WPPConnect is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public License
-along with WPPConnect. If not, see <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.</p>
+<p><a href="media/LICENSE.md">GNU Lesser General Public License v3.0 or later (LGPL-3.0-or-later)</a>.</p>
+<p>WPPConnect Team and contributors.</p>
+<p>The original legal document and existing copyright notices are preserved. Third-party components retain their own terms.</p>
 </div></div>
 <div class="col-sidebar">
 <div class="page-menu">
@@ -138,18 +114,20 @@ along with WPPConnect. If not, see <a href="https://www.gnu.org/licenses/">https
 <div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
 <details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
 <h3>On This Page</h3></summary>
-<div class="tsd-accordion-details"><a href="#wppconnect-📞"><span>WPP<wbr/>Connect 📞</span></a>
+<div class="tsd-accordion-details"><a href="#wppconnect"><span>WPP<wbr/>Connect</span></a>
 <ul>
-<li><a href="#our-online-channels"><span>Our online channels</span></a></li>
-<li><a href="#functions"><span>Functions</span></a></li>
-<li><a href="#installation"><span>Installation</span></a></li>
-<li><a href="#development"><span>Development</span></a></li></ul><a href="#update-checking"><span>Update checking</span></a>
-<ul>
-<li><a href="#maintainers"><span>Maintainers</span></a></li>
+<li><a href="#overview"><span>Overview</span></a></li>
+<li><a href="#features"><span>Features</span></a></li>
+<li><a href="#getting-started"><span>Getting started</span></a></li>
+<li><a href="#configuration"><span>Configuration</span></a></li>
+<li><a href="#documentation"><span>Documentation</span></a></li>
+<li><a href="#wppconnect-ecosystem"><span>WPP<wbr/>Connect ecosystem</span></a></li>
+<li><a href="#support-the-project"><span>Support the project</span></a></li>
 <li><a href="#contributing"><span>Contributing</span></a></li>
-<li><a href="#star-history"><span>Star <wbr/>History</span></a></li>
+<li><a href="#community-and-support"><span>Community and support</span></a></li>
 <li><a href="#license"><span>License</span></a></li></ul></div></details></div>
 <div class="site-menu">
+<nav id="tsd-sidebar-links" class="tsd-navigation"><a href="https://wppconnect.io" class="tsd-nav-link">WPPConnect</a><a href="https://wppconnect.io/docs/" class="tsd-nav-link">Guides</a><a href="https://github.com/wppconnect-team" class="tsd-nav-link">GitHub</a></nav>
 <nav class="tsd-navigation"><a href="modules.html">@wppconnect-team/wppconnect - v2.3.6</a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container">
 <li>Loading...</li></ul></nav></div></div></div><footer>

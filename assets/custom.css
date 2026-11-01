@@ -1,0 +1,42 @@
+/* WPPConnect API reference: shared brand, readable code, native TypeDoc navigation. */
+:root {
+  --dim-toolbar-contents-height: 4rem;
+  --light-color-background: #fafbfc;
+  --light-color-background-secondary: #f0f4f3;
+  --light-color-background-active: #e0eee8;
+  --light-color-accent: #dce3e3;
+  --light-color-active-menu-item: #e0eee8;
+  --light-color-text: #172324;
+  --light-color-text-aside: #4b6261;
+  --light-color-link: #02623f;
+  --light-color-focus-outline: #02623f;
+  --dark-color-background: #0b1113;
+  --dark-color-background-secondary: #121c1e;
+  --dark-color-background-active: #17382b;
+  --dark-color-accent: #293a3b;
+  --dark-color-active-menu-item: #17382b;
+  --dark-color-text: #e5eeeb;
+  --dark-color-text-aside: #adbfba;
+  --dark-color-link: #63dfa1;
+  --dark-color-focus-outline: #63dfa1;
+}
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.7; }
+h1, h2, h3 { letter-spacing: -.025em; line-height: 1.25; text-wrap: balance; }
+h1 { font-size: clamp(2rem, 4vw, 3rem); }
+h2 { margin-top: 2.5rem; font-size: 1.65rem; }
+code, pre, .tsd-signature { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: .9em; }
+.tsd-page-toolbar { border-bottom: 1px solid var(--color-accent); background: var(--color-background); }
+.tsd-page-toolbar a.title { font-size: .95rem; font-weight: 650; letter-spacing: -.02em; }
+.container-main { padding-top: 2rem; }
+.tsd-page-title { margin-bottom: 2rem; }
+.tsd-panel.tsd-member { padding: 1.5rem; border: 1px solid var(--color-accent); border-radius: 12px; background: var(--color-background); margin-bottom: 1.5rem; }
+.tsd-signature { padding: 1rem; border: 1px solid var(--color-accent); border-radius: 9px; background: var(--color-background-secondary); overflow-x: auto; }
+.tsd-navigation a { border-radius: 6px; padding-block: .4rem; line-height: 1.5; }
+.tsd-navigation a.current { color: var(--color-link); font-weight: 600; }
+.tsd-typography pre { border: 1px solid var(--color-accent); border-radius: 10px; padding: 1.2rem; }
+.tsd-typography table { display: block; max-width: 100%; border-radius: 8px; overflow-x: auto; }
+.tsd-typography img { max-width: 100%; height: auto; }
+a { text-underline-offset: 3px; }
+:where(a, button, input, select, summary):focus-visible { outline: 3px solid var(--color-focus-outline); outline-offset: 3px; }
+@media (max-width: 769px) { .container-main { padding-top: 1rem; } .tsd-panel.tsd-member { padding: 1rem; } h1 { overflow-wrap: anywhere; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
