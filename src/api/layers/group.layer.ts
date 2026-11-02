@@ -190,7 +190,7 @@ export class GroupLayer extends RetrieverLayer {
     groupId: string,
     participantId: string | string[]
   ) {
-    await evaluateAndReturn(
+    return await evaluateAndReturn(
       this.page,
       ({ groupId, participantId }) =>
         WPP.group.promoteParticipants(groupId, participantId),
