@@ -115,17 +115,17 @@ export class CatalogLayer extends CommunityLayer {
    * @param options Object with options
    * @example
    * ```javascript
-   * client.editProduct('56989897878' {
+   * client.editProduct('56989897878', {
    *    name: 'Product name',
    *     description: 'product description',
-   *     price: '89.90',
+   *     price: 89.90,
    *     isHidden: true,
    *     url: 'https://wppconnect.io',
    *     retailerId: 'AKA001',
    *   });
    * ```
    */
-  public async editProduct(productId: string, options: string) {
+  public async editProduct(productId: string, options: any) {
     return evaluateAndReturn(
       this.page,
       ({ productId, options }) => WPP.catalog.editProduct(productId, options),

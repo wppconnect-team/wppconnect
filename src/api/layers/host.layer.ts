@@ -470,7 +470,10 @@ export class HostLayer {
     return qrResult;
   }
 
-  public async waitForQrCodeScan() {
+  public async waitForQrCodeScan(catchQR?: CatchQRCallback) {
+    if (catchQR) {
+      this.catchQR = catchQR;
+    }
     if (!this.isStarted) {
       throw new Error('waitForQrCodeScan error: Session not started');
     }

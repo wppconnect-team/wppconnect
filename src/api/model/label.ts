@@ -20,4 +20,24 @@ export interface Label {
   color: number | null;
   count: number;
   hexColor: string;
+  colorIndex?: number;
+}
+
+export interface NewLabelOptions {
+  labelColor?: string | number;
+}
+
+export interface EditLabelOptions {
+  name?: string;
+  labelColor?: string | number;
+}
+
+export interface AddOrRemoveLabelsOptions {
+  labelId: string;
+  type: 'add' | 'remove';
+}
+
+export interface DeleteLabelReturn {
+  id: string;
+  deleteLabelResult: any;
 }

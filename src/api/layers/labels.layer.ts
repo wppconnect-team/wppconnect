@@ -18,12 +18,20 @@
 import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
+import {
+  AddOrRemoveLabelsOptions,
+  DeleteLabelReturn,
+  EditLabelOptions,
+  Label,
+  NewLabelOptions,
+} from '../model';
 import { ListsLayer } from './lists.layer';
 
 export class LabelsLayer extends ListsLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
   }
+
   /**
    * Create New Label
    * @category Labels
@@ -39,15 +47,41 @@ export class LabelsLayer extends ListsLayer {
    * @param name Name of label
    * @param options options of label
    */
-  public async addNewLabel(name: string, options?: string) {
+  public async addNewLabel(
+    name: string,
+    options?: NewLabelOptions | string
+  ): Promise<Label> {
     return await evaluateAndReturn(
       this.page,
-      ({ name, options }) => {
-        WPP.labels.addNewLabel(name, options);
-      },
+      ({ name, options }) => WPP.labels.addNewLabel(name, options as any),
       { name, options }
     );
   }
+
+  /**
+   * Edit an existing Label
+   * @category Labels
+   *
+   * @example
+   * ```javascript
+   * client.editLabel('1', { name: 'New label name' });
+   * //or
+   * client.editLabel('1', { labelColor: '#dfaef0' });
+   * ```
+   * @param id Id of label
+   * @param options options of label
+   */
+  public async editLabel(
+    id: string,
+    options?: EditLabelOptions
+  ): Promise<Label> {
+    return await evaluateAndReturn(
+      this.page,
+      ({ id, options }) => WPP.labels.editLabel(id, options),
+      { id, options }
+    );
+  }
+
   /**
    * Add or delete label of chatId
    * @category Labels
@@ -65,20 +99,16 @@ export class LabelsLayer extends ListsLayer {
    * @param options options to remove or add
    */
   public async addOrRemoveLabels(
-    chatIds: string,
-    options: {
-      labelId: string;
-      type: 'add' | 'remove';
-    }[]
-  ) {
+    chatIds: string | string[],
+    options: AddOrRemoveLabelsOptions | AddOrRemoveLabelsOptions[]
+  ): Promise<any> {
     return await evaluateAndReturn(
       this.page,
-      ({ chatIds, options }) => {
-        WPP.labels.addOrRemoveLabels(chatIds, options);
-      },
+      ({ chatIds, options }) => WPP.labels.addOrRemoveLabels(chatIds, options),
       { chatIds, options }
     );
   }
+
   /**
    * Get all Labels
    *
@@ -87,7 +117,7 @@ export class LabelsLayer extends ListsLayer {
    * client.getAllLabels();
    * ```
    */
-  public async getAllLabels() {
+  public async getAllLabels(): Promise<Label[]> {
     return evaluateAndReturn(this.page, () => WPP.labels.getAllLabels());
   }
 
@@ -101,15 +131,29 @@ export class LabelsLayer extends ListsLayer {
    * client.getLabelById('1');
    * ```
    */
-  public async getLabelById(id: string) {
+  public async getLabelById(id: string): Promise<Label> {
     return await evaluateAndReturn(
       this.page,
-      ({ id }) => {
-        WPP.labels.getLabelById(id);
-      },
+      ({ id }) => WPP.labels.getLabelById(id),
       { id }
     );
   }
+
+  /**
+   * Get color palette for labels
+   * @category Labels
+   *
+   * @example
+   * ```javascript
+   * client.getLabelColorPalette();
+   * ```
+   */
+  public async getLabelColorPalette(): Promise<string[]> {
+    return evaluateAndReturn(this.page, () =>
+      WPP.labels.getLabelColorPalette()
+    );
+  }
+
   /**
    * Delete all Labels
    * @category Labels
@@ -119,27 +163,28 @@ export class LabelsLayer extends ListsLayer {
    * client.deleteAllLabels();
    * ```
    */
-  public async deleteAllLabels() {
-    return await evaluateAndReturn(this.page, () => {
-      WPP.labels.deleteAllLabels();
-    });
+  public async deleteAllLabels(): Promise<DeleteLabelReturn[]> {
+    return await evaluateAndReturn(this.page, () =>
+      WPP.labels.deleteAllLabels()
+    );
   }
+
   /**
-   * Add or delete label of chatId
+   * Delete label(s) by id
    * @category Labels
    *
    * @example
    * ```javascript
-   * client.deleteLabel();
+   * client.deleteLabel('1');
    * ```
-   * @param id Id or string to labels to delete
+   * @param id Id or string array of labels to delete
    */
-  public async deleteLabel(id: string | string[]) {
+  public async deleteLabel(
+    id: string | string[]
+  ): Promise<DeleteLabelReturn | DeleteLabelReturn[]> {
     return await evaluateAndReturn(
       this.page,
-      ({ id }) => {
-        WPP.labels.deleteLabel(id);
-      },
+      ({ id }) => WPP.labels.deleteLabel(id as any),
       { id }
     );
   }

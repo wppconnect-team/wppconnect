@@ -64,9 +64,7 @@ export class ProfileLayer extends StatusLayer {
   public async setProfileStatus(status: string) {
     return await evaluateAndReturn(
       this.page,
-      ({ status }) => {
-        WPP.profile.setMyStatus(status);
-      },
+      ({ status }) => WPP.profile.setMyStatus(status),
       { status }
     );
   }
