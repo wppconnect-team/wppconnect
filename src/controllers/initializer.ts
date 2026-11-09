@@ -222,10 +222,7 @@ export async function create(
     if (!page) {
       return;
     }
-    if (
-      typeof (browser as Browser).isConnected === 'function' &&
-      !(browser as Browser).isConnected()
-    ) {
+    if ((browser as Browser).connected === false) {
       return;
     }
     const pages = await browser.pages();
