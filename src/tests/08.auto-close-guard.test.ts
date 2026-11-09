@@ -181,19 +181,29 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
 
   async function createWithSessionPage() {
     const handlers: Record<string, (...args: any[]) => any> = {};
-    const state = { pages: [] as any[], closeCalls: 0 };
+    const state = {
+      pages: [] as any[],
+      pagesCalls: 0,
+      closeCalls: 0,
+      connected: true,
+    };
     const browser: any = {
       on(event: string, handler: (...args: any[]) => any) {
         handlers[event] = handler;
         return this;
       },
-      pages: async () => state.pages,
+      pages: async () => {
+        state.pagesCalls += 1;
+        return state.pages;
+      },
       process: () => null,
       disconnect: async () => undefined,
       close: async () => {
         state.closeCalls += 1;
       },
-      isConnected: () => true,
+      get connected() {
+        return state.connected;
+      },
     };
     const { page, state: pageState } = fakeSessionPage(browser);
 
@@ -221,6 +231,26 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
       await handlers['targetdestroyed']({});
 
       assert.strictEqual(state.closeCalls, 1);
+    } finally {
+      stop();
+    }
+  });
+
+  it('does not inspect pages after a getter-only browser disconnects', async function () {
+    this.timeout(10000);
+
+    const { handlers, state, pageState, stop } = await createWithSessionPage();
+
+    try {
+      pageState.closed = true;
+      state.pages = [makePage('about:blank')];
+      state.connected = false;
+      const pagesCallsBefore = state.pagesCalls;
+
+      await handlers['targetdestroyed']({});
+
+      assert.strictEqual(state.pagesCalls, pagesCallsBefore);
+      assert.strictEqual(state.closeCalls, 0);
     } finally {
       stop();
     }
