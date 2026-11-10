@@ -25,6 +25,7 @@ import {
   needsToScan,
 } from '../../controllers/auth';
 import {
+  closeBrowser,
   initWhatsapp,
   injectApi,
   InjectionTimeoutError,
@@ -425,9 +426,15 @@ export class HostLayer {
       this.log('info', 'Closing the page');
       this.autoCloseCalled = true;
       this.statusFind && this.statusFind('autocloseCalled', this.session);
-      try {
-        this.page.close();
-      } catch (error) {}
+      void Promise.resolve()
+        .then(() => this.page.close())
+        .catch(async (error) => {
+          this.log('error', error);
+          await closeBrowser(this.page.browser());
+        })
+        .catch((error) => {
+          this.log('error', error);
+        });
     }
   }
 

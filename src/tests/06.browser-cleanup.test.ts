@@ -21,6 +21,7 @@ import * as path from 'path';
 import { Browser } from 'puppeteer';
 
 import { Whatsapp } from '../api/whatsapp';
+import { HostLayer } from '../api/layers/host.layer';
 import { closeBrowser } from '../controllers/browser';
 
 function fakeBrowser(overrides: Record<string, unknown> = {}): Browser {
@@ -122,7 +123,64 @@ describe('Whatsapp.close browser cleanup', function () {
   });
 });
 
+describe('automatic page close', function () {
+  it('releases the browser when page.close rejects', async function () {
+    let disconnectCalls = 0;
+    const browser = fakeBrowser({
+      disconnect: async () => {
+        disconnectCalls += 1;
+      },
+    });
+    const host: any = {
+      autoCloseInterval: null,
+      options: { autoClose: 1, deviceSyncTimeout: 0 },
+      page: {
+        isClosed: () => false,
+        close: async () => {
+          throw new Error('page close failed');
+        },
+        browser: () => browser,
+      },
+      log() {},
+    };
+
+    (HostLayer.prototype as any).tryAutoClose.call(host);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+
+    assert.strictEqual(disconnectCalls, 1);
+  });
+});
+
 describe('closeBrowser', function () {
+  it('shares concurrent cleanup and remains safe when called again', async function () {
+    let disconnectCalls = 0;
+    const browser = fakeBrowser({
+      disconnect: async () => {
+        disconnectCalls += 1;
+      },
+    });
+
+    await Promise.all([closeBrowser(browser), closeBrowser(browser)]);
+    await closeBrowser(browser);
+
+    assert.strictEqual(disconnectCalls, 1);
+  });
+
+  it('allows retry after a failed disconnect', async function () {
+    let disconnectCalls = 0;
+    const browser = fakeBrowser({
+      disconnect: async () => {
+        disconnectCalls += 1;
+        if (disconnectCalls === 1) throw new Error('disconnect failed');
+      },
+    });
+
+    await closeBrowser(browser);
+    await closeBrowser(browser);
+
+    assert.strictEqual(disconnectCalls, 2);
+  });
+
   it('disconnects a browser without a process handle (remote/browserWS)', async function () {
     let closeCalls = 0;
     let disconnectCalls = 0;
@@ -174,6 +232,79 @@ describe('create browser cleanup', function () {
 
   after(function () {
     fs.rmSync(tokenFolder, { recursive: true, force: true });
+  });
+
+  it('disconnects a browserWS connection created during failed initialization', async function () {
+    const browserModule = require('../controllers/browser');
+    const originalInitBrowser = browserModule.initBrowser;
+    const { create } = require('../controllers/initializer');
+    let disconnectCalls = 0;
+    let closeCalls = 0;
+    browserModule.initBrowser = async () =>
+      fakeBrowser({
+        on() {
+          return this;
+        },
+        pages: async () => {
+          throw new Error('page acquisition failed');
+        },
+        disconnect: async () => {
+          disconnectCalls += 1;
+        },
+        close: async () => {
+          closeCalls += 1;
+        },
+      });
+
+    try {
+      await assert.rejects(
+        create({
+          session,
+          browserWS: 'ws://example.invalid',
+          disableWelcome: true,
+          updatesLog: false,
+          waitForLogin: false,
+        }),
+        /page acquisition failed/
+      );
+      assert.strictEqual(disconnectCalls, 1);
+      assert.strictEqual(closeCalls, 0);
+    } finally {
+      browserModule.initBrowser = originalInitBrowser;
+    }
+  });
+
+  it('leaves a caller-supplied browser alone when initialization fails', async function () {
+    const { create } = require('../controllers/initializer');
+    let closeCalls = 0;
+    let disconnectCalls = 0;
+    const browser = fakeBrowser({
+      on() {
+        return this;
+      },
+      pages: async () => {
+        throw new Error('page acquisition failed');
+      },
+      close: async () => {
+        closeCalls += 1;
+      },
+      disconnect: async () => {
+        disconnectCalls += 1;
+      },
+    });
+
+    await assert.rejects(
+      create({
+        session,
+        browser,
+        disableWelcome: true,
+        updatesLog: false,
+        waitForLogin: false,
+      }),
+      /page acquisition failed/
+    );
+    assert.strictEqual(closeCalls, 0);
+    assert.strictEqual(disconnectCalls, 0);
   });
 
   function stubCreate(child: ChildProcess, pages: () => Promise<any>) {

@@ -19,6 +19,7 @@ import { spawn } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 
+import { Whatsapp } from '../api/whatsapp';
 import { hasAlivePage } from '../controllers/browser';
 
 function makePage(url: string, closed = false): any {
@@ -181,7 +182,8 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
   });
 
   async function createWithSessionPage(
-    browserOverrides: Record<string, any> = {}
+    browserOverrides: Record<string, any> = {},
+    logger?: any
   ) {
     const handlers: Record<string, (...args: any[]) => any> = {};
     const state = {
@@ -215,7 +217,12 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
     const { page, state: pageState } = fakeSessionPage(browser);
 
     const { create } = require('../controllers/initializer');
-    await create({ session: SESSION, page, ...CREATE_OPTIONS }).catch(() => {});
+    await create({
+      session: SESSION,
+      page,
+      ...CREATE_OPTIONS,
+      ...(logger ? { logger } : {}),
+    }).catch(() => {});
 
     assert.ok(handlers['targetdestroyed'], 'handler registered during create');
 
@@ -223,6 +230,7 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
       handlers,
       state,
       pageState,
+      page,
       stop: () => page.emit('close'),
     };
   }
@@ -238,6 +246,60 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
       await handlers['targetdestroyed']({});
 
       assert.strictEqual(state.closeCalls, 0);
+      assert.strictEqual(state.disconnectCalls, 1);
+    } finally {
+      stop();
+    }
+  });
+
+  it('contains and logs a browser.pages failure in targetdestroyed', async function () {
+    const errors: string[] = [];
+    const logger = {
+      info() {},
+      http() {},
+      warn() {},
+      log() {},
+      error(message: string) {
+        errors.push(message);
+      },
+    };
+    const { handlers, stop } = await createWithSessionPage(
+      {
+        pages: async () => {
+          throw new Error('pages failed');
+        },
+      },
+      logger
+    );
+
+    try {
+      await assert.doesNotReject(handlers['targetdestroyed']({}));
+      assert.ok(errors.some((message) => message.includes('targetdestroyed')));
+    } finally {
+      stop();
+    }
+  });
+
+  it('shares cleanup across client.close and targetdestroyed', async function () {
+    const { handlers, state, pageState, page, stop } =
+      await createWithSessionPage();
+    const autoCloseRuns: Promise<any>[] = [];
+    page.close = async () => {
+      if (pageState.closed) return;
+      pageState.closed = true;
+      state.pages = [makePage('about:blank')];
+      autoCloseRuns.push(handlers['targetdestroyed']({}));
+    };
+
+    try {
+      const client: any = { page, cancelQrLoop() {} };
+      await Promise.all([
+        Whatsapp.prototype.close.call(client),
+        Whatsapp.prototype.close.call(client),
+      ]);
+      await Promise.all(autoCloseRuns);
+      await Whatsapp.prototype.close.call(client);
+
       assert.strictEqual(state.disconnectCalls, 1);
     } finally {
       stop();

@@ -135,7 +135,7 @@ export async function create(
 
   let browser = mergedOptions.browser;
   let page = mergedOptions.page;
-  let browserCreated = false;
+  let browserAcquiredHere = false;
 
   if (!browser && page) {
     // Get browser from page
@@ -207,7 +207,7 @@ export async function create(
       });
     }
 
-    browserCreated = !mergedOptions.browserWS;
+    browserAcquiredHere = true;
   }
 
   if (!mergedOptions.browserWS && browser['_process']) {
@@ -217,20 +217,24 @@ export async function create(
   }
 
   (browser as Browser).on('targetdestroyed', async (target: any) => {
-    // The handler is registered before the session page is acquired, so ignore
-    // targets destroyed during startup: there is nothing to auto-close yet.
-    if (!page) {
-      return;
-    }
-    if ((browser as Browser).connected === false) {
-      return;
-    }
-    const pages = await browser.pages();
-    // An `about:blank` tab often remains after the session page is closed, so
-    // close only once the session page itself is gone and no real page is left
-    // (#2896). A temporarily blank session page must not be mistaken for it.
-    if (page.isClosed() && !hasAlivePage(pages)) {
-      await browserModule.closeBrowser(browser as Browser);
+    try {
+      // The handler is registered before the session page is acquired, so ignore
+      // targets destroyed during startup: there is nothing to auto-close yet.
+      if (!page || (browser as Browser).connected === false) return;
+
+      const pages = await browser.pages();
+      // An `about:blank` tab often remains after the session page is closed, so
+      // close only once the session page itself is gone and no real page is left
+      // (#2896). A temporarily blank session page must not be mistaken for it.
+      if (page.isClosed() && !hasAlivePage(pages)) {
+        await browserModule.closeBrowser(browser as Browser);
+      }
+    } catch (error) {
+      logger.error('Error handling targetdestroyed', {
+        session,
+        type: 'browser',
+        error,
+      });
     }
   });
 
@@ -295,7 +299,7 @@ export async function create(
     }
   } catch (error) {
     // Release a browser launched here; the caller never got a reference
-    if (browserCreated) {
+    if (browserAcquiredHere) {
       await browserModule.closeBrowser(browser as Browser);
     }
     throw error;

@@ -508,13 +508,31 @@ export async function initBrowser(
   return browser;
 }
 
+const closingBrowsers = new WeakMap<Browser, Promise<void>>();
+
 /**
  * Closes a browser and, when it was launched by this process, guarantees its
  * OS process tree is terminated even if the graceful close fails or hangs.
  * Remote browsers (`browserWS`) expose no process handle and are only
  * disconnected. Safe to call when the page/browser was already closed.
  */
-export async function closeBrowser(browser: Browser): Promise<void> {
+export function closeBrowser(browser: Browser): Promise<void> {
+  const closing = closingBrowsers.get(browser);
+  if (closing) return closing;
+
+  // Register before calling close(), which can itself emit targetdestroyed.
+  const cleanup = Promise.resolve()
+    .then(() => closeBrowserOnce(browser))
+    .then((completed) => {
+      // A failed disconnect may succeed on a later close request.
+      if (!completed) closingBrowsers.delete(browser);
+    });
+  closingBrowsers.set(browser, cleanup);
+  void cleanup.catch(() => closingBrowsers.delete(browser));
+  return cleanup;
+}
+
+async function closeBrowserOnce(browser: Browser): Promise<boolean> {
   // Only browsers launched by this process expose a process handle
   const pid = browser.process?.()?.pid;
 
@@ -523,12 +541,16 @@ export async function closeBrowser(browser: Browser): Promise<void> {
     // would terminate the browser shared with every other connected client.
     // Connections that expose neither a process handle nor a disconnect method
     // (e.g. test doubles) fall back to close().
-    if (typeof browser.disconnect === 'function') {
-      await browser.disconnect().catch(() => null);
-    } else {
-      await browser.close().catch(() => null);
+    try {
+      if (typeof browser.disconnect === 'function') {
+        await browser.disconnect();
+      } else {
+        await browser.close();
+      }
+      return true;
+    } catch {
+      return false;
     }
-    return;
   }
 
   const gracefulClose = browser.close().catch(() => null);
@@ -548,6 +570,7 @@ export async function closeBrowser(browser: Browser): Promise<void> {
   await new Promise<void>((resolve) => {
     treeKill(pid, 'SIGKILL', () => resolve());
   });
+  return true;
 }
 
 export async function getOrCreatePage(
