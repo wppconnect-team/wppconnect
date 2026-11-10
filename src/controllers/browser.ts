@@ -31,7 +31,7 @@ import { WebSocketTransport } from './websocket';
 import { Logger } from 'winston';
 import { SessionToken } from '../token-store';
 import { LoadingScreenCallback } from '../api/model';
-import { LogLevel } from '../utils/logger';
+import { defaultLogger, LogLevel } from '../utils/logger';
 
 const treeKill = require('tree-kill') as (
   pid: number,
@@ -541,6 +541,8 @@ async function closeBrowserOnce(browser: Browser): Promise<boolean> {
     // would terminate the browser shared with every other connected client.
     // Connections that expose neither a process handle nor a disconnect method
     // (e.g. test doubles) fall back to close().
+    const action =
+      typeof browser.disconnect === 'function' ? 'disconnect' : 'close';
     try {
       if (typeof browser.disconnect === 'function') {
         await browser.disconnect();
@@ -548,12 +550,22 @@ async function closeBrowserOnce(browser: Browser): Promise<boolean> {
         await browser.close();
       }
       return true;
-    } catch {
+    } catch (error) {
+      defaultLogger.warn(`Browser ${action} failed`, { error });
       return false;
     }
   }
 
-  const gracefulClose = browser.close().catch(() => null);
+  const gracefulClose = Promise.resolve()
+    .then(() => browser.close())
+    .catch((error) => {
+      defaultLogger.warn(
+        'Browser close failed; forcing process tree termination',
+        {
+          error,
+        }
+      );
+    });
 
   // Bound the graceful close so an unresponsive browser cannot hang teardown
   let timer: NodeJS.Timeout;

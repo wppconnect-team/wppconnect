@@ -23,6 +23,7 @@ import { Browser } from 'puppeteer';
 import { Whatsapp } from '../api/whatsapp';
 import { HostLayer } from '../api/layers/host.layer';
 import { closeBrowser } from '../controllers/browser';
+import { defaultLogger } from '../utils/logger';
 
 function fakeBrowser(overrides: Record<string, unknown> = {}): Browser {
   return {
@@ -168,6 +169,12 @@ describe('closeBrowser', function () {
 
   it('allows retry after a failed disconnect', async function () {
     let disconnectCalls = 0;
+    const warnings: string[] = [];
+    const originalWarn = defaultLogger.warn;
+    defaultLogger.warn = ((message: string) => {
+      warnings.push(message);
+      return defaultLogger;
+    }) as typeof defaultLogger.warn;
     const browser = fakeBrowser({
       disconnect: async () => {
         disconnectCalls += 1;
@@ -175,10 +182,15 @@ describe('closeBrowser', function () {
       },
     });
 
-    await closeBrowser(browser);
-    await closeBrowser(browser);
+    try {
+      await closeBrowser(browser);
+      await closeBrowser(browser);
 
-    assert.strictEqual(disconnectCalls, 2);
+      assert.strictEqual(disconnectCalls, 2);
+      assert.ok(warnings.some((message) => message.includes('disconnect')));
+    } finally {
+      defaultLogger.warn = originalWarn;
+    }
   });
 
   it('disconnects a browser without a process handle (remote/browserWS)', async function () {
