@@ -230,7 +230,7 @@ export async function create(
     // close only once the session page itself is gone and no real page is left
     // (#2896). A temporarily blank session page must not be mistaken for it.
     if (page.isClosed() && !hasAlivePage(pages)) {
-      browser.close().catch(() => null);
+      await browserModule.closeBrowser(browser as Browser);
     }
   });
 

@@ -15,6 +15,7 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 import * as assert from 'assert';
+import { spawn } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -179,12 +180,15 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
     }
   });
 
-  async function createWithSessionPage() {
+  async function createWithSessionPage(
+    browserOverrides: Record<string, any> = {}
+  ) {
     const handlers: Record<string, (...args: any[]) => any> = {};
     const state = {
       pages: [] as any[],
       pagesCalls: 0,
       closeCalls: 0,
+      disconnectCalls: 0,
       connected: true,
     };
     const browser: any = {
@@ -197,13 +201,16 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
         return state.pages;
       },
       process: () => null,
-      disconnect: async () => undefined,
+      disconnect: async () => {
+        state.disconnectCalls += 1;
+      },
       close: async () => {
         state.closeCalls += 1;
       },
       get connected() {
         return state.connected;
       },
+      ...browserOverrides,
     };
     const { page, state: pageState } = fakeSessionPage(browser);
 
@@ -220,7 +227,7 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
     };
   }
 
-  it('closes the browser once the session tab is closed and only about:blank remains', async function () {
+  it('disconnects a remote browser once the session tab is closed and only about:blank remains', async function () {
     this.timeout(10000);
 
     const { handlers, state, pageState, stop } = await createWithSessionPage();
@@ -230,9 +237,42 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
       state.pages = [makePage('about:blank')];
       await handlers['targetdestroyed']({});
 
-      assert.strictEqual(state.closeCalls, 1);
+      assert.strictEqual(state.closeCalls, 0);
+      assert.strictEqual(state.disconnectCalls, 1);
     } finally {
       stop();
+    }
+  });
+
+  it('terminates an owned browser when automatic close hangs', async function () {
+    this.timeout(15000);
+    const child = spawn(
+      process.execPath,
+      ['-e', 'setInterval(() => {}, 1000)'],
+      {
+        stdio: 'ignore',
+      }
+    );
+
+    try {
+      const { handlers, state, pageState, stop } = await createWithSessionPage({
+        process: () => ({ pid: child.pid }),
+        close: () => new Promise<void>(() => {}),
+      });
+
+      try {
+        pageState.closed = true;
+        state.pages = [makePage('about:blank')];
+        await handlers['targetdestroyed']({});
+
+        assert.strictEqual(await waitForChildExit(child), true);
+      } finally {
+        stop();
+      }
+    } finally {
+      if (child.exitCode === null && child.signalCode === null) {
+        child.kill('SIGKILL');
+      }
     }
   });
 
@@ -288,3 +328,17 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
     }
   });
 });
+
+function waitForChildExit(child: ReturnType<typeof spawn>): Promise<boolean> {
+  return new Promise((resolve) => {
+    if (child.exitCode !== null || child.signalCode !== null) {
+      return resolve(true);
+    }
+
+    const timer = setTimeout(() => resolve(false), 8000);
+    child.once('exit', () => {
+      clearTimeout(timer);
+      resolve(true);
+    });
+  });
+}
