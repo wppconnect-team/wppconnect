@@ -290,6 +290,8 @@ export async function waitForWppReady(
       {
         // 0 would mean no limit to puppeteer
         timeout: deadline === Infinity ? 0 : Math.max(deadline - Date.now(), 1),
+        // Hidden tabs may suspend animation frames while wa-js keeps loading.
+        polling: 250,
         signal: options.signal,
       }
     );

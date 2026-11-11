@@ -312,6 +312,7 @@ class FakeSession {
 }
 
 class SlowReadyPage extends FakePage {
+  animationFramesSuspended = false;
   // Mirrors page.setDefaultTimeout(): applies when no timeout is passed
   defaultTimeout = 30;
   scriptTags = 0;
@@ -425,7 +426,7 @@ class SlowReadyPage extends FakePage {
 
   async waitForFunction(
     fn?: unknown,
-    options: { timeout?: number; signal?: AbortSignal } = {}
+    options: { timeout?: number; signal?: AbortSignal; polling?: number } = {}
   ) {
     if (!String(fn).includes('isReady')) return true;
 
@@ -443,6 +444,7 @@ class SlowReadyPage extends FakePage {
       const onAbort = () => done(() => reject(options.signal.reason));
       const onClose = () => done(() => reject(new Error('Waiting failed')));
       const poll = setInterval(() => {
+        if (this.animationFramesSuspended && !options.polling) return;
         if (runInWindow(fn, this.window)) done(() => resolve(true));
       }, 5);
       const timer =
@@ -808,6 +810,16 @@ describe('HostLayer slow WhatsApp Web initialization', function () {
       { name: 'AbortError' }
     );
     assert.strictEqual(page.scriptTags, 0);
+  });
+
+  it('detects readiness when animation frames are suspended', async function () {
+    const page = new SlowReadyPage(10);
+    pages.push(page);
+    page.animationFramesSuspended = true;
+
+    await injectApi(page as unknown as Page, undefined, { timeout: 1000 });
+
+    assert.strictEqual(page.window.WPP?.isReady, true);
   });
 
   it('names the stage when waitForWppReady times out on its own', async function () {
