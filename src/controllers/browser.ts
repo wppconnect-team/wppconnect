@@ -31,7 +31,7 @@ import { WebSocketTransport } from './websocket';
 import { Logger } from 'winston';
 import { SessionToken } from '../token-store';
 import { LoadingScreenCallback } from '../api/model';
-import { LogLevel } from '../utils/logger';
+import { defaultLogger, LogLevel } from '../utils/logger';
 
 const treeKill = require('tree-kill') as (
   pid: number,
@@ -508,30 +508,66 @@ export async function initBrowser(
   return browser;
 }
 
+const closingBrowsers = new WeakMap<Browser, Promise<void>>();
+
 /**
- * Closes a browser and, when it was launched by this process, guarantees its
- * OS process tree is terminated even if the graceful close fails or hangs.
+ * Closes a browser and, when it was launched by this process, attempts to
+ * terminate its OS process tree even if graceful close fails or hangs.
+ * Failed cleanup can be retried by a later close request.
  * Remote browsers (`browserWS`) expose no process handle and are only
  * disconnected. Safe to call when the page/browser was already closed.
  */
-export async function closeBrowser(browser: Browser): Promise<void> {
+export function closeBrowser(browser: Browser): Promise<void> {
+  const closing = closingBrowsers.get(browser);
+  if (closing) return closing;
+
+  // Register before calling close(), which can itself emit targetdestroyed.
+  const cleanup = Promise.resolve()
+    .then(() => closeBrowserOnce(browser))
+    .then((completed) => {
+      // Failed cleanup may succeed on a later close request.
+      if (!completed) closingBrowsers.delete(browser);
+    });
+  closingBrowsers.set(browser, cleanup);
+  void cleanup.catch(() => closingBrowsers.delete(browser));
+  return cleanup;
+}
+
+async function closeBrowserOnce(browser: Browser): Promise<boolean> {
   // Only browsers launched by this process expose a process handle
-  const pid = browser.process?.()?.pid;
+  const child = browser.process?.();
+  const pid = child?.pid;
 
   if (!pid) {
     // Caller-supplied remote connection: detach this client only. Closing it
     // would terminate the browser shared with every other connected client.
     // Connections that expose neither a process handle nor a disconnect method
     // (e.g. test doubles) fall back to close().
-    if (typeof browser.disconnect === 'function') {
-      await browser.disconnect().catch(() => null);
-    } else {
-      await browser.close().catch(() => null);
+    const action =
+      typeof browser.disconnect === 'function' ? 'disconnect' : 'close';
+    try {
+      if (typeof browser.disconnect === 'function') {
+        await browser.disconnect();
+      } else {
+        await browser.close();
+      }
+      return true;
+    } catch (error) {
+      defaultLogger.warn(`Browser ${action} failed`, { error });
+      return false;
     }
-    return;
   }
 
-  const gracefulClose = browser.close().catch(() => null);
+  const gracefulClose = Promise.resolve()
+    .then(() => browser.close())
+    .catch((error) => {
+      defaultLogger.warn(
+        'Browser close failed; forcing process tree termination',
+        {
+          error,
+        }
+      );
+    });
 
   // Bound the graceful close so an unresponsive browser cannot hang teardown
   let timer: NodeJS.Timeout;
@@ -544,9 +580,21 @@ export async function closeBrowser(browser: Browser): Promise<void> {
     clearTimeout(timer);
   }
 
-  // Force kill the process tree if the graceful close did not take it down
-  await new Promise<void>((resolve) => {
-    treeKill(pid, 'SIGKILL', () => resolve());
+  const hasExited = () => child?.exitCode != null || child?.signalCode != null;
+  // Never send a termination request for a process handle that has exited:
+  // the operating system may have assigned its old pid to another process.
+  if (hasExited()) return true;
+
+  return new Promise<boolean>((resolve) => {
+    treeKill(pid, 'SIGKILL', (error) => {
+      if (error) {
+        defaultLogger.warn('Browser process tree termination failed', {
+          pid,
+          error,
+        });
+      }
+      resolve(!error || hasExited());
+    });
   });
 }
 

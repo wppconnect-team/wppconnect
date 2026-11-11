@@ -21,7 +21,9 @@ import * as path from 'path';
 import { Browser } from 'puppeteer';
 
 import { Whatsapp } from '../api/whatsapp';
+import { HostLayer } from '../api/layers/host.layer';
 import { closeBrowser } from '../controllers/browser';
+import { defaultLogger } from '../utils/logger';
 
 function fakeBrowser(overrides: Record<string, unknown> = {}): Browser {
   return {
@@ -68,6 +70,27 @@ function fakePage() {
 }
 
 describe('Whatsapp.close browser cleanup', function () {
+  it('keeps explicit close destructive for a caller-supplied browser', async function () {
+    let pageCloseCalls = 0;
+    let disconnectCalls = 0;
+    const browser = fakeBrowser({
+      disconnect: async () => {
+        disconnectCalls += 1;
+      },
+    });
+    const page: any = {
+      close: async () => {
+        pageCloseCalls += 1;
+      },
+      browser: () => browser,
+    };
+    const client: any = { page, cancelQrLoop() {} };
+
+    assert.strictEqual(await Whatsapp.prototype.close.call(client), true);
+    assert.strictEqual(pageCloseCalls, 1);
+    assert.strictEqual(disconnectCalls, 1);
+  });
+
   it('closes the browser even when the page is already closed', async function () {
     this.timeout(20000);
     const child = startIdleChild();
@@ -122,7 +145,166 @@ describe('Whatsapp.close browser cleanup', function () {
   });
 });
 
+describe('automatic page close', function () {
+  it('does not disconnect a borrowed browser when page.close rejects', async function () {
+    let disconnectCalls = 0;
+    const browser = fakeBrowser({
+      disconnect: async () => {
+        disconnectCalls += 1;
+      },
+    });
+    const host: any = {
+      autoCloseInterval: null,
+      options: { autoClose: 1, deviceSyncTimeout: 0 },
+      page: {
+        isClosed: () => false,
+        close: async () => {
+          throw new Error('page close failed');
+        },
+        browser: () => browser,
+      },
+      log() {},
+    };
+
+    (HostLayer.prototype as any).tryAutoClose.call(host);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+
+    assert.strictEqual(disconnectCalls, 0);
+  });
+
+  it('releases the browser when page.close rejects', async function () {
+    let disconnectCalls = 0;
+    const browser = fakeBrowser({
+      disconnect: async () => {
+        disconnectCalls += 1;
+      },
+    });
+    const host: any = {
+      browserAcquiredHere: true,
+      autoCloseInterval: null,
+      options: { autoClose: 1, deviceSyncTimeout: 0 },
+      page: {
+        isClosed: () => false,
+        close: async () => {
+          throw new Error('page close failed');
+        },
+        browser: () => browser,
+      },
+      log() {},
+    };
+
+    (HostLayer.prototype as any).tryAutoClose.call(host);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+
+    assert.strictEqual(disconnectCalls, 1);
+  });
+});
+
+function closeBrowserWithTreeKill(
+  stub: (...args: any[]) => void
+): typeof closeBrowser {
+  const browserId = require.resolve('../controllers/browser');
+  const treeKillId = require.resolve('tree-kill');
+  const browserModule = require.cache[browserId];
+  const treeKillModule = require.cache[treeKillId]!;
+  const original = treeKillModule.exports;
+  try {
+    treeKillModule.exports = stub;
+    delete require.cache[browserId];
+    return require(browserId).closeBrowser;
+  } finally {
+    require.cache[browserId] = browserModule;
+    treeKillModule.exports = original;
+  }
+}
+
 describe('closeBrowser', function () {
+  it('retries failed local process termination instead of caching success', async function () {
+    this.timeout(20000);
+    const child = startIdleChild();
+    const realTreeKill = require('tree-kill');
+    let attempts = 0;
+    const close = closeBrowserWithTreeKill((pid, signal, callback) => {
+      attempts++;
+      if (attempts === 1) callback(new Error('Termination denied'));
+      else realTreeKill(pid, signal, callback);
+    });
+    const browser = fakeBrowser({ process: () => child });
+    try {
+      await close(browser);
+      assert.strictEqual(child.exitCode, null);
+      assert.strictEqual(child.signalCode, null);
+      await close(browser);
+      assert.strictEqual(attempts, 2);
+      assert.strictEqual(await waitForChildExit(child), true);
+      await close(browser);
+      assert.strictEqual(attempts, 2);
+    } finally {
+      killChild(child);
+    }
+  });
+
+  it('never forces termination using the pid of an already exited child', async function () {
+    this.timeout(20000);
+    const child = spawn(process.execPath, ['-e', 'process.exit(0)'], {
+      stdio: 'ignore',
+    });
+    let attempts = 0;
+    const close = closeBrowserWithTreeKill((_pid, _signal, callback) => {
+      attempts++;
+      callback(new Error('The old pid must not be killed'));
+    });
+    try {
+      assert.strictEqual(await waitForChildExit(child), true);
+      const browser = fakeBrowser({ process: () => child });
+      await close(browser);
+      await close(browser);
+      assert.strictEqual(attempts, 0);
+    } finally {
+      killChild(child);
+    }
+  });
+
+  it('shares concurrent cleanup and remains safe when called again', async function () {
+    let disconnectCalls = 0;
+    const browser = fakeBrowser({
+      disconnect: async () => {
+        disconnectCalls += 1;
+      },
+    });
+
+    await Promise.all([closeBrowser(browser), closeBrowser(browser)]);
+    await closeBrowser(browser);
+
+    assert.strictEqual(disconnectCalls, 1);
+  });
+
+  it('allows retry after a failed disconnect', async function () {
+    let disconnectCalls = 0;
+    const warnings: string[] = [];
+    const originalWarn = defaultLogger.warn;
+    defaultLogger.warn = ((message: string) => {
+      warnings.push(message);
+      return defaultLogger;
+    }) as typeof defaultLogger.warn;
+    const browser = fakeBrowser({
+      disconnect: async () => {
+        disconnectCalls += 1;
+        if (disconnectCalls === 1) throw new Error('disconnect failed');
+      },
+    });
+
+    try {
+      await closeBrowser(browser);
+      await closeBrowser(browser);
+
+      assert.strictEqual(disconnectCalls, 2);
+      assert.ok(warnings.some((message) => message.includes('disconnect')));
+    } finally {
+      defaultLogger.warn = originalWarn;
+    }
+  });
+
   it('disconnects a browser without a process handle (remote/browserWS)', async function () {
     let closeCalls = 0;
     let disconnectCalls = 0;
@@ -174,6 +356,79 @@ describe('create browser cleanup', function () {
 
   after(function () {
     fs.rmSync(tokenFolder, { recursive: true, force: true });
+  });
+
+  it('disconnects a browserWS connection created during failed initialization', async function () {
+    const browserModule = require('../controllers/browser');
+    const originalInitBrowser = browserModule.initBrowser;
+    const { create } = require('../controllers/initializer');
+    let disconnectCalls = 0;
+    let closeCalls = 0;
+    browserModule.initBrowser = async () =>
+      fakeBrowser({
+        on() {
+          return this;
+        },
+        pages: async () => {
+          throw new Error('page acquisition failed');
+        },
+        disconnect: async () => {
+          disconnectCalls += 1;
+        },
+        close: async () => {
+          closeCalls += 1;
+        },
+      });
+
+    try {
+      await assert.rejects(
+        create({
+          session,
+          browserWS: 'ws://example.invalid',
+          disableWelcome: true,
+          updatesLog: false,
+          waitForLogin: false,
+        }),
+        /page acquisition failed/
+      );
+      assert.strictEqual(disconnectCalls, 1);
+      assert.strictEqual(closeCalls, 0);
+    } finally {
+      browserModule.initBrowser = originalInitBrowser;
+    }
+  });
+
+  it('leaves a caller-supplied browser alone when initialization fails', async function () {
+    const { create } = require('../controllers/initializer');
+    let closeCalls = 0;
+    let disconnectCalls = 0;
+    const browser = fakeBrowser({
+      on() {
+        return this;
+      },
+      pages: async () => {
+        throw new Error('page acquisition failed');
+      },
+      close: async () => {
+        closeCalls += 1;
+      },
+      disconnect: async () => {
+        disconnectCalls += 1;
+      },
+    });
+
+    await assert.rejects(
+      create({
+        session,
+        browser,
+        disableWelcome: true,
+        updatesLog: false,
+        waitForLogin: false,
+      }),
+      /page acquisition failed/
+    );
+    assert.strictEqual(closeCalls, 0);
+    assert.strictEqual(disconnectCalls, 0);
   });
 
   function stubCreate(child: ChildProcess, pages: () => Promise<any>) {

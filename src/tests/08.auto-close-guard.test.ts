@@ -15,9 +15,11 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 import * as assert from 'assert';
+import { spawn } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 
+import { Whatsapp } from '../api/whatsapp';
 import { hasAlivePage } from '../controllers/browser';
 
 function makePage(url: string, closed = false): any {
@@ -119,6 +121,53 @@ function fakeSessionPage(browser: any) {
 }
 
 describe('targetdestroyed auto-close guard (create lifecycle)', function () {
+  it('recognizes the destroyed session target before Page.isClosed updates', async function () {
+    const browserModule = require('../controllers/browser');
+    const initializer = require('../controllers/initializer');
+    const originalInit = browserModule.initBrowser;
+    const originalStart = Object.getOwnPropertyDescriptor(
+      Whatsapp.prototype,
+      'start'
+    );
+    const target = {};
+    const handlers: Record<string, (...args: any[]) => any> = {};
+    let disconnects = 0;
+    const browser: any = {
+      connected: true,
+      process: () => null,
+      on(name: string, fn: any) {
+        handlers[name] = fn;
+        return this;
+      },
+      pages: async () => [page],
+      disconnect: async () => {
+        disconnects++;
+        browser.connected = false;
+      },
+    };
+    const { page } = fakeSessionPage(browser);
+    page.target = () => target;
+    browserModule.initBrowser = async () => browser;
+    Object.defineProperty(Whatsapp.prototype, 'start', {
+      configurable: true,
+      writable: true,
+      value: async () => undefined,
+    });
+    try {
+      await initializer.create({ session: SESSION, ...CREATE_OPTIONS });
+      await handlers.targetdestroyed({});
+      assert.strictEqual(disconnects, 0);
+      assert.strictEqual(page.isClosed(), false);
+      await handlers.targetdestroyed(target);
+      assert.strictEqual(disconnects, 1);
+    } finally {
+      browserModule.initBrowser = originalInit;
+      if (originalStart)
+        Object.defineProperty(Whatsapp.prototype, 'start', originalStart);
+      else delete (Whatsapp.prototype as any).start;
+    }
+  });
+
   after(function () {
     fs.rmSync(TOKEN_FOLDER, { recursive: true, force: true });
   });
@@ -179,12 +228,17 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
     }
   });
 
-  async function createWithSessionPage() {
+  async function createWithSessionPage(
+    browserOverrides: Record<string, any> = {},
+    logger?: any,
+    resource: 'page' | 'browser' | 'owned' = 'owned'
+  ) {
     const handlers: Record<string, (...args: any[]) => any> = {};
     const state = {
       pages: [] as any[],
       pagesCalls: 0,
       closeCalls: 0,
+      disconnectCalls: 0,
       connected: true,
     };
     const browser: any = {
@@ -197,18 +251,38 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
         return state.pages;
       },
       process: () => null,
-      disconnect: async () => undefined,
+      disconnect: async () => {
+        state.disconnectCalls += 1;
+      },
       close: async () => {
         state.closeCalls += 1;
       },
       get connected() {
         return state.connected;
       },
+      ...browserOverrides,
     };
     const { page, state: pageState } = fakeSessionPage(browser);
+    if (resource !== 'page') state.pages = [page];
 
     const { create } = require('../controllers/initializer');
-    await create({ session: SESSION, page, ...CREATE_OPTIONS }).catch(() => {});
+    const browserModule = require('../controllers/browser');
+    const originalInitBrowser = browserModule.initBrowser;
+    if (resource === 'owned') browserModule.initBrowser = async () => browser;
+    try {
+      await create({
+        session: SESSION,
+        ...(resource === 'page'
+          ? { page }
+          : resource === 'browser'
+          ? { browser }
+          : { browserWS: 'ws://example.invalid' }),
+        ...CREATE_OPTIONS,
+        ...(logger ? { logger } : {}),
+      }).catch(() => {});
+    } finally {
+      browserModule.initBrowser = originalInitBrowser;
+    }
 
     assert.ok(handlers['targetdestroyed'], 'handler registered during create');
 
@@ -216,11 +290,47 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
       handlers,
       state,
       pageState,
+      page,
+      browser,
       stop: () => page.emit('close'),
     };
   }
 
-  it('closes the browser once the session tab is closed and only about:blank remains', async function () {
+  it('preserves a borrowed Page browser during targetdestroyed', async function () {
+    const { handlers, state, pageState, stop } = await createWithSessionPage(
+      {},
+      undefined,
+      'page'
+    );
+    try {
+      pageState.closed = true;
+      state.pages = [makePage('about:blank')];
+      const pagesCallsBefore = state.pagesCalls;
+      await handlers['targetdestroyed']({});
+      assert.strictEqual(state.pagesCalls, pagesCallsBefore);
+      assert.strictEqual(state.disconnectCalls, 0);
+      assert.strictEqual(state.closeCalls, 0);
+    } finally {
+      stop();
+    }
+  });
+
+  it('preserves a shared caller-supplied remote Browser connection', async function () {
+    const { handlers, state, pageState, browser, stop } =
+      await createWithSessionPage({}, undefined, 'browser');
+    try {
+      pageState.closed = true;
+      state.pages = [makePage('about:blank')];
+      await handlers['targetdestroyed']({});
+      assert.strictEqual(state.disconnectCalls, 0);
+      assert.strictEqual(state.closeCalls, 0);
+      assert.strictEqual(browser.connected, true);
+    } finally {
+      stop();
+    }
+  });
+
+  it('disconnects a remote browser once the session tab is closed and only about:blank remains', async function () {
     this.timeout(10000);
 
     const { handlers, state, pageState, stop } = await createWithSessionPage();
@@ -230,9 +340,92 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
       state.pages = [makePage('about:blank')];
       await handlers['targetdestroyed']({});
 
-      assert.strictEqual(state.closeCalls, 1);
+      assert.strictEqual(state.closeCalls, 0);
+      assert.strictEqual(state.disconnectCalls, 1);
     } finally {
       stop();
+    }
+  });
+
+  it('contains and logs a browser.pages failure in targetdestroyed', async function () {
+    const errors: string[] = [];
+    const logger = {
+      info() {},
+      http() {},
+      warn() {},
+      log() {},
+      error(message: string) {
+        errors.push(message);
+      },
+    };
+    const { handlers, browser, stop } = await createWithSessionPage({}, logger);
+    browser.pages = async () => {
+      throw new Error('pages failed');
+    };
+
+    try {
+      await assert.doesNotReject(handlers['targetdestroyed']({}));
+      assert.ok(errors.some((message) => message.includes('targetdestroyed')));
+    } finally {
+      stop();
+    }
+  });
+
+  it('shares cleanup across client.close and targetdestroyed', async function () {
+    const { handlers, state, pageState, page, stop } =
+      await createWithSessionPage();
+    const autoCloseRuns: Promise<any>[] = [];
+    page.close = async () => {
+      if (pageState.closed) return;
+      pageState.closed = true;
+      state.pages = [makePage('about:blank')];
+      autoCloseRuns.push(handlers['targetdestroyed']({}));
+    };
+
+    try {
+      const client: any = { page, cancelQrLoop() {} };
+      await Promise.all([
+        Whatsapp.prototype.close.call(client),
+        Whatsapp.prototype.close.call(client),
+      ]);
+      await Promise.all(autoCloseRuns);
+      await Whatsapp.prototype.close.call(client);
+
+      assert.strictEqual(state.disconnectCalls, 1);
+    } finally {
+      stop();
+    }
+  });
+
+  it('terminates an owned browser when automatic close hangs', async function () {
+    this.timeout(15000);
+    const child = spawn(
+      process.execPath,
+      ['-e', 'setInterval(() => {}, 1000)'],
+      {
+        stdio: 'ignore',
+      }
+    );
+
+    try {
+      const { handlers, state, pageState, stop } = await createWithSessionPage({
+        process: () => ({ pid: child.pid }),
+        close: () => new Promise<void>(() => {}),
+      });
+
+      try {
+        pageState.closed = true;
+        state.pages = [makePage('about:blank')];
+        await handlers['targetdestroyed']({});
+
+        assert.strictEqual(await waitForChildExit(child), true);
+      } finally {
+        stop();
+      }
+    } finally {
+      if (child.exitCode === null && child.signalCode === null) {
+        child.kill('SIGKILL');
+      }
     }
   });
 
@@ -288,3 +481,17 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
     }
   });
 });
+
+function waitForChildExit(child: ReturnType<typeof spawn>): Promise<boolean> {
+  return new Promise((resolve) => {
+    if (child.exitCode !== null || child.signalCode !== null) {
+      return resolve(true);
+    }
+
+    const timer = setTimeout(() => resolve(false), 8000);
+    child.once('exit', () => {
+      clearTimeout(timer);
+      resolve(true);
+    });
+  });
+}

@@ -25,6 +25,7 @@ import {
   needsToScan,
 } from '../../controllers/auth';
 import {
+  closeBrowser,
   initWhatsapp,
   injectApi,
   InjectionTimeoutError,
@@ -69,8 +70,11 @@ export class HostLayer {
   public onLoadingScreen?: LoadingScreenCallback = null;
   public catchLinkCode?: LinkByCodeCallback = null;
 
+  protected readonly browserAcquiredHere: boolean;
+
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     this.session = session;
+    this.browserAcquiredHere = options?.__browserAcquiredHere === true;
     this.options = { ...defaultOptions, ...options };
 
     this.logger = this.options.logger || defaultLogger;
@@ -425,9 +429,17 @@ export class HostLayer {
       this.log('info', 'Closing the page');
       this.autoCloseCalled = true;
       this.statusFind && this.statusFind('autocloseCalled', this.session);
-      try {
-        this.page.close();
-      } catch (error) {}
+      void Promise.resolve()
+        .then(() => this.page.close())
+        .catch(async (error) => {
+          this.log('error', error);
+          if (this.browserAcquiredHere) {
+            await closeBrowser(this.page.browser());
+          }
+        })
+        .catch((error) => {
+          this.log('error', error);
+        });
     }
   }
 
