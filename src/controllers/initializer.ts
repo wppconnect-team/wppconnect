@@ -217,6 +217,7 @@ export async function create(
   }
 
   (browser as Browser).on('targetdestroyed', async (target: any) => {
+    if (!browserAcquiredHere) return;
     try {
       // The handler is registered before the session page is acquired, so ignore
       // targets destroyed during startup: there is nothing to auto-close yet.
@@ -255,7 +256,10 @@ export async function create(
     if (page) {
       await page.setBypassCSP(true);
 
-      const client = new Whatsapp(page, session, mergedOptions);
+      const client = new Whatsapp(page, session, {
+        ...mergedOptions,
+        __browserAcquiredHere: browserAcquiredHere,
+      });
       client.catchQR = catchQR;
       client.statusFind = statusFind;
       client.onLoadingScreen = onLoadingScreen;

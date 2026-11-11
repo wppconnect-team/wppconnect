@@ -70,8 +70,11 @@ export class HostLayer {
   public onLoadingScreen?: LoadingScreenCallback = null;
   public catchLinkCode?: LinkByCodeCallback = null;
 
+  protected readonly browserAcquiredHere: boolean;
+
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     this.session = session;
+    this.browserAcquiredHere = options?.__browserAcquiredHere === true;
     this.options = { ...defaultOptions, ...options };
 
     this.logger = this.options.logger || defaultLogger;
@@ -430,7 +433,9 @@ export class HostLayer {
         .then(() => this.page.close())
         .catch(async (error) => {
           this.log('error', error);
-          await closeBrowser(this.page.browser());
+          if (this.browserAcquiredHere) {
+            await closeBrowser(this.page.browser());
+          }
         })
         .catch((error) => {
           this.log('error', error);

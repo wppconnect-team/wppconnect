@@ -183,7 +183,8 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
 
   async function createWithSessionPage(
     browserOverrides: Record<string, any> = {},
-    logger?: any
+    logger?: any,
+    resource: 'page' | 'browser' | 'owned' = 'owned'
   ) {
     const handlers: Record<string, (...args: any[]) => any> = {};
     const state = {
@@ -215,14 +216,26 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
       ...browserOverrides,
     };
     const { page, state: pageState } = fakeSessionPage(browser);
+    if (resource !== 'page') state.pages = [page];
 
     const { create } = require('../controllers/initializer');
-    await create({
-      session: SESSION,
-      page,
-      ...CREATE_OPTIONS,
-      ...(logger ? { logger } : {}),
-    }).catch(() => {});
+    const browserModule = require('../controllers/browser');
+    const originalInitBrowser = browserModule.initBrowser;
+    if (resource === 'owned') browserModule.initBrowser = async () => browser;
+    try {
+      await create({
+        session: SESSION,
+        ...(resource === 'page'
+          ? { page }
+          : resource === 'browser'
+          ? { browser }
+          : { browserWS: 'ws://example.invalid' }),
+        ...CREATE_OPTIONS,
+        ...(logger ? { logger } : {}),
+      }).catch(() => {});
+    } finally {
+      browserModule.initBrowser = originalInitBrowser;
+    }
 
     assert.ok(handlers['targetdestroyed'], 'handler registered during create');
 
@@ -231,9 +244,44 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
       state,
       pageState,
       page,
+      browser,
       stop: () => page.emit('close'),
     };
   }
+
+  it('preserves a borrowed Page browser during targetdestroyed', async function () {
+    const { handlers, state, pageState, stop } = await createWithSessionPage(
+      {},
+      undefined,
+      'page'
+    );
+    try {
+      pageState.closed = true;
+      state.pages = [makePage('about:blank')];
+      const pagesCallsBefore = state.pagesCalls;
+      await handlers['targetdestroyed']({});
+      assert.strictEqual(state.pagesCalls, pagesCallsBefore);
+      assert.strictEqual(state.disconnectCalls, 0);
+      assert.strictEqual(state.closeCalls, 0);
+    } finally {
+      stop();
+    }
+  });
+
+  it('preserves a shared caller-supplied remote Browser connection', async function () {
+    const { handlers, state, pageState, browser, stop } =
+      await createWithSessionPage({}, undefined, 'browser');
+    try {
+      pageState.closed = true;
+      state.pages = [makePage('about:blank')];
+      await handlers['targetdestroyed']({});
+      assert.strictEqual(state.disconnectCalls, 0);
+      assert.strictEqual(state.closeCalls, 0);
+      assert.strictEqual(browser.connected, true);
+    } finally {
+      stop();
+    }
+  });
 
   it('disconnects a remote browser once the session tab is closed and only about:blank remains', async function () {
     this.timeout(10000);
@@ -263,14 +311,10 @@ describe('targetdestroyed auto-close guard (create lifecycle)', function () {
         errors.push(message);
       },
     };
-    const { handlers, stop } = await createWithSessionPage(
-      {
-        pages: async () => {
-          throw new Error('pages failed');
-        },
-      },
-      logger
-    );
+    const { handlers, browser, stop } = await createWithSessionPage({}, logger);
+    browser.pages = async () => {
+      throw new Error('pages failed');
+    };
 
     try {
       await assert.doesNotReject(handlers['targetdestroyed']({}));

@@ -70,6 +70,27 @@ function fakePage() {
 }
 
 describe('Whatsapp.close browser cleanup', function () {
+  it('keeps explicit close destructive for a caller-supplied browser', async function () {
+    let pageCloseCalls = 0;
+    let disconnectCalls = 0;
+    const browser = fakeBrowser({
+      disconnect: async () => {
+        disconnectCalls += 1;
+      },
+    });
+    const page: any = {
+      close: async () => {
+        pageCloseCalls += 1;
+      },
+      browser: () => browser,
+    };
+    const client: any = { page, cancelQrLoop() {} };
+
+    assert.strictEqual(await Whatsapp.prototype.close.call(client), true);
+    assert.strictEqual(pageCloseCalls, 1);
+    assert.strictEqual(disconnectCalls, 1);
+  });
+
   it('closes the browser even when the page is already closed', async function () {
     this.timeout(20000);
     const child = startIdleChild();
@@ -125,6 +146,32 @@ describe('Whatsapp.close browser cleanup', function () {
 });
 
 describe('automatic page close', function () {
+  it('does not disconnect a borrowed browser when page.close rejects', async function () {
+    let disconnectCalls = 0;
+    const browser = fakeBrowser({
+      disconnect: async () => {
+        disconnectCalls += 1;
+      },
+    });
+    const host: any = {
+      autoCloseInterval: null,
+      options: { autoClose: 1, deviceSyncTimeout: 0 },
+      page: {
+        isClosed: () => false,
+        close: async () => {
+          throw new Error('page close failed');
+        },
+        browser: () => browser,
+      },
+      log() {},
+    };
+
+    (HostLayer.prototype as any).tryAutoClose.call(host);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+
+    assert.strictEqual(disconnectCalls, 0);
+  });
+
   it('releases the browser when page.close rejects', async function () {
     let disconnectCalls = 0;
     const browser = fakeBrowser({
@@ -133,6 +180,7 @@ describe('automatic page close', function () {
       },
     });
     const host: any = {
+      browserAcquiredHere: true,
       autoCloseInterval: null,
       options: { autoClose: 1, deviceSyncTimeout: 0 },
       page: {

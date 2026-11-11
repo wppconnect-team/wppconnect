@@ -21,6 +21,8 @@ import { defaultLogger } from '../utils/logger';
 
 // Server config
 export interface CreateConfig {
+  /** @internal Set by create() for automatic browser cleanup. */
+  __browserAcquiredHere?: boolean;
   /**
    * Headless chrome
    * @default true
