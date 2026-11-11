@@ -121,6 +121,53 @@ function fakeSessionPage(browser: any) {
 }
 
 describe('targetdestroyed auto-close guard (create lifecycle)', function () {
+  it('recognizes the destroyed session target before Page.isClosed updates', async function () {
+    const browserModule = require('../controllers/browser');
+    const initializer = require('../controllers/initializer');
+    const originalInit = browserModule.initBrowser;
+    const originalStart = Object.getOwnPropertyDescriptor(
+      Whatsapp.prototype,
+      'start'
+    );
+    const target = {};
+    const handlers: Record<string, (...args: any[]) => any> = {};
+    let disconnects = 0;
+    const browser: any = {
+      connected: true,
+      process: () => null,
+      on(name: string, fn: any) {
+        handlers[name] = fn;
+        return this;
+      },
+      pages: async () => [page],
+      disconnect: async () => {
+        disconnects++;
+        browser.connected = false;
+      },
+    };
+    const { page } = fakeSessionPage(browser);
+    page.target = () => target;
+    browserModule.initBrowser = async () => browser;
+    Object.defineProperty(Whatsapp.prototype, 'start', {
+      configurable: true,
+      writable: true,
+      value: async () => undefined,
+    });
+    try {
+      await initializer.create({ session: SESSION, ...CREATE_OPTIONS });
+      await handlers.targetdestroyed({});
+      assert.strictEqual(disconnects, 0);
+      assert.strictEqual(page.isClosed(), false);
+      await handlers.targetdestroyed(target);
+      assert.strictEqual(disconnects, 1);
+    } finally {
+      browserModule.initBrowser = originalInit;
+      if (originalStart)
+        Object.defineProperty(Whatsapp.prototype, 'start', originalStart);
+      else delete (Whatsapp.prototype as any).start;
+    }
+  });
+
   after(function () {
     fs.rmSync(TOKEN_FOLDER, { recursive: true, force: true });
   });

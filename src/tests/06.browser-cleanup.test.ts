@@ -200,7 +200,71 @@ describe('automatic page close', function () {
   });
 });
 
+function closeBrowserWithTreeKill(
+  stub: (...args: any[]) => void
+): typeof closeBrowser {
+  const browserId = require.resolve('../controllers/browser');
+  const treeKillId = require.resolve('tree-kill');
+  const browserModule = require.cache[browserId];
+  const treeKillModule = require.cache[treeKillId]!;
+  const original = treeKillModule.exports;
+  try {
+    treeKillModule.exports = stub;
+    delete require.cache[browserId];
+    return require(browserId).closeBrowser;
+  } finally {
+    require.cache[browserId] = browserModule;
+    treeKillModule.exports = original;
+  }
+}
+
 describe('closeBrowser', function () {
+  it('retries failed local process termination instead of caching success', async function () {
+    this.timeout(20000);
+    const child = startIdleChild();
+    const realTreeKill = require('tree-kill');
+    let attempts = 0;
+    const close = closeBrowserWithTreeKill((pid, signal, callback) => {
+      attempts++;
+      if (attempts === 1) callback(new Error('Termination denied'));
+      else realTreeKill(pid, signal, callback);
+    });
+    const browser = fakeBrowser({ process: () => child });
+    try {
+      await close(browser);
+      assert.strictEqual(child.exitCode, null);
+      assert.strictEqual(child.signalCode, null);
+      await close(browser);
+      assert.strictEqual(attempts, 2);
+      assert.strictEqual(await waitForChildExit(child), true);
+      await close(browser);
+      assert.strictEqual(attempts, 2);
+    } finally {
+      killChild(child);
+    }
+  });
+
+  it('never forces termination using the pid of an already exited child', async function () {
+    this.timeout(20000);
+    const child = spawn(process.execPath, ['-e', 'process.exit(0)'], {
+      stdio: 'ignore',
+    });
+    let attempts = 0;
+    const close = closeBrowserWithTreeKill((_pid, _signal, callback) => {
+      attempts++;
+      callback(new Error('The old pid must not be killed'));
+    });
+    try {
+      assert.strictEqual(await waitForChildExit(child), true);
+      const browser = fakeBrowser({ process: () => child });
+      await close(browser);
+      await close(browser);
+      assert.strictEqual(attempts, 0);
+    } finally {
+      killChild(child);
+    }
+  });
+
   it('shares concurrent cleanup and remains safe when called again', async function () {
     let disconnectCalls = 0;
     const browser = fakeBrowser({

@@ -227,7 +227,13 @@ export async function create(
       // An `about:blank` tab often remains after the session page is closed, so
       // close only once the session page itself is gone and no real page is left
       // (#2896). A temporarily blank session page must not be mistaken for it.
-      if (page.isClosed() && !hasAlivePage(pages)) {
+      // Puppeteer can destroy the target before Page.isClosed() becomes true.
+      const sessionTargetDestroyed =
+        typeof page.target === 'function' && target === page.target();
+      if (
+        (sessionTargetDestroyed || page.isClosed()) &&
+        !hasAlivePage(pages.filter((candidate) => candidate !== page))
+      ) {
         await browserModule.closeBrowser(browser as Browser);
       }
     } catch (error) {

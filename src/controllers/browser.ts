@@ -511,8 +511,9 @@ export async function initBrowser(
 const closingBrowsers = new WeakMap<Browser, Promise<void>>();
 
 /**
- * Closes a browser and, when it was launched by this process, guarantees its
- * OS process tree is terminated even if the graceful close fails or hangs.
+ * Closes a browser and, when it was launched by this process, attempts to
+ * terminate its OS process tree even if graceful close fails or hangs.
+ * Failed cleanup can be retried by a later close request.
  * Remote browsers (`browserWS`) expose no process handle and are only
  * disconnected. Safe to call when the page/browser was already closed.
  */
@@ -524,7 +525,7 @@ export function closeBrowser(browser: Browser): Promise<void> {
   const cleanup = Promise.resolve()
     .then(() => closeBrowserOnce(browser))
     .then((completed) => {
-      // A failed disconnect may succeed on a later close request.
+      // Failed cleanup may succeed on a later close request.
       if (!completed) closingBrowsers.delete(browser);
     });
   closingBrowsers.set(browser, cleanup);
@@ -534,7 +535,8 @@ export function closeBrowser(browser: Browser): Promise<void> {
 
 async function closeBrowserOnce(browser: Browser): Promise<boolean> {
   // Only browsers launched by this process expose a process handle
-  const pid = browser.process?.()?.pid;
+  const child = browser.process?.();
+  const pid = child?.pid;
 
   if (!pid) {
     // Caller-supplied remote connection: detach this client only. Closing it
@@ -578,11 +580,22 @@ async function closeBrowserOnce(browser: Browser): Promise<boolean> {
     clearTimeout(timer);
   }
 
-  // Force kill the process tree if the graceful close did not take it down
-  await new Promise<void>((resolve) => {
-    treeKill(pid, 'SIGKILL', () => resolve());
+  const hasExited = () => child?.exitCode != null || child?.signalCode != null;
+  // Never send a termination request for a process handle that has exited:
+  // the operating system may have assigned its old pid to another process.
+  if (hasExited()) return true;
+
+  return new Promise<boolean>((resolve) => {
+    treeKill(pid, 'SIGKILL', (error) => {
+      if (error) {
+        defaultLogger.warn('Browser process tree termination failed', {
+          pid,
+          error,
+        });
+      }
+      resolve(!error || hasExited());
+    });
   });
-  return true;
 }
 
 export async function getOrCreatePage(
