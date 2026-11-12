@@ -1,8 +1,14 @@
 {
   "$schema": "https://typedoc.org/schema.json",
   "customCss": ".github/brand/docs-theme.css",
-  "navigationLinks": { "WPPConnect": "https://wppconnect.io", "Guides": "https://wppconnect.io/docs/", "GitHub": "https://github.com/wppconnect-team" },
+  "navigationLinks": {
+    "WPPConnect": "https://wppconnect.io",
+    "Guides": "https://wppconnect.io/docs/",
+    "GitHub": "https://github.com/wppconnect-team"
+  },
   "favicon": ".github/brand/v2/favicon.ico",
+  "plugin": ["./scripts/typedoc-canonical.mjs"],
+  "hostedBaseUrl": "https://wppconnect.io/wppconnect/",
   "disableSources": false,
   "entryPoints": ["src/index.ts"],
   "excludeExternals": false,
