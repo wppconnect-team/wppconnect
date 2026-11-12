@@ -14,7 +14,7 @@
     "clean": "shx rm -rf session dist",
     "example": "node ./examples/basic/index.js",
     "commit": "cz",
-    "docs:build": "npm run docs:clean && typedoc && npm run docs:copy-images",
+    "docs:build": "npm run docs:clean && typedoc && npm run docs:copy-images && node scripts/docs-redirects.mjs",
     "docs:clean": "shx rm -rf api-docs",
     "docs:copy-images": "shx cp -R ./img ./api-docs",
     "lint:js": "eslint 'src/**/*.js'",

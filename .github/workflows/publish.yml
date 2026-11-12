@@ -72,10 +72,12 @@ jobs:
           prerelease: ${{ contains(github.ref, '-alpha') }}
 
       - name: Build API-Docs
+        id: docs_build
         run: npm run docs:build
         continue-on-error: true
 
       - name: Deploy API-Docs
+        if: steps.docs_build.outcome == 'success'
         uses: peaceiris/actions-gh-pages@v4
         continue-on-error: true
         with:

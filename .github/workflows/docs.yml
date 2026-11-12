@@ -7,6 +7,8 @@ on:
       - '.github/brand/**'
       - '.github/workflows/docs.yml'
       - 'typedoc.json'
+      - 'scripts/typedoc-canonical.mjs'
+      - 'scripts/docs-redirects.mjs'
       - 'README.md'
       - 'README.pt-BR.md'
   workflow_dispatch:
