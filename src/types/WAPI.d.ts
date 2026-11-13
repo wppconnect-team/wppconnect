@@ -192,7 +192,6 @@ interface WAPI {
   takeOver: () => boolean;
   unsubscribePresence: (id: string | string[]) => Promise<number>;
   waitNewAcknowledgements: (callback: Function) => void;
-  waitNewMessages: (rmCallback: boolean, callback: Function) => void;
   _profilePicfunc: (contactId: string) => Promise<ProfilePicThumbObj>;
   _serializeChatObj: (chat: any) => any;
   processMessageObj: (
