@@ -15,6 +15,15 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+const messageDefaults = {
+  isSentCagPollCreation: false,
+  isEventCanceled: false,
+  isForwarded: false,
+  isQuestion: false,
+  isSpoiler: false,
+  nonJidMentions: null,
+};
+
 export async function getMessages(chatId, params = {}, serialize = true) {
   const msgs = await WPP.chat.getMessages(chatId, params);
 
@@ -26,9 +35,15 @@ export async function getMessages(chatId, params = {}, serialize = true) {
     throw error;
   }
 
-  const result = msgs
-    .map((m) => new WPP.whatsapp.MsgStore.modelClass(m))
-    .map((m) => WAPI.processMessageObj(m, true, true));
+  // WPP.chat.getMessages already returns models; wrapping them again leaks a copy per message
+  const result = msgs.map((m) => {
+    const message = { ...WAPI.processMessageObj(m, true, true) };
+    // Preserve the DTO defaults previously materialized by the copy constructor.
+    for (const [key, value] of Object.entries(messageDefaults)) {
+      if (message[key] === undefined) message[key] = value;
+    }
+    return message;
+  });
 
   return result;
 }
