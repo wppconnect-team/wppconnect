@@ -1,3 +1,41 @@
+## 2.4.0 (2026-11-13)
+
+### Bug Fixes
+
+- **browser:** poll readiness in hidden pages ([712e504](https://github.com/wppconnect-team/wppconnect/commit/712e504))
+- **browser:** respect ownership during automatic cleanup ([c774248](https://github.com/wppconnect-team/wppconnect/commit/c774248))
+- bump wa-js version to 4.8.0 (#2964) ([7e0dace](https://github.com/wppconnect-team/wppconnect/commit/7e0dace)), closes [#2964](https://github.com/wppconnect-team/wppconnect/issues/2964)
+- **labels:** await promises, fix method signatures and export label models (#2951) ([94937ce](https://github.com/wppconnect-team/wppconnect/commit/94937ce)), closes [#2951](https://github.com/wppconnect-team/wppconnect/issues/2951)
+- normalize forwarding input and run the complete test suite ([b28c1d6](https://github.com/wppconnect-team/wppconnect/commit/b28c1d6))
+- **wapi:** remove unbounded new messages buffer ([9532a1a](https://github.com/wppconnect-team/wppconnect/commit/9532a1a))
+- **wapi:** serialize existing message models without extra copies ([7992ab3](https://github.com/wppconnect-team/wppconnect/commit/7992ab3))
+
+### Documentation
+
+- adopt official WPPConnect branding and API favicon (#2946) ([4d8dda6](https://github.com/wppconnect-team/wppconnect/commit/4d8dda6)), closes [#2946](https://github.com/wppconnect-team/wppconnect/issues/2946)
+- publish canonical SDK URLs and preserve renamed references (#2959) ([7ab758a](https://github.com/wppconnect-team/wppconnect/commit/7ab758a)), closes [#2959](https://github.com/wppconnect-team/wppconnect/issues/2959)
+- refresh API reference visual design (#2950) ([fd0f11b](https://github.com/wppconnect-team/wppconnect/commit/fd0f11b)), closes [#2950](https://github.com/wppconnect-team/wppconnect/issues/2950)
+- standardize bilingual READMEs and support guidance ([672e8cc](https://github.com/wppconnect-team/wppconnect/commit/672e8cc))
+- update official WPPConnect logo and API favicon (#2949) ([17f73ca](https://github.com/wppconnect-team/wppconnect/commit/17f73ca)), closes [#2949](https://github.com/wppconnect-team/wppconnect/issues/2949)
+
+### Build System
+
+- **deps-dev:** bump fast-uri from 3.1.7 to 3.1.9 ([94f5b44](https://github.com/wppconnect-team/wppconnect/commit/94f5b44))
+- **deps-dev:** update babel monorepo to ^7.29.13 (#2955) ([77c3fb2](https://github.com/wppconnect-team/wppconnect/commit/77c3fb2)), closes [#2955](https://github.com/wppconnect-team/wppconnect/issues/2955)
+- **deps-dev:** update dependency concurrently to ^10.0.7 (#2957) ([a43806e](https://github.com/wppconnect-team/wppconnect/commit/a43806e)), closes [#2957](https://github.com/wppconnect-team/wppconnect/issues/2957)
+- **deps-dev:** update dependency eslint to v10.14.0 (#2953) ([bfe7d57](https://github.com/wppconnect-team/wppconnect/commit/bfe7d57)), closes [#2953](https://github.com/wppconnect-team/wppconnect/issues/2953)
+- **deps-dev:** update dependency globals to ^17.14.0 (#2954) ([1c34452](https://github.com/wppconnect-team/wppconnect/commit/1c34452)), closes [#2954](https://github.com/wppconnect-team/wppconnect/issues/2954)
+- **deps-dev:** update dependency release-it to ^21.1.2 (#2952) ([df15904](https://github.com/wppconnect-team/wppconnect/commit/df15904)), closes [#2952](https://github.com/wppconnect-team/wppconnect/issues/2952)
+- **deps-dev:** update dependency typescript-eslint to ^8.72.1 (#2943) ([b912ee1](https://github.com/wppconnect-team/wppconnect/commit/b912ee1)), closes [#2943](https://github.com/wppconnect-team/wppconnect/issues/2943)
+- **deps-dev:** update dependency typescript-eslint to ^8.72.2 (#2960) ([775e5ee](https://github.com/wppconnect-team/wppconnect/commit/775e5ee)), closes [#2960](https://github.com/wppconnect-team/wppconnect/issues/2960)
+- **deps-dev:** update dependency webpack to ^5.112.2 (#2942) ([8bf6381](https://github.com/wppconnect-team/wppconnect/commit/8bf6381)), closes [#2942](https://github.com/wppconnect-team/wppconnect/issues/2942)
+- **deps:** bump follow-redirects from 1.16.1 to 1.16.2 (#2947) ([7bff268](https://github.com/wppconnect-team/wppconnect/commit/7bff268)), closes [#2947](https://github.com/wppconnect-team/wppconnect/issues/2947)
+- **deps:** bump undici and release-it (#2948) ([7db9899](https://github.com/wppconnect-team/wppconnect/commit/7db9899)), closes [#2948](https://github.com/wppconnect-team/wppconnect/issues/2948)
+- **deps:** bump zod, puppeteer and puppeteer-core (#2939) ([349fcdc](https://github.com/wppconnect-team/wppconnect/commit/349fcdc)), closes [#2939](https://github.com/wppconnect-team/wppconnect/issues/2939)
+- **deps:** update dependency axios to ^1.21.0 (#2944) ([d8576d2](https://github.com/wppconnect-team/wppconnect/commit/d8576d2)), closes [#2944](https://github.com/wppconnect-team/wppconnect/issues/2944)
+- **deps:** update dependency node to v24.22.2 (#2945) ([8d2ad2b](https://github.com/wppconnect-team/wppconnect/commit/8d2ad2b)), closes [#2945](https://github.com/wppconnect-team/wppconnect/issues/2945)
+- **deps:** update dependency serialize-javascript to v7.1.4 (#2940) ([1b44483](https://github.com/wppconnect-team/wppconnect/commit/1b44483)), closes [#2940](https://github.com/wppconnect-team/wppconnect/issues/2940)
+
 ## <small>2.3.6 (2026-10-23)</small>
 
 ### Bug Fixes
