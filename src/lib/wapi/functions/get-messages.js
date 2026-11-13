@@ -26,9 +26,8 @@ export async function getMessages(chatId, params = {}, serialize = true) {
     throw error;
   }
 
-  const result = msgs
-    .map((m) => new WPP.whatsapp.MsgStore.modelClass(m))
-    .map((m) => WAPI.processMessageObj(m, true, true));
+  // WPP.chat.getMessages already returns models; wrapping them again leaks a copy per message
+  const result = msgs.map((m) => WAPI.processMessageObj(m, true, true));
 
   return result;
 }
