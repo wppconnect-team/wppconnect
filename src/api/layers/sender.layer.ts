@@ -943,27 +943,26 @@ export class SenderLayer extends ListenerLayer {
 
   /**
    * Forwards array of messages (could be ids or message objects)
-   * What is the difference between forwardMessage and forwardMessagesV2?
-   * forwardMessage was used to forward a single message
-   * forwardMessagesV2 is used to forward multiple messages
-   * Also, it fixes how we pass the arguments to the whatsapp original function
-   * From positional args to named args (object)
+   * Accepts a single message ID or an array and forwards them through the
+   * native batch API.
    * @category Chat
    * @param to Chat id
    * @param messages Array of messages ids to be forwarded
    * @param options
-   * @returns array of messages ID
+   * @returns Messages that could not be forwarded. An empty array means all
+   * messages were forwarded.
    */
   public async forwardMessagesV2(
     toChatId: string,
     messages: string | string[],
     options?: ForwardMessagesOptions
   ): Promise<Array<any>> {
+    const messageIds = Array.isArray(messages) ? messages : [messages];
     return evaluateAndReturn(
       this.page,
       ({ toChatId, messages, options }) =>
         WPP.chat.forwardMessages(toChatId, messages, options),
-      { toChatId, messages, options }
+      { toChatId, messages: messageIds, options }
     );
   }
 

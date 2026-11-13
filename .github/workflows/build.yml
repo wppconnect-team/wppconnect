@@ -40,17 +40,14 @@ jobs:
       - name: Build source
         run: npm run build
 
-      - name: Test page lifecycle and authentication
+      - name: Test complete suite without external pairing
         timeout-minutes: 5
-        run: npx mocha -r ts-node/register src/tests/00.host-layer-page-load.test.ts
+        run: npm test
         env:
           TS_NODE_FILES: 'true'
-
-      - name: Test regression specs
-        timeout-minutes: 5
-        run: npx mocha -r ts-node/register src/tests/0[6-9].*.test.ts src/tests/1[0-9].*.test.ts
-        env:
-          TS_NODE_FILES: 'true'
+          SKIP_QR_CODE: 'true'
+          TEST_USER_ID: ''
+          TEST_GROUP_ID: ''
 
       - name: Verify CommonJS entry point
         run: |
