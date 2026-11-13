@@ -101,7 +101,6 @@ import {
   getFileHash,
 } from './helper';
 import {
-  addNewMessagesListener,
   addOnAddedToGroup,
   addOnLiveLocation,
   addOnNewAcks,
@@ -111,7 +110,6 @@ import {
   addOnStateChange,
   addOnStreamChange,
   allNewMessagesListener,
-  initNewMessagesListener,
 } from './listeners';
 import {
   _profilePicfunc,
@@ -270,19 +268,6 @@ if (typeof window.WAPI === 'undefined') {
   window.WAPI.getBusinessProfilesProducts = getBusinessProfilesProducts;
   window.WAPI.getOrderbyMsg = getOrderbyMsg;
 
-  // Listeners initialization
-  window.WAPI._newMessagesQueue = [];
-  window.WAPI._newMessagesBuffer =
-    sessionStorage.getItem('saved_msgs') != null
-      ? JSON.parse(sessionStorage.getItem('saved_msgs'))
-      : [];
-  window.WAPI._newMessagesDebouncer = null;
-  window.WAPI._newMessagesCallbacks = [];
-
-  // Listeners
-  window.addEventListener('unload', window.WAPI._unloadInform, false);
-  window.addEventListener('beforeunload', window.WAPI._unloadInform, false);
-  window.addEventListener('pageunload', window.WAPI._unloadInform, false);
   // On-work below:
 
   window.WAPI.getProfilePicSmallFromId = async function (id) {
@@ -546,8 +531,6 @@ if (typeof window.WAPI === 'undefined') {
 
   readyPromise.then(addOnStreamChange);
   readyPromise.then(addOnStateChange);
-  readyPromise.then(initNewMessagesListener);
-  readyPromise.then(addNewMessagesListener);
   readyPromise.then(allNewMessagesListener);
   readyPromise.then(addOnNewAcks);
   readyPromise.then(addOnAddedToGroup);
