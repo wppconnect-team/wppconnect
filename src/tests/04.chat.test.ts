@@ -102,13 +102,9 @@ describeAuthenticatedTest('Chat functions', function (getClient) {
       'Message to forward'
     );
 
-    const r = await client.forwardMessages(testUserId, msg.id, false);
+    const failures = await client.forwardMessagesV2(testUserId, msg.id, {});
 
-    assert.strictEqual(r.length, 1);
-
-    const fmsg = await client.getMessageById(r[0]);
-
-    assert.strictEqual(fmsg.body, 'Message to forward');
+    assert.deepStrictEqual(failures, []);
   });
 
   it('forward multiple messages', async function () {
@@ -127,19 +123,13 @@ describeAuthenticatedTest('Chat functions', function (getClient) {
       'Message 2 to forward'
     );
 
-    const r = await client.forwardMessages(
+    const failures = await client.forwardMessagesV2(
       testUserId,
       [msg1.id, msg2.id],
-      false
+      {}
     );
 
-    assert.strictEqual(r.length, 2);
-
-    const fmsg1 = await client.getMessageById(r[0]);
-    const fmsg2 = await client.getMessageById(r[1]);
-
-    assert.strictEqual(fmsg1.body, 'Message 1 to forward');
-    assert.strictEqual(fmsg2.body, 'Message 2 to forward');
+    assert.deepStrictEqual(failures, []);
   });
 
   it('archive chat', async function () {
