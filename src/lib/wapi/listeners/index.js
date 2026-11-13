@@ -16,7 +16,6 @@
  */
 
 export { allNewMessagesListener } from './add-all-new-messages';
-export { addNewMessagesListener } from './add-new-messages';
 export { addOnAddedToGroup } from './add-on-added-to-group';
 export { addOnLiveLocation } from './add-on-live-location';
 export { addOnNewAcks } from './add-on-new-ack';
@@ -29,4 +28,3 @@ export {
   addOnStreamInfoChanged,
   addOnStreamModeChanged,
 } from './add-on-state-change';
-export { initNewMessagesListener } from './init-listeners';
