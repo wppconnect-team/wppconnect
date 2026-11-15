@@ -58,7 +58,7 @@
     "@babel/core": "^7.29.13",
     "@babel/eslint-parser": "^7.29.13",
     "@babel/eslint-plugin": "^7.29.7",
-    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-env": "^7.29.14",
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
     "@commitlint/cz-commitlint": "^21.2.4",
