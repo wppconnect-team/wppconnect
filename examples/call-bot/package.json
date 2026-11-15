@@ -1,0 +1,11 @@
+{
+  "name": "wppconnect-call-bot",
+  "version": "1.0.0",
+  "description": "Answer, play audio and record WhatsApp calls",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "ISC"
+}

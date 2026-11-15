@@ -37,3 +37,4 @@ export * from './presence-event';
 export * from './profile-pic-thumb';
 export * from './wid';
 export * from './label';
+export * from './call';

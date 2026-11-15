@@ -16,11 +16,11 @@
  */
 
 import { Page } from 'puppeteer';
-import { ControlsLayer } from './controls.layer';
+import { CallLayer } from './call.layer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
 
-export class BusinessLayer extends ControlsLayer {
+export class BusinessLayer extends CallLayer {
   constructor(public page: Page, session?: string, options?: CreateConfig) {
     super(page, session, options);
   }
