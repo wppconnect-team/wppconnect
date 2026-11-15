@@ -1,3 +1,9 @@
+## <small>2.4.3 (2026-11-15)</small>
+
+### Chores
+
+- **release:** prepare v2.4.2 ([2d9e12a](https://github.com/wppconnect-team/wppconnect/commit/2d9e12a))
+
 ## <small>2.4.1 (2026-11-15)</small>
 
 ### Features
