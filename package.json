@@ -24,6 +24,7 @@
     "release": "release-it",
     "start": "npm run build:client && tsc app.ts && node app.js",
     "test": "mocha -r ts-node/register src/tests/**/*.test.ts",
+    "test:startup-security": "node --experimental-vm-modules --test test/startup-security.test.cjs",
     "watch": "concurrently \"npm run build:wapi -- --mode=development -w -d eval-source-map\" \"npm run build:client -- -w --sourceMap\""
   },
   "config": {

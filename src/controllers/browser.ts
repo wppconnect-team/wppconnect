@@ -32,7 +32,6 @@ import { Logger } from 'winston';
 import { SessionToken } from '../token-store';
 import { LoadingScreenCallback } from '../api/model';
 import { defaultLogger, LogLevel } from '../utils/logger';
-import '../utils/diagnostics';
 
 const treeKill = require('tree-kill') as (
   pid: number,
