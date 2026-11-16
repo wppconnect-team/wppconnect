@@ -201,9 +201,7 @@ export async function onLoadingScreen(
         if (progressBar) {
           // The progress node and the message node live in sibling subtrees;
           // either lookup can miss while the page is still mounting
-          const progressMsg = progressMessage
-            ? progressMessage.innerText
-            : '';
+          const progressMsg = progressMessage ? progressMessage.innerText : '';
           if (
             this.lastPercent !== progressBar.value ||
             this.lastPercentMessage !== progressMsg
