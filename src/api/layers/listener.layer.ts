@@ -22,6 +22,7 @@ import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
 import { ExposedFn } from '../helpers/exposed.enum';
+import { listenIncomingCall } from '../helpers/listen-incoming-call';
 import {
   Ack,
   CallAudioFrame,
@@ -235,36 +236,6 @@ export class ListenerLayer extends ProfileLayer {
         // WA-JS with native call support emits call.* events
         const hasCallEvents =
           typeof (WPP.call as any)?.enableAudioInjection === 'function';
-        try {
-          if (!window['onIncomingCall']?.exposed) {
-            if (hasCallEvents) {
-              // CallStore 'add' is not triggered by the native VoIP stack,
-              // keep the IncomingCall payload for compatibility
-              WPP.on('call.incoming_call', (data: any) => {
-                const call: any = WPP.whatsapp.CallStore.get(data.id);
-                window['onIncomingCall']({
-                  id: data.id,
-                  peerJid: wid(data.peerJid),
-                  offerTime: data.offerTime,
-                  isVideo: data.isVideo,
-                  isGroup: data.isGroup,
-                  groupJid: wid(data.groupJid) || null,
-                  canHandleLocally: !!call?.canHandleLocally,
-                  outgoing: false,
-                  isSilenced: !!call?.isSilenced,
-                  offerReceivedWhileOffline: !!call?.offerReceivedWhileOffline,
-                  webClientShouldHandle: !!call?.webClientShouldHandle,
-                  participants: [],
-                });
-              });
-            } else {
-              window.WAPI.onIncomingCall(window['onIncomingCall']);
-            }
-            window['onIncomingCall'].exposed = true;
-          }
-        } catch (error) {
-          console.error(error);
-        }
         try {
           const callEvents = {
             onCallOutgoing: 'call.outgoing_call',
@@ -482,6 +453,10 @@ export class ListenerLayer extends ProfileLayer {
         }
       })
       .catch(() => {});
+
+    await this.page.evaluate(listenIncomingCall).catch((error) => {
+      this.log('debug', `Incoming call listener: ${error}`);
+    });
 
     // The page was reloaded, restore the call audio capture
     if (this.listenerEmitter.listenerCount(ExposedFn.onCallAudioFrame) > 0) {

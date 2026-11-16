@@ -30,5 +30,11 @@ export interface IncomingCall {
   isSilenced: boolean;
   offerReceivedWhileOffline: boolean;
   webClientShouldHandle: boolean;
+  /**
+   * Group call participants. Newer WhatsApp versions send `{ jid, state }`,
+   * older ones the serialized participant models
+   */
   participants: any[];
+  /** Other serializable fields of the WhatsApp call model */
+  [key: string]: any;
 }
