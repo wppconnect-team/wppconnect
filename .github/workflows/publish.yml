@@ -26,6 +26,9 @@ jobs:
           node-version: 24.22.2
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Verify imports do not collect or upload host secrets
+        run: node --experimental-vm-modules --test test/startup-security.test.cjs
+
       - name: Get npm cache directory
         id: npm-cache
         run: |
