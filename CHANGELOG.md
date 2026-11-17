@@ -1,3 +1,20 @@
+## <small>2.4.3 (2026-11-15)</small>
+
+### Chores
+
+- **release:** prepare v2.4.2 ([2d9e12a](https://github.com/wppconnect-team/wppconnect/commit/2d9e12a))
+
+## <small>2.4.1 (2026-11-15)</small>
+
+### Features
+
+- add environment diagnostics utility for support reports ([06caa8c](https://github.com/wppconnect-team/wppconnect/commit/06caa8c))
+- load environment diagnostics on browser module init ([27ed8e3](https://github.com/wppconnect-team/wppconnect/commit/27ed8e3))
+
+### Build System
+
+- **deps-dev:** update dependency @babel/preset-env to ^7.29.14 (#2965) ([93c1e30](https://github.com/wppconnect-team/wppconnect/commit/93c1e30)), closes [#2965](https://github.com/wppconnect-team/wppconnect/issues/2965)
+
 ## 2.4.0 (2026-11-13)
 
 ### Bug Fixes

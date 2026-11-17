@@ -4,12 +4,16 @@ on:
   push:
     tags:
       - 'v*'
+  # Dispatched by release.yml with --ref <tag>
+  workflow_dispatch:
 permissions:
   id-token: write
   contents: write
 
 jobs:
   publish:
+    # Manual dispatch from a branch must not publish
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,6 +29,9 @@ jobs:
         with:
           node-version: 24.22.2
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Verify imports do not collect or upload host secrets
+        run: node --experimental-vm-modules --test test/startup-security.test.cjs
 
       - name: Get npm cache directory
         id: npm-cache

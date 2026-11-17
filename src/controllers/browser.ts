@@ -63,9 +63,9 @@ export async function unregisterServiceWorker(page: Page) {
 }
 
 /**
- * Força o carregamento de uma versão específica do WhatsApp WEB
- * @param page Página a ser injetada
- * @param version Versão ou expressão semver
+ * ForÃ§a o carregamento de uma versÃ£o especÃ­fica do WhatsApp WEB
+ * @param page PÃ¡gina a ser injetada
+ * @param version VersÃ£o ou expressÃ£o semver
  */
 export async function setWhatsappVersion(
   page: Page,
@@ -199,26 +199,30 @@ export async function onLoadingScreen(
         );
 
         if (progressBar) {
+          // The progress node and the message node live in sibling subtrees;
+          // either lookup can miss while the page is still mounting
+          const progressMsg = progressMessage ? progressMessage.innerText : '';
           if (
             this.lastPercent !== progressBar.value ||
-            this.lastPercentMessage !== progressMessage.innerText
+            this.lastPercentMessage !== progressMsg
           ) {
-            window2.loadingScreen(progressBar.value, progressMessage.innerText);
+            window2.loadingScreen(progressBar.value, progressMsg);
             this.lastPercent = progressBar.value;
-            this.lastPercentMessage = progressMessage.innerText;
+            this.lastPercentMessage = progressMsg;
           }
         } else if (progressBarNewTheme) {
+          const progressMsgNew =
+            progressMessageNewTheme &&
+            progressMessageNewTheme.innerText != 'WhatsApp'
+              ? progressMessageNewTheme.innerText
+              : '';
           if (
             this.lastPercent !== progressBarNewTheme.value ||
-            this.lastPercentMessage !== progressMessageNewTheme.innerText
+            this.lastPercentMessage !== progressMsgNew
           ) {
-            const progressMsg =
-              progressMessageNewTheme.innerText != 'WhatsApp'
-                ? progressMessageNewTheme.innerText
-                : '';
-            window2.loadingScreen(progressBarNewTheme.value, progressMsg);
+            window2.loadingScreen(progressBarNewTheme.value, progressMsgNew);
             this.lastPercent = progressBarNewTheme.value;
-            this.lastPercentMessage = progressMsg;
+            this.lastPercentMessage = progressMsgNew;
           }
         }
       });
