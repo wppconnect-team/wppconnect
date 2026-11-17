@@ -21,6 +21,10 @@ on:
         description: 'Tag de pré-lançamento (ex: alpha, beta, rc). Deixe vazio para versões estáveis.'
         required: false
 
+permissions:
+  contents: write # push the release commit and tag
+  actions: write # dispatch publish.yml
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -28,7 +32,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          token: ${{ secrets.PERSONAL_TOKEN }}
           # `changelog:update` walks the commits since the previous tag. On the
           # default shallow clone it saw a single commit and no tags, so every
           # release wrote a single bullet into CHANGELOG.md.
@@ -68,3 +71,9 @@ jobs:
             RELEASE_ARGS="$RELEASE_ARGS --preRelease ${{ github.event.inputs.preRelease }}"
           fi
           npx release-it $RELEASE_ARGS
+
+      # Tags pushed with GITHUB_TOKEN don't fire `push: tags`; dispatch is exempt.
+      - name: Trigger publish
+        run: gh workflow run publish.yml --ref "v$(node -p "require('./package.json').version")"
+        env:
+          GH_TOKEN: ${{ github.token }}
