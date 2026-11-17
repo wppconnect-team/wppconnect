@@ -22,8 +22,16 @@ import { Page } from 'puppeteer';
 import { CreateConfig } from '../../config/create-config';
 import { evaluateAndReturn } from '../helpers';
 import { ExposedFn } from '../helpers/exposed.enum';
+import { listenIncomingCall } from '../helpers/listen-incoming-call';
 import {
   Ack,
+  CallAudioFrame,
+  CallAudioFrameOptions,
+  CallEndedEvent,
+  CallEvent,
+  CallMuteStateEvent,
+  CallStateChangedEvent,
+  CallVideoStateEvent,
   Chat,
   IncomingCall,
   LiveLocation,
@@ -218,10 +226,79 @@ export class ListenerLayer extends ProfileLayer {
         } catch (error) {
           console.error(error);
         }
+        // Wid objects do not cross to Node, send them as strings
+        const wid = (w: any) => (w ? w._serialized || w.toString() : undefined);
+        const toCallEvent = (data: any) => ({
+          ...data,
+          peerJid: wid(data.peerJid),
+          groupJid: wid(data.groupJid),
+        });
+        // WA-JS with native call support emits call.* events
+        const hasCallEvents =
+          typeof (WPP.call as any)?.enableAudioInjection === 'function';
         try {
-          if (!window['onIncomingCall']?.exposed) {
-            window.WAPI.onIncomingCall(window['onIncomingCall']);
-            window['onIncomingCall'].exposed = true;
+          const callEvents = {
+            onCallOutgoing: 'call.outgoing_call',
+            onCallRinging: 'call.ringing',
+            onCallAccepted: 'call.accepted',
+            onCallStateChanged: 'call.state_changed',
+            onCallEnded: 'call.ended',
+            onCallVideoState: 'call.video_state',
+          };
+          for (const [name, event] of Object.entries(callEvents)) {
+            if (hasCallEvents && !window[name]?.exposed) {
+              WPP.on(event as any, (data: any) => {
+                const payload = toCallEvent(data);
+                if ('jid' in data) {
+                  payload.jid = wid(data.jid);
+                }
+                window[name](payload);
+              });
+              window[name].exposed = true;
+            }
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        try {
+          if (hasCallEvents && !window['onCallMuteState']?.exposed) {
+            WPP.on('call.mute_state' as any, (data: any) => {
+              window['onCallMuteState']({
+                ...data,
+                participants: (data.participants || []).map((p: any) => ({
+                  ...p,
+                  jid: wid(p.jid),
+                })),
+              });
+            });
+            window['onCallMuteState'].exposed = true;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        try {
+          if (hasCallEvents && !window['onCallAudioFrame']?.exposed) {
+            // Capture is only enabled while Node has listeners
+            // (window.__wppconnectCallFrames), and is armed for a single
+            // call, so it is armed again for the next one
+            const arm = () => {
+              if ((window as any).__wppconnectCallFrames) {
+                WPP.call.enableAudioCapture({
+                  format: 'int16-base64',
+                  source: 'both',
+                });
+              }
+            };
+            WPP.on('call.audio_frame' as any, (frame: any) => {
+              if (
+                (window as any).__wppconnectCallFrames &&
+                frame.format === 'int16-base64'
+              ) {
+                window['onCallAudioFrame'](frame);
+              }
+            });
+            WPP.on('call.ended' as any, () => setTimeout(arm, 0));
+            window['onCallAudioFrame'].exposed = true;
           }
         } catch (error) {
           console.error(error);
@@ -376,6 +453,29 @@ export class ListenerLayer extends ProfileLayer {
         }
       })
       .catch(() => {});
+
+    await this.page.evaluate(listenIncomingCall).catch((error) => {
+      this.log('debug', `Incoming call listener: ${error}`);
+    });
+
+    // The page was reloaded, restore the call audio capture
+    if (this.listenerEmitter.listenerCount(ExposedFn.onCallAudioFrame) > 0) {
+      await this.setCallAudioCapture(true);
+    }
+  }
+
+  /**
+   * Enables or disables the call audio capture used by {@link onCallAudioFrame}
+   */
+  private async setCallAudioCapture(enabled: boolean) {
+    await this.page
+      .evaluate((enabled) => {
+        (window as any).__wppconnectCallFrames = enabled;
+        WPP.call.enableAudioCapture(
+          enabled ? { format: 'int16-base64', source: 'both' } : false
+        );
+      }, enabled)
+      .catch((error) => this.log('debug', `Call audio capture: ${error}`));
   }
 
   /**
@@ -605,6 +705,152 @@ export class ListenerLayer extends ProfileLayer {
    */
   public onIncomingCall(callback: (call: IncomingCall) => any) {
     return this.registerEvent('onIncomingCall', callback);
+  }
+
+  /**
+   * @event Listens to calls started by this session
+   * @category Call
+   * @example
+   * ```javascript
+   * client.onCallOutgoing((call) => console.log('Calling', call.peerJid));
+   * ```
+   * @returns Disposable object to stop listening
+   */
+  public onCallOutgoing(callback: (call: CallEvent) => any) {
+    return this.registerEvent(ExposedFn.onCallOutgoing, callback);
+  }
+
+  /**
+   * @event Listens to calls ringing on the other side
+   * @category Call
+   * @example
+   * ```javascript
+   * client.onCallRinging((call) => console.log('Ringing', call.id));
+   * ```
+   * @returns Disposable object to stop listening
+   */
+  public onCallRinging(callback: (call: CallEvent) => any) {
+    return this.registerEvent(ExposedFn.onCallRinging, callback);
+  }
+
+  /**
+   * @event Listens to calls being connected, incoming or outgoing
+   * @category Call
+   * @example
+   * ```javascript
+   * client.onCallAccepted(() => client.playCallAudio('./welcome.mp3'));
+   * ```
+   * @returns Disposable object to stop listening
+   */
+  public onCallAccepted(callback: (call: CallEvent) => any) {
+    return this.registerEvent(ExposedFn.onCallAccepted, callback);
+  }
+
+  /**
+   * @event Listens to every call state change
+   * @category Call
+   * @example
+   * ```javascript
+   * client.onCallStateChanged((call) => console.log(call.id, call.stateName));
+   * ```
+   * @returns Disposable object to stop listening
+   */
+  public onCallStateChanged(callback: (call: CallStateChangedEvent) => any) {
+    return this.registerEvent(ExposedFn.onCallStateChanged, callback);
+  }
+
+  /**
+   * @event Listens to calls ending, with the result and duration
+   * @category Call
+   * @example
+   * ```javascript
+   * client.onCallEnded((call) => {
+   *   console.log(call.resultName, call.duration);
+   * });
+   * ```
+   * @returns Disposable object to stop listening
+   */
+  public onCallEnded(callback: (call: CallEndedEvent) => any) {
+    return this.registerEvent(ExposedFn.onCallEnded, callback);
+  }
+
+  /**
+   * @event Listens to microphone mute changes of the call participants
+   * @category Call
+   * @example
+   * ```javascript
+   * client.onCallMuteState((state) => console.log(state.peerMuted));
+   * ```
+   * @returns Disposable object to stop listening
+   */
+  public onCallMuteState(callback: (state: CallMuteStateEvent) => any) {
+    return this.registerEvent(ExposedFn.onCallMuteState, callback);
+  }
+
+  /**
+   * @event Listens to camera changes of the call participants
+   * @category Call
+   * @example
+   * ```javascript
+   * client.onCallVideoState((state) => console.log(state.stateName));
+   * ```
+   * @returns Disposable object to stop listening
+   */
+  public onCallVideoState(callback: (state: CallVideoStateEvent) => any) {
+    return this.registerEvent(ExposedFn.onCallVideoState, callback);
+  }
+
+  /**
+   * Listens to the call audio, in frames of 60 ms of 16 kHz mono PCM
+   * (about 16 frames per second for each side).
+   *
+   * The capture is only enabled while there is a listener, and is armed again
+   * for each call. Register it before the call starts to get every frame.
+   *
+   * @event Listens to the call audio
+   * @category Call
+   * @example
+   * ```javascript
+   * client.onCallAudioFrame(
+   *   (frame) => {
+   *     const pcm = Buffer.from(frame.samples, 'base64'); // Int16 LE
+   *   },
+   *   { source: 'remote' }
+   * );
+   * ```
+   * @returns Disposable object to stop listening
+   */
+  public onCallAudioFrame(
+    callback: (frame: CallAudioFrame) => any,
+    options: CallAudioFrameOptions = {}
+  ) {
+    const source = options.source || 'both';
+    const listener = (frame: CallAudioFrame) => {
+      if (source === 'both' || frame.source === source) {
+        return callback(frame);
+      }
+    };
+
+    const isFirst =
+      this.listenerEmitter.listenerCount(ExposedFn.onCallAudioFrame) === 0;
+    const subscription = this.registerEvent(
+      ExposedFn.onCallAudioFrame,
+      listener
+    );
+    if (isFirst) {
+      this.setCallAudioCapture(true);
+    }
+
+    return {
+      dispose: () => {
+        subscription.dispose();
+        if (
+          this.listenerEmitter.listenerCount(ExposedFn.onCallAudioFrame) === 0
+        ) {
+          this.setCallAudioCapture(false);
+        }
+      },
+    };
   }
 
   /**

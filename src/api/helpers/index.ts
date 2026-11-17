@@ -22,3 +22,4 @@ export { stickerSelect, resizeImg } from './select-sticker';
 export { scrapeImg } from './scrape-img-qr';
 export { scrapeLogin } from './scrape-login';
 export { evaluateAndReturn } from './evaluate-and-return';
+export { evaluateWithErrorCode } from './evaluate-with-error-code';

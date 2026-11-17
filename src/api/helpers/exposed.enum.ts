@@ -31,4 +31,12 @@ export enum ExposedFn {
   onPresenceChanged = 'onPresenceChanged',
   onLiveLocation = 'onLiveLocation',
   onBackendEvent = 'onBackendEvent',
+  onCallOutgoing = 'onCallOutgoing',
+  onCallRinging = 'onCallRinging',
+  onCallAccepted = 'onCallAccepted',
+  onCallStateChanged = 'onCallStateChanged',
+  onCallEnded = 'onCallEnded',
+  onCallMuteState = 'onCallMuteState',
+  onCallVideoState = 'onCallVideoState',
+  onCallAudioFrame = 'onCallAudioFrame',
 }
