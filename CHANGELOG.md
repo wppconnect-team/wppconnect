@@ -1,3 +1,13 @@
+## <small>2.4.5 (2026-11-17)</small>
+
+### Features
+
+- expose WA-JS call controls and media helpers (#2966) ([2120120](https://github.com/wppconnect-team/wppconnect/commit/2120120)), closes [#2966](https://github.com/wppconnect-team/wppconnect/issues/2966)
+
+### Build System
+
+- ship only dist in the npm package (#2973) ([8bed567](https://github.com/wppconnect-team/wppconnect/commit/8bed567)), closes [#2973](https://github.com/wppconnect-team/wppconnect/issues/2973)
+
 ## <small>2.4.4 (2026-11-17)</small>
 
 ### Bug Fixes
