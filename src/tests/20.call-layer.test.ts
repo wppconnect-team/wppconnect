@@ -63,6 +63,38 @@ function callLayer(call: { [key: string]: (...args: any[]) => any }) {
 }
 
 describe('CallLayer', function () {
+  for (const [type, options, expected] of [
+    ['video', {}, true],
+    ['voice', {}, false],
+    ['video', { isVideo: false }, false],
+    ['voice', { isVideo: true }, true],
+  ] as const) {
+    it(`joins a ${type} link with ${JSON.stringify(
+      options
+    )} without replacing native defaults`, async function () {
+      let received: boolean | undefined;
+      const { layer } = callLayer({
+        joinCallLink: async (_link: string, nativeOptions: any) => {
+          received = nativeOptions.isVideo;
+          return {
+            id: 'LINK-CALL',
+            isCallLink: true,
+            isVideo: nativeOptions.isVideo ?? type === 'video',
+          };
+        },
+      });
+      const call = await layer.joinCallLink(
+        `https://call.whatsapp.com/${type}/fixture`,
+        options
+      );
+      assert.strictEqual(
+        received,
+        'isVideo' in options ? options.isVideo : undefined
+      );
+      assert.strictEqual(call?.isVideo, expected);
+    });
+  }
+
   it('passes the arguments to WA-JS', async function () {
     const calls: any[] = [];
     const record =

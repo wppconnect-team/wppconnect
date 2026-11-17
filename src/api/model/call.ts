@@ -124,6 +124,7 @@ export interface CreateCallLinkOptions {
 }
 
 export interface JoinCallLinkOptions {
+  /** Join with video; when omitted, use the call link's voice or video type */
   isVideo?: boolean;
   /** Enable audio injection for this call before joining it */
   audioInjection?: boolean;

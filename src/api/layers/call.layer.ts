@@ -342,7 +342,7 @@ export class CallLayer extends ControlsLayer {
   public async joinCallLink(link: string, options: JoinCallLinkOptions = {}) {
     return this.startCall(
       'joinCallLink',
-      [link, { isVideo: !!options.isVideo }],
+      [link, { isVideo: options.isVideo }],
       options.audioInjection
     );
   }
