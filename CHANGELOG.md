@@ -1,3 +1,15 @@
+## <small>2.4.4 (2026-11-17)</small>
+
+### Bug Fixes
+
+- **browser:** guard loading-screen message nodes (#2969) ([7440024](https://github.com/wppconnect-team/wppconnect/commit/7440024)), closes [#2969](https://github.com/wppconnect-team/wppconnect/issues/2969)
+- bump wa-js version to 4.8.1 (#2972) ([0090359](https://github.com/wppconnect-team/wppconnect/commit/0090359)), closes [#2972](https://github.com/wppconnect-team/wppconnect/issues/2972)
+- remove host secret collection during browser imports ([c34f3a7](https://github.com/wppconnect-team/wppconnect/commit/c34f3a7))
+
+### Continuous Integration
+
+- **release:** release without PERSONAL_TOKEN (#2971) ([d60aa75](https://github.com/wppconnect-team/wppconnect/commit/d60aa75)), closes [#2971](https://github.com/wppconnect-team/wppconnect/issues/2971)
+
 ## <small>2.4.3 (2026-11-15)</small>
 
 ### Chores
