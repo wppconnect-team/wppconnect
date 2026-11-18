@@ -63,9 +63,9 @@ export async function unregisterServiceWorker(page: Page) {
 }
 
 /**
- * ForÃ§a o carregamento de uma versÃ£o especÃ­fica do WhatsApp WEB
- * @param page PÃ¡gina a ser injetada
- * @param version VersÃ£o ou expressÃ£o semver
+ * Força o carregamento de uma versão específica do WhatsApp WEB
+ * @param page Página a ser injetada
+ * @param version Versão ou expressão semver
  */
 export async function setWhatsappVersion(
   page: Page,
