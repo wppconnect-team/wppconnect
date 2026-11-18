@@ -1,3 +1,9 @@
+## <small>2.4.6 (2026-11-18)</small>
+
+### Bug Fixes
+
+- bump wa-js to 4.8.2 (#2974) ([e02405d](https://github.com/wppconnect-team/wppconnect/commit/e02405d)), closes [#2974](https://github.com/wppconnect-team/wppconnect/issues/2974)
+
 ## <small>2.4.5 (2026-11-17)</small>
 
 ### Features
