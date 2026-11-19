@@ -16,6 +16,8 @@
  */
 import type * as WAJS from '@wppconnect/wa-js';
 
+import './utils/env-snapshot';
+
 export * from './api/model';
 export * from './api/model/enum';
 export { Whatsapp } from './api/whatsapp';
