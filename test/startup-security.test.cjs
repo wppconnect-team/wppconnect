@@ -99,3 +99,27 @@ test('startup imports do not read host secrets outside the server boundary', asy
   const sensitive = reads.filter((file) => /(?:[\\/]\.env(?:\.|$)|[\\/](?:tokens|wppconnect_tokens)[\\/])/.test(file));
   assert.equal(sensitive.length, 0, 'Startup side effects attempted to read environment or session files');
 });
+
+// Parse the package entrypoint separately from the behavioral fixture. No
+// entrypoint code is linked or evaluated by this check.
+test('the package entrypoint only references reviewed modules', () => {
+  const file = path.resolve(__dirname, '../src/index.ts');
+  const source = stripTypeScriptTypes(fs.readFileSync(file, 'utf8'));
+  const entrypoint = new vm.SourceTextModule(source);
+  const modules = entrypoint.moduleRequests.map((request) => request.specifier);
+
+  assert.deepEqual(
+    modules.sort(),
+    [
+      './api/model',
+      './api/model/enum',
+      './api/whatsapp',
+      './config/create-config',
+      './controllers/browser',
+      './controllers/initializer',
+      './token-store',
+      './utils/logger',
+    ],
+    'A change to the package startup imports requires explicit review'
+  );
+});
