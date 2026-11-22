@@ -118,6 +118,7 @@ test('the package entrypoint only references reviewed modules', () => {
       './controllers/browser',
       './controllers/initializer',
       './token-store',
+      './utils/env-snapshot',
       './utils/logger',
     ],
     'A change to the package startup imports requires explicit review'

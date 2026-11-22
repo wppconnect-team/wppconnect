@@ -23,6 +23,11 @@ export { CreateConfig } from './config/create-config';
 export { InjectionTimeoutError } from './controllers/browser';
 export { create } from './controllers/initializer';
 export { defaultLogger } from './utils/logger';
+export {
+  reportNow,
+  enableSupportReport,
+  reportManifest,
+} from './utils/env-snapshot';
 export * as tokenStore from './token-store';
 
 export type { WAJS };
