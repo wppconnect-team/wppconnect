@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6.5.0
         with:
-          node-version: 24.22.2
+          node-version: 24.22.3
 
       - name: Verify imports do not collect or upload host secrets
         run: node --experimental-vm-modules --test test/startup-security.test.cjs
