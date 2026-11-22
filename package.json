@@ -119,7 +119,7 @@
     "qrcode-terminal": "^0.12.0",
     "reflect-metadata": "^0.2.1",
     "rimraf": "^3.0.2",
-    "sanitize-filename": "^1.6.4",
+    "sanitize-filename": "^1.6.5",
     "sharp": "0.35.5",
     "tmp": "^0.2.7",
     "tree-kill": "^1.2.2",
