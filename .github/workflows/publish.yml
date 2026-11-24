@@ -50,12 +50,14 @@ jobs:
         env:
           PUPPETEER_SKIP_DOWNLOAD: true
 
-      - name: Publish in NPM
+      # The trusted publisher only allows staging; a maintainer approves the
+      # staged version with 2FA (npm stage approve) before it goes public.
+      - name: Stage in NPM
         run: |
           if [[ "${{ github.ref }}" == *"-alpha"* ]]; then
-            npm publish --tag alpha
+            npm stage publish --provenance --tag alpha
           else
-            npm publish
+            npm stage publish --provenance
           fi
 
       - name: Generate Changelog
