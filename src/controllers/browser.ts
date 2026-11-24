@@ -133,6 +133,10 @@ export async function initWhatsapp(
     await setWhatsappVersion(page, version, log);
   }
 
+  // A background tab (e.g. restored from a persistent profile) is hidden, and
+  // WhatsApp may never fetch a QR code there
+  await page.bringToFront().catch(() => null);
+
   log?.('verbose', `Loading WhatsApp WEB`);
   await page.goto(puppeteerConfig.whatsappUrl, {
     waitUntil: 'load',

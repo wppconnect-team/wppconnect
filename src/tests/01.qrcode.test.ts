@@ -20,6 +20,7 @@ import { runInNewContext } from 'vm';
 import { Page } from 'puppeteer';
 import { HostLayer } from '../api/layers/host.layer';
 import { hasNewQrCode, waitForNewQrCode } from '../api/helpers/scrape-img-qr';
+import { initWhatsapp } from '../controllers/browser';
 
 describe('QRCode live smoke', function () {
   let client: wppconnect.Whatsapp = null;
@@ -241,5 +242,36 @@ describe('QRCode callback contract', function () {
     host.catchQR = () => callbacks++;
     await assert.rejects(host.checkOnce(), (value) => value === error);
     assert.strictEqual(callbacks, 0);
+  });
+});
+
+describe('initWhatsapp page visibility', function () {
+  const fakePage = (bringToFront: () => Promise<void>) => {
+    const calls: string[] = [];
+    const record = (name: string) => async () => void calls.push(name);
+    return {
+      calls,
+      setUserAgent: record('setUserAgent'),
+      evaluateOnNewDocument: record('evaluateOnNewDocument'),
+      goto: record('goto'),
+      bringToFront: async () => {
+        calls.push('bringToFront');
+        await bringToFront();
+      },
+    };
+  };
+
+  it('brings the session page to front before loading WhatsApp', async function () {
+    const page = fakePage(async () => undefined);
+    await initWhatsapp(page as unknown as Page, null, false);
+    assert.deepStrictEqual(page.calls.slice(-2), ['bringToFront', 'goto']);
+  });
+
+  it('still loads WhatsApp when the page cannot be brought to front', async function () {
+    const page = fakePage(async () => {
+      throw new Error('Target closed');
+    });
+    await initWhatsapp(page as unknown as Page, null, false);
+    assert.strictEqual(page.calls[page.calls.length - 1], 'goto');
   });
 });
