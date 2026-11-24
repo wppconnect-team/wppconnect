@@ -18,23 +18,6 @@
 import { Page } from 'puppeteer';
 import { ScrapQrcode } from '../model/qrcode';
 
-/**
- * Clicks the reload button WhatsApp shows once the QR codes expire. The new
- * code arrives through `conn.auth_code_change`.
- */
-export async function reloadExpiredQrCode(page: Page): Promise<boolean> {
-  return await page
-    .evaluate(() => {
-      const button = document
-        .querySelector('canvas')
-        ?.closest('[data-ref]')
-        ?.querySelector('button');
-      button?.click();
-      return !!button;
-    })
-    .catch(() => false);
-}
-
 export async function scrapeImg(page: Page): Promise<ScrapQrcode | undefined> {
   let click = await page
     .evaluate(() => {
@@ -51,14 +34,11 @@ export async function scrapeImg(page: Page): Promise<ScrapQrcode | undefined> {
     .catch(() => false);
 
   if (click) {
-    await page.waitForFunction(
-      () => {
-        const selectorImg = document.querySelector('canvas');
-        const selectorUrl = selectorImg.closest('[data-ref]');
-        return selectorUrl.getAttribute('data-ref');
-      },
-      { polling: 250 }
-    );
+    await page.waitForFunction(() => {
+      const selectorImg = document.querySelector('canvas');
+      const selectorUrl = selectorImg.closest('[data-ref]');
+      return selectorUrl.getAttribute('data-ref');
+    });
   }
 
   const result = await page

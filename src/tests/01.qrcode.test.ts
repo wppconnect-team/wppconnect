@@ -97,7 +97,7 @@ class QrHost extends HostLayer {
   }
 }
 
-class AuthCodePage {
+class WppPage {
   reads = 0;
   constructor(private answers: unknown[]) {}
   on() {
@@ -114,35 +114,61 @@ class AuthCodePage {
   }
 }
 
-describe('QRCode from the wa-js auth code', function () {
-  const getQrCode = (page: AuthCodePage) =>
-    new HostLayer(page as unknown as Page, 'qr-auth-code', {
+describe('QRCode from wa-js', function () {
+  const getQrCode = (page: WppPage) =>
+    new HostLayer(page as unknown as Page, 'qr-wa-js', {
       logQR: false,
     }).getQrCode();
-  const fullCode = 'https://wa.me/settings/linked_devices#2@ref,a,b,c,1';
 
-  it('builds the image from the exact code of the WhatsApp QR', async function () {
-    // No reload button, then WPP.conn.getAuthCode().fullCode
-    const result = await getQrCode(new AuthCodePage([false, fullCode]));
-    assert.strictEqual(result.urlCode, fullCode);
-    assert.match(result.base64Image, /^data:image\/png;base64,.{100,}/);
+  it('uses the QR code wa-js read from the page', async function () {
+    const painted = {
+      fullCode: 'https://wa.me/settings/linked_devices#2@ref,a,b,c,1',
+      base64Image: 'data:image/png;base64,painted',
+    };
+    assert.deepStrictEqual(await getQrCode(new WppPage([painted])), {
+      urlCode: painted.fullCode,
+      base64Image: painted.base64Image,
+    });
   });
 
-  it('reloads an expired code and leaves the next one to auth_code_change', async function () {
-    const page = new AuthCodePage([true]);
-    assert.strictEqual(await getQrCode(page), undefined);
+  it('returns nothing while no QR code is painted', async function () {
+    assert.strictEqual(await getQrCode(new WppPage([null])), undefined);
+    assert.strictEqual(
+      await getQrCode(new WppPage([new Error('WPP not ready')])),
+      undefined
+    );
+  });
+});
+
+class RefreshHost extends HostLayer {
+  constructor(page: WppPage) {
+    super(page as unknown as Page, 'qr-refresh', { logQR: false });
+  }
+  protected log() {}
+  refresh() {
+    return this.refreshQrCode();
+  }
+}
+
+describe('QRCode refresh', function () {
+  it('asks wa-js for new codes once they expire', async function () {
+    const page = new WppPage([true]);
+    await new RefreshHost(page).refresh();
     assert.strictEqual(page.reads, 1);
   });
 
-  it('returns nothing while WhatsApp has no code', async function () {
-    assert.strictEqual(
-      await getQrCode(new AuthCodePage([false, undefined])),
-      undefined
-    );
-    assert.strictEqual(
-      await getQrCode(new AuthCodePage([false, new Error('WPP not ready')])),
-      undefined
-    );
+  it('does not refresh after the QR loop is cancelled', async function () {
+    const page = new WppPage([true]);
+    const host = new RefreshHost(page);
+    host.cancelQrLoop();
+    await host.refresh();
+    assert.strictEqual(page.reads, 0);
+  });
+
+  it('keeps going when the refresh fails', async function () {
+    const page = new WppPage([new Error('refreshQR failed')]);
+    await new RefreshHost(page).refresh();
+    assert.strictEqual(page.reads, 1);
   });
 });
 
