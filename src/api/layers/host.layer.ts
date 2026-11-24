@@ -32,7 +32,7 @@ import {
 } from '../../controllers/browser';
 import { defaultLogger, LogLevel } from '../../utils/logger';
 import { sleep } from '../../utils/sleep';
-import { evaluateAndReturn, scrapeImg } from '../helpers';
+import { evaluateAndReturn, scrapeImg, waitForNewQrCode } from '../helpers';
 import {
   CatchQRCallback,
   HostDevice,
@@ -333,6 +333,9 @@ export class HostLayer {
       return;
     }
 
+    await this.waitForQrCodePaint();
+    if (this.qrLoopCancelled || this.page.isClosed()) return;
+
     const result = await this.getQrCode();
     if (this.qrLoopCancelled || this.page.isClosed()) return;
 
@@ -360,6 +363,11 @@ export class HostLayer {
     }
 
     this.catchQR?.(result.base64Image, qr, this.attempt, result.urlCode);
+  }
+
+  /** Waits until WhatsApp paints a QR code newer than the last one delivered */
+  protected async waitForQrCodePaint() {
+    await waitForNewQrCode(this.page, this.urlCode);
   }
 
   /**

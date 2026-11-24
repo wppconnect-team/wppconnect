@@ -124,6 +124,7 @@ class AuthenticationPage extends FakePage {
 
 class AuthenticationHostLayer extends HostLayer {
   protected log() {}
+  protected async waitForQrCodePaint() {}
 
   begin(logged = false) {
     this.isStarted = true;
