@@ -16,6 +16,7 @@
  */
 
 import { Page } from 'puppeteer';
+import { toDataURL } from 'qrcode';
 import { Logger } from 'winston';
 import { CreateConfig, defaultOptions } from '../../config/create-config';
 import {
@@ -32,7 +33,7 @@ import {
 } from '../../controllers/browser';
 import { defaultLogger, LogLevel } from '../../utils/logger';
 import { sleep } from '../../utils/sleep';
-import { evaluateAndReturn, scrapeImg, waitForNewQrCode } from '../helpers';
+import { evaluateAndReturn, reloadExpiredQrCode } from '../helpers';
 import {
   CatchQRCallback,
   HostDevice,
@@ -333,9 +334,6 @@ export class HostLayer {
       return;
     }
 
-    await this.waitForQrCodePaint();
-    if (this.qrLoopCancelled || this.page.isClosed()) return;
-
     const result = await this.getQrCode();
     if (this.qrLoopCancelled || this.page.isClosed()) return;
 
@@ -363,11 +361,6 @@ export class HostLayer {
     }
 
     this.catchQR?.(result.base64Image, qr, this.attempt, result.urlCode);
-  }
-
-  /** Waits until WhatsApp paints a QR code newer than the last one delivered */
-  protected async waitForQrCodePaint() {
-    await waitForNewQrCode(this.page, this.urlCode);
   }
 
   /**
@@ -482,12 +475,18 @@ export class HostLayer {
     this.autoCloseInterval = null;
   }
 
-  public async getQrCode() {
-    let qrResult: ScrapQrcode | undefined;
+  public async getQrCode(): Promise<ScrapQrcode | undefined> {
+    if (await reloadExpiredQrCode(this.page)) return undefined;
 
-    qrResult = await scrapeImg(this.page).catch(() => undefined);
+    // fullCode is the exact string of WhatsApp's QR code, so the image is
+    // built from it instead of read from a canvas that may not be painted yet
+    const urlCode = await evaluateAndReturn(
+      this.page,
+      async () => (await WPP.conn.getAuthCode())?.fullCode
+    ).catch(() => undefined);
+    if (!urlCode) return undefined;
 
-    return qrResult;
+    return { urlCode, base64Image: await toDataURL(urlCode) };
   }
 
   public async waitForQrCodeScan(catchQR?: CatchQRCallback) {

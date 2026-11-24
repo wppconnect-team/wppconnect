@@ -17,38 +17,22 @@
 
 import { Page } from 'puppeteer';
 import { ScrapQrcode } from '../model/qrcode';
-import { sleep } from '../../utils/sleep';
 
 /**
- * Page-side check for a QR code other than `previous`, or for the reload
- * button WhatsApp shows once the codes run out.
+ * Clicks the reload button WhatsApp shows once the QR codes expire. The new
+ * code arrives through `conn.auth_code_change`.
  */
-export function hasNewQrCode(previous: string): boolean {
-  const holder = document.querySelector('canvas')?.closest('[data-ref]');
-  if (holder?.querySelector('button')) return true;
-  const code = holder?.getAttribute('data-ref');
-  return !!code && code !== previous;
-}
-
-/**
- * Waits for WhatsApp to paint a new QR code. The ref changes before the canvas
- * does, and a read made in between misses the code until the next rotation.
- * Polls from Node: page timers stall in hidden tabs and on a busy main thread.
- */
-export async function waitForNewQrCode(
-  page: Page,
-  previous: string,
-  timeout = 20000
-): Promise<void> {
-  const deadline = Date.now() + timeout;
-  while (Date.now() < deadline && !page.isClosed()) {
-    const painted = await page
-      .evaluate(hasNewQrCode, previous)
-      .catch(() => null);
-    // null: navigated or closed; let the caller read whatever is there
-    if (painted !== false) return;
-    await sleep(250);
-  }
+export async function reloadExpiredQrCode(page: Page): Promise<boolean> {
+  return await page
+    .evaluate(() => {
+      const button = document
+        .querySelector('canvas')
+        ?.closest('[data-ref]')
+        ?.querySelector('button');
+      button?.click();
+      return !!button;
+    })
+    .catch(() => false);
 }
 
 export async function scrapeImg(page: Page): Promise<ScrapQrcode | undefined> {
