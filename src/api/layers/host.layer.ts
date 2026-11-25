@@ -32,7 +32,7 @@ import {
 } from '../../controllers/browser';
 import { defaultLogger, LogLevel } from '../../utils/logger';
 import { sleep } from '../../utils/sleep';
-import { evaluateAndReturn, scrapeImg } from '../helpers';
+import { evaluateAndReturn } from '../helpers';
 import {
   CatchQRCallback,
   HostDevice,
@@ -278,9 +278,15 @@ export class HostLayer {
       );
     } else {
       await evaluateAndReturn(this.page, () => {
-        WPP.on('conn.auth_code_change', (window as any).checkQrCode);
+        WPP.on('conn.qrcode_change', (window as any).checkQrCode);
+        WPP.on('conn.qrcode_idle', (window as any).refreshQrCode);
       }).catch(() => null);
       this.checkQrCode().catch((error) => this.log('error', error));
+      // The codes may have expired before these listeners were added
+      const idle = await evaluateAndReturn(this.page, () =>
+        WPP.conn.isIdle()
+      ).catch(() => false);
+      if (idle) this.refreshQrCode();
     }
     this.checkInChat().catch((error) => this.log('error', error));
   }
@@ -303,6 +309,7 @@ export class HostLayer {
     );
 
     await this.exposePageFunction('checkQrCode', () => this.checkQrCode());
+    await this.exposePageFunction('refreshQrCode', () => this.refreshQrCode());
     await this.exposePageFunction('onLinkCode', (code: string) =>
       this.onLinkCode(code)
     );
@@ -360,6 +367,14 @@ export class HostLayer {
     }
 
     this.catchQR?.(result.base64Image, qr, this.attempt, result.urlCode);
+  }
+
+  /** Asks for new QR codes once they expire, like WhatsApp's reload button */
+  protected async refreshQrCode() {
+    if (this.qrLoopCancelled || this.page.isClosed()) return;
+    await evaluateAndReturn(this.page, () =>
+      WPP.conn.refreshQR().then(() => true)
+    ).catch((error) => this.log('warn', `QR code refresh failed: ${error}`));
   }
 
   /**
@@ -474,12 +489,14 @@ export class HostLayer {
     this.autoCloseInterval = null;
   }
 
-  public async getQrCode() {
-    let qrResult: ScrapQrcode | undefined;
+  public async getQrCode(): Promise<ScrapQrcode | undefined> {
+    // wa-js reads the QR WhatsApp painted, so the image matches the code
+    const qr = await evaluateAndReturn(this.page, () =>
+      WPP.conn.getQRCode()
+    ).catch(() => null);
+    if (!qr) return undefined;
 
-    qrResult = await scrapeImg(this.page).catch(() => undefined);
-
-    return qrResult;
+    return { urlCode: qr.fullCode, base64Image: qr.base64Image };
   }
 
   public async waitForQrCodeScan(catchQR?: CatchQRCallback) {

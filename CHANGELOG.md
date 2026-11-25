@@ -1,3 +1,32 @@
+## <small>2.4.7-rc.0 (2026-11-24)</small>
+
+### Bug Fixes
+
+- **auth:** build the QR code image from the wa-js auth code ([bab1a3e](https://github.com/wppconnect-team/wppconnect/commit/bab1a3e)), closes [wppconnect-team/wa-js#3815](https://github.com/wppconnect-team/wa-js/issues/3815)
+- **auth:** take the QR code from wa-js conn.qrcode_change ([f1357c6](https://github.com/wppconnect-team/wppconnect/commit/f1357c6)), closes [wppconnect-team/wa-js#3816](https://github.com/wppconnect-team/wa-js/issues/3816)
+- **auth:** wait for WhatsApp to paint the QR code before reading it ([c593f97](https://github.com/wppconnect-team/wppconnect/commit/c593f97))
+- **browser:** bring the session page to front before loading WhatsApp ([ffe6a8a](https://github.com/wppconnect-team/wppconnect/commit/ffe6a8a)), closes [wppconnect-server#2722](https://github.com/wppconnect-server/issues/2722)
+
+### Tests
+
+- verify package entrypoint imports before startup ([75857b9](https://github.com/wppconnect-team/wppconnect/commit/75857b9))
+
+### Build System
+
+- **deps-dev:** update dependency release-it to ^21.1.3 (#2984) ([fe00eea](https://github.com/wppconnect-team/wppconnect/commit/fe00eea)), closes [#2984](https://github.com/wppconnect-team/wppconnect/issues/2984)
+- **deps:** update dependency axios to ^1.21.1 (#2976) ([1e92b37](https://github.com/wppconnect-team/wppconnect/commit/1e92b37)), closes [#2976](https://github.com/wppconnect-team/wppconnect/issues/2976)
+- **deps:** update dependency sanitize-filename to ^1.6.5 (#2978) ([31ee0e3](https://github.com/wppconnect-team/wppconnect/commit/31ee0e3)), closes [#2978](https://github.com/wppconnect-team/wppconnect/issues/2978)
+
+### Continuous Integration
+
+- **deps:** update dependency node to v24.22.3 (#2983) ([73f7c29](https://github.com/wppconnect-team/wppconnect/commit/73f7c29)), closes [#2983](https://github.com/wppconnect-team/wppconnect/issues/2983)
+- **publish:** pass a dist-tag for every prerelease ([1a764c1](https://github.com/wppconnect-team/wppconnect/commit/1a764c1))
+- **publish:** stage npm releases for maintainer approval (#2985) ([7a889be](https://github.com/wppconnect-team/wppconnect/commit/7a889be)), closes [#2985](https://github.com/wppconnect-team/wppconnect/issues/2985)
+
+### Chores
+
+- **deps:** update @wppconnect/wa-js to 4.8.5-rc.0 ([1007d46](https://github.com/wppconnect-team/wppconnect/commit/1007d46))
+
 ## <small>2.4.6 (2026-11-18)</small>
 
 ### Bug Fixes

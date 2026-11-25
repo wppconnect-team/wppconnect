@@ -53,10 +53,21 @@ jobs:
       # The trusted publisher only allows staging; a maintainer approves the
       # staged version with 2FA (npm stage approve) before it goes public.
       - name: Stage in NPM
+        id: stage_npm
         run: |
-          if [[ "${{ github.ref }}" == *"-alpha"* ]]; then
-            npm stage publish --provenance --tag alpha
+          version="${GITHUB_REF_NAME#v}"
+          version="${version%%+*}"
+          if [[ "$version" == *-* ]]; then
+            preid="${version#*-}"
+            dist_tag="${preid%%.*}"
+            # Keep prereleases off latest and avoid semver ranges as dist-tags.
+            if [[ "$dist_tag" == latest || "$dist_tag" =~ ^([vV]?[0-9]+|[vV]?[xX])$ ]]; then
+              dist_tag=next
+            fi
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+            npm stage publish --provenance --tag="$dist_tag"
           else
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
             npm stage publish --provenance
           fi
 
@@ -78,7 +89,7 @@ jobs:
           release_name: ${{ github.ref }}
           body: ${{ steps.generate_changelog.outputs.changelog }}
           draft: false
-          prerelease: ${{ contains(github.ref, '-alpha') }}
+          prerelease: ${{ steps.stage_npm.outputs.prerelease == 'true' }}
 
       - name: Build API-Docs
         id: docs_build

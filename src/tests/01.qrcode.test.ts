@@ -18,6 +18,7 @@ import * as wppconnect from '../index';
 import * as assert from 'assert';
 import { Page } from 'puppeteer';
 import { HostLayer } from '../api/layers/host.layer';
+import { initWhatsapp } from '../controllers/browser';
 
 describe('QRCode live smoke', function () {
   let client: wppconnect.Whatsapp = null;
@@ -96,6 +97,81 @@ class QrHost extends HostLayer {
   }
 }
 
+class WppPage {
+  reads = 0;
+  constructor(private answers: unknown[]) {}
+  on() {
+    return this;
+  }
+  isClosed() {
+    return false;
+  }
+  async evaluate() {
+    this.reads++;
+    const answer = this.answers.shift();
+    if (answer instanceof Error) throw answer;
+    return answer;
+  }
+}
+
+describe('QRCode from wa-js', function () {
+  const getQrCode = (page: WppPage) =>
+    new HostLayer(page as unknown as Page, 'qr-wa-js', {
+      logQR: false,
+    }).getQrCode();
+
+  it('uses the QR code wa-js read from the page', async function () {
+    const painted = {
+      fullCode: 'https://wa.me/settings/linked_devices#2@ref,a,b,c,1',
+      base64Image: 'data:image/png;base64,painted',
+    };
+    assert.deepStrictEqual(await getQrCode(new WppPage([painted])), {
+      urlCode: painted.fullCode,
+      base64Image: painted.base64Image,
+    });
+  });
+
+  it('returns nothing while no QR code is painted', async function () {
+    assert.strictEqual(await getQrCode(new WppPage([null])), undefined);
+    assert.strictEqual(
+      await getQrCode(new WppPage([new Error('WPP not ready')])),
+      undefined
+    );
+  });
+});
+
+class RefreshHost extends HostLayer {
+  constructor(page: WppPage) {
+    super(page as unknown as Page, 'qr-refresh', { logQR: false });
+  }
+  protected log() {}
+  refresh() {
+    return this.refreshQrCode();
+  }
+}
+
+describe('QRCode refresh', function () {
+  it('asks wa-js for new codes once they expire', async function () {
+    const page = new WppPage([true]);
+    await new RefreshHost(page).refresh();
+    assert.strictEqual(page.reads, 1);
+  });
+
+  it('does not refresh after the QR loop is cancelled', async function () {
+    const page = new WppPage([true]);
+    const host = new RefreshHost(page);
+    host.cancelQrLoop();
+    await host.refresh();
+    assert.strictEqual(page.reads, 0);
+  });
+
+  it('keeps going when the refresh fails', async function () {
+    const page = new WppPage([new Error('refreshQR failed')]);
+    await new RefreshHost(page).refresh();
+    assert.strictEqual(page.reads, 1);
+  });
+});
+
 describe('QRCode callback contract', function () {
   const first = { urlCode: 'first-code', base64Image: 'first-image' };
   const second = { urlCode: 'second-code', base64Image: 'second-image' };
@@ -157,5 +233,36 @@ describe('QRCode callback contract', function () {
     host.catchQR = () => callbacks++;
     await assert.rejects(host.checkOnce(), (value) => value === error);
     assert.strictEqual(callbacks, 0);
+  });
+});
+
+describe('initWhatsapp page visibility', function () {
+  const fakePage = (bringToFront: () => Promise<void>) => {
+    const calls: string[] = [];
+    const record = (name: string) => async () => void calls.push(name);
+    return {
+      calls,
+      setUserAgent: record('setUserAgent'),
+      evaluateOnNewDocument: record('evaluateOnNewDocument'),
+      goto: record('goto'),
+      bringToFront: async () => {
+        calls.push('bringToFront');
+        await bringToFront();
+      },
+    };
+  };
+
+  it('brings the session page to front before loading WhatsApp', async function () {
+    const page = fakePage(async () => undefined);
+    await initWhatsapp(page as unknown as Page, null, false);
+    assert.deepStrictEqual(page.calls.slice(-2), ['bringToFront', 'goto']);
+  });
+
+  it('still loads WhatsApp when the page cannot be brought to front', async function () {
+    const page = fakePage(async () => {
+      throw new Error('Target closed');
+    });
+    await initWhatsapp(page as unknown as Page, null, false);
+    assert.strictEqual(page.calls[page.calls.length - 1], 'goto');
   });
 });
