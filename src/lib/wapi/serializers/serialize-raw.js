@@ -15,9 +15,27 @@
  * along with WPPConnect.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/**
+ * Live WhatsApp Web collections can show up in a model's toJSON() (for example
+ * chat.msgUnsyncedButtonReplyMsgs, for a button reply that is not synced yet).
+ * They reference the whole store, so CDP cannot return them by value
+ * ("Object reference chain is too long"): puppeteer resolves page.evaluate with
+ * undefined and a single chat makes the whole listChats() result disappear.
+ */
+const isCollection = (value) =>
+  !!value &&
+  typeof value === 'object' &&
+  (Array.isArray(value._models) || typeof value.modelClass === 'function');
+
 export const _serializeRawObj = (obj) => {
   if (obj && obj.toJSON) {
-    return obj.toJSON();
+    const json = Object.assign({}, obj.toJSON());
+    for (const key of Object.keys(json)) {
+      if (isCollection(json[key])) {
+        delete json[key];
+      }
+    }
+    return json;
   }
   return {};
 };
