@@ -79,7 +79,7 @@
     "commitizen": "^4.3.2",
     "concurrently": "^10.0.7",
     "conventional-changelog-cli": "^5.0.0",
-    "eslint": "10.14.0",
+    "eslint": "10.16.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.7",
     "globals": "^17.14.0",
